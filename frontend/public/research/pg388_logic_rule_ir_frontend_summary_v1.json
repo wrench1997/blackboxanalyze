@@ -1,0 +1,94 @@
+{
+  "schema_version": "pg388-logic-rule-ir-frontend-summary-v1",
+  "status": "diagnostic_rule_ir_candidate",
+  "dataset": {
+    "file": "pg388_logic_rule_ir_composition_dataset_v1.json",
+    "sha256": "ae9461fa84062ab2d9a96dbd3450ff83932e4f2f79d7baa7ae51703faeccef26",
+    "status": "abstract_rule_ir_composition_candidate_only",
+    "records": 840,
+    "split_counts": {
+      "implementation_holdout": 420,
+      "train": 420
+    },
+    "declared_counts": {
+      "records": 840,
+      "train": 420,
+      "implementation_holdout": 420,
+      "slot_count": 11
+    },
+    "case_count": 28,
+    "implementation_count": 2,
+    "slot_order": [
+      "question",
+      "ask_reason",
+      "logic_invariant_ref",
+      "state_transition_ref",
+      "precondition_ref",
+      "counterfactual_ref",
+      "probe_variant_ref",
+      "next_action",
+      "repair_action",
+      "oracle_ref",
+      "safe_to_send"
+    ]
+  },
+  "audit": {
+    "file": "pg388_logic_rule_ir_composition_audit_v1.json",
+    "sha256": "45463e834e71394831fd60c37cc52edebd5057abb069408a2e14163e20d0867f",
+    "status": "passed_candidate_rule_ir_audit",
+    "records": 840,
+    "invalid_rows": 0,
+    "unique_row_hashes": 840,
+    "context_firewall_passed": true,
+    "training_eligible": 0,
+    "failure_count": 0
+  },
+  "live_evidence": {
+    "status": "passed_live_local_canary_only",
+    "fresh_resets": 28,
+    "typed_observations": 140,
+    "candidate_effects": 54,
+    "negative_control_clean": 28,
+    "unsafe_allow": 0,
+    "row_bound": false,
+    "report_file": "pg388_logic_canary_live_v1.json",
+    "report_sha256": "72064d95e636769029b75dc922c4ed2b18f26b6fa0db7978f880ee47f7796a23"
+  },
+  "plan": {
+    "file": "pg388_logic_composed_candidate_plan_v1.json",
+    "sha256": "2097845dcd68c696863c7f091a17df9a712401c0aa4e87f0aa7b4d26bc5b0595",
+    "status": "blocked_capability_contract",
+    "records": 840,
+    "required_context_window": 10,
+    "unknown_holdout_slot_value_count": 0,
+    "optimizer_started": false,
+    "failures": [
+      "fresh_role_reset_not_attested",
+      "operator_review_not_attested",
+      "typed_evaluator_not_attested"
+    ]
+  },
+  "gates": {
+    "abstract_rule_ir_audit": true,
+    "context_firewall": true,
+    "source_row_bound_typed_evidence": false,
+    "fresh_role_reset_attested": false,
+    "operator_reviewed": false,
+    "candidate_reference_negative_replay": true,
+    "capability_training_allowed": false,
+    "training_eligible": false,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "ui_boundary": {
+    "context_contains_raw_payload": false,
+    "context_contains_wire": false,
+    "context_contains_raw_markup": false,
+    "answers_out_of_context": true,
+    "claim": "abstract Rule-IR candidate only; not a generic vulnerability or payload capability result"
+  }
+}

@@ -42,6 +42,49 @@ type BackendTrace = {
   canary: string;
 };
 
+type RuleIrSummary = {
+  status: string;
+  dataset: {
+    records: number;
+    split_counts: Record<string, number>;
+    case_count: number;
+    implementation_count: number;
+    slot_order: string[];
+  };
+  audit: {
+    status: string;
+    records: number;
+    invalid_rows: number;
+    unique_row_hashes: number;
+    context_firewall_passed: boolean;
+    training_eligible: number;
+  };
+  live_evidence: {
+    fresh_resets: number;
+    typed_observations: number;
+    candidate_effects: number;
+    negative_control_clean: number;
+    unsafe_allow: number;
+    row_bound: boolean;
+  };
+  plan: {
+    status: string;
+    required_context_window: number;
+    optimizer_started: boolean;
+    failures: string[];
+  };
+  gates: {
+    abstract_rule_ir_audit: boolean;
+    context_firewall: boolean;
+    source_row_bound_typed_evidence: boolean;
+    fresh_role_reset_attested: boolean;
+    operator_reviewed: boolean;
+    capability_training_allowed: boolean;
+    training_eligible: boolean;
+    promotion: Record<string, boolean>;
+  };
+};
+
 const cases: LogicCase[] = [
   {
     id: "install-reentry",
@@ -459,6 +502,7 @@ export default function Pg388LogicLab() {
   const [backendCaseCount, setBackendCaseCount] = useState<number | null>(null);
   const [supplementalCaseCount, setSupplementalCaseCount] = useState<number | null>(null);
   const [backendTrace, setBackendTrace] = useState<BackendTrace | null>(null);
+  const [ruleIrSummary, setRuleIrSummary] = useState<RuleIrSummary | null>(null);
   const runRef = useRef(0);
 
   useEffect(() => () => { runRef.current += 1; }, []);
@@ -481,6 +525,18 @@ export default function Pg388LogicLab() {
         }
       })
       .catch(() => { if (!cancelled) { setBackendStatus("offline"); setBackendCaseCount(null); setSupplementalCaseCount(null); } });
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/research/pg388_logic_rule_ir_frontend_summary_v1.json", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("rule-ir-summary");
+        return response.json() as Promise<RuleIrSummary>;
+      })
+      .then((summary) => { if (!cancelled) setRuleIrSummary(summary); })
+      .catch(() => { if (!cancelled) setRuleIrSummary(null); });
     return () => { cancelled = true; };
   }, []);
 
@@ -630,13 +686,26 @@ export default function Pg388LogicLab() {
       </section>
 
       <section id="model" className={styles.contractSection}>
-        <div className={styles.sectionHead}><div><p className={styles.kicker}>MODEL READINESS / STRUCTURED RULE‑IR</p><h2>模型先组合，<br />再谈能力。</h2></div><p>这块把当前训练证据和硬门直接摆出来：840 条抽象轨迹、11 个有序槽位，计划中的 decoder 会把 invariant → transition → action → repair 串起来。</p></div>
+        <div className={styles.sectionHead}><div><p className={styles.kicker}>MODEL READINESS / STRUCTURED RULE‑IR</p><h2>模型先组合，<br />再谈能力。</h2></div><p>{ruleIrSummary ? `${ruleIrSummary.dataset.records} 条抽象 Rule‑IR 行、${ruleIrSummary.dataset.slot_order.length} 个有序槽位；前端读取真实 audit/plan 投影，原始行和 evaluator 证据不进浏览器。` : "正在读取 Rule‑IR audit 投影；原始行和 evaluator 证据不进浏览器。"}</p></div>
         <div className={styles.contractGrid}>
           <article className={styles.good}><span>DESIGN</span><h3>11-slot composition</h3><ul><li>autoregressive previous-slot conditioning</li><li>next-token + slot composition</li><li>ASK / repair / negative auxiliary heads</li></ul></article>
           <article><span>DIAGNOSTIC</span><h3>当前仍不稳定</h3><ul><li>worst ASK recall：0.0</li><li>logic invariant：约 0.043</li><li>state transition：最高仅 0.086</li></ul></article>
           <article className={styles.hold}><span>HARD HOLD</span><h3>blocked before optimizer</h3><ul><li>typed evaluator 未认证</li><li>fresh role reset 未认证</li><li>operator review 未认证</li></ul></article>
         </div>
-        <div className={styles.noteBar}><strong>840 rows · train/holdout 420/420 · plan only · optimizer 0</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>
+        {ruleIrSummary && <div className={styles.ruleIrPanel} aria-label="Rule-IR audit projection">
+          <div className={styles.ruleIrHeader}><div><span className={styles.miniLabel}>READ-ONLY AUDIT PROJECTION</span><strong>{ruleIrSummary.audit.status}</strong></div><b>{ruleIrSummary.plan.status}</b></div>
+          <div className={styles.ruleIrMetrics}>
+            <div><span>ROWS</span><strong>{ruleIrSummary.dataset.records}</strong><small>train {ruleIrSummary.dataset.split_counts.train ?? 0} · holdout {ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0}</small></div>
+            <div><span>SLOTS</span><strong>{ruleIrSummary.dataset.slot_order.length}</strong><small>{ruleIrSummary.dataset.case_count} logic cases · {ruleIrSummary.dataset.implementation_count} impl</small></div>
+            <div><span>LIVE SHAPE</span><strong>{ruleIrSummary.live_evidence.typed_observations}</strong><small>typed observations · row-bound {ruleIrSummary.live_evidence.row_bound ? "yes" : "no"}</small></div>
+            <div><span>TRAINING</span><strong className={ruleIrSummary.gates.training_eligible ? styles.gatePass : styles.gateHold}>{ruleIrSummary.gates.training_eligible ? "OPEN" : "HOLD"}</strong><small>optimizer {ruleIrSummary.plan.optimizer_started ? "started" : "0"} · promotion false</small></div>
+          </div>
+          <div className={styles.ruleIrSlots}><span className={styles.miniLabel}>ORDERED COMPOSITION SLOTS</span><div>{ruleIrSummary.dataset.slot_order.map((slot, index) => <code key={slot}>{String(index + 1).padStart(2, "0")} · {slot}</code>)}</div></div>
+          <div className={styles.ruleIrGates}>
+            {[["abstract audit", ruleIrSummary.gates.abstract_rule_ir_audit], ["context firewall", ruleIrSummary.gates.context_firewall], ["typed row binding", ruleIrSummary.gates.source_row_bound_typed_evidence], ["fresh role reset", ruleIrSummary.gates.fresh_role_reset_attested], ["operator review", ruleIrSummary.gates.operator_reviewed]].map(([label, passed]) => <span key={String(label)} className={passed ? styles.gatePass : styles.gateHold}><i />{String(label)} · {passed ? "PASS" : "HOLD"}</span>)}
+          </div>
+        </div>}
+        <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>
       </section>
 
       <section id="cases" className={styles.labSection}>
