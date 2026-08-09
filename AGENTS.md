@@ -1422,3 +1422,10 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 轨迹 builder 已把 train implementation 与 holdout implementation 的历史顺序显式区分为同一 ontology token 的不同有序序列，避免跨 split 精确 context 复用；当前 builder SHA=`880bb4814a0513476abf8b6d89556862a34982c9193c0cedb5d7fe6e2b7d596f`，dataset SHA=`b600b849466d029319765953c43eafa0e15ee587bfa62f52a28aaf3d03198bbf`，90 行、train/holdout=`45/45`。
 - audit 已新增 `cross_split_context_overlap` 与 `cross_split_context_target_overlap`，当前均为 `0`；audit 报告 SHA=`04cf1b52dfd9a700d5a414340214ebfa7236c8e392d45164c793e65a2dd9bffd`，audit 脚本 SHA=`ba3fd64e338e5bc652ea165b831b914430819f401983ccba829c74aca51754a5`，状态仍为 candidate-only，训练资格与所有 promotion 继续关闭。
 - 1 epoch CPU wiring smoke 已按新 dataset 重跑，报告 SHA=`47a591235e24e15f6ab3dbe8b4d2d7d60bb7bbcfa14990fd3dfe5d539602e634`；另保留 8 epoch 对照报告 SHA=`90ef40560f5342842dc379c2f6b422a6e549d270d78aa879b18cf01ed16cd87d`，仅用于显示小数据重复轨迹的拟合诊断，不能解释为跨实现或漏洞利用能力。
+
+### 2026-08-10：PG-388 实际本地前后端 canary 采集
+
+- 新增 `scripts/run_pg388_logic_canary_live.py`（SHA=`e96ec3b3faf2f7221c2dc0cfe4d6e7a6b15baf8777a14797c0cbc00bde57aa2d`）和 `tests/test_pg388_logic_canary_live.py`（SHA=`f6a8fb5ec45c936e88fbda1b1b6e5077e9a6d0ab9034dbb57fa4a7df7b5201b7`）。live 入口要求 `PG388_LOCAL_EVAL=1`，只允许 localhost/127.0.0.1，拒绝外部 URL；未显式开关时不接触前端。
+- 在当前 PG-388 Docker 前端/后端上完成真实序列：3 次 fresh reset、15 次 typed observation、4 个 candidate/replay/scope effect、3 个 negative clean、unsafe allow=0。报告=`research/pg388_logic_canary_live_v1.json` SHA=`63ef2785e616e2aac186303b73ffda19910a5dcedee8836b05bb6a6b69bed526`，状态=`passed_live_local_canary_only`。
+- 报告只保存抽象 state/effect/action/invariant 桶与逐角色 evidence hash；`target_contacted=false`、`external_network=false`、`wire_created=false`、`safe_to_send=false`、raw request/response 不存储，training/promotion/memory/payload/vulnerability 全关闭。这是本地模拟器的 typed 状态差分，不是任意应用漏洞或可迁移 payload 能力。
+- 本轮规则文件 SHA=`100067d7b2823fce75feb16aa3a260398cdd1a52b4374417ccc51459d8fa855c`，演示资产 manifest SHA=`e6d6ccb0c268fcd6d2aac162cffcb85831cb084c3eb1f8b31ddcb7e2b0dac8e1`。
