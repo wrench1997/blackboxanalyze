@@ -1375,6 +1375,12 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 结果是 wiring evidence：train-only vocabulary gap=0、ASK recall=`1.0`、negative false allow=`0`，worst next_action=`0.679688`；optimizer 只在 CPU，GPU/Docker/network/wire 全 false，`training_eligible=0`、promotion 全关。该结果不证明 live 逻辑漏洞能力，也不等价于 A800 训练。
 - 本次 rules 外部 SHA=`c046d66b78ffcc0baa063801117392baf035b0d98df95b21926e589e2f445d6d`；`tests/test_pg388_logic_supplement.py` 现在还校验该候选报告的 CPU-only 和 fail-closed 字段。
 
+### 2026-08-10：PG-388 taxonomy audit 同步补充合同
+
+- taxonomy audit 已改为读取 `ALL_LOGIC_CASES`，报告=`research/pg388_logic_taxonomy_audit_v1.json` SHA=`2a71b4de7f6b2e33f7b7523d50ec5b0afa215fcef958fd524f0d89291d8b5c45`：核心56 + 补充10 = 66，`missing_anchor_count=0`、`diagnostic_gap_count=0`、`candidate_only_count=10`、status=`passed_candidate_coverage_all_anchors`。补充合同只是覆盖清单，仍没有 live typed evidence 或训练资格。
+- 审计器 SHA=`66f744b69aba4e48469d7962e9bea02b8c9149d45a1c2213a1dab4adb41ebac5`，测试 SHA=`13c6d86d94fd29c28d127a74255d0ff1c46e60630e92329e29bc281fe5ba47a3`；专项测试=`2 passed`。
+- 同步后的 rules 外部 SHA=`a2109c55898cab9603c04c9e1e65cda317a0ddb44da762fb4c34ad94ee77c504`。
+
 ### 2026-08-10：GitHub 提交预检
 
 - 当前工作目录不是 Git 仓库，没有 `.git` 和 remote；未执行 `git init`、commit 或 push，等待用户提供 GitHub repository URL、可见性和推送授权。
