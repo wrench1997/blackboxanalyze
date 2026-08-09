@@ -41,7 +41,7 @@ def _sha(value: Any) -> str:
 
 def _load(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8-sig"))
-    if not isinstance(value, dict) or value.get("status") not in {"abstract_logic_candidate_only", "abstract_logic_supplement_candidate_only"}:
+    if not isinstance(value, dict) or value.get("status") not in {"abstract_logic_candidate_only", "abstract_logic_supplement_candidate_only", "abstract_canary_trajectory_candidate_only"}:
         raise ValueError("pg388_dataset_status_mismatch")
     return value
 

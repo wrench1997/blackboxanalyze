@@ -14258,6 +14258,35 @@
       "training_eligible": false,
       "evaluator_sidecar_only": true
     },
+    "trajectory_dataset": {
+      "builder": "scripts/build_pg388_logic_canary_trajectory_dataset.py",
+      "builder_sha256": "12f5ef77e5e1592a0b26e38268a1249c7d45bd9e9e9ae6d49622c0af5935e803",
+      "dataset": "research/pg388_logic_canary_trajectory_dataset_v1.json",
+      "dataset_sha256": "50b0e6933da17046de1302f9aa8da65b0b752a809dcef3703443c38156ad5192",
+      "audit": "scripts/audit_pg388_logic_canary_trajectory_dataset.py",
+      "audit_sha256": "744c6aae08d440e5228cd19008b992f1813fe67f3f48f4a72c98f2e603758eee",
+      "audit_report": "research/pg388_logic_canary_trajectory_audit_v1.json",
+      "audit_report_sha256": "f06b49d26400b5af478d592cc03945c71e37f622c5c7ee55ecd1ceafeff7e4af",
+      "counts": {"records": 90, "train": 45, "implementation_holdout": 45, "cases": 3, "phases": 5, "roles": 4},
+      "context_target_boundary": "context is state/invariant/phase/role only; typed effect is target/sidecar only",
+      "training_eligible": 0,
+      "promotion": {"training_allowed": false, "memory_promotion_allowed": false, "payload_catalog_promotion_allowed": false, "vulnerability_claim_allowed": false},
+      "cpu_smoke": {
+        "runner": "scripts/run_pg388_logic_token_candidate.py",
+        "runner_sha256": "316e1e6355f1ccf892a141aef599687b3f79dc737a735906c9406a6039a594e5",
+        "report": "research/pg388_logic_canary_token_cpu_smoke_v1.json",
+        "report_sha256": "c18790df76cfb377c3b255803ad666658124f6d6fd819803cd381ea76329719a",
+        "rows_train": 45,
+        "rows_holdout": 45,
+        "device": "cpu",
+        "train_only_vocab_gap": 0,
+        "optimizer_started": true,
+        "gpu_touched": false,
+        "docker_started": false,
+        "network_contacted": false,
+        "interpretation": "wiring candidate only; not a live vulnerability or payload capability"
+      }
+    },
     "tests": {
       "projection": "tests/test_pg388_logic_invariant_projection.py",
       "projection_sha256": "8f1d93e54cccbf735adadd071791791ae0302f17444896e94161dc78119725b2",
