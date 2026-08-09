@@ -251,6 +251,7 @@ export default function Pg389JsChainLab() {
         <div><strong>{cases.length}</strong><span>链路案例</span></div>
         <div><strong>{stats.get}/{stats.post}</strong><span>GET / POST</span></div>
         <div><strong>{stats.guarded}</strong><span>guard 变体</span></div>
+        <div><strong>9/9</strong><span>fixture typed roles</span></div>
         <div><strong>0</strong><span>原始 wire 进入模型</span></div>
       </section>
 
@@ -297,6 +298,7 @@ export default function Pg389JsChainLab() {
           </div>
 
           <div className={styles.boundary}>{item.boundary}</div>
+          <div className={styles.replayNote}><span className={styles.replayDot} /> local fixture replay · 3 chain cases × candidate/reference/replay typed · negative violation 0 · promotion false</div>
           <button className={styles.toggle} onClick={() => setShowProjection((value) => !value)}>{showProjection ? "隐藏" : "显示"} projection tokens</button>
           {showProjection && <div className={styles.tokens}><span>[BOS]</span><span>source={item.source}</span>{item.chain.map((step, index) => <span key={step + index}>decoder_step_{index + 1}={step}</span>)}<span>filter_stage={item.filter}</span><span>guard_precedence={item.guard}</span><span>sink_context={item.sink}</span><span>[CTX_END]</span></div>}
         </div>

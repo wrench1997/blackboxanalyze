@@ -1,0 +1,1116 @@
+{
+  "schema_version": "pg389-js-chain-local-replay-v1",
+  "status": "completed_local_fixture_typed_diagnostic",
+  "scope": "PG385_loopback_fixture_mapped_to_PG389_abstract_chain",
+  "interpretation": "typed fixture-shape evidence only; not a JS implementation holdout, arbitrary target test, vulnerability claim or payload catalogue",
+  "counts": {
+    "cases": 3,
+    "roles": 4,
+    "rows": 12,
+    "fresh_resets": 12,
+    "typed_effect": 9,
+    "baseline_filtered": 12,
+    "failure_action_changed": 12,
+    "negative_violation": 0,
+    "evidence_rows": 12
+  },
+  "case_reports": [
+    {
+      "case_ref": "query_decode_then_filter",
+      "source_report_sha256": "1253098005b0f610b8b968f622d9c9a79901328c7631e71ff6e51ce1347c1fca",
+      "rows": 4,
+      "baseline_filtered": true,
+      "candidate_typed": true,
+      "reference_typed": true,
+      "negative_clean": true,
+      "replay_typed": true,
+      "action_changed": true
+    },
+    {
+      "case_ref": "query_filter_then_decode",
+      "source_report_sha256": "101c00a6bab75c12064987dd7c4b9ed867d97677c61d7f9f354b6826ce5f9621",
+      "rows": 4,
+      "baseline_filtered": true,
+      "candidate_typed": true,
+      "reference_typed": true,
+      "negative_clean": true,
+      "replay_typed": true,
+      "action_changed": true
+    },
+    {
+      "case_ref": "double_decode_order",
+      "source_report_sha256": "35090fef83210b0739184538bab8d06598a8558f2f74ecbef4e73c9c2d9a2f73",
+      "rows": 4,
+      "baseline_filtered": true,
+      "candidate_typed": true,
+      "reference_typed": true,
+      "negative_clean": true,
+      "replay_typed": true,
+      "action_changed": true
+    }
+  ],
+  "rows": [
+    {
+      "record_ref_sha256": "1e1a1adf8185f8c48fe999348d876568c2a129c9411748f3aedfed5acba2bf29",
+      "case_ref": "query_decode_then_filter",
+      "role": "candidate",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=query_decode_then_filter",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "filter_stage=after_decode",
+        "guard_precedence=filter_before_sink",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=filtered_after_decode",
+        "oracle_shape=bounded_text_shape",
+        "observation_1=input_seen",
+        "observation_2=decoded_once",
+        "observation_3=filter_rejected",
+        "observation_4=sink_not_reached",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=repair",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_encoded",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_text_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode"
+        ],
+        "filter_stage": "after_decode",
+        "guard_precedence": "filter_before_sink",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "decoded_once",
+          "filter_rejected",
+          "sink_not_reached"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "2373f816245bc4eacdca30bb4c09f13356ca512a53efd4706901a3ff8779ac6b",
+      "row_sha256": "daa9b2ef3b0bc8f97c25f0169a46e9a2838ce7330d5db11d78fb68980bc3eb52"
+    },
+    {
+      "record_ref_sha256": "4f2a78a060c7fa9b6032b3bc6ac5cbf2828d59c54df7faf34d64a107f7ed2a68",
+      "case_ref": "query_decode_then_filter",
+      "role": "reference",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=query_decode_then_filter",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "filter_stage=after_decode",
+        "guard_precedence=filter_before_sink",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=filtered_after_decode",
+        "oracle_shape=bounded_text_shape",
+        "observation_1=input_seen",
+        "observation_2=decoded_once",
+        "observation_3=filter_rejected",
+        "observation_4=sink_not_reached",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=repair",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_encoded",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_text_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode"
+        ],
+        "filter_stage": "after_decode",
+        "guard_precedence": "filter_before_sink",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "decoded_once",
+          "filter_rejected",
+          "sink_not_reached"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "5376ee01702a38dffb54e2cb2fa270bd35ad87e257a4781ede4e49e68076eb37",
+      "row_sha256": "07ea43370fe33e49dba0788edaf6f20b37e51fa41fd63ad70848e53c6c93fc7b"
+    },
+    {
+      "record_ref_sha256": "263345a37aa2fdf2b6e639292e4da08561559da63c1383e3741eeca843d9e901",
+      "case_ref": "query_decode_then_filter",
+      "role": "negative",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=query_decode_then_filter",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "filter_stage=after_decode",
+        "guard_precedence=filter_before_sink",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=filtered_after_decode",
+        "oracle_shape=bounded_text_shape",
+        "observation_1=input_seen",
+        "observation_2=decoded_once",
+        "observation_3=filter_rejected",
+        "observation_4=sink_not_reached",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=repair",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_encoded",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_text_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode"
+        ],
+        "filter_stage": "after_decode",
+        "guard_precedence": "filter_before_sink",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "decoded_once",
+          "filter_rejected",
+          "sink_not_reached"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "no_effect",
+        "failure_shape": "negative_control",
+        "effect_class": "none",
+        "typed_effect_confirmed": false,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "ad28b07b5988766cd03fa3dd3e76c8c54aa0deff3a998cd4329467d8fa5dd43b"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "65b04586995aeb1acd6c59333a0422e8d790401cba8019cea9c8cab1ad474e28",
+      "row_sha256": "5cd2d6ac46708f568402dc66d39660fed5e8f2d25dc72cf8ef015209b3f4804d"
+    },
+    {
+      "record_ref_sha256": "10b9d248c18ace5e02446c7e71bbe4b5f31cd1cea02d387ee80d911de05f999f",
+      "case_ref": "query_decode_then_filter",
+      "role": "replay",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=query_decode_then_filter",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "filter_stage=after_decode",
+        "guard_precedence=filter_before_sink",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=filtered_after_decode",
+        "oracle_shape=bounded_text_shape",
+        "observation_1=input_seen",
+        "observation_2=decoded_once",
+        "observation_3=filter_rejected",
+        "observation_4=sink_not_reached",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=repair",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_encoded",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_text_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode"
+        ],
+        "filter_stage": "after_decode",
+        "guard_precedence": "filter_before_sink",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "decoded_once",
+          "filter_rejected",
+          "sink_not_reached"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "873173785d103a2978a7957abdd04d61ff274babc39cc171b3f8b85b778472ed",
+      "row_sha256": "e210b8c336ba895f83d32064cd61facf07a3f843d92be3fd03cbfedc3a3bdd90"
+    },
+    {
+      "record_ref_sha256": "59b03661af77dbf6285f683d3d316a6259d8d33512410dc18341f72f4ce38c33",
+      "case_ref": "query_filter_then_decode",
+      "role": "candidate",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=query_filter_then_decode",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "filter_stage=before_decode",
+        "guard_precedence=filter_before_sink",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=raw_shape_blocked",
+        "oracle_shape=bounded_text_shape",
+        "observation_1=input_seen",
+        "observation_2=filter_rejected",
+        "observation_3=decoder_not_reached",
+        "observation_4=sink_not_reached",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=select_probe_variant",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_one_variable",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_text_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode"
+        ],
+        "filter_stage": "before_decode",
+        "guard_precedence": "filter_before_sink",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "filter_rejected",
+          "decoder_not_reached",
+          "sink_not_reached"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "fe6dd314e0c3f662618381edb4bee61a7640a2b64e786aedd0ad2aa4933d3404",
+      "row_sha256": "291844eafaad1174bdf1a76cf319a76145703e781cb6594e726abae417226a1a"
+    },
+    {
+      "record_ref_sha256": "06a7a8cd5f7693f711161a61e1f13e6848d1068a69360c71a8b0c97c94826bfc",
+      "case_ref": "query_filter_then_decode",
+      "role": "reference",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=query_filter_then_decode",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "filter_stage=before_decode",
+        "guard_precedence=filter_before_sink",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=raw_shape_blocked",
+        "oracle_shape=bounded_text_shape",
+        "observation_1=input_seen",
+        "observation_2=filter_rejected",
+        "observation_3=decoder_not_reached",
+        "observation_4=sink_not_reached",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=select_probe_variant",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_one_variable",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_text_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode"
+        ],
+        "filter_stage": "before_decode",
+        "guard_precedence": "filter_before_sink",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "filter_rejected",
+          "decoder_not_reached",
+          "sink_not_reached"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "780c0df48dbbbd69bc4a90dcab306a353c288daeeac86bfeeaab9257b257d6e5",
+      "row_sha256": "a702c14d7ee86bdec08453d0edbb275ae340f8259987657ca0e3acadddb2dc38"
+    },
+    {
+      "record_ref_sha256": "de8cb0cad3919a5b6e9e3d0281fa79b3eea47199465a663680dabb37c5e4592e",
+      "case_ref": "query_filter_then_decode",
+      "role": "negative",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=query_filter_then_decode",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "filter_stage=before_decode",
+        "guard_precedence=filter_before_sink",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=raw_shape_blocked",
+        "oracle_shape=bounded_text_shape",
+        "observation_1=input_seen",
+        "observation_2=filter_rejected",
+        "observation_3=decoder_not_reached",
+        "observation_4=sink_not_reached",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=select_probe_variant",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_one_variable",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_text_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode"
+        ],
+        "filter_stage": "before_decode",
+        "guard_precedence": "filter_before_sink",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "filter_rejected",
+          "decoder_not_reached",
+          "sink_not_reached"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "no_effect",
+        "failure_shape": "negative_control",
+        "effect_class": "none",
+        "typed_effect_confirmed": false,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "ad28b07b5988766cd03fa3dd3e76c8c54aa0deff3a998cd4329467d8fa5dd43b"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "176a2139428a6c7d79360d4ab9f8045d612943a0dd4df1c113d143bfb6a304e3",
+      "row_sha256": "9528e6de01bd98e953df3c576b78438a370ef3d897d4f9742f869b6cfc759430"
+    },
+    {
+      "record_ref_sha256": "22350ffe275edaaed21949944710c7849d12ffb0707f8685ad07a50c52571f53",
+      "case_ref": "query_filter_then_decode",
+      "role": "replay",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=query_filter_then_decode",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "filter_stage=before_decode",
+        "guard_precedence=filter_before_sink",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=raw_shape_blocked",
+        "oracle_shape=bounded_text_shape",
+        "observation_1=input_seen",
+        "observation_2=filter_rejected",
+        "observation_3=decoder_not_reached",
+        "observation_4=sink_not_reached",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=select_probe_variant",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_one_variable",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_text_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode"
+        ],
+        "filter_stage": "before_decode",
+        "guard_precedence": "filter_before_sink",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "filter_rejected",
+          "decoder_not_reached",
+          "sink_not_reached"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "bfe7fb63752071ee8b439024dccba4f049d484ffb4028e059f80e4b4aef3087c",
+      "row_sha256": "214b0ed3dcc09284622dd9bcb3ada319d648983870e98c8ebe8b8bf46e6f22f1"
+    },
+    {
+      "record_ref_sha256": "1149b0497e36bd1a1f823e5adad17feb1163b3806193a1c4bc478f2ad6df6321",
+      "case_ref": "double_decode_order",
+      "role": "candidate",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=double_decode_order",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "decoder_step_3=percent_decode",
+        "filter_stage=between_decode_steps",
+        "guard_precedence=guard_after_normalize",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=second_decode_changes_shape",
+        "oracle_shape=bounded_marker_shape",
+        "observation_1=input_seen",
+        "observation_2=decoded_once",
+        "observation_3=guard_checked",
+        "observation_4=decoded_twice",
+        "observation_5=sink_shape_observed",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=repair",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_layered",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_marker_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode",
+          "percent_decode"
+        ],
+        "filter_stage": "between_decode_steps",
+        "guard_precedence": "guard_after_normalize",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "decoded_once",
+          "guard_checked",
+          "decoded_twice",
+          "sink_shape_observed"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "2d87679869d48da735c43781f06e89bc00b136d9b096196747833ad0d4000f09",
+      "row_sha256": "7b96caa80ef78ad2d3307c2fbab9ddef9dcfb7169a05feb408e432ebc0d27a6f"
+    },
+    {
+      "record_ref_sha256": "ea72f86997c52952c38aa69a57c221fa5dd0c2f2830b44cf15a2c330edd38f7c",
+      "case_ref": "double_decode_order",
+      "role": "reference",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=double_decode_order",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "decoder_step_3=percent_decode",
+        "filter_stage=between_decode_steps",
+        "guard_precedence=guard_after_normalize",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=second_decode_changes_shape",
+        "oracle_shape=bounded_marker_shape",
+        "observation_1=input_seen",
+        "observation_2=decoded_once",
+        "observation_3=guard_checked",
+        "observation_4=decoded_twice",
+        "observation_5=sink_shape_observed",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=repair",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_layered",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_marker_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode",
+          "percent_decode"
+        ],
+        "filter_stage": "between_decode_steps",
+        "guard_precedence": "guard_after_normalize",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "decoded_once",
+          "guard_checked",
+          "decoded_twice",
+          "sink_shape_observed"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "8e19278fcaa686eb20ff6852db79e3ccbdc88e65773f06f07d87eb8cbfab2b44",
+      "row_sha256": "4caaa415280f56111b271e87e24cfc84788865ae8d36d2334ce19610e822eeb1"
+    },
+    {
+      "record_ref_sha256": "d721832f2712dc6e86c3a6aa463e4ba879f98e1e99c8757f8521c00210c4f302",
+      "case_ref": "double_decode_order",
+      "role": "negative",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=double_decode_order",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "decoder_step_3=percent_decode",
+        "filter_stage=between_decode_steps",
+        "guard_precedence=guard_after_normalize",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=second_decode_changes_shape",
+        "oracle_shape=bounded_marker_shape",
+        "observation_1=input_seen",
+        "observation_2=decoded_once",
+        "observation_3=guard_checked",
+        "observation_4=decoded_twice",
+        "observation_5=sink_shape_observed",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=repair",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_layered",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_marker_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode",
+          "percent_decode"
+        ],
+        "filter_stage": "between_decode_steps",
+        "guard_precedence": "guard_after_normalize",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "decoded_once",
+          "guard_checked",
+          "decoded_twice",
+          "sink_shape_observed"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "no_effect",
+        "failure_shape": "negative_control",
+        "effect_class": "none",
+        "typed_effect_confirmed": false,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "ad28b07b5988766cd03fa3dd3e76c8c54aa0deff3a998cd4329467d8fa5dd43b"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "c9bc127b424b91fdfdd6ea3c0766cde10b198b650f467160e845afbf93bf0113",
+      "row_sha256": "a9144d13cb7092ed592269d925a2d726eb7cc22381cd3c97f39680dea0a2f1cf"
+    },
+    {
+      "record_ref_sha256": "96226f10b241d46462521efccf29d765bb4746faeccbec31d0e3012dfa07f60c",
+      "case_ref": "double_decode_order",
+      "role": "replay",
+      "context_tokens": [
+        "[BOS]",
+        "chain_case=double_decode_order",
+        "chain_variant=chain_order_a",
+        "source_kind=location_search",
+        "transport=GET_query",
+        "decoder_step_1=query_parse",
+        "decoder_step_2=percent_decode",
+        "decoder_step_3=percent_decode",
+        "filter_stage=between_decode_steps",
+        "guard_precedence=guard_after_normalize",
+        "sink_context=text_sink",
+        "state_policy=ephemeral",
+        "failure_signature=second_decode_changes_shape",
+        "oracle_shape=bounded_marker_shape",
+        "observation_1=input_seen",
+        "observation_2=decoded_once",
+        "observation_3=guard_checked",
+        "observation_4=decoded_twice",
+        "observation_5=sink_shape_observed",
+        "[CTX_END]"
+      ],
+      "target_tokens": [
+        "[TARGET_BEGIN]",
+        "next_action=repair",
+        "repair_action=encoding",
+        "probe_variant_ref=fixture_shape_layered",
+        "safe_to_send=1",
+        "ask_reason=none",
+        "observation_goal=bounded_marker_shape",
+        "[TARGET_END]"
+      ],
+      "decode_filter_context": {
+        "source_kind": "location_search",
+        "transport": "GET_query",
+        "decoder_chain": [
+          "query_parse",
+          "percent_decode",
+          "percent_decode"
+        ],
+        "filter_stage": "between_decode_steps",
+        "guard_precedence": "guard_after_normalize",
+        "sink_context": "text_sink",
+        "observation_sequence": [
+          "input_seen",
+          "decoded_once",
+          "guard_checked",
+          "decoded_twice",
+          "sink_shape_observed"
+        ],
+        "source_text_stored": false,
+        "raw_value_stored": false
+      },
+      "baseline_projection": {
+        "filter_state": "filtered",
+        "failure_shape": "raw_delimiter_blocked",
+        "typed_effect_confirmed": false
+      },
+      "typed_projection": {
+        "filter_state": "typed_effect",
+        "failure_shape": "none",
+        "effect_class": "bounded_marker_reflection",
+        "typed_effect_confirmed": true,
+        "encoding_acceptance": "encoded_variant",
+        "response_shape": "bounded_json_projection",
+        "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932"
+      },
+      "fresh_reset": true,
+      "failure_observed": true,
+      "action_changed": true,
+      "local_fixture_contacted": true,
+      "ephemeral_wire_used": true,
+      "raw_wire_stored": false,
+      "raw_value_stored": false,
+      "typed_evaluator_observed": true,
+      "training_eligible": false,
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "evidence_sha256": "b6f33ac90882641c3971b2cd170e26be71791d0bb01437e1a6dd0700dd01f863",
+      "row_sha256": "4e8bf2edf0d91e5aa20b35d4f1ef00b2559b4be90cc2f725d3f87c697ae568fc"
+    }
+  ],
+  "execution": {
+    "local_fixture_contacted": true,
+    "target_contacted": false,
+    "external_network": false,
+    "ephemeral_wire_used": true,
+    "raw_wire_stored": false,
+    "raw_value_stored": false,
+    "docker_started": false,
+    "gpu_touched": false,
+    "training_started": false
+  },
+  "model_boundary": {
+    "context_abstract_only": true,
+    "model_raw_value": false,
+    "model_wire": false,
+    "evaluator_last_hop_binding": true,
+    "evaluator_answers_in_context": false
+  },
+  "training_eligible": 0,
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "f0f23fdaf9a4e25964e01d31737db36b25488e793208861b22b4299eb13c5bd6"
+}
