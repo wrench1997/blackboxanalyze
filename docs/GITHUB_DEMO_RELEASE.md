@@ -15,7 +15,9 @@ docker compose -f docker-compose.pg388.yml -p pg388demo up -d
 打开 `http://localhost:3000/pg388`。展示所需的抽象报告和数据集列在
 `research/pg388_demo_asset_manifest_v1.json`，不会包含原始 payload、wire、响应正文、凭据或外部回调。
 
-当前已验证的 GitHub `main` 提交是 `ebaa94dbad4da1f65864712653f837c9dc04d0d5`；截至本说明更新时，仓库还没有名为 `v0.1-demo` 的 GitHub Release。源码克隆可以立即用于前端演示，Release 下载命令只在该 Release 实际创建后使用。
+28-case token CPU smoke 也已登记为诊断资产：420/420 train/holdout、train-only vocab=75、unknown gap=0；但 worst ASK recall=`0.0`、logic invariant=`0.042857`、state transition=`0.064286`，因此不能宣传为模型已经学会逻辑漏洞或通用 payload 生成。
+
+源码克隆可以立即用于前端演示；接收方应以 `git ls-remote --heads origin main` 返回的提交和资产清单 SHA 为准。截至本说明更新时，仓库还没有名为 `v0.1-demo` 的 GitHub Release；Release 下载命令只在该 Release 实际创建后使用。
 
 ## 大文件分层
 

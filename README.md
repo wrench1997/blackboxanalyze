@@ -344,7 +344,7 @@ $env:PG388_NODE_BASE_IMAGE='node:20.11.1-alpine3.19@sha256:<reviewed-node-digest
 docker compose -f docker-compose.pg388.yml -p pg388demo up -d
 ```
 
-打开 `http://localhost:3000/pg388`。页面包含 24 个案例（核心业务逻辑 + 10 个补充分类），可运行 `fresh reset → ASK → failure repair → candidate/reference/negative → replay`。后端只接受抽象枚举，不接收账号、凭据、原始请求值、URL 或响应正文；所有训练、payload catalog 和漏洞晋级标记均关闭。
+打开 `http://localhost:3000/pg388`。页面包含 28 个案例（18 个 concrete local canary + 10 个补充分类），可运行 `fresh reset → ASK → failure repair → candidate/reference/negative → replay`。后端只接受抽象枚举，不接收账号、凭据、原始请求值、URL 或响应正文；所有训练、payload catalog 和漏洞晋级标记均关闭。
 
 PG-385/PG-386 页面展示的是另一个 fixture-bound 过滤反馈实验，不能把本地 canary 结果解释为任意网址的通用 WAF、XSS 或 SQL 能力。
 #   b l a c k b o x a n a l y z e  
