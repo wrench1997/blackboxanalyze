@@ -1,0 +1,50 @@
+{
+  "schema_version": "pg388-logic-canary-smoke-v1",
+  "status": "passed_typed_local_canary_only",
+  "purpose": "bounded state-machine evidence for the PG-388 frontend demonstration",
+  "cases": [
+    "nonce_replay",
+    "coupon_reuse_boundary",
+    "subject_resource_scope"
+  ],
+  "phases_per_case": [
+    "baseline",
+    "candidate",
+    "reference",
+    "negative",
+    "replay"
+  ],
+  "counts": {
+    "fresh_resets": 3,
+    "typed_observations": 15,
+    "candidate_replay_or_scope_effects": 4,
+    "negative_control_clean": 3,
+    "unsafe_allow": 0
+  },
+  "observed_shapes": [
+    "accepted_once",
+    "accepted_replay",
+    "benefit_applied_again",
+    "resource_visible",
+    "resource_denied",
+    "duplicate_effect"
+  ],
+  "safety": {
+    "input_contract": "case_ref_role_phase_enums_only",
+    "safe_to_send": false,
+    "target_contacted": false,
+    "wire_created": false,
+    "external_network": false,
+    "persistent_storage": false,
+    "raw_values_stored": false,
+    "evaluator_sidecar_only": true
+  },
+  "interpretation": "A vulnerable_effect is a typed state difference inside this disposable simulator; it is not a claim about a real application or a portable exploit.",
+  "training_eligible": false,
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  }
+}

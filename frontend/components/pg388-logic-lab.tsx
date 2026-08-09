@@ -39,6 +39,7 @@ type BackendTrace = {
   reference: string;
   negative: string;
   replay: string;
+  canary: string;
 };
 
 const cases: LogicCase[] = [
@@ -445,7 +446,7 @@ export default function Pg388LogicLab() {
     runRef.current = run;
     setRunning(true);
     setStage(1);
-    setBackendTrace({ status: "running", reset: "pending", observation: "pending", repair: "pending", candidate: "pending", reference: "pending", negative: "pending", replay: "pending" });
+    setBackendTrace({ status: "running", reset: "pending", observation: "pending", repair: "pending", candidate: "pending", reference: "pending", negative: "pending", replay: "pending", canary: "not_run" });
     const postAbstract = async (path: string, body: Record<string, string> = {}) => {
       const response = await fetch(`/pg388-api${path}`, {
         method: "POST",
@@ -486,10 +487,22 @@ export default function Pg388LogicLab() {
       const replay = await postAbstract("/api/episode", { case_ref: selected.backendCaseRef, role: "replay", feedback_state: "typed_effect" });
       if (runRef.current !== run) return;
       setBackendTrace((previous) => previous ? { ...previous, status: "complete", replay: replay.fresh_reset_required ? "fresh_required" : "review" } : previous);
+      const concreteCanaryCases = new Set(["nonce_replay", "coupon_reuse_boundary", "subject_resource_scope"]);
+      if (concreteCanaryCases.has(selected.backendCaseRef)) {
+        await postAbstract("/api/canary", { case_ref: selected.backendCaseRef, role: "candidate", phase: "baseline" });
+        await postAbstract("/api/canary", { case_ref: selected.backendCaseRef, role: "candidate", phase: "candidate" });
+        await postAbstract("/api/canary", { case_ref: selected.backendCaseRef, role: "reference", phase: "reference" });
+        await postAbstract("/api/canary", { case_ref: selected.backendCaseRef, role: "negative", phase: "negative" });
+        const canaryReplay = await postAbstract("/api/canary", { case_ref: selected.backendCaseRef, role: "replay", phase: "replay" });
+        if (runRef.current !== run) return;
+        setBackendTrace((previous) => previous ? { ...previous, canary: canaryReplay.vulnerable_effect ? "typed_state_violation" : "typed_clean" } : previous);
+      } else {
+        setBackendTrace((previous) => previous ? { ...previous, canary: "abstract_only" } : previous);
+      }
     } catch {
       if (runRef.current === run) {
         setBackendStatus("offline");
-        setBackendTrace({ status: "offline", reset: "static_fallback", observation: "ASK", repair: "ASK", candidate: "abstain", reference: "abstain", negative: "zero_allow", replay: "not_run" });
+        setBackendTrace({ status: "offline", reset: "static_fallback", observation: "ASK", repair: "ASK", candidate: "abstain", reference: "abstain", negative: "zero_allow", replay: "not_run", canary: "not_run" });
       }
     } finally {
       if (runRef.current === run) setRunning(false);
@@ -595,7 +608,7 @@ export default function Pg388LogicLab() {
 
             {showTokens && <div className={styles.tokenBox}><div className={styles.panelLabel}><span>ABSTRACT CONTEXT TOKENS</span><b>CONTEXT‑ONLY</b></div><div className={styles.tokens}>{selected.tokens.map((token) => <code key={token}>{token}</code>)}</div></div>}
 
-            {backendTrace && <div className={styles.tokenBox}><div className={styles.panelLabel}><span>LIVE BACKEND PROJECTION</span><b>{backendTrace.status.toUpperCase()}</b></div><div className={styles.tokens}><code>reset={backendTrace.reset}</code><code>observe={backendTrace.observation}</code><code>repair={backendTrace.repair}</code><code>candidate={backendTrace.candidate}</code><code>reference={backendTrace.reference}</code><code>negative={backendTrace.negative}</code><code>replay={backendTrace.replay}</code></div></div>}
+            {backendTrace && <div className={styles.tokenBox}><div className={styles.panelLabel}><span>LIVE BACKEND PROJECTION</span><b>{backendTrace.status.toUpperCase()}</b></div><div className={styles.tokens}><code>reset={backendTrace.reset}</code><code>observe={backendTrace.observation}</code><code>repair={backendTrace.repair}</code><code>candidate={backendTrace.candidate}</code><code>reference={backendTrace.reference}</code><code>negative={backendTrace.negative}</code><code>replay={backendTrace.replay}</code><code>local_canary={backendTrace.canary}</code></div></div>}
 
             <div className={styles.controls}><button type="button" className={styles.primary} onClick={runCanary} disabled={running}><span>{running ? "RUNNING…" : "RUN LOCAL CANARY"}</span><b>↗</b></button><button type="button" className={styles.secondary} onClick={reset}>FRESH RESET</button><label><input type="checkbox" checked={showTokens} onChange={(event) => setShowTokens(event.target.checked)} /> show tokens</label></div>
 

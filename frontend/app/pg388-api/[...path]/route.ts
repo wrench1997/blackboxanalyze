@@ -11,6 +11,7 @@ const ALLOWED_PATHS = new Set([
   "api/reset",
   "api/observe",
   "api/episode",
+  "api/canary",
 ]);
 const ALLOWED_HOSTS = new Set(["127.0.0.1", "localhost", "::1", "pg388-backend"]);
 const MAX_REQUEST_BYTES = 4096;

@@ -61,3 +61,37 @@ def test_fixture_rejects_non_enum_input_and_never_returns_raw_values() -> None:
     assert result["safe_to_send"] is False
     assert "secret" not in json.dumps(result, ensure_ascii=False)
     assert manifest()["model_boundary"]["raw_values"] is False
+
+
+def test_local_canary_replays_a_bounded_logic_state_machine() -> None:
+    status, reset = _call("/api/reset", "POST")
+    assert status == 200 and reset["state_clean"] is True
+    status, baseline = _call("/api/canary", "POST", {"case_ref": "nonce_replay", "role": "candidate", "phase": "baseline"})
+    assert status == 200 and baseline["invariant_holds"] is True
+    status, first = _call("/api/canary", "POST", {"case_ref": "nonce_replay", "role": "candidate", "phase": "candidate"})
+    assert status == 200 and first["state_delta"] == "one_effect"
+    status, replay = _call("/api/canary", "POST", {"case_ref": "nonce_replay", "role": "replay", "phase": "replay"})
+    assert status == 200
+    assert replay["vulnerable_effect"] is True
+    assert replay["state_delta"] == "duplicate_effect"
+    assert replay["safe_to_send"] is False
+    assert replay["external_network"] is False
+
+
+def test_local_canary_negative_and_reference_stay_clean() -> None:
+    _call("/api/reset", "POST")
+    for case_ref in ("coupon_reuse_boundary", "subject_resource_scope"):
+        status, reference = _call("/api/canary", "POST", {"case_ref": case_ref, "role": "reference", "phase": "reference"})
+        assert status == 200
+        assert reference["vulnerable_effect"] is False
+        status, negative = _call("/api/canary", "POST", {"case_ref": case_ref, "role": "negative", "phase": "negative"})
+        assert status == 200
+        assert negative["negative_control_clean"] is True
+        assert negative["state_delta"] == "zero"
+
+
+def test_local_canary_accepts_only_scenario_role_phase_enums() -> None:
+    status, result = _call("/api/canary", "POST", {"case_ref": "nonce_replay", "role": "candidate", "phase": "candidate", "value": "secret"})
+    assert status == 400
+    assert result["safe_to_send"] is False
+    assert "secret" not in json.dumps(result, ensure_ascii=False)

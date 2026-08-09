@@ -30,3 +30,12 @@ Session guessing/forgery/leakage).  They accept the same enum-only episode
 contract and never turn a raw value into a request.  The frontend catalog
 shows all 24 presentation cases while preserving `training_eligible=false`
 and all promotion flags false.
+
+The local canary endpoint `/api/canary` is a bounded evaluator demonstration
+for three abstract state machines: nonce replay, coupon reuse, and
+cross-subject resource scope. It accepts only `case_ref`, `role`, and `phase`
+enums and emits state buckets/deltas; it does not accept identifiers, prices,
+coupons, tokens, credentials, or arbitrary request values. A
+`vulnerable_effect=true` result is only a typed result from this disposable
+simulator, not a claim about any real application. Reset before each sequence
+and keep `safe_to_send=false`.

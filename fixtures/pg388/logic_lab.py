@@ -34,6 +34,17 @@ MAX_BODY_BYTES = 4096
 _CASE_REFS = frozenset(item["case_ref"] for item in ALL_LOGIC_CASES)
 _state = {"episode_count": 0, "reset_count": 0}
 
+# Three concrete, bounded state-machine canaries for the frontend demo.  The
+# evaluator chooses only scenario/role/phase enums; it never accepts a user
+# supplied identifier, price, coupon, token, or arbitrary request value.
+_CANARY_CASES = {
+    "nonce_replay": "replay_protection",
+    "coupon_reuse_boundary": "coupon_reuse",
+    "subject_resource_scope": "horizontal_authorization",
+}
+_CANARY_PHASES = frozenset({"baseline", "candidate", "reference", "negative", "replay"})
+_canary_state = {"nonce_effect_count": 0, "coupon_use_count": 0}
+
 
 def _network_mode() -> str:
     return os.environ.get("PG388_NETWORK_MODE", "none")
@@ -58,7 +69,7 @@ def _json_response(start_response: Callable[..., Any], status: int, document: Ma
     return [body]
 
 
-def _read_json(environ: Mapping[str, Any]) -> tuple[dict[str, Any] | None, str | None]:
+def _read_json(environ: Mapping[str, Any], *, allowed: set[str] | None = None) -> tuple[dict[str, Any] | None, str | None]:
     try:
         length = min(max(int(str(environ.get("CONTENT_LENGTH", "0") or "0")), 0), MAX_BODY_BYTES)
     except ValueError:
@@ -73,8 +84,8 @@ def _read_json(environ: Mapping[str, Any]) -> tuple[dict[str, Any] | None, str |
         return None, "json_invalid"
     if not isinstance(value, dict):
         return None, "json_object_required"
-    allowed = {"case_ref", "role", "feedback_state"}
-    if set(value) - allowed:
+    allowed_keys = allowed or {"case_ref", "role", "feedback_state"}
+    if set(value) - allowed_keys:
         return None, "abstract_enum_fields_only"
     return value, None
 
@@ -92,6 +103,120 @@ def _validate_request(document: Mapping[str, Any]) -> tuple[dict[str, str] | Non
     return {"case_ref": case_ref, "role": role, "feedback_state": feedback}, None
 
 
+def _validate_canary_request(document: Mapping[str, Any]) -> tuple[dict[str, str] | None, str | None]:
+    case_ref = str(document.get("case_ref", ""))
+    role = str(document.get("role", ""))
+    phase = str(document.get("phase", ""))
+    if case_ref not in _CANARY_CASES:
+        return None, "unknown_canary_case"
+    if role not in ROLES:
+        return None, "unknown_role"
+    if phase not in _CANARY_PHASES:
+        return None, "unknown_canary_phase"
+    if phase == "baseline" and role != "candidate":
+        return None, "baseline_role_required"
+    if phase != "baseline" and phase != role:
+        return None, "canary_role_phase_mismatch"
+    return {"case_ref": case_ref, "role": role, "phase": phase}, None
+
+
+def _canary_state_bucket(case_ref: str) -> str:
+    if case_ref == "nonce_replay":
+        return "zero_effect" if _canary_state["nonce_effect_count"] == 0 else "one_or_more_effects"
+    if case_ref == "coupon_reuse_boundary":
+        return "unused" if _canary_state["coupon_use_count"] == 0 else "consumed_once_or_more"
+    return "subject_scope_unmodified"
+
+
+def _canary_result(request: Mapping[str, str]) -> dict[str, Any]:
+    case_ref = request["case_ref"]
+    role = request["role"]
+    phase = request["phase"]
+    before = _canary_state_bucket(case_ref)
+    violated = False
+    state_delta = "zero"
+    effect_shape = "denied_shape"
+    action_shape = "observe_only"
+
+    if phase == "baseline":
+        effect_shape = "baseline_shape"
+    elif case_ref == "nonce_replay":
+        if role == "candidate":
+            _canary_state["nonce_effect_count"] += 1
+            state_delta, effect_shape, action_shape = "one_effect", "accepted_once", "candidate_apply"
+        elif role == "replay":
+            violated = _canary_state["nonce_effect_count"] > 0
+            if violated:
+                _canary_state["nonce_effect_count"] += 1
+                state_delta, effect_shape, action_shape = "duplicate_effect", "accepted_replay", "candidate_replay"
+            else:
+                state_delta, effect_shape, action_shape = "zero", "missing_baseline", "ask_baseline"
+        elif role == "reference":
+            state_delta, effect_shape, action_shape = "zero", "rejected_replay", "reference_guard"
+        else:
+            state_delta, effect_shape, action_shape = "zero", "rejected_replay", "negative_guard"
+    elif case_ref == "coupon_reuse_boundary":
+        if role == "candidate":
+            _canary_state["coupon_use_count"] += 1
+            state_delta, effect_shape, action_shape = "discount_once", "benefit_applied", "candidate_apply"
+        elif role == "replay":
+            violated = _canary_state["coupon_use_count"] > 0
+            if violated:
+                _canary_state["coupon_use_count"] += 1
+                state_delta, effect_shape, action_shape = "discount_reused", "benefit_applied_again", "candidate_replay"
+            else:
+                state_delta, effect_shape, action_shape = "zero", "missing_baseline", "ask_baseline"
+        elif role == "reference":
+            state_delta, effect_shape, action_shape = "zero", "coupon_reuse_denied", "reference_guard"
+        else:
+            state_delta, effect_shape, action_shape = "zero", "coupon_reuse_denied", "negative_guard"
+    else:  # subject_resource_scope: deterministic cross-owner authorization canary.
+        if role in {"candidate", "replay"}:
+            violated = True
+            state_delta, effect_shape, action_shape = "read_cross_scope", "resource_visible", "candidate_scope_bypass"
+        elif role == "reference":
+            state_delta, effect_shape, action_shape = "zero", "resource_denied", "reference_scope_guard"
+        else:
+            state_delta, effect_shape, action_shape = "zero", "resource_denied", "negative_scope_guard"
+
+    after = _canary_state_bucket(case_ref)
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "status": "typed_local_canary_result",
+        "canary_case": _CANARY_CASES[case_ref],
+        "case_ref": case_ref,
+        "role": role,
+        "phase": phase,
+        "state_before": before,
+        "state_after": after,
+        "state_delta": state_delta,
+        "effect_shape": effect_shape,
+        "action_shape": action_shape,
+        "invariant_holds": not violated,
+        "vulnerable_effect": violated,
+        "typed_observation": True,
+        "negative_control_clean": role == "negative" and not violated,
+        "safe_to_send": False,
+        "target_contacted": False,
+        "external_network": False,
+        "persistent_storage": False,
+        "fresh_reset_required": True,
+        "evaluator_sidecar": {"scope": "local_disposable_canary_only", "raw_values_stored": False},
+    }
+
+
+def _canary_manifest() -> dict[str, Any]:
+    return {
+        "endpoint": "/api/canary",
+        "cases": [{"case_ref": key, "surface": value} for key, value in _CANARY_CASES.items()],
+        "phases": sorted(_CANARY_PHASES),
+        "roles": list(ROLES),
+        "input_policy": "case_ref_role_phase_enums_only",
+        "vulnerability_claim": "local_typed_state_shape_only",
+        "safe_to_send": False,
+    }
+
+
 def manifest() -> dict[str, Any]:
     return {
         "schema_version": SCHEMA_VERSION,
@@ -106,7 +231,8 @@ def manifest() -> dict[str, Any]:
         "network": {"mode": _network_mode(), "loopback_only": _loopback_only(), "external_network": False},
         "state": {"persistent_storage": False, "business_write": False, "disposable_episode_only": True},
         "model_boundary": {"raw_values": False, "raw_response": False, "oracle_answer_in_context": False, "safe_to_send": False},
-        "route_classes": ["health", "manifest", "cases", "supplemental-cases", "reset", "observe", "episode"],
+        "route_classes": ["health", "manifest", "cases", "supplemental-cases", "reset", "observe", "episode", "canary"],
+        "canary": _canary_manifest(),
         "training_eligible": False,
         "promotion": {"training_allowed": False, "memory_promotion_allowed": False, "payload_catalog_promotion_allowed": False, "vulnerability_claim_allowed": False},
     }
@@ -156,7 +282,17 @@ def application(environ: Mapping[str, Any], start_response: Callable[..., Any]) 
     if path == "/api/reset" and method == "POST":
         _state["episode_count"] = 0
         _state["reset_count"] += 1
+        _canary_state["nonce_effect_count"] = 0
+        _canary_state["coupon_use_count"] = 0
         return _json_response(start_response, 200, {"status": "fresh_reset", "reset_count_bucket": "first" if _state["reset_count"] == 1 else "repeated", "state_clean": True, "state_delta": "zero", "persistent_storage": False, "external_network": False})
+    if path == "/api/canary" and method == "POST":
+        document, error = _read_json(environ, allowed={"case_ref", "role", "phase"})
+        if error:
+            return _json_response(start_response, 400, {"status": "ask", "ask_reason": error, "safe_to_send": False, "raw_values_stored": False})
+        request, error = _validate_canary_request(document or {})
+        if error:
+            return _json_response(start_response, 400, {"status": "ask", "ask_reason": error, "safe_to_send": False, "raw_values_stored": False})
+        return _json_response(start_response, 200, _canary_result(request or {}))
     if path in {"/api/observe", "/api/episode"} and method == "POST":
         document, error = _read_json(environ)
         if error:

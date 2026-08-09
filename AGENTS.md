@@ -1403,3 +1403,10 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 用户已明确授权推送；`origin/main` 当前与本地提交 `ebaa94dbad4da1f65864712653f837c9dc04d0d5` 一致，工作区干净。该事实覆盖上方“等待授权/未执行 push”的历史预检记录。
 - GitHub API 当前没有 `v0.1-demo` Release；不能在接收流程中假定该 Release 已存在。源码克隆可直接启动 `/pg388`，Release 下载命令仅在实际创建后使用。
 - `scripts/verify_demo_assets.ps1` 新增 `-AllowMissingOptional`：源码克隆时校验 Git 内的小型资产，并把 `distribution=release_or_a800_cache` 且 `required_for_frontend_demo=false` 的缺失 checkpoint 明确列入 `missing_optional`；不允许把缺失权重当作已验证。所有资产齐备后必须去掉该开关再校验。
+
+### 2026-08-10：PG-388 三类本地业务状态机 canary
+
+- 为避免 PG-388 只有抽象投影，`fixtures/pg388/logic_lab.py` 新增 enum-only `/api/canary`：`nonce_replay`、`coupon_reuse_boundary`、`subject_resource_scope` 三类 disposable 状态机，输入仅 `case_ref/role/phase`，输出仅状态桶、差分桶和 typed local sidecar；implementation SHA=`e0b7e634e854b9e1dc2ae86da2e785afd42a427660e9abc981edb4370d5f0a23`。
+- 每个序列执行 `baseline → candidate → reference → negative → replay`，在内存中观察重放/重复优惠/跨主体访问的差分；3 次 fresh reset、15 次 typed observation、4 次 candidate replay/scope effect、3 次 negative clean、unsafe allow=0。报告=`research/pg388_logic_canary_smoke_v1.json` SHA=`adaddd710b8250860096b458cb1dd580d7ff9018ca647fb9ac8eb40e5b716455`。
+- 前端 proxy 已 allowlist `/pg388-api/api/canary`，组件会把 `local_canary=typed_state_violation/typed_clean/abstract_only` 显示在 live projection 中；API route SHA=`1dc81fa08fb0fc2fbe35c17f8e3ca521b2cb99d312e2024ff7f1cdd3672eec01`，组件 SHA=`9dc615fdb6594d938fd8dbff640e2f6838110ac6b755a5301e9278576527653f`。
+- 该 `vulnerable_effect` 只表示 disposable simulator 内的 typed 状态差分，不是现实应用漏洞、通用 payload 或任意目标能力。`safe_to_send=false`、target/network/wire/persistent storage 全 false，训练/记忆/晋级全关闭。规则文件本轮 SHA=`964b511c881db6c7937f06494b44c26bfa6c7bd2ee9d80b9dee880438906b631`。
