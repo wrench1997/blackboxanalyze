@@ -1390,3 +1390,10 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 当前工作目录不是 Git 仓库，没有 `.git` 和 remote；未执行 `git init`、commit 或 push，等待用户提供 GitHub repository URL、可见性和推送授权。
 - `.gitignore` 已加入两个超过 GitHub 单文件限制的历史研究数据：`research/pg360_slotwise_dataset_v1.json`（约348MB）与 `research/pg361_syntax_slotwise_dataset_v1.json`（约682MB）；`artifacts/`、前端依赖和构建缓存原本已忽略。
 - 推荐提交内容为源码、`fixtures/pg388`、`frontend`、`scripts`、`tests`、`AGENTS.md`、README 和小型审计报告；大权重/缓存只保留 SHA 与本地归档，不上传。
+
+### 2026-08-10：GitHub 大文件与演示资产发布约定
+
+- 当前工作区已是 Git 仓库，分支=`main`，`origin=https://github.com/wrench1997/blackboxanalyze.git`，最新本地提交=`ca9459e`；工作区干净。此前旧的“不是 Git 仓库/无 remote”预检记录仅保留作历史，不代表当前状态。
+- 新增 `research/pg388_demo_asset_manifest_v1.json`，登记 PG-388 抽象数据、审计、可选候选 checkpoint 的路径/字节数/SHA-256；新增 `scripts/verify_demo_assets.ps1`，接收方下载后必须先做路径、大小和哈希校验。
+- 新增 `docs/GITHUB_DEMO_RELEASE.md`：GitHub main 放源代码与小型 manifest；Release 放明天演示所需的少量资产；A800 只作训练/推理缓存，canonical copy 必须留在本地归档或受控对象存储。大权重不因位于 A800 就自动获得训练、记忆或晋级资格。
+- 本轮未上传原始 payload、wire、响应正文、凭据或外部地址；GitHub 推送需在网络可用时显式执行 `git push origin main`，Release 资产另行发布并再次校验哈希。
