@@ -22,7 +22,8 @@ def audit_dataset(document: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(rows, list):
         reasons.append("rows_missing")
         rows = []
-    if len(rows) != 90:
+    expected_records = len(CASES) * 3 * len(PHASES) * 2
+    if len(rows) != expected_records:
         reasons.append("record_count_mismatch")
     expected_cases = set(CASES)
     observed_cases = {str(row.get("case_ref")) for row in rows if isinstance(row, dict)}

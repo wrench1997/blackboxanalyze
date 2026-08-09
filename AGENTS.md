@@ -1429,3 +1429,23 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 在当前 PG-388 Docker 前端/后端上完成真实序列：3 次 fresh reset、15 次 typed observation、4 个 candidate/replay/scope effect、3 个 negative clean、unsafe allow=0。报告=`research/pg388_logic_canary_live_v1.json` SHA=`63ef2785e616e2aac186303b73ffda19910a5dcedee8836b05bb6a6b69bed526`，状态=`passed_live_local_canary_only`。
 - 报告只保存抽象 state/effect/action/invariant 桶与逐角色 evidence hash；`target_contacted=false`、`external_network=false`、`wire_created=false`、`safe_to_send=false`、raw request/response 不存储，training/promotion/memory/payload/vulnerability 全关闭。这是本地模拟器的 typed 状态差分，不是任意应用漏洞或可迁移 payload 能力。
 - 本轮规则文件 SHA=`100067d7b2823fce75feb16aa3a260398cdd1a52b4374417ccc51459d8fa855c`，演示资产 manifest SHA=`e6d6ccb0c268fcd6d2aac162cffcb85831cb084c3eb1f8b31ddcb7e2b0dac8e1`。
+
+### 2026-08-10：PG-388 扩展本地逻辑 canary 矩阵
+
+- `/api/canary` 已从 3 个状态机扩展为 17 个 enum-only case refs，覆盖安装重入、价格/状态/数量边界、身份规范化、找回绑定、2FA 顺序、验证码重用、Session 旋转、水平/垂直越权、标识符枚举信号、执行顺序和响应投影；其中 14 个有受控 defective-branch effect，仍只返回抽象 state/effect/action 桶。
+- 后端实现最新 SHA=`166e6fa7e8785492aa4ac6df4250c024bf1bbe7e60b0ad6721c3a1ec2e8df5a0`，README SHA=`2225dbcb0271b1c647b40936418e479d46f2a9a18f20d49209e1cfbb81f05541`，刷新后的本地 display image=`sha256:80b2a43dab8cd2a0744ca4fc06b94f9948389392272fd1a9842eccc1d6a030da`，容器刷新报告=`research/pg388_logic_backend_container_smoke_v2.json` SHA=`956b295106cb1ed606a479241e8f42363aee5dda7b31fce3cd72dcb3b871e20a`。
+- 真实 HTTP 验证了 `install_reentry_gate` candidate 产生 `setup_reentered` typed effect，以及 `two_factor_reset_binding` negative 保持 clean；所有请求仍只含 `case_ref/role/phase`，safe_to_send、外网、持久化和 promotion 全关闭。
+- 扩展矩阵登记后的当前 rules SHA=`c53a310fc64bdb52407171f96462b8840fa7ab0c41de166e5aca4bb76e51e5c4`，demo asset manifest SHA=`0136dc90c17e447ea6509827f364f47a7d7a009e689ebd155e20ed5bfe2095fe`。
+
+### 2026-08-10：PG-388 17-case 轨迹集扩展
+
+- canary trajectory builder 现在覆盖 17 个逻辑 case，生成 510 行（train/implementation_holdout=`255/255`）；dataset SHA=`7cefae6b85d380f13cf79c15f1cfd06c51ba30ab0004d776ef8af750d81a1a1f`，builder SHA=`ae85150297601c90a561f98143f31bf4bbb041145615059ca00b0cc5aaed2178`。
+- 审计报告 SHA=`f2574f0cfe345ee742c86434f3b0239ba6db52b194b5b14cf4faa9c594d83b68`，审计脚本 SHA=`d70d668c0ed64ec60bbde401741593e182230b9f8e3d8a59c6d0c673d25916c0`；cross-split context/context-target overlap 均为 `0`，raw/context firewall 与 training/promotion gates 仍关闭。
+- 新数据上的 1 epoch CPU wiring smoke：train/holdout=`255/255`、unknown context gap=0、optimizer 仅 CPU，报告 SHA=`03210760ff87e80e87afcf9fba85cdf78215df1eae56b766412dde4d854d0e28`；8 epoch 对照 SHA=`80701dd04ca79a3b1fef10a977491b0c79fa467a884b1730e29b5ab66fa630f8`。8 epoch holdout `next_action` 最坏约 `0.9647`、ASK recall=`1.0`，只代表本地小矩阵拟合诊断，不代表通用漏洞能力。
+- 该扩展批次最终 rules SHA=`2c0286cbfe23b7671577f51b808ae7013eab099a8e4e512aa85ff5300b0b91d9`，asset manifest SHA=`d961700d92675b026f6bcf51893bf220b081f1424e477e67ee4e899face31d8f`。
+
+### 2026-08-10：PG-388 全矩阵 live replay
+
+- live runner 已与 17-case 矩阵对齐，真实本地 HTTP replay 重新执行 17 次 fresh reset、85 次 typed observation、32 个 candidate/replay effect、17 个 negative clean，unsafe allow=0。报告=`research/pg388_logic_canary_live_v1.json` SHA=`3a4ce6d69673e4a2c5690284174892d8a29bf17a5942cd2b87b2f4b7f288f1c1`。
+- runner SHA=`0ceac2d4bf942a15b7ddc6d50c25262993a90a6705e258c51eca4e3a29d25633`，test SHA=`9214b9b1ebfa9419e176857d6bb04e16fa34e38af58e22899125d3071e3d8e0e`。live 仍只允许本地 origin、enum-only body、抽象 projection；raw request/response、外网、wire、持久化、训练和 promotion 全关闭。
+- 全矩阵 replay 更新后的 rules SHA=`86eb48a2a08c3de04efb6fc4acc8d22ef9245f8b165cc692bef60b29236c9721`，asset manifest SHA=`66bb4263869aab09a9f811bfe2d2d3873a1c17c16d4623ff12ea0e76512fced5`。

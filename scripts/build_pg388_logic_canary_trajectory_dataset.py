@@ -22,6 +22,36 @@ CASES = {
     "nonce_replay": {"surface": "replay_protection", "invariant": "nonce_fresh_per_action", "repair": "replay"},
     "coupon_reuse_boundary": {"surface": "coupon_reuse", "invariant": "coupon_consumed_once", "repair": "replay"},
     "subject_resource_scope": {"surface": "horizontal_authorization", "invariant": "subject_matches_resource", "repair": "scope"},
+    "install_reentry_gate": {"surface": "installation_gate", "invariant": "install_once_until_reset", "repair": "state"},
+    "purchase_price_binding": {"surface": "transaction_price", "invariant": "price_bound_to_server_quote", "repair": "authority"},
+    "purchase_status_transition": {"surface": "transaction_status", "invariant": "status_transition_is_server_owned", "repair": "order"},
+    "purchase_quantity_floor": {"surface": "transaction_quantity", "invariant": "quantity_is_positive", "repair": "boundary"},
+    "identity_canonicalization": {"surface": "identity_canonicalization", "invariant": "canonical_identity_is_unique", "repair": "normalization"},
+    "password_reset_subject_binding": {"surface": "password_reset", "invariant": "reset_subject_matches_requester", "repair": "binding"},
+    "two_factor_reset_binding": {"surface": "two_factor_reset", "invariant": "reset_does_not_skip_second_factor", "repair": "order"},
+    "captcha_reuse": {"surface": "captcha_state", "invariant": "challenge_consumed_once", "repair": "replay"},
+    "session_fixation_boundary": {"surface": "session_rotation", "invariant": "session_rotates_after_auth", "repair": "rotation"},
+    "query_object_scope": {"surface": "query_authorization", "invariant": "query_subject_owns_object", "repair": "scope"},
+    "vertical_role_scope": {"surface": "vertical_authorization", "invariant": "role_allows_transition", "repair": "role"},
+    "query_identifier_entropy": {"surface": "identifier_enumeration", "invariant": "identifier_not_predictable", "repair": "entropy"},
+    "execution_order": {"surface": "execution_order", "invariant": "checks_precede_side_effect", "repair": "order"},
+    "sensitive_projection": {"surface": "information_projection", "invariant": "sensitive_fields_not_projected", "repair": "redaction"},
+}
+RISK_OUTCOMES = {
+    "install_reentry_gate": ("setup_reentered", "unexpected_reconfigure"),
+    "purchase_price_binding": ("client_total_accepted", "total_mismatch"),
+    "purchase_status_transition": ("status_advanced", "payment_order_violation"),
+    "purchase_quantity_floor": ("negative_quantity_accepted", "quantity_delta_nonzero"),
+    "identity_canonicalization": ("duplicate_identity", "normalization_bypass"),
+    "password_reset_subject_binding": ("subject_mismatch_accepted", "reset_scope_crossed"),
+    "two_factor_reset_binding": ("session_upgraded_without_factor", "factor_order_bypassed"),
+    "captcha_reuse": ("challenge_reused", "verification_replay"),
+    "session_fixation_boundary": ("session_not_rotated", "identity_transition_shared"),
+    "query_object_scope": ("cross_scope_read", "owner_binding_bypassed"),
+    "vertical_role_scope": ("admin_action_allowed", "role_guard_bypassed"),
+    "query_identifier_entropy": ("ordered_identifier", "enumeration_signal"),
+    "execution_order": ("mutate_before_deny", "side_effect_before_check"),
+    "sensitive_projection": ("secret_shape_exposed", "response_projection_verbose"),
 }
 
 
@@ -53,6 +83,15 @@ def _outcome(case_ref: str, role: str, phase: str) -> dict[str, str | bool]:
         if phase == "candidate":
             return {"next_action": "replay", "repair_action": "none", "effect_shape": "benefit_applied", "state_delta": "discount_once", "invariant_result": "holds", "vulnerable_effect": False}
         return {"next_action": "abstain", "repair_action": "replay", "effect_shape": "benefit_applied_again", "state_delta": "discount_reused", "invariant_result": "violated", "vulnerable_effect": True}
+    if case_ref in RISK_OUTCOMES:
+        effect_shape, state_delta = RISK_OUTCOMES[case_ref]
+        if role == "negative":
+            return {"next_action": "abstain", "repair_action": "none", "effect_shape": "denied_shape", "state_delta": "zero", "invariant_result": "holds", "vulnerable_effect": False}
+        if role == "reference":
+            return {"next_action": "confirm_reference", "repair_action": "none", "effect_shape": "reference_denied_shape", "state_delta": "zero", "invariant_result": "holds", "vulnerable_effect": False}
+        if phase == "candidate":
+            return {"next_action": "repair", "repair_action": "none", "effect_shape": effect_shape, "state_delta": state_delta, "invariant_result": "violated", "vulnerable_effect": True}
+        return {"next_action": "abstain", "repair_action": CASES[case_ref]["repair"], "effect_shape": f"{effect_shape}_replay", "state_delta": f"{state_delta}_replay", "invariant_result": "violated", "vulnerable_effect": True}
     return {"next_action": "abstain", "repair_action": "scope", "effect_shape": "resource_visible", "state_delta": "read_cross_scope", "invariant_result": "violated", "vulnerable_effect": True}
 
 
@@ -122,7 +161,7 @@ def build_dataset() -> dict[str, Any]:
         "status": "abstract_canary_trajectory_candidate_only",
         "objective": "让模型学习有限业务状态机的 baseline/candidate/reference/negative/replay 组合，而不是记忆攻击字符串",
         "rows": rows,
-        "counts": {"records": len(rows), "train": 45, "implementation_holdout": 45, "cases": len(CASES), "implementations": len(IMPLEMENTATIONS), "seeds": len(SEEDS), "phases": len(PHASES), "roles": len(ROLES)},
+        "counts": {"records": len(rows), "train": len(rows) // len(IMPLEMENTATIONS), "implementation_holdout": len(rows) // len(IMPLEMENTATIONS), "cases": len(CASES), "implementations": len(IMPLEMENTATIONS), "seeds": len(SEEDS), "phases": len(PHASES), "roles": len(ROLES)},
         "case_refs": list(CASES),
         "context_firewall": {"raw_source": False, "raw_payload": False, "raw_response": False, "evaluator_answer": False, "external_network": False},
         "source_contract": {"fresh_role_reset": False, "candidate_reference_negative_replay": True, "typed_evidence": False, "operator_reviewed": False, "live_rows_emitted": False},

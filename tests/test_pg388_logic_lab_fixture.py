@@ -95,3 +95,21 @@ def test_local_canary_accepts_only_scenario_role_phase_enums() -> None:
     assert status == 400
     assert result["safe_to_send"] is False
     assert "secret" not in json.dumps(result, ensure_ascii=False)
+
+
+def test_local_canary_exposes_extended_logic_matrix_without_raw_values() -> None:
+    document = manifest()
+    canary = document["canary"]
+    assert len(canary["cases"]) == 17
+    assert set(canary["concrete_effect_cases"]) >= {"install_reentry_gate", "two_factor_reset_binding", "query_object_scope"}
+    _call("/api/reset", "POST")
+    status, candidate = _call("/api/canary", "POST", {"case_ref": "install_reentry_gate", "role": "candidate", "phase": "candidate"})
+    assert status == 200
+    assert candidate["vulnerable_effect"] is True
+    assert candidate["effect_shape"] == "setup_reentered"
+    assert candidate["safe_to_send"] is False
+    assert "identifier" not in json.dumps(candidate, ensure_ascii=False)
+    status, negative = _call("/api/canary", "POST", {"case_ref": "two_factor_reset_binding", "role": "negative", "phase": "negative"})
+    assert status == 200
+    assert negative["vulnerable_effect"] is False
+    assert negative["negative_control_clean"] is True

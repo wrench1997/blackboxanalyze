@@ -34,16 +34,48 @@ MAX_BODY_BYTES = 4096
 _CASE_REFS = frozenset(item["case_ref"] for item in ALL_LOGIC_CASES)
 _state = {"episode_count": 0, "reset_count": 0}
 
-# Three concrete, bounded state-machine canaries for the frontend demo.  The
+# Concrete, bounded state-machine canaries for the frontend demo.  The
 # evaluator chooses only scenario/role/phase enums; it never accepts a user
 # supplied identifier, price, coupon, token, or arbitrary request value.
 _CANARY_CASES = {
     "nonce_replay": "replay_protection",
     "coupon_reuse_boundary": "coupon_reuse",
     "subject_resource_scope": "horizontal_authorization",
+    "install_reentry_gate": "installation_gate",
+    "purchase_price_binding": "transaction_price",
+    "purchase_status_transition": "transaction_status",
+    "purchase_quantity_floor": "transaction_quantity",
+    "identity_canonicalization": "identity_canonicalization",
+    "password_reset_subject_binding": "password_reset",
+    "two_factor_reset_binding": "two_factor_reset",
+    "captcha_reuse": "captcha_state",
+    "session_fixation_boundary": "session_rotation",
+    "query_object_scope": "query_authorization",
+    "vertical_role_scope": "vertical_authorization",
+    "query_identifier_entropy": "identifier_enumeration",
+    "execution_order": "execution_order",
+    "sensitive_projection": "information_projection",
+}
+# These cases deliberately model a bounded defective branch in the local
+# simulator.  The values are abstract effect/state buckets only.
+_CANARY_RISK = {
+    "install_reentry_gate": ("setup_reentered", "unexpected_reconfigure"),
+    "purchase_price_binding": ("client_total_accepted", "total_mismatch"),
+    "purchase_status_transition": ("status_advanced", "payment_order_violation"),
+    "purchase_quantity_floor": ("negative_quantity_accepted", "quantity_delta_nonzero"),
+    "identity_canonicalization": ("duplicate_identity", "normalization_bypass"),
+    "password_reset_subject_binding": ("subject_mismatch_accepted", "reset_scope_crossed"),
+    "two_factor_reset_binding": ("session_upgraded_without_factor", "factor_order_bypassed"),
+    "captcha_reuse": ("challenge_reused", "verification_replay"),
+    "session_fixation_boundary": ("session_not_rotated", "identity_transition_shared"),
+    "query_object_scope": ("cross_scope_read", "owner_binding_bypassed"),
+    "vertical_role_scope": ("admin_action_allowed", "role_guard_bypassed"),
+    "query_identifier_entropy": ("ordered_identifier", "enumeration_signal"),
+    "execution_order": ("mutate_before_deny", "side_effect_before_check"),
+    "sensitive_projection": ("secret_shape_exposed", "response_projection_verbose"),
 }
 _CANARY_PHASES = frozenset({"baseline", "candidate", "reference", "negative", "replay"})
-_canary_state = {"nonce_effect_count": 0, "coupon_use_count": 0}
+_canary_state = {"nonce_effect_count": 0, "coupon_use_count": 0, "generic_effect_counts": {key: 0 for key in _CANARY_RISK}}
 
 
 def _network_mode() -> str:
@@ -125,6 +157,8 @@ def _canary_state_bucket(case_ref: str) -> str:
         return "zero_effect" if _canary_state["nonce_effect_count"] == 0 else "one_or_more_effects"
     if case_ref == "coupon_reuse_boundary":
         return "unused" if _canary_state["coupon_use_count"] == 0 else "consumed_once_or_more"
+    if case_ref in _CANARY_RISK:
+        return "zero_effect" if _canary_state["generic_effect_counts"][case_ref] == 0 else "one_or_more_effects"
     return "subject_scope_unmodified"
 
 
@@ -170,6 +204,16 @@ def _canary_result(request: Mapping[str, str]) -> dict[str, Any]:
             state_delta, effect_shape, action_shape = "zero", "coupon_reuse_denied", "reference_guard"
         else:
             state_delta, effect_shape, action_shape = "zero", "coupon_reuse_denied", "negative_guard"
+    elif case_ref in _CANARY_RISK:
+        if role in {"candidate", "replay"}:
+            _canary_state["generic_effect_counts"][case_ref] += 1
+            effect_shape, state_delta = _CANARY_RISK[case_ref]
+            action_shape = "candidate_apply" if role == "candidate" else "candidate_replay"
+            violated = True
+        elif role == "reference":
+            state_delta, effect_shape, action_shape = "zero", "reference_denied_shape", "reference_guard"
+        else:
+            state_delta, effect_shape, action_shape = "zero", "negative_denied_shape", "negative_guard"
     else:  # subject_resource_scope: deterministic cross-owner authorization canary.
         if role in {"candidate", "replay"}:
             violated = True
@@ -212,6 +256,7 @@ def _canary_manifest() -> dict[str, Any]:
         "phases": sorted(_CANARY_PHASES),
         "roles": list(ROLES),
         "input_policy": "case_ref_role_phase_enums_only",
+        "concrete_effect_cases": list(_CANARY_RISK),
         "vulnerability_claim": "local_typed_state_shape_only",
         "safe_to_send": False,
     }
@@ -284,6 +329,7 @@ def application(environ: Mapping[str, Any], start_response: Callable[..., Any]) 
         _state["reset_count"] += 1
         _canary_state["nonce_effect_count"] = 0
         _canary_state["coupon_use_count"] = 0
+        _canary_state["generic_effect_counts"] = {key: 0 for key in _CANARY_RISK}
         return _json_response(start_response, 200, {"status": "fresh_reset", "reset_count_bucket": "first" if _state["reset_count"] == 1 else "repeated", "state_clean": True, "state_delta": "zero", "persistent_storage": False, "external_network": False})
     if path == "/api/canary" and method == "POST":
         document, error = _read_json(environ, allowed={"case_ref", "role", "phase"})

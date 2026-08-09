@@ -13,7 +13,23 @@ def _fake_request(_base: str, path: str, *, method: str = "GET", payload=None, t
     case_ref = payload["case_ref"]
     role = payload["role"]
     phase = payload["phase"]
-    violation = case_ref == "subject_resource_scope" and phase != "baseline" and role in {"candidate", "replay"}
+    risk_cases = {
+        "install_reentry_gate",
+        "purchase_price_binding",
+        "purchase_status_transition",
+        "purchase_quantity_floor",
+        "identity_canonicalization",
+        "password_reset_subject_binding",
+        "two_factor_reset_binding",
+        "captcha_reuse",
+        "session_fixation_boundary",
+        "query_object_scope",
+        "vertical_role_scope",
+        "query_identifier_entropy",
+        "execution_order",
+        "sensitive_projection",
+    }
+    violation = (case_ref == "subject_resource_scope" and phase != "baseline" and role in {"candidate", "replay"}) or (case_ref in risk_cases and phase in {"candidate", "replay"})
     if case_ref in {"nonce_replay", "coupon_reuse_boundary"} and role == "replay":
         violation = True
     return {
@@ -55,7 +71,7 @@ def test_live_lane_keeps_only_abstract_typed_projection(monkeypatch) -> None:
     monkeypatch.setenv("PG388_LOCAL_EVAL", "1")
     report = live.run(environ={"PG388_LOCAL_EVAL": "1"}, request=_fake_request)
     assert report["status"] == "passed_live_local_canary_only"
-    assert report["counts"] == {"fresh_resets": 3, "typed_observations": 15, "candidate_effects": 4, "negative_control_clean": 3, "unsafe_allow": 0}
+    assert report["counts"] == {"fresh_resets": 17, "typed_observations": 85, "candidate_effects": 32, "negative_control_clean": 17, "unsafe_allow": 0}
     assert all("evaluator_sidecar" not in row for row in report["rows"])
     assert all(row["safe_to_send"] is False for row in report["rows"])
     assert report["model_boundary"]["raw_response_stored"] is False

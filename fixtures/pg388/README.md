@@ -32,10 +32,11 @@ shows all 24 presentation cases while preserving `training_eligible=false`
 and all promotion flags false.
 
 The local canary endpoint `/api/canary` is a bounded evaluator demonstration
-for three abstract state machines: nonce replay, coupon reuse, and
-cross-subject resource scope. It accepts only `case_ref`, `role`, and `phase`
-enums and emits state buckets/deltas; it does not accept identifiers, prices,
-coupons, tokens, credentials, or arbitrary request values. A
-`vulnerable_effect=true` result is only a typed result from this disposable
+for 17 abstract state machines covering installation, purchase boundaries,
+identity/recovery, 2FA, CAPTCHA, sessions, authorization, identifier entropy,
+execution order, and response projection. It accepts only `case_ref`, `role`,
+and `phase` enums and emits state buckets/deltas; it does not accept
+identifiers, prices, coupons, tokens, credentials, or arbitrary request values.
+A `vulnerable_effect=true` result is only a typed result from this disposable
 simulator, not a claim about any real application. Reset before each sequence
 and keep `safe_to_send=false`.

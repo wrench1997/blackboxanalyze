@@ -20,7 +20,25 @@ from urllib.request import Request, urlopen
 
 SCHEMA_VERSION = "pg388-logic-canary-live-v1"
 DEFAULT_BASE_URL = "http://127.0.0.1:3000/pg388-api"
-CASES = ("nonce_replay", "coupon_reuse_boundary", "subject_resource_scope")
+CASES = (
+    "nonce_replay",
+    "coupon_reuse_boundary",
+    "subject_resource_scope",
+    "install_reentry_gate",
+    "purchase_price_binding",
+    "purchase_status_transition",
+    "purchase_quantity_floor",
+    "identity_canonicalization",
+    "password_reset_subject_binding",
+    "two_factor_reset_binding",
+    "captcha_reuse",
+    "session_fixation_boundary",
+    "query_object_scope",
+    "vertical_role_scope",
+    "query_identifier_entropy",
+    "execution_order",
+    "sensitive_projection",
+)
 SEQUENCES = (
     ("candidate", "baseline"),
     ("candidate", "candidate"),
