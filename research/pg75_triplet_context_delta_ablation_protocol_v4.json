@@ -1,0 +1,55 @@
+{
+  "protocol_id": "pg-pk-75-triplet-context-delta-ablation-v4",
+  "schema_version": "sift-pg75-triplet-context-delta-ablation-protocol-v4",
+  "input_contract": {
+    "accepted_pg74_triplet_trace_only": true,
+    "family_and_oracle_features_forbidden": true,
+    "negative_oracle_features_forbidden": true,
+    "unknown_family_training_forbidden": true,
+    "raw_persistence_forbidden": true
+  },
+  "split_contract": {
+    "train_seeds": [
+      74101,
+      74102
+    ],
+    "dev_seeds": [
+      74103
+    ],
+    "legacy_pg69_unknown_diagnostic_only": true,
+    "pg72_external_known_schema_mismatch_diagnostic_only": true,
+    "pg76_independent_unknown_triplet_required": true,
+    "triplet_delta_features": true,
+    "neutral_surface_context_features": true,
+    "ood_threshold_calibrated_from_known_train_dev": true,
+    "all_abstain_not_capability_success": true
+  },
+  "required_gates": {
+    "dev_confirm_recall_min": 0.8,
+    "dev_false_accept_zero": true,
+    "legacy_unknown_misname_zero": true,
+    "legacy_unknown_strict_abstain": true,
+    "independent_triplet_unknown_holdout": true,
+    "independent_source_attested": true,
+    "independent_implementation_review": true,
+    "family_holdout_review": true
+  },
+  "run_result": {
+    "capability_gate": {
+      "status": "passed",
+      "checks": {
+        "dev_confirm_recall": true,
+        "dev_false_accept_zero": true,
+        "legacy_unknown_misname_zero": true,
+        "legacy_unknown_strict_abstain": true,
+        "independent_triplet_unknown_misname_zero": true,
+        "independent_triplet_unknown_strict_abstain": true,
+        "independent_source_attested": true
+      },
+      "claim_allowed": false
+    },
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "next_experiment": "PG77 independent implementation and multi-family triplet replay before any promotion"
+}

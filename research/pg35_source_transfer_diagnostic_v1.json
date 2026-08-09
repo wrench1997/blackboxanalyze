@@ -1,0 +1,367 @@
+{
+  "protocol_id": "sift-pg35-source-transfer-diagnostic-v1",
+  "schema_version": "pg-pk-35-source-transfer-diagnostic-v1",
+  "status": "diagnostic_only",
+  "training": {
+    "source_variant": "alpha",
+    "sample_count": 216,
+    "family_set": [
+      "access_control",
+      "authentication",
+      "command_injection",
+      "injection",
+      "input_validation",
+      "logic",
+      "ordinary_response",
+      "url_redirect",
+      "xss"
+    ],
+    "pair_count": 108,
+    "seed": 20350803,
+    "epochs": 180,
+    "best_objective": 0.070381,
+    "history_tail": [
+      {
+        "epoch": 100,
+        "family_loss": 0.070986,
+        "effect_loss": 4.3e-05,
+        "pair_loss": 8e-06,
+        "objective": 0.071032
+      },
+      {
+        "epoch": 120,
+        "family_loss": 0.070653,
+        "effect_loss": 4.5e-05,
+        "pair_loss": 7e-06,
+        "objective": 0.0707
+      },
+      {
+        "epoch": 140,
+        "family_loss": 0.070391,
+        "effect_loss": 4.3e-05,
+        "pair_loss": 9e-06,
+        "objective": 0.070436
+      },
+      {
+        "epoch": 160,
+        "family_loss": 0.070417,
+        "effect_loss": 4.6e-05,
+        "pair_loss": 7e-06,
+        "objective": 0.070465
+      },
+      {
+        "epoch": 180,
+        "family_loss": 0.070345,
+        "effect_loss": 3.6e-05,
+        "pair_loss": 4e-06,
+        "objective": 0.070381
+      }
+    ]
+  },
+  "model": {
+    "class": "PairRuleIRModel",
+    "device": "cuda",
+    "cuda_available": true,
+    "visible_projection_labels": false,
+    "typed_oracle_consumed_by_model": false,
+    "positive_authority": false
+  },
+  "thresholds": {
+    "confidence": 0.6,
+    "novelty": 8.0
+  },
+  "splits": {
+    "train_alpha": {
+      "count": 216,
+      "positive_count": 96,
+      "negative_count": 120,
+      "accepted_count": 96,
+      "false_positive_count": 0,
+      "typed_recall": 1.0,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "abstain_precision": 1.0,
+      "ece": 0.55458,
+      "median_queries": 2.0,
+      "abstain_rate": 0.555556,
+      "mean_confidence": 0.991802,
+      "mean_effect_probability": 0.44445,
+      "max_distance": 0.00273,
+      "by_family": {
+        "access_control": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "authentication": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "command_injection": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "input_validation": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "injection": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "logic": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "ordinary_response": {
+          "count": 24,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.111111
+        },
+        "url_redirect": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "xss": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 108,
+        "agreement_rate": 1.0,
+        "mean_l1": 0.000119
+      }
+    },
+    "beta_source_holdout": {
+      "count": 216,
+      "positive_count": 96,
+      "negative_count": 120,
+      "accepted_count": 96,
+      "false_positive_count": 0,
+      "typed_recall": 1.0,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "abstain_precision": 1.0,
+      "ece": 0.55458,
+      "median_queries": 2.0,
+      "abstain_rate": 0.555556,
+      "mean_confidence": 0.991802,
+      "mean_effect_probability": 0.44445,
+      "max_distance": 0.00273,
+      "by_family": {
+        "access_control": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "authentication": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "command_injection": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "input_validation": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "injection": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "logic": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "ordinary_response": {
+          "count": 24,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.111111
+        },
+        "url_redirect": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "xss": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 108,
+        "agreement_rate": 1.0,
+        "mean_l1": 0.000119
+      }
+    },
+    "gamma_source_holdout": {
+      "count": 216,
+      "positive_count": 96,
+      "negative_count": 120,
+      "accepted_count": 96,
+      "false_positive_count": 0,
+      "typed_recall": 1.0,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "abstain_precision": 1.0,
+      "ece": 0.55458,
+      "median_queries": 2.0,
+      "abstain_rate": 0.555556,
+      "mean_confidence": 0.991802,
+      "mean_effect_probability": 0.44445,
+      "max_distance": 0.00273,
+      "by_family": {
+        "access_control": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "authentication": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "command_injection": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "input_validation": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "injection": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "logic": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "ordinary_response": {
+          "count": 24,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.111111
+        },
+        "url_redirect": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        },
+        "xss": {
+          "count": 24,
+          "accepted": 12,
+          "typed_recall": 1.0,
+          "abstain_rate": 0.055556
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 108,
+        "agreement_rate": 1.0,
+        "mean_l1": 0.000119
+      }
+    },
+    "negative_control": {
+      "count": 48,
+      "positive_count": 0,
+      "negative_count": 48,
+      "accepted_count": 0,
+      "false_positive_count": 0,
+      "typed_recall": 0.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "abstain_precision": 1.0,
+      "ece": 0.991182,
+      "median_queries": 2.0,
+      "abstain_rate": 1.0,
+      "mean_confidence": 0.991182,
+      "mean_effect_probability": 1.5e-05,
+      "max_distance": 0.00273,
+      "by_family": {
+        "ordinary_response": {
+          "count": 48,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 1.0
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 24,
+        "agreement_rate": 1.0,
+        "mean_l1": 7e-05
+      }
+    }
+  },
+  "pair_consistency": {
+    "train_alpha": {
+      "pair_count": 108,
+      "agreement_rate": 1.0,
+      "mean_l1": 0.000119
+    },
+    "beta_source_holdout": {
+      "pair_count": 108,
+      "agreement_rate": 1.0,
+      "mean_l1": 0.000119
+    },
+    "gamma_source_holdout": {
+      "pair_count": 108,
+      "agreement_rate": 1.0,
+      "mean_l1": 0.000119
+    },
+    "negative_control": {
+      "pair_count": 24,
+      "agreement_rate": 1.0,
+      "mean_l1": 7e-05
+    }
+  },
+  "checkpoint": "artifacts\\pg35-source-transfer\\pair_rule_ir.pt",
+  "checkpoint_sha256": "32bce7498f4d697180192b8656e66cc2e57c9b75ff4c5ae148472f5c51e22e27",
+  "training_allowed": false,
+  "memory_promotion_allowed": false,
+  "capability_claim_allowed": false,
+  "interpretation": "source_transfer_only; family coverage is not a family-holdout claim"
+}

@@ -1,0 +1,73 @@
+{
+  "protocol_id": "pg-pk-135-balanced-policy-v1",
+  "schema_version": "pg135-balanced-policy-protocol-v1",
+  "objective": "每个完整 counterfactual episode 固定 2 GET + 2 POST，并在同一当前 POST 上验证历史差异。",
+  "action_plan": {
+    "control_first": [
+      [
+        "control",
+        "GET"
+      ],
+      [
+        "candidate",
+        "POST"
+      ],
+      [
+        "control",
+        "GET"
+      ],
+      [
+        "control",
+        "POST"
+      ]
+    ],
+    "candidate_first": [
+      [
+        "candidate",
+        "GET"
+      ],
+      [
+        "candidate",
+        "POST"
+      ],
+      [
+        "control",
+        "GET"
+      ],
+      [
+        "control",
+        "POST"
+      ]
+    ]
+  },
+  "ood_guard": {
+    "unknown_slot_value": "abstain_candidate_only",
+    "raw_and_guarded_metrics_required": true,
+    "known_pairs_source": "train_only"
+  },
+  "required_gates": {
+    "fresh_checkpoint": true,
+    "exact_get_post_balance": true,
+    "pg135_accuracy_floor": true,
+    "pg135_history_accuracy_floor": true,
+    "pg135_counterfactual_conflicts": true,
+    "pg135_counterfactual_separation": true,
+    "current_only_ablation_drop": true,
+    "pg127_accuracy_floor": true,
+    "pg125_family_accuracy_floor": true,
+    "pg122_family_accuracy_floor": true,
+    "unknown_all_steps_abstain": true,
+    "safety_compliance_floor": true,
+    "pg122_ood_guard_triggered": true,
+    "pg122_guarded_safety_floor": true,
+    "negative_false_stop_zero": true,
+    "channel_ablations_present": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "hard_gates_passed": true,
+    "training_eligible": false,
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

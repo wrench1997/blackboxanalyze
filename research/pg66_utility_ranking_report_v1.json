@@ -1,0 +1,131 @@
+{
+  "protocol_id": "pg-pk-66-utility-ranking-v1",
+  "schema_version": "pg66-utility-ranking-report-v1",
+  "status": "diagnostic_only",
+  "training": {
+    "source_trace": "research\\pg64_multistep_belief_regret_trace_v1.json",
+    "train_group_count": 171,
+    "dev_group_count": 174,
+    "holdout_group_count": 337,
+    "epochs": 100,
+    "device": "cuda",
+    "history_tail": [
+      {
+        "epoch": 20,
+        "train_loss": 0.010891,
+        "dev_ranking_accuracy": 0.689655,
+        "dev_ranking_loss": 0.009144
+      },
+      {
+        "epoch": 40,
+        "train_loss": 0.002704,
+        "dev_ranking_accuracy": 0.689655,
+        "dev_ranking_loss": 0.007565
+      },
+      {
+        "epoch": 60,
+        "train_loss": 0.000571,
+        "dev_ranking_accuracy": 0.735632,
+        "dev_ranking_loss": 0.007325
+      },
+      {
+        "epoch": 80,
+        "train_loss": 0.000251,
+        "dev_ranking_accuracy": 0.735632,
+        "dev_ranking_loss": 0.005898
+      },
+      {
+        "epoch": 100,
+        "train_loss": 0.000568,
+        "dev_ranking_accuracy": 0.735632,
+        "dev_ranking_loss": 0.00543
+      }
+    ],
+    "checkpoint": "artifacts\\pg66-utility-ranking\\ranking_head.pt",
+    "checkpoint_sha256": "3bc3587488ca4cb0cf25f83e117d6496fbc410720b4dfb39fa85d0d4cc2a6bab",
+    "oracle_in_input": false,
+    "family_in_input": false,
+    "target_in_input": false,
+    "label_type": "continuous_pre_oracle_utility_plus_pairwise_ranking"
+  },
+  "train_metrics": {
+    "group_count": 171,
+    "ranking_accuracy": 0.725146,
+    "decisive_group_count": 75,
+    "decisive_ranking_accuracy": 1.0,
+    "tie_margin": 0.03,
+    "mean_utility_regret": 0.0,
+    "mean_mse": 0.000201,
+    "ranking_loss": 0.000201
+  },
+  "dev_metrics": {
+    "group_count": 174,
+    "ranking_accuracy": 0.735632,
+    "decisive_group_count": 78,
+    "decisive_ranking_accuracy": 1.0,
+    "tie_margin": 0.03,
+    "mean_utility_regret": 0.0,
+    "mean_mse": 0.004891,
+    "ranking_loss": 0.00543
+  },
+  "pg64_holdout_metrics": {
+    "group_count": 337,
+    "ranking_accuracy": 0.721068,
+    "decisive_group_count": 145,
+    "decisive_ranking_accuracy": 1.0,
+    "tie_margin": 0.03,
+    "mean_utility_regret": 0.0,
+    "mean_mse": 0.007039,
+    "ranking_loss": 0.007646
+  },
+  "independent_noise_holdout": {
+    "episode_count": 144,
+    "positive_episode_count": 96,
+    "negative_control_count": 48,
+    "target_recall": 1.0,
+    "known_target_recall": 1.0,
+    "unknown_positive_count": 14,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 14,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "mean_steps": 2.333333,
+    "median_steps": 2.0,
+    "multi_step_episode_rate": 0.666667,
+    "mean_counterfactual_regret": 0.0,
+    "action_counts": {
+      "POST.confirm": 120,
+      "GET.confirm": 120,
+      "POST.screen": 48,
+      "GET.screen": 48
+    },
+    "fresh_reset_count": 336,
+    "evidence_hash_count": 336,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "safety_gate": {
+    "status": "passed",
+    "reasons": [],
+    "claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "capability_gate": {
+    "status": "passed",
+    "reasons": [],
+    "tie_margin": 0.03,
+    "minimum_decisive_ranking_accuracy": 0.8,
+    "maximum_mean_utility_regret": 0.02,
+    "claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "status": "utility_ranking_safety_passed_capability_passed_no_promotion",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "interpretation": "PG66 用连续 pre-oracle utility 替代单一选择标签；显式忽略 utility 差小于 0.03 的不可区分平局，避免把平局当作能力错误。"
+}

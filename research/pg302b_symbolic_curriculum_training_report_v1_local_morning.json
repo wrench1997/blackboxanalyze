@@ -1,0 +1,584 @@
+{
+  "protocol_id": "pg302b-symbolic-curriculum-training-v1",
+  "schema_version": "pg302b-symbolic-curriculum-training-report-v1",
+  "status": "completed_local_morning_pg302b_symbolic_curriculum",
+  "source": {
+    "dataset": "research/pg302_symbolic_assembly_dataset_v1.json",
+    "dataset_sha256": "21a2bcdcef98a43b6481754d4c367c33da4cd53d1dd49cc5d9d8f82e5131744f",
+    "audit": "research/pg302_symbolic_assembly_audit_v1.json",
+    "audit_sha256": "ad514d76a753e581a2108f7408742c8730938847048021bafffe75b73345fb69",
+    "oracle_blind": true,
+    "literal_payload_in_context": false,
+    "wire_emission": false
+  },
+  "device": {
+    "execution_mode": "local_morning",
+    "timestamp": "2026-08-07T10:26:29.991819+08:00",
+    "cuda_visible_devices": "0",
+    "visible_device_count": 1,
+    "current_device": 0,
+    "device_name": "NVIDIA GeForce RTX 3060"
+  },
+  "config": {
+    "d_model": 48,
+    "n_heads": 2,
+    "n_layers": 1,
+    "experts": 2,
+    "expert_hidden": 96,
+    "top_k": 1,
+    "dropout": 0.05,
+    "max_length": 64
+  },
+  "curriculum": {
+    "question_pretrain_rows": 240,
+    "assembly_sft_rows": 80,
+    "question_pretrain_epochs": 80,
+    "assembly_sft_epochs": 120,
+    "initial_state_transfer": true
+  },
+  "split": {
+    "total": 120,
+    "train": 80,
+    "implementation_holdout": 24,
+    "hard_negative_eval": 16,
+    "seeds": [
+      30211,
+      30212,
+      30213
+    ]
+  },
+  "metrics": {
+    "train": {
+      "causal_symbolic": {
+        "count": {
+          "mean": 80.0,
+          "min": 80.0,
+          "max": 80.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 12.0,
+          "min": 0.0,
+          "max": 24.0
+        },
+        "missing_question_count": {
+          "mean": 56.0,
+          "min": 56.0,
+          "max": 56.0
+        },
+        "missing_question_recall": {
+          "mean": 0.714286,
+          "min": 0.357143,
+          "max": 1.0
+        },
+        "positive_recall": {
+          "mean": 0.666667,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 0.823529,
+          "min": 0.647059,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.7,
+          "min": 0.55,
+          "max": 0.85
+        },
+        "token_accuracy": {
+          "mean": 0.840909,
+          "min": 0.754545,
+          "max": 0.918182
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "bound_abstract": {
+        "assembly_slot_exact": {
+          "mean": 0.8,
+          "min": 0.7,
+          "max": 0.85
+        },
+        "count": {
+          "mean": 80.0,
+          "min": 80.0,
+          "max": 80.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 12.0,
+          "min": 0.0,
+          "max": 24.0
+        },
+        "missing_question_recall": {
+          "mean": 0.714286,
+          "min": 0.357143,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.7,
+          "min": 0.55,
+          "max": 0.85
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      }
+    },
+    "implementation_holdout": {
+      "causal_symbolic": {
+        "count": {
+          "mean": 24.0,
+          "min": 24.0,
+          "max": 24.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 4.0,
+          "min": 0.0,
+          "max": 8.0
+        },
+        "missing_question_count": {
+          "mean": 16.0,
+          "min": 16.0,
+          "max": 16.0
+        },
+        "missing_question_recall": {
+          "mean": 0.666667,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "positive_recall": {
+          "mean": 0.666667,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 0.8,
+          "min": 0.6,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.666667,
+          "min": 0.5,
+          "max": 0.833333
+        },
+        "token_accuracy": {
+          "mean": 0.823232,
+          "min": 0.727273,
+          "max": 0.909091
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "bound_abstract": {
+        "assembly_slot_exact": {
+          "mean": 0.777778,
+          "min": 0.666667,
+          "max": 0.833333
+        },
+        "count": {
+          "mean": 24.0,
+          "min": 24.0,
+          "max": 24.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 4.0,
+          "min": 0.0,
+          "max": 8.0
+        },
+        "missing_question_recall": {
+          "mean": 0.666667,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.666667,
+          "min": 0.5,
+          "max": 0.833333
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      }
+    },
+    "hard_negative": {
+      "causal_symbolic": {
+        "count": {
+          "mean": 16.0,
+          "min": 16.0,
+          "max": 16.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "bound_abstract": {
+        "assembly_slot_exact": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "count": {
+          "mean": 16.0,
+          "min": 16.0,
+          "max": 16.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      }
+    },
+    "per_seed": [
+      {
+        "seed": 30211,
+        "train": {
+          "causal_symbolic": {
+            "count": 80,
+            "token_accuracy": 0.918182,
+            "sequence_exact_accuracy": 0.85,
+            "positive_recall": 0.0,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 56
+          },
+          "bound_abstract": {
+            "count": 80,
+            "sequence_exact_accuracy": 0.85,
+            "slot_accuracy": {
+              "transport": 0.85,
+              "field_role": 0.85,
+              "encoding": 0.85,
+              "oracle": 1.0,
+              "stop_condition": 0.85
+            },
+            "assembly_slot_exact": 0.85,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0
+          }
+        },
+        "implementation_holdout": {
+          "causal_symbolic": {
+            "count": 24,
+            "token_accuracy": 0.909091,
+            "sequence_exact_accuracy": 0.833333,
+            "positive_recall": 0.0,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 16
+          },
+          "bound_abstract": {
+            "count": 24,
+            "sequence_exact_accuracy": 0.833333,
+            "slot_accuracy": {
+              "transport": 0.833333,
+              "field_role": 0.833333,
+              "encoding": 0.833333,
+              "oracle": 1.0,
+              "stop_condition": 0.833333
+            },
+            "assembly_slot_exact": 0.833333,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0
+          }
+        },
+        "hard_negative": {
+          "causal_symbolic": {
+            "count": 16,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          },
+          "bound_abstract": {
+            "count": 16,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "assembly_slot_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0
+          }
+        }
+      },
+      {
+        "seed": 30212,
+        "train": {
+          "causal_symbolic": {
+            "count": 80,
+            "token_accuracy": 0.754545,
+            "sequence_exact_accuracy": 0.55,
+            "positive_recall": 1.0,
+            "hard_negative_false_allow": 24,
+            "safe_reject_rate": 0.647059,
+            "missing_question_recall": 0.357143,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 56
+          },
+          "bound_abstract": {
+            "count": 80,
+            "sequence_exact_accuracy": 0.55,
+            "slot_accuracy": {
+              "transport": 0.7,
+              "field_role": 0.7,
+              "encoding": 0.7,
+              "oracle": 1.0,
+              "stop_condition": 0.7
+            },
+            "assembly_slot_exact": 0.7,
+            "missing_question_recall": 0.357143,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 24
+          }
+        },
+        "implementation_holdout": {
+          "causal_symbolic": {
+            "count": 24,
+            "token_accuracy": 0.727273,
+            "sequence_exact_accuracy": 0.5,
+            "positive_recall": 1.0,
+            "hard_negative_false_allow": 8,
+            "safe_reject_rate": 0.6,
+            "missing_question_recall": 0.25,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 16
+          },
+          "bound_abstract": {
+            "count": 24,
+            "sequence_exact_accuracy": 0.5,
+            "slot_accuracy": {
+              "transport": 0.666667,
+              "field_role": 0.666667,
+              "encoding": 0.666667,
+              "oracle": 1.0,
+              "stop_condition": 0.666667
+            },
+            "assembly_slot_exact": 0.666667,
+            "missing_question_recall": 0.25,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 8
+          }
+        },
+        "hard_negative": {
+          "causal_symbolic": {
+            "count": 16,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          },
+          "bound_abstract": {
+            "count": 16,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "assembly_slot_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0
+          }
+        }
+      },
+      {
+        "seed": 30213,
+        "train": {
+          "causal_symbolic": {
+            "count": 80,
+            "token_accuracy": 0.85,
+            "sequence_exact_accuracy": 0.7,
+            "positive_recall": 1.0,
+            "hard_negative_false_allow": 12,
+            "safe_reject_rate": 0.823529,
+            "missing_question_recall": 0.785714,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 56
+          },
+          "bound_abstract": {
+            "count": 80,
+            "sequence_exact_accuracy": 0.7,
+            "slot_accuracy": {
+              "transport": 0.85,
+              "field_role": 0.85,
+              "encoding": 0.85,
+              "oracle": 1.0,
+              "stop_condition": 0.85
+            },
+            "assembly_slot_exact": 0.85,
+            "missing_question_recall": 0.785714,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 12
+          }
+        },
+        "implementation_holdout": {
+          "causal_symbolic": {
+            "count": 24,
+            "token_accuracy": 0.833333,
+            "sequence_exact_accuracy": 0.666667,
+            "positive_recall": 1.0,
+            "hard_negative_false_allow": 4,
+            "safe_reject_rate": 0.8,
+            "missing_question_recall": 0.75,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 16
+          },
+          "bound_abstract": {
+            "count": 24,
+            "sequence_exact_accuracy": 0.666667,
+            "slot_accuracy": {
+              "transport": 0.833333,
+              "field_role": 0.833333,
+              "encoding": 0.833333,
+              "oracle": 1.0,
+              "stop_condition": 0.833333
+            },
+            "assembly_slot_exact": 0.833333,
+            "missing_question_recall": 0.75,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 4
+          }
+        },
+        "hard_negative": {
+          "causal_symbolic": {
+            "count": 16,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          },
+          "bound_abstract": {
+            "count": 16,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "assembly_slot_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0
+          }
+        }
+      }
+    ]
+  },
+  "engineering_gate": {
+    "status": "blocked",
+    "checks": {
+      "dataset_audit_pass": true,
+      "resource_contract": true,
+      "question_pretrain_present": true,
+      "symbolic_slot_contract": true,
+      "deterministic_binder": true,
+      "implementation_holdout_present": true,
+      "question_recall_min": false,
+      "bound_assembly_slot_exact_min": false,
+      "hard_negative_zero_false_allow": true,
+      "hard_negative_unnecessary_question_max": true,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "scientific_gate": {
+    "status": "blocked",
+    "checks": {
+      "fresh_real_evaluator": false,
+      "real_application_gold": false,
+      "literal_payload_success": false,
+      "implementation_holdout": true
+    },
+    "reasons": [
+      "question-pretrain + symbolic assembly only",
+      "no fresh typed replay",
+      "no real application gold"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "payload_catalog_promotion_allowed": false
+  },
+  "conclusion": "PG-302B tests question pretraining followed by symbolic abstract assembly SFT; it is not a payload or vulnerability success claim.",
+  "elapsed_seconds": 64.509,
+  "report_sha256": "ab0fd879c4d073cfd7ef9a0efad63f3cf7b4d1ed8ad4f797f74d5611349d5b63"
+}

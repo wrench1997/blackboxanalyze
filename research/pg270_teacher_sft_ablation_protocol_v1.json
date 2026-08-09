@@ -1,0 +1,55 @@
+{
+  "protocol_id": "pg270-teacher-sft-ablation-v1",
+  "schema_version": "pg270-teacher-sft-ablation-protocol-v1",
+  "input_contract": {
+    "family_holdout": [
+      "infoleak",
+      "other",
+      "redirect",
+      "serialization",
+      "xxe"
+    ],
+    "route_dev_hash_modulus": 6,
+    "oracle_target_in_context": false,
+    "family_in_context": false,
+    "raw_probe_or_response_in_context": false
+  },
+  "training_contract": {
+    "teacher_targets_only": true,
+    "reference_answer_not_in_inference_context": true,
+    "process_reward_is_label": true,
+    "preference_rejected_is_abstract_only": true,
+    "training_promotion_blocked": true,
+    "memory_promotion_blocked": true
+  },
+  "evaluation_contract": {
+    "route_dev": true,
+    "unseen_family_holdout": true,
+    "plain_vs_guided": true,
+    "preference_pairs_scored": true,
+    "process_reward_labels_present": true
+  },
+  "gates": {
+    "source_audit_required": true,
+    "raw_context_forbidden": true,
+    "promotion_blocked": true,
+    "memory_blocked": true
+  },
+  "run": {
+    "capability_gate": {
+      "status": "passed",
+      "checks": {
+        "source_audit_pass": true,
+        "context_target_split_pass": true,
+        "raw_context_free": true,
+        "unseen_family_evaluated": true,
+        "guided_variant_evaluated": true,
+        "guided_not_worse_next_action": true
+      },
+      "claim_allowed": false
+    },
+    "report_sha256": "180f04fdecd350a6033ba7604a70bbf73c56982d92c2540bb36c81d8d679ff8a"
+  },
+  "next_experiment": "PG-271 independent seed + fresh Pikachu replay before any offline RL",
+  "protocol_sha256": "6f195926c5f10c4b57bd8978fef2e14c8296b04d3fad658debc7d3e476cd018c"
+}

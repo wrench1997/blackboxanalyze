@@ -1,0 +1,221 @@
+{
+  "protocol_id": "pg-pk-314-independent-variant-replay-v1",
+  "schema_version": "pg314-independent-variant-replay-report-v1",
+  "status": "completed_real_local_docker_independent_variant_replay",
+  "runtime": {
+    "execution_window": "Asia/Shanghai 08:00-18:00",
+    "explicit_flag": "PG314_LOCAL_DOCKER_EVAL=1",
+    "device": "cpu_inference_only",
+    "image": "sift/pikachu-pg240-source-native@sha256:de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+    "network": "none",
+    "route_ids": [
+      "sql-string-get",
+      "sql-numeric-post"
+    ]
+  },
+  "model": {
+    "checkpoint": "artifacts\\pg313-probe-variant\\pg313_probe_variant_moe_local_morning.pt",
+    "architecture": "causal_transformer_moe_next_token",
+    "symbolic_checkpoint": true,
+    "target_length": 14,
+    "target_representation": "symbolic_slot_copy_plus_probe_variant_ref",
+    "wire_generation": "source_grounded_binding_after_model_variant_guard",
+    "oracle_target_in_context": false,
+    "raw_payload_in_context": false,
+    "raw_response_body_in_context": false
+  },
+  "preflight_identifiability": {
+    "count": 12,
+    "question_recall": 1.0,
+    "unsafe_allow": 0,
+    "rows": [
+      {
+        "route_id": "sql-string-get",
+        "missing": "typed_available",
+        "question_expected": "ask_typed_availability",
+        "question_actual": "ask_typed_availability",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "replay_ready",
+        "question_expected": "ask_replay_readiness",
+        "question_actual": "ask_replay_readiness",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "evidence_present",
+        "question_expected": "ask_evidence_presence",
+        "question_actual": "ask_evidence_presence",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "feedback_state",
+        "question_expected": "ask_feedback_state",
+        "question_actual": "ask_feedback_state",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "negative_control",
+        "question_expected": "ask_negative_control",
+        "question_actual": "ask_negative_control",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "fresh_reset",
+        "question_expected": "ask_fresh_reset",
+        "question_actual": "ask_fresh_reset",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "typed_available",
+        "question_expected": "ask_typed_availability",
+        "question_actual": "ask_typed_availability",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "replay_ready",
+        "question_expected": "ask_replay_readiness",
+        "question_actual": "ask_replay_readiness",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "evidence_present",
+        "question_expected": "ask_evidence_presence",
+        "question_actual": "ask_evidence_presence",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "feedback_state",
+        "question_expected": "ask_feedback_state",
+        "question_actual": "ask_feedback_state",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "negative_control",
+        "question_expected": "ask_negative_control",
+        "question_actual": "ask_negative_control",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "fresh_reset",
+        "question_expected": "ask_fresh_reset",
+        "question_actual": "ask_fresh_reset",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      }
+    ]
+  },
+  "counts": {
+    "route_count": 2,
+    "get_count": 1,
+    "post_count": 1,
+    "model_variant_role_count": 6,
+    "model_variant_exact_count": 6,
+    "model_candidate_send_count": 2,
+    "model_variant_send_count": 6,
+    "model_typed_effect_count": 2,
+    "evaluator_gold_typed_effect_count": 2,
+    "variant_source_attested_candidate_count": 2,
+    "variant_reference_canary_count": 2,
+    "variant_negative_control_count": 2,
+    "model_abstain_count": 0,
+    "variant_misselection_count": 0,
+    "negative_lane_violation_count": 0,
+    "false_positive_count": 0,
+    "fresh_reset_count": 2,
+    "negative_control_count": 2,
+    "typed_evidence_hash_count": 2,
+    "elapsed_seconds": 25.235
+  },
+  "checks": {
+    "real_docker_contacted": true,
+    "independent_image_digest": "sift/pikachu-pg240-source-native@sha256:de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+    "loopback_only": true,
+    "docker_network_none": true,
+    "external_network_disabled": true,
+    "get_post_pair": true,
+    "fresh_reset_per_route": true,
+    "zero_volume_per_route": true,
+    "database_health_per_route": true,
+    "source_attestation_per_route": true,
+    "typed_evidence_hash_per_route": true,
+    "negative_controls_present": true,
+    "raw_payload_in_model_context": false,
+    "raw_response_body_stored": false,
+    "public_target_contacted": false,
+    "sql_time_delay": false,
+    "sql_write": false
+  },
+  "hypothesis_gate": {
+    "status": "blocked",
+    "checks": {
+      "audit_and_runtime_contract": true,
+      "preflight_question_recall_min": true,
+      "preflight_zero_unsafe_allow": true,
+      "variant_selection_exact": true,
+      "negative_lane_zero_violation": true,
+      "typed_effect_on_all_routes": true,
+      "fresh_get_post_pair": true,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "scientific_gate": {
+    "status": "blocked",
+    "reasons": [
+      "PG-313 worst-seed offline gate was blocked before this replay",
+      "model output remains abstract and source-grounded adapter output is not literal payload generation",
+      "one independent image and four routes are insufficient for capability graduation",
+      "training/memory/payload catalog promotion remains disabled"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "checkpoint_role": "research_candidate_only"
+  },
+  "artifacts": {
+    "human_catalog": "research\\pg314_independent_variant_human_catalog_v1.json",
+    "training_dataset": "research\\pg314_independent_variant_training_dataset_v1.json",
+    "trace": "research\\pg314_independent_variant_trace_v1.json",
+    "protocol": "research\\pg314_independent_variant_protocol_v1.json"
+  },
+  "report_sha256": "09d9976de7292f74ca6a24391d9576a2da43d488121cddfb4bf8fed88fa1b9eb"
+}

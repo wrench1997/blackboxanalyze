@@ -1,0 +1,593 @@
+{
+  "protocol_id": "pg-pk-219-result-aware-policy-training-v1",
+  "schema_version": "pg219-result-aware-policy-training-report-v1",
+  "status": "completed_result_aware_process_policy_seed_route_holdout",
+  "device": "cuda",
+  "data": {
+    "all_rows": 50,
+    "train_rows": 42,
+    "holdout_rows": 58,
+    "train_seed_set": [
+      21701,
+      21801
+    ],
+    "holdout_seed_set": [
+      21702,
+      21802
+    ],
+    "route_holdout": "/vul/sqli/sqli_x.php",
+    "train_route_count": 6,
+    "holdout_route_count": 7,
+    "counterfactual_train_rows": 24,
+    "counterfactual_holdout_rows": 34,
+    "typed_failure_counterfactual_rows": 8
+  },
+  "model": {
+    "base_artifact": "artifacts\\pg191-pikachu-surface-matrix-large-v1\\xxl_dual.pt",
+    "base_parameter_count": 101487169,
+    "context_hidden_frozen": true,
+    "capacity_variants": {
+      "standard": 96,
+      "wide": 192,
+      "deep": 384
+    },
+    "selected_variant": "standard"
+  },
+  "variants": [
+    {
+      "variant": "standard",
+      "hidden_dim": 96,
+      "base_parameter_count": 101487169,
+      "trainable_adapter_parameter_count": 44231,
+      "training": {
+        "schema_version": "pg219-result-aware-process-policy-v1",
+        "train_rows": 42,
+        "holdout_rows": 58,
+        "epochs": 80,
+        "history": [
+          {
+            "epoch": 1,
+            "loss": 1.96661901,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.31034482,
+              "outcome_accuracy": 0.5,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 0.25,
+              "retry_alternate_recall": 0.2,
+              "raw_unsafe_allow_count": 4,
+              "gated_action_accuracy": 0.37931034,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 20,
+            "loss": 0.02590208,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 40,
+            "loss": 0.0042703,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 60,
+            "loss": 0.00208347,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 80,
+            "loss": 0.00146722,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          }
+        ],
+        "train": {
+          "count": 42,
+          "action_accuracy": 1.0,
+          "outcome_accuracy": 1.0,
+          "safe_candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "retry_alternate_recall": 1.0,
+          "raw_unsafe_allow_count": 0,
+          "gated_action_accuracy": 1.0,
+          "gated_unsafe_allow_count": 0
+        },
+        "holdout": {
+          "count": 58,
+          "action_accuracy": 1.0,
+          "outcome_accuracy": 1.0,
+          "safe_candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "retry_alternate_recall": 1.0,
+          "raw_unsafe_allow_count": 0,
+          "gated_action_accuracy": 1.0,
+          "gated_unsafe_allow_count": 0
+        }
+      },
+      "score": 2.0,
+      "catastrophic_forgetting_gate": {
+        "not_applicable_to_frozen_body": true,
+        "adapter_holdout_gated_accuracy": 1.0
+      },
+      "artifact": "artifacts\\pg219-result-aware-policy-v1\\result_aware_policy_standard.pt"
+    },
+    {
+      "variant": "wide",
+      "hidden_dim": 192,
+      "base_parameter_count": 101487169,
+      "trainable_adapter_parameter_count": 54407,
+      "training": {
+        "schema_version": "pg219-result-aware-process-policy-v1",
+        "train_rows": 42,
+        "holdout_rows": 58,
+        "epochs": 80,
+        "history": [
+          {
+            "epoch": 1,
+            "loss": 1.89503145,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.0862069,
+              "outcome_accuracy": 0.5,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 0.0,
+              "retry_alternate_recall": 0.0,
+              "raw_unsafe_allow_count": 38,
+              "gated_action_accuracy": 0.74137932,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 20,
+            "loss": 0.00678669,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 40,
+            "loss": 0.00096749,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 60,
+            "loss": 0.00047149,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 80,
+            "loss": 0.00033095,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          }
+        ],
+        "train": {
+          "count": 42,
+          "action_accuracy": 1.0,
+          "outcome_accuracy": 1.0,
+          "safe_candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "retry_alternate_recall": 1.0,
+          "raw_unsafe_allow_count": 0,
+          "gated_action_accuracy": 1.0,
+          "gated_unsafe_allow_count": 0
+        },
+        "holdout": {
+          "count": 58,
+          "action_accuracy": 1.0,
+          "outcome_accuracy": 1.0,
+          "safe_candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "retry_alternate_recall": 1.0,
+          "raw_unsafe_allow_count": 0,
+          "gated_action_accuracy": 1.0,
+          "gated_unsafe_allow_count": 0
+        }
+      },
+      "score": 2.0,
+      "catastrophic_forgetting_gate": {
+        "not_applicable_to_frozen_body": true,
+        "adapter_holdout_gated_accuracy": 1.0
+      }
+    },
+    {
+      "variant": "deep",
+      "hidden_dim": 384,
+      "base_parameter_count": 101487169,
+      "trainable_adapter_parameter_count": 74759,
+      "training": {
+        "schema_version": "pg219-result-aware-process-policy-v1",
+        "train_rows": 42,
+        "holdout_rows": 58,
+        "epochs": 80,
+        "history": [
+          {
+            "epoch": 1,
+            "loss": 1.94010913,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.53448278,
+              "outcome_accuracy": 0.53448278,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 0.54166667,
+              "retry_alternate_recall": 0.0,
+              "raw_unsafe_allow_count": 12,
+              "gated_action_accuracy": 0.74137932,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 20,
+            "loss": 0.00057134,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 40,
+            "loss": 0.0001228,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 60,
+            "loss": 6.516e-05,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          },
+          {
+            "epoch": 80,
+            "loss": 5.096e-05,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 1.0,
+              "outcome_accuracy": 1.0,
+              "safe_candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "retry_alternate_recall": 1.0,
+              "raw_unsafe_allow_count": 0,
+              "gated_action_accuracy": 1.0,
+              "gated_unsafe_allow_count": 0
+            }
+          }
+        ],
+        "train": {
+          "count": 42,
+          "action_accuracy": 1.0,
+          "outcome_accuracy": 1.0,
+          "safe_candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "retry_alternate_recall": 1.0,
+          "raw_unsafe_allow_count": 0,
+          "gated_action_accuracy": 1.0,
+          "gated_unsafe_allow_count": 0
+        },
+        "holdout": {
+          "count": 58,
+          "action_accuracy": 1.0,
+          "outcome_accuracy": 1.0,
+          "safe_candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "retry_alternate_recall": 1.0,
+          "raw_unsafe_allow_count": 0,
+          "gated_action_accuracy": 1.0,
+          "gated_unsafe_allow_count": 0
+        }
+      },
+      "score": 2.0,
+      "catastrophic_forgetting_gate": {
+        "not_applicable_to_frozen_body": true,
+        "adapter_holdout_gated_accuracy": 1.0
+      }
+    }
+  ],
+  "shadow_replay": [
+    {
+      "seed": 21801,
+      "route": "/vul/sqli/sqli_x.php",
+      "step_index": 0,
+      "target_action": "safe_candidate",
+      "proposed_action": "safe_candidate",
+      "action": "safe_candidate",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21801,
+      "route": "/vul/sqli/sqli_x.php",
+      "step_index": 1,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21801,
+      "route": "/vul/sqli/sqli_x.php",
+      "step_index": 2,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "step_index": 0,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": false,
+      "outcome": "no_effect"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "step_index": 1,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": false,
+      "outcome": "no_effect"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "step_index": 2,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": false,
+      "outcome": "no_effect"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_blind_t.php",
+      "step_index": 0,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": false,
+      "outcome": "no_effect"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_blind_t.php",
+      "step_index": 1,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": false,
+      "outcome": "no_effect"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_blind_t.php",
+      "step_index": 2,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": false,
+      "outcome": "no_effect"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_id.php",
+      "step_index": 0,
+      "target_action": "safe_candidate",
+      "proposed_action": "safe_candidate",
+      "action": "safe_candidate",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_id.php",
+      "step_index": 1,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_id.php",
+      "step_index": 2,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_search.php",
+      "step_index": 0,
+      "target_action": "safe_candidate",
+      "proposed_action": "safe_candidate",
+      "action": "safe_candidate",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_search.php",
+      "step_index": 1,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_search.php",
+      "step_index": 2,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_str.php",
+      "step_index": 0,
+      "target_action": "safe_candidate",
+      "proposed_action": "safe_candidate",
+      "action": "safe_candidate",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_str.php",
+      "step_index": 1,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    },
+    {
+      "seed": 21802,
+      "route": "/vul/sqli/sqli_str.php",
+      "step_index": 2,
+      "target_action": "abstain",
+      "proposed_action": "abstain",
+      "action": "abstain",
+      "hard_gate": true,
+      "outcome": "result_verified"
+    }
+  ],
+  "promotion": {
+    "training_eligible": true,
+    "artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "live_send_takeover_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "safety": {
+    "local_trace_sources_only": true,
+    "loopback_replay_not_repeated": true,
+    "external_network_targets": false,
+    "database_write": false,
+    "time_delay_used": false,
+    "oracle_labels_as_features": false,
+    "route_identity_as_feature": false,
+    "raw_inputs_retained": false
+  },
+  "source_report_sha256": {
+    "pg217": "f849d12526f42c955c437c7424c601e1d14ceb1464cf88946c1989dd409add30",
+    "pg218": "3adeb023073c4efd2d84dcf72263ca40917b0008e979f41f9c93c8206af3ab72"
+  },
+  "report_sha256": "ee2a513eb4009e551ecfc11976909e35adf0f58f47c4f38525749db148e094bb"
+}

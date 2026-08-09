@@ -1,0 +1,46 @@
+{
+  "protocol_id": "pg296-missing-pattern-eval-v1",
+  "schema_version": "pg296-missing-pattern-eval-report-v1",
+  "status": "completed_frozen_causal_moe_ood_eval",
+  "source": {
+    "dataset": "research/pg296_missing_pattern_dataset_v1.json",
+    "dataset_sha256": "175b8aadcf4b281b945f2ba9865f725e0ec561a70b18719923cfc34beda13bb7",
+    "training_report": "research/pg295_causal_moe_training_report_v1_local_morning.json",
+    "checkpoint": "artifacts/pg295-causal-moe/pg295_causal_moe_selected_local_morning.pt",
+    "literal_payload_in_context": false,
+    "wire_emission": false
+  },
+  "model": {
+    "architecture": "causal_transformer_moe",
+    "config_name": "moe_wide",
+    "frozen": true
+  },
+  "split": {
+    "total": 36,
+    "patterns": [
+      "get_query_order_shift",
+      "post_form_decoy",
+      "permuted_missing"
+    ],
+    "training_eligible": 0
+  },
+  "metrics": {
+    "count": 36,
+    "token_accuracy": 0.133333,
+    "sequence_exact_accuracy": 0.0,
+    "positive_recall": null,
+    "hard_negative_false_allow": 0,
+    "safe_reject_rate": 1.0,
+    "missing_question_recall": 0.333333,
+    "unnecessary_question_rate": null,
+    "missing_question_count": 36
+  },
+  "gate": {
+    "question_required": true,
+    "hard_negative_not_run": true,
+    "promotion_blocked": true,
+    "claim_allowed": false
+  },
+  "conclusion": "OOD missing patterns test question composition only; no real evaluator or payload capability is established.",
+  "report_sha256": "7a77ff83a300bdeb2e9df8653b6ba5e3d4d81869e1ebd24cc1f4477f44c46330"
+}

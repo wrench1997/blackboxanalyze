@@ -1,0 +1,187 @@
+{
+  "protocol_id": "sift-pg42-independent-semantic-ood-v1",
+  "schema_version": "pg-pk-42-independent-semantic-ood-report-v1",
+  "status": "diagnostic_only",
+  "catalog": {
+    "path": "research\\pg42_independent_semantic_catalog_v1.json",
+    "sha256": "213202769653a0eafc1aacfd91e0eb1d2e5290d356a9618a650309888ebaf7ed",
+    "pair_count": 1440,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "model": {
+    "checkpoint": "artifacts\\pg39-coarse-delta\\coarse_delta.pt",
+    "checkpoint_sha256": "dff539c3323e5a41842453d0620fc6a5313b5d07e333a376046e05a3030e8a7d",
+    "effect_head_source": "pg39-coarse-delta",
+    "effect_head_input": "bounded candidate-control coarse delta",
+    "typed_oracle_consumed_by_model": false,
+    "family_consumed_by_model": false,
+    "semantic_reference_consumed_by_effect_head": false
+  },
+  "splits": {
+    "train": {
+      "count": 256,
+      "positive_count": 64,
+      "negative_count": 192,
+      "effect_accepted_count": 64,
+      "effect_recall_any_family": 1.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.75,
+      "mean_effect_probability": 0.249956
+    },
+    "dev": {
+      "count": 320,
+      "positive_count": 80,
+      "negative_count": 240,
+      "effect_accepted_count": 32,
+      "effect_recall_any_family": 0.4,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.9,
+      "mean_effect_probability": 0.102946
+    },
+    "implementation_holdout": {
+      "count": 576,
+      "positive_count": 144,
+      "negative_count": 432,
+      "effect_accepted_count": 96,
+      "effect_recall_any_family": 0.666667,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.833333,
+      "mean_effect_probability": 0.168284
+    },
+    "family_holdout": {
+      "count": 144,
+      "positive_count": 36,
+      "negative_count": 108,
+      "effect_accepted_count": 24,
+      "effect_recall_any_family": 0.666667,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.833333,
+      "mean_effect_probability": 0.168284
+    },
+    "negative_control": {
+      "count": 144,
+      "positive_count": 0,
+      "negative_count": 144,
+      "effect_accepted_count": 0,
+      "effect_recall_any_family": 0.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 1.0,
+      "mean_effect_probability": 5.3e-05
+    }
+  },
+  "routing": {
+    "known_bindings": {
+      "markup-context": "xss",
+      "operator-context": "injection",
+      "auth-boundary": "authentication",
+      "subject-boundary": "access_control"
+    },
+    "unknown_route": "unknown_surface",
+    "unknown_requires_abstain": true,
+    "route_counts": {
+      "unknown_surface": 1344,
+      "xss": 24,
+      "injection": 24,
+      "authentication": 24,
+      "access_control": 24
+    },
+    "semantic_counts": {
+      "markup-context": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 120
+      },
+      "operator-context": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 120
+      },
+      "auth-boundary": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 120
+      },
+      "subject-boundary": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 120
+      },
+      "state-boundary": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 144
+      },
+      "destination-context": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 144
+      },
+      "scalar-boundary": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 144
+      },
+      "local-callback": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 144
+      },
+      "template-boundary": {
+        "pairs": 144,
+        "positive": 36,
+        "effect_accepted": 24,
+        "abstain": 144
+      },
+      "ordinary-surface": {
+        "pairs": 144,
+        "positive": 0,
+        "effect_accepted": 0,
+        "abstain": 144
+      }
+    },
+    "metrics": {
+      "known_positive_count": 144,
+      "known_negative_count": 432,
+      "unknown_positive_count": 180,
+      "unknown_negative_count": 684,
+      "known_family_recall": 0.666667,
+      "unknown_effect_recall": 0.666667,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true
+    }
+  },
+  "safe_routing_gate": {
+    "schema_version": "sift-pg42-independent-ood-gate-v1",
+    "status": "blocked",
+    "claim_allowed": false,
+    "reasons": [
+      "independent_implementation_effect_recall_below_1",
+      "new_family_effect_recall_below_1"
+    ],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "status": "quarantined_independent_ood",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "manifest_sha256": "5187a92990921a20931d9ce5831d1a09671d32bd20b1c44ada7d6b3983135491"
+}

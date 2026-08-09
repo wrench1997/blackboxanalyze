@@ -1,0 +1,141 @@
+{
+  "protocol_id": "pg-pk-78-multisource-triplet-holdout-v1",
+  "schema_version": "pg78-multisource-triplet-holdout-report-v1",
+  "status": "completed_evaluation",
+  "source": {
+    "pg53_report": "research\\pg53_cross_source_typed_replay_report_v1.json",
+    "pg53_report_sha256": "4278998229ceea681f5bd07a2662e7b66dd089fae5110d97ad570496aed7443a",
+    "candidate_checkpoint": "artifacts\\pg77-real-triplet-transformer\\model.pt",
+    "candidate_checkpoint_sha256": "a94c0085bf1e238c661c1c85455e75ebad3e02df379c85b5c1e042abcf7998d6",
+    "model_retrained_on_pg53": false,
+    "family_in_tokens": false,
+    "source_in_tokens": false,
+    "oracle_in_tokens_before_target": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "source_report": "research\\pg53_cross_source_typed_replay_report_v1.json",
+    "case_count": 270,
+    "fresh_reset_count": 648,
+    "screen_present_count": 108,
+    "screen_missing_count": 162,
+    "source_count": 5,
+    "code_implementation_count": 3,
+    "implementation_count": 5,
+    "family_count": 9,
+    "method_counts": {
+      "GET": 135,
+      "POST": 135
+    },
+    "source_report_sha256": "4278998229ceea681f5bd07a2662e7b66dd089fae5110d97ad570496aed7443a"
+  },
+  "metrics": {
+    "count": 270,
+    "accuracy": 0.0,
+    "false_accept_count": 0,
+    "confirm_recall": 0.0,
+    "abstain_count": 270
+  },
+  "by_implementation": {
+    "pg34": {
+      "count": 54,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 54
+    },
+    "pg35": {
+      "count": 108,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 108
+    },
+    "pg36": {
+      "count": 108,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 108
+    }
+  },
+  "by_family": {
+    "xss": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    },
+    "injection": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    },
+    "authentication": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    },
+    "access_control": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    },
+    "logic": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    },
+    "url_redirect": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    },
+    "input_validation": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    },
+    "command_injection": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    },
+    "ordinary_response": {
+      "count": 30,
+      "confirm_recall": 0.0,
+      "false_accept_count": 0,
+      "abstain_count": 30
+    }
+  },
+  "capability_gate": {
+    "status": "blocked",
+    "checks": {
+      "typed_positive_and_negative_rows": true,
+      "fresh_reset_attested": true,
+      "get_post_covered": true,
+      "multi_implementation": true,
+      "multi_family": true,
+      "raw_free": true,
+      "unknown_token_count_zero": false,
+      "false_accept_zero": true,
+      "known_recall_min": false,
+      "screen_contract_complete": false
+    },
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "holdout_evaluation_only",
+    "reason": "PG-53 is a broad source holdout; screen contract is incomplete and the candidate must not be retrained on it"
+  },
+  "formal_claim": {
+    "allowed": false,
+    "reason": "external holdout is diagnostic and projection contract is incomplete"
+  }
+}

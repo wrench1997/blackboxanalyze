@@ -1,0 +1,34 @@
+{
+  "schema_version": "pg331-whole-web-trajectory-v1",
+  "purpose": "审计多个严格 source-row 是否能组成不丢 ASK、失败修复、GET/POST 和证据绑定的抽象轨迹；不发送请求、不复制原始正文或 payload。",
+  "implementation": "app/pg331_trajectory.py",
+  "step_shape": {
+    "required": ["step_index", "action_role", "row"],
+    "action_roles": ["ask", "baseline_observe", "candidate_request", "reference_request", "negative_request", "repair", "replay", "abstain"],
+    "contiguous_zero_based_index": true,
+    "max_steps": 128
+  },
+  "checks": [
+    "serialized_source_row_validation",
+    "source_id_consistency",
+    "abstract_request_method_presence",
+    "optional_get_post_pair",
+    "optional_candidate_reference_negative_triplet",
+    "failure_previous_next_action_change",
+    "typed_evidence_hash_role_binding",
+    "ask_target_safe_to_send_false",
+    "context_firewall_and_raw_exclusion"
+  ],
+  "model_boundary": {
+    "trajectory_audit_is_sidecar": true,
+    "raw_payload_or_response_body_in_context": false,
+    "family_route_oracle_literals_in_context": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "status": "implementation_complete_dataset_pending"
+}

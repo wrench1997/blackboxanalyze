@@ -1,0 +1,36 @@
+{
+  "protocol_id": "pg-pk-212-pikachu-sql-response-shape-loop-v1",
+  "schema_version": "pg212-pikachu-sql-response-shape-loop-protocol-v1",
+  "ai_participates_in_send": true,
+  "independent_reference_sent": true,
+  "evaluator": "response_shape_only; no backend AST",
+  "backend_failure_is_not_vulnerability": true,
+  "allowed_probe_classes": [
+    "syntax_shape",
+    "encoded_syntax_shape"
+  ],
+  "forbidden_probe_classes": [
+    "time_delay",
+    "local_side_channel",
+    "write",
+    "destructive"
+  ],
+  "fresh_reset_required": true,
+  "fresh_reset_unit": "one disposable no-volume container per route episode",
+  "database_clean_required": true,
+  "database_clean_attestation": [
+    "pinned_image_digest",
+    "fresh_container_recreated",
+    "zero_volume_or_bind_mount",
+    "state_change_allowed_false",
+    "baseline_state_fingerprint"
+  ],
+  "docker_restart_allowed": "health recovery only; restarted writable layer is not accepted as a clean reset",
+  "matched_negative_control_required": true,
+  "evidence_hash_required": true,
+  "raw_payload_and_response_excluded": true,
+  "training_promotion_allowed": false,
+  "memory_promotion_allowed": false,
+  "vulnerability_claim_allowed": false,
+  "protocol_sha256": "33317eb6a1c9a6cb6815ef5fce59118a31eb34baa6eb612cd25fe1e7f1e8ce8b"
+}

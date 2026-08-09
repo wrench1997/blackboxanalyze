@@ -1,0 +1,45 @@
+{
+  "schema_version": "pg114-family-holdout-replay-proposal-v1",
+  "evaluation_only": true,
+  "training_eligible": false,
+  "family_holdout_semantic": "security_policy_transition",
+  "decoy_semantic": "shape_only_change",
+  "reference_reports": [
+    "research/pg112_python_bsp_local_replay_report_v1.json",
+    "research/pg113_cross_implementation_replay_report_v1.json"
+  ],
+  "model_input_contract": {
+    "family_names": false,
+    "typed_oracle_labels": false,
+    "raw_probe_values": false,
+    "raw_response_bodies": false,
+    "fields": [
+      "action_manifest",
+      "baseline_projection",
+      "response_projection",
+      "belief_before",
+      "target_instance_slot"
+    ]
+  },
+  "matrix": {
+    "target_seeds": [
+      11401,
+      11402,
+      11403
+    ],
+    "surface_slots": 4,
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_reset_per_action": true
+  },
+  "required_outcomes": {
+    "family_holdout_confirm_recall_min": 1.0,
+    "decoy_false_accept_max": 0,
+    "withheld_oracle_abstain_min": 1.0,
+    "all_abstain_not_success": true
+  },
+  "bsp_core_schema": "bsp-v3-python-research-core-v1",
+  "replay_package_promotion": false
+}

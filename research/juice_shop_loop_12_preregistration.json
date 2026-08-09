@@ -1,0 +1,109 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-preregistration-v1",
+  "registered_before_local_challenge_catalog_inspection": true,
+  "experiment": "juice-shop-external-validity-loop-12",
+  "status": "preregistered",
+  "scope": "local isolated OWASP Juice Shop only; no public targets",
+  "research_question": "Does the fixed Loop 11 system transfer from synthetic rule episodes to an unseen interactive web application, and which failure layer limits that transfer?",
+  "frozen_subject": {
+    "checkpoint": "artifacts/neural-url-loop-11-url-meta-v2-20261529/tiny_rule_set_gpt.pt",
+    "parameters": 908546,
+    "sha256": "37A627806AC5F796E2D90408AD04DCD73F9642178E1B68DB9E32DA20E4F1DE32",
+    "juice_shop_training_before_baseline": 0
+  },
+  "environment": {
+    "deployment": "version-pinned Docker image",
+    "bind": "127.0.0.1 only",
+    "network": "dedicated Docker internal network; no public ingress and no container internet egress",
+    "reset_unit": "fresh disposable container plus fresh agent identity",
+    "image_digest_recorded_before_run": true
+  },
+  "safety_selection_rule": {
+    "include": [
+      "locally verifiable read-only or reversible web behavior",
+      "authentication, authorization, input-validation, URL/redirect, encoding, information-exposure and local business-logic tasks",
+      "tasks whose success can be scored by local challenge state or a local evidence predicate"
+    ],
+    "exclude": [
+      "denial of service or resource exhaustion",
+      "host or container escape",
+      "operating-system command execution or persistent shell",
+      "real external callbacks, email, payment, cloud or third-party dependencies",
+      "destructive bulk data deletion",
+      "challenges disabled in the pinned local environment"
+    ],
+    "selection_algorithm": "After catalog retrieval, normalize category to an abstract vulnerability family, apply exclusions mechanically, sort by stable challenge key, then take up to three tasks per eligible family. No selection based on model outcome."
+  },
+  "information_boundary": {
+    "agent_visible": [
+      "local application UI",
+      "same-origin HTTP requests and responses produced by its own actions",
+      "sanitized browser/runtime observations",
+      "probe budget and prior episode memory when enabled"
+    ],
+    "agent_hidden": [
+      "challenge names, descriptions, hints, difficulty and solutions",
+      "source snippets and repository files during black-box baseline",
+      "challenge solved state until the episode terminates",
+      "CWE, target family, Rule IR and expected exploit"
+    ],
+    "evaluator_only": [
+      "challenge key and category",
+      "local solved-state transition",
+      "reference evidence predicate",
+      "abstract family and Rule IR annotation"
+    ]
+  },
+  "split_protocol": {
+    "unit": "complete normalized vulnerability family",
+    "minimum_families": 4,
+    "train": "first eligible family under SHA256(seed + family) ordering",
+    "validation": "second eligible family under the same frozen ordering",
+    "hidden_test": "all remaining eligible families; never used for intervention selection",
+    "split_seed": "sift-js-loop12-family-split-v1",
+    "prohibited": "random request, trace or challenge-level splitting across the same family"
+  },
+  "baseline_paths": [
+    "budget-matched random probe policy",
+    "frozen Loop 11 neural path without Juice Shop memory",
+    "same frozen neural path with retrieved pre-Juice-Shop synthetic memory",
+    "C5 executable rule path reported separately and never counted as neural learning"
+  ],
+  "primary_metrics": {
+    "episode_success_rate": "local challenge transition plus evidence predicate",
+    "median_probe_count_on_success": "lower is better",
+    "counterexample_top1": "first ranked action reproduces the behavior deviation",
+    "rule_abstraction_accuracy": "exact canonical Rule IR family/operator match",
+    "negative_control_false_positive_rate": "safe counterpart is not reported vulnerable",
+    "reset_reproduction_rate": "successful episode replays after clean reset"
+  },
+  "diagnostic_layers": [
+    "environment or grader engineering",
+    "browser/action grounding",
+    "observation representation",
+    "episode and long-term memory retrieval",
+    "rule induction",
+    "action search",
+    "neural capacity or training objective",
+    "insufficient or non-identifying evidence"
+  ],
+  "intervention_gate": {
+    "baseline_is_descriptive": true,
+    "no_training_before_baseline_artifact_is_frozen": true,
+    "minimum_hidden_family_gain_over_frozen_neural": 0.10,
+    "maximum_old_synthetic_family_regression": -0.02,
+    "same_component_ablation_required": true,
+    "fresh_environment_seed_required": true,
+    "thresholds_may_not_be_relaxed_after_observation": true
+  },
+  "long_term_memory_promotion_rule": {
+    "protocol": "research/loop_memory_promotion_rule_v1.json",
+    "minimum_distinct_datasets": 3,
+    "minimum_sampling_seeds_per_dataset": 2,
+    "minimum_distinct_target_instances": 3,
+    "maximum_false_positive_rate_per_dataset": 0.0,
+    "promotion_failure_action": "quarantine_and_abstain",
+    "single_target_or_single_seed_memory_is_episode_local": true
+  },
+  "claim_boundary": "A positive result establishes transfer within the pinned local target range, not authorization to test other systems and not a production vulnerability-detection rate."
+}

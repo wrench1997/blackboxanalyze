@@ -1,0 +1,75 @@
+{
+  "schema_version": "pg-pk-40-semantic-router-protocol-v1",
+  "protocol_id": "PG-40",
+  "title": "抽象 probe-semantic IR 路由与源外 Rule IR 解码",
+  "objective": "验证不暴露漏洞族名字的抽象语义引用，是否能让 Rule IR family router 在独立实现和多种子上稳定解码；effect confirmation 仍使用族无关 candidate-control 差分。",
+  "scope": {
+    "fixture_adapter": "scripts/run_pg40_semantic_router_catalog_parallel.py",
+    "underlying_local_fixture": "app/pg37_counterfactual_fixture.py",
+    "methods": ["GET", "POST"],
+    "implementations": ["atlas", "orbit"],
+    "seeds": [361, 367, 373],
+    "surface_variants": ["compact"],
+    "families": ["xss", "injection", "authentication", "access_control", "logic", "url_redirect", "input_validation", "command_injection", "ordinary_response", "unknown_surface"],
+    "external_network": false,
+    "credentials": false,
+    "state_mutation": false,
+    "raw_probe_or_response_persistence": false
+  },
+  "semantic_ir_contract": {
+    "semantic_references": ["markup-context", "operator-context", "auth-boundary", "subject-boundary", "state-invariant", "url-target", "scalar-boundary", "local-canary", "ordinary-surface"],
+    "reference_contains_family_name": false,
+    "reference_contains_raw_probe": false,
+    "reference_is_executable": false,
+    "language_neutral": true,
+    "typed_oracle_hidden_until_after_probe": true,
+    "model_input_excludes": ["family", "positive", "positive_authority", "typed_effect_ready", "source_id", "target_instance_id", "evidence_sha256", "raw_probe", "raw_response_body"]
+  },
+  "split_plan": {
+    "train": "atlas; all semantic classes; seeds 361,367",
+    "seed_holdout": "atlas; all semantic classes; seed 373",
+    "source_holdout": "orbit; all semantic classes; all seeds",
+    "negative_control": "both implementations; ordinary_surface semantic class",
+    "strict_family_holdout": "not claimed by this protocol because semantic router observes every semantic class in training"
+  },
+  "promotion_gate": {
+    "source_transfer_is_diagnostic_only": true,
+    "strict_family_holdout_required_for_capability_claim": true,
+    "zero_negative_false_accept": true,
+    "minimum_independent_seeds": 3,
+    "minimum_independent_source_hashes": 2,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "pending_collection"
+  },
+  "collection_result": {
+    "catalog": "research/pg40_semantic_router_catalog_v1.json",
+    "trace": "research/pg40_semantic_router_trace_v1.json",
+    "sample_count": 960,
+    "typed_positive_count": 96,
+    "negative_count": 864,
+    "episode_count": 60,
+    "accepted_evaluation_episode_count": 48,
+    "fresh_reset_count": 960,
+    "source_count": 2,
+    "semantic_reference_count": 9,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "run_result": {
+    "trainer": "scripts/train_pg40_semantic_router.py",
+    "report": "research/pg40_semantic_router_report_v1.json",
+    "device": "cuda",
+    "train_pair_count": 320,
+    "source_holdout_typed_recall": 1.0,
+    "source_holdout_effect_recall": 1.0,
+    "source_holdout_false_positive_rate": 0.0,
+    "negative_control_false_positive_rate": 0.0,
+    "strict_family_holdout_claim": false,
+    "capability_gate_status": "blocked",
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "semantic IR makes source transfer easy when every semantic class is observed, but this does not solve family-OOD naming; the semantic prior must be separately audited"
+  },
+  "status": "source_transfer_completed_family_ood_claim_blocked_no_promotion"
+}

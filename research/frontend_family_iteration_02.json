@@ -1,0 +1,51 @@
+{
+  "schema_version": "sift-experiment-iteration-v1",
+  "parent_experiment": "frontend-structured-semantics-loop-01",
+  "iteration": 2,
+  "registered_before_iteration_02_results": true,
+  "observed_failure": {
+    "seed": 20260801,
+    "raw_holdout": {
+      "postmessage_origin": 0.495,
+      "dom_sink_injection": 0.510833
+    },
+    "verbose_semantic_holdout": {
+      "postmessage_origin": 0.506667,
+      "dom_sink_injection": 0.508333
+    },
+    "numeric_boundary_regression": -0.104166,
+    "training_seconds_raw": 80.406,
+    "training_seconds_verbose_semantic": 178.623
+  },
+  "root_cause_evidence": {
+    "raw_prompt_truncation_rate": 0.0,
+    "verbose_semantic_training_truncation": {
+      "substring_origin": 1.0,
+      "truthiness_gate": 1.0
+    },
+    "verbose_semantic_holdout_truncation": {
+      "postmessage_origin": 1.0,
+      "dom_sink_injection": 1.0
+    },
+    "classification": "representation_serialization_and_engineering_throughput",
+    "capacity_change_supported": false
+  },
+  "minimal_change": {
+    "name": "compact typed semantic tokens",
+    "description": "Replace duplicated verbose key/value prose with compact typed URL, markup, numeric, boolean, and string tokens.",
+    "model_change": false,
+    "data_change": false,
+    "label_visibility_change": false,
+    "memory_budget_change": false,
+    "post_change_max_prompt_bytes": 443,
+    "post_change_truncation_rate": 0.0
+  },
+  "unchanged_success_criteria": {
+    "postmessage_origin_behavior_agreement_min": 0.85,
+    "dom_sink_injection_behavior_agreement_min": 0.85,
+    "counterexample_at_10_min": 0.8,
+    "old_family_regression_max_absolute": 0.02,
+    "required_independent_seeds": 3
+  },
+  "decision": "Run seed 20260801 first. Continue the remaining two seeds only if the first seed removes the truncation failure and does not trigger old-family regression."
+}

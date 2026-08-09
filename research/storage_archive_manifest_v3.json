@@ -1,0 +1,31 @@
+{
+  "schema_version": "storage-archive-manifest-v3",
+  "created_at": "2026-08-08",
+  "reason": "Move two explicitly reviewed historical PG-147/PG-163 capacity directories off D: while preserving legacy paths through junctions.",
+  "source_root": "D:/workspace/blackboxanalyze/artifacts",
+  "archive_root": "E:/blackboxanalyze-archive/artifacts/legacy-pg147-pg163-20260808",
+  "selection_rule": "Exact historical PG147/PG163 directories only; no PG-331/332/current research paths.",
+  "reversible": true,
+  "delete_performed": false,
+  "bytes_total": 624803392,
+  "directory_count": 2,
+  "directories": [
+    "pg147-model-capacity-sweep-v1",
+    "pg163-large-typed-mix-v1"
+  ],
+  "files": [
+    {"path": "pg147-model-capacity-sweep-v1/large_transformer.pt", "bytes": 76656288, "sha256": "b3590f4dff6c25620a84d1ef97481e43e330c631567f33b554c0d6ff6f3ea018"},
+    {"path": "pg147-model-capacity-sweep-v1/medium_transformer.pt", "bytes": 13145074, "sha256": "12b16cd32b89f989ce49f32a3d6eb0040b1770664a60250696bd985b9c739d75"},
+    {"path": "pg147-model-capacity-sweep-v1/tiny_transformer.pt", "bytes": 1093806, "sha256": "d0ee3bc88ea0c8f83f768af320ccf65bb8744d437bab090c4c3ca3ea8865a9b6"},
+    {"path": "pg147-model-capacity-sweep-v1/xl_transformer.pt", "bytes": 228300876, "sha256": "65b689fe359abadfefe50396b71b78aba85d966cf58e95d83a0f47e65c9497c3"},
+    {"path": "pg163-large-typed-mix-v1/large_typed_mix.pt", "bytes": 76916924, "sha256": "600329470cb1c0c1781ea246e43afa4fccc68f1cf2c75217ea55b46d66855d6e"},
+    {"path": "pg163-large-typed-mix-v1/xl_typed_mix.pt", "bytes": 228690424, "sha256": "2bf34d8c7bbc68a941a8d9f4cee3e7ca59256bfe850fa1a26d92e021c683fa7d"
+    }
+  ],
+  "junctions_preserved": [
+    {"path": "D:/workspace/blackboxanalyze/artifacts/pg147-model-capacity-sweep-v1", "target": "E:/blackboxanalyze-archive/artifacts/legacy-pg147-pg163-20260808/pg147-model-capacity-sweep-v1"},
+    {"path": "D:/workspace/blackboxanalyze/artifacts/pg163-large-typed-mix-v1", "target": "E:/blackboxanalyze-archive/artifacts/legacy-pg147-pg163-20260808/pg163-large-typed-mix-v1"}
+  ],
+  "restore": "Remove only the two D: junctions, move the exact E: directories back, then verify all file hashes above.",
+  "post_move_verification": {"junctions_created": 2, "archive_targets_verified": true, "source_paths_preserved": true, "deleted": false}
+}

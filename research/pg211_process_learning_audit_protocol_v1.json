@@ -1,0 +1,27 @@
+{
+  "protocol_id": "pg-pk-211-process-learning-audit-v1",
+  "schema_version": "pg211-process-learning-audit-protocol-v1",
+  "input_reports": [
+    "research\\pg210_ai_reference_payload_validation_report_v1.json",
+    "research\\pg210_request_anatomy_view_v1.json"
+  ],
+  "real_send_gate": [
+    "ai.sent",
+    "method/path/placement/fields match",
+    "binding_sha256",
+    "payload_sha256",
+    "probe_sha256"
+  ],
+  "learning_gate": [
+    "online_weight_update",
+    "policy_uses_evaluator",
+    "history feature",
+    "decision diversity or counterfactual gain"
+  ],
+  "matched_reference_does_not_equal_learning": true,
+  "raw_payload_and_response_excluded": true,
+  "training_promotion_allowed": false,
+  "memory_promotion_allowed": false,
+  "vulnerability_claim_allowed": false,
+  "protocol_sha256": "284c7a7fdf165ca31146350569f1d92f73069834053ecda2188fc36bf1ddbe6f"
+}

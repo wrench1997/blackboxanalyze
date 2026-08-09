@@ -1,0 +1,55 @@
+{
+  "schema_version": "pg379-node-native-http-impl-b-manifest-v1",
+  "implementation_id": "pg379_dynamic_real_holdout_impl_b",
+  "runtime_boundary": "node_native_http_single_process",
+  "runtime": {
+    "language": "javascript",
+    "server": "node_native_http",
+    "persistent_storage": false,
+    "external_network": false,
+    "bind_host": "127.0.0.1",
+    "network_mode_required": "none",
+    "fresh_reset_endpoint": "POST /__reset",
+    "health_endpoint": "GET /__health",
+    "manifest_endpoint": "GET /__manifest"
+  },
+  "attestation_contract": {
+    "source_files": ["server.js", "manifest.json", "package.json"],
+    "source_sha256_required": true,
+    "base_image_digest_required": true,
+    "runtime_image_digest_required": true,
+    "process_boundary_attested": true,
+    "shared_fixture_route_answer_forbidden": true,
+    "source_rows_emitted": false
+  },
+  "route_count": 12,
+  "get_route_count": 6,
+  "post_route_count": 6,
+  "route_classes": [
+    {"route_class": "get_query_html_text", "method": "GET", "path": "/pg379/b/get-query-html-text", "parameter_role": "query_text", "encoding_chain": "url_percent", "response_shape": "html_text", "input_source": "query", "script_surface": "none"},
+    {"route_class": "get_path_dom_text", "method": "GET", "path": "/pg379/b/get-path-dom-text/<value>", "parameter_role": "path_segment", "encoding_chain": "identity", "response_shape": "html_dom_text", "input_source": "path", "script_surface": "inline_dom_text"},
+    {"route_class": "get_fragment_js_navigation", "method": "GET", "path": "/pg379/b/get-fragment-js-navigation", "parameter_role": "fragment_identifier", "encoding_chain": "fragment", "response_shape": "html_fragment", "input_source": "query", "script_surface": "spa_navigation"},
+    {"route_class": "get_json_shape", "method": "GET", "path": "/pg379/b/get-json-shape", "parameter_role": "json_value", "encoding_chain": "json_string", "response_shape": "json_shape", "input_source": "query", "script_surface": "inline_json_data"},
+    {"route_class": "get_redirect_control", "method": "GET", "path": "/pg379/b/get-redirect-control", "parameter_role": "view_mode", "encoding_chain": "query_parameter", "response_shape": "redirect_shape", "input_source": "query", "script_surface": "history_navigation"},
+    {"route_class": "get_failure_feedback", "method": "GET", "path": "/pg379/b/get-failure-feedback", "parameter_role": "query_term", "encoding_chain": "form_urlencoded", "response_shape": "error_shape", "input_source": "query", "script_surface": "none"},
+    {"route_class": "post_form_dom_update", "method": "POST", "path": "/pg379/b/post-form-dom-update", "parameter_role": "form_field", "encoding_chain": "form_urlencoded", "response_shape": "html_dom_text", "input_source": "form", "script_surface": "inline_dom_text"},
+    {"route_class": "post_json_state_transition", "method": "POST", "path": "/pg379/b/post-json-state-transition", "parameter_role": "json_value", "encoding_chain": "json_object_then_utf8", "response_shape": "state_delta", "input_source": "json", "script_surface": "module_fetch"},
+    {"route_class": "post_redirect_control", "method": "POST", "path": "/pg379/b/post-redirect-control", "parameter_role": "view_mode", "encoding_chain": "form_urlencoded_then_url_percent", "response_shape": "redirect_shape", "input_source": "form", "script_surface": "history_navigation"},
+    {"route_class": "post_attribute_shape", "method": "POST", "path": "/pg379/b/post-attribute-shape", "parameter_role": "attribute_value", "encoding_chain": "form_urlencoded", "response_shape": "html_attribute", "input_source": "form", "script_surface": "none"},
+    {"route_class": "post_parser_failure", "method": "POST", "path": "/pg379/b/post-parser-failure", "parameter_role": "structured_value", "encoding_chain": "json_object_then_utf8", "response_shape": "error_shape", "input_source": "json", "script_surface": "dialog_shape"},
+    {"route_class": "post_replay_shape", "method": "POST", "path": "/pg379/b/post-replay-shape", "parameter_role": "record_cursor", "encoding_chain": "query_parameter_then_url_percent", "response_shape": "replay_shape", "input_source": "form", "script_surface": "module_fetch"}
+  ],
+  "input_classes": ["safe_canary", "ordinary", "filtered", "missing", "parser_error"],
+  "filter_categories": ["markup_delimiter", "script_scheme", "template_delimiter", "query_operator", "length_limit"],
+  "evaluator_projection": {
+    "canary_seen": "boolean",
+    "filter_failure": "status_class_and_filter_reason",
+    "response_shape": "bounded_enum",
+    "fresh_reset": "health_and_reset_projection",
+    "evidence": "evaluator_side_only",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  }
+}

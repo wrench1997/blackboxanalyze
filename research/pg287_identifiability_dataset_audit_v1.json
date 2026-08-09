@@ -1,0 +1,50 @@
+{
+  "schema_version": "pg287-identifiability-dataset-audit-v1",
+  "dataset": "research/pg287_identifiability_dataset_v1.json",
+  "dataset_sha256": "f327b416c02189daa07e94715b306cd25b417d9cd49b975df24996cb7fae4e82",
+  "counts": {
+    "train": 6678,
+    "route_dev": 756,
+    "family_holdout": 630,
+    "hard_negative": 1512,
+    "total": 9576,
+    "ambiguous": 6552,
+    "resolved": 1512
+  },
+  "coverage": {
+    "split_variant_counts": {
+      "train": {
+        "ambiguous": 5418,
+        "resolved": 1260
+      },
+      "route_dev": {
+        "ambiguous": 504,
+        "resolved": 252
+      },
+      "family_holdout": {
+        "ambiguous": 630,
+        "resolved": 0
+      }
+    },
+    "family_holdout_resolved_coverage": false
+  },
+  "checks": {
+    "source_rows_present": true,
+    "counts_match": true,
+    "context_family_hidden": true,
+    "context_no_labels_or_literals": true,
+    "ambiguous_rows_ask": true,
+    "resolved_rows_have_observed_encoding": true,
+    "hard_negative_quarantined": true,
+    "raw_material_excluded": true
+  },
+  "status": "passed",
+  "training_eligible_rows": 8064,
+  "promotion_blocked": true,
+  "coverage_gate_status": "blocked",
+  "coverage_gaps": [
+    "family_holdout_resolved_rows"
+  ],
+  "interpretation": "PG-285 的编码碰撞被显式转成 ask_typed；resolved 变体只在 context 中提供 observable encoding token。family holdout 没有 resolved 行时只能报告 coverage gap，不能显示 0% 模型准确率；该数据仍源自模板，不能证明真实靶场泛化。",
+  "audit_sha256": "1fa443584e6b99e7980fff5aedc0f037491bb78c14d86bc35c659b9bbbd51698"
+}

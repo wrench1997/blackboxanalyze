@@ -1,0 +1,1416 @@
+{
+  "protocol_id": "pg-pk-160-hierarchical-lr-early-stop-v1",
+  "schema_version": "pg160-hierarchical-lr-early-stop-report-v1",
+  "status": "completed_pg160_hierarchical_lr_early_stop",
+  "device": "cuda",
+  "seed": 16001,
+  "source": {
+    "label_count": 696,
+    "train_count": 216,
+    "dev_count": 216,
+    "holdout_count": 264,
+    "synthetic_train_count": 6400,
+    "synthetic_dev_count": 800,
+    "synthetic_holdout_count": 800,
+    "real_train_count": 216,
+    "real_dev_count": 216,
+    "real_holdout_count": 264,
+    "real_repeated_count": 2133,
+    "action_mix_count": 8533,
+    "lm_replay_count": 1200,
+    "unknown_hint_count": 120,
+    "surface_unknown_count": 6,
+    "language_canary_count": 1210,
+    "real_fraction": 0.25,
+    "balanced_replay_count": 1200,
+    "balanced_synthetic_count": 600,
+    "balanced_real_count": 600,
+    "surface_anchor_count": 600,
+    "surface_anchor_source": "pg147_training_eligible_abstract_surface_proxy",
+    "pg145_training_eligible": false,
+    "pg146_training_labels_used": false,
+    "held_out_family": null,
+    "family_names_in_adversary": [
+      "blind",
+      "decoy",
+      "latch",
+      "procedural_causal_family",
+      "resource",
+      "scope",
+      "steady"
+    ],
+    "family_count": 7,
+    "unseen_authorization_count": 12,
+    "source_checkpoint": "artifacts\\pg159-family-invariant-adapter-v1\\shared_adapter_256.pt",
+    "family_labels_as_model_inputs": false,
+    "family_labels_for_adversary_only": true,
+    "variant_count": 4
+  },
+  "variants": [
+    {
+      "variant": "shared_adapter_source",
+      "config": {
+        "freeze_body": true,
+        "head_lr": 0.0,
+        "body_lr": 0.0,
+        "max_epochs": 0,
+        "early_stop": false
+      },
+      "best_epoch": 0,
+      "train_count": 0,
+      "parameter_count": 38328264,
+      "temperature": 0.8,
+      "abstain_threshold": 0.82,
+      "best_dev_selection": {},
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.865,
+        "false_stop_count": 108,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 192,
+        "coverage": 0.72727273,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 72,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 6,
+        "coverage": 0.5,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 6,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "family_holdout_metrics": {
+        "authorization": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accuracy": 0.66666667,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_holdout_calibrated": {
+        "authorization": {
+          "count": 12,
+          "accepted_count": 6,
+          "coverage": 0.5,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 6,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accepted_count": 42,
+          "coverage": 0.63636364,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 24,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accepted_count": 24,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accepted_count": 6,
+          "coverage": 0.33333333,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accepted_count": 6,
+          "coverage": 0.5,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 6,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accepted_count": 42,
+          "coverage": 0.63636364,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 24,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_adversary_on_real_holdout": {
+        "count": 252,
+        "accuracy": 0.0,
+        "family_count": 7
+      },
+      "surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 8.85841751,
+        "next_token_accuracy": 0.63333333,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.95449609,
+          "perplexity": 2.59736141,
+          "next_token_accuracy": 0.52039388,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.14301527,
+          "relative_perplexity_increase": -0.05218818,
+          "next_token_accuracy_drop": -0.01352754,
+          "mean_logit_kl": 0.0442156
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [],
+      "elapsed_seconds": 8.136
+    },
+    {
+      "variant": "adapter_only_2e",
+      "config": {
+        "freeze_body": true,
+        "head_lr": 0.0001,
+        "body_lr": 0.0,
+        "max_epochs": 2,
+        "early_stop": false
+      },
+      "best_epoch": 2,
+      "train_count": 11653,
+      "parameter_count": 38328264,
+      "temperature": 1.2,
+      "abstain_threshold": 0.0,
+      "best_dev_selection": {
+        "raw": {
+          "count": 1016,
+          "accuracy": 0.84940945,
+          "false_stop_count": 0,
+          "unknown_count": 179,
+          "unknown_abstain_rate": 1.0
+        },
+        "temperature": 1.2,
+        "threshold": 0.0,
+        "calibrated": {
+          "count": 1016,
+          "accepted_count": 1016,
+          "coverage": 1.0,
+          "selective_accuracy": 0.84940945,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 179,
+          "unknown_abstain_rate": 1.0
+        },
+        "selection_key": [
+          1,
+          1.0,
+          0.84940945,
+          -1.2
+        ]
+      },
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.85625,
+        "false_stop_count": 0,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 800,
+        "coverage": 1.0,
+        "selective_accuracy": 0.85625,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 264,
+        "coverage": 1.0,
+        "selective_accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 12,
+        "coverage": 1.0,
+        "selective_accuracy": 0.75,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "family_holdout_metrics": {
+        "authorization": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accuracy": 0.66666667,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_holdout_calibrated": {
+        "authorization": {
+          "count": 12,
+          "accepted_count": 12,
+          "coverage": 1.0,
+          "selective_accuracy": 0.75,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accepted_count": 24,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accepted_count": 18,
+          "coverage": 1.0,
+          "selective_accuracy": 0.66666667,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accepted_count": 12,
+          "coverage": 1.0,
+          "selective_accuracy": 0.75,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_adversary_on_real_holdout": {
+        "count": 252,
+        "accuracy": 0.52380952,
+        "family_count": 7
+      },
+      "surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 8.85841751,
+        "next_token_accuracy": 0.63333333,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.95449609,
+          "perplexity": 2.59736141,
+          "next_token_accuracy": 0.52039388,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.14301527,
+          "relative_perplexity_increase": -0.05218818,
+          "next_token_accuracy_drop": -0.01352754,
+          "mean_logit_kl": 0.0442156
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 1.05791023,
+          "action_loss": 0.2323714,
+          "lm_loss": 0.68241297,
+          "surface_lm_loss": 0.77992425,
+          "family_loss": 1.33645888,
+          "false_stop_loss": 0.08322216,
+          "unknown_loss": 0.00050958,
+          "dev": {
+            "raw": {
+              "count": 1016,
+              "accuracy": 0.87893701,
+              "false_stop_count": 81,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "temperature": 0.9,
+            "threshold": 0.66,
+            "calibrated": {
+              "count": 1016,
+              "accepted_count": 748,
+              "coverage": 0.73622047,
+              "selective_accuracy": 0.9959893,
+              "false_stop_count": 0,
+              "abstain_count": 268,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "selection_key": [
+              1,
+              0.73622047,
+              0.9959893,
+              -0.9
+            ]
+          },
+          "family_adversary_dev": {
+            "count": 1016,
+            "accuracy": 0.89370079,
+            "family_count": 7
+          }
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 0.99781752,
+          "action_loss": 0.22875314,
+          "lm_loss": 0.68223535,
+          "surface_lm_loss": 0.76995088,
+          "family_loss": 0.32592452,
+          "false_stop_loss": 0.07926962,
+          "unknown_loss": 4.678e-05,
+          "dev": {
+            "raw": {
+              "count": 1016,
+              "accuracy": 0.84940945,
+              "false_stop_count": 0,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "temperature": 1.2,
+            "threshold": 0.0,
+            "calibrated": {
+              "count": 1016,
+              "accepted_count": 1016,
+              "coverage": 1.0,
+              "selective_accuracy": 0.84940945,
+              "false_stop_count": 0,
+              "abstain_count": 0,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "selection_key": [
+              1,
+              1.0,
+              0.84940945,
+              -1.2
+            ]
+          },
+          "family_adversary_dev": {
+            "count": 1016,
+            "accuracy": 0.89370079,
+            "family_count": 7
+          }
+        }
+      ],
+      "elapsed_seconds": 82.113
+    },
+    {
+      "variant": "body_lr_1e5_2e",
+      "config": {
+        "freeze_body": false,
+        "head_lr": 0.0001,
+        "body_lr": 1e-05,
+        "max_epochs": 2,
+        "early_stop": false
+      },
+      "best_epoch": 2,
+      "train_count": 11653,
+      "parameter_count": 38328264,
+      "temperature": 0.95,
+      "abstain_threshold": 0.57,
+      "best_dev_selection": {
+        "raw": {
+          "count": 1016,
+          "accuracy": 0.86614173,
+          "false_stop_count": 22,
+          "unknown_count": 179,
+          "unknown_abstain_rate": 1.0
+        },
+        "temperature": 0.95,
+        "threshold": 0.57,
+        "calibrated": {
+          "count": 1016,
+          "accepted_count": 810,
+          "coverage": 0.79724409,
+          "selective_accuracy": 0.95679012,
+          "false_stop_count": 0,
+          "abstain_count": 206,
+          "unknown_count": 179,
+          "unknown_abstain_rate": 1.0
+        },
+        "selection_key": [
+          1,
+          0.79724409,
+          0.95679012,
+          -0.95
+        ]
+      },
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.86,
+        "false_stop_count": 28,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 634,
+        "coverage": 0.7925,
+        "selective_accuracy": 0.9511041,
+        "false_stop_count": 0,
+        "abstain_count": 166,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 228,
+        "coverage": 0.86363636,
+        "selective_accuracy": 0.92105263,
+        "false_stop_count": 0,
+        "abstain_count": 36,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 12,
+        "coverage": 1.0,
+        "selective_accuracy": 0.75,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "family_holdout_metrics": {
+        "authorization": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accuracy": 0.66666667,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_holdout_calibrated": {
+        "authorization": {
+          "count": 12,
+          "accepted_count": 12,
+          "coverage": 1.0,
+          "selective_accuracy": 0.75,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accepted_count": 54,
+          "coverage": 0.81818182,
+          "selective_accuracy": 0.88888889,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accepted_count": 24,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accepted_count": 6,
+          "coverage": 0.33333333,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accepted_count": 12,
+          "coverage": 1.0,
+          "selective_accuracy": 0.75,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accepted_count": 54,
+          "coverage": 0.81818182,
+          "selective_accuracy": 0.88888889,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_adversary_on_real_holdout": {
+        "count": 252,
+        "accuracy": 0.52380952,
+        "family_count": 7
+      },
+      "surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 10.72529697,
+        "next_token_accuracy": 0.56666667,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.94887435,
+          "perplexity": 2.5828007,
+          "next_token_accuracy": 0.52104552,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.15757598,
+          "relative_perplexity_increase": -0.05750158,
+          "next_token_accuracy_drop": -0.01417918,
+          "mean_logit_kl": 0.03773697
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 1.04888008,
+          "action_loss": 0.23162728,
+          "lm_loss": 0.67749235,
+          "surface_lm_loss": 0.75408447,
+          "family_loss": 1.48710767,
+          "false_stop_loss": 0.08156356,
+          "unknown_loss": 0.00029411,
+          "dev": {
+            "raw": {
+              "count": 1016,
+              "accuracy": 0.87401575,
+              "false_stop_count": 69,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "temperature": 0.95,
+            "threshold": 0.63,
+            "calibrated": {
+              "count": 1016,
+              "accepted_count": 742,
+              "coverage": 0.73031496,
+              "selective_accuracy": 1.0,
+              "false_stop_count": 0,
+              "abstain_count": 274,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "selection_key": [
+              1,
+              0.73031496,
+              1.0,
+              -0.95
+            ]
+          },
+          "family_adversary_dev": {
+            "count": 1016,
+            "accuracy": 0.88779528,
+            "family_count": 7
+          }
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 1.05389281,
+          "action_loss": 0.22541016,
+          "lm_loss": 0.67320025,
+          "surface_lm_loss": 0.74298626,
+          "family_loss": 1.87522884,
+          "false_stop_loss": 0.07976887,
+          "unknown_loss": 0.00017539,
+          "dev": {
+            "raw": {
+              "count": 1016,
+              "accuracy": 0.86614173,
+              "false_stop_count": 22,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "temperature": 0.95,
+            "threshold": 0.57,
+            "calibrated": {
+              "count": 1016,
+              "accepted_count": 810,
+              "coverage": 0.79724409,
+              "selective_accuracy": 0.95679012,
+              "false_stop_count": 0,
+              "abstain_count": 206,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "selection_key": [
+              1,
+              0.79724409,
+              0.95679012,
+              -0.95
+            ]
+          },
+          "family_adversary_dev": {
+            "count": 1016,
+            "accuracy": 0.32283465,
+            "family_count": 7
+          }
+        }
+      ],
+      "elapsed_seconds": 175.366
+    },
+    {
+      "variant": "body_lr_3e5_early",
+      "config": {
+        "freeze_body": false,
+        "head_lr": 0.0001,
+        "body_lr": 3e-05,
+        "max_epochs": 3,
+        "early_stop": true
+      },
+      "best_epoch": 3,
+      "train_count": 11653,
+      "parameter_count": 38328264,
+      "temperature": 1.0,
+      "abstain_threshold": 0.6,
+      "best_dev_selection": {
+        "raw": {
+          "count": 1016,
+          "accuracy": 0.88287402,
+          "false_stop_count": 88,
+          "unknown_count": 179,
+          "unknown_abstain_rate": 1.0
+        },
+        "temperature": 1.0,
+        "threshold": 0.6,
+        "calibrated": {
+          "count": 1016,
+          "accepted_count": 761,
+          "coverage": 0.74901575,
+          "selective_accuracy": 0.98817346,
+          "false_stop_count": 0,
+          "abstain_count": 255,
+          "unknown_count": 179,
+          "unknown_abstain_rate": 1.0
+        },
+        "selection_key": [
+          1,
+          0.74901575,
+          0.98817346,
+          -1.0
+        ]
+      },
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.86,
+        "false_stop_count": 101,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 580,
+        "coverage": 0.725,
+        "selective_accuracy": 0.99827586,
+        "false_stop_count": 1,
+        "abstain_count": 220,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 228,
+        "coverage": 0.86363636,
+        "selective_accuracy": 0.92105263,
+        "false_stop_count": 0,
+        "abstain_count": 36,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 12,
+        "coverage": 1.0,
+        "selective_accuracy": 0.75,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "family_holdout_metrics": {
+        "authorization": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accuracy": 0.66666667,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_holdout_calibrated": {
+        "authorization": {
+          "count": 12,
+          "accepted_count": 12,
+          "coverage": 1.0,
+          "selective_accuracy": 0.75,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accepted_count": 54,
+          "coverage": 0.81818182,
+          "selective_accuracy": 0.88888889,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accepted_count": 24,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accepted_count": 6,
+          "coverage": 0.33333333,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accepted_count": 12,
+          "coverage": 1.0,
+          "selective_accuracy": 0.75,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accepted_count": 54,
+          "coverage": 0.81818182,
+          "selective_accuracy": 0.88888889,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_adversary_on_real_holdout": {
+        "count": 252,
+        "accuracy": 0.47619048,
+        "family_count": 7
+      },
+      "surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 15.69858837,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.95121741,
+          "perplexity": 2.58885945,
+          "next_token_accuracy": 0.51881305,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.15151723,
+          "relative_perplexity_increase": -0.05529066,
+          "next_token_accuracy_drop": -0.01194671,
+          "mean_logit_kl": 0.04600725
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 1.0896849,
+          "action_loss": 0.23770147,
+          "lm_loss": 0.67587382,
+          "surface_lm_loss": 0.76516588,
+          "family_loss": 2.08341796,
+          "false_stop_loss": 0.0827488,
+          "unknown_loss": 0.00029463,
+          "dev": {
+            "raw": {
+              "count": 1016,
+              "accuracy": 0.84940945,
+              "false_stop_count": 3,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "temperature": 0.95,
+            "threshold": 0.64,
+            "calibrated": {
+              "count": 1016,
+              "accepted_count": 742,
+              "coverage": 0.73031496,
+              "selective_accuracy": 1.0,
+              "false_stop_count": 0,
+              "abstain_count": 274,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "selection_key": [
+              1,
+              0.73031496,
+              1.0,
+              -0.95
+            ]
+          },
+          "family_adversary_dev": {
+            "count": 1016,
+            "accuracy": 0.25787402,
+            "family_count": 7
+          }
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 1.10216702,
+          "action_loss": 0.22668286,
+          "lm_loss": 0.66935512,
+          "surface_lm_loss": 0.76377935,
+          "family_loss": 2.6441222,
+          "false_stop_loss": 0.08047579,
+          "unknown_loss": 0.00017082,
+          "dev": {
+            "raw": {
+              "count": 1016,
+              "accuracy": 0.84940945,
+              "false_stop_count": 3,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "temperature": 1.2,
+            "threshold": 0.63,
+            "calibrated": {
+              "count": 1016,
+              "accepted_count": 751,
+              "coverage": 0.73917323,
+              "selective_accuracy": 0.99201065,
+              "false_stop_count": 0,
+              "abstain_count": 265,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "selection_key": [
+              1,
+              0.73917323,
+              0.99201065,
+              -1.2
+            ]
+          },
+          "family_adversary_dev": {
+            "count": 1016,
+            "accuracy": 0.31397638,
+            "family_count": 7
+          }
+        },
+        {
+          "epoch": 3,
+          "mean_loss": 1.07458058,
+          "action_loss": 0.22275131,
+          "lm_loss": 0.66270023,
+          "surface_lm_loss": 0.76339647,
+          "family_loss": 2.24619929,
+          "false_stop_loss": 0.07999327,
+          "unknown_loss": 3.656e-05,
+          "dev": {
+            "raw": {
+              "count": 1016,
+              "accuracy": 0.88287402,
+              "false_stop_count": 88,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "temperature": 1.0,
+            "threshold": 0.6,
+            "calibrated": {
+              "count": 1016,
+              "accepted_count": 761,
+              "coverage": 0.74901575,
+              "selective_accuracy": 0.98817346,
+              "false_stop_count": 0,
+              "abstain_count": 255,
+              "unknown_count": 179,
+              "unknown_abstain_rate": 1.0
+            },
+            "selection_key": [
+              1,
+              0.74901575,
+              0.98817346,
+              -1.0
+            ]
+          },
+          "family_adversary_dev": {
+            "count": 1016,
+            "accuracy": 0.31397638,
+            "family_count": 7
+          }
+        }
+      ],
+      "elapsed_seconds": 220.491
+    }
+  ],
+  "objective": "hierarchical_body_adapter_learning_rate_dev_risk_early_stop",
+  "data_policy": {
+    "raw_payloads": false,
+    "raw_responses": false,
+    "external_network_targets": false,
+    "pg145_training_eligible": false,
+    "pg146_training_labels_used": false,
+    "family_labels_as_model_inputs": false,
+    "unseen_authorization_family_training_used": false,
+    "holdout_labels_in_training": false,
+    "calibration_fit_on_holdout": false
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  },
+  "report_sha256": "89f0c7d41bdc3df972313c6324eaf71a72936e31eb3eb6acafc01624d9d67c35"
+}

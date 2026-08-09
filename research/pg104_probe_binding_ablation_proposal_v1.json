@@ -1,0 +1,333 @@
+{
+  "schema_version": "active-auto-goal-label-inducer-v1",
+  "proposal_id": "pg103-active-auto-goal-label-v1",
+  "proposal_inputs": {
+    "design_row_count": 32,
+    "oracle_visible": false,
+    "family_visible": false,
+    "raw_probe_visible": false,
+    "raw_response_visible": false,
+    "induction_objective": "stable_single_active_slot_with_get_post_support",
+    "binding_attestation_required": true
+  },
+  "goal": {
+    "goal_id": "auto_repeatable_effect_slot_discovery_v1",
+    "intent": "discover a repeatable bounded effect without assigning a vulnerability family",
+    "success_condition": [
+      "one supported active slot is observed",
+      "the same generic label repeats on GET and POST or a second compatible probe",
+      "matched negative controls do not receive a candidate decision",
+      "fresh reset, loopback safety and evidence hash checks remain true"
+    ],
+    "failure_condition": [
+      "no observable active slot",
+      "the effect is not repeated",
+      "a matched negative control also receives the candidate decision"
+    ],
+    "abstain_condition": [
+      "more than one active slot is observed",
+      "the active slot was not supported during design",
+      "GET/POST support is incomplete or conflicting"
+    ],
+    "budget": {
+      "max_steps": 2,
+      "requires_fresh_reset": true,
+      "requires_get_post_pair": true
+    }
+  },
+  "labels": [
+    {
+      "label_id": "AUTO_NO_OBSERVED_EFFECT",
+      "definition": {
+        "predicate": "active_slot_count_equals",
+        "value": 0
+      },
+      "decision": "reject"
+    },
+    {
+      "slot": "p0",
+      "label_id": "AUTO_EFFECT_SLOT_P0",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p1",
+      "label_id": "AUTO_EFFECT_SLOT_P1",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p2",
+      "label_id": "AUTO_EFFECT_SLOT_P2",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p3",
+      "label_id": "AUTO_EFFECT_SLOT_P3",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p4",
+      "label_id": "AUTO_EFFECT_SLOT_P4",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p5",
+      "label_id": "AUTO_EFFECT_SLOT_P5",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p6",
+      "label_id": "AUTO_EFFECT_SLOT_P6",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p7",
+      "label_id": "AUTO_EFFECT_SLOT_P7",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "label_id": "AUTO_UNSEEN_OR_AMBIGUOUS_EFFECT",
+      "definition": {
+        "predicate": "active_slot_unseen_or_count_not_equal_one"
+      },
+      "decision": "abstain"
+    }
+  ],
+  "discovered_effect_slots": [
+    {
+      "slot": "p0",
+      "label_id": "AUTO_EFFECT_SLOT_P0",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p1",
+      "label_id": "AUTO_EFFECT_SLOT_P1",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p2",
+      "label_id": "AUTO_EFFECT_SLOT_P2",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p3",
+      "label_id": "AUTO_EFFECT_SLOT_P3",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p4",
+      "label_id": "AUTO_EFFECT_SLOT_P4",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p5",
+      "label_id": "AUTO_EFFECT_SLOT_P5",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p6",
+      "label_id": "AUTO_EFFECT_SLOT_P6",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    },
+    {
+      "slot": "p7",
+      "label_id": "AUTO_EFFECT_SLOT_P7",
+      "support_count": 4,
+      "support_rate": 0.125,
+      "method_coverage": [
+        "GET",
+        "POST"
+      ],
+      "stable_under_get_post": true,
+      "decision": "confirm_candidate"
+    }
+  ],
+  "supported_slots": [
+    "p0",
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5",
+    "p6",
+    "p7"
+  ],
+  "probe_binding": {
+    "required": true,
+    "schema_version": "safe-active-probe-binding-v1",
+    "binding_sha256": "7dde557c5754de18da63356dafb88cd07aca8b487e27dd2c37280874f0279dd8"
+  },
+  "composition_contract": {
+    "required_atoms": [
+      "effect_present",
+      "probe_binding_valid",
+      "get_post_repeat",
+      "negative_control_clear"
+    ],
+    "rule_ir": {
+      "schema_version": "generic-rule-composition-v1",
+      "executable": false,
+      "typed_oracle_required": true,
+      "atoms": [
+        "effect_present",
+        "get_post_repeat",
+        "negative_control_clear",
+        "probe_binding_valid"
+      ],
+      "expression": {
+        "op": "and",
+        "args": [
+          {
+            "op": "atom",
+            "name": "effect_present"
+          },
+          {
+            "op": "atom",
+            "name": "get_post_repeat"
+          },
+          {
+            "op": "atom",
+            "name": "negative_control_clear"
+          },
+          {
+            "op": "atom",
+            "name": "probe_binding_valid"
+          }
+        ]
+      },
+      "canonical_sha256": "0ec598c3dc39c55978d08070a0287ea4dccdac4071be2474e31b2994db70347c"
+    },
+    "executable": false,
+    "typed_oracle_required": true,
+    "family_classification_forbidden": true
+  },
+  "induction_stats": {
+    "pattern_count": 8,
+    "single_slot_pattern_count": 8,
+    "ambiguous_row_count": 0,
+    "minimum_support": 2,
+    "require_get_post": true,
+    "pattern_support": {
+      "p0": 4,
+      "p1": 4,
+      "p2": 4,
+      "p3": 4,
+      "p4": 4,
+      "p5": 4,
+      "p6": 4,
+      "p7": 4
+    }
+  },
+  "audit": {
+    "labels_are_generic_action_effect_aliases": true,
+    "vulnerability_family_names_not_generated": true,
+    "requires_independent_typed_oracle": true,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "proposal_sha256": "a0d7e309e8f4abf60ae5aaf1277726ff8d273e61d168428d7d6240eea3829b10"
+}

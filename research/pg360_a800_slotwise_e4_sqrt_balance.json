@@ -1,0 +1,494 @@
+{
+  "schema_version": "pg360-a800-slotwise-candidate-v1",
+  "status": "slotwise_candidate_only",
+  "gate": {
+    "schema_version": "pg360-a800-slotwise-candidate-v1-gate",
+    "status": "ready",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "dataset_candidate_only": true,
+      "audit_candidate_only": true,
+      "all_slots_present": true,
+      "vocabulary_locked": true,
+      "promotion_closed": true,
+      "hashes_locked": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "candidate_only": true,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "abb94768abdc00d3dcf2ec5874dd3ab23dffe71db6aa2d55f65b4cde43b767c1",
+    "audit": "e9cb371b275e39e82931dfaf65427e8360beeb0f411bd5be37dc0de31f34f427",
+    "rules": "5ae0978f2421ba694ea78d11fb88e0ce6eea92004060ae9976bc1c73f3a51879",
+    "script": "2235ef8580ec1d046c227ec2ed454c0d8294fb3aa4cdfbbdc254179b0fb72c5d",
+    "model": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      36001,
+      36002,
+      36003
+    ],
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "batch_size": 128,
+    "target_weight": 8.0,
+    "context_weight": 0.25,
+    "balance_slot_values": false,
+    "sqrt_balance_slot_values": true,
+    "balance_strategy": "sqrt_geometric",
+    "fit_value_counts": {
+      "36001": {
+        "ask_reason": {
+          "ask_reason=none": 640,
+          "ask_reason=typed_evidence": 573
+        },
+        "encoding_ref": {
+          "encoding_ref=form_urlencode": 215,
+          "encoding_ref=form_urlencoded_then_url_percent": 72,
+          "encoding_ref=form_urlencoded_then_utf8": 124,
+          "encoding_ref=fragment_then_utf8": 72,
+          "encoding_ref=identity": 430,
+          "encoding_ref=json_object_then_utf8": 72,
+          "encoding_ref=json_string": 152,
+          "encoding_ref=query_parameter_then_url_percent": 102,
+          "encoding_ref=query_parameter_then_utf8": 102,
+          "encoding_ref=unknown": 512,
+          "encoding_ref=url_percent": 152
+        },
+        "field_role_ref": {
+          "field_role_ref=attribute_value": 152,
+          "field_role_ref=display_preference": 72,
+          "field_role_ref=display_text": 152,
+          "field_role_ref=dom_text": 152,
+          "field_role_ref=filter_choice": 51,
+          "field_role_ref=form_field": 215,
+          "field_role_ref=fragment_identifier": 152,
+          "field_role_ref=json_value": 152,
+          "field_role_ref=list_item": 152,
+          "field_role_ref=metric_group": 51,
+          "field_role_ref=note_text": 51,
+          "field_role_ref=notice_state": 72,
+          "field_role_ref=path_segment": 152,
+          "field_role_ref=profile_key": 51,
+          "field_role_ref=query_term": 51,
+          "field_role_ref=query_text": 215,
+          "field_role_ref=record_cursor": 72,
+          "field_role_ref=sort_direction": 72,
+          "field_role_ref=status_label": 152,
+          "field_role_ref=step_index": 51,
+          "field_role_ref=tab_name": 72,
+          "field_role_ref=unknown": 512,
+          "field_role_ref=view_mode": 102
+        },
+        "negative_control_presence_ref": {
+          "negative_control_presence_ref=matched_triplet": 640,
+          "negative_control_presence_ref=not_observed": 573
+        },
+        "next_action": {
+          "next_action=abstain": 256,
+          "next_action=ask_typed": 512,
+          "next_action=repair": 256,
+          "next_action=replay": 256,
+          "next_action=select_probe_variant": 363
+        },
+        "oracle_ref": {
+          "oracle_ref=negative_no_effect": 287,
+          "oracle_ref=typed_effect": 496,
+          "oracle_ref=unknown": 640
+        },
+        "payload_shape_ref": {
+          "payload_shape_ref=html_attribute_marker": 152,
+          "payload_shape_ref=html_dom_marker": 152,
+          "payload_shape_ref=html_form_marker": 304,
+          "payload_shape_ref=html_fragment_marker": 221,
+          "payload_shape_ref=html_text_marker": 263,
+          "payload_shape_ref=json_string_marker": 168,
+          "payload_shape_ref=path_segment_marker": 152,
+          "payload_shape_ref=script_context_marker": 144,
+          "payload_shape_ref=unknown": 512
+        },
+        "probe_variant_ref": {
+          "probe_variant_ref=negative_control": 287,
+          "probe_variant_ref=none": 640,
+          "probe_variant_ref=reference": 287,
+          "probe_variant_ref=runtime_canary": 287,
+          "probe_variant_ref=source_attested_candidate": 287
+        },
+        "question": {
+          "question=ask_failure": 256,
+          "question=ask_typed": 512,
+          "question=none": 512
+        },
+        "repair_action": {
+          "repair_action=method": 256,
+          "repair_action=none": 444,
+          "repair_action=observe": 512,
+          "repair_action=reset": 256
+        },
+        "safe_to_send": {
+          "safe_to_send=0": 768,
+          "safe_to_send=1": 544
+        },
+        "transport_ref": {
+          "transport_ref=get_fragment": 152,
+          "transport_ref=get_path": 152,
+          "transport_ref=get_query": 483,
+          "transport_ref=post_form": 221,
+          "transport_ref=unknown": 512
+        }
+      },
+      "36002": {
+        "ask_reason": {
+          "ask_reason=none": 640,
+          "ask_reason=typed_evidence": 573
+        },
+        "encoding_ref": {
+          "encoding_ref=form_urlencode": 215,
+          "encoding_ref=form_urlencoded_then_url_percent": 72,
+          "encoding_ref=form_urlencoded_then_utf8": 124,
+          "encoding_ref=fragment_then_utf8": 72,
+          "encoding_ref=identity": 430,
+          "encoding_ref=json_object_then_utf8": 72,
+          "encoding_ref=json_string": 152,
+          "encoding_ref=query_parameter_then_url_percent": 102,
+          "encoding_ref=query_parameter_then_utf8": 102,
+          "encoding_ref=unknown": 512,
+          "encoding_ref=url_percent": 152
+        },
+        "field_role_ref": {
+          "field_role_ref=attribute_value": 152,
+          "field_role_ref=display_preference": 72,
+          "field_role_ref=display_text": 152,
+          "field_role_ref=dom_text": 152,
+          "field_role_ref=filter_choice": 51,
+          "field_role_ref=form_field": 215,
+          "field_role_ref=fragment_identifier": 152,
+          "field_role_ref=json_value": 152,
+          "field_role_ref=list_item": 152,
+          "field_role_ref=metric_group": 51,
+          "field_role_ref=note_text": 51,
+          "field_role_ref=notice_state": 72,
+          "field_role_ref=path_segment": 152,
+          "field_role_ref=profile_key": 51,
+          "field_role_ref=query_term": 51,
+          "field_role_ref=query_text": 215,
+          "field_role_ref=record_cursor": 72,
+          "field_role_ref=sort_direction": 72,
+          "field_role_ref=status_label": 152,
+          "field_role_ref=step_index": 51,
+          "field_role_ref=tab_name": 72,
+          "field_role_ref=unknown": 512,
+          "field_role_ref=view_mode": 102
+        },
+        "negative_control_presence_ref": {
+          "negative_control_presence_ref=matched_triplet": 640,
+          "negative_control_presence_ref=not_observed": 573
+        },
+        "next_action": {
+          "next_action=abstain": 256,
+          "next_action=ask_typed": 512,
+          "next_action=repair": 256,
+          "next_action=replay": 256,
+          "next_action=select_probe_variant": 363
+        },
+        "oracle_ref": {
+          "oracle_ref=negative_no_effect": 287,
+          "oracle_ref=typed_effect": 496,
+          "oracle_ref=unknown": 640
+        },
+        "payload_shape_ref": {
+          "payload_shape_ref=html_attribute_marker": 152,
+          "payload_shape_ref=html_dom_marker": 152,
+          "payload_shape_ref=html_form_marker": 304,
+          "payload_shape_ref=html_fragment_marker": 221,
+          "payload_shape_ref=html_text_marker": 263,
+          "payload_shape_ref=json_string_marker": 168,
+          "payload_shape_ref=path_segment_marker": 152,
+          "payload_shape_ref=script_context_marker": 144,
+          "payload_shape_ref=unknown": 512
+        },
+        "probe_variant_ref": {
+          "probe_variant_ref=negative_control": 287,
+          "probe_variant_ref=none": 640,
+          "probe_variant_ref=reference": 287,
+          "probe_variant_ref=runtime_canary": 287,
+          "probe_variant_ref=source_attested_candidate": 287
+        },
+        "question": {
+          "question=ask_failure": 256,
+          "question=ask_typed": 512,
+          "question=none": 512
+        },
+        "repair_action": {
+          "repair_action=method": 256,
+          "repair_action=none": 444,
+          "repair_action=observe": 512,
+          "repair_action=reset": 256
+        },
+        "safe_to_send": {
+          "safe_to_send=0": 768,
+          "safe_to_send=1": 544
+        },
+        "transport_ref": {
+          "transport_ref=get_fragment": 152,
+          "transport_ref=get_path": 152,
+          "transport_ref=get_query": 483,
+          "transport_ref=post_form": 221,
+          "transport_ref=unknown": 512
+        }
+      },
+      "36003": {
+        "ask_reason": {
+          "ask_reason=none": 640,
+          "ask_reason=typed_evidence": 573
+        },
+        "encoding_ref": {
+          "encoding_ref=form_urlencode": 215,
+          "encoding_ref=form_urlencoded_then_url_percent": 72,
+          "encoding_ref=form_urlencoded_then_utf8": 124,
+          "encoding_ref=fragment_then_utf8": 72,
+          "encoding_ref=identity": 430,
+          "encoding_ref=json_object_then_utf8": 72,
+          "encoding_ref=json_string": 152,
+          "encoding_ref=query_parameter_then_url_percent": 102,
+          "encoding_ref=query_parameter_then_utf8": 102,
+          "encoding_ref=unknown": 512,
+          "encoding_ref=url_percent": 152
+        },
+        "field_role_ref": {
+          "field_role_ref=attribute_value": 152,
+          "field_role_ref=display_preference": 72,
+          "field_role_ref=display_text": 152,
+          "field_role_ref=dom_text": 152,
+          "field_role_ref=filter_choice": 51,
+          "field_role_ref=form_field": 215,
+          "field_role_ref=fragment_identifier": 152,
+          "field_role_ref=json_value": 152,
+          "field_role_ref=list_item": 152,
+          "field_role_ref=metric_group": 51,
+          "field_role_ref=note_text": 51,
+          "field_role_ref=notice_state": 72,
+          "field_role_ref=path_segment": 152,
+          "field_role_ref=profile_key": 51,
+          "field_role_ref=query_term": 51,
+          "field_role_ref=query_text": 215,
+          "field_role_ref=record_cursor": 72,
+          "field_role_ref=sort_direction": 72,
+          "field_role_ref=status_label": 152,
+          "field_role_ref=step_index": 51,
+          "field_role_ref=tab_name": 72,
+          "field_role_ref=unknown": 512,
+          "field_role_ref=view_mode": 102
+        },
+        "negative_control_presence_ref": {
+          "negative_control_presence_ref=matched_triplet": 640,
+          "negative_control_presence_ref=not_observed": 573
+        },
+        "next_action": {
+          "next_action=abstain": 256,
+          "next_action=ask_typed": 512,
+          "next_action=repair": 256,
+          "next_action=replay": 256,
+          "next_action=select_probe_variant": 363
+        },
+        "oracle_ref": {
+          "oracle_ref=negative_no_effect": 287,
+          "oracle_ref=typed_effect": 496,
+          "oracle_ref=unknown": 640
+        },
+        "payload_shape_ref": {
+          "payload_shape_ref=html_attribute_marker": 152,
+          "payload_shape_ref=html_dom_marker": 152,
+          "payload_shape_ref=html_form_marker": 304,
+          "payload_shape_ref=html_fragment_marker": 221,
+          "payload_shape_ref=html_text_marker": 263,
+          "payload_shape_ref=json_string_marker": 168,
+          "payload_shape_ref=path_segment_marker": 152,
+          "payload_shape_ref=script_context_marker": 144,
+          "payload_shape_ref=unknown": 512
+        },
+        "probe_variant_ref": {
+          "probe_variant_ref=negative_control": 287,
+          "probe_variant_ref=none": 640,
+          "probe_variant_ref=reference": 287,
+          "probe_variant_ref=runtime_canary": 287,
+          "probe_variant_ref=source_attested_candidate": 287
+        },
+        "question": {
+          "question=ask_failure": 256,
+          "question=ask_typed": 512,
+          "question=none": 512
+        },
+        "repair_action": {
+          "repair_action=method": 256,
+          "repair_action=none": 444,
+          "repair_action=observe": 512,
+          "repair_action=reset": 256
+        },
+        "safe_to_send": {
+          "safe_to_send=0": 768,
+          "safe_to_send=1": 544
+        },
+        "transport_ref": {
+          "transport_ref=get_fragment": 152,
+          "transport_ref=get_path": 152,
+          "transport_ref=get_query": 483,
+          "transport_ref=post_form": 221,
+          "transport_ref=unknown": 512
+        }
+      }
+    },
+    "max_length": 627,
+    "source_rows": 1832,
+    "slot_records": 21984,
+    "target_information_in_context": false,
+    "candidate_only": true
+  },
+  "slot_order": [
+    "question",
+    "ask_reason",
+    "next_action",
+    "repair_action",
+    "transport_ref",
+    "field_role_ref",
+    "encoding_ref",
+    "probe_variant_ref",
+    "safe_to_send",
+    "payload_shape_ref",
+    "oracle_ref",
+    "negative_control_presence_ref"
+  ],
+  "candidates": [
+    {
+      "seed": 36001,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 0.964706,
+          "ask_reason": 1.0,
+          "next_action": 0.835294,
+          "repair_action": 0.9,
+          "transport_ref": 0.864706,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.770588,
+          "safe_to_send": 0.9,
+          "payload_shape_ref": 0.708824,
+          "oracle_ref": 0.9,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 68,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.924595,
+        "post_predictive_entropy": 3.738906,
+        "relative_entropy_drop": 0.460054
+      }
+    },
+    {
+      "seed": 36002,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 0.964706,
+          "ask_reason": 1.0,
+          "next_action": 0.835294,
+          "repair_action": 0.9,
+          "transport_ref": 0.864706,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.808824,
+          "safe_to_send": 0.9,
+          "payload_shape_ref": 0.705882,
+          "oracle_ref": 0.9,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 68,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.924378,
+        "post_predictive_entropy": 3.533801,
+        "relative_entropy_drop": 0.489658
+      }
+    },
+    {
+      "seed": 36003,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 0.964706,
+          "ask_reason": 1.0,
+          "next_action": 0.835294,
+          "repair_action": 0.9,
+          "transport_ref": 0.864706,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.808824,
+          "safe_to_send": 0.805882,
+          "payload_shape_ref": 0.705882,
+          "oracle_ref": 0.935294,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 0.0,
+        "negative_false_allow": 0,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.925709,
+        "post_predictive_entropy": 3.789497,
+        "relative_entropy_drop": 0.452836
+      }
+    }
+  ],
+  "worst_seed": {
+    "max_relative_entropy_drop": 0.489658,
+    "entropy_gate_passed": false,
+    "ask_recall_min": 0.952381,
+    "repair_recall_min": 0.0,
+    "abstain_recall_min": 0.0,
+    "positive_action_recall_min": 0.666667,
+    "positive_recall_min": 0.0,
+    "negative_false_allow_max": 68,
+    "rule_ir_assembly_exact_min": 0.705882
+  },
+  "scientific_gate": {
+    "status": "blocked_candidate_only",
+    "raw_payload_in_context": false,
+    "typed_live_replay_with_model_selected_wire": false,
+    "independent_implementation": false,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "4c2ecb4bd4ef5a8ca5ab4b8c7b9aac7391bb01cf03f439aac6871c4bc9c3a5d6"
+}

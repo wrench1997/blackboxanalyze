@@ -1,0 +1,142 @@
+{
+  "schema_version": "pg-pk-36-delayed-maze-protocol-v1",
+  "protocol_id": "PG-36",
+  "title": "授权本地靶场延迟效果、歧义响应与安全 abstain",
+  "objective": "验证黑盒智能体是否能先走 screen，再在 belief 不确定时主动选择 confirm；只有 typed oracle 与匹配阴性对照同时成立才标记出口。",
+  "scope": {
+    "targets": ["127.0.0.1", "localhost", "workspace_authorized_docker_only"],
+    "methods": ["GET", "POST"],
+    "phases": ["screen", "confirm", "error", "timeout"],
+    "fresh_reset_per_control_and_candidate": true,
+    "external_network": false,
+    "credentials": false,
+    "state_mutation": false,
+    "real_sleep": false,
+    "raw_probe_or_response_persistence": false,
+    "destructive_actions": false
+  },
+  "fixture": {
+    "implementation": "app/pg36_independent_maze_fixture.py",
+    "collector": "scripts/run_pg36_independent_maze_catalog.py",
+    "catalog": "research/pg36_independent_maze_catalog_v1.json",
+    "trace": "research/pg36_independent_maze_trace_v1.json",
+    "route_layouts": ["north", "south"],
+    "seed_count": 3,
+    "family_count": 10,
+    "sample_count": 960,
+    "typed_positive_count": 96,
+    "negative_control_count": 864,
+    "delayed_confirm_count": 240,
+    "ambiguous_screen_count": 240,
+    "deterministic_error_count": 240,
+    "deterministic_timeout_count": 240,
+    "episode_count": 60,
+    "accepted_evaluation_episode_count": 48,
+    "unknown_or_ordinary_trace_only_count": 12
+  },
+  "maze_contract": {
+    "screen_is_ambiguous": true,
+    "confirm_is_the_only_positive_phase": true,
+    "error_and_timeout_are_negative_controls": true,
+    "typed_oracle_hidden_until_after_probe": true,
+    "negative_control_must_match_source_surface_phase_method": true,
+    "fresh_target_before_every_observation": true,
+    "stop_requires_typed_positive_and_negative_pair": true,
+    "unknown_surface_must_abstain": true,
+    "step_identity_includes_pair_role": true
+  },
+  "data_contract": {
+    "required_context": [
+      "http_method",
+      "route_template_id",
+      "phase",
+      "baseline_projection",
+      "response_projection",
+      "typed_oracle_projection",
+      "fresh_reset",
+      "negative_control_pair",
+      "evidence_sha256"
+    ],
+    "model_input_excludes": ["family", "positive", "positive_authority", "evaluator_state", "source_id", "target_instance_id", "evidence_sha256"],
+    "rule_ir_executable": false,
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "promotion_gate": {
+    "minimum_independent_seeds": 3,
+    "minimum_independent_source_hashes": 2,
+    "minimum_target_instances": 3,
+    "zero_negative_false_accept": true,
+    "known_family_typed_recall_gain_required": true,
+    "unknown_surface_strict_abstain": true,
+    "error_timeout_false_accept_zero": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "pending_active_model_run"
+  },
+  "engineering_correction": {
+    "initial_issue": "negative control/candidate share sample_role and caused duplicate trace step IDs",
+    "fix": "trace step identity now includes pair_role",
+    "invalid_trace_count_before_fix": 60,
+    "accepted_trace_count_after_fix": 48,
+    "regression_test_required": true
+  },
+  "active_belief_diagnostic": {
+    "script": "scripts/run_pg36_active_belief_diagnostic.py",
+    "report": "research/pg36_active_belief_diagnostic_v1.json",
+    "mode": "offline_projection_replay",
+    "checkpoint_source": "artifacts/pg35-source-transfer/pair_rule_ir.pt",
+    "fixed_policy": {
+      "typed_recall": 1.0,
+      "false_positive_rate": 0.0,
+      "mean_queries": 16.0,
+      "median_queries": 16.0
+    },
+    "active_policy": {
+      "typed_recall": 1.0,
+      "false_positive_rate": 0.0,
+      "mean_queries": 7.2,
+      "median_queries": 4.0
+    },
+    "typed_oracle_used_after_probe_for_stop_only": true,
+    "controller_is_upper_bound_diagnostic": true,
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "controller replays typed oracle for stopping and therefore does not prove learned active-probing capability"
+  },
+  "formal_candidate": {
+    "script": "scripts/train_pg36_formal_rule_ir_candidate.py",
+    "report": "research/pg36_formal_rule_ir_candidate_report_v1.json",
+    "checkpoint": "artifacts/pg36-formal-rule-ir-candidate/rule_ir.pt",
+    "training_rows": 128,
+    "training_split": "north implementation; train/dev roles; seeds 361,367",
+    "seed_holdout": "north implementation; train/dev roles; seed 373",
+    "family_holdout": "north implementation; logic and url_redirect",
+    "source_holdout": "south implementation; train/dev roles",
+    "unknown_abstain": "south implementation; ordinary_response and unknown_surface",
+    "typed_oracle_consumed_by_model": false,
+    "strict_results": {
+      "family_holdout_typed_recall": 0.0,
+      "ood_source_typed_recall": 0.0,
+      "source_holdout_typed_recall": 0.5,
+      "source_holdout_false_positive_rate": 0.0,
+      "unknown_false_positive_rate": 0.0
+    },
+    "capability_gate_status": "blocked",
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "failure_interpretation": "the candidate abstains safely on unseen families but has not learned family-general detection; source transfer is partial and cannot be promoted"
+  },
+  "failure_triage": {
+    "script": "scripts/run_pg36_formal_rule_ir_triage.py",
+    "report": "research/pg36_formal_rule_ir_triage_v1.json",
+    "classification": "experiment_problem",
+    "engineering_regression": false,
+    "model_change_authorized": false,
+    "checkpoint_promotion": false,
+    "memory_promotion": false,
+    "next_experiment": "PG-37 representation-gap ablation with paired response-shape counterfactuals"
+  },
+  "status": "capability_gate_failed_experiment_triage_complete_no_promotion"
+}

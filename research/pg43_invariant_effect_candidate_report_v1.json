@@ -1,0 +1,208 @@
+{
+  "protocol_id": "sift-pg43-invariant-effect-v1",
+  "schema_version": "pg-pk-43-invariant-effect-report-v1",
+  "status": "diagnostic_only",
+  "training_source": {
+    "catalog": "research\\pg37_counterfactual_catalog_v1.json",
+    "pair_count": 128,
+    "typed_oracle_consumed_by_model": false,
+    "pg42_used_for_training": false
+  },
+  "model": {
+    "class": "InvariantEffectModel",
+    "representation": "sign_binned_shape_delta_and_change_bits",
+    "invariant_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      18,
+      19
+    ],
+    "nuisance_dimensions_excluded": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "typed_oracle_consumed_by_model": false,
+    "family_agnostic": true,
+    "checkpoint": "artifacts\\pg43-invariant-effect\\invariant_effect.pt",
+    "checkpoint_sha256": "2a7d88cd68b8468b0545fca98a2c555425dcea43f27ec6b427133f502ec69776"
+  },
+  "training": {
+    "epochs": 320,
+    "seed": 20430802,
+    "device": "cuda",
+    "best_selection": 0.0,
+    "history_tail": [
+      {
+        "epoch": 160,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      },
+      {
+        "epoch": 200,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      },
+      {
+        "epoch": 240,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      },
+      {
+        "epoch": 280,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      },
+      {
+        "epoch": 320,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      }
+    ],
+    "novelty_threshold": 2.0
+  },
+  "pg37_splits": {
+    "train": {
+      "pair_count": 128,
+      "positive_count": 32,
+      "negative_count": 96,
+      "effect_accepted_count": 32,
+      "effect_recall_any_family": 1.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.75,
+      "mean_effect_probability": 0.25,
+      "mean_train_distance": 0.0,
+      "max_train_distance": 0.0
+    },
+    "seed_holdout": {
+      "pair_count": 64,
+      "positive_count": 16,
+      "negative_count": 48,
+      "effect_accepted_count": 16,
+      "effect_recall_any_family": 1.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.75,
+      "mean_effect_probability": 0.25,
+      "mean_train_distance": 0.0,
+      "max_train_distance": 0.0
+    },
+    "negative_control": {
+      "pair_count": 288,
+      "positive_count": 0,
+      "negative_count": 288,
+      "effect_accepted_count": 0,
+      "effect_recall_any_family": 0.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 1.0,
+      "mean_effect_probability": 0.0,
+      "mean_train_distance": 0.0,
+      "max_train_distance": 0.0
+    }
+  },
+  "pg42_splits": {
+    "train_role_diagnostic": {
+      "pair_count": 256,
+      "positive_count": 64,
+      "negative_count": 192,
+      "effect_accepted_count": 64,
+      "effect_recall_any_family": 1.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.75,
+      "mean_effect_probability": 0.25,
+      "mean_train_distance": 0.5,
+      "max_train_distance": 2.0
+    },
+    "dev_role": {
+      "pair_count": 320,
+      "positive_count": 80,
+      "negative_count": 240,
+      "effect_accepted_count": 80,
+      "effect_recall_any_family": 1.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.75,
+      "mean_effect_probability": 0.25,
+      "mean_train_distance": 0.5,
+      "max_train_distance": 2.0
+    },
+    "implementation_holdout": {
+      "pair_count": 576,
+      "positive_count": 144,
+      "negative_count": 432,
+      "effect_accepted_count": 144,
+      "effect_recall_any_family": 1.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.75,
+      "mean_effect_probability": 0.25,
+      "mean_train_distance": 0.5,
+      "max_train_distance": 2.0
+    },
+    "family_holdout": {
+      "pair_count": 144,
+      "positive_count": 36,
+      "negative_count": 108,
+      "effect_accepted_count": 36,
+      "effect_recall_any_family": 1.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 0.75,
+      "mean_effect_probability": 0.25,
+      "mean_train_distance": 0.5,
+      "max_train_distance": 2.0
+    },
+    "negative_control": {
+      "pair_count": 144,
+      "positive_count": 0,
+      "negative_count": 144,
+      "effect_accepted_count": 0,
+      "effect_recall_any_family": 0.0,
+      "effect_false_positive_count": 0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_rate": 1.0,
+      "mean_effect_probability": 0.0,
+      "mean_train_distance": 0.0,
+      "max_train_distance": 0.0
+    }
+  },
+  "candidate_effect_gate": {
+    "status": "passed",
+    "claim_allowed": false,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "status": "quarantined_candidate",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "manifest_sha256": "22d2a834bac7bdd5477951b7140938b0b02023bd5979edce54d5425b4850c756"
+}

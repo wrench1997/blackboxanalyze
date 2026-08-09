@@ -1,0 +1,40 @@
+{
+  "protocol_id": "pg-pk-166-surface-replay-adaptation-v1",
+  "schema_version": "pg166-surface-replay-adaptation-protocol-v1",
+  "base_checkpoint": "artifacts\\pg164-xxl-capacity-v1\\xxl_typed_mix.pt",
+  "surface_dataset": "research\\pg165_surface_attested_training_dataset_v1.json",
+  "strategies": {
+    "replay_anchored": {
+      "lr": 2e-05,
+      "epochs": 1,
+      "replay_rows": 10027
+    },
+    "surface_only": {
+      "lr": 0.0001,
+      "epochs": 1,
+      "rows": 28
+    }
+  },
+  "metrics": [
+    "base_holdout_perplexity",
+    "typed_holdout_perplexity",
+    "surface_effect_projection_perplexity",
+    "next_token_accuracy"
+  ],
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "attestation_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "98933af0c1044c15a67ef947039131feb0c7b64aae80942f0b4771db4d02cb19"
+}

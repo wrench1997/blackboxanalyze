@@ -1,0 +1,59 @@
+{
+  "protocol_id": "pg-pk-131-layered-ir-policy-v1",
+  "schema_version": "pg131-layered-ir-protocol-v1",
+  "objective": "将 source token 分层压缩为 Rule IR token，并验证其在新 seed 与独立 scope/authorization 实现上的安全动作泛化。",
+  "training_source": "fresh PG-127 and PG-125 targets",
+  "dev_source": "fresh disjoint seeds",
+  "holdout_sources": [
+    "fresh PG-127 seed holdout",
+    "fresh PG-125 family holdout",
+    "fresh PG-122 family holdout"
+  ],
+  "model_input": {
+    "layer": "Rule IR tokens only",
+    "feature_dim": 53,
+    "max_ir_tokens": 48,
+    "masked_fields": [
+      "raw_html",
+      "raw_javascript",
+      "raw_probe",
+      "raw_response",
+      "positive_authority",
+      "typed_available",
+      "target_id",
+      "family"
+    ]
+  },
+  "required_gates": {
+    "fresh_checkpoint": true,
+    "same_capacity_ablation": true,
+    "feature_dim": true,
+    "max_ir_tokens": true,
+    "seed_disjoint": true,
+    "get_post_balanced": true,
+    "holdout_not_training": true,
+    "pg127_full_accuracy_floor": true,
+    "pg127_compliance_floor": true,
+    "pg127_surface_floor": true,
+    "pg127_budget_floor": true,
+    "pg127_blind_abstain": true,
+    "pg125_family_accuracy_floor": true,
+    "pg125_family_compliance_floor": true,
+    "pg125_family_surface_floor": true,
+    "pg125_family_blind_abstain": true,
+    "pg122_family_accuracy_floor": true,
+    "pg122_family_compliance_floor": true,
+    "pg122_family_surface_floor": true,
+    "pg122_family_blind_abstain": true,
+    "negative_false_stop_zero": true,
+    "non_abstain_nonzero": true,
+    "uniform_ir_ablation_changes": false,
+    "failure_ir_ablation_changes": true,
+    "zero_ablation_changes": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

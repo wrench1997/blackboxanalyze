@@ -1,0 +1,189 @@
+{
+  "schema_version": "pg360-a800-slotwise-candidate-v1",
+  "status": "slotwise_candidate_only",
+  "gate": {
+    "schema_version": "pg360-a800-slotwise-candidate-v1-gate",
+    "status": "ready",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "dataset_candidate_only": true,
+      "audit_candidate_only": true,
+      "all_slots_present": true,
+      "vocabulary_locked": true,
+      "promotion_closed": true,
+      "hashes_locked": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "candidate_only": true,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "0ab13277aaaf2d6ba0c6ce42fb6c2f8e948f581172c80fd3318cb82aeca92863",
+    "audit": "3320a72853fcb5b05cbd8149a90276bdf0a670e27c872d9bba030a87697dbde0",
+    "rules": "df820316fabf9df895acaf7acc8b990f8a1ce0be99749dc751543ce0b6920f90",
+    "script": "4347c86c2cbcd1b72f9cf63cfa3c35686687c76a0ae24db0d51d7641e95ed951",
+    "model": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      36001,
+      36002,
+      36003
+    ],
+    "epochs": 1,
+    "learning_rate": 0.0002,
+    "batch_size": 128,
+    "target_weight": 8.0,
+    "context_weight": 0.25,
+    "max_length": 627,
+    "source_rows": 1832,
+    "slot_records": 21984,
+    "target_information_in_context": false,
+    "candidate_only": true
+  },
+  "slot_order": [
+    "question",
+    "ask_reason",
+    "next_action",
+    "repair_action",
+    "transport_ref",
+    "field_role_ref",
+    "encoding_ref",
+    "probe_variant_ref",
+    "safe_to_send",
+    "payload_shape_ref",
+    "oracle_ref",
+    "negative_control_presence_ref"
+  ],
+  "candidates": [
+    {
+      "seed": 36001,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 0.964706,
+          "ask_reason": 1.0,
+          "next_action": 0.835294,
+          "repair_action": 0.9,
+          "transport_ref": 0.705882,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.741176,
+          "safe_to_send": 0.805882,
+          "payload_shape_ref": 0.705882,
+          "oracle_ref": 0.9,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 0.0,
+        "negative_false_allow": 0,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.924292,
+        "post_predictive_entropy": 6.737286,
+        "relative_entropy_drop": 0.027007
+      }
+    },
+    {
+      "seed": 36002,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 0.964706,
+          "ask_reason": 1.0,
+          "next_action": 0.705882,
+          "repair_action": 0.9,
+          "transport_ref": 0.864706,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.741176,
+          "safe_to_send": 0.9,
+          "payload_shape_ref": 0.705882,
+          "oracle_ref": 0.9,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 68,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.924374,
+        "post_predictive_entropy": 6.698259,
+        "relative_entropy_drop": 0.032655
+      }
+    },
+    {
+      "seed": 36003,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 0.964706,
+          "ask_reason": 1.0,
+          "next_action": 0.835294,
+          "repair_action": 0.9,
+          "transport_ref": 0.864706,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.741176,
+          "safe_to_send": 0.858824,
+          "payload_shape_ref": 0.732353,
+          "oracle_ref": 0.9,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 0.515152,
+        "negative_false_allow": 32,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.924738,
+        "post_predictive_entropy": 6.758856,
+        "relative_entropy_drop": 0.023955
+      }
+    }
+  ],
+  "worst_seed": {
+    "max_relative_entropy_drop": 0.032655,
+    "entropy_gate_passed": true,
+    "ask_recall_min": 0.952381,
+    "repair_recall_min": 0.0,
+    "abstain_recall_min": 0.0,
+    "positive_action_recall_min": 0.0,
+    "positive_recall_min": 0.0,
+    "negative_false_allow_max": 68,
+    "rule_ir_assembly_exact_min": 0.705882
+  },
+  "scientific_gate": {
+    "status": "blocked_candidate_only",
+    "raw_payload_in_context": false,
+    "typed_live_replay_with_model_selected_wire": false,
+    "independent_implementation": false,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "84d56632f0644e1aec4bb79650ba2ad40d0089f50a784f560b81e4b5783f56c7"
+}

@@ -1,0 +1,30 @@
+{
+  "protocol_id": "pg-pk-261-masked-active-belief-capacity-v1",
+  "schema_version": "pg261-masked-active-belief-capacity-training-protocol-v1",
+  "frozen_legacy_policy": "artifacts\\pg249-pikachu-route-seed-capacity-v1\\frozen_xxl_capacity_hidden4096.pt",
+  "training_sources": [
+    "research\\pg258_unified_rule_ir_capacity_dataset_v1.json",
+    "research\\pg259_fresh_local_trace_collection_dataset_v1.json",
+    "research\\pg260_fresh_paired_trace_collection_dataset_v1.json"
+  ],
+  "capacity_variants": [
+    2048,
+    4096,
+    8192
+  ],
+  "heads": [
+    "next_token",
+    "rule_ir",
+    "family",
+    "belief",
+    "probe",
+    "unknown_family_abstain"
+  ],
+  "oracle_target_off_input": true,
+  "fresh_route_seed_holdout": true,
+  "implementation_ood": "pg246 VulnerableApp rows, separate score",
+  "promotion_blocked": true,
+  "raw_payload_and_response_excluded": true,
+  "protocol_sha256": "4eb0e5117db87076c04e55becb4b6ce2d32efbe84e0ccb298af4d03d15d9fb39",
+  "architecture_change": "mask-aware mean pooling over non-padding tokens"
+}

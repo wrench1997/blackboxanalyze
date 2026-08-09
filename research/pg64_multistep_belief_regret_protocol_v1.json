@@ -1,0 +1,35 @@
+{
+  "protocol_id": "pg-pk-64-multistep-belief-regret-v1",
+  "schema_version": "pg64-multistep-belief-regret-protocol-v1",
+  "objective": "验证观察差分→belief 后验→下一动作→typed oracle→regret 的多步链路，并与固定顺序基线对照。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "fixture_replay_only": true,
+    "state_mutation": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false
+  },
+  "input_contract": {
+    "pre_oracle_surface_projection_only": true,
+    "belief_uses_post_action_projection": true,
+    "typed_oracle_after_action_only": true,
+    "family_label_before_action_forbidden": true,
+    "raw_probe_response_forbidden": true
+  },
+  "required_gates": {
+    "multi_step_episode_rate_min": 0.5,
+    "target_recall_min": 0.8,
+    "negative_false_accept_zero": true,
+    "unknown_strict_abstain": true,
+    "fresh_reset_per_action": true,
+    "evidence_hash_per_action": true,
+    "counterfactual_regret_reported": true,
+    "fixed_order_baseline_required": true
+  },
+  "run_result": {
+    "status": "passed",
+    "active_target_recall": 1.0,
+    "active_mean_regret": 0.0
+  }
+}

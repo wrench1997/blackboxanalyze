@@ -1,0 +1,162 @@
+{
+  "protocol_id": "pg-pk-04-multidataset-memory-filter-v1",
+  "schema_version": "sift-pikachu-multidataset-memory-filter-report-v1",
+  "target_count": 3,
+  "dataset_count": 3,
+  "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+  "seeds": [
+    20260841,
+    20260847
+  ],
+  "seeds_per_target": 2,
+  "ledger_count": 126,
+  "targets": [
+    {
+      "dataset_id": "pikachu-dataset-8766",
+      "base_url": "http://127.0.0.1:8766",
+      "target_instance_id": "abdb609db1ce51897ef2a2474caf8120932acce89730ee430b4fea388efc4ef5",
+      "fresh_target": false
+    },
+    {
+      "dataset_id": "pikachu-dataset-8767",
+      "base_url": "http://127.0.0.1:8767",
+      "target_instance_id": "3314a1aadb3d2f0f16b98f0c098e8a0c1feac95d3dc3caa200ff9f2bcb4ba904",
+      "fresh_target": true
+    },
+    {
+      "dataset_id": "pikachu-dataset-8768",
+      "base_url": "http://127.0.0.1:8768",
+      "target_instance_id": "7c14d40e8aa3b07b8d12b6476b4d8390ee13bd285d695c0f3f0073a4315b4a5a",
+      "fresh_target": true
+    }
+  ],
+  "promotion": {
+    "xss::reflected_get": {
+      "schema_version": "sift-memory-promotion-gate-v1",
+      "rule_key": "xss::reflected_get",
+      "status": "promote",
+      "promote": true,
+      "reasons": [],
+      "requirements": {
+        "min_distinct_datasets": 3,
+        "min_sampling_seeds_per_dataset": 2,
+        "min_target_instances": 3,
+        "min_observations_per_dataset": 2,
+        "min_accepted_per_dataset": 1,
+        "max_false_positive_rate": 0.0,
+        "require_evidence_hash": true,
+        "require_local_only": true,
+        "require_oracle_revalidation": true
+      },
+      "summary": {
+        "evaluation_count": 24,
+        "distinct_dataset_count": 3,
+        "distinct_target_instance_count": 3,
+        "distinct_evidence_hash_count": 12
+      },
+      "per_dataset": {
+        "pikachu-dataset-8766": {
+          "observation_count": 8,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 8,
+          "reasons": []
+        },
+        "pikachu-dataset-8767": {
+          "observation_count": 8,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 8,
+          "reasons": []
+        },
+        "pikachu-dataset-8768": {
+          "observation_count": 8,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 8,
+          "reasons": []
+        }
+      }
+    },
+    "injection::sqli_str": {
+      "schema_version": "sift-memory-promotion-gate-v1",
+      "rule_key": "injection::sqli_str",
+      "status": "quarantine",
+      "promote": false,
+      "reasons": [
+        "pikachu-dataset-8766:insufficient_accepted_evidence",
+        "pikachu-dataset-8767:insufficient_accepted_evidence",
+        "pikachu-dataset-8768:insufficient_accepted_evidence"
+      ],
+      "requirements": {
+        "min_distinct_datasets": 3,
+        "min_sampling_seeds_per_dataset": 2,
+        "min_target_instances": 3,
+        "min_observations_per_dataset": 2,
+        "min_accepted_per_dataset": 1,
+        "max_false_positive_rate": 0.0,
+        "require_evidence_hash": true,
+        "require_local_only": true,
+        "require_oracle_revalidation": true
+      },
+      "summary": {
+        "evaluation_count": 18,
+        "distinct_dataset_count": 3,
+        "distinct_target_instance_count": 3,
+        "distinct_evidence_hash_count": 9
+      },
+      "per_dataset": {
+        "pikachu-dataset-8766": {
+          "observation_count": 6,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 0,
+          "reasons": [
+            "insufficient_accepted_evidence"
+          ]
+        },
+        "pikachu-dataset-8767": {
+          "observation_count": 6,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 0,
+          "reasons": [
+            "insufficient_accepted_evidence"
+          ]
+        },
+        "pikachu-dataset-8768": {
+          "observation_count": 6,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 0,
+          "reasons": [
+            "insufficient_accepted_evidence"
+          ]
+        }
+      }
+    }
+  },
+  "ledger_summary": {
+    "raw_response_stored": false,
+    "evaluator_state_visible": false,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "false_positive_is_evaluator_side": true
+  },
+  "loop_rule_path": "research\\loop_memory_promotion_rule_v1.json",
+  "elapsed_seconds": 38.45,
+  "report_path": "research\\pikachu_multidataset_memory_filter_v1.json"
+}

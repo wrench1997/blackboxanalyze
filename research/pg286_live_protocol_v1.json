@@ -1,0 +1,58 @@
+{
+  "protocol_id": "pg286-live-observation-collection-v1",
+  "schema_version": "pg286-live-observation-collection-protocol-v1",
+  "scope": {
+    "remote_host": "112.111.7.91:60228",
+    "authorization": "operator_allowlisted_remote_docker",
+    "loopback_or_private_container_only": true,
+    "external_network": false,
+    "cuda_visible_devices": "0"
+  },
+  "runner_contract": {
+    "request_methods": ["GET", "POST"],
+    "required_surface": ["surface_id", "method", "origin_relative_path", "channel", "source_attestation_sha256"],
+    "required_reset": ["fresh_target", "container_recreated", "container_restart_used", "volume_mount_count", "database_health_gate", "state_change_allowed"],
+    "required_projections": ["baseline", "reference", "negative", "candidate", "replay"],
+    "typed_modalities": ["dom_effect", "sql_ast_shape", "redirect_hop", "logic_transition", "result_shape"],
+    "field_input": "exact names accepted transiently; only coarse field_role tokens are persisted",
+    "raw_payload_or_response": false
+  },
+  "collection_gate": {
+    "remote_docker_available": true,
+    "typed_effect_confirmed": true,
+    "negative_control_clean": true,
+    "fresh_reset": true,
+    "reference_agreement": true,
+    "replay_consistent": true,
+    "evidence_hash": true,
+    "non_destructive": true,
+    "operator_reviewed": true,
+    "hard_negative": false
+  },
+  "promotion_contract": {
+    "single_record_training": false,
+    "single_record_memory_promotion": false,
+    "cross_seed_minimum": 3,
+    "get_and_post_required": true,
+    "family_holdout_required": true,
+    "hard_negative_false_allow": 0,
+    "independent_audit_required": true
+  },
+  "implementation": {
+    "collector": "app/pg286_live_collection.py",
+    "batch_gate": "app/pg286_live_batch.py",
+    "batch_audit": "research/pg286_live_batch_audit_v1.json",
+    "ingest_endpoint": "/api/maze/remote-docker/observation",
+    "tokenizer": "app/pg286_observation_tokens.py",
+    "evaluator_contract": "app/pg284_evaluator_contract.py",
+    "remote_adapter": "app/authorized_remote_docker.py"
+  },
+  "current_status": {
+    "remote_docker": "unavailable",
+    "live_records": 0,
+    "training_gold": 0,
+    "scientific_gate": "blocked"
+  },
+  "next_experiment": "PG-286-live-run：远程 Docker 恢复后，采集至少 3 个 fresh seed、同时覆盖 GET/POST 和未见 family，再运行 A800 GPU0 的 guarded wire-plan 训练。",
+  "protocol_sha256": "ec69bac89ee43e275ddbbbbd15971b053f1eecdd4465973ecca75460871df6cb"
+}

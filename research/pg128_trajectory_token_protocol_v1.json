@@ -1,0 +1,84 @@
+{
+  "protocol_id": "pg-pk-128-trajectory-token-v1",
+  "schema_version": "pg128-trajectory-token-protocol-v1",
+  "objective": "验证历史失败 token 按各自权重参与长上下文动作组装，且不引入 oracle 或表面泄漏。",
+  "training": {
+    "pg125_fresh_train_seeds": [
+      12521,
+      12523,
+      12525
+    ],
+    "pg127_long_train_seeds": [
+      12811,
+      12813,
+      12815
+    ],
+    "pg127_long_dev_seeds": [
+      12812,
+      12814,
+      12816
+    ],
+    "pg127_long_holdout_seeds": [
+      12801,
+      12803,
+      12805
+    ],
+    "holdout_never_in_training": true
+  },
+  "token_contract": {
+    "one_token_per_prefix_step": true,
+    "feature_dim": 19,
+    "max_tokens": 6,
+    "token_weights_normalized_per_prefix": true,
+    "weight_sources": [
+      "recency",
+      "failed_gate_focus",
+      "candidate_signal_focus",
+      "remaining_probe_budget"
+    ],
+    "future_token_mask": true,
+    "masked_fields": [
+      "positive_authority",
+      "typed_available",
+      "evidence_hash",
+      "raw_probe",
+      "raw_response",
+      "target_id",
+      "family"
+    ]
+  },
+  "evaluation": {
+    "required_methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_reset_per_action": true,
+    "six_step_long_horizon": true,
+    "positive_negative_unknown_surfaces": true,
+    "weighted_vs_uniform_token_ablation": true,
+    "zero_negative_false_stop": true,
+    "gates": {
+      "fresh_checkpoint": true,
+      "same_capacity_ablation": true,
+      "token_feature_dim": true,
+      "max_token_window": true,
+      "seed_disjoint": true,
+      "get_post_balanced": true,
+      "holdout_not_training": true,
+      "six_step_replay_accepted": true,
+      "full_accuracy_floor": true,
+      "full_compliance_floor": true,
+      "all_surface_accuracy_floor": true,
+      "budget_accuracy_floor": true,
+      "negative_false_stop_zero": true,
+      "full_non_abstain_nonzero": true,
+      "token_weight_ablation_changes_behavior": false,
+      "zero_ablation_changes_behavior": true,
+      "memory_promotion_forbidden": true
+    }
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

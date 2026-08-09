@@ -1,0 +1,63 @@
+{
+  "protocol_id": "pg-pk-132-open-source-ir-policy-v1",
+  "schema_version": "pg132-open-source-ir-protocol-v1",
+  "objective": "验证开源 tokenizer + Rule IR embedding 是否在不暴露 source/raw response 的情况下保持安全动作泛化。",
+  "training_source": "fresh PG-127 and PG-125 targets",
+  "dev_source": "fresh disjoint seeds",
+  "holdout_sources": [
+    "fresh PG-127 seed holdout",
+    "fresh PG-125 family holdout",
+    "fresh PG-122 family holdout"
+  ],
+  "model_input": {
+    "layer": "bounded Rule IR pair token IDs + scalar channel",
+    "max_ir_tokens": 48,
+    "scalar_dim": 4,
+    "masked_fields": [
+      "raw_html",
+      "raw_javascript",
+      "raw_probe",
+      "raw_response",
+      "positive_authority",
+      "typed_available",
+      "target_id",
+      "family"
+    ]
+  },
+  "required_gates": {
+    "fresh_checkpoint": true,
+    "same_capacity_ablation": true,
+    "open_source_tokenizer_present": true,
+    "fresh_embedding_explicitly_not_pretrained": true,
+    "token_window": true,
+    "scalar_dim": true,
+    "seed_disjoint": true,
+    "get_post_balanced": true,
+    "holdout_not_training": true,
+    "pg127_full_accuracy_floor": true,
+    "pg127_compliance_floor": true,
+    "pg127_surface_floor": true,
+    "pg127_budget_floor": true,
+    "pg127_blind_abstain": true,
+    "pg125_family_accuracy_floor": true,
+    "pg125_family_compliance_floor": true,
+    "pg125_family_surface_floor": true,
+    "pg125_family_blind_abstain": true,
+    "pg122_family_accuracy_floor": true,
+    "pg122_family_compliance_floor": true,
+    "pg122_family_surface_floor": true,
+    "pg122_family_blind_abstain": true,
+    "negative_false_stop_zero": true,
+    "non_abstain_nonzero": true,
+    "uniform_token_ablation_changes": false,
+    "failure_scalar_ablation_changes": false,
+    "token_embedding_ablation_changes": true,
+    "zero_ablation_changes": true,
+    "history_order_counterfactual_changes": false,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

@@ -1,0 +1,536 @@
+{
+  "experiment": "frontend-raw-semantics-rule-memory-gate",
+  "status": "completed",
+  "seed": 20260801,
+  "device": "cuda",
+  "checkpoint": "artifacts\\frontend-loop-06-raw-control-20260801\\tiny_rule_gpt.pt",
+  "model_parameters": 908546,
+  "learned_parameters_added_by_gate": 0,
+  "data": {
+    "programs": 1800,
+    "train_families": [
+      "authorization_or",
+      "markup_lexeme_primitive",
+      "numeric_boundary",
+      "string_suffix_primitive",
+      "substring_origin",
+      "truthiness_gate"
+    ],
+    "heldout_families": [
+      "dom_sink_injection",
+      "postmessage_origin"
+    ],
+    "target_family_examples_in_training": 0,
+    "feature_mode": "raw"
+  },
+  "results": {
+    "iid_neural": {
+      "accuracy": 0.839815,
+      "correct": 907,
+      "total": 1080,
+      "by_family": {
+        "numeric_boundary": 0.616667,
+        "substring_origin": 1.0,
+        "markup_lexeme_primitive": 0.9,
+        "string_suffix_primitive": 0.983333,
+        "truthiness_gate": 0.538889,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000921",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=47:1|input.age=45:0|input.age=44:0|input.age=90:1|input.age=46:1|input.age=43:0<RULEMEM>generic=input.age#gt=45|q=0|fit=6/6<QUERY>input.age=0<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001194",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.credits=-1,input.role=member:1|input.credits=2,input.role=owner:1|input.credits=0,input.role=member:0|input.credits=-1,input.role=owner:1|input.credits=2,input.role=guest:1|input.credits=0,input.role=guest:0|input.credits=-2,input.role=member:1|input.credits=-1,input.role=guest:1<RULEMEM>generic=(input.credits!=0)or(input.role==owner)|q=1|fit=8/8<QUERY>input.credits=2,input.role=member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000514",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.flags=18,input.role=member:1|input.flags=0,input.role=guest:0|input.flags=2,input.role=member:1|input.flags=-1,input.role=owner:1|input.flags=-1,input.role=guest:1|input.flags=-2,input.role=guest:1|input.flags=1,input.role=guest:1|input.flags=0,input.role=member:0<RULEMEM>generic=(input.flags!=0)or(input.role==owner)|q=1|fit=8/8<QUERY>input.flags=-1,input.role=member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000794",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.quota=-2,input.role=guest:1|input.quota=-1,input.role=root:1|input.quota=5,input.role=guest:1|input.quota=5,input.role=root:1|input.quota=0,input.role=member:0|input.quota=5,input.role=member:1|input.quota=0,input.role=guest:0|input.quota=-2,input.role=member:1<RULEMEM>generic=(input.quota!=0)or(input.role==root)|q=1|fit=8/8<QUERY>input.quota=-2,input.role=root<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000754",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.balance=0,input.role=admin:1|input.balance=0,input.role=member:0|input.balance=1,input.role=admin:1|input.balance=9,input.role=guest:1|input.balance=-2,input.role=admin:1|input.balance=-1,input.role=guest:1|input.balance=-2,input.role=guest:1|input.balance=0,input.role=guest:0<RULEMEM>generic=(input.balance!=0)or(input.role==admin)|q=1|fit=8/8<QUERY>input.balance=1,input.role=member<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001361",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=141:1|input.balance=139:0|input.balance=142:1|input.balance=280:1|input.balance=140:0|input.balance=0:0<RULEMEM>generic=input.balance#gt=140|q=0|fit=6/6<QUERY>input.balance=138<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001354",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.balance=2,input.role=root:1|input.balance=1,input.role=member:1|input.balance=0,input.role=guest:0|input.balance=-1,input.role=member:1|input.balance=2,input.role=guest:1|input.balance=0,input.role=member:0|input.balance=-2,input.role=guest:1|input.balance=0,input.role=root:1<RULEMEM>generic=(input.balance!=0)or(input.role==root)|q=1|fit=8/8<QUERY>input.balance=9,input.role=member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001274",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.quota=3,input.role=admin:1|input.quota=1,input.role=member:1|input.quota=-2,input.role=member:1|input.quota=-2,input.role=admin:1|input.quota=0,input.role=member:0|input.quota=3,input.role=guest:1|input.quota=0,input.role=guest:0|input.quota=-1,input.role=guest:1<RULEMEM>generic=(input.quota!=0)or(input.role==admin)|q=1|fit=8/8<QUERY>input.quota=-1,input.role=member<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001201",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=0:1|input.age=64:1|input.age=66:0|input.age=65:1|input.age=132:0|input.age=68:0<RULEMEM>generic=input.age#lt=66|q=0|fit=6/6<QUERY>input.age=67<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001634",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.balance=-2,input.role=guest:1|input.balance=0,input.role=member:0|input.balance=-1,input.role=guest:1|input.balance=2,input.role=owner:1|input.balance=1,input.role=owner:1|input.balance=0,input.role=guest:0|input.balance=2,input.role=guest:1|input.balance=1,input.role=guest:1<RULEMEM>generic=(input.balance!=0)or(input.role==owner)|q=1|fit=8/8<QUERY>input.balance=-2,input.role=member<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001568",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.message=<x-token></x-token>:1|input.message=<input value='x'>:1|input.message=<i>sample</i>:1|input.message=<section>node</section>:1|input.message=right > angle:0|input.message=sample:0|input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=<unfinished:0<RULEMEM><QUERY>input.message=<b>sample</b><ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=142:0|input.balance=0:1|input.balance=140:1|input.balance=143:0|input.balance=139:1|input.balance=282:0<RULEMEM>generic=input.balance#lt=142|q=1|fit=6/6<QUERY>input.balance=141<ANSWER>"
+        }
+      ]
+    },
+    "iid_gate": {
+      "accuracy": 0.95,
+      "correct": 1026,
+      "total": 1080,
+      "by_family": {
+        "numeric_boundary": 0.838889,
+        "substring_origin": 1.0,
+        "markup_lexeme_primitive": 0.9,
+        "string_suffix_primitive": 1.0,
+        "truthiness_gate": 0.961111,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001568",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.message=<x-token></x-token>:1|input.message=<input value='x'>:1|input.message=<i>sample</i>:1|input.message=<section>node</section>:1|input.message=right > angle:0|input.message=sample:0|input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=<unfinished:0<RULEMEM><QUERY>input.message=<b>sample</b><ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=142:0|input.balance=0:1|input.balance=140:1|input.balance=143:0|input.balance=139:1|input.balance=282:0<RULEMEM>generic=input.balance#lt=142|q=1|fit=6/6<QUERY>input.balance=141<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000241",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.retryCount=17:1|input.retryCount=36:0|input.retryCount=19:0|input.retryCount=20:0|input.retryCount=0:1|input.retryCount=16:1<RULEMEM>generic=input.retryCount#lt=19|q=1|fit=6/6<QUERY>input.retryCount=18<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000401",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.total=170:0|input.total=86:0|input.total=83:1|input.total=0:1|input.total=84:1|input.total=87:0<RULEMEM>generic=input.total#lt=86|q=1|fit=6/6<QUERY>input.total=85<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000048",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.message=right > angle:0|input.message=<input value='x'>:1|input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=<section>node</section>:1|input.message=alpha:0|input.message=<img src=x>:1|input.message=plain alpha:0|input.message=<x-token></x-token>:1<RULEMEM><QUERY>input.message=<b>alpha</b><ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000874",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.flags=2,input.role=member:1|input.flags=4,input.role=guest:1|input.flags=2,input.role=guest:1|input.flags=1,input.role=guest:1|input.flags=1,input.role=member:1|input.flags=0,input.role=guest:0|input.flags=-1,input.role=member:1|input.flags=-2,input.role=guest:1<RULEMEM>generic=(input.flags!=0)or(input.role==member)|q=1|fit=8/8<QUERY>input.flags=0,input.role=member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000994",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.retries=0,input.role=member:0|input.retries=17,input.role=member:1|input.retries=-1,input.role=member:1|input.retries=1,input.role=admin:1|input.retries=-1,input.role=admin:1|input.retries=17,input.role=admin:1|input.retries=-1,input.role=guest:1|input.retries=2,input.role=guest:1<RULEMEM>generic=(input.retries!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.retries=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000361",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=448:0|input.balance=225:0|input.balance=0:1|input.balance=222:1|input.balance=223:1|input.balance=226:0<RULEMEM>generic=input.balance#lt=225|q=1|fit=6/6<QUERY>input.balance=224<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000841",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=0:1|input.balance=118:0|input.balance=60:0|input.balance=57:1|input.balance=61:0|input.balance=58:1<RULEMEM>generic=input.balance#lt=60|q=1|fit=6/6<QUERY>input.balance=59<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001674",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.flags=1,input.role=guest:1|input.flags=9,input.role=admin:1|input.flags=1,input.role=admin:1|input.flags=0,input.role=member:0|input.flags=9,input.role=member:1|input.flags=-2,input.role=admin:1|input.flags=9,input.role=guest:1|input.flags=-1,input.role=admin:1<RULEMEM>generic=(input.flags!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.flags=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001368",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.message=plain beta:0|input.message=2 < 3 and 5 > 4:0|input.message=<x-token></x-token>:1|input.message=<input value='x'>:1|input.message=<b>beta</b>:1|input.message=beta:0|input.message=<i>beta</i>:1|input.message=&lt;i&gt;encoded&lt;/i&gt;:0<RULEMEM><QUERY>input.message=<img src=x><ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000121",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=44:1|input.balance=41:0|input.balance=0:0|input.balance=45:1|input.balance=42:0|input.balance=86:1<RULEMEM>generic=input.balance#gt=42|q=1|fit=6/6<QUERY>input.balance=43<ANSWER>"
+        }
+      ]
+    },
+    "holdout_neural": {
+      "accuracy": 0.772222,
+      "correct": 1390,
+      "total": 1800,
+      "by_family": {
+        "postmessage_origin": 0.937778,
+        "dom_sink_injection": 0.606667
+      },
+      "failures": [
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001126",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=<b>notice</b>:1|input.payload=javascript:alert(1):0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=plain notice:0|input.payload=<template>fragment</template>:1|input.payload=<not-closed:0|input.payload=<img src=x>:1|input.payload=</p><section>injected</section><p>:1<RULEMEM><QUERY>input.payload=<a href='/local'>link</a><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001742",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<a href='/local'>link</a>:1|input.payload=no markup here:0|input.payload=<not-closed:0|input.payload=2 < 3 and 5 > 4:0|input.payload=<span data-marker='probe'>x</span>:1|input.payload=<b>probe</b>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=x & y:0<RULEMEM><QUERY>input.payload={{template}}<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001766",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=javascript:alert(1):0|input.payload=x & y:0|input.payload=<span data-marker='profile'>x</span>:1|input.payload=<not-closed:0|input.payload=<input value='probe'>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=<template>fragment</template>:1|input.payload={{template}}:0<RULEMEM><QUERY>input.payload=&lt;b&gt;encoded&lt;/b&gt;<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000158",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload={{template}}:0|input.payload=<template>fragment</template>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=<span data-marker='profile'>x</span>:1|input.payload=no markup here:0|input.payload=2 < 3 and 5 > 4:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=x & y:0<RULEMEM><QUERY>input.payload=plain profile<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001478",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=<math><mtext>node</mtext></math>:1|input.payload=x & y:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<img src=x>:1|input.payload=no markup here:0|input.payload=<svg><title>x</title></svg>:1|input.payload=hello world:0|input.payload=plain notice:0<RULEMEM><QUERY>input.payload=<span data-marker='notice'>x</span><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000942",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=no markup here:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<not-closed:0|input.payload=hello world:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<svg><title>x</title></svg>:1|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<a href='/local'>link</a>:1<RULEMEM><QUERY>input.payload=angle > only<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000190",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<svg><title>x</title></svg>:1|input.payload=<span data-marker='notice'>x</span>:1|input.payload=<template>fragment</template>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=angle > only:0|input.payload=<not-closed:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=x & y:0<RULEMEM><QUERY>input.payload=plain notice<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000054",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=no markup here:0|input.payload=javascript:alert(1):0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<b>message</b>:1|input.payload=plain message:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<img src=x>:1<RULEMEM><QUERY>input.payload=angle > only<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000734",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=x & y:0|input.payload=<not-closed:0|input.payload=<input value='probe'>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=<math><mtext>node</mtext></math>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=</p><section>injected</section><p>:1|input.payload=plain message:0<RULEMEM><QUERY>input.payload=2 < 3 and 5 > 4<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001542",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<img src=x>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=javascript:alert(1):0|input.payload=<b>profile</b>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=angle > only:0|input.payload=<template>fragment</template>:1|input.payload=x & y:0<RULEMEM><QUERY>input.payload=no markup here<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001126",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=2 < 3 and 5 > 4:0|input.payload=<b>notice</b>:1|input.payload={{template}}:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<not-closed:0|input.payload=angle > only:0|input.payload=<template>fragment</template>:1|input.payload=<a href='/local'>link</a>:1<RULEMEM><QUERY>input.payload=hello world<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001190",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=hello world:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<a href='/local'>link</a>:1|input.payload=x & y:0|input.payload=javascript:alert(1):0|input.payload=<span data-marker='probe'>x</span>:1|input.payload=<math><mtext>node</mtext></math>:1<RULEMEM><QUERY>input.payload=plain probe<ANSWER>"
+        }
+      ]
+    },
+    "holdout_gate": {
+      "accuracy": 0.803333,
+      "correct": 1446,
+      "total": 1800,
+      "by_family": {
+        "postmessage_origin": 1.0,
+        "dom_sink_injection": 0.606667
+      },
+      "failures": [
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001126",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=<b>notice</b>:1|input.payload=javascript:alert(1):0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=plain notice:0|input.payload=<template>fragment</template>:1|input.payload=<not-closed:0|input.payload=<img src=x>:1|input.payload=</p><section>injected</section><p>:1<RULEMEM><QUERY>input.payload=<a href='/local'>link</a><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001742",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<a href='/local'>link</a>:1|input.payload=no markup here:0|input.payload=<not-closed:0|input.payload=2 < 3 and 5 > 4:0|input.payload=<span data-marker='probe'>x</span>:1|input.payload=<b>probe</b>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=x & y:0<RULEMEM><QUERY>input.payload={{template}}<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001766",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=javascript:alert(1):0|input.payload=x & y:0|input.payload=<span data-marker='profile'>x</span>:1|input.payload=<not-closed:0|input.payload=<input value='probe'>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=<template>fragment</template>:1|input.payload={{template}}:0<RULEMEM><QUERY>input.payload=&lt;b&gt;encoded&lt;/b&gt;<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000158",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload={{template}}:0|input.payload=<template>fragment</template>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=<span data-marker='profile'>x</span>:1|input.payload=no markup here:0|input.payload=2 < 3 and 5 > 4:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=x & y:0<RULEMEM><QUERY>input.payload=plain profile<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001478",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=<math><mtext>node</mtext></math>:1|input.payload=x & y:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<img src=x>:1|input.payload=no markup here:0|input.payload=<svg><title>x</title></svg>:1|input.payload=hello world:0|input.payload=plain notice:0<RULEMEM><QUERY>input.payload=<span data-marker='notice'>x</span><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000942",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=no markup here:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<not-closed:0|input.payload=hello world:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<svg><title>x</title></svg>:1|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<a href='/local'>link</a>:1<RULEMEM><QUERY>input.payload=angle > only<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000190",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<svg><title>x</title></svg>:1|input.payload=<span data-marker='notice'>x</span>:1|input.payload=<template>fragment</template>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=angle > only:0|input.payload=<not-closed:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=x & y:0<RULEMEM><QUERY>input.payload=plain notice<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000054",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=no markup here:0|input.payload=javascript:alert(1):0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<b>message</b>:1|input.payload=plain message:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<img src=x>:1<RULEMEM><QUERY>input.payload=angle > only<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000734",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=x & y:0|input.payload=<not-closed:0|input.payload=<input value='probe'>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=<math><mtext>node</mtext></math>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=</p><section>injected</section><p>:1|input.payload=plain message:0<RULEMEM><QUERY>input.payload=2 < 3 and 5 > 4<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001542",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<img src=x>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=javascript:alert(1):0|input.payload=<b>profile</b>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=angle > only:0|input.payload=<template>fragment</template>:1|input.payload=x & y:0<RULEMEM><QUERY>input.payload=no markup here<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001126",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=2 < 3 and 5 > 4:0|input.payload=<b>notice</b>:1|input.payload={{template}}:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<not-closed:0|input.payload=angle > only:0|input.payload=<template>fragment</template>:1|input.payload=<a href='/local'>link</a>:1<RULEMEM><QUERY>input.payload=hello world<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001190",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=hello world:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<a href='/local'>link</a>:1|input.payload=x & y:0|input.payload=javascript:alert(1):0|input.payload=<span data-marker='probe'>x</span>:1|input.payload=<math><mtext>node</mtext></math>:1<RULEMEM><QUERY>input.payload=plain probe<ANSWER>"
+        }
+      ]
+    },
+    "holdout_no_memory": {
+      "accuracy": 0.695556,
+      "correct": 1252,
+      "total": 1800,
+      "by_family": {
+        "postmessage_origin": 0.591111,
+        "dom_sink_injection": 0.8
+      },
+      "failures": [
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001597",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://example.test:0|input.origin=https://portal.test-attacker.test:0|input.origin=https://evilportal.test:1|input.origin=https://evil.test:0|input.origin=https://not-portal.test:1|input.origin=http://localhost:0|input.origin=chrome-extension://portal.test:1|input.origin=ftp://portal.test:1<RULEMEM>input.origin#suffix=portal.test|q=1|fit=8/8<QUERY>input.origin=https://sub.portal.test<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000269",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=http://trusted.com:1|input.origin=https://example.test:0|input.origin=https://not-trusted.com:1|input.origin=http://localhost:0|input.origin=https://trusted.com.evil.test:0|input.origin=https://evil.test:0|input.origin=ftp://trusted.com:1|input.origin=wss://trusted.com:1<RULEMEM>input.origin#suffix=trusted.com|q=1|fit=8/8<QUERY>input.origin=https://evil.test/trusted.com<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001126",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=<b>notice</b>:1|input.payload=javascript:alert(1):0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=plain notice:0|input.payload=<template>fragment</template>:1|input.payload=<not-closed:0|input.payload=<img src=x>:1|input.payload=</p><section>injected</section><p>:1<RULEMEM><QUERY>input.payload=<a href='/local'>link</a><ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001029",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.origin=https://portal.test.evil.test:0|input.origin=https://portal.test:1|input.origin=chrome-extension://portal.test:1|input.origin=https://example.test:0|input.origin=https://evil.test:0|input.origin=https://evil.test/portal.test:1|input.origin=wss://portal.test:1|input.origin=http://localhost:0<RULEMEM>input.origin#suffix=portal.test|q=0|fit=8/8<QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000134",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=</p><section>injected</section><p>:1|input.payload=plain notice:0|input.payload=javascript:alert(1):0|input.payload=<template>fragment</template>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=hello world:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload={{template}}:0<RULEMEM><QUERY>input.payload=<a href='/local'>link</a><ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001453",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://safe.local.evil.test:0|input.origin=https://not-safe.local:1|input.origin=https://evil.test/safe.local:1|input.origin=https://evil.test:0|input.origin=null:0|input.origin=http://safe.local:1|input.origin=http://localhost:0|input.origin=https://evilsafe.local:1<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=https://safe.local<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000958",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=javascript:alert(1):0|input.payload=plain profile:0|input.payload=<svg><title>x</title></svg>:1|input.payload=<input value='probe'>:1|input.payload=no markup here:0|input.payload=</p><section>injected</section><p>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0<RULEMEM><QUERY>input.payload=<span data-marker='profile'>x</span><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000630",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=angle > only:0|input.payload=x & y:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<template>fragment</template>:1|input.payload=plain message:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<input value='probe'>:1|input.payload=hello world:0<RULEMEM><QUERY>input.payload=<a href='/local'>link</a><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001662",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=javascript:alert(1):0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<template>fragment</template>:1|input.payload=2 < 3 and 5 > 4:0|input.payload=<img src=x>:1|input.payload=hello world:0|input.payload=<not-closed:0<RULEMEM><QUERY>input.payload=<a href='/local'>link</a><ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000757",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://sub.safe.local:1|input.origin=https://evil.test/safe.local:1|input.origin=null:0|input.origin=ftp://safe.local:1|input.origin=https://example.test:0|input.origin=https://evil.test:0|input.origin=https://safe.local.evil.test:0|input.origin=http://safe.local:1<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=https://deep.sub.safe.local<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001557",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://account.internal:1|input.origin=https://evilaccount.internal:1|input.origin=https://sub.account.internal:1|input.origin=ftp://account.internal:1|input.origin=http://localhost:0|input.origin=null:0|input.origin=https://account.internal.evil.test:0|input.origin=https://example.test:0<RULEMEM>input.origin#suffix=account.internal|q=1|fit=8/8<QUERY>input.origin=https://not-account.internal<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001101",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://sub.safe.local:1|input.origin=https://example.test:0|input.origin=https://evilsafe.local:1|input.origin=https://safe.local:1|input.origin=https://deep.sub.safe.local:1|input.origin=null:0|input.origin=https://safe.local-attacker.test:0|input.origin=https://evil.test:0<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=chrome-extension://safe.local<ANSWER>"
+        }
+      ]
+    },
+    "gate_delta": 0.031111,
+    "memory_delta": 0.107777,
+    "counterexample_at_k": {
+      "k": 10,
+      "score": 1.0,
+      "successful_programs": 450,
+      "total_programs": 450,
+      "by_family": {
+        "postmessage_origin": 1.0,
+        "dom_sink_injection": 1.0
+      },
+      "top1": 0.862222,
+      "random_top1": 0.53125,
+      "top1_lift": 0.330972,
+      "precision_at_k": 0.748,
+      "random_precision_at_k": 0.53125,
+      "random_success_at_k": 0.999997,
+      "metric_warning": "Counterexample@K is non-discriminative when the random success baseline is near one.",
+      "policy_visibility": "declared intended output is visible only to the verifier, not to the behavior model"
+    }
+  },
+  "guardrails": {
+    "source_rule_ir_cwe_or_target_label_visible": false,
+    "gate_requires_context_fit": 0.75,
+    "same_frozen_checkpoint_for_gate_ablation": true
+  }
+}

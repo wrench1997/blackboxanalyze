@@ -1,0 +1,40 @@
+{
+  "protocol_id": "pg-pk-08-surface-role-calibration-v1",
+  "objective": "Train and calibrate a generic surface-role head so family-specific oracle revalidation can preserve positive recall without accepting unrelated reflection surfaces.",
+  "input_contract": {
+    "visible": ["content_type_class", "status_class", "html_tag_count", "html_attribute_count", "script_count", "json_field_count", "response_header_count", "body_length", "body_length_delta_abs"],
+    "excluded": ["family", "surface_role", "expected_oracle", "marker_in_attribute", "marker_in_html_text", "marker_in_json_value", "marker_in_header", "source_id", "evaluator_state", "raw_body"]
+  },
+  "roles": ["reflected_attribute", "reflected_text", "json_echo", "header_echo", "plain_control"],
+  "training": {
+    "seed": 20260851,
+    "fresh_seeds": [20260857, 20260861, 20260867],
+    "examples_per_role": 500,
+    "device_policy": "cuda when available",
+    "source": "bounded synthetic shape curriculum only"
+  },
+  "calibration": {
+    "minimum_precision": 0.99,
+    "threshold_is_fitted_on_validation_only": true,
+    "positive_gate_requires_role_and_confidence": true
+  },
+  "cross_target_eval": {
+    "target": "http://127.0.0.1:8791",
+    "fresh_target_required": true,
+    "same_source_hash_is_not_positive_evidence": true,
+    "surface_oracle_still_required": true
+  },
+  "acceptance": {
+    "fresh_min_accuracy": 0.90,
+    "positive_attribute_recall_min": 0.90,
+    "non_attribute_positive_accept_rate_max": 0.05,
+    "otherwise": "diagnostic_only_and_abstain"
+  },
+  "safety": {
+    "local_only": true,
+    "get_only": true,
+    "no_script_execution": true,
+    "no_external_callbacks": true,
+    "no_database_write": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "protocol_id": "pg-pk-137-transfer-strategies-v1",
+  "schema_version": "pg137-transfer-strategies-protocol-v1",
+  "objective": "比较 causal next-token 预训练后的四种动作迁移策略，并要求族外 action gain、raw/guarded safety 与 unknown abstain 分开验收。",
+  "strategies": [
+    {
+      "name": "scratch",
+      "pretrained": false,
+      "freeze_causal_body": false,
+      "body_learning_rate": 0.002,
+      "action_learning_rate": 0.002,
+      "lm_loss_weight": 0.0
+    },
+    {
+      "name": "frozen_body",
+      "pretrained": true,
+      "freeze_causal_body": true,
+      "body_learning_rate": 0.0,
+      "action_learning_rate": 0.002,
+      "lm_loss_weight": 0.0
+    },
+    {
+      "name": "low_lr_full",
+      "pretrained": true,
+      "freeze_causal_body": false,
+      "body_learning_rate": 0.0002,
+      "action_learning_rate": 0.002,
+      "lm_loss_weight": 0.0
+    },
+    {
+      "name": "joint_lm_action",
+      "pretrained": true,
+      "freeze_causal_body": false,
+      "body_learning_rate": 0.0002,
+      "action_learning_rate": 0.002,
+      "lm_loss_weight": 0.25
+    }
+  ],
+  "required_gates": {
+    "fresh_replay": true,
+    "strategies_complete": true,
+    "causal_lm_dev_finite": true,
+    "causal_lm_better_than_uniform": true,
+    "exact_get_post_balance": true,
+    "selected_safety_known_families": false,
+    "selected_safety_pg122_guarded": true,
+    "selected_unknown_all_steps_abstain": true,
+    "selected_negative_false_stop_zero": true,
+    "raw_and_guarded_metrics_preserved": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion_gates": {
+    "two_unseen_set_action_gain": false,
+    "cross_implementation_review_complete": false
+  },
+  "promotion": {
+    "hard_gates_passed": false,
+    "training_eligible": false,
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "pg168-discriminative-slot-report-v1",
+  "protocol_id": "pg-pk-168-discriminative-slot-v1",
+  "status": "completed_pg168_discriminative_slot_augmentation",
+  "scope": {
+    "claim": "abstract Rule-IR slot information and OOD collision diagnostic",
+    "real_vulnerability_scanner_claim_allowed": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "slot_train_count": 8000,
+    "slot_dev_count": 1000,
+    "slot_ood_count": 1000,
+    "replay_train_count": 9999,
+    "augmented_train_count": 17999,
+    "projection_overlap_dev_ood": 0
+  },
+  "baseline": {
+    "base_holdout": {
+      "loss": 0.94460476,
+      "perplexity": 2.5717967,
+      "next_token_accuracy": 0.52225226,
+      "token_count": 82868
+    },
+    "typed_holdout": {
+      "loss": 0.37398688,
+      "perplexity": 1.45351808,
+      "next_token_accuracy": 0.83348866,
+      "token_count": 6438
+    },
+    "slot_dev": {
+      "loss": 5.88070403,
+      "perplexity": 358.06123715,
+      "next_token_accuracy": 0.15008333,
+      "token_count": 24000
+    },
+    "slot_ood": {
+      "loss": 5.97526284,
+      "perplexity": 393.57153495,
+      "next_token_accuracy": 0.14820833,
+      "token_count": 24000
+    }
+  },
+  "variants": {
+    "replay_only": {
+      "strategy": "replay_only",
+      "train_row_count": 9999,
+      "train_loss": 0.92276957,
+      "base_holdout": {
+        "loss": 0.93949607,
+        "perplexity": 2.55869169,
+        "next_token_accuracy": 0.52047835,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.38923938,
+        "perplexity": 1.4758578,
+        "next_token_accuracy": 0.8415657,
+        "token_count": 6438
+      },
+      "slot_dev": {
+        "loss": 6.03588233,
+        "perplexity": 418.16761058,
+        "next_token_accuracy": 0.13745833,
+        "token_count": 24000
+      },
+      "slot_ood": {
+        "loss": 6.155499,
+        "perplexity": 471.30196493,
+        "next_token_accuracy": 0.135,
+        "token_count": 24000
+      },
+      "elapsed_seconds": 166.491,
+      "checkpoint": "artifacts\\pg168-discriminative-slot-augmentation-v1\\replay_only.pt"
+    },
+    "slot_augmented": {
+      "strategy": "slot_augmented",
+      "train_row_count": 17999,
+      "train_loss": 0.88065892,
+      "base_holdout": {
+        "loss": 0.95121138,
+        "perplexity": 2.58884384,
+        "next_token_accuracy": 0.52203504,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.41035209,
+        "perplexity": 1.50734842,
+        "next_token_accuracy": 0.83473128,
+        "token_count": 6438
+      },
+      "slot_dev": {
+        "loss": 0.66423017,
+        "perplexity": 1.94299417,
+        "next_token_accuracy": 0.687625,
+        "token_count": 24000
+      },
+      "slot_ood": {
+        "loss": 0.86717943,
+        "perplexity": 2.38018788,
+        "next_token_accuracy": 0.67708333,
+        "token_count": 24000
+      },
+      "elapsed_seconds": 261.592,
+      "checkpoint": "artifacts\\pg168-discriminative-slot-augmentation-v1\\slot_augmented.pt"
+    }
+  },
+  "interpretation": {
+    "slot_ood_projection_isolated": true,
+    "vulnerability_claim_allowed": false,
+    "promotion_allowed": false,
+    "next_token_lm_only": true
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "source": {
+    "checkpoint_sha256": "d88aeeea13e5325e4bd632f0a05289792089ce3a90d78e2e8e21b811e1ee993e",
+    "base_dataset_sha256": "8edda7ad0e9db70ca6fa00f3ee892e77f7fe68ee6dcb909c032e4eaff4453d30",
+    "slot_dataset_sha256": "af5580681b101d275aecdae36a76536fb95dc759f27aba6d019c48420a10e72f"
+  },
+  "report_sha256": "ebd7ca0892b0d724588cc92acfc506907b0ead5b2e6ed3012850acabca795bb8"
+}

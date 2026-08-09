@@ -1,0 +1,47 @@
+{
+  "schema_version": "sift-experiment-iteration-v1",
+  "parent_experiment": "frontend-structured-semantics-loop-01",
+  "iteration": 4,
+  "registered_before_iteration_04_results": true,
+  "observed_failure": {
+    "raw_meta_holdout_accuracy": 0.498333,
+    "compact_meta_holdout_accuracy": 0.434583,
+    "counterexample_top1_lift_raw_meta": 0.02875,
+    "counterexample_top1_lift_compact_meta": -0.224583
+  },
+  "root_cause_hypothesis": {
+    "layer": "data_coverage_or_label",
+    "claim": "Training contains no suffix-matching or markup-parser primitive. Meta-label permutation cannot induce operations that are absent from the curriculum.",
+    "capacity_change_supported": false
+  },
+  "minimal_change": {
+    "new_training_families": [
+      "string_suffix_primitive",
+      "markup_lexeme_primitive"
+    ],
+    "heldout_families_unchanged": [
+      "postmessage_origin",
+      "dom_sink_injection"
+    ],
+    "target_family_examples_in_training": 0,
+    "program_count": 1800,
+    "model_change": false,
+    "meta_label_permutation": false,
+    "reason": "Teach language-neutral primitives on non-security surfaces, then test transfer to unseen vulnerability families."
+  },
+  "fair_ablation": [
+    "raw trace with primitive curriculum",
+    "compact semantic trace with identical primitive curriculum"
+  ],
+  "unchanged_primary_success_criteria": {
+    "postmessage_origin_behavior_agreement_min": 0.85,
+    "dom_sink_injection_behavior_agreement_min": 0.85,
+    "counterexample_at_10_min": 0.8,
+    "old_family_regression_max_absolute": 0.02,
+    "required_independent_seeds": 3
+  },
+  "diagnostic_guardrail": {
+    "counterexample_top1_lift_over_random_min": 0.15,
+    "target_family_source_rule_ir_cwe_or_labels_visible": false
+  }
+}

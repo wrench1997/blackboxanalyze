@@ -1,0 +1,70 @@
+{
+  "protocol_id": "pg-pk-160-hierarchical-lr-early-stop-v1",
+  "schema_version": "pg160-hierarchical-lr-early-stop-protocol-v1",
+  "objective": "hierarchical_body_adapter_learning_rate_dev_risk_early_stop",
+  "variants": [
+    {
+      "name": "shared_adapter_source",
+      "config": {
+        "freeze_body": true,
+        "head_lr": 0.0,
+        "body_lr": 0.0,
+        "max_epochs": 0,
+        "early_stop": false
+      }
+    },
+    {
+      "name": "adapter_only_2e",
+      "config": {
+        "freeze_body": true,
+        "head_lr": 0.0001,
+        "body_lr": 0.0,
+        "max_epochs": 2,
+        "early_stop": false
+      }
+    },
+    {
+      "name": "body_lr_1e5_2e",
+      "config": {
+        "freeze_body": false,
+        "head_lr": 0.0001,
+        "body_lr": 1e-05,
+        "max_epochs": 2,
+        "early_stop": false
+      }
+    },
+    {
+      "name": "body_lr_3e5_early",
+      "config": {
+        "freeze_body": false,
+        "head_lr": 0.0001,
+        "body_lr": 3e-05,
+        "max_epochs": 3,
+        "early_stop": true
+      }
+    }
+  ],
+  "source_checkpoint": "PG-159 shared_adapter_256",
+  "learning_rate_groups": {
+    "body": "1e-5 or 3e-5",
+    "adapter_action_family_heads": "1e-4",
+    "frozen_body_control": true
+  },
+  "early_stop": {
+    "selection_metric": "dev calibrated zero-false-stop lexicographic coverage/selective_accuracy",
+    "patience": 1,
+    "holdout_used": false
+  },
+  "loss": {
+    "lm_weight": 0.5,
+    "surface_weight": 0.5,
+    "adversarial_weight": 0.05,
+    "false_stop_weight": 0.2,
+    "unknown_weight": 0.2
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  }
+}

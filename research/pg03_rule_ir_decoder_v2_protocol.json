@@ -1,0 +1,50 @@
+{
+  "protocol_id": "sift-pg03-rule-ir-decoder-v2",
+  "version": "1.0",
+  "purpose": "在 PG-03 Catalog 上训练更强的双视图 Rule IR 解码基线，并用 fail-closed 支持门减少小样本族外误报。",
+  "input_contract": {
+    "catalog": "research/payload_replay_catalog_v1.json",
+    "feature_dim": 256,
+    "surface_slice": "145:189",
+    "excluded_labels": ["family", "source_id", "semantic", "evaluator", "rule_ir", "raw_body"],
+    "projection_label_leak_check": true
+  },
+  "model": {
+    "class": "CatalogRuleIRDecoderV2",
+    "architecture": "surface/context two-tower -> gated fusion -> 96-d embedding -> 5-way classifier",
+    "grammar_constrained_output": true,
+    "augmentation": "five noisy views per training row",
+    "contrastive_objective": "same-family view attraction with temperature 0.15"
+  },
+  "decision_policy": {
+    "confidence_floor": 0.25,
+    "top2_margin_floor": 0.08,
+    "novelty_gate": "nearest normalized training trace distance",
+    "minimum_family_support": 2,
+    "support_gate_action": "force abstain if predicted family has fewer than two training rows",
+    "rule_ir_emission": "only after confidence, margin, novelty, support and grammar gates pass"
+  },
+  "splits": {
+    "source_split_same_family": "source suffix a trains, suffix b tests",
+    "family_holdout_structural_transfer": "xss/injection/access_control train; url_redirect/logic test",
+    "family_holdout_unseen_surface": "xss/injection train; access_control/logic/url_redirect test on unseen HTTP-canary surface"
+  },
+  "interpretation": {
+    "exit_found": "predicted family equals local maze semantic family and a valid Rule IR is emitted",
+    "false_positive": "non-abstained predicted family differs from local maze semantic family",
+    "abstain": "confidence/margin/novelty/support gate blocks emission",
+    "evaluator_confirmation": false,
+    "independent_target_implementation": false
+  },
+  "safety": {
+    "local_only": true,
+    "external_network": false,
+    "read_only_get_probes_only": true,
+    "fresh_reset_per_sample": true,
+    "raw_body_stored": false,
+    "public_corpus_ingested": false
+  },
+  "runner": "scripts/train_pg03_rule_ir_decoder_v2.py",
+  "decoder": "app/catalog_rule_decoder.py",
+  "result": "research/pg03_rule_ir_decoder_v2.json"
+}

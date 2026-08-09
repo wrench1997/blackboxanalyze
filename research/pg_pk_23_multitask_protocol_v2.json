@@ -1,0 +1,56 @@
+{
+  "protocol_id": "pg-pk-23-multitask-evidence-bound-v2",
+  "schema_version": "sift-pikachu-pg23-multitask-protocol-v2",
+  "objective": "Improve Rule IR emission recall by separating visible surface inference from post-replay bounded evidence binding.",
+  "data": {
+    "catalogs": [
+      "research/pikachu_counterfactual_catalog_v1.json",
+      "research/pikachu_payload_catalog_v1.json"
+    ],
+    "offline_augmentations": [
+      "baseline_replay_response_shape",
+      "transport_failure_response_shape"
+    ],
+    "offline_augmentations_are_not_replay_evidence": true,
+    "raw_probe_strings_stored_in_report": false
+  },
+  "two_stage_design": {
+    "visible_stage": ["family_head", "surface_head"],
+    "evidence_stage": "bounded oracle projection only",
+    "evidence_features": [
+      "marker reflection/location flags",
+      "bounded SQL error-shape flag",
+      "redirect/status flags",
+      "bounded body delta buckets",
+      "transport status class"
+    ],
+    "raw_body_or_script_execution": false,
+    "rule_ir_output": "grammar_checked_abstract_template_only"
+  },
+  "hard_negative_policy": {
+    "training_negatives": ["baseline_replay", "ordinary_safe_surface", "unsupported_surface"],
+    "held_out_negatives": ["marker_substitution", "transport_failure"],
+    "calibration_must_contain_positive_and_negative": true,
+    "zero_false_accept_constraint": true
+  },
+  "evaluation": {
+    "source_holdout": "staged local source held out",
+    "hard_negative_holdout": "marker-substitution and transport negatives held out",
+    "encoding_holdout": "plain/url_percent train; html_entity/double_html_entity test",
+    "surface_holdout": "reflected_get/sqli_str/sqli_search train; remaining surfaces test",
+    "joint_holdout": "encoding and surface held out together"
+  },
+  "target_scope": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false
+  },
+  "provisional_success_gates": {
+    "false_accept_rate_negative": 0.0,
+    "rule_ir_validity": 1.0,
+    "unsupported_surface_abstain_rate": 0.95,
+    "fresh_target_observation_agreement": 0.90
+  }
+}

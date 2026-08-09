@@ -1,0 +1,16 @@
+{
+  "protocol_id": "pg-pk-131-layered-ir-policy-v1",
+  "proposal_id": "pg131-layered-ir-proposal-v1",
+  "question": "分层 Rule IR token 是否能在不依赖页面/脚本表面的情况下保持安全动作、预算探索和 unknown abstain？",
+  "prediction": {
+    "pg127_accuracy": ">=0.95",
+    "pg125_family_accuracy": ">=0.95",
+    "pg122_family_accuracy": ">=0.95",
+    "blind_abstain": 1.0,
+    "negative_false_stop": 0,
+    "failure_ir_ablation_changes": true
+  },
+  "intervention": "fresh Transformer consumes only eight Rule IR slots per prefix step; failure slots get scheduler weights, forward recovery returns baseline slots",
+  "failure_rule": "任一 family/seed/ablation 门失败都保留 trace、禁止训练/记忆晋升，先做实验-工程分诊。",
+  "next": "通过后再接第三独立实现和原生 HTML/JS snapshot source split；失败则按 IR slot 与 source/IR 层级分解。"
+}

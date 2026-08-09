@@ -1,0 +1,77 @@
+{
+  "protocol_id": "pg-pk-23-multitask-hard-negative-v1",
+  "schema_version": "sift-pikachu-pg23-multitask-protocol-v1",
+  "objective": "Improve accepted evidence recall without reintroducing hard-negative false accepts by jointly learning family, surface role, and Rule IR emission abstention.",
+  "data": {
+    "catalogs": [
+      "research/pikachu_counterfactual_catalog_v1.json",
+      "research/pikachu_payload_catalog_v1.json"
+    ],
+    "base_samples_are_authorized_local_only": true,
+    "offline_augmentations": [
+      "baseline_replay_response_shape",
+      "transport_failure_response_shape"
+    ],
+    "augmentation_is_not_real_replay_evidence": true,
+    "raw_probe_strings_stored_in_report": false
+  },
+  "visible_feature_policy": {
+    "included": [
+      "HTTP method",
+      "neutral path shape",
+      "coarse safe probe modality",
+      "coarse encoding class",
+      "status class",
+      "content type class",
+      "bounded response shape",
+      "body length"
+    ],
+    "excluded": [
+      "raw marker/probe text",
+      "family labels",
+      "surface labels",
+      "counterfactual intervention names",
+      "oracle field values",
+      "evaluator state",
+      "cookies and credentials"
+    ]
+  },
+  "model": {
+    "class": "PG23MultiTaskDecoder",
+    "heads": ["family", "surface", "rule_ir_emit"],
+    "losses": [
+      "weighted family cross entropy",
+      "weighted surface cross entropy",
+      "hard-negative weighted BCE emission loss",
+      "same-pair embedding consistency"
+    ],
+    "free_form_payload_generation": false,
+    "rule_ir_output": "grammar_checked_abstract_template_only"
+  },
+  "splits": {
+    "source_holdout": "hold out the staged local source",
+    "hard_negative_holdout": "hold out counterfactual and offline response-shape negatives",
+    "encoding_holdout": "train plain/url_percent and test html_entity/double_html_entity",
+    "surface_holdout": "train reflected_get/sqli_str/sqli_search and test remaining surfaces",
+    "joint_holdout": "hold out encoding and surface together"
+  },
+  "threshold_policy": {
+    "calibration_source": "training-only calibration subset",
+    "primary_constraint": "zero false accepts on calibration negatives",
+    "objective": "maximize positive evidence acceptance under the zero-false-accept constraint",
+    "abstain_is_allowed": true
+  },
+  "target_scope": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false
+  },
+  "provisional_success_gates": {
+    "false_accept_rate_negative": 0.0,
+    "unsupported_surface_abstain_rate": 0.95,
+    "rule_ir_validity": 1.0,
+    "fresh_target_observation_agreement": 0.90
+  }
+}

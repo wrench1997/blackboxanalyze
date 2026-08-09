@@ -1,0 +1,44 @@
+{
+  "protocol_id": "pg-pk-315-worst-seed-replay-v1",
+  "schema_version": "pg315-worst-seed-protocol-v1",
+  "scope": {
+    "target": "authorized local Docker independent Pikachu implementation",
+    "image": "sift/pikachu-pg240-source-native@sha256:de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+    "network": "none",
+    "loopback_only": true,
+    "external_network": false,
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "seeds": [
+      31301,
+      31302,
+      31303
+    ]
+  },
+  "model_contract": {
+    "decoder_only_next_token": true,
+    "abstract_slot_assembly": true,
+    "model_selects_variant": true,
+    "failure_feedback_repair_or_abstain": true,
+    "oracle_target_off_input": true
+  },
+  "required_gates": {
+    "all_seed_checkpoints": true,
+    "worst_seed_question": true,
+    "worst_seed_variant": true,
+    "worst_seed_repair_abstain": true,
+    "negative_zero_violation": true,
+    "fresh_reset": true,
+    "typed_evidence_hash": true,
+    "raw_payload_training_excluded": true
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "payload_catalog_promotion_allowed": false
+  },
+  "protocol_sha256": "58f391e0c2845ad64be658cdd366d513b06f3e0f90aee7a63c65954a573e8afc"
+}

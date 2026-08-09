@@ -1,0 +1,42 @@
+{
+  "protocol_id": "pg-pk-12-heterogeneous-surface-holdout-v1",
+  "surfaces": [
+    "html_attribute",
+    "html_text",
+    "json_value",
+    "xml_text",
+    "plain_text",
+    "response_header"
+  ],
+  "targets": [
+    "alpha:8800",
+    "beta:8801",
+    "gamma:8802"
+  ],
+  "seeds": [
+    20260831,
+    20260837,
+    20260843
+  ],
+  "positive_gate": {
+    "oracle": "fixture_heterogeneous_surface_oracle_v1",
+    "sink_kind": "html_attribute",
+    "pair": [
+      "plain",
+      "url_percent"
+    ],
+    "source_hash": true,
+    "evidence_hash": true
+  },
+  "shared_router": {
+    "strict_ood": true,
+    "positive_authority": false,
+    "abstain_required": true,
+    "abstain_fallback": "family_specific_xss_typed_oracle"
+  },
+  "promotion_dataset_identity": {
+    "dataset_id": "heterogeneous_surface_fixture_v1",
+    "variant_ports_are_target_instances": true,
+    "requires_independent_fixture_source": true
+  }
+}

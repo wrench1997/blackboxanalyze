@@ -1,0 +1,1821 @@
+{
+  "protocol_id": "pg-pk-204-token-binding-loop-v1",
+  "schema_version": "pg204-token-binding-loop-report-v1",
+  "status": "completed_token_aware_real_get_post_loop",
+  "device": "cuda",
+  "model": {
+    "variant": "xxl_token_aware_adapter",
+    "base_parameter_count": 101487169,
+    "total_parameter_count": 101531631,
+    "online_weight_update": false
+  },
+  "targets": [
+    {
+      "seed": 20401,
+      "target_instance_hash": "42d3f91ee3ffe013bfca02fdbb912d1326f36f2ca689fe87b5b7317f2c0e9db2",
+      "fresh_container": true
+    },
+    {
+      "seed": 20402,
+      "target_instance_hash": "b56383dbbadce824aa09e02a67708cc142991dc03fcdb3fac58a61acfabc5c99",
+      "fresh_container": true
+    }
+  ],
+  "route_runs": [
+    {
+      "seed": 20401,
+      "surface": "pg204_xss_identity_get",
+      "path": "/vul/xss/xss_01.php",
+      "method": "GET",
+      "encoding": "inert_dom_markup",
+      "target_instance_hash": "42d3f91ee3ffe013bfca02fdbb912d1326f36f2ca689fe87b5b7317f2c0e9db2",
+      "fresh_container": true,
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "4f1e3e4bc2cb7d1e0c3a4033ab67ddec47f8021ec5555fa84be1f65e24392f08",
+        "semantic_body_sha256": "4f1e3e4bc2cb7d1e0c3a4033ab67ddec47f8021ec5555fa84be1f65e24392f08",
+        "shape": {
+          "kind": "other",
+          "field_count": 426,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "adfe12c116cc2d8cbca930c08c1c75514f2e29dc8b8c4df67ab51aa3cfa6c2e7",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "98e42491ddecf78fa534198b8f26c28b805ed3000d59d2b487132dca19796598",
+        "semantic_body_sha256": "98e42491ddecf78fa534198b8f26c28b805ed3000d59d2b487132dca19796598",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa74da97d08b0ffbbfa0f89516b0da6ff9a267dfa0e1949c23c090a95612af3f",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "token_validation": {
+        "valid": true,
+        "reason": "bound",
+        "network_allowed": true,
+        "binding_sha256": "3719248462fa27c18d16c01a910464ba662153bc38502bbce92083b119ab50f1"
+      },
+      "token_binding_sha256": "3719248462fa27c18d16c01a910464ba662153bc38502bbce92083b119ab50f1",
+      "model_decision": {
+        "action": "safe_candidate",
+        "action_confidence": 0.9991716146469116,
+        "encoding": "dom_markup",
+        "encoding_confidence": 0.9971164464950562,
+        "failure": "no_effect",
+        "failure_confidence": 0.9980596899986267,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "safe_candidate",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": true,
+          "failure_kind": "no_effect"
+        }
+      },
+      "candidate_sent": true,
+      "candidate_result": {
+        "schema_version": "sift-pg198-payload-grounding-v1",
+        "candidate": {
+          "candidate_id": "cd407d3a6a08539ab681",
+          "family": "xss",
+          "method": "GET",
+          "path": "/vul/xss/xss_01.php",
+          "probe_kind": "inert_dom_markup",
+          "probe_sha256": "19d40e3f937cbfeddbe399dd651b654156e547bfdb6b8064f88b246da9cc62e1",
+          "payload_sha256": "a39665de259f67d083989e08a5088802401c4dfafd690da60ac8bd45a5d97687",
+          "expected_keys": [
+            "browser_sink_observed",
+            "dom_change"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        },
+        "binding": {
+          "method": "GET",
+          "path": "/vul/xss/xss_01.php",
+          "placement": "query",
+          "field_names": [
+            "message",
+            "submit"
+          ],
+          "field_count": 2,
+          "values_sha256": "0c759e0f69a52da9a8024bc43b95450568dd85fb2706ea9783c5e166ad40a631",
+          "runtime_only": true,
+          "binding_sha256": "06c3c24cd2b41b028b90ad4bf9207535e87b16c2ae1a6e416139894d9daea5eb"
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "4096-65535",
+          "body_sha256": "9bad24af0defe4b1fba0ce562b11f28441a70acbea427f5f981191cab4201e05",
+          "semantic_body_sha256": "9bad24af0defe4b1fba0ce562b11f28441a70acbea427f5f981191cab4201e05",
+          "shape": {
+            "kind": "other",
+            "field_count": 428,
+            "scalar_count": 1
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": true,
+            "location": "html_text",
+            "count": 2
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "dbed2684d507fe607c269a6b80c4654905d7b624e8c985a57f459a3d685c0151",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false
+        },
+        "oracle": {
+          "typed_available": true,
+          "browser_effect": true,
+          "alternate_effect": true,
+          "dual_agreement": true,
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "browser_evidence_hash": "e487d92e6ec16a26df85000f1f03d64bd65efb79d044f931d82bc850c6ee3da3",
+          "alternate_evidence_hash": "cf98b027db15fd36791ca8a96f10607219171b52bd5c0643dc8e31ef6d0b7f74"
+        },
+        "signal": {
+          "marker_reflected": true,
+          "marker_in_script_source": false,
+          "marker_in_attribute": true,
+          "sql_error_shape": false,
+          "redirect_present": false,
+          "external_redirect": false,
+          "status_changed": false,
+          "candidate_signal": true
+        },
+        "evidence": {
+          "candidate_sha256": "dc532773487d42964488269abb46b7d85ca930c8202f5d3c3dd64578241cc74f",
+          "payload_sha256": "a39665de259f67d083989e08a5088802401c4dfafd690da60ac8bd45a5d97687",
+          "binding_sha256": "06c3c24cd2b41b028b90ad4bf9207535e87b16c2ae1a6e416139894d9daea5eb",
+          "projection_sha256": "dbed2684d507fe607c269a6b80c4654905d7b624e8c985a57f459a3d685c0151",
+          "oracle_sha256": "d8f025fced6240ba4f0d075b1f4cec5f1acfac15f5453241303b9b41413a0b80",
+          "evidence_sha256": "4f2c44df4c4fd7eaa5dbcc49112b72c9540d224d2a56f64bc3832a194a0f9917"
+        },
+        "raw_probe_stored": false,
+        "raw_response_stored": false
+      },
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20401,
+      "surface": "pg204_xss_encoded_get",
+      "path": "/vul/xss/xss_02.php",
+      "method": "GET",
+      "encoding": "encoded_dom_markup",
+      "target_instance_hash": "42d3f91ee3ffe013bfca02fdbb912d1326f36f2ca689fe87b5b7317f2c0e9db2",
+      "fresh_container": true,
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "62706e803e5c2f4db37e3233ed5f0e7afb0c49000d4fddea17e4813372d7149a",
+        "semantic_body_sha256": "62706e803e5c2f4db37e3233ed5f0e7afb0c49000d4fddea17e4813372d7149a",
+        "shape": {
+          "kind": "other",
+          "field_count": 426,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "3a605fa03f6a2c0be10fdbf47912b8330398b8ea5a4318f0f4546af47bfb9486",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "911c7256359b2ccde6510730582fdbd6876a3beec1fdb91becb9b2200a1e774b",
+        "semantic_body_sha256": "911c7256359b2ccde6510730582fdbd6876a3beec1fdb91becb9b2200a1e774b",
+        "shape": {
+          "kind": "other",
+          "field_count": 428,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 2
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "6bf828a75ed8436230c780356b5ec787d9e05d1be807bf2c0ea26fb218e1494a",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "token_validation": {
+        "valid": true,
+        "reason": "bound",
+        "network_allowed": true,
+        "binding_sha256": "7e2650e51fb48067a3f739f5b7884fce1d96a671a6339dba4afa51455bee4347"
+      },
+      "token_binding_sha256": "7e2650e51fb48067a3f739f5b7884fce1d96a671a6339dba4afa51455bee4347",
+      "model_decision": {
+        "action": "safe_candidate",
+        "action_confidence": 0.9988247752189636,
+        "encoding": "encoded_dom",
+        "encoding_confidence": 0.9954394698143005,
+        "failure": "no_effect",
+        "failure_confidence": 0.9984250068664551,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "safe_candidate",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": true,
+          "failure_kind": "no_effect"
+        }
+      },
+      "candidate_sent": true,
+      "candidate_result": {
+        "schema_version": "sift-pg198-payload-grounding-v1",
+        "candidate": {
+          "candidate_id": "2168f43730b5e0a6fe0f",
+          "family": "xss",
+          "method": "GET",
+          "path": "/vul/xss/xss_02.php",
+          "probe_kind": "encoded_dom_markup",
+          "probe_sha256": "aabfc0c6b83451463f1a11fb55a094bb9a3be2536413c297cda1610e7d9bbbf1",
+          "payload_sha256": "e9a430e78e75b8b5dbcb721a820ef3fc8f68e0125516c068cb08a72a9ea2e011",
+          "expected_keys": [
+            "browser_sink_observed",
+            "dom_change",
+            "requires_decode_depth"
+          ],
+          "candidate_index": 1,
+          "family_hidden_from_policy": true
+        },
+        "binding": {
+          "method": "GET",
+          "path": "/vul/xss/xss_02.php",
+          "placement": "query",
+          "field_names": [
+            "message",
+            "submit"
+          ],
+          "field_count": 2,
+          "values_sha256": "cfa120557f4057ed94c8d0ab1643febc42faeaef8a784529602e15ed254253a6",
+          "runtime_only": true,
+          "binding_sha256": "769fccc2ce1edb6b60efb406de43aadb55875471f312f9bd064ffd4018e8d409"
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "4096-65535",
+          "body_sha256": "1679e4ebc17f15cf545d0d41bf04a2ec0187f3a7743b74cc056a59b52f5cc419",
+          "semantic_body_sha256": "1679e4ebc17f15cf545d0d41bf04a2ec0187f3a7743b74cc056a59b52f5cc419",
+          "shape": {
+            "kind": "other",
+            "field_count": 428,
+            "scalar_count": 1
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": true,
+            "location": "html_text",
+            "count": 4
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "51d1f58c14c280e72f4cfb076379e78a3066d2e8d745e407bd2e51ef65bb239b",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false
+        },
+        "oracle": {
+          "typed_available": true,
+          "browser_effect": false,
+          "alternate_effect": true,
+          "dual_agreement": false,
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "browser_evidence_hash": "dd5300b6f3f6efa9b5da9ad8c3ac2bed85f22e6cbac7f9b8e12e5330ef47b27d",
+          "alternate_evidence_hash": "cf98b027db15fd36791ca8a96f10607219171b52bd5c0643dc8e31ef6d0b7f74"
+        },
+        "signal": {
+          "marker_reflected": true,
+          "marker_in_script_source": false,
+          "marker_in_attribute": true,
+          "sql_error_shape": false,
+          "redirect_present": false,
+          "external_redirect": false,
+          "status_changed": false,
+          "candidate_signal": true
+        },
+        "evidence": {
+          "candidate_sha256": "66f1ed399fa4db9c9e3e086f87c4216f3ce56bf20d1717e547ab9c3460833978",
+          "payload_sha256": "e9a430e78e75b8b5dbcb721a820ef3fc8f68e0125516c068cb08a72a9ea2e011",
+          "binding_sha256": "769fccc2ce1edb6b60efb406de43aadb55875471f312f9bd064ffd4018e8d409",
+          "projection_sha256": "51d1f58c14c280e72f4cfb076379e78a3066d2e8d745e407bd2e51ef65bb239b",
+          "oracle_sha256": "3147c83f25f92b1091fb39ed6d10d46f2c9f4072ac308138522acd5d36349475",
+          "evidence_sha256": "cb20d015c47bdfd12ea0d5d07eeceb2cf59a71d09ef16d7d44944347e44be2c0"
+        },
+        "raw_probe_stored": false,
+        "raw_response_stored": false
+      },
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20401,
+      "surface": "pg204_post_unknown",
+      "path": "/vul/xss/xsspost/post_login.php",
+      "method": "POST",
+      "encoding": "inert_dom_markup",
+      "target_instance_hash": "42d3f91ee3ffe013bfca02fdbb912d1326f36f2ca689fe87b5b7317f2c0e9db2",
+      "fresh_container": true,
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "7a1c25979e1d26f03cef69b153889da148728afa09d68e87832facdb6e3d97d2",
+        "semantic_body_sha256": "7a1c25979e1d26f03cef69b153889da148728afa09d68e87832facdb6e3d97d2",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "9f48f907a1b00feba38668918e4f081f2adf2bb19b3e22ffc50208af0969bdde",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "7a1c25979e1d26f03cef69b153889da148728afa09d68e87832facdb6e3d97d2",
+        "semantic_body_sha256": "7a1c25979e1d26f03cef69b153889da148728afa09d68e87832facdb6e3d97d2",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "9f48f907a1b00feba38668918e4f081f2adf2bb19b3e22ffc50208af0969bdde",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "token_validation": {
+        "valid": true,
+        "reason": "bound",
+        "network_allowed": true,
+        "binding_sha256": "e781d97dfc83011bcf2b42ed01271428bbce2cc88d4c854d13cd75f46d15e7d9"
+      },
+      "token_binding_sha256": "e781d97dfc83011bcf2b42ed01271428bbce2cc88d4c854d13cd75f46d15e7d9",
+      "model_decision": {
+        "action": "safe_candidate",
+        "action_confidence": 0.6205070614814758,
+        "encoding": "dom_markup",
+        "encoding_confidence": 0.9570788741111755,
+        "failure": "validation_shape",
+        "failure_confidence": 0.9911297559738159,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "abstain",
+        "features": {
+          "method": "POST",
+          "status_class": "2xx",
+          "typed_available": false,
+          "failure_kind": "post_validation"
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20402,
+      "surface": "pg204_xss_identity_get",
+      "path": "/vul/xss/xss_01.php",
+      "method": "GET",
+      "encoding": "inert_dom_markup",
+      "target_instance_hash": "b56383dbbadce824aa09e02a67708cc142991dc03fcdb3fac58a61acfabc5c99",
+      "fresh_container": true,
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "4f1e3e4bc2cb7d1e0c3a4033ab67ddec47f8021ec5555fa84be1f65e24392f08",
+        "semantic_body_sha256": "4f1e3e4bc2cb7d1e0c3a4033ab67ddec47f8021ec5555fa84be1f65e24392f08",
+        "shape": {
+          "kind": "other",
+          "field_count": 426,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "adfe12c116cc2d8cbca930c08c1c75514f2e29dc8b8c4df67ab51aa3cfa6c2e7",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "eda5cf738c448e6c992b0dd6c1aa609d75a1beade3e5f78268e326ddb27ba765",
+        "semantic_body_sha256": "eda5cf738c448e6c992b0dd6c1aa609d75a1beade3e5f78268e326ddb27ba765",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "86f8a124b7b6fd85fe85664cc938f78d0054d12b275f2990cf14942dd9d79c18",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "token_validation": {
+        "valid": true,
+        "reason": "bound",
+        "network_allowed": true,
+        "binding_sha256": "ea5ab942a51915a608c96be98f1d0383de2422aa942a1bbd2f21b26c6919c99f"
+      },
+      "token_binding_sha256": "ea5ab942a51915a608c96be98f1d0383de2422aa942a1bbd2f21b26c6919c99f",
+      "model_decision": {
+        "action": "safe_candidate",
+        "action_confidence": 0.9991716146469116,
+        "encoding": "dom_markup",
+        "encoding_confidence": 0.9971164464950562,
+        "failure": "no_effect",
+        "failure_confidence": 0.9980596899986267,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "safe_candidate",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": true,
+          "failure_kind": "no_effect"
+        }
+      },
+      "candidate_sent": true,
+      "candidate_result": {
+        "schema_version": "sift-pg198-payload-grounding-v1",
+        "candidate": {
+          "candidate_id": "067a6b39e3e7b4d4b3ff",
+          "family": "xss",
+          "method": "GET",
+          "path": "/vul/xss/xss_01.php",
+          "probe_kind": "inert_dom_markup",
+          "probe_sha256": "059286a54e0ae9abc93620470078c1f4652dd67d23c237f5aec7142fa77d2c9f",
+          "payload_sha256": "78db7222db0883433152a52f582d382d91a7fd77170546280e4be55d6e2370bb",
+          "expected_keys": [
+            "browser_sink_observed",
+            "dom_change"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        },
+        "binding": {
+          "method": "GET",
+          "path": "/vul/xss/xss_01.php",
+          "placement": "query",
+          "field_names": [
+            "message",
+            "submit"
+          ],
+          "field_count": 2,
+          "values_sha256": "f35f89a5a66c242fc6cba85349dea2cc16c31326a9c33dafe9a9b0603673ee87",
+          "runtime_only": true,
+          "binding_sha256": "0f4d99e555d3cbc1489ac0408ec880a81a927c102d147c3c8da19994fe48780d"
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "4096-65535",
+          "body_sha256": "2b5494da9edde79d700aa230b3a51fbf71a36c35e023edf03f96596f383a1681",
+          "semantic_body_sha256": "2b5494da9edde79d700aa230b3a51fbf71a36c35e023edf03f96596f383a1681",
+          "shape": {
+            "kind": "other",
+            "field_count": 428,
+            "scalar_count": 1
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": true,
+            "location": "html_text",
+            "count": 2
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "00fd7ae71ff891e3489b140b4b4a4663383374592f8ae837f525362bb89537a2",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false
+        },
+        "oracle": {
+          "typed_available": true,
+          "browser_effect": true,
+          "alternate_effect": true,
+          "dual_agreement": true,
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "browser_evidence_hash": "e487d92e6ec16a26df85000f1f03d64bd65efb79d044f931d82bc850c6ee3da3",
+          "alternate_evidence_hash": "cf98b027db15fd36791ca8a96f10607219171b52bd5c0643dc8e31ef6d0b7f74"
+        },
+        "signal": {
+          "marker_reflected": true,
+          "marker_in_script_source": false,
+          "marker_in_attribute": true,
+          "sql_error_shape": false,
+          "redirect_present": false,
+          "external_redirect": false,
+          "status_changed": false,
+          "candidate_signal": true
+        },
+        "evidence": {
+          "candidate_sha256": "a782da62f811fd465a36317279f40e54cf807be454c6180a80ee93cd8d21a63b",
+          "payload_sha256": "78db7222db0883433152a52f582d382d91a7fd77170546280e4be55d6e2370bb",
+          "binding_sha256": "0f4d99e555d3cbc1489ac0408ec880a81a927c102d147c3c8da19994fe48780d",
+          "projection_sha256": "00fd7ae71ff891e3489b140b4b4a4663383374592f8ae837f525362bb89537a2",
+          "oracle_sha256": "d8f025fced6240ba4f0d075b1f4cec5f1acfac15f5453241303b9b41413a0b80",
+          "evidence_sha256": "f80f6f2fd3d22887e5b4b4246a15f8b1cc539e48ecf4a6d7da3357993267733b"
+        },
+        "raw_probe_stored": false,
+        "raw_response_stored": false
+      },
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20402,
+      "surface": "pg204_xss_encoded_get",
+      "path": "/vul/xss/xss_02.php",
+      "method": "GET",
+      "encoding": "encoded_dom_markup",
+      "target_instance_hash": "b56383dbbadce824aa09e02a67708cc142991dc03fcdb3fac58a61acfabc5c99",
+      "fresh_container": true,
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "62706e803e5c2f4db37e3233ed5f0e7afb0c49000d4fddea17e4813372d7149a",
+        "semantic_body_sha256": "62706e803e5c2f4db37e3233ed5f0e7afb0c49000d4fddea17e4813372d7149a",
+        "shape": {
+          "kind": "other",
+          "field_count": 426,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "3a605fa03f6a2c0be10fdbf47912b8330398b8ea5a4318f0f4546af47bfb9486",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "fe36bbfc991414ef9ad797205e1f730271e82b4677d6233cfc45faa01998ae03",
+        "semantic_body_sha256": "fe36bbfc991414ef9ad797205e1f730271e82b4677d6233cfc45faa01998ae03",
+        "shape": {
+          "kind": "other",
+          "field_count": 428,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 2
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "981ed626817f8ae408f96b5ed1a4144b9c9560d9683097eaef3523ad144adeb8",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "token_validation": {
+        "valid": true,
+        "reason": "bound",
+        "network_allowed": true,
+        "binding_sha256": "059767e6c6630daacc56d55ff61b3b88e6829fe139bfe1aa591e09356fa43a70"
+      },
+      "token_binding_sha256": "059767e6c6630daacc56d55ff61b3b88e6829fe139bfe1aa591e09356fa43a70",
+      "model_decision": {
+        "action": "safe_candidate",
+        "action_confidence": 0.9988247752189636,
+        "encoding": "encoded_dom",
+        "encoding_confidence": 0.9954394698143005,
+        "failure": "no_effect",
+        "failure_confidence": 0.9984250068664551,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "safe_candidate",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": true,
+          "failure_kind": "no_effect"
+        }
+      },
+      "candidate_sent": true,
+      "candidate_result": {
+        "schema_version": "sift-pg198-payload-grounding-v1",
+        "candidate": {
+          "candidate_id": "989d2e05f8be38dae7e6",
+          "family": "xss",
+          "method": "GET",
+          "path": "/vul/xss/xss_02.php",
+          "probe_kind": "encoded_dom_markup",
+          "probe_sha256": "c7d16e21406dd30ea939971f004a12ee1606754143f1982eba85432a7c1855df",
+          "payload_sha256": "4b410358949c2f1e9960aeaaa5dad3e5b75bc78d0b98477d07104508f26d7cd6",
+          "expected_keys": [
+            "browser_sink_observed",
+            "dom_change",
+            "requires_decode_depth"
+          ],
+          "candidate_index": 1,
+          "family_hidden_from_policy": true
+        },
+        "binding": {
+          "method": "GET",
+          "path": "/vul/xss/xss_02.php",
+          "placement": "query",
+          "field_names": [
+            "message",
+            "submit"
+          ],
+          "field_count": 2,
+          "values_sha256": "81a8a96ae9e30bf07acf73575d5b05c0ba1855fdf6c7a04bfece02581b0f8508",
+          "runtime_only": true,
+          "binding_sha256": "7684d848744cb0df31ea0d3475007d603d2f72b10a70b001c4ff4a5672b0d579"
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "4096-65535",
+          "body_sha256": "96a72c9769dcf1e00d9cc9c97d5399d234dcbe8d649da77d644e765554dfc275",
+          "semantic_body_sha256": "96a72c9769dcf1e00d9cc9c97d5399d234dcbe8d649da77d644e765554dfc275",
+          "shape": {
+            "kind": "other",
+            "field_count": 428,
+            "scalar_count": 1
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": true,
+            "location": "html_text",
+            "count": 4
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "a0d08f02aae466e5b37dff09922b60e86813d5005d9ce5240ef12973489bdb62",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false
+        },
+        "oracle": {
+          "typed_available": true,
+          "browser_effect": false,
+          "alternate_effect": true,
+          "dual_agreement": false,
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "browser_evidence_hash": "dd5300b6f3f6efa9b5da9ad8c3ac2bed85f22e6cbac7f9b8e12e5330ef47b27d",
+          "alternate_evidence_hash": "cf98b027db15fd36791ca8a96f10607219171b52bd5c0643dc8e31ef6d0b7f74"
+        },
+        "signal": {
+          "marker_reflected": true,
+          "marker_in_script_source": false,
+          "marker_in_attribute": true,
+          "sql_error_shape": false,
+          "redirect_present": false,
+          "external_redirect": false,
+          "status_changed": false,
+          "candidate_signal": true
+        },
+        "evidence": {
+          "candidate_sha256": "9ce8ff9923b636fcffc18ce47e8cb2927cace838dfce602b1d9cac4d542a2024",
+          "payload_sha256": "4b410358949c2f1e9960aeaaa5dad3e5b75bc78d0b98477d07104508f26d7cd6",
+          "binding_sha256": "7684d848744cb0df31ea0d3475007d603d2f72b10a70b001c4ff4a5672b0d579",
+          "projection_sha256": "a0d08f02aae466e5b37dff09922b60e86813d5005d9ce5240ef12973489bdb62",
+          "oracle_sha256": "3147c83f25f92b1091fb39ed6d10d46f2c9f4072ac308138522acd5d36349475",
+          "evidence_sha256": "b4d62f2f71198e0c5b06d7a89a50d6d87b4bf3e946635773b6c253a4a63e99ea"
+        },
+        "raw_probe_stored": false,
+        "raw_response_stored": false
+      },
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20402,
+      "surface": "pg204_post_unknown",
+      "path": "/vul/xss/xsspost/post_login.php",
+      "method": "POST",
+      "encoding": "inert_dom_markup",
+      "target_instance_hash": "b56383dbbadce824aa09e02a67708cc142991dc03fcdb3fac58a61acfabc5c99",
+      "fresh_container": true,
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "7a1c25979e1d26f03cef69b153889da148728afa09d68e87832facdb6e3d97d2",
+        "semantic_body_sha256": "7a1c25979e1d26f03cef69b153889da148728afa09d68e87832facdb6e3d97d2",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "9f48f907a1b00feba38668918e4f081f2adf2bb19b3e22ffc50208af0969bdde",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "7a1c25979e1d26f03cef69b153889da148728afa09d68e87832facdb6e3d97d2",
+        "semantic_body_sha256": "7a1c25979e1d26f03cef69b153889da148728afa09d68e87832facdb6e3d97d2",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "9f48f907a1b00feba38668918e4f081f2adf2bb19b3e22ffc50208af0969bdde",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "token_validation": {
+        "valid": true,
+        "reason": "bound",
+        "network_allowed": true,
+        "binding_sha256": "a386a7862739c26bc9ea0000a7e62ae9557fb29c858cde79a60c472e362a74e6"
+      },
+      "token_binding_sha256": "a386a7862739c26bc9ea0000a7e62ae9557fb29c858cde79a60c472e362a74e6",
+      "model_decision": {
+        "action": "safe_candidate",
+        "action_confidence": 0.6205070614814758,
+        "encoding": "dom_markup",
+        "encoding_confidence": 0.9570788741111755,
+        "failure": "validation_shape",
+        "failure_confidence": 0.9911297559738159,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "abstain",
+        "features": {
+          "method": "POST",
+          "status_class": "2xx",
+          "typed_available": false,
+          "failure_kind": "post_validation"
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  ],
+  "fault_runs": [
+    {
+      "case": "missing_encoding_token",
+      "packet": null,
+      "validation": {
+        "valid": false,
+        "reason": "missing_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "binding_hash_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_01.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "a39665de259f67d083989e08a5088802401c4dfafd690da60ac8bd45a5d97687",
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "token_features_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_01.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "a39665de259f67d083989e08a5088802401c4dfafd690da60ac8bd45a5d97687",
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "3719248462fa27c18d16c01a910464ba662153bc38502bbce92083b119ab50f1"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "token_features_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "method_path_binding_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_01.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "a39665de259f67d083989e08a5088802401c4dfafd690da60ac8bd45a5d97687",
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "3719248462fa27c18d16c01a910464ba662153bc38502bbce92083b119ab50f1"
+      },
+      "route": {
+        "surface": "pg204_xss_identity_get",
+        "path": "/vul/xss/xss_04.php",
+        "method": "GET",
+        "fields": [
+          "message",
+          "submit"
+        ],
+        "layout": "inline_html",
+        "family": "xss",
+        "typed_available": true,
+        "encoding": "inert_dom_markup"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "PG-204 candidate method/path binding mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_encoding_token",
+      "packet": null,
+      "validation": {
+        "valid": false,
+        "reason": "missing_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "binding_hash_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_02.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "e9a430e78e75b8b5dbcb721a820ef3fc8f68e0125516c068cb08a72a9ea2e011",
+        "encoding_name": "encoded_dom",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "token_features_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_02.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "e9a430e78e75b8b5dbcb721a820ef3fc8f68e0125516c068cb08a72a9ea2e011",
+        "encoding_name": "encoded_dom",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "7e2650e51fb48067a3f739f5b7884fce1d96a671a6339dba4afa51455bee4347"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "token_features_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "method_path_binding_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_02.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "e9a430e78e75b8b5dbcb721a820ef3fc8f68e0125516c068cb08a72a9ea2e011",
+        "encoding_name": "encoded_dom",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "7e2650e51fb48067a3f739f5b7884fce1d96a671a6339dba4afa51455bee4347"
+      },
+      "route": {
+        "surface": "pg204_xss_encoded_get",
+        "path": "/vul/xss/xss_04.php",
+        "method": "GET",
+        "fields": [
+          "message",
+          "submit"
+        ],
+        "layout": "inline_html",
+        "family": "xss",
+        "typed_available": true,
+        "encoding": "encoded_dom_markup"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "PG-204 candidate method/path binding mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_encoding_token",
+      "packet": null,
+      "validation": {
+        "valid": false,
+        "reason": "missing_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "binding_hash_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xsspost/post_login.php",
+        "route_fields": [
+          "submit",
+          "username"
+        ],
+        "payload_sha256": "0e7d2cd376f3595004ada53c98c234e34b9efec48e551e708a8c49a21cbf8b1e",
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "typed_available": false,
+        "token_features": [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "token_features_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xsspost/post_login.php",
+        "route_fields": [
+          "submit",
+          "username"
+        ],
+        "payload_sha256": "0e7d2cd376f3595004ada53c98c234e34b9efec48e551e708a8c49a21cbf8b1e",
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "typed_available": false,
+        "token_features": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "e781d97dfc83011bcf2b42ed01271428bbce2cc88d4c854d13cd75f46d15e7d9"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "token_features_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "method_path_binding_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xsspost/post_login.php",
+        "route_fields": [
+          "submit",
+          "username"
+        ],
+        "payload_sha256": "0e7d2cd376f3595004ada53c98c234e34b9efec48e551e708a8c49a21cbf8b1e",
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "typed_available": false,
+        "token_features": [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "e781d97dfc83011bcf2b42ed01271428bbce2cc88d4c854d13cd75f46d15e7d9"
+      },
+      "route": {
+        "surface": "pg204_post_unknown",
+        "path": "/vul/xss/xss_04.php",
+        "method": "POST",
+        "fields": [
+          "username",
+          "submit"
+        ],
+        "layout": "attribute_shell",
+        "family": "xss",
+        "typed_available": false,
+        "encoding": "inert_dom_markup"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "PG-204 candidate method/path binding mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_encoding_token",
+      "packet": null,
+      "validation": {
+        "valid": false,
+        "reason": "missing_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "binding_hash_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_01.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "78db7222db0883433152a52f582d382d91a7fd77170546280e4be55d6e2370bb",
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "token_features_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_01.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "78db7222db0883433152a52f582d382d91a7fd77170546280e4be55d6e2370bb",
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "ea5ab942a51915a608c96be98f1d0383de2422aa942a1bbd2f21b26c6919c99f"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "token_features_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "method_path_binding_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_01.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "78db7222db0883433152a52f582d382d91a7fd77170546280e4be55d6e2370bb",
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "ea5ab942a51915a608c96be98f1d0383de2422aa942a1bbd2f21b26c6919c99f"
+      },
+      "route": {
+        "surface": "pg204_xss_identity_get",
+        "path": "/vul/xss/xss_04.php",
+        "method": "GET",
+        "fields": [
+          "message",
+          "submit"
+        ],
+        "layout": "inline_html",
+        "family": "xss",
+        "typed_available": true,
+        "encoding": "inert_dom_markup"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "PG-204 candidate method/path binding mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_encoding_token",
+      "packet": null,
+      "validation": {
+        "valid": false,
+        "reason": "missing_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "binding_hash_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_02.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "4b410358949c2f1e9960aeaaa5dad3e5b75bc78d0b98477d07104508f26d7cd6",
+        "encoding_name": "encoded_dom",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "token_features_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_02.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "4b410358949c2f1e9960aeaaa5dad3e5b75bc78d0b98477d07104508f26d7cd6",
+        "encoding_name": "encoded_dom",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "059767e6c6630daacc56d55ff61b3b88e6829fe139bfe1aa591e09356fa43a70"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "token_features_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "method_path_binding_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_02.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "payload_sha256": "4b410358949c2f1e9960aeaaa5dad3e5b75bc78d0b98477d07104508f26d7cd6",
+        "encoding_name": "encoded_dom",
+        "failure_name": "no_effect",
+        "typed_available": true,
+        "token_features": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "059767e6c6630daacc56d55ff61b3b88e6829fe139bfe1aa591e09356fa43a70"
+      },
+      "route": {
+        "surface": "pg204_xss_encoded_get",
+        "path": "/vul/xss/xss_04.php",
+        "method": "GET",
+        "fields": [
+          "message",
+          "submit"
+        ],
+        "layout": "inline_html",
+        "family": "xss",
+        "typed_available": true,
+        "encoding": "encoded_dom_markup"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "PG-204 candidate method/path binding mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_encoding_token",
+      "packet": null,
+      "validation": {
+        "valid": false,
+        "reason": "missing_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "binding_hash_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xsspost/post_login.php",
+        "route_fields": [
+          "submit",
+          "username"
+        ],
+        "payload_sha256": "2af4e8c2194d57e3b55e4dc0fd0cb5999972677a3dc65cf3872af37dd382780a",
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "typed_available": false,
+        "token_features": [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "token_features_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xsspost/post_login.php",
+        "route_fields": [
+          "submit",
+          "username"
+        ],
+        "payload_sha256": "2af4e8c2194d57e3b55e4dc0fd0cb5999972677a3dc65cf3872af37dd382780a",
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "typed_available": false,
+        "token_features": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "a386a7862739c26bc9ea0000a7e62ae9557fb29c858cde79a60c472e362a74e6"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "token_features_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "method_path_binding_mismatch",
+      "packet": {
+        "schema_version": "pg204-runtime-token-binding-v1",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xsspost/post_login.php",
+        "route_fields": [
+          "submit",
+          "username"
+        ],
+        "payload_sha256": "2af4e8c2194d57e3b55e4dc0fd0cb5999972677a3dc65cf3872af37dd382780a",
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "typed_available": false,
+        "token_features": [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "binding_sha256": "a386a7862739c26bc9ea0000a7e62ae9557fb29c858cde79a60c472e362a74e6"
+      },
+      "route": {
+        "surface": "pg204_post_unknown",
+        "path": "/vul/xss/xss_04.php",
+        "method": "POST",
+        "fields": [
+          "username",
+          "submit"
+        ],
+        "layout": "attribute_shell",
+        "family": "xss",
+        "typed_available": false,
+        "encoding": "inert_dom_markup"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "PG-204 candidate method/path binding mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    }
+  ],
+  "counts": {
+    "fresh_container_count": 2,
+    "route_replay_count": 6,
+    "valid_token_binding_count": 6,
+    "candidate_send_count": 4,
+    "encoded_variant_send_count": 2,
+    "post_unknown_abstain_count": 2,
+    "token_fault_count": 24,
+    "network_allowed_on_fault_count": 0,
+    "false_positive_count": 0
+  },
+  "promotion": {
+    "training_eligible": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "pinned_image": "tavenli/pikachu-labs@sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "fresh_container_per_seed": true,
+    "token_faults_fail_closed": true,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "online_weight_update": false
+  },
+  "report_sha256": "4fa4a916ae4d16b62573306ceb1be131bf1f50aa515f465ad646fcbbc6a6b686"
+}

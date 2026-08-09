@@ -1,0 +1,30 @@
+{
+  "schema_version": "sift-preregistered-experiment-v1",
+  "protocol_id": "pg-pk-22-oracle-projection-binding-v1",
+  "scope": "offline evaluator projection integrity at the positive-oracle boundary",
+  "root_cause_hypothesis": "The response evidence is hashed with an embedded oracle projection, but revalidators read an independent top-level projection without checking equality, allowing a decision field to be changed after hashing.",
+  "pre_fix_negative_control": {
+    "mutation": "change top-level oracle_projection after evidence hash is computed",
+    "observed": "positive revalidation can remain accepted",
+    "required": "reject with oracle_projection_not_bound_to_evidence"
+  },
+  "intervention": "Require the top-level oracle_projection to be present in evidence and canonically equal to the hashed embedded projection for XSS, SQL, and logic/access revalidators.",
+  "predictions": {
+    "untampered_fixture_pair": "accepted",
+    "tampered_top_level_projection": "rejected",
+    "missing_embedded_projection": "rejected",
+    "model_oracle_semantics_unchanged": true
+  },
+  "protected_invariants": {
+    "typed_oracle_remains_positive_authority": true,
+    "reflection_or_parse_signal_is_not_upgraded": true,
+    "local_only_replay_only": true,
+    "model_or_checkpoint_unchanged": true
+  },
+  "failure_conditions": [
+    "an untampered existing fixture pair stops validating",
+    "a changed top-level projection is accepted",
+    "missing embedded projection is accepted",
+    "any existing oracle test fails"
+  ]
+}

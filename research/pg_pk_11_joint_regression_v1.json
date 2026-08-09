@@ -1,0 +1,101 @@
+{
+  "schema_version": "sift-pg-pk-11-joint-regression-report-v1",
+  "protocol_id": "pg-pk-11-joint-cross-family-regression-v1",
+  "status": "pass",
+  "triage": {
+    "schema_version": "sift-experiment-engineering-triage-v1",
+    "classification": "inconclusive",
+    "experiment_path": {
+      "signals": [],
+      "gate_passed": true,
+      "action": "no_scientific_failure_signal"
+    },
+    "engineering_path": {
+      "signals": [],
+      "gate_passed": true,
+      "action": "no_engineering_failure_signal"
+    },
+    "evidence": {
+      "missing_artifacts": [],
+      "shared_router_positive_authority": false,
+      "sql_active_request_count": 13,
+      "sql_active_oracle_pair_count": 4,
+      "logic_oracle_pair_count": 12,
+      "logic_memory_status": {
+        "access_control": "promote",
+        "logic": "promote"
+      }
+    },
+    "model_change_authorized": false,
+    "infrastructure_scale_authorized": false
+  },
+  "metrics": {
+    "shared_encoding_holdout": {
+      "accuracy": 1.0,
+      "control_false_accept_rate": 0.0,
+      "positive_recall": 1.0,
+      "by_family": {
+        "control": 1.0,
+        "xss": 1.0,
+        "injection": 1.0,
+        "access_control": 1.0,
+        "logic": 1.0
+      }
+    },
+    "shared_joint_surface_holdout": {
+      "accuracy": 0.956522,
+      "control_false_accept_rate": 0.043478,
+      "positive_recall": 1.0,
+      "by_family": {
+        "control": 0.666667,
+        "xss": 1.0,
+        "injection": 0.0,
+        "access_control": 1.0,
+        "logic": 1.0
+      }
+    },
+    "shared_pair_invariance": {
+      "pair_count": 11.0,
+      "mean_l2": 0.0,
+      "max_l2": 0.0
+    },
+    "sql_active": {
+      "requests": 13,
+      "complete_pairs": 5,
+      "oracle_revalidated_pairs": 4,
+      "shared_router_abstains": 0,
+      "shared_router_ood": 0,
+      "positive_authority": false
+    },
+    "logic_access": {
+      "oracle_revalidated_pairs": 12,
+      "counterfactual_model_accepts": 0,
+      "memory_promotion": {
+        "access_control": "promote",
+        "logic": "promote"
+      }
+    }
+  },
+  "required_invariants": {
+    "shared_router_diagnostic_only": true,
+    "family_specific_oracle_positive_gate": true,
+    "active_budget_preserved": true,
+    "counterfactual_model_accepts_zero": true,
+    "triage_paths_independent": true
+  },
+  "source_reports": [
+    "artifacts\\shared-family-router-pg-pk-11\\report.json",
+    "research\\pg_pk_11_shared_router_triage_v1.json",
+    "research\\pg_pk_09_sql_active_probe_v1.json",
+    "research\\pg_pk_10_logic_access_v1.json"
+  ],
+  "ledger": {
+    "path": "artifacts\\experiment-ledger-pg-pk-11.jsonl",
+    "record_hash": "dbf9df48cc6386c330e82005da861aa9fb94cc6d60d4e4202b8866565bb5a5e1",
+    "verification": {
+      "valid": true,
+      "record_count": 7,
+      "head": "dbf9df48cc6386c330e82005da861aa9fb94cc6d60d4e4202b8866565bb5a5e1"
+    }
+  }
+}

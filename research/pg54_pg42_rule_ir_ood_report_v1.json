@@ -1,0 +1,335 @@
+{
+  "protocol_id": "pg-pk-54-pg42-rule-ir-ood-v1",
+  "schema_version": "pg54-pg42-rule-ir-ood-report-v1",
+  "status": "diagnostic_only",
+  "source": {
+    "fixture": "app.pg42_independent_semantic_fixture",
+    "implementations": [
+      "cobalt",
+      "quartz"
+    ],
+    "variants": [
+      "ledger",
+      "envelope",
+      "framed"
+    ],
+    "surface_count": 10,
+    "families": [
+      "access_control",
+      "authentication",
+      "command_injection",
+      "injection",
+      "input_validation",
+      "logic",
+      "ordinary_response",
+      "template_injection",
+      "url_redirect",
+      "xss"
+    ],
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "sampling_seeds": [
+      401,
+      409,
+      419
+    ],
+    "loopback_only": true,
+    "external_network": false
+  },
+  "summary": {
+    "case_count": 360,
+    "confirmed_positive_count": 324,
+    "confirmed_negative_count": 36,
+    "get_post_covered": {
+      "GET": 180,
+      "POST": 180
+    },
+    "implementation_count": 2,
+    "variant_count": 3,
+    "seed_count": 3,
+    "negative_control_pass_count": 360,
+    "fresh_reset_count": 360
+  },
+  "feature_review": {
+    "dataset_id": "pg54-pg42-rule-ir-ood-feature-audit",
+    "row_count": 360,
+    "stage_counts": {
+      "candidate": 54,
+      "observable_safe": 37,
+      "quality": 28,
+      "source_leakage": 28,
+      "seed_stability": 28,
+      "label_utility_audit": 21,
+      "redundancy_pruned": 17
+    },
+    "accepted_features": [
+      "geometry_change_presence_control",
+      "geometry_leaf_delta_control",
+      "geometry_true_boolean_delta_ratio_control",
+      "shape_key_count_bucket",
+      "shape_key_delta_from_control",
+      "geometry_nonzero_numeric_count",
+      "geometry_boolean_count",
+      "body_length_bucket",
+      "geometry_leaf_delta_ratio_control",
+      "geometry_leaf_count",
+      "geometry_true_boolean_count",
+      "geometry_string_length_bucket_sum",
+      "geometry_object_delta_ratio_control",
+      "shape_key_delta_ratio_control",
+      "geometry_true_boolean_delta_control",
+      "geometry_object_count",
+      "geometry_string_count"
+    ],
+    "source_count": 2,
+    "family_count": 10,
+    "pg53_selected_features": [
+      "geometry_change_presence_control",
+      "geometry_true_boolean_delta_ratio_control",
+      "geometry_array_item_count",
+      "geometry_nonzero_numeric_count",
+      "geometry_numeric_count",
+      "geometry_array_count"
+    ],
+    "selected_features_revalidated_on_pg54": false,
+    "selected_features_missing_on_pg54": [
+      "geometry_array_count",
+      "geometry_array_item_count",
+      "geometry_numeric_count"
+    ],
+    "pg54_only_accepted_features": [
+      "body_length_bucket",
+      "geometry_boolean_count",
+      "geometry_leaf_count",
+      "geometry_leaf_delta_control",
+      "geometry_leaf_delta_ratio_control",
+      "geometry_object_count",
+      "geometry_object_delta_ratio_control",
+      "geometry_string_count",
+      "geometry_string_length_bucket_sum",
+      "geometry_true_boolean_count",
+      "geometry_true_boolean_delta_control",
+      "shape_key_count_bucket",
+      "shape_key_delta_from_control",
+      "shape_key_delta_ratio_control"
+    ],
+    "feature_transfer_gate": "blocked",
+    "review": {
+      "reviewer_id": "codex-primary-feature-funnel-review-v1",
+      "reviewer_role": "independent_feature_quality_and_leakage_auditor",
+      "review_scope": "PG-54 PG-42 safe visible response projections only",
+      "decision": "approved_for_downstream_ood_experiment",
+      "passed": true,
+      "checks": {
+        "oracle_is_label_not_feature": true,
+        "source_seed_surface_audit_only": true,
+        "raw_request_response_forbidden": true,
+        "hashes_evidence_only": true,
+        "surface_observation_not_model_eligible": true,
+        "generic_geometry_has_no_field_names": true,
+        "accepted_features_have_stats": true,
+        "accepted_features_have_accept_decision": true,
+        "accepted_features_are_model_eligible": true,
+        "accepted_features_have_low_source_shift": true,
+        "no_unsafe_feature_name": true,
+        "multiple_sources": true,
+        "multiple_families": true,
+        "evaluation_only": true
+      },
+      "notes": [
+        "审核只确认特征是否满足安全、可观测、跨来源和可复核要求。",
+        "typed oracle/family/source/seed 只用于审核与评估，不进入模型特征。",
+        "本审核不等于漏洞检测能力证明，也不批准长期记忆写入。"
+      ],
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "review_evidence_sha256": "b0109ac73cae2d9f4509af9ced652539b31986a8928416f8f356af9a0adc7bf2"
+    },
+    "training_eligible": false,
+    "long_term_memory_write": false
+  },
+  "model": {
+    "checkpoint": "artifacts\\pg53-rule-ir-candidate\\decoder.pt",
+    "checkpoint_sha256": "2d88fc07ecf9ebb5e3c5088d20ab905a6b1590e6b0dbe06ec9bc0a21897a8c04",
+    "selected_features": [
+      "geometry_change_presence_control",
+      "geometry_true_boolean_delta_ratio_control",
+      "geometry_array_item_count",
+      "geometry_nonzero_numeric_count",
+      "geometry_numeric_count",
+      "geometry_array_count"
+    ],
+    "feature_funnel_review_evidence_sha256": "f6558ad12ad8aaa7fe79d6da5e27a560dc8436c76579844aa5a0dcc7c9c9b5fa",
+    "oracle_visible_before_probe": false,
+    "typed_oracle_in_features": false,
+    "family_label_in_features": false,
+    "raw_request_response_in_features": false,
+    "device": "cuda",
+    "density_gate": {
+      "reference_train_rows": 72,
+      "calibration_dev_rows": 36,
+      "calibrated_threshold": 0.0,
+      "calibrated_dev_hits": 8,
+      "calibrated_dev_emitted": 8,
+      "calibrated_dev_false_accepts": 0,
+      "calibration_source": "pg53-pg35-dev-only",
+      "holdout_distance_min": 0.0,
+      "holdout_distance_max": 14142.135742,
+      "gate_enabled": true
+    }
+  },
+  "splits": {
+    "all": {
+      "count": 360,
+      "positive_count": 324,
+      "negative_count": 36,
+      "emitted_count": 0,
+      "known_positive_count": 288,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 36,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "abstain_rate": 1.0
+    },
+    "implementation_cobalt": {
+      "count": 180,
+      "positive_count": 162,
+      "negative_count": 18,
+      "emitted_count": 0,
+      "known_positive_count": 144,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 18,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "abstain_rate": 1.0
+    },
+    "implementation_quartz": {
+      "count": 180,
+      "positive_count": 162,
+      "negative_count": 18,
+      "emitted_count": 0,
+      "known_positive_count": 144,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 18,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "abstain_rate": 1.0
+    },
+    "variant_framed": {
+      "count": 120,
+      "positive_count": 108,
+      "negative_count": 12,
+      "emitted_count": 0,
+      "known_positive_count": 96,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 12,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "abstain_rate": 1.0
+    },
+    "seed_419": {
+      "count": 120,
+      "positive_count": 108,
+      "negative_count": 12,
+      "emitted_count": 0,
+      "known_positive_count": 96,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 12,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "abstain_rate": 1.0
+    },
+    "known_families": {
+      "count": 288,
+      "positive_count": 288,
+      "negative_count": 0,
+      "emitted_count": 0,
+      "known_positive_count": 288,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "abstain_rate": 1.0
+    },
+    "unknown_template_family": {
+      "count": 36,
+      "positive_count": 36,
+      "negative_count": 0,
+      "emitted_count": 0,
+      "known_positive_count": 0,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 36,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "abstain_rate": 1.0
+    },
+    "negative_control": {
+      "count": 36,
+      "positive_count": 0,
+      "negative_count": 36,
+      "emitted_count": 0,
+      "known_positive_count": 0,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_effect_false_accept_count": 0,
+      "negative_effect_false_accept_rate": 0.0,
+      "abstain_rate": 1.0
+    }
+  },
+  "unknown_family_policy": {
+    "family": "template_injection",
+    "model_class_present": false,
+    "must_abstain": true,
+    "unknown_misname_count": 0,
+    "unknown_not_abstain_count": 0,
+    "strict_abstain": true
+  },
+  "trace": {
+    "path": "research\\pg54_pg42_rule_ir_ood_trace_v1.json",
+    "sha256": "8636d3474edd2838b0e652a2e047e4eb73e04f4728c027858ed0cc8d0a55e174",
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_claim_allowed": false,
+    "status": "quarantined_independent_rule_ir_ood",
+    "reason": "PG42_is_an_independent_envelope_and_template_family_holdout; feature_transfer_gate_and_capability_metrics_are_diagnostic_only"
+  },
+  "report_sha256": "84d749a625f4ef557967b55ee63a83cc11b973d7361529dba46de7486ceb761e"
+}

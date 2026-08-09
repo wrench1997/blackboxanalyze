@@ -1,0 +1,317 @@
+{
+  "protocol_id": "pg-pk-147-model-capacity-sweep-v1",
+  "schema_version": "pg147-model-capacity-sweep-report-v1",
+  "status": "completed_pg147_model_capacity_sweep",
+  "device": "cuda",
+  "seed": 14701,
+  "corpus": {
+    "base_count": 1338,
+    "unique_count": 12092,
+    "generated_count": 12000,
+    "duplicate_count": 1246,
+    "train_count": 9673,
+    "dev_count": 1209,
+    "holdout_count": 1210,
+    "vocabulary_size": 170,
+    "max_length": 128,
+    "source_files": [
+      "research/pg136_causal_token_lm_dataset_v1.json",
+      "research/pg145_local_multisurface_model_dataset_v1.json",
+      "research/pg146_public_lab_replay_model_dataset_v1.json"
+    ]
+  },
+  "variants": [
+    {
+      "variant": "tiny_transformer",
+      "config": {
+        "d_model": 96,
+        "nhead": 4,
+        "layers": 2,
+        "batch_size": 128,
+        "epochs": 4,
+        "lr": 0.0003
+      },
+      "parameter_count": 268970,
+      "checkpoint": "artifacts\\pg147-model-capacity-sweep-v1\\tiny_transformer.pt",
+      "train": {
+        "loss": 1.03186987,
+        "perplexity": 2.80630837,
+        "next_token_accuracy": 0.51830293,
+        "token_count": 662626
+      },
+      "dev": {
+        "loss": 1.02891294,
+        "perplexity": 2.79802257,
+        "next_token_accuracy": 0.51448784,
+        "token_count": 82552
+      },
+      "holdout": {
+        "loss": 1.04047702,
+        "perplexity": 2.83056693,
+        "next_token_accuracy": 0.51514457,
+        "token_count": 82868
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 3.72984531,
+          "dev": {
+            "loss": 2.34912001,
+            "perplexity": 10.47634654,
+            "next_token_accuracy": 0.42241254,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 1.75164449,
+          "dev": {
+            "loss": 1.31353749,
+            "perplexity": 3.71930749,
+            "next_token_accuracy": 0.44857787,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 1.24835853,
+          "dev": {
+            "loss": 1.14797342,
+            "perplexity": 3.15179905,
+            "next_token_accuracy": 0.4776989,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 4,
+          "train_loss": 1.1164346,
+          "dev": {
+            "loss": 1.02891294,
+            "perplexity": 2.79802257,
+            "next_token_accuracy": 0.51448784,
+            "token_count": 82552
+          }
+        }
+      ],
+      "elapsed_seconds": 7.518
+    },
+    {
+      "variant": "medium_transformer",
+      "config": {
+        "d_model": 256,
+        "nhead": 8,
+        "layers": 4,
+        "batch_size": 96,
+        "epochs": 4,
+        "lr": 0.0002
+      },
+      "parameter_count": 3279530,
+      "checkpoint": "artifacts\\pg147-model-capacity-sweep-v1\\medium_transformer.pt",
+      "train": {
+        "loss": 0.94758486,
+        "perplexity": 2.57947233,
+        "next_token_accuracy": 0.52406033,
+        "token_count": 662626
+      },
+      "dev": {
+        "loss": 0.94885481,
+        "perplexity": 2.58275022,
+        "next_token_accuracy": 0.51780696,
+        "token_count": 82552
+      },
+      "holdout": {
+        "loss": 0.95126597,
+        "perplexity": 2.58898516,
+        "next_token_accuracy": 0.51884925,
+        "token_count": 82868
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 1.91163048,
+          "dev": {
+            "loss": 1.0675632,
+            "perplexity": 2.90828394,
+            "next_token_accuracy": 0.49983041,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 1.00471085,
+          "dev": {
+            "loss": 0.96764116,
+            "perplexity": 2.63172931,
+            "next_token_accuracy": 0.51792809,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.96664619,
+          "dev": {
+            "loss": 0.95535808,
+            "perplexity": 2.59960129,
+            "next_token_accuracy": 0.51814614,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.95575609,
+          "dev": {
+            "loss": 0.94885481,
+            "perplexity": 2.58275022,
+            "next_token_accuracy": 0.51780696,
+            "token_count": 82552
+          }
+        }
+      ],
+      "elapsed_seconds": 20.867
+    },
+    {
+      "variant": "large_transformer",
+      "config": {
+        "d_model": 512,
+        "nhead": 8,
+        "layers": 6,
+        "batch_size": 48,
+        "epochs": 4,
+        "lr": 0.00015
+      },
+      "parameter_count": 19155114,
+      "checkpoint": "artifacts\\pg147-model-capacity-sweep-v1\\large_transformer.pt",
+      "train": {
+        "loss": 0.94023502,
+        "perplexity": 2.56058314,
+        "next_token_accuracy": 0.52474246,
+        "token_count": 662626
+      },
+      "dev": {
+        "loss": 0.94298349,
+        "perplexity": 2.5676305,
+        "next_token_accuracy": 0.51970879,
+        "token_count": 82552
+      },
+      "holdout": {
+        "loss": 0.94092251,
+        "perplexity": 2.56234411,
+        "next_token_accuracy": 0.52440025,
+        "token_count": 82868
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 1.18024274,
+          "dev": {
+            "loss": 0.95569002,
+            "perplexity": 2.60046434,
+            "next_token_accuracy": 0.51993895,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.95281555,
+          "dev": {
+            "loss": 0.9456462,
+            "perplexity": 2.57447646,
+            "next_token_accuracy": 0.52024179,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.94580888,
+          "dev": {
+            "loss": 0.94616627,
+            "perplexity": 2.57581572,
+            "next_token_accuracy": 0.51888507,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.94290684,
+          "dev": {
+            "loss": 0.94298349,
+            "perplexity": 2.5676305,
+            "next_token_accuracy": 0.51970879,
+            "token_count": 82552
+          }
+        }
+      ],
+      "elapsed_seconds": 72.908
+    },
+    {
+      "variant": "xl_transformer",
+      "config": {
+        "d_model": 768,
+        "nhead": 12,
+        "layers": 8,
+        "batch_size": 24,
+        "epochs": 3,
+        "lr": 0.0001
+      },
+      "parameter_count": 57064106,
+      "checkpoint": "artifacts\\pg147-model-capacity-sweep-v1\\xl_transformer.pt",
+      "train": {
+        "loss": 0.94280258,
+        "perplexity": 2.56716603,
+        "next_token_accuracy": 0.52389131,
+        "token_count": 662626
+      },
+      "dev": {
+        "loss": 0.94512697,
+        "perplexity": 2.57314007,
+        "next_token_accuracy": 0.52224053,
+        "token_count": 82552
+      },
+      "holdout": {
+        "loss": 0.94460701,
+        "perplexity": 2.57180247,
+        "next_token_accuracy": 0.52121446,
+        "token_count": 82868
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 1.05816157,
+          "dev": {
+            "loss": 0.95587224,
+            "perplexity": 2.60093824,
+            "next_token_accuracy": 0.5204356,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.94938312,
+          "dev": {
+            "loss": 0.94694473,
+            "perplexity": 2.57782169,
+            "next_token_accuracy": 0.51970879,
+            "token_count": 82552
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.94467207,
+          "dev": {
+            "loss": 0.94512697,
+            "perplexity": 2.57314007,
+            "next_token_accuracy": 0.52224053,
+            "token_count": 82552
+          }
+        }
+      ],
+      "elapsed_seconds": 161.311
+    }
+  ],
+  "objective": "capacity_and_next_token_representation_comparison",
+  "raw_payload_or_response_in_corpus": false,
+  "external_network_targets": false,
+  "capability_claim_allowed": false,
+  "long_term_memory_promotion_allowed": false,
+  "report_sha256": "70af67c91739ad7b42270d6e4d46aa5eda13b30400175037bc0a6dce3d7a6c1f"
+}

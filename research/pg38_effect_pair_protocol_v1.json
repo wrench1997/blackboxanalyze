@@ -1,0 +1,86 @@
+{
+  "schema_version": "pg-pk-38-effect-pair-protocol-v1",
+  "protocol_id": "PG-38",
+  "title": "候选-阴性对照可观察差分与族无关 typed-effect head",
+  "objective": "验证跨族检测失败是否来自逐响应表面记忆；模型只看 candidate 与匹配 control 的 bounded projection 差分，单独训练族无关 effect head，再评估 Rule IR family head。",
+  "scope": {
+    "input_catalog": "research/pg37_counterfactual_catalog_v1.json",
+    "methods": ["GET", "POST"],
+    "surface_variants": ["compact", "nested", "headerized"],
+    "implementations": ["atlas", "orbit"],
+    "seeds": [361, 367, 373],
+    "local_only": true,
+    "external_network": false,
+    "state_mutation": false,
+    "raw_probe_or_response_persistence": false
+  },
+  "pair_contract": {
+    "candidate_and_control_share_target_context": true,
+    "control_is_observed_before_candidate": true,
+    "pair_feature_is_bounded_candidate_minus_control_projection": true,
+    "typed_oracle_hidden_until_after_probe": true,
+    "effect_head_is_family_agnostic": true,
+    "family_head_does_not_consume_typed_effect": true,
+    "zero_delta_negative_controls_retained": true,
+    "surface_variant_label_excluded": true,
+    "raw_hashes_excluded": true
+  },
+  "split_plan": {
+    "train": "atlas; train/dev families; compact+nested; seeds 361,367",
+    "seed_holdout": "atlas; train/dev families; compact+nested; seed 373",
+    "surface_holdout": "atlas; train/dev families; headerized; all seeds",
+    "family_holdout": "atlas; logic/url_redirect; all variants and seeds",
+    "ood_source": "atlas; input_validation/command_injection; all variants and seeds",
+    "source_holdout": "orbit; train/dev families; all variants and seeds",
+    "negative_control": "atlas+orbit; ordinary_response/unknown_surface; all variants and seeds"
+  },
+  "planned_pair_counts": {
+    "train": 128,
+    "seed_holdout": 64,
+    "surface_holdout": 24,
+    "family_holdout": 36,
+    "ood_source": 36,
+    "source_holdout": 72,
+    "negative_control": 72
+  },
+  "model_input_contract": {
+    "allowed": ["bounded_candidate_projection", "bounded_control_projection", "bounded_projection_delta", "http_method", "phase", "abstract_probe_kind"],
+    "excluded": ["family", "positive", "positive_authority", "typed_effect_ready", "evaluator_state", "implementation", "source_id", "target_instance_id", "surface_variant_label", "evidence_sha256", "raw_probe", "raw_response_body", "body_sha256", "semantic_body_sha256"],
+    "typed_oracle_is_label_not_feature": true,
+    "positive_authority": false,
+    "rule_ir_executable": false,
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "promotion_gate": {
+    "minimum_independent_seeds": 3,
+    "minimum_independent_source_hashes": 2,
+    "minimum_target_instances": 3,
+    "zero_negative_false_accept": true,
+    "effect_recall_gain_required": true,
+    "family_holdout_typed_recall_gain_required": true,
+    "unknown_surface_strict_abstain": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "pending_collection_replay"
+  },
+  "run_result": {
+    "script": "scripts/train_pg38_effect_pair_candidate.py",
+    "report": "research/pg38_effect_pair_candidate_report_v1.json",
+    "device": "cuda",
+    "pair_count": 1440,
+    "typed_positive_pair_count": 288,
+    "splits": {
+      "surface_holdout": {"typed_recall": 0.0, "effect_recall_any_family": 0.0, "effect_false_positive_rate": 0.0},
+      "family_holdout": {"typed_recall": 0.0, "effect_recall_any_family": 0.5, "effect_false_positive_rate": 0.0},
+      "ood_source": {"typed_recall": 0.0, "effect_recall_any_family": 0.5, "effect_false_positive_rate": 0.0},
+      "source_holdout": {"typed_recall": 0.25, "effect_recall_any_family": 0.666667, "effect_false_positive_rate": 0.0},
+      "negative_control": {"effect_recall_any_family": 0.0, "effect_false_positive_rate": 0.0}
+    },
+    "capability_gate_status": "blocked",
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "candidate-control delta makes a family-agnostic effect head partially transfer to unseen families, but surface holdout and family Rule IR decoding still fail; no promotion"
+  },
+  "status": "run_completed_capability_gate_failed_no_promotion"
+}

@@ -1,0 +1,74 @@
+{
+  "protocol_id": "pg-pk-163-large-typed-mix-v1",
+  "schema_version": "pg163-large-typed-mix-protocol-v1",
+  "objective": "用 fresh typed GET/POST Rule-IR projection 增强大规模 causal token 预训练，并观察 typed holdout 泛化和基础语言保持。",
+  "source_set": [
+    "pg147_abstract_corpus",
+    "pg116_alpha_fresh",
+    "pg116_beta_fresh",
+    "pg118_delta_fresh",
+    "pg119_metadata_approved",
+    "pg123_authorization_approved"
+  ],
+  "train_seed_sets": {
+    "pg116": [
+      16301,
+      16302,
+      16303,
+      16304,
+      16305,
+      16306,
+      16307,
+      16308,
+      16309,
+      16310
+    ],
+    "pg118": [
+      16321,
+      16322,
+      16323,
+      16324,
+      16325,
+      16326,
+      16327,
+      16328,
+      16329,
+      16330
+    ]
+  },
+  "holdout_seed_sets": {
+    "pg116": [
+      16311,
+      16312,
+      16313,
+      16314,
+      16315
+    ],
+    "pg118": [
+      16331,
+      16332,
+      16333,
+      16334,
+      16335
+    ]
+  },
+  "sequence_contract": {
+    "max_len": 128,
+    "get_post_balanced": true,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "oracle_labels_in_tokens": false,
+    "target_identity_in_tokens": false,
+    "family_labels_in_tokens": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false
+  },
+  "training_artifact_promotion_allowed": false,
+  "memory_promotion_allowed": false,
+  "protocol_sha256": "969dcbc69221fe9fe81f0746add561e913ffadc4cd8be5c1ec1e3f9333ffca2e"
+}

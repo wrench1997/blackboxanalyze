@@ -1,0 +1,34 @@
+{
+  "schema_version": "sift-experiment-iteration-v1",
+  "parent_experiment": "frontend-structured-semantics-loop-01",
+  "iteration": 6,
+  "registered_before_iteration_06_results": true,
+  "observed_failure": {
+    "episode_memory_postmessage_accuracy": 0.527778,
+    "corrected_rule_memory_q_accuracy_postmessage": 1.0,
+    "corrected_rule_memory_q_accuracy_suffix_primitive": 1.0,
+    "interpretation": "The memory writer recovers the behavior, but the byte decoder does not reliably consume the rule-memory token."
+  },
+  "root_cause_hypothesis": {
+    "layer": "memory_write_retrieve_or_staleness",
+    "component": "memory-to-logit fusion",
+    "claim": "A high-confidence executable memory should be authoritative for its covered query; treating it as ordinary byte text loses the result."
+  },
+  "minimal_change": {
+    "name": "confidence-gated executable Rule Memory head",
+    "learned_parameters_added": 0,
+    "retraining": false,
+    "checkpoint": "artifacts/frontend-loop-05-routed-memory-20260801/tiny_rule_gpt.pt",
+    "gate": "Use the context-derived prediction only when context agreement is at least 0.75; otherwise defer to neural logits.",
+    "target_query_output_used_to_write_memory": false
+  },
+  "unchanged_success_criteria": {
+    "postmessage_origin_behavior_agreement_min": 0.85,
+    "dom_sink_injection_behavior_agreement_min": 0.85,
+    "counterexample_at_10_min": 0.8,
+    "old_family_regression_max_absolute": 0.02,
+    "required_independent_seeds": 3,
+    "counterexample_top1_lift_over_random_min": 0.15
+  },
+  "decision": "Evaluate the same checkpoint with and without the gate. If the gate clears the first-seed family thresholds, train and evaluate seeds 20260817 and 20260903 under the frozen iteration-06 design."
+}

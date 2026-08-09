@@ -1,0 +1,51 @@
+{
+  "protocol_id": "pg-pk-60-pre-oracle-probe-policy-audit-v1",
+  "schema_version": "pg60-pre-oracle-probe-policy-audit-protocol-v1",
+  "objective": "审计 PG-47 的 pre-oracle GET/POST action-value 策略是否真正依赖抽象状态，而不是固定动作顺序造成的查询减少。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false
+  },
+  "inputs": {
+    "policy_report": "research/pg47_counterfactual_action_value_report_v1.json",
+    "policy_trace": "research/pg47_counterfactual_action_trace_v1.json",
+    "independent_catalog": "research/pg42_independent_semantic_catalog_v1.json",
+    "typed_oracle_before_action": false,
+    "family_before_action": false
+  },
+  "required_hard_gates": {
+    "confirmation_action_entropy_min": 0.5,
+    "at_least_two_state_dependent_confirmation_actions": true,
+    "get_post_coverage": true,
+    "fresh_reset_per_action": true,
+    "matched_negative_control": true,
+    "evidence_hash_per_action": true,
+    "no_raw_probe_or_response_retention": true,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "run_result": {
+    "status": "blocked_fixed_action_order",
+    "episode_count": 180,
+    "step_count": 558,
+    "action_sequence_patterns": {
+      "GET_to_POST_to_GET": 162,
+      "GET_to_POST_to_GET_to_POST": 18
+    },
+    "first_action_counts": {"GET": 180},
+    "confirmation_action_counts": {"GET.confirm": 162},
+    "confirmation_action_entropy": 0.0,
+    "paired_get_post_group_count": 180,
+    "fresh_reset_count": 558,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0,
+    "interpretation": "PG-47 safety/query-reduction metrics cannot prove active policy learning while confirmation action entropy is zero.",
+    "next_required_dataset": "same abstract state with different best GET/POST action, randomized action order, typed oracle after action"
+  }
+}

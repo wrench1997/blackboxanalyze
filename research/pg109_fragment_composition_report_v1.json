@@ -1,0 +1,1042 @@
+{
+  "protocol_id": "pg-pk-109-fragment-composition-v1",
+  "schema_version": "pg109-fragment-composition-report-v1",
+  "status": "passed_fragment_composition_diagnostic",
+  "source": {
+    "training_source": "PG101 train role PG36 north seeds 361/367",
+    "evaluation_source": "PG105 PG42/PG35/PG76/PG69 plus PG106 independent decoy",
+    "training_row_count": 32,
+    "evaluation_row_count": 578,
+    "episode_count": 289,
+    "source_hashes": {
+      "train_dataset": "6070cab5a7fc8ed869ebfbf4d752c1b527929751f12a9d41d3bb8f8987749efe",
+      "pg105_dataset": "dc1573b34ddcb2733933d1393fca28f073566f4cbd58be4ed30edb9e326e4ad3",
+      "pg105_trace": "053058554dd93f86ee17b0a6257b7a5bb44cbd1a8b3c6ca29de3138ab6e25db3",
+      "pg106_dataset": "205011724db70c65ee5911423123970400f2f18d2482b3b5956b046b80d28cea",
+      "pg106_trace": "1736d73e9371a1f44adc785769eb62953c828749621a43ddf9a60b178339ed5f",
+      "assembler": "8c814c1851b21de3c5ee628c6bd678b994197590fa51705b2c9be055b1f0ed33",
+      "inducer": "c3eaf01cfcc392b6b2efc540c386b40769ab3f3738d14b509b26eaa41bd7811e",
+      "runner": "bf3ce318f3407d3bd7dd6f8aa07c707cda011c1bff0f5223a1aa7f7cdcbd3a1d"
+    }
+  },
+  "controller": {
+    "architecture": "family-free atomic Rule IR fragment assembler",
+    "atoms": [
+      "effect_present",
+      "probe_binding_valid",
+      "get_post_repeat",
+      "negative_control_clear"
+    ],
+    "copy_paste_order_invariant": true,
+    "cross_sample_recombination": true,
+    "family_labels_in_fragments": false,
+    "oracle_labels_in_fragments": false,
+    "typed_oracle_called": false,
+    "promotion_allowed": false
+  },
+  "metrics": {
+    "training_row_count": 32,
+    "evaluation_row_count": 578,
+    "episode_count": 289,
+    "supported_slot_count": 8,
+    "known_effect_expected_pair_count": 216,
+    "known_effect_assembled_pair_count": 216,
+    "known_effect_pair_count": 216,
+    "known_effect_assembly_recall": 1.0,
+    "unknown_or_decoy_episode_count": 16,
+    "unknown_or_decoy_abstain_rate": 1.0,
+    "cross_sample_recombination_count": 8,
+    "cross_sample_valid_rate": 1.0,
+    "negative_case_count": 4,
+    "negative_case_abstain_rate": 1.0,
+    "typed_oracle_called_count": 0,
+    "confirmed_positive_count": 0
+  },
+  "checks": {
+    "training_row_count": true,
+    "evaluation_row_count": true,
+    "episode_count": true,
+    "supported_slots_are_generic": true,
+    "binding_attestation_valid": true,
+    "model_input_oracle_blind": true,
+    "fragments_have_bounded_context": true,
+    "known_effect_pair_count_positive": true,
+    "known_effect_recall": true,
+    "unknown_and_decoy_abstain": true,
+    "cross_sample_recombination_count": true,
+    "cross_sample_recombination_valid": true,
+    "cross_sample_order_invariant": true,
+    "episode_order_invariant": true,
+    "slot_conflict_abstain": true,
+    "duplicate_evidence_abstain": true,
+    "invalid_binding_abstain": true,
+    "input_only_decoy_abstain": true,
+    "typed_oracle_not_called": true,
+    "assembly_non_executable": true,
+    "promotion_disabled": true
+  },
+  "capability_gate": {
+    "status": "passed_fragment_composition_diagnostic",
+    "checks": {
+      "training_row_count": true,
+      "evaluation_row_count": true,
+      "episode_count": true,
+      "supported_slots_are_generic": true,
+      "binding_attestation_valid": true,
+      "model_input_oracle_blind": true,
+      "fragments_have_bounded_context": true,
+      "known_effect_pair_count_positive": true,
+      "known_effect_recall": true,
+      "unknown_and_decoy_abstain": true,
+      "cross_sample_recombination_count": true,
+      "cross_sample_recombination_valid": true,
+      "cross_sample_order_invariant": true,
+      "episode_order_invariant": true,
+      "slot_conflict_abstain": true,
+      "duplicate_evidence_abstain": true,
+      "invalid_binding_abstain": true,
+      "input_only_decoy_abstain": true,
+      "typed_oracle_not_called": true,
+      "assembly_non_executable": true,
+      "promotion_disabled": true
+    },
+    "blocking_reasons": [],
+    "claim_allowed": false
+  },
+  "negative_cases": {
+    "slot_conflict": {
+      "schema_version": "generic-rule-assembly-v1",
+      "executable": false,
+      "typed_oracle_required": true,
+      "promotion_eligible": false,
+      "decision": "abstain",
+      "reason": "slot_conflict"
+    },
+    "duplicate_evidence": {
+      "schema_version": "generic-rule-assembly-v1",
+      "executable": false,
+      "typed_oracle_required": true,
+      "promotion_eligible": false,
+      "decision": "abstain",
+      "reason": "duplicate_evidence"
+    },
+    "invalid_binding": {
+      "schema_version": "generic-rule-assembly-v1",
+      "executable": false,
+      "typed_oracle_required": true,
+      "promotion_eligible": false,
+      "decision": "abstain",
+      "reason": "invalid_fragment_binding"
+    },
+    "input_only_decoy": {
+      "schema_version": "generic-rule-assembly-v1",
+      "executable": false,
+      "typed_oracle_required": true,
+      "promotion_eligible": false,
+      "decision": "abstain",
+      "reason": "input_only_fragment_cannot_supply_effect"
+    }
+  },
+  "cross_sample": [
+    {
+      "slot": "p0",
+      "source_pair": [
+        "pg42",
+        "pg35"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p0",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "2ff153b136c885d4dcabcc8e0cc3cf48a438284dc6130bddde246d9b24631430",
+          "9adfa506890f7657fa20dd90ef60ef72b1e81f475eafc10841eabfaa9d6f9266"
+        ],
+        "evidence_sha256": [
+          "4568cdca8f5c98e93cfd33091172221b9668ea751bf639e077ab0cf6de2e4377",
+          "adc180bcca407d41532354223f6e17c15a6f4a56c8098fe40c56668b2f4a5927"
+        ],
+        "canonical_sha256": "f7904ec060ce7c4863992793c446e909125a19cbb0a6d16b600cc07c1a34ef47"
+      },
+      "reverse_assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p0",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "2ff153b136c885d4dcabcc8e0cc3cf48a438284dc6130bddde246d9b24631430",
+          "9adfa506890f7657fa20dd90ef60ef72b1e81f475eafc10841eabfaa9d6f9266"
+        ],
+        "evidence_sha256": [
+          "4568cdca8f5c98e93cfd33091172221b9668ea751bf639e077ab0cf6de2e4377",
+          "adc180bcca407d41532354223f6e17c15a6f4a56c8098fe40c56668b2f4a5927"
+        ],
+        "canonical_sha256": "f7904ec060ce7c4863992793c446e909125a19cbb0a6d16b600cc07c1a34ef47"
+      },
+      "order_invariant": true
+    },
+    {
+      "slot": "p1",
+      "source_pair": [
+        "pg42",
+        "pg35"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p1",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "205a3fd8a74388e84645046f67bea6d6c43f7eb98246ae49422dccec3406ada3",
+          "59096c53845584f8213a4e05685d0c95470a976dabbe415e44683a7638ab2c4f"
+        ],
+        "evidence_sha256": [
+          "91bfd4a4c2959fb7d8936b2e89ccf1df05948f8190d1ecc19d9cf19619c4336f",
+          "d87b76907e6faf8b4dad7ddae58eaeaad9d0f96f4a220e3a4c3be135959e394d"
+        ],
+        "canonical_sha256": "515ba9d044c21f3738ceb0f86c74a158054f2924eb0480404a1c10e41ecbcb57"
+      },
+      "reverse_assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p1",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "205a3fd8a74388e84645046f67bea6d6c43f7eb98246ae49422dccec3406ada3",
+          "59096c53845584f8213a4e05685d0c95470a976dabbe415e44683a7638ab2c4f"
+        ],
+        "evidence_sha256": [
+          "91bfd4a4c2959fb7d8936b2e89ccf1df05948f8190d1ecc19d9cf19619c4336f",
+          "d87b76907e6faf8b4dad7ddae58eaeaad9d0f96f4a220e3a4c3be135959e394d"
+        ],
+        "canonical_sha256": "515ba9d044c21f3738ceb0f86c74a158054f2924eb0480404a1c10e41ecbcb57"
+      },
+      "order_invariant": true
+    },
+    {
+      "slot": "p2",
+      "source_pair": [
+        "pg42",
+        "pg35"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "3b9e5c42f14986a082e426b893401d018e0f6d7a05685055b1570828f1da14e6",
+          "4e8b73acbedbb32789eecca6530161451195bcb4c6a254f2ba274ef4c5a5256d"
+        ],
+        "evidence_sha256": [
+          "7b4e97223dab17c3564a38381891e9fc409744dc5dc84e90b5881a2f7a384896",
+          "87323cb579ec3db46f3174017c7d381a4c1a644e27c2e04991ee23d986722ca2"
+        ],
+        "canonical_sha256": "46bca93df22fef818e91946535a2f1d5ee67cc4cdb889d4d1c710d2fe0749a2b"
+      },
+      "reverse_assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "3b9e5c42f14986a082e426b893401d018e0f6d7a05685055b1570828f1da14e6",
+          "4e8b73acbedbb32789eecca6530161451195bcb4c6a254f2ba274ef4c5a5256d"
+        ],
+        "evidence_sha256": [
+          "7b4e97223dab17c3564a38381891e9fc409744dc5dc84e90b5881a2f7a384896",
+          "87323cb579ec3db46f3174017c7d381a4c1a644e27c2e04991ee23d986722ca2"
+        ],
+        "canonical_sha256": "46bca93df22fef818e91946535a2f1d5ee67cc4cdb889d4d1c710d2fe0749a2b"
+      },
+      "order_invariant": true
+    },
+    {
+      "slot": "p3",
+      "source_pair": [
+        "pg42",
+        "pg35"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p3",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "4ed295acb00399f58b248e8f11709c048675f58c4c472b85c689015b107fdfb0",
+          "c4ad47f1e78d089b455653741b42046338483d1b05ffab12c4a6950f3c57ebe8"
+        ],
+        "evidence_sha256": [
+          "1bfd84453f38f473261adbda1bce696b83d940147deb6754e41c5d2f7ec08dfd",
+          "3fdfff09c585a54d4954f9b72ec6904033546d178a06f795fb2b149efd718bcd"
+        ],
+        "canonical_sha256": "f3eea78204f708e7dd558f10b0a70ebc0c0460c3843d436fccf8338a3405db86"
+      },
+      "reverse_assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p3",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "4ed295acb00399f58b248e8f11709c048675f58c4c472b85c689015b107fdfb0",
+          "c4ad47f1e78d089b455653741b42046338483d1b05ffab12c4a6950f3c57ebe8"
+        ],
+        "evidence_sha256": [
+          "1bfd84453f38f473261adbda1bce696b83d940147deb6754e41c5d2f7ec08dfd",
+          "3fdfff09c585a54d4954f9b72ec6904033546d178a06f795fb2b149efd718bcd"
+        ],
+        "canonical_sha256": "f3eea78204f708e7dd558f10b0a70ebc0c0460c3843d436fccf8338a3405db86"
+      },
+      "order_invariant": true
+    },
+    {
+      "slot": "p4",
+      "source_pair": [
+        "pg42",
+        "pg35"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p4",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "a540079e9d2e6890cbf8080998f4cc0853ace36d3c4f79411f89c51c67e2c3c0",
+          "e81a15e2f3f99d88f340cdcac3875f1d9dcab1bac3ba5b7fbbc92b7fb765919b"
+        ],
+        "evidence_sha256": [
+          "107c073abdb3e30a7e9ea8148ef5e87b634cf101e52823cb49fe5eb11c1be32a",
+          "841e1dfaf8c8544873df8215f3f2044efe1718de202ffe8be1274f608d1968b1"
+        ],
+        "canonical_sha256": "ac6abd09c0736e019bc0edbef7217c1c730d12487fdf1707da22206e1f7594fc"
+      },
+      "reverse_assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p4",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "a540079e9d2e6890cbf8080998f4cc0853ace36d3c4f79411f89c51c67e2c3c0",
+          "e81a15e2f3f99d88f340cdcac3875f1d9dcab1bac3ba5b7fbbc92b7fb765919b"
+        ],
+        "evidence_sha256": [
+          "107c073abdb3e30a7e9ea8148ef5e87b634cf101e52823cb49fe5eb11c1be32a",
+          "841e1dfaf8c8544873df8215f3f2044efe1718de202ffe8be1274f608d1968b1"
+        ],
+        "canonical_sha256": "ac6abd09c0736e019bc0edbef7217c1c730d12487fdf1707da22206e1f7594fc"
+      },
+      "order_invariant": true
+    },
+    {
+      "slot": "p5",
+      "source_pair": [
+        "pg42",
+        "pg35"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p5",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "856a9359c4107ce221e93bd2aceb9d0102ab504196830c936f175b20b5454466",
+          "fdc2aab76311b2c7415e3fd36b699d539dc94363bd454e7270d63fbdc15aca0a"
+        ],
+        "evidence_sha256": [
+          "8bb2fb7230ce1fef43bb9603753561636d5f1c39766a117ce1394e2cc27cb22a",
+          "f7e6066228edfc585a38cab4d17c22da3bab32d0c731e6c768671c14742f1884"
+        ],
+        "canonical_sha256": "71c48c8191cb27901adde04eb867f58214e50ab1a17fb7e2a035fb21bfde3783"
+      },
+      "reverse_assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p5",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "856a9359c4107ce221e93bd2aceb9d0102ab504196830c936f175b20b5454466",
+          "fdc2aab76311b2c7415e3fd36b699d539dc94363bd454e7270d63fbdc15aca0a"
+        ],
+        "evidence_sha256": [
+          "8bb2fb7230ce1fef43bb9603753561636d5f1c39766a117ce1394e2cc27cb22a",
+          "f7e6066228edfc585a38cab4d17c22da3bab32d0c731e6c768671c14742f1884"
+        ],
+        "canonical_sha256": "71c48c8191cb27901adde04eb867f58214e50ab1a17fb7e2a035fb21bfde3783"
+      },
+      "order_invariant": true
+    },
+    {
+      "slot": "p6",
+      "source_pair": [
+        "pg42",
+        "pg35"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p6",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "0084744a751aba2a0fd7b5e1b511f3ade7637c0d4826801acd7c6a7b32c01985",
+          "9050a723835c66ad7b78cb547b309473303215fd44ae82ea8f679202497fb7c5"
+        ],
+        "evidence_sha256": [
+          "3e864fd6c1c842a6001b931f18b1888c589f21e0605bd1752266c9c941cd9e8e",
+          "85ec215c396fb3d27e5bd3dbc205e1ca00e5366daa8df2be9540547dcd86a0e6"
+        ],
+        "canonical_sha256": "311ebd0792e32346cc7f304436600664313623091269b5531d01d3ecceeb8a62"
+      },
+      "reverse_assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p6",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "0084744a751aba2a0fd7b5e1b511f3ade7637c0d4826801acd7c6a7b32c01985",
+          "9050a723835c66ad7b78cb547b309473303215fd44ae82ea8f679202497fb7c5"
+        ],
+        "evidence_sha256": [
+          "3e864fd6c1c842a6001b931f18b1888c589f21e0605bd1752266c9c941cd9e8e",
+          "85ec215c396fb3d27e5bd3dbc205e1ca00e5366daa8df2be9540547dcd86a0e6"
+        ],
+        "canonical_sha256": "311ebd0792e32346cc7f304436600664313623091269b5531d01d3ecceeb8a62"
+      },
+      "order_invariant": true
+    },
+    {
+      "slot": "p7",
+      "source_pair": [
+        "pg42",
+        "pg35"
+      ],
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p7",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "cfd5b4b5ae65339ed980c21145554050e8fb2a3b27bf515bdef49b9ddc9ce30f",
+          "eb5bbdd55291f1c31606efccf63ad5a62e5185f89533913cfa7655fc88e781b7"
+        ],
+        "evidence_sha256": [
+          "acffa2a984c415ff6083bb1dcc2e08e2baea6bab2ccf64a60f6f89b42172b0ad",
+          "de10753962f04442ead8330907075b6c6dbb974cb312b4d7bf0a05accad32ad6"
+        ],
+        "canonical_sha256": "22fa79fd55731a8ee1cf87dda5d839b7f7ccd0be021f9c22ed945c2394fa99d2"
+      },
+      "reverse_assembly": {
+        "schema_version": "generic-rule-assembly-v1",
+        "executable": false,
+        "typed_oracle_required": true,
+        "promotion_eligible": false,
+        "decision": "await_typed_oracle",
+        "reason": "two_method_effect_pair_reassembled",
+        "slot": "p7",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "atoms": [
+          "effect_present",
+          "probe_binding_valid",
+          "get_post_repeat",
+          "negative_control_clear"
+        ],
+        "expression": {
+          "op": "and",
+          "args": [
+            {
+              "op": "atom",
+              "name": "effect_present"
+            },
+            {
+              "op": "atom",
+              "name": "get_post_repeat"
+            },
+            {
+              "op": "atom",
+              "name": "negative_control_clear"
+            },
+            {
+              "op": "atom",
+              "name": "probe_binding_valid"
+            }
+          ]
+        },
+        "fragment_ids": [
+          "cfd5b4b5ae65339ed980c21145554050e8fb2a3b27bf515bdef49b9ddc9ce30f",
+          "eb5bbdd55291f1c31606efccf63ad5a62e5185f89533913cfa7655fc88e781b7"
+        ],
+        "evidence_sha256": [
+          "acffa2a984c415ff6083bb1dcc2e08e2baea6bab2ccf64a60f6f89b42172b0ad",
+          "de10753962f04442ead8330907075b6c6dbb974cb312b4d7bf0a05accad32ad6"
+        ],
+        "canonical_sha256": "22fa79fd55731a8ee1cf87dda5d839b7f7ccd0be021f9c22ed945c2394fa99d2"
+      },
+      "order_invariant": true
+    }
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "fragment_composition_evaluation_only",
+    "reason": "composition proposals still require independent typed replay, OOD validation and human/Codex review"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "request_field_names_stored": false,
+    "request_values_stored": false,
+    "evaluator_labels_in_model_input": false,
+    "family_labels_in_fragments": false,
+    "fresh_reset_per_fragment": true,
+    "matched_negative_controls": true,
+    "evidence_hashes_verified": true,
+    "long_term_memory_write": false
+  }
+}

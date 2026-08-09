@@ -1,0 +1,49 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-hidden-family-matrix-v1.1",
+  "status": "frozen-before-matrix-execution",
+  "supersedes": "research/juice_shop_loop_12_hidden_matrix_protocol_v1.json",
+  "correction": "redirect query values are percent-encoded so the action remains origin-relative under the adapter's no-:// guard; v1 is retained as a protocol-validation failure.",
+  "scope": "seven hidden families from catalog v3; local pinned Juice Shop only",
+  "families": [
+    "observability",
+    "access_control",
+    "authentication",
+    "input_validation",
+    "injection",
+    "url_redirect",
+    "xss"
+  ],
+  "action_banks": {
+    "observability": ["/", "/metrics", "/logs/", "/debug/", "/ftp/"],
+    "access_control": ["/rest/basket/1", "/rest/admin/application-configuration", "/api/Users", "/rest/user/whoami", "/rest/order-history"],
+    "authentication": ["/rest/user/whoami", "/rest/user/login", "/api/SecurityQuestions", "/rest/user/reset-password", "/api/Users"],
+    "input_validation": ["/rest/products/search?q=", "/rest/products/search?q=%00", "/api/Products?limit=1", "/api/Products/1?quantity=-1", "/rest/products/search?q=%3Cscript%3E"],
+    "injection": ["/rest/products/search?q=normal", "/rest/products/search?q=%27", "/rest/products/search?q=%27%20OR%201%3D1--", "/rest/products/search?q=%27%20UNION%20SELECT%20NULL--", "/rest/products/search?q=1"],
+    "url_redirect": ["/redirect?to=https%3A%2F%2Fexample.com", "/redirect?to=%2F%2Fexample.com", "/redirect?url=https%3A%2F%2Fexample.com", "/", "/rest/products/search?q=normal"],
+    "xss": ["/rest/products/search?q=%3Cscript%3E", "/rest/products/search?q=%3Cimg%20src=x%20onerror=alert(1)%3E", "/", "/api/Products?limit=1", "/robots.txt"]
+  },
+  "safety": {
+    "methods": ["GET"],
+    "no_external_callbacks": true,
+    "no_destructive_writes": true,
+    "no_evaluator_endpoints": true,
+    "xss_interpretation": "HTTP-only matrix cell; browser/DOM execution is not claimed"
+  },
+  "shadow_protocol": {
+    "one_shadow_container_for_all_banks": true,
+    "shadow_state_discarded_before_evaluation": true,
+    "policy_visible": ["sanitized status, headers, body shape and length"],
+    "policy_hidden": ["family labels, challenge keys, catalog, solved state, Rule IR"]
+  },
+  "evaluation_protocol": {
+    "one_fresh_target_per_policy": true,
+    "family_order_fixed": true,
+    "one_replayed_action_per_family": true,
+    "metric": "action-level family hit; batch result is not independent episode success"
+  },
+  "policies": {
+    "trained_response_head_v3": "v3 response head score, stable tie break",
+    "trained_response_head_v3_ablation": "same checkpoint with response slots disabled"
+  },
+  "follow_up": "Any family hit is independently repeated in a fresh target before being treated as a family-level result. Families with no hit are reported as action-search/interface gaps, not model impossibility."
+}

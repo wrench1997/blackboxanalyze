@@ -1,0 +1,144 @@
+{
+  "schema_version": "pg172-third-generator-capacity-report-v1",
+  "protocol_id": "pg-pk-172-third-generator-capacity-v1",
+  "status": "completed_pg172_third_generator_capacity",
+  "scope": {
+    "claim": "third-generator OOD and 101M versus 160M scratch capacity diagnostic",
+    "real_vulnerability_scanner_claim_allowed": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "base_replay_count": 4000,
+    "third_train_count": 4000,
+    "third_dev_count": 1000,
+    "third_ood_count": 1000,
+    "prior_ood_count": 2000,
+    "projection_overlap_third_prior": 0,
+    "projection_overlap_third_dev_ood": 0
+  },
+  "variants": {
+    "capacity_101m_scratch": {
+      "strategy": "capacity_101m_scratch",
+      "config": {
+        "d_model": 1024,
+        "nhead": 16,
+        "layers": 8
+      },
+      "parameter_count": 101380329,
+      "train_row_count": 8000,
+      "train_loss": 0.97374019,
+      "base_holdout": {
+        "loss": 0.98187675,
+        "perplexity": 2.66946144,
+        "next_token_accuracy": 0.51428778,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.65570468,
+        "perplexity": 1.9264996,
+        "next_token_accuracy": 0.79372476,
+        "token_count": 6438
+      },
+      "third_generator_dev": {
+        "loss": 0.70523815,
+        "perplexity": 2.02432872,
+        "next_token_accuracy": 0.6383871,
+        "token_count": 31000
+      },
+      "third_generator_ood": {
+        "loss": 0.84694065,
+        "perplexity": 2.3325,
+        "next_token_accuracy": 0.63274194,
+        "token_count": 31000
+      },
+      "prior_generator_ood": {
+        "loss": 3.40458051,
+        "perplexity": 30.10166586,
+        "next_token_accuracy": 0.26797917,
+        "token_count": 48000
+      },
+      "elapsed_seconds": 270.93,
+      "checkpoint": "artifacts\\pg172-third-generator-capacity-v1\\capacity_101m_scratch.pt"
+    },
+    "capacity_160m_scratch": {
+      "strategy": "capacity_160m_scratch",
+      "config": {
+        "d_model": 1152,
+        "nhead": 18,
+        "layers": 10
+      },
+      "parameter_count": 160089065,
+      "train_row_count": 8000,
+      "train_loss": 0.96768475,
+      "base_holdout": {
+        "loss": 0.99121975,
+        "perplexity": 2.6945191,
+        "next_token_accuracy": 0.51596515,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.70587221,
+        "perplexity": 2.02561267,
+        "next_token_accuracy": 0.81345138,
+        "token_count": 6438
+      },
+      "third_generator_dev": {
+        "loss": 0.70757693,
+        "perplexity": 2.02906872,
+        "next_token_accuracy": 0.63477419,
+        "token_count": 31000
+      },
+      "third_generator_ood": {
+        "loss": 0.86580299,
+        "perplexity": 2.37691395,
+        "next_token_accuracy": 0.63164516,
+        "token_count": 31000
+      },
+      "prior_generator_ood": {
+        "loss": 3.00666676,
+        "perplexity": 20.21988969,
+        "next_token_accuracy": 0.28497917,
+        "token_count": 48000
+      },
+      "elapsed_seconds": 183.329,
+      "checkpoint": "artifacts\\pg172-third-generator-capacity-v1\\capacity_160m_scratch.pt"
+    }
+  },
+  "capacity_comparison": {
+    "same_training_rows": true,
+    "same_optimizer": true,
+    "same_seed": true,
+    "initialization": "from_scratch_for_both",
+    "causal_capacity_claim_allowed": true
+  },
+  "interpretation": {
+    "third_generator_ood_isolated": true,
+    "vulnerability_claim_allowed": false,
+    "promotion_allowed": false,
+    "next_token_lm_only": true
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "source": {
+    "runner_sha256": "a47ea3abe8e16848e1c1ffc200c9b8a196e88fae384cc51e9f1a942f84ebdc85",
+    "reference_checkpoint_sha256": "d88aeeea13e5325e4bd632f0a05289792089ce3a90d78e2e8e21b811e1ee993e",
+    "base_dataset_sha256": "8edda7ad0e9db70ca6fa00f3ee892e77f7fe68ee6dcb909c032e4eaff4453d30",
+    "prior_dataset_sha256": [
+      "af5580681b101d275aecdae36a76536fb95dc759f27aba6d019c48420a10e72f",
+      "dcaa74c1bb40905a471f1712b482ebff40f6d57638e57608394b681279c82681"
+    ],
+    "dataset_sha256": "2bc8ea5e5cbc9b05f14139766bab3171f85bedd39ee8b4b1addaf2643aefd631"
+  },
+  "report_sha256": "ef881f1fc498fb8b66ae01b49fcc184ee3fcbde9ef6bb80f9e2ebf2b20761b45"
+}

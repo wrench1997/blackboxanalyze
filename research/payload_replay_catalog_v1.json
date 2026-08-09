@@ -1,0 +1,4619 @@
+{
+  "schema_version": "sift-authorized-payload-catalog-v1",
+  "catalog_id": "pg03-local-replay-catalog-v1",
+  "sources": [
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-01-a",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "b2174dd9cd9e9867e9170d00bd26bdf87deefa47b070ec7195733c08e0569db5"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-01-a-maze_dom_sink_replay-c55b5f91df4d",
+          "source_id": "pg03-source-01-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/dom",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "inert_dom_markup",
+            "probe": "<span data-sift-marker=\"pg03-probe-a-base\">pg03-probe-a-base</span>",
+            "expected": {
+              "browser_sink_observed": true,
+              "dom_change": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "c55b5f91df4d2f892b1709f87178fb5856f04810846bdb7e9734caf36097be1a"
+          },
+          "probe_artifact": {
+            "original": "<span data-sift-marker=\"pg03-probe-a-base\">pg03-probe-a-base</span>",
+            "encoding": "none_inert_markup",
+            "probe_sha256": "8bb734bbb553cfd05a779d293788701e733a7d32f579c953e32d2d89d513e9b0"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "dom_sink",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "browser_sink_observed+dom_change"
+          },
+          "structural_feature": "dom:inert_dom_markup",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/dom",
+            "params": {
+              "marker": "pg03-probe-a-base",
+              "value": "<span data-sift-marker=\"pg03-probe-a-base\">pg03-probe-a-base</span>"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "d9a69bf42438d5528514",
+              "sequence": 1
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 605,
+            "body_sha256": "bee9dac4b44c9b003670a5cd965c5b128247145ba6a23342ea4e0e9335bbe39d",
+            "headers": {
+              "content-length": "605",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "after_element_count",
+                "before_element_count",
+                "browser_sink_observed",
+                "candidate_signal",
+                "database_touched",
+                "dom_change",
+                "evidence_hash",
+                "marker_hits",
+                "navigation",
+                "network_access",
+                "oracle",
+                "script_execution",
+                "script_like_present",
+                "sink",
+                "source_sha256",
+                "tag_shape",
+                "transformed_sha256",
+                "transforms"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "browser_sink_observed": true,
+            "candidate_signal": true,
+            "database_touched": false,
+            "dom_change": true,
+            "evidence_hash": "549290ec908efc67b880db26fde0bb27cf7c2dfeadc3d6b4493c7d766ef09893",
+            "marker_hits": 1,
+            "navigation": false,
+            "network_access": false,
+            "oracle": "controlled_detached_dom_v1",
+            "script_execution": false,
+            "script_like_present": false,
+            "sink": "innerHTML",
+            "tag_shape": [
+              "span"
+            ],
+            "transforms": []
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "204a8473de7c0cc7c3fcce817dd56ac986c6f08fbae569f4fb107be82e58ca43",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "browser_sink_observed": true,
+              "candidate_signal": true,
+              "database_touched": false,
+              "dom_change": true,
+              "evidence_hash": "549290ec908efc67b880db26fde0bb27cf7c2dfeadc3d6b4493c7d766ef09893",
+              "marker_hits": 1,
+              "navigation": false,
+              "network_access": false,
+              "oracle": "controlled_detached_dom_v1",
+              "script_execution": false,
+              "script_like_present": false,
+              "sink": "innerHTML",
+              "tag_shape": [
+                "span"
+              ],
+              "transforms": []
+            },
+            "path": "/api/maze/replay/dom",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "d9a69bf42438d5528514",
+              "sequence": 1
+            },
+            "response": {
+              "body_length": 605,
+              "body_sha256": "bee9dac4b44c9b003670a5cd965c5b128247145ba6a23342ea4e0e9335bbe39d",
+              "headers": {
+                "content-length": "605",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "after_element_count",
+                  "before_element_count",
+                  "browser_sink_observed",
+                  "candidate_signal",
+                  "database_touched",
+                  "dom_change",
+                  "evidence_hash",
+                  "marker_hits",
+                  "navigation",
+                  "network_access",
+                  "oracle",
+                  "script_execution",
+                  "script_like_present",
+                  "sink",
+                  "source_sha256",
+                  "tag_shape",
+                  "transformed_sha256",
+                  "transforms"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.browser_sink_observed"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.dom_change"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.browser_sink_observed\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.dom_change\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-01-a-maze_dom_double_decode_replay-8e79f44b60be",
+          "source_id": "pg03-source-01-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/dom",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "encoded_dom_markup",
+            "probe": "&amp;lt;span data-sift-marker=\"pg03-probe-a-base\"&amp;gt;pg03-probe-a-base&amp;lt;/span&amp;gt;",
+            "expected": {
+              "browser_sink_observed": true,
+              "dom_change": true,
+              "requires_decode_depth": 2
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "8e79f44b60be920343cba9173a05783df2e984236e0efe51f920f68ed6835dbd"
+          },
+          "probe_artifact": {
+            "original": "&amp;lt;span data-sift-marker=\"pg03-probe-a-base\"&amp;gt;pg03-probe-a-base&amp;lt;/span&amp;gt;",
+            "encoding": "html_entity_encode_depth_2",
+            "probe_sha256": "33301b0f5f6a694fbae01ce915899dc13ac0b633fefad2b215908b772ec25258"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "dom_double_decode",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "browser_sink_observed+dom_change+double_decode"
+          },
+          "structural_feature": "dom:encoded_dom_markup",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/dom",
+            "params": {
+              "marker": "pg03-probe-a-base",
+              "transforms": "html_entity_decode,html_entity_decode",
+              "value": "&amp;lt;span data-sift-marker=\"pg03-probe-a-base\"&amp;gt;pg03-probe-a-base&amp;lt;/span&amp;gt;"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "6a45e69d0d1d0a88917c",
+              "sequence": 2
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 646,
+            "body_sha256": "9d2cf4e19e9613bb948eac1aa281687222335bfc60e5be49ffdd00fc246822f7",
+            "headers": {
+              "content-length": "646",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "after_element_count",
+                "before_element_count",
+                "browser_sink_observed",
+                "candidate_signal",
+                "database_touched",
+                "dom_change",
+                "evidence_hash",
+                "marker_hits",
+                "navigation",
+                "network_access",
+                "oracle",
+                "script_execution",
+                "script_like_present",
+                "sink",
+                "source_sha256",
+                "tag_shape",
+                "transformed_sha256",
+                "transforms"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "browser_sink_observed": true,
+            "candidate_signal": true,
+            "database_touched": false,
+            "dom_change": true,
+            "evidence_hash": "0cb2efa9bc159187bc6622f4a9d6cfe9ba10428f44135b2fbd84149708108a7b",
+            "marker_hits": 1,
+            "navigation": false,
+            "network_access": false,
+            "oracle": "controlled_detached_dom_v1",
+            "script_execution": false,
+            "script_like_present": false,
+            "sink": "innerHTML",
+            "tag_shape": [
+              "span"
+            ],
+            "transforms": [
+              "html_entity_decode",
+              "html_entity_decode"
+            ]
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "22577544a4cdaa2d9b602f5486b8e8661667d7fa331a3475f97ed3de0beb15f4",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "browser_sink_observed": true,
+              "candidate_signal": true,
+              "database_touched": false,
+              "dom_change": true,
+              "evidence_hash": "0cb2efa9bc159187bc6622f4a9d6cfe9ba10428f44135b2fbd84149708108a7b",
+              "marker_hits": 1,
+              "navigation": false,
+              "network_access": false,
+              "oracle": "controlled_detached_dom_v1",
+              "script_execution": false,
+              "script_like_present": false,
+              "sink": "innerHTML",
+              "tag_shape": [
+                "span"
+              ],
+              "transforms": [
+                "html_entity_decode",
+                "html_entity_decode"
+              ]
+            },
+            "path": "/api/maze/replay/dom",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "6a45e69d0d1d0a88917c",
+              "sequence": 2
+            },
+            "response": {
+              "body_length": 646,
+              "body_sha256": "9d2cf4e19e9613bb948eac1aa281687222335bfc60e5be49ffdd00fc246822f7",
+              "headers": {
+                "content-length": "646",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "after_element_count",
+                  "before_element_count",
+                  "browser_sink_observed",
+                  "candidate_signal",
+                  "database_touched",
+                  "dom_change",
+                  "evidence_hash",
+                  "marker_hits",
+                  "navigation",
+                  "network_access",
+                  "oracle",
+                  "script_execution",
+                  "script_like_present",
+                  "sink",
+                  "source_sha256",
+                  "tag_shape",
+                  "transformed_sha256",
+                  "transforms"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.browser_sink_observed"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.dom_change"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.browser_sink_observed\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.dom_change\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-01-b",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "518a5659fd7a1ed62ba6091f9c1d837c9ea243c18a6b4926f4fb17a883f8bd33"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-01-b-maze_dom_sink_replay-f7fb0b69fee9",
+          "source_id": "pg03-source-01-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/dom",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "inert_dom_markup",
+            "probe": "<span data-sift-marker=\"pg03-probe-b-base\">pg03-probe-b-base</span>",
+            "expected": {
+              "browser_sink_observed": true,
+              "dom_change": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "f7fb0b69fee98be8b987934fd329815ce53cbe8214f0ea1bda6acc0caf703f56"
+          },
+          "probe_artifact": {
+            "original": "<span data-sift-marker=\"pg03-probe-b-base\">pg03-probe-b-base</span>",
+            "encoding": "none_inert_markup",
+            "probe_sha256": "279b77a24c950ab7cdfc27ae7d6068b123946410743e00cac2c349132b53d8bc"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "dom_sink",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "browser_sink_observed+dom_change"
+          },
+          "structural_feature": "dom:inert_dom_markup",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/dom",
+            "params": {
+              "marker": "pg03-probe-b-base",
+              "value": "<span data-sift-marker=\"pg03-probe-b-base\">pg03-probe-b-base</span>"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "9f16d1bcc1e8dcce3ab5",
+              "sequence": 3
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 605,
+            "body_sha256": "1b6886f22d3056372a3ab837a803877a698656fac39a637dff904699bef04ded",
+            "headers": {
+              "content-length": "605",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "after_element_count",
+                "before_element_count",
+                "browser_sink_observed",
+                "candidate_signal",
+                "database_touched",
+                "dom_change",
+                "evidence_hash",
+                "marker_hits",
+                "navigation",
+                "network_access",
+                "oracle",
+                "script_execution",
+                "script_like_present",
+                "sink",
+                "source_sha256",
+                "tag_shape",
+                "transformed_sha256",
+                "transforms"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "browser_sink_observed": true,
+            "candidate_signal": true,
+            "database_touched": false,
+            "dom_change": true,
+            "evidence_hash": "17279ebeffed17ed0d0dae6c3ffb50a7c0e11bb23efbda479ed3e9bf6230dfe1",
+            "marker_hits": 1,
+            "navigation": false,
+            "network_access": false,
+            "oracle": "controlled_detached_dom_v1",
+            "script_execution": false,
+            "script_like_present": false,
+            "sink": "innerHTML",
+            "tag_shape": [
+              "span"
+            ],
+            "transforms": []
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "31f19126dbc04155565927f260e502cbb0c5a50027a40621b4406127f9aa9693",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "browser_sink_observed": true,
+              "candidate_signal": true,
+              "database_touched": false,
+              "dom_change": true,
+              "evidence_hash": "17279ebeffed17ed0d0dae6c3ffb50a7c0e11bb23efbda479ed3e9bf6230dfe1",
+              "marker_hits": 1,
+              "navigation": false,
+              "network_access": false,
+              "oracle": "controlled_detached_dom_v1",
+              "script_execution": false,
+              "script_like_present": false,
+              "sink": "innerHTML",
+              "tag_shape": [
+                "span"
+              ],
+              "transforms": []
+            },
+            "path": "/api/maze/replay/dom",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "9f16d1bcc1e8dcce3ab5",
+              "sequence": 3
+            },
+            "response": {
+              "body_length": 605,
+              "body_sha256": "1b6886f22d3056372a3ab837a803877a698656fac39a637dff904699bef04ded",
+              "headers": {
+                "content-length": "605",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "after_element_count",
+                  "before_element_count",
+                  "browser_sink_observed",
+                  "candidate_signal",
+                  "database_touched",
+                  "dom_change",
+                  "evidence_hash",
+                  "marker_hits",
+                  "navigation",
+                  "network_access",
+                  "oracle",
+                  "script_execution",
+                  "script_like_present",
+                  "sink",
+                  "source_sha256",
+                  "tag_shape",
+                  "transformed_sha256",
+                  "transforms"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.browser_sink_observed"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.dom_change"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.browser_sink_observed\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.dom_change\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-01-b-maze_dom_double_decode_replay-55b07694b2de",
+          "source_id": "pg03-source-01-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/dom",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "encoded_dom_markup",
+            "probe": "&amp;lt;span data-sift-marker=\"pg03-probe-b-base\"&amp;gt;pg03-probe-b-base&amp;lt;/span&amp;gt;",
+            "expected": {
+              "browser_sink_observed": true,
+              "dom_change": true,
+              "requires_decode_depth": 2
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "55b07694b2de11ef8fa86e10f95f046281c398c937aaa03338e0162cbb4f5968"
+          },
+          "probe_artifact": {
+            "original": "&amp;lt;span data-sift-marker=\"pg03-probe-b-base\"&amp;gt;pg03-probe-b-base&amp;lt;/span&amp;gt;",
+            "encoding": "html_entity_encode_depth_2",
+            "probe_sha256": "5485a1dfc4634a662a987e3a915473752df6f7fec8d2cad6433b1b74474c756e"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "dom_double_decode",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "browser_sink_observed+dom_change+double_decode"
+          },
+          "structural_feature": "dom:encoded_dom_markup",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/dom",
+            "params": {
+              "marker": "pg03-probe-b-base",
+              "transforms": "html_entity_decode,html_entity_decode",
+              "value": "&amp;lt;span data-sift-marker=\"pg03-probe-b-base\"&amp;gt;pg03-probe-b-base&amp;lt;/span&amp;gt;"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "51c1011b21f2e414546a",
+              "sequence": 4
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 646,
+            "body_sha256": "69649d46e0755449890575eb03785db0b4160b642dbde1d9bebfabf756fbe587",
+            "headers": {
+              "content-length": "646",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "after_element_count",
+                "before_element_count",
+                "browser_sink_observed",
+                "candidate_signal",
+                "database_touched",
+                "dom_change",
+                "evidence_hash",
+                "marker_hits",
+                "navigation",
+                "network_access",
+                "oracle",
+                "script_execution",
+                "script_like_present",
+                "sink",
+                "source_sha256",
+                "tag_shape",
+                "transformed_sha256",
+                "transforms"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "browser_sink_observed": true,
+            "candidate_signal": true,
+            "database_touched": false,
+            "dom_change": true,
+            "evidence_hash": "ff4b9d892a229295d5b1bd6486a2c90b0fec19277b3f2bac1362272ccd8bd865",
+            "marker_hits": 1,
+            "navigation": false,
+            "network_access": false,
+            "oracle": "controlled_detached_dom_v1",
+            "script_execution": false,
+            "script_like_present": false,
+            "sink": "innerHTML",
+            "tag_shape": [
+              "span"
+            ],
+            "transforms": [
+              "html_entity_decode",
+              "html_entity_decode"
+            ]
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "6473d604d89528ce66924af374cf3496fe66c5f9d4b14511dc09ca627dfaf278",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "browser_sink_observed": true,
+              "candidate_signal": true,
+              "database_touched": false,
+              "dom_change": true,
+              "evidence_hash": "ff4b9d892a229295d5b1bd6486a2c90b0fec19277b3f2bac1362272ccd8bd865",
+              "marker_hits": 1,
+              "navigation": false,
+              "network_access": false,
+              "oracle": "controlled_detached_dom_v1",
+              "script_execution": false,
+              "script_like_present": false,
+              "sink": "innerHTML",
+              "tag_shape": [
+                "span"
+              ],
+              "transforms": [
+                "html_entity_decode",
+                "html_entity_decode"
+              ]
+            },
+            "path": "/api/maze/replay/dom",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "51c1011b21f2e414546a",
+              "sequence": 4
+            },
+            "response": {
+              "body_length": 646,
+              "body_sha256": "69649d46e0755449890575eb03785db0b4160b642dbde1d9bebfabf756fbe587",
+              "headers": {
+                "content-length": "646",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "after_element_count",
+                  "before_element_count",
+                  "browser_sink_observed",
+                  "candidate_signal",
+                  "database_touched",
+                  "dom_change",
+                  "evidence_hash",
+                  "marker_hits",
+                  "navigation",
+                  "network_access",
+                  "oracle",
+                  "script_execution",
+                  "script_like_present",
+                  "sink",
+                  "source_sha256",
+                  "tag_shape",
+                  "transformed_sha256",
+                  "transforms"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.browser_sink_observed"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.dom_change"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.browser_sink_observed\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.dom_change\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-02-a",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "5802c7677daa92e525184f5f03684d870e48063b92ca921552a551d2cded65eb"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-a-maze_sql_operator_like_replay-b9bdd61ce6c8",
+          "source_id": "pg03-source-02-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "operator_like",
+            "expected": {
+              "channel": "operator_like",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "b9bdd61ce6c84a183acf43b108e272ad87f6fb8d9055bd7b19fe2b75da477c87"
+          },
+          "probe_artifact": {
+            "original": "operator_like",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:operator_like",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "operator_like"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "d4bf0192595cbdad828a",
+              "sequence": 5
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1358,
+            "body_sha256": "91fa5118d18927792dfbcf69df935a46b98c1c9b9b31204fd8efcb4fbecb942b",
+            "headers": {
+              "content-length": "1358",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": false,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": false,
+            "evidence_hash": "d6e40fc9e580915136783be8cd85b945cf07a9b064484386bd1a989a275560f5",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "modality": "ast_shape",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 0,
+            "syntax_error_observed": false,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "timing_differential": false
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "32dd125f5be3d623a6617d9519dbc31fa4c306702b4fc39e9ae920e449ec4c4b",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": false,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": false,
+              "evidence_hash": "d6e40fc9e580915136783be8cd85b945cf07a9b064484386bd1a989a275560f5",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": false,
+              "local_callback_only": false,
+              "modality": "ast_shape",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 0,
+              "syntax_error_observed": false,
+              "timeout_budget_ms": null,
+              "timeout_observed": false,
+              "timing_differential": false
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "d4bf0192595cbdad828a",
+              "sequence": 5
+            },
+            "response": {
+              "body_length": 1358,
+              "body_sha256": "91fa5118d18927792dfbcf69df935a46b98c1c9b9b31204fd8efcb4fbecb942b",
+              "headers": {
+                "content-length": "1358",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-a-maze_sql_syntax_error_replay-ed2802d3df64",
+          "source_id": "pg03-source-02-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "syntax_error",
+            "expected": {
+              "channel": "syntax_error",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "ed2802d3df64bb35928bdea2d76523c22ba5ed872905dea2441e5740d290dc56"
+          },
+          "probe_artifact": {
+            "original": "syntax_error",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "bf19dfc472ae203ab6023f4e58dec48dcb24dfe188031ffc4fdfb4ad7b19a984"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:syntax_error",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "syntax_error"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "9ec889b41fbb754a8c50",
+              "sequence": 6
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1182,
+            "body_sha256": "0b42e98efefd4040292e456c9cfd01ddea7d4240f0c67efa4f91c905b2405b64",
+            "headers": {
+              "content-length": "1182",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": false,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": true,
+            "evidence_hash": "0c6e4b6a332be5e686829f45554ef7774ea8fd6342c8e62369f6ef084156bb81",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "modality": "syntax_error",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 0,
+            "syntax_error_observed": true,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "timing_differential": false
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "71bd94d68812907ed679a3251e22a03960dc7cc7cf78f4ccba34f561dd5f38b6",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": false,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": true,
+              "evidence_hash": "0c6e4b6a332be5e686829f45554ef7774ea8fd6342c8e62369f6ef084156bb81",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": false,
+              "local_callback_only": false,
+              "modality": "syntax_error",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 0,
+              "syntax_error_observed": true,
+              "timeout_budget_ms": null,
+              "timeout_observed": false,
+              "timing_differential": false
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "9ec889b41fbb754a8c50",
+              "sequence": 6
+            },
+            "response": {
+              "body_length": 1182,
+              "body_sha256": "0b42e98efefd4040292e456c9cfd01ddea7d4240f0c67efa4f91c905b2405b64",
+              "headers": {
+                "content-length": "1182",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-a-maze_sql_blind_boolean_replay-cf53aeb03443",
+          "source_id": "pg03-source-02-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "blind_boolean",
+            "expected": {
+              "channel": "blind_boolean",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "cf53aeb03443cfe19f4a283e3fbdd17db3ac79301ef4b4c3faba1e41542e59fb"
+          },
+          "probe_artifact": {
+            "original": "blind_boolean",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "328789b18b47407b05ca4fb8663a080a9475cb30b5d67e975743267334764424"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:blind_boolean",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "blind_boolean"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "795c4c1f58bc2c63bd98",
+              "sequence": 7
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1349,
+            "body_sha256": "dc937b03eabb4486a87dc48c5275716caed710576fc5944de03b39a85eed89b5",
+            "headers": {
+              "content-length": "1349",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": true,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": false,
+            "evidence_hash": "d9a77d021ec33f012d8fd4973804f3080a0e7620415af697e4d86319f26fcee2",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "modality": "blind_response",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 0,
+            "syntax_error_observed": false,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "timing_differential": false
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "4707ac80746b262359990e18c7fa1c9c78d811b0b512bbdcbf4ed68b94744bec",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": true,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": false,
+              "evidence_hash": "d9a77d021ec33f012d8fd4973804f3080a0e7620415af697e4d86319f26fcee2",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": false,
+              "local_callback_only": false,
+              "modality": "blind_response",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 0,
+              "syntax_error_observed": false,
+              "timeout_budget_ms": null,
+              "timeout_observed": false,
+              "timing_differential": false
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "795c4c1f58bc2c63bd98",
+              "sequence": 7
+            },
+            "response": {
+              "body_length": 1349,
+              "body_sha256": "dc937b03eabb4486a87dc48c5275716caed710576fc5944de03b39a85eed89b5",
+              "headers": {
+                "content-length": "1349",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-a-maze_sql_time_delay_replay-96373e5362fc",
+          "source_id": "pg03-source-02-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "time_delay",
+            "expected": {
+              "channel": "time_delay",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "96373e5362fcce98ef994eb93dfebb934e83a3152ff9e39ffc870a45bcf0a8d7"
+          },
+          "probe_artifact": {
+            "original": "time_delay",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "aad474e4114b359936e3bb779d82fb097cc3534fdbdb747e0f108959c98632e0"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:time_delay",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "time_delay"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "4b5ff99ceb662229b45c",
+              "sequence": 8
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1305,
+            "body_sha256": "97cf2ffb46b933bd6cd20b04dd5864390020cf374c3bb06eab7a1554238a2969",
+            "headers": {
+              "content-length": "1305",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": false,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": false,
+            "evidence_hash": "4688d2c00fa5d6b0a56731e0bca28ed5e798ae568f04094e73a3f09e7ab6715a",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "modality": "bounded_timing",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 100,
+            "syntax_error_observed": false,
+            "timeout_budget_ms": 25,
+            "timeout_observed": true,
+            "timing_differential": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "13940140e6fb1ab5bb3e17f12cd902ce85c5c231040188004e26ffa742e7e827",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": false,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": false,
+              "evidence_hash": "4688d2c00fa5d6b0a56731e0bca28ed5e798ae568f04094e73a3f09e7ab6715a",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": false,
+              "local_callback_only": false,
+              "modality": "bounded_timing",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 100,
+              "syntax_error_observed": false,
+              "timeout_budget_ms": 25,
+              "timeout_observed": true,
+              "timing_differential": true
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "4b5ff99ceb662229b45c",
+              "sequence": 8
+            },
+            "response": {
+              "body_length": 1305,
+              "body_sha256": "97cf2ffb46b933bd6cd20b04dd5864390020cf374c3bb06eab7a1554238a2969",
+              "headers": {
+                "content-length": "1305",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-a-maze_sql_local_side_channel_replay-9ad1edead9be",
+          "source_id": "pg03-source-02-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "local_side_channel",
+            "expected": {
+              "channel": "local_side_channel",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "9ad1edead9beb3f9f1ed51f90e7dfa83cc21b78d474dc718b7b80aae548bcedf"
+          },
+          "probe_artifact": {
+            "original": "local_side_channel",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "89e9f1cce73ed49fb74215763547e901dcda1daf65b974311af5c86fedbc55a2"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:local_side_channel",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "local_side_channel"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "0fb73a9dc43e2217b855",
+              "sequence": 9
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1269,
+            "body_sha256": "13e71da435a76aa75c3093c024e6406c36af0a09e6ed76bb0a42287589b46c93",
+            "headers": {
+              "content-length": "1269",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": false,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": false,
+            "evidence_hash": "90f3aba55581a6243472b576629f1409538db7acb51f209fbba5587f99ba35fc",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": true,
+            "local_callback_only": true,
+            "modality": "local_side_channel",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 0,
+            "syntax_error_observed": false,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "timing_differential": false
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "e36ed70552bde1fde9d467d1d48a5ea3668889457875d15826765c25f5abfe40",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": false,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": false,
+              "evidence_hash": "90f3aba55581a6243472b576629f1409538db7acb51f209fbba5587f99ba35fc",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": true,
+              "local_callback_only": true,
+              "modality": "local_side_channel",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 0,
+              "syntax_error_observed": false,
+              "timeout_budget_ms": null,
+              "timeout_observed": false,
+              "timing_differential": false
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "0fb73a9dc43e2217b855",
+              "sequence": 9
+            },
+            "response": {
+              "body_length": 1269,
+              "body_sha256": "13e71da435a76aa75c3093c024e6406c36af0a09e6ed76bb0a42287589b46c93",
+              "headers": {
+                "content-length": "1269",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-02-b",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "a0928642f54c8d312015345668a3f981cc4b69c4e2d324caaba6e9ee7efc55ec"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-b-maze_sql_operator_like_replay-0e6766b4e1db",
+          "source_id": "pg03-source-02-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "operator_like",
+            "expected": {
+              "channel": "operator_like",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "0e6766b4e1db64debe6784e0b3c7c47b09927e80974133461896fc31f7f75084"
+          },
+          "probe_artifact": {
+            "original": "operator_like",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:operator_like",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "operator_like"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "194e3d3cdb6281c2fdf8",
+              "sequence": 10
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1358,
+            "body_sha256": "91fa5118d18927792dfbcf69df935a46b98c1c9b9b31204fd8efcb4fbecb942b",
+            "headers": {
+              "content-length": "1358",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": false,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": false,
+            "evidence_hash": "d6e40fc9e580915136783be8cd85b945cf07a9b064484386bd1a989a275560f5",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "modality": "ast_shape",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 0,
+            "syntax_error_observed": false,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "timing_differential": false
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "2f0bd68efdd9eabf04183e52ef82a3079a2d419af3c1fd982ffc342afa95c59e",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": false,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": false,
+              "evidence_hash": "d6e40fc9e580915136783be8cd85b945cf07a9b064484386bd1a989a275560f5",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": false,
+              "local_callback_only": false,
+              "modality": "ast_shape",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 0,
+              "syntax_error_observed": false,
+              "timeout_budget_ms": null,
+              "timeout_observed": false,
+              "timing_differential": false
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "194e3d3cdb6281c2fdf8",
+              "sequence": 10
+            },
+            "response": {
+              "body_length": 1358,
+              "body_sha256": "91fa5118d18927792dfbcf69df935a46b98c1c9b9b31204fd8efcb4fbecb942b",
+              "headers": {
+                "content-length": "1358",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-b-maze_sql_syntax_error_replay-caf1eaa8cbd6",
+          "source_id": "pg03-source-02-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "syntax_error",
+            "expected": {
+              "channel": "syntax_error",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "caf1eaa8cbd6a722ed2dd070b9313b566fd0e89fbe03e251ca8895f96e32da7f"
+          },
+          "probe_artifact": {
+            "original": "syntax_error",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "bf19dfc472ae203ab6023f4e58dec48dcb24dfe188031ffc4fdfb4ad7b19a984"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:syntax_error",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "syntax_error"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "fdb997c2bc036d046279",
+              "sequence": 11
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1182,
+            "body_sha256": "0b42e98efefd4040292e456c9cfd01ddea7d4240f0c67efa4f91c905b2405b64",
+            "headers": {
+              "content-length": "1182",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": false,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": true,
+            "evidence_hash": "0c6e4b6a332be5e686829f45554ef7774ea8fd6342c8e62369f6ef084156bb81",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "modality": "syntax_error",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 0,
+            "syntax_error_observed": true,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "timing_differential": false
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "e0c137cd5f9588980c6b811c034e943f7674099d60d01a0774add5742b2c5832",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": false,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": true,
+              "evidence_hash": "0c6e4b6a332be5e686829f45554ef7774ea8fd6342c8e62369f6ef084156bb81",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": false,
+              "local_callback_only": false,
+              "modality": "syntax_error",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 0,
+              "syntax_error_observed": true,
+              "timeout_budget_ms": null,
+              "timeout_observed": false,
+              "timing_differential": false
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "fdb997c2bc036d046279",
+              "sequence": 11
+            },
+            "response": {
+              "body_length": 1182,
+              "body_sha256": "0b42e98efefd4040292e456c9cfd01ddea7d4240f0c67efa4f91c905b2405b64",
+              "headers": {
+                "content-length": "1182",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-b-maze_sql_blind_boolean_replay-3c7a6303b1c6",
+          "source_id": "pg03-source-02-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "blind_boolean",
+            "expected": {
+              "channel": "blind_boolean",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "3c7a6303b1c60e9cbd3a0b784f5b29c0cda55bc7dfa769fa76961db14b4d4b96"
+          },
+          "probe_artifact": {
+            "original": "blind_boolean",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "328789b18b47407b05ca4fb8663a080a9475cb30b5d67e975743267334764424"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:blind_boolean",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "blind_boolean"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "1305e297af5d9e74e6e1",
+              "sequence": 12
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1349,
+            "body_sha256": "dc937b03eabb4486a87dc48c5275716caed710576fc5944de03b39a85eed89b5",
+            "headers": {
+              "content-length": "1349",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": true,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": false,
+            "evidence_hash": "d9a77d021ec33f012d8fd4973804f3080a0e7620415af697e4d86319f26fcee2",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "modality": "blind_response",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 0,
+            "syntax_error_observed": false,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "timing_differential": false
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "7ec76f245c91ba7ef7d3591c7c5218978e4bcd8f8df93b39e50244337972ebfe",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": true,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": false,
+              "evidence_hash": "d9a77d021ec33f012d8fd4973804f3080a0e7620415af697e4d86319f26fcee2",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": false,
+              "local_callback_only": false,
+              "modality": "blind_response",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 0,
+              "syntax_error_observed": false,
+              "timeout_budget_ms": null,
+              "timeout_observed": false,
+              "timing_differential": false
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "1305e297af5d9e74e6e1",
+              "sequence": 12
+            },
+            "response": {
+              "body_length": 1349,
+              "body_sha256": "dc937b03eabb4486a87dc48c5275716caed710576fc5944de03b39a85eed89b5",
+              "headers": {
+                "content-length": "1349",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-b-maze_sql_time_delay_replay-21e3df3faf12",
+          "source_id": "pg03-source-02-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "time_delay",
+            "expected": {
+              "channel": "time_delay",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "21e3df3faf128e68f58f5a8f6a6d2880fdc7ceca2d1f08768842f70408900b0e"
+          },
+          "probe_artifact": {
+            "original": "time_delay",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "aad474e4114b359936e3bb779d82fb097cc3534fdbdb747e0f108959c98632e0"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:time_delay",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "time_delay"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "d5a7410ec61124677ed2",
+              "sequence": 13
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1305,
+            "body_sha256": "97cf2ffb46b933bd6cd20b04dd5864390020cf374c3bb06eab7a1554238a2969",
+            "headers": {
+              "content-length": "1305",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": false,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": false,
+            "evidence_hash": "4688d2c00fa5d6b0a56731e0bca28ed5e798ae568f04094e73a3f09e7ab6715a",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "modality": "bounded_timing",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 100,
+            "syntax_error_observed": false,
+            "timeout_budget_ms": 25,
+            "timeout_observed": true,
+            "timing_differential": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "85cfc610de0b6414a5ccd4a7694a64500ecf09c8f02741c2c8d15b79a52699ea",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": false,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": false,
+              "evidence_hash": "4688d2c00fa5d6b0a56731e0bca28ed5e798ae568f04094e73a3f09e7ab6715a",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": false,
+              "local_callback_only": false,
+              "modality": "bounded_timing",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 100,
+              "syntax_error_observed": false,
+              "timeout_budget_ms": 25,
+              "timeout_observed": true,
+              "timing_differential": true
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "d5a7410ec61124677ed2",
+              "sequence": 13
+            },
+            "response": {
+              "body_length": 1305,
+              "body_sha256": "97cf2ffb46b933bd6cd20b04dd5864390020cf374c3bb06eab7a1554238a2969",
+              "headers": {
+                "content-length": "1305",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-02-b-maze_sql_local_side_channel_replay-f123d0a4c65e",
+          "source_id": "pg03-source-02-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "sql_channel_class",
+            "probe": "local_side_channel",
+            "expected": {
+              "channel": "local_side_channel",
+              "requires_recheck": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "f123d0a4c65e094094398705bd6073e201e6770509f34cb8cc62c2dec1b11bda"
+          },
+          "probe_artifact": {
+            "original": "local_side_channel",
+            "encoding": "abstract_sql_fragment_class",
+            "probe_sha256": "89e9f1cce73ed49fb74215763547e901dcda1daf65b974311af5c86fedbc55a2"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sql_ast_boundary",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "controlled_differential+interpreter_boundary"
+          },
+          "structural_feature": "sql:sql_channel_class:local_side_channel",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/replay/sql",
+            "params": {
+              "fragment_class": "local_side_channel"
+            },
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "0c1675916fcceb45b6b2",
+              "sequence": 14
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 1269,
+            "body_sha256": "13e71da435a76aa75c3093c024e6406c36af0a09e6ed76bb0a42287589b46c93",
+            "headers": {
+              "content-length": "1269",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "keys": [
+                "concatenated_ast",
+                "evidence",
+                "fragment_class",
+                "parameterized_ast"
+              ],
+              "type": "object"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "blind_boolean_differential": false,
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "database_touched": false,
+            "error_differential": false,
+            "evidence_hash": "90f3aba55581a6243472b576629f1409538db7acb51f209fbba5587f99ba35fc",
+            "external_network": false,
+            "interpreter_boundary": true,
+            "local_callback_observed": true,
+            "local_callback_only": true,
+            "modality": "local_side_channel",
+            "network_access": false,
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "real_sleep_performed": false,
+            "row_shape_differential": false,
+            "simulated_latency_ms": 0,
+            "syntax_error_observed": false,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "timing_differential": false
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "4d858d9207edbb698c3ffe039a890be367f515d2f44134c692c1773b0ffe26c3",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "blind_boolean_differential": false,
+              "candidate_signal": true,
+              "controlled_differential": true,
+              "database_touched": false,
+              "error_differential": false,
+              "evidence_hash": "90f3aba55581a6243472b576629f1409538db7acb51f209fbba5587f99ba35fc",
+              "external_network": false,
+              "interpreter_boundary": true,
+              "local_callback_observed": true,
+              "local_callback_only": true,
+              "modality": "local_side_channel",
+              "network_access": false,
+              "oracle": "synthetic_sql_ast_differential_v1",
+              "real_sleep_performed": false,
+              "row_shape_differential": false,
+              "simulated_latency_ms": 0,
+              "syntax_error_observed": false,
+              "timeout_budget_ms": null,
+              "timeout_observed": false,
+              "timing_differential": false
+            },
+            "path": "/api/maze/replay/sql",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "0c1675916fcceb45b6b2",
+              "sequence": 14
+            },
+            "response": {
+              "body_length": 1269,
+              "body_sha256": "13e71da435a76aa75c3093c024e6406c36af0a09e6ed76bb0a42287589b46c93",
+              "headers": {
+                "content-length": "1269",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "keys": [
+                  "concatenated_ast",
+                  "evidence",
+                  "fragment_class",
+                  "parameterized_ast"
+                ],
+                "type": "object"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.controlled_differential"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.interpreter_boundary"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.controlled_differential\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.interpreter_boundary\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-03-a",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "f762bc03c73a63c5d38661469e0add0302982362b6620f101b29af3734fe2763"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-03-a-maze_access_control_registry_replay-788f0ec1d6a3",
+          "source_id": "pg03-source-03-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "http_canary",
+            "probe": "pg03-probe-a-base",
+            "expected": {
+              "requires_recheck": true,
+              "status_code": 200
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "788f0ec1d6a3827cd31fbd393d07955305e0bd85a43470104f4e136cd1995410"
+          },
+          "probe_artifact": {
+            "original": "pg03-probe-a-base",
+            "encoding": "identifier_canary",
+            "probe_sha256": "88ab00ed461bb281675f8c96f5652f5d7199e3cefb573a81f58592bad3b6f58f"
+          },
+          "semantic": {
+            "family": "access_control",
+            "surface": "lab_registry_access_surface",
+            "expected_oracle": "synthetic_rule_surface_v1",
+            "expected_signal": "status_code_200"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "params": {},
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "a7f91f8e5da8391b0469",
+              "sequence": 15
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 5301,
+            "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+            "headers": {
+              "content-length": "5301",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "item_shapes": [
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "length": 12,
+              "type": "array"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {},
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "fdc472075ee6b0e3a3d82773c5ce9c057f2513c8606796a6c916f921e0b8a56e",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {},
+            "path": "/api/maze/labs",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "a7f91f8e5da8391b0469",
+              "sequence": 15
+            },
+            "response": {
+              "body_length": 5301,
+              "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+              "headers": {
+                "content-length": "5301",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "item_shapes": [
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "length": 12,
+                "type": "array"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "left": {
+              "op": "const",
+              "value": 200
+            },
+            "op": "eq",
+            "right": {
+              "op": "field",
+              "path": "response.status_code"
+            }
+          },
+          "rule_ir_canonical": "{\"left\":{\"op\":\"const\",\"value\":200},\"op\":\"eq\",\"right\":{\"op\":\"field\",\"path\":\"response.status_code\"}}",
+          "rule_ir_complexity": 3,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-03-b",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "aa3b9b034f51e8fb688dffe76959a3464a699d8d96f54ce5598fa9597cce923b"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-03-b-maze_access_control_registry_replay-2095d0b43aa9",
+          "source_id": "pg03-source-03-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "http_canary",
+            "probe": "pg03-probe-b-base",
+            "expected": {
+              "requires_recheck": true,
+              "status_code": 200
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "2095d0b43aa9e33d732a44e43aef36043f554fd037faefd8a83f29899f81d2ba"
+          },
+          "probe_artifact": {
+            "original": "pg03-probe-b-base",
+            "encoding": "identifier_canary",
+            "probe_sha256": "c2f98473287da99bbefef1abbbfc261ba7ad8fcb560b12321e414c3d9a9cf3d3"
+          },
+          "semantic": {
+            "family": "access_control",
+            "surface": "lab_registry_access_surface",
+            "expected_oracle": "synthetic_rule_surface_v1",
+            "expected_signal": "status_code_200"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "params": {},
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "4591260de81fdb342731",
+              "sequence": 16
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 5301,
+            "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+            "headers": {
+              "content-length": "5301",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "item_shapes": [
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "length": 12,
+              "type": "array"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {},
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "212df430ca6a90c373d37e370b07f443e87a76cc6c425fba94dae17525b2db8b",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {},
+            "path": "/api/maze/labs",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "4591260de81fdb342731",
+              "sequence": 16
+            },
+            "response": {
+              "body_length": 5301,
+              "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+              "headers": {
+                "content-length": "5301",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "item_shapes": [
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "length": 12,
+                "type": "array"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "left": {
+              "op": "const",
+              "value": 200
+            },
+            "op": "eq",
+            "right": {
+              "op": "field",
+              "path": "response.status_code"
+            }
+          },
+          "rule_ir_canonical": "{\"left\":{\"op\":\"const\",\"value\":200},\"op\":\"eq\",\"right\":{\"op\":\"field\",\"path\":\"response.status_code\"}}",
+          "rule_ir_complexity": 3,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-04-a",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "6bd01a1dd1a2864e493c00e23702fa027889bc231e1abd83b7d43f5798978979"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-04-a-maze_url_redirect_registry_replay-788f0ec1d6a3",
+          "source_id": "pg03-source-04-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "http_canary",
+            "probe": "pg03-probe-a-base",
+            "expected": {
+              "requires_recheck": true,
+              "status_code": 200
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "788f0ec1d6a3827cd31fbd393d07955305e0bd85a43470104f4e136cd1995410"
+          },
+          "probe_artifact": {
+            "original": "pg03-probe-a-base",
+            "encoding": "identifier_canary",
+            "probe_sha256": "88ab00ed461bb281675f8c96f5652f5d7199e3cefb573a81f58592bad3b6f58f"
+          },
+          "semantic": {
+            "family": "url_redirect",
+            "surface": "lab_registry_redirect_surface",
+            "expected_oracle": "synthetic_rule_surface_v1",
+            "expected_signal": "status_code_200"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "params": {},
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "6cff8bd4339911bcfb08",
+              "sequence": 17
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 5301,
+            "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+            "headers": {
+              "content-length": "5301",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "item_shapes": [
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "length": 12,
+              "type": "array"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {},
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "acdb3a9b430bdb6381861a25e7889ad0c581bfb991f7da953d51851d46f65486",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {},
+            "path": "/api/maze/labs",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "6cff8bd4339911bcfb08",
+              "sequence": 17
+            },
+            "response": {
+              "body_length": 5301,
+              "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+              "headers": {
+                "content-length": "5301",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "item_shapes": [
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "length": 12,
+                "type": "array"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "left": {
+              "op": "const",
+              "value": 200
+            },
+            "op": "eq",
+            "right": {
+              "op": "field",
+              "path": "response.status_code"
+            }
+          },
+          "rule_ir_canonical": "{\"left\":{\"op\":\"const\",\"value\":200},\"op\":\"eq\",\"right\":{\"op\":\"field\",\"path\":\"response.status_code\"}}",
+          "rule_ir_complexity": 3,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-04-b",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "ed03084d18d11bc44612908dc558cd0afda8b9e05d9276327d5fbeac31347774"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-04-b-maze_url_redirect_registry_replay-2095d0b43aa9",
+          "source_id": "pg03-source-04-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "http_canary",
+            "probe": "pg03-probe-b-base",
+            "expected": {
+              "requires_recheck": true,
+              "status_code": 200
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "2095d0b43aa9e33d732a44e43aef36043f554fd037faefd8a83f29899f81d2ba"
+          },
+          "probe_artifact": {
+            "original": "pg03-probe-b-base",
+            "encoding": "identifier_canary",
+            "probe_sha256": "c2f98473287da99bbefef1abbbfc261ba7ad8fcb560b12321e414c3d9a9cf3d3"
+          },
+          "semantic": {
+            "family": "url_redirect",
+            "surface": "lab_registry_redirect_surface",
+            "expected_oracle": "synthetic_rule_surface_v1",
+            "expected_signal": "status_code_200"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "params": {},
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "7b75f814167336f3df4f",
+              "sequence": 18
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 5301,
+            "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+            "headers": {
+              "content-length": "5301",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "item_shapes": [
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "length": 12,
+              "type": "array"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {},
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "53d879fc7a968fa377fd2c56b8ae421ddb909613613d2901a5d197071a2cb7d0",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {},
+            "path": "/api/maze/labs",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "7b75f814167336f3df4f",
+              "sequence": 18
+            },
+            "response": {
+              "body_length": 5301,
+              "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+              "headers": {
+                "content-length": "5301",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "item_shapes": [
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "length": 12,
+                "type": "array"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "left": {
+              "op": "const",
+              "value": 200
+            },
+            "op": "eq",
+            "right": {
+              "op": "field",
+              "path": "response.status_code"
+            }
+          },
+          "rule_ir_canonical": "{\"left\":{\"op\":\"const\",\"value\":200},\"op\":\"eq\",\"right\":{\"op\":\"field\",\"path\":\"response.status_code\"}}",
+          "rule_ir_complexity": 3,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-05-a",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "b595b9f8eb19198ac02cd388649a2eb32ef58b154c2c6e0ab075fea74fb4e6f3"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-05-a-maze_logic_registry_replay-788f0ec1d6a3",
+          "source_id": "pg03-source-05-a",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-a-base"
+            },
+            "marker": "pg03-probe-a-base",
+            "probe_kind": "http_canary",
+            "probe": "pg03-probe-a-base",
+            "expected": {
+              "requires_recheck": true,
+              "status_code": 200
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "788f0ec1d6a3827cd31fbd393d07955305e0bd85a43470104f4e136cd1995410"
+          },
+          "probe_artifact": {
+            "original": "pg03-probe-a-base",
+            "encoding": "identifier_canary",
+            "probe_sha256": "88ab00ed461bb281675f8c96f5652f5d7199e3cefb573a81f58592bad3b6f58f"
+          },
+          "semantic": {
+            "family": "logic",
+            "surface": "lab_registry_logic_surface",
+            "expected_oracle": "synthetic_rule_surface_v1",
+            "expected_signal": "status_code_200"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "params": {},
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "a2cf934cf677fcef70b1",
+              "sequence": 19
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 5301,
+            "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+            "headers": {
+              "content-length": "5301",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "item_shapes": [
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "length": 12,
+              "type": "array"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {},
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "b40b242b27f2b4ff6d5a9eb64a3ed637f9eb89f449fb3b73de68ab518d6ab376",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {},
+            "path": "/api/maze/labs",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "a2cf934cf677fcef70b1",
+              "sequence": 19
+            },
+            "response": {
+              "body_length": 5301,
+              "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+              "headers": {
+                "content-length": "5301",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "item_shapes": [
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "length": 12,
+                "type": "array"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "left": {
+              "op": "const",
+              "value": 200
+            },
+            "op": "eq",
+            "right": {
+              "op": "field",
+              "path": "response.status_code"
+            }
+          },
+          "rule_ir_canonical": "{\"left\":{\"op\":\"const\",\"value\":200},\"op\":\"eq\",\"right\":{\"op\":\"field\",\"path\":\"response.status_code\"}}",
+          "rule_ir_complexity": 3,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg03-source-05-b",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/replay_collector.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:3100"
+        ],
+        "captured_at": "2026-08-02",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "92360ff5933a79807ae064bd9c6dab2ad83deb453269c05f6a5fdb46d9c9742c"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg03-source-05-b-maze_logic_registry_replay-2095d0b43aa9",
+          "source_id": "pg03-source-05-b",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg03-probe-b-base"
+            },
+            "marker": "pg03-probe-b-base",
+            "probe_kind": "http_canary",
+            "probe": "pg03-probe-b-base",
+            "expected": {
+              "requires_recheck": true,
+              "status_code": 200
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "2095d0b43aa9e33d732a44e43aef36043f554fd037faefd8a83f29899f81d2ba"
+          },
+          "probe_artifact": {
+            "original": "pg03-probe-b-base",
+            "encoding": "identifier_canary",
+            "probe_sha256": "c2f98473287da99bbefef1abbbfc261ba7ad8fcb560b12321e414c3d9a9cf3d3"
+          },
+          "semantic": {
+            "family": "logic",
+            "surface": "lab_registry_logic_surface",
+            "expected_oracle": "synthetic_rule_surface_v1",
+            "expected_signal": "status_code_200"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:3100",
+            "method": "GET",
+            "path": "/api/maze/labs",
+            "params": {},
+            "fresh_reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "55ac7fcb77862698e3d8",
+              "sequence": 20
+            },
+            "transport": "in_process_asgi"
+          },
+          "response_projection": {
+            "body_length": 5301,
+            "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+            "headers": {
+              "content-length": "5301",
+              "content-type": "application/json"
+            },
+            "json_shape": {
+              "item_shapes": [
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "keys": [
+                    "candidate_signal",
+                    "dead_ends",
+                    "exit_oracle",
+                    "family",
+                    "id",
+                    "research_axis",
+                    "safety",
+                    "scenario_id",
+                    "stable_replay",
+                    "state_model"
+                  ],
+                  "type": "object"
+                }
+              ],
+              "length": 12,
+              "type": "array"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {},
+          "evidence": {
+            "baseline": {
+              "body_length": 33,
+              "body_sha256": "dbd8645a0472a28ab6444ffa5ff6ab46a1048fab2d1792a6158b0e1585bc9791",
+              "status_code": 200
+            },
+            "collector": "sift-local-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "82d1aabf64b243c0d01721e724126e859565bb30182f34ed6982686ae58e4635",
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {},
+            "path": "/api/maze/labs",
+            "real_sleep_performed": false,
+            "reset": {
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "kind": "fresh_local_asgi",
+              "reset_id": "55ac7fcb77862698e3d8",
+              "sequence": 20
+            },
+            "response": {
+              "body_length": 5301,
+              "body_sha256": "cee4cccfe15f21572b0fa8ca64c63011a942c9627f12105c49f7f08b0cc3c9d2",
+              "headers": {
+                "content-length": "5301",
+                "content-type": "application/json"
+              },
+              "json_shape": {
+                "item_shapes": [
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "keys": [
+                      "candidate_signal",
+                      "dead_ends",
+                      "exit_oracle",
+                      "family",
+                      "id",
+                      "research_axis",
+                      "safety",
+                      "scenario_id",
+                      "stable_replay",
+                      "state_model"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "length": 12,
+                "type": "array"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:3100"
+          },
+          "rule_ir": {
+            "left": {
+              "op": "const",
+              "value": 200
+            },
+            "op": "eq",
+            "right": {
+              "op": "field",
+              "path": "response.status_code"
+            }
+          },
+          "rule_ir_canonical": "{\"left\":{\"op\":\"const\",\"value\":200},\"op\":\"eq\",\"right\":{\"op\":\"field\",\"path\":\"response.status_code\"}}",
+          "rule_ir_complexity": 3,
+          "rule_ir_result": true
+        }
+      ]
+    }
+  ],
+  "safety": {
+    "local_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_touched": false,
+    "evaluator_state_visible": false,
+    "real_exploit_strings": false
+  },
+  "catalog_sha256": "c76cf1fa1aa123d1641e34775ba6aea25c480545afe90a6233e888033210e537"
+}

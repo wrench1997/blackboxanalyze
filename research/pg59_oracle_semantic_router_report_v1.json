@@ -1,0 +1,176 @@
+{
+  "protocol_id": "pg-pk-59-oracle-semantic-router-v1",
+  "schema_version": "pg59-oracle-semantic-router-report-v1",
+  "device": "cuda",
+  "input_dim": 39,
+  "modalities": [
+    "DOM",
+    "AST",
+    "AUTH_BOUNDARY",
+    "ACCESS_BOUNDARY",
+    "LOGIC",
+    "REDIRECT",
+    "VALIDATION",
+    "CANARY",
+    "OTHER",
+    "NEGATIVE"
+  ],
+  "training_contract": {
+    "training_source": "PG-53 typed oracle",
+    "evaluation_source": "PG-42 independent semantic catalog",
+    "family_name_in_features": false,
+    "raw_probe_in_features": false,
+    "raw_response_body_in_features": false,
+    "oracle_semantics_are_post_probe_evidence": true,
+    "unknown_modality_fail_closed": true
+  },
+  "split_counts": {
+    "train": 270,
+    "dev": 640,
+    "holdout": 1728
+  },
+  "metrics": {
+    "dev_raw": {
+      "count": 640,
+      "emitted_count": 80,
+      "known_positive_count": 80,
+      "known_family_hits": 80,
+      "known_family_recall": 1.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 0,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.875
+    },
+    "holdout_raw": {
+      "count": 1728,
+      "emitted_count": 144,
+      "known_positive_count": 144,
+      "known_family_hits": 144,
+      "known_family_recall": 1.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 36,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.916667
+    },
+    "dev_semantic_gate": {
+      "count": 640,
+      "emitted_count": 80,
+      "known_positive_count": 80,
+      "known_family_hits": 80,
+      "known_family_recall": 1.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 0,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.875
+    },
+    "holdout_semantic_gate": {
+      "count": 1728,
+      "emitted_count": 144,
+      "known_positive_count": 144,
+      "known_family_hits": 144,
+      "known_family_recall": 1.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 36,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.916667
+    },
+    "dev_calibrated": {
+      "count": 640,
+      "emitted_count": 80,
+      "known_positive_count": 80,
+      "known_family_hits": 80,
+      "known_family_recall": 1.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 0,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.875
+    },
+    "holdout_calibrated": {
+      "count": 1728,
+      "emitted_count": 144,
+      "known_positive_count": 144,
+      "known_family_hits": 144,
+      "known_family_recall": 1.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 36,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.916667
+    }
+  },
+  "thresholds": {
+    "raw": {
+      "emit_threshold": 0.5,
+      "family_threshold": 0.5,
+      "margin_threshold": 0.05
+    },
+    "calibrated": {
+      "emit_threshold": 0.016846785321831703,
+      "family_threshold": 0.4586985111236572,
+      "margin_threshold": 0.26044416427612305
+    },
+    "calibration_source": "PG-59 PG-42 dev only",
+    "calibration_metrics": {
+      "count": 640,
+      "emitted_count": 80,
+      "known_positive_count": 80,
+      "known_family_hits": 80,
+      "known_family_recall": 1.0,
+      "known_wrong_family_count": 0,
+      "unknown_positive_count": 0,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.875
+    }
+  },
+  "checkpoint": "artifacts\\pg59-oracle-semantic-router\\router.pt",
+  "checkpoint_sha256": "937e2d099048daba6eae14a2feebd05a45716e2ba77764d86608b8bec88b73ad",
+  "trace": "research\\pg59_oracle_semantic_router_trace_v1.json",
+  "history_tail": [
+    {
+      "epoch": 116,
+      "train_loss": 0.125843,
+      "dev_loss": 0.185088
+    },
+    {
+      "epoch": 117,
+      "train_loss": 0.125993,
+      "dev_loss": 0.184704
+    },
+    {
+      "epoch": 118,
+      "train_loss": 0.125314,
+      "dev_loss": 0.185357
+    },
+    {
+      "epoch": 119,
+      "train_loss": 0.125908,
+      "dev_loss": 0.187328
+    },
+    {
+      "epoch": 120,
+      "train_loss": 0.124932,
+      "dev_loss": 0.189434
+    }
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false,
+    "status": "quarantined_typed_oracle_router_ablation",
+    "reason": "PG-59 tests post-probe typed semantic routing; it does not prove pre-oracle discovery or authorize memory promotion."
+  },
+  "report_sha256": "65ac375cce72f3464b8f33cf2ee5eb6ea5808bb610a4d8582ff0f001151edd66"
+}

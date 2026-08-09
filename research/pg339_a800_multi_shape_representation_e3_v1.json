@@ -1,0 +1,319 @@
+{
+  "schema_version": "pg339-a800-multi-shape-representation-smoke-v1",
+  "status": "representation_pretrain_candidate_only",
+  "gate": {
+    "schema_version": "pg339-a800-multi-shape-representation-smoke-v1",
+    "status": "ready_representation_pretrain_candidate",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "train_context_rows_valid": true,
+      "shape_holdout_context_rows_valid": true,
+      "context_vocabulary_locked": true,
+      "audit_diagnostic_only": true,
+      "full_axis_information_present": true,
+      "split_implementation_isolation": true,
+      "data_code_vocab_rules_hashes_locked": true
+    },
+    "failures": [],
+    "representation_training_allowed": true,
+    "information_gate_status": "diagnostic_only_information_gate_pending",
+    "information_promotion_gate_passed": false,
+    "train_split": "train",
+    "holdout_split": "shape_holdout",
+    "split_counts": {
+      "train": 9,
+      "shape_holdout": 15
+    },
+    "unknown_context_token_count": 0,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "28380d1f0b3596c7f70ad6b8bbb1f13dc3e5be2bf7afed5fdf5daf8218338b03",
+    "information_audit": "f16a2dd7cf0876df7e055b783469b666ac2894b184f2c4e363e3bf55e3bad8fc",
+    "vocabulary": "c59093061cdd3dfb2f921907e600f55ff8d1b1068560be2f6b0117f09cb0fc4d",
+    "rules": "9df4f5c0051304911852d24d5a73fe251677e3d203392b7a71f9aca046c6f870",
+    "script": "c9e5780bc77c0a1eb328cbdabd33ad596d4c57fcc0324667fdd8c317995ce6f3",
+    "model": "f7d9b94d0a6859770c5ff89813d4008716664e4cb3a7294008e68a7a774dccec"
+  },
+  "training": {
+    "device": "cuda:0",
+    "seeds": [
+      33901,
+      33902,
+      33903
+    ],
+    "context_only": true,
+    "target_tokens_read": false,
+    "learning_rate": 0.0001,
+    "epochs": 1
+  },
+  "context_capacity_requirement": {
+    "train_max": 3284,
+    "shape_holdout_max": 1358,
+    "required_max_length": 3284
+  },
+  "loss": [
+    {
+      "seed": 33901,
+      "baseline_shape_holdout": {
+        "next_token_count": 14973,
+        "mean_next_token_loss": 7.128422,
+        "mean_predictive_entropy_nats": 7.095532
+      },
+      "train": {
+        "next_token_count": 29033,
+        "mean_next_token_loss": 6.999332,
+        "mean_predictive_entropy_nats": 7.09571
+      },
+      "shape_holdout": {
+        "next_token_count": 14973,
+        "mean_next_token_loss": 7.056247,
+        "mean_predictive_entropy_nats": 7.095692,
+        "context_row_count": 15,
+        "split": "shape_holdout"
+      },
+      "shape_holdout_ablation": {
+        "document_structure": {
+          "full_entropy_nats": 7.095692,
+          "ablated_entropy_nats": 7.096143,
+          "entropy_delta_nats": 0.000451,
+          "full_loss": 7.056247,
+          "ablated_loss": 7.15721,
+          "loss_delta": 0.100963
+        },
+        "navigation": {
+          "full_entropy_nats": 7.095692,
+          "ablated_entropy_nats": 7.095621,
+          "entropy_delta_nats": -7.1e-05,
+          "full_loss": 7.056247,
+          "ablated_loss": 7.059525,
+          "loss_delta": 0.003278
+        },
+        "request_transport": {
+          "full_entropy_nats": 7.095692,
+          "ablated_entropy_nats": 7.095683,
+          "entropy_delta_nats": -9e-06,
+          "full_loss": 7.056247,
+          "ablated_loss": 7.049354,
+          "loss_delta": -0.006893
+        },
+        "response_transport": {
+          "full_entropy_nats": 7.095692,
+          "ablated_entropy_nats": 7.095693,
+          "entropy_delta_nats": 1e-06,
+          "full_loss": 7.056247,
+          "ablated_loss": 7.053483,
+          "loss_delta": -0.002764
+        },
+        "javascript_surface": {
+          "full_entropy_nats": 7.095692,
+          "ablated_entropy_nats": 7.09569,
+          "entropy_delta_nats": -2e-06,
+          "full_loss": 7.056247,
+          "ablated_loss": 7.053457,
+          "loss_delta": -0.00279
+        },
+        "failure_feedback": {
+          "full_entropy_nats": 7.095692,
+          "ablated_entropy_nats": 7.095686,
+          "entropy_delta_nats": -6e-06,
+          "full_loss": 7.056247,
+          "ablated_loss": 7.052582,
+          "loss_delta": -0.003665
+        },
+        "belief_and_replay": {
+          "full_entropy_nats": 7.095692,
+          "ablated_entropy_nats": 7.095683,
+          "entropy_delta_nats": -9e-06,
+          "full_loss": 7.056247,
+          "ablated_loss": 7.053154,
+          "loss_delta": -0.003093
+        }
+      },
+      "relative_entropy_drop": -2.3e-05,
+      "forgetting": "not_applicable_no_prior_candidate"
+    },
+    {
+      "seed": 33902,
+      "baseline_shape_holdout": {
+        "next_token_count": 14973,
+        "mean_next_token_loss": 7.176178,
+        "mean_predictive_entropy_nats": 7.0965
+      },
+      "train": {
+        "next_token_count": 29033,
+        "mean_next_token_loss": 7.096776,
+        "mean_predictive_entropy_nats": 7.096703
+      },
+      "shape_holdout": {
+        "next_token_count": 14973,
+        "mean_next_token_loss": 7.104404,
+        "mean_predictive_entropy_nats": 7.096646,
+        "context_row_count": 15,
+        "split": "shape_holdout"
+      },
+      "shape_holdout_ablation": {
+        "document_structure": {
+          "full_entropy_nats": 7.096646,
+          "ablated_entropy_nats": 7.09692,
+          "entropy_delta_nats": 0.000274,
+          "full_loss": 7.104404,
+          "ablated_loss": 7.169801,
+          "loss_delta": 0.065397
+        },
+        "navigation": {
+          "full_entropy_nats": 7.096646,
+          "ablated_entropy_nats": 7.096658,
+          "entropy_delta_nats": 1.2e-05,
+          "full_loss": 7.104404,
+          "ablated_loss": 7.091883,
+          "loss_delta": -0.012521
+        },
+        "request_transport": {
+          "full_entropy_nats": 7.096646,
+          "ablated_entropy_nats": 7.096642,
+          "entropy_delta_nats": -4e-06,
+          "full_loss": 7.104404,
+          "ablated_loss": 7.103005,
+          "loss_delta": -0.001399
+        },
+        "response_transport": {
+          "full_entropy_nats": 7.096646,
+          "ablated_entropy_nats": 7.096649,
+          "entropy_delta_nats": 3e-06,
+          "full_loss": 7.104404,
+          "ablated_loss": 7.103159,
+          "loss_delta": -0.001245
+        },
+        "javascript_surface": {
+          "full_entropy_nats": 7.096646,
+          "ablated_entropy_nats": 7.096647,
+          "entropy_delta_nats": 1e-06,
+          "full_loss": 7.104404,
+          "ablated_loss": 7.103314,
+          "loss_delta": -0.00109
+        },
+        "failure_feedback": {
+          "full_entropy_nats": 7.096646,
+          "ablated_entropy_nats": 7.096647,
+          "entropy_delta_nats": 1e-06,
+          "full_loss": 7.104404,
+          "ablated_loss": 7.102156,
+          "loss_delta": -0.002248
+        },
+        "belief_and_replay": {
+          "full_entropy_nats": 7.096646,
+          "ablated_entropy_nats": 7.096646,
+          "entropy_delta_nats": 0.0,
+          "full_loss": 7.104404,
+          "ablated_loss": 7.102272,
+          "loss_delta": -0.002132
+        }
+      },
+      "relative_entropy_drop": -2.1e-05,
+      "forgetting": "not_applicable_no_prior_candidate"
+    },
+    {
+      "seed": 33903,
+      "baseline_shape_holdout": {
+        "next_token_count": 14973,
+        "mean_next_token_loss": 7.118255,
+        "mean_predictive_entropy_nats": 7.097812
+      },
+      "train": {
+        "next_token_count": 29033,
+        "mean_next_token_loss": 7.02446,
+        "mean_predictive_entropy_nats": 7.097871
+      },
+      "shape_holdout": {
+        "next_token_count": 14973,
+        "mean_next_token_loss": 7.054356,
+        "mean_predictive_entropy_nats": 7.097789,
+        "context_row_count": 15,
+        "split": "shape_holdout"
+      },
+      "shape_holdout_ablation": {
+        "document_structure": {
+          "full_entropy_nats": 7.097789,
+          "ablated_entropy_nats": 7.098854,
+          "entropy_delta_nats": 0.001065,
+          "full_loss": 7.054356,
+          "ablated_loss": 7.153621,
+          "loss_delta": 0.099265
+        },
+        "navigation": {
+          "full_entropy_nats": 7.097789,
+          "ablated_entropy_nats": 7.097862,
+          "entropy_delta_nats": 7.3e-05,
+          "full_loss": 7.054356,
+          "ablated_loss": 7.048244,
+          "loss_delta": -0.006112
+        },
+        "request_transport": {
+          "full_entropy_nats": 7.097789,
+          "ablated_entropy_nats": 7.097785,
+          "entropy_delta_nats": -4e-06,
+          "full_loss": 7.054356,
+          "ablated_loss": 7.050408,
+          "loss_delta": -0.003948
+        },
+        "response_transport": {
+          "full_entropy_nats": 7.097789,
+          "ablated_entropy_nats": 7.097791,
+          "entropy_delta_nats": 2e-06,
+          "full_loss": 7.054356,
+          "ablated_loss": 7.051465,
+          "loss_delta": -0.002891
+        },
+        "javascript_surface": {
+          "full_entropy_nats": 7.097789,
+          "ablated_entropy_nats": 7.097791,
+          "entropy_delta_nats": 2e-06,
+          "full_loss": 7.054356,
+          "ablated_loss": 7.052498,
+          "loss_delta": -0.001858
+        },
+        "failure_feedback": {
+          "full_entropy_nats": 7.097789,
+          "ablated_entropy_nats": 7.097788,
+          "entropy_delta_nats": -1e-06,
+          "full_loss": 7.054356,
+          "ablated_loss": 7.049837,
+          "loss_delta": -0.004519
+        },
+        "belief_and_replay": {
+          "full_entropy_nats": 7.097789,
+          "ablated_entropy_nats": 7.09779,
+          "entropy_delta_nats": 1e-06,
+          "full_loss": 7.054356,
+          "ablated_loss": 7.052185,
+          "loss_delta": -0.002171
+        }
+      },
+      "relative_entropy_drop": 3e-06,
+      "forgetting": "not_applicable_no_prior_candidate"
+    }
+  ],
+  "entropy_gate": {
+    "relative_drop_limit": 0.25,
+    "max_relative_entropy_drop": 3e-06,
+    "passed": true,
+    "interpretation": "baseline is the same-seed untrained model; this is a diagnostic gate, not a capability promotion gate"
+  },
+  "forgetting": "not_applicable_no_prior_candidate",
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "4e7a39765ce297cd12b45f095d080da9a335d7781e0f2defe85beff8efe23e65"
+}

@@ -1,0 +1,20 @@
+{
+  "protocol_id": "pg-pk-115-small-rule-ir-decoder-v1",
+  "proposal_id": "pg115-small-rule-ir-decoder-proposal-v1",
+  "question": "小型模型能否从抽象响应差分和多步上下文输出 Rule IR 决策，而不是记住目标或家族名称？",
+  "intervention": "使用独立种子生成 800 条四类决策训练/开发样本，训练 4.6K 参数 MLP，再盲测 PG-114 的 48 条模型输入",
+  "not_in_scope": [
+    "真实网址扫描能力",
+    "可执行攻击 payload",
+    "长期记忆自动提升",
+    "PG-114 标签进入训练"
+  ],
+  "success_definition": {
+    "positive_recall_nonzero": true,
+    "decoy_false_accept_zero": true,
+    "withheld_abstain_nonzero": true,
+    "all_abstain_not_success": true
+  },
+  "next_if_pass": "增加跨实现、跨编码的已授权训练行，并保持 PG-114/新家族盲测隔离",
+  "next_if_fail": "按混淆矩阵增加 candidate/decoy/abstain 的反事实配对，不扩张模型容量"
+}

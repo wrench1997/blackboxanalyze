@@ -1,0 +1,53 @@
+{
+  "protocol_id": "pg-pk-61-target-zone-counterfactual-v1",
+  "schema_version": "pg61-target-zone-counterfactual-protocol-v1",
+  "objective": "在同一 base abstract state 的 GET/POST 反事实中学习目标区出口动作，并在跨布局/种子上保持安全弃权。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "local_fixture_only": true,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false,
+    "state_mutation": false,
+    "credentials_accessed": false
+  },
+  "input_contract": {
+    "model_reads": [
+      "surface_class",
+      "response_shape",
+      "channel_hint",
+      "route_depth",
+      "parameter_count_bucket",
+      "candidate_action"
+    ],
+    "model_must_not_read": [
+      "oracle_projection",
+      "response_projection_after_action",
+      "expected_method",
+      "zone_type",
+      "layout",
+      "task_id",
+      "raw_probe",
+      "raw_response"
+    ]
+  },
+  "counterfactual_contract": {
+    "same_base_state_with_both_best_methods": true,
+    "randomized_candidate_order": true,
+    "matched_get_post_negative_controls": true,
+    "typed_oracle_after_action_only": true,
+    "fresh_reset_per_action": true,
+    "evidence_hash_per_action": true,
+    "no_raw_probe_or_response_retention": true
+  },
+  "splits": {
+    "train": "atlas+birch",
+    "dev": "cinder",
+    "holdout": "delta+ember"
+  },
+  "threshold_selection": "dev_only_safe_negative_and_unknown_abstain_filter",
+  "run_result": {
+    "status": "completed_hard_gate_pending_registry",
+    "selected_threshold": 0.5
+  }
+}

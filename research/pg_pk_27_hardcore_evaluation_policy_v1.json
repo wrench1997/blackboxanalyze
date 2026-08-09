@@ -1,0 +1,55 @@
+{
+  "schema_version": "pg-pk-27-hardcore-evaluation-policy-v1",
+  "purpose": "Prevent self-deceptive experiments and require reproducible payload-success evidence.",
+  "no_self_deception_rules": [
+    "health_check_is_not_payload_success",
+    "http_200_is_not_payload_success",
+    "reflection_error_status_or_timeout_is_not_confirmation",
+    "HEAD_only_is_preflight_for_payload_families",
+    "model_confidence_is_never_positive_authority",
+    "no_positive_claim_without_typed_oracle_and_allowlisted_regex_evidence"
+  ],
+  "payload_family_method_requirements": {
+    "xss": ["GET", "POST"],
+    "sqli": ["GET", "POST"],
+    "logic_access": ["GET", "POST"],
+    "command_injection": ["GET", "POST"],
+    "open_redirect": ["GET"],
+    "clickjacking": ["HEAD", "GET"]
+  },
+  "minimum_independence": {
+    "target_instance_count": 3,
+    "sampling_seed_count": 3,
+    "fresh_reset_per_observation": true,
+    "same_source_variants_are_not_independent": true,
+    "positive_replay_count_per_case": 2,
+    "matched_negative_control_per_positive": true
+  },
+  "positive_acceptance": [
+    "expected_effect_confirmed",
+    "typed_oracle_positive_authority",
+    "allowlisted_regex_evidence_matched",
+    "matched_negative_control_confirmed_negative",
+    "fresh_reset_proof",
+    "evidence_sha256_valid",
+    "independent_replay_consistent"
+  ],
+  "hard_fail_conditions": [
+    "missing_required_http_method",
+    "zero_typed_positives",
+    "positive_without_negative_control",
+    "positive_without_fresh_reset",
+    "positive_without_regex_evidence",
+    "negative_false_accept",
+    "wrong_family_accept",
+    "transport_error_counted_as_success",
+    "raw_body_or_raw_payload_stored",
+    "train_test_source_hash_overlap"
+  ],
+  "decision_policy": {
+    "pass": "all hard gates pass",
+    "preflight_only": "deployment/negative checks pass but payload family lacks complete method and positive evidence",
+    "hard_fail": "any hard_fail_condition is observed",
+    "training_or_memory_on_preflight_or_fail": "blocked"
+  }
+}

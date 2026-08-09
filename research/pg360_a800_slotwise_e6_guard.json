@@ -1,0 +1,279 @@
+{
+  "schema_version": "pg360-a800-slotwise-candidate-v1",
+  "status": "slotwise_candidate_only",
+  "gate": {
+    "schema_version": "pg360-a800-slotwise-candidate-v1-gate",
+    "status": "ready",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "dataset_candidate_only": true,
+      "audit_candidate_only": true,
+      "all_slots_present": true,
+      "vocabulary_locked": true,
+      "promotion_closed": true,
+      "hashes_locked": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "candidate_only": true,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "abb94768abdc00d3dcf2ec5874dd3ab23dffe71db6aa2d55f65b4cde43b767c1",
+    "audit": "e9cb371b275e39e82931dfaf65427e8360beeb0f411bd5be37dc0de31f34f427",
+    "rules": "f75f6f86c6df6eccc24679b568085f3c8e4b43bc51497631cc7e78892e887c72",
+    "script": "28af18be2fcb1cb054b6ba19720a7241bd00ee5d65ee703062de0e54b398af71",
+    "model": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      36001,
+      36002,
+      36003
+    ],
+    "epochs": 1,
+    "learning_rate": 0.0002,
+    "batch_size": 128,
+    "target_weight": 8.0,
+    "context_weight": 0.25,
+    "balance_slot_values": false,
+    "sqrt_balance_slot_values": false,
+    "balance_strategy": "empirical",
+    "apply_rule_ir_guard": true,
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 2,
+    "experts": 2,
+    "expert_hidden": 256,
+    "dropout": 0.05,
+    "fit_value_counts": {
+      "36001": {},
+      "36002": {},
+      "36003": {}
+    },
+    "max_length": 627,
+    "source_rows": 1832,
+    "slot_records": 21984,
+    "target_information_in_context": false,
+    "candidate_only": true
+  },
+  "slot_order": [
+    "question",
+    "ask_reason",
+    "next_action",
+    "repair_action",
+    "transport_ref",
+    "field_role_ref",
+    "encoding_ref",
+    "probe_variant_ref",
+    "safe_to_send",
+    "payload_shape_ref",
+    "oracle_ref",
+    "negative_control_presence_ref"
+  ],
+  "candidates": [
+    {
+      "seed": 36001,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 0.819118,
+          "repair_action": 0.9,
+          "transport_ref": 0.863235,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.0,
+          "safe_to_send": 0.805882,
+          "payload_shape_ref": 0.705882,
+          "oracle_ref": 0.9,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.0,
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 0.659091,
+        "positive_action_recall": 0.181818,
+        "positive_recall": 0.0,
+        "negative_false_allow": 0,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.924595,
+        "post_predictive_entropy": 6.713344,
+        "relative_entropy_drop": 0.030507,
+        "raw_model_metrics": {
+          "source_rows": 680,
+          "slot_accuracy": {
+            "question": 0.964706,
+            "ask_reason": 1.0,
+            "next_action": 0.835294,
+            "repair_action": 0.9,
+            "transport_ref": 0.863235,
+            "field_role_ref": 0.705882,
+            "encoding_ref": 0.758824,
+            "probe_variant_ref": 0.741176,
+            "safe_to_send": 0.902941,
+            "payload_shape_ref": 0.705882,
+            "oracle_ref": 0.741176,
+            "negative_control_presence_ref": 1.0
+          },
+          "rule_ir_assembly_exact": 0.705882,
+          "ask_recall": 0.952381,
+          "repair_recall": 0.0,
+          "abstain_recall": 0.0,
+          "positive_action_recall": 0.666667,
+          "positive_recall": 0.757576,
+          "negative_false_allow": 34,
+          "negative_total": 548
+        }
+      }
+    },
+    {
+      "seed": 36002,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 0.805882,
+          "repair_action": 0.9,
+          "transport_ref": 0.864706,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.0,
+          "safe_to_send": 0.805882,
+          "payload_shape_ref": 0.705882,
+          "oracle_ref": 0.9,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.0,
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 1.0,
+        "positive_action_recall": 0.0,
+        "positive_recall": 0.0,
+        "negative_false_allow": 0,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.924378,
+        "post_predictive_entropy": 6.734667,
+        "relative_entropy_drop": 0.027398,
+        "raw_model_metrics": {
+          "source_rows": 680,
+          "slot_accuracy": {
+            "question": 0.964706,
+            "ask_reason": 1.0,
+            "next_action": 0.835294,
+            "repair_action": 0.9,
+            "transport_ref": 0.864706,
+            "field_role_ref": 0.705882,
+            "encoding_ref": 0.758824,
+            "probe_variant_ref": 0.741176,
+            "safe_to_send": 0.9,
+            "payload_shape_ref": 0.705882,
+            "oracle_ref": 0.9,
+            "negative_control_presence_ref": 1.0
+          },
+          "rule_ir_assembly_exact": 0.705882,
+          "ask_recall": 0.952381,
+          "repair_recall": 0.0,
+          "abstain_recall": 0.0,
+          "positive_action_recall": 0.666667,
+          "positive_recall": 1.0,
+          "negative_false_allow": 68,
+          "negative_total": 548
+        }
+      }
+    },
+    {
+      "seed": 36003,
+      "implementation_holdout": {
+        "source_rows": 680,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 0.741176,
+          "repair_action": 0.9,
+          "transport_ref": 0.864706,
+          "field_role_ref": 0.705882,
+          "encoding_ref": 0.758824,
+          "probe_variant_ref": 0.0,
+          "safe_to_send": 0.805882,
+          "payload_shape_ref": 0.705882,
+          "oracle_ref": 0.9,
+          "negative_control_presence_ref": 0.705882
+        },
+        "rule_ir_assembly_exact": 0.0,
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.0,
+        "positive_recall": 0.0,
+        "negative_false_allow": 0,
+        "negative_total": 548,
+        "baseline_predictive_entropy": 6.925709,
+        "post_predictive_entropy": 6.724094,
+        "relative_entropy_drop": 0.029111,
+        "raw_model_metrics": {
+          "source_rows": 680,
+          "slot_accuracy": {
+            "question": 0.964706,
+            "ask_reason": 1.0,
+            "next_action": 0.705882,
+            "repair_action": 0.9,
+            "transport_ref": 0.864706,
+            "field_role_ref": 0.705882,
+            "encoding_ref": 0.758824,
+            "probe_variant_ref": 0.741176,
+            "safe_to_send": 0.805882,
+            "payload_shape_ref": 0.705882,
+            "oracle_ref": 0.747059,
+            "negative_control_presence_ref": 0.705882
+          },
+          "rule_ir_assembly_exact": 0.705882,
+          "ask_recall": 0.952381,
+          "repair_recall": 0.0,
+          "abstain_recall": 0.0,
+          "positive_action_recall": 0.0,
+          "positive_recall": 0.0,
+          "negative_false_allow": 0,
+          "negative_total": 548
+        }
+      }
+    }
+  ],
+  "worst_seed": {
+    "max_relative_entropy_drop": 0.030507,
+    "entropy_gate_passed": true,
+    "ask_recall_min": 1.0,
+    "repair_recall_min": 1.0,
+    "abstain_recall_min": 0.0,
+    "positive_action_recall_min": 0.0,
+    "positive_recall_min": 0.0,
+    "negative_false_allow_max": 0,
+    "rule_ir_assembly_exact_min": 0.0
+  },
+  "scientific_gate": {
+    "status": "blocked_candidate_only",
+    "raw_payload_in_context": false,
+    "typed_live_replay_with_model_selected_wire": false,
+    "independent_implementation": false,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "6261d16b6415aaefa798e206e7ef2d5b359905e7258f74b79a33d4797f1220ae"
+}

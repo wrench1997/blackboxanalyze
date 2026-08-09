@@ -1,0 +1,30 @@
+{
+  "protocol_id": "pg-pk-05-cross-app-shadow-v1",
+  "objective": "Test a Pikachu-trained Rule IR decoder on an unseen local Juice Shop application and require OOD/oracle abstention when no family-specific evidence contract exists.",
+  "training_boundary": {
+    "training_target": "Pikachu only",
+    "cross_app_surface_in_training": false,
+    "checkpoint_frozen": true
+  },
+  "target": {
+    "base_url": "http://127.0.0.1:3100",
+    "container_image_digest_required": true,
+    "external_network": false,
+    "evaluator_paths_blocked": ["/api/Challenges", "/snippets"]
+  },
+  "safe_surface_allowlist": ["/", "/robots.txt", "/rest/products/search"],
+  "probe_policy": {
+    "method": "GET",
+    "query_fields": ["q"],
+    "credentials": false,
+    "mutations": false,
+    "raw_body_storage": false
+  },
+  "abstain_rule": {
+    "ood_distance_above_training_threshold": "abstain",
+    "no_family_specific_oracle": "abstain",
+    "model_confidence_alone_never_emits_rule_ir": true
+  },
+  "metrics": ["model_only_acceptance", "ood_abstain_rate", "oracle_gate_abstain_rate", "unsupported_surface_count"],
+  "loop_memory_promotion_rule": "research/loop_memory_promotion_rule_v1.json"
+}

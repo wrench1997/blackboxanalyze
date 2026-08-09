@@ -1,0 +1,171 @@
+{
+  "schema_version": "sift-neural-url-diagnostic-v1",
+  "experiment": "neural-url-generalization-loop-11-diagnostics",
+  "status": "completed",
+  "scope": "frozen-checkpoint counterfactuals; no training",
+  "aggregate": {
+    "condition_means": {
+      "target_origin": 0.489444,
+      "target_rewritten_as_endpoint": 0.590278,
+      "primitive_endpoint": 1.0,
+      "primitive_rewritten_as_origin": 0.434167,
+      "target_trace_only": 0.485833,
+      "target_trace_labels_inverted": 0.560278
+    },
+    "field_rewrite_delta_mean": 0.100833,
+    "field_rewrite_delta_min": -0.06,
+    "scheme_accuracy_means": {
+      "ftp": 0.53716,
+      "http": 0.600309,
+      "https": 0.446883,
+      "invalid": 0.351368,
+      "ws": 0.749074
+    }
+  },
+  "hypothesis_results": {
+    "H1_field_path_shortcut": {
+      "passes": false,
+      "finding": "field rewrite is not a stable primary cause"
+    },
+    "H2_protocol_novelty": {
+      "passes": false,
+      "finding": "accuracy stratified by serialized query scheme; explicit port is currently absent from the routed token"
+    },
+    "H3_episode_binding_failure": {
+      "passes": true,
+      "finding": "inverted episode labels are not followed reliably"
+    }
+  },
+  "per_cross_product": [
+    {
+      "data_seed": 20261123,
+      "model_seed": 20261001,
+      "conditions": {
+        "target_origin": 0.438333,
+        "target_rewritten_as_endpoint": 0.623333,
+        "primitive_endpoint": 1.0,
+        "primitive_rewritten_as_origin": 0.473333,
+        "target_trace_only": 0.433333,
+        "target_trace_labels_inverted": 0.616667
+      },
+      "field_rewrite_delta": 0.185,
+      "reverse_field_rewrite_delta": -0.526667,
+      "scheme_breakdown": {
+        "ftp": 0.170213,
+        "http": 0.37037,
+        "https": 0.427326,
+        "invalid": 0.423529,
+        "ws": 0.742857
+      }
+    },
+    {
+      "data_seed": 20261123,
+      "model_seed": 20261019,
+      "conditions": {
+        "target_origin": 0.495,
+        "target_rewritten_as_endpoint": 0.618333,
+        "primitive_endpoint": 1.0,
+        "primitive_rewritten_as_origin": 0.47,
+        "target_trace_only": 0.483333,
+        "target_trace_labels_inverted": 0.551667
+      },
+      "field_rewrite_delta": 0.123333,
+      "reverse_field_rewrite_delta": -0.53,
+      "scheme_breakdown": {
+        "ftp": 0.851064,
+        "http": 0.851852,
+        "https": 0.395349,
+        "invalid": 0.117647,
+        "ws": 0.928571
+      }
+    },
+    {
+      "data_seed": 20261123,
+      "model_seed": 20261107,
+      "conditions": {
+        "target_origin": 0.553333,
+        "target_rewritten_as_endpoint": 0.493333,
+        "primitive_endpoint": 1.0,
+        "primitive_rewritten_as_origin": 0.333333,
+        "target_trace_only": 0.556667,
+        "target_trace_labels_inverted": 0.508333
+      },
+      "field_rewrite_delta": -0.06,
+      "reverse_field_rewrite_delta": -0.666667,
+      "scheme_breakdown": {
+        "ftp": 0.680851,
+        "http": 0.62963,
+        "https": 0.523256,
+        "invalid": 0.494118,
+        "ws": 0.628571
+      }
+    },
+    {
+      "data_seed": 20261211,
+      "model_seed": 20261001,
+      "conditions": {
+        "target_origin": 0.418333,
+        "target_rewritten_as_endpoint": 0.67,
+        "primitive_endpoint": 1.0,
+        "primitive_rewritten_as_origin": 0.47,
+        "target_trace_only": 0.416667,
+        "target_trace_labels_inverted": 0.623333
+      },
+      "field_rewrite_delta": 0.251667,
+      "reverse_field_rewrite_delta": -0.53,
+      "scheme_breakdown": {
+        "ftp": 0.145833,
+        "http": 0.321429,
+        "https": 0.402439,
+        "invalid": 0.416667,
+        "ws": 0.75
+      }
+    },
+    {
+      "data_seed": 20261211,
+      "model_seed": 20261019,
+      "conditions": {
+        "target_origin": 0.478333,
+        "target_rewritten_as_endpoint": 0.618333,
+        "primitive_endpoint": 1.0,
+        "primitive_rewritten_as_origin": 0.456667,
+        "target_trace_only": 0.481667,
+        "target_trace_labels_inverted": 0.555
+      },
+      "field_rewrite_delta": 0.14,
+      "reverse_field_rewrite_delta": -0.543333,
+      "scheme_breakdown": {
+        "ftp": 0.833333,
+        "http": 0.910714,
+        "https": 0.359756,
+        "invalid": 0.135417,
+        "ws": 0.902778
+      }
+    },
+    {
+      "data_seed": 20261211,
+      "model_seed": 20261107,
+      "conditions": {
+        "target_origin": 0.553333,
+        "target_rewritten_as_endpoint": 0.518333,
+        "primitive_endpoint": 1.0,
+        "primitive_rewritten_as_origin": 0.401667,
+        "target_trace_only": 0.543333,
+        "target_trace_labels_inverted": 0.506667
+      },
+      "field_rewrite_delta": -0.035,
+      "reverse_field_rewrite_delta": -0.598333,
+      "scheme_breakdown": {
+        "ftp": 0.541667,
+        "http": 0.517857,
+        "https": 0.573171,
+        "invalid": 0.520833,
+        "ws": 0.541667
+      }
+    }
+  ],
+  "decision": "Use supported diagnostics to choose the minimal fixed-size pilot; do not add target-family examples.",
+  "lineage": {
+    "preregistration": "research/neural_url_loop_11_preregistration.json"
+  }
+}

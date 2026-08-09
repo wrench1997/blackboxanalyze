@@ -1,0 +1,136 @@
+{
+  "protocol_id": "sift-pg48-compositional-preprobe-v1",
+  "schema_version": "pg-pk-48-compositional-preprobe-report-v1",
+  "status": "diagnostic_only",
+  "training": {
+    "implementation": "ember",
+    "pair_count": 112,
+    "positive_count": 24,
+    "seeds": [
+      401,
+      409
+    ],
+    "semantic_index": {
+      "auth-boundary": 0,
+      "destination-context": 1,
+      "markup-context": 2,
+      "operator-context": 3,
+      "ordinary-surface": 4,
+      "state-boundary": 5,
+      "subject-boundary": 6
+    },
+    "channel_index": {
+      "query-channel": 0,
+      "form-channel": 1
+    },
+    "response_projection_consumed_by_policy": false,
+    "typed_oracle_consumed_by_model": false,
+    "pg48_frost_used_for_training": false,
+    "epochs": 360,
+    "seed": 20480802,
+    "device": "cuda",
+    "best_selection": 1e-06,
+    "history_tail": [
+      {
+        "epoch": 120,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 1e-06
+      },
+      {
+        "epoch": 180,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 1e-06
+      },
+      {
+        "epoch": 240,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 1e-06
+      },
+      {
+        "epoch": 300,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 1e-06
+      },
+      {
+        "epoch": 360,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 1e-06
+      }
+    ]
+  },
+  "model": {
+    "class": "PreProbeActionValueModel",
+    "input": "semantic/channel slots + action + belief only",
+    "checkpoint": "artifacts\\pg48-compositional-preprobe\\preprobe_action_value.pt",
+    "checkpoint_sha256": "8d829982ce444277448d3b7e87fd4c33cfda3b39b4922dd75e1852df6d5cb7dc",
+    "response_projection_consumed_by_policy": false,
+    "executable": false
+  },
+  "train_metrics": {
+    "pair_count": 112,
+    "positive_count": 24,
+    "effect_recall": 1.0
+  },
+  "seed_holdout_metrics": {
+    "pair_count": 56,
+    "positive_count": 12,
+    "effect_recall": 1.0
+  },
+  "frost_holdout": {
+    "episode_count": 48,
+    "positive_episode_count": 42,
+    "negative_episode_count": 6,
+    "effect_success_rate": 1.0,
+    "known_positive_count": 36,
+    "known_family_recall": 1.0,
+    "unknown_positive_count": 6,
+    "unknown_safe_abstain_count": 6,
+    "unknown_strict_abstain": true,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "mean_queries": 3.125,
+    "median_queries": 3.0,
+    "positive_mean_queries": 3.0,
+    "negative_mean_queries": 4.0,
+    "fixed_probe_baseline_queries": 4.0,
+    "mean_query_reduction_rate": 0.21875,
+    "get_post_covered": true,
+    "accepted_trace_episode_count": 48,
+    "belief_update_count": 150
+  },
+  "action_counts": {
+    "GET.screen": 48,
+    "POST.screen": 48,
+    "GET.confirm": 24,
+    "POST.confirm": 30
+  },
+  "method_counts": {
+    "GET": 72,
+    "POST": 78
+  },
+  "safe_gate": {
+    "schema_version": "sift-pg48-preprobe-gate-v1",
+    "status": "passed",
+    "claim_allowed": true,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "formal_capability_claim_allowed": false,
+  "formal_claim_blockers": [
+    "template_boundary_is_unknown_and_abstained",
+    "one_independent_implementation_holdout_is_not_full_capability_proof"
+  ],
+  "promotion": {
+    "status": "quarantined_preprobe_candidate",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "trace": "research\\pg48_compositional_preprobe_active_trace_v1.json",
+  "manifest_sha256": "2aa9d54a8247a9db15d61f3d2e761e1d3fb7fd8b4daa3e5ace8a92f071e8456c"
+}

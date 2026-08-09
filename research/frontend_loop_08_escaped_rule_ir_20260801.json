@@ -1,0 +1,450 @@
+{
+  "experiment": "frontend-structured-semantics-loop-06-rule-memory-gate",
+  "status": "completed",
+  "seed": 20260801,
+  "device": "cuda",
+  "checkpoint": "artifacts\\frontend-loop-05-routed-memory-20260801\\tiny_rule_gpt.pt",
+  "model_parameters": 908546,
+  "learned_parameters_added_by_gate": 0,
+  "data": {
+    "programs": 1800,
+    "train_families": [
+      "authorization_or",
+      "markup_lexeme_primitive",
+      "numeric_boundary",
+      "string_suffix_primitive",
+      "substring_origin",
+      "truthiness_gate"
+    ],
+    "heldout_families": [
+      "dom_sink_injection",
+      "postmessage_origin"
+    ],
+    "target_family_examples_in_training": 0
+  },
+  "results": {
+    "iid_neural": {
+      "accuracy": 0.838889,
+      "correct": 906,
+      "total": 1080,
+      "by_family": {
+        "numeric_boundary": 0.627778,
+        "substring_origin": 1.0,
+        "markup_lexeme_primitive": 1.0,
+        "string_suffix_primitive": 0.672222,
+        "truthiness_gate": 0.733333,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000514",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.flags=18,input.role=member:1|input.flags=0,input.role=guest:0|input.flags=2,input.role=member:1|input.flags=-1,input.role=owner:1|input.flags=-1,input.role=guest:1|input.flags=-2,input.role=guest:1|input.flags=1,input.role=guest:1|input.flags=0,input.role=member:0<RULEMEM>generic=(input.flags!=0)or(input.role==owner)|q=1|fit=8/8<QUERY>input.flags=-1,input.role=member<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000575",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:http|safe.local|/:1|input.endpoint=u:http|localhost|/:0|input.endpoint=null:0|input.endpoint=u:https|example.test|/:0|input.endpoint=u:https|safe.local.other.test|/:0|input.endpoint=u:ftp|safe.local|/:1|input.endpoint=u:wss|safe.local|/:1|input.endpoint=u:https|other.test|/safe.local:1<RULEMEM>input.endpoint#suffix=safe.local|q=0|fit=8/8<QUERY>input.endpoint=u:https|safe.local-extra.test|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000775",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.endpoint=null:0|input.endpoint=u:ftp|safe.local|/:1|input.endpoint=u:wss|safe.local|/:1|input.endpoint=u:http|localhost|/:0|input.endpoint=u:https|safe.local-extra.test|/:0|input.endpoint=u:https|safe.local|/:1|input.endpoint=u:https|safe.local.other.test|/:0|input.endpoint=u:https|prefixsafe.local|/:1<RULEMEM>input.endpoint#suffix=safe.local|q=1|fit=8/8<QUERY>input.endpoint=u:http|safe.local|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000295",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:https|other.test|/safe.local:1|input.endpoint=u:https|sub.safe.local|/:1|input.endpoint=u:https|safe.local-extra.test|/:0|input.endpoint=u:https|safe.local|/:1|input.endpoint=null:0|input.endpoint=u:http|safe.local|/:1|input.endpoint=u:https|example.test|/:0|input.endpoint=u:https|safe.local.other.test|/:0<RULEMEM>input.endpoint#suffix=safe.local|q=1|fit=8/8<QUERY>input.endpoint=u:ftp|safe.local|/<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001361",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=141:1|input.balance=139:0|input.balance=142:1|input.balance=280:1|input.balance=140:0|input.balance=0:0<RULEMEM>generic=input.balance#gt=140|q=0|fit=6/6<QUERY>input.balance=138<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001201",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=0:1|input.age=64:1|input.age=66:0|input.age=65:1|input.age=132:0|input.age=68:0<RULEMEM>generic=input.age#lt=66|q=0|fit=6/6<QUERY>input.age=67<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=142:0|input.balance=0:1|input.balance=140:1|input.balance=143:0|input.balance=139:1|input.balance=282:0<RULEMEM>generic=input.balance#lt=142|q=1|fit=6/6<QUERY>input.balance=141<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000281",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.total=191:0|input.total=192:0|input.total=193:0|input.total=194:1|input.total=0:0|input.total=386:1<RULEMEM>generic=input.total#gt=193|q=1|fit=6/6<QUERY>input.total=195<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000535",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:http|localhost|/:0|input.endpoint=u:https|trusted.com-extra.test|/:0|input.endpoint=u:wss|trusted.com|/:1|input.endpoint=u:https|example.test|/:0|input.endpoint=u:ftp|trusted.com|/:1|input.endpoint=null:0|input.endpoint=u:https|sub.trusted.com|/:1|input.endpoint=u:https|other.test|/trusted.com:1<RULEMEM>input.endpoint#suffix=trusted.com|q=1|fit=8/8<QUERY>input.endpoint=u:https|prefixtrusted.com|/<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000081",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=99:1|input.balance=0:1|input.balance=100:0|input.balance=98:1|input.balance=102:0|input.balance=200:0<RULEMEM>generic=input.balance#le=99|q=0|fit=6/6<QUERY>input.balance=101<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000434",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.retries=0,input.role=member:0|input.retries=1,input.role=member:1|input.retries=1,input.role=owner:1|input.retries=-1,input.role=owner:1|input.retries=0,input.role=guest:0|input.retries=2,input.role=guest:1|input.retries=0,input.role=owner:1|input.retries=17,input.role=guest:1<RULEMEM>generic=(input.retries!=0)or(input.role==owner)|q=1|fit=8/8<QUERY>input.retries=2,input.role=member<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000081",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=101:0|input.balance=99:1|input.balance=200:0|input.balance=98:1|input.balance=0:1|input.balance=100:0<RULEMEM>generic=input.balance#le=99|q=0|fit=6/6<QUERY>input.balance=102<ANSWER>"
+        }
+      ]
+    },
+    "iid_gate": {
+      "accuracy": 0.966667,
+      "correct": 1044,
+      "total": 1080,
+      "by_family": {
+        "numeric_boundary": 0.838889,
+        "substring_origin": 1.0,
+        "markup_lexeme_primitive": 1.0,
+        "string_suffix_primitive": 1.0,
+        "truthiness_gate": 0.961111,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=142:0|input.balance=0:1|input.balance=140:1|input.balance=143:0|input.balance=139:1|input.balance=282:0<RULEMEM>generic=input.balance#lt=142|q=1|fit=6/6<QUERY>input.balance=141<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000241",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retryCount=17:1|input.retryCount=36:0|input.retryCount=19:0|input.retryCount=20:0|input.retryCount=0:1|input.retryCount=16:1<RULEMEM>generic=input.retryCount#lt=19|q=1|fit=6/6<QUERY>input.retryCount=18<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000401",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.total=170:0|input.total=86:0|input.total=83:1|input.total=0:1|input.total=84:1|input.total=87:0<RULEMEM>generic=input.total#lt=86|q=1|fit=6/6<QUERY>input.total=85<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000874",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.flags=2,input.role=member:1|input.flags=4,input.role=guest:1|input.flags=2,input.role=guest:1|input.flags=1,input.role=guest:1|input.flags=1,input.role=member:1|input.flags=0,input.role=guest:0|input.flags=-1,input.role=member:1|input.flags=-2,input.role=guest:1<RULEMEM>generic=(input.flags!=0)or(input.role==member)|q=1|fit=8/8<QUERY>input.flags=0,input.role=member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000994",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retries=0,input.role=member:0|input.retries=17,input.role=member:1|input.retries=-1,input.role=member:1|input.retries=1,input.role=admin:1|input.retries=-1,input.role=admin:1|input.retries=17,input.role=admin:1|input.retries=-1,input.role=guest:1|input.retries=2,input.role=guest:1<RULEMEM>generic=(input.retries!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.retries=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000361",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=448:0|input.balance=225:0|input.balance=0:1|input.balance=222:1|input.balance=223:1|input.balance=226:0<RULEMEM>generic=input.balance#lt=225|q=1|fit=6/6<QUERY>input.balance=224<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000841",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=0:1|input.balance=118:0|input.balance=60:0|input.balance=57:1|input.balance=61:0|input.balance=58:1<RULEMEM>generic=input.balance#lt=60|q=1|fit=6/6<QUERY>input.balance=59<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001674",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.flags=1,input.role=guest:1|input.flags=9,input.role=admin:1|input.flags=1,input.role=admin:1|input.flags=0,input.role=member:0|input.flags=9,input.role=member:1|input.flags=-2,input.role=admin:1|input.flags=9,input.role=guest:1|input.flags=-1,input.role=admin:1<RULEMEM>generic=(input.flags!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.flags=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000121",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=44:1|input.balance=41:0|input.balance=0:0|input.balance=45:1|input.balance=42:0|input.balance=86:1<RULEMEM>generic=input.balance#gt=42|q=1|fit=6/6<QUERY>input.balance=43<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=236:0|input.balance=235:0|input.balance=0:0|input.balance=474:1|input.balance=238:1|input.balance=239:1<RULEMEM>generic=input.balance#gt=236|q=1|fit=6/6<QUERY>input.balance=237<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=239:1|input.balance=238:1|input.balance=474:1|input.balance=0:0|input.balance=236:0|input.balance=235:0<RULEMEM>generic=input.balance#gt=236|q=1|fit=6/6<QUERY>input.balance=237<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000401",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.total=87:0|input.total=0:1|input.total=83:1|input.total=86:0|input.total=170:0|input.total=84:1<RULEMEM>generic=input.total#lt=86|q=1|fit=6/6<QUERY>input.total=85<ANSWER>"
+        }
+      ]
+    },
+    "holdout_neural": {
+      "accuracy": 0.747778,
+      "correct": 1346,
+      "total": 1800,
+      "by_family": {
+        "postmessage_origin": 0.495556,
+        "dom_sink_injection": 1.0
+      },
+      "failures": [
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000933",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|account.internal|/:1|input.origin=u:https|evilaccount.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|sub.account.internal|/:1|input.origin=u:https|evil.test|/:0|input.origin=u:https|example.test|/:0|input.origin=u:https|account.internal-attacker.test|/:0|input.origin=null:0<RULEMEM>input.origin#suffix=account.internal|q=0|fit=8/8<QUERY>input.origin=u:https|account.internal.evil.test|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000269",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|trusted.com|/:1|input.origin=u:https|example.test|/:0|input.origin=u:https|not-trusted.com|/:1|input.origin=u:http|localhost|/:0|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:https|evil.test|/:0|input.origin=u:ftp|trusted.com|/:1|input.origin=u:wss|trusted.com|/:1<RULEMEM>input.origin#suffix=trusted.com|q=1|fit=8/8<QUERY>input.origin=u:https|evil.test|/trusted.com<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001029",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:https|portal.test|/:1|input.origin=u:chrome-extension|portal.test|/:1|input.origin=u:https|example.test|/:0|input.origin=u:https|evil.test|/:0|input.origin=u:https|evil.test|/portal.test:1|input.origin=u:wss|portal.test|/:1|input.origin=u:http|localhost|/:0<RULEMEM>input.origin#suffix=portal.test|q=0|fit=8/8<QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000853",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/:0|input.origin=u:https|deep.sub.safe.local|/:1|input.origin=u:https|example.test|/:0|input.origin=u:wss|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=null:0|input.origin=u:https|safe.local|/:1<RULEMEM>input.origin#suffix=safe.local|q=0|fit=8/8<QUERY>input.origin=u:http|localhost|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001093",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:ftp|portal.test|/:1|input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:https|evil.test|/:0|input.origin=u:https|example.test|/:0|input.origin=u:chrome-extension|portal.test|/:1|input.origin=u:https|deep.sub.portal.test|/:1|input.origin=null:0|input.origin=u:https|not-portal.test|/:1<RULEMEM>input.origin#suffix=portal.test|q=0|fit=8/8<QUERY>input.origin=u:http|localhost|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001789",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|example.test|/:0|input.origin=u:https|evil.test|/portal.test:1|input.origin=u:chrome-extension|portal.test|/:1|input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:http|localhost|/:0|input.origin=u:https|deep.sub.portal.test|/:1|input.origin=null:0|input.origin=u:ftp|portal.test|/:1<RULEMEM>input.origin#suffix=portal.test|q=0|fit=8/8<QUERY>input.origin=u:https|portal.test-attacker.test|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001557",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|account.internal|/:1|input.origin=u:https|evilaccount.internal|/:1|input.origin=u:https|sub.account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:http|localhost|/:0|input.origin=null:0|input.origin=u:https|account.internal.evil.test|/:0|input.origin=u:https|example.test|/:0<RULEMEM>input.origin#suffix=account.internal|q=1|fit=8/8<QUERY>input.origin=u:https|not-account.internal|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001101",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|sub.safe.local|/:1|input.origin=u:https|example.test|/:0|input.origin=u:https|evilsafe.local|/:1|input.origin=u:https|safe.local|/:1|input.origin=u:https|deep.sub.safe.local|/:1|input.origin=null:0|input.origin=u:https|safe.local-attacker.test|/:0|input.origin=u:https|evil.test|/:0<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=u:chrome-extension|safe.local|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001485",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/:0|input.origin=u:wss|portal.test|/:1|input.origin=u:https|evil.test|/portal.test:1|input.origin=null:0|input.origin=u:http|localhost|/:0|input.origin=u:chrome-extension|portal.test|/:1|input.origin=u:https|portal.test-attacker.test|/:0|input.origin=u:https|portal.test|/:1<RULEMEM>input.origin#suffix=portal.test|q=1|fit=8/8<QUERY>input.origin=u:https|not-portal.test|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001077",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=u:chrome-extension|portal.test|/:1|input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:https|evil.test|/:0|input.origin=u:https|example.test|/:0|input.origin=u:https|not-portal.test|/:1|input.origin=u:http|localhost|/:0<RULEMEM>input.origin#suffix=portal.test|q=0|fit=8/8<QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000037",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|example.test|/:0|input.origin=u:https|trusted.com|/:1|input.origin=u:https|trusted.com-attacker.test|/:0|input.origin=u:https|evil.test|/:0|input.origin=u:https|sub.trusted.com|/:1|input.origin=u:wss|trusted.com|/:1|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:https|not-trusted.com|/:1<RULEMEM>input.origin#suffix=trusted.com|q=1|fit=8/8<QUERY>input.origin=u:ftp|trusted.com|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000909",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|deep.sub.safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=null:0|input.origin=u:https|example.test|/:0|input.origin=u:http|localhost|/:0|input.origin=u:http|safe.local|/:1|input.origin=u:https|sub.safe.local|/:1|input.origin=u:https|not-safe.local|/:1<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=u:https|evilsafe.local|/<ANSWER>"
+        }
+      ]
+    },
+    "holdout_gate": {
+      "accuracy": 1.0,
+      "correct": 1800,
+      "total": 1800,
+      "by_family": {
+        "postmessage_origin": 1.0,
+        "dom_sink_injection": 1.0
+      },
+      "failures": []
+    },
+    "holdout_no_memory": {
+      "accuracy": 0.289444,
+      "correct": 521,
+      "total": 1800,
+      "by_family": {
+        "postmessage_origin": 0.443333,
+        "dom_sink_injection": 0.135556
+      },
+      "failures": [
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001597",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|example.test|/:0|input.origin=u:https|portal.test-attacker.test|/:0|input.origin=u:https|evilportal.test|/:1|input.origin=u:https|evil.test|/:0|input.origin=u:https|not-portal.test|/:1|input.origin=u:http|localhost|/:0|input.origin=u:chrome-extension|portal.test|/:1|input.origin=u:ftp|portal.test|/:1<RULEMEM>input.origin#suffix=portal.test|q=1|fit=8/8<QUERY>input.origin=u:https|sub.portal.test|/<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000269",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|trusted.com|/:1|input.origin=u:https|example.test|/:0|input.origin=u:https|not-trusted.com|/:1|input.origin=u:http|localhost|/:0|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:https|evil.test|/:0|input.origin=u:ftp|trusted.com|/:1|input.origin=u:wss|trusted.com|/:1<RULEMEM>input.origin#suffix=trusted.com|q=1|fit=8/8<QUERY>input.origin=u:https|evil.test|/trusted.com<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000414",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:0100l1:0|input.payload=m:1110l4:1|input.payload=m:0000l1:0|input.payload=m:1110l2:1|input.payload=m:0000l1:0|input.payload=m:1110l1:1|input.payload=m:1110l3:1|input.payload=m:0000l2:0<RULEMEM><QUERY>input.payload=m:1110l3<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000854",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:0100l1:0|input.payload=m:1100l1:0|input.payload=m:1000l1:0|input.payload=m:1110l3:1|input.payload=m:0000l2:0|input.payload=m:1110l4:1|input.payload=m:1110l1:1|input.payload=m:1110l3:1<RULEMEM><QUERY>input.payload=m:1110l4<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001462",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110l1:1|input.payload=m:1110l2:1|input.payload=m:1110l4:1|input.payload=m:1110l3:1|input.payload=m:0000l0:0|input.payload=m:0000l1:0|input.payload=m:0001l3:0|input.payload=m:0000l2:0<RULEMEM><QUERY>input.payload=m:1110l3<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001126",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110l1:1|input.payload=m:0000l2:0|input.payload=m:0001l3:0|input.payload=m:0000l1:0|input.payload=m:1110l3:1|input.payload=m:1000l1:0|input.payload=m:1110l1:1|input.payload=m:1110l4:1<RULEMEM><QUERY>input.payload=m:1110l3<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001510",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:1000l1:0|input.payload=m:1110l3:1|input.payload=m:1110l3:1|input.payload=m:0000l1:0|input.payload=m:1110l1:1|input.payload=m:1110l4:1|input.payload=m:1100l1:0|input.payload=m:0000l0:0<RULEMEM><QUERY>input.payload=m:0000l1<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000134",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110l4:1|input.payload=m:0000l1:0|input.payload=m:0000l2:0|input.payload=m:1110l3:1|input.payload=m:1110l3:1|input.payload=m:0000l1:0|input.payload=m:1110l4:1|input.payload=m:0000l1:0<RULEMEM><QUERY>input.payload=m:1110l3<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001453",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|not-safe.local|/:1|input.origin=u:https|evil.test|/safe.local:1|input.origin=u:https|evil.test|/:0|input.origin=null:0|input.origin=u:http|safe.local|/:1|input.origin=u:http|localhost|/:0|input.origin=u:https|evilsafe.local|/:1<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=u:https|safe.local|/<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000958",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l2:0|input.payload=m:0000l1:0|input.payload=m:1110l3:1|input.payload=m:1110l2:1|input.payload=m:0000l1:0|input.payload=m:1110l4:1|input.payload=m:1110l3:1|input.payload=m:0001l3:0<RULEMEM><QUERY>input.payload=m:1110l4<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000630",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:0100l1:0|input.payload=m:0000l0:0|input.payload=m:1110l4:1|input.payload=m:1110l3:1|input.payload=m:0000l1:0|input.payload=m:1110l3:1|input.payload=m:1110l2:1|input.payload=m:0000l1:0<RULEMEM><QUERY>input.payload=m:1110l3<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000853",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/:0|input.origin=u:https|deep.sub.safe.local|/:1|input.origin=u:https|example.test|/:0|input.origin=u:wss|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=null:0|input.origin=u:https|safe.local|/:1<RULEMEM>input.origin#suffix=safe.local|q=0|fit=8/8<QUERY>input.origin=u:http|localhost|/<ANSWER>"
+        }
+      ]
+    },
+    "gate_delta": 0.252222,
+    "memory_delta": 0.710556,
+    "counterexample_at_k": {
+      "k": 10,
+      "score": 1.0,
+      "successful_programs": 450,
+      "total_programs": 450,
+      "by_family": {
+        "postmessage_origin": 1.0,
+        "dom_sink_injection": 1.0
+      },
+      "top1": 1.0,
+      "random_top1": 0.53125,
+      "top1_lift": 0.46875,
+      "precision_at_k": 0.95,
+      "random_precision_at_k": 0.53125,
+      "random_success_at_k": 0.999997,
+      "metric_warning": "Counterexample@K is non-discriminative when the random success baseline is near one.",
+      "policy_visibility": "declared intended output is visible only to the verifier, not to the behavior model"
+    }
+  },
+  "guardrails": {
+    "source_rule_ir_cwe_or_target_label_visible": false,
+    "gate_requires_context_fit": 0.75,
+    "same_frozen_checkpoint_for_gate_ablation": true
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "audit_id": "pg277-question-composition-independent-audit-v1",
+  "status": "passed",
+  "audit_checks": {
+    "hash_chain": true,
+    "report_protocol_binding": true,
+    "a800_gpu0_only": true,
+    "dataset_binding": true,
+    "split_contract": true,
+    "context_firewall": true,
+    "evaluation_only": true,
+    "coarse_collision_proven": true,
+    "enriched_collision_resolved": true,
+    "dataset_audit_pass": true,
+    "all_variants": true,
+    "coarse_representation_failure_exposed": true,
+    "final_only_failure_exposed": true,
+    "process_supervision_transfer": true,
+    "conservative_update_stable": true,
+    "dpo_instability_not_hidden": true,
+    "promotion_blocked": true
+  },
+  "report": "research\\pg277_question_composition_report_v1.json",
+  "findings": [
+    {
+      "id": "representation-collision",
+      "status": "falsified-coarse-sufficiency",
+      "evidence": "36 records in 4 identical-input/conflicting-label groups; coarse positive recall stayed 0%.",
+      "implication": "Do not add epochs or RL to an information-colliding projection; collect the missing observation channel first."
+    },
+    {
+      "id": "final-label-only",
+      "status": "falsified-active-recovery",
+      "evidence": "Final-only SFT classified complete holdout inputs at 100% but pre-question and ask-recovery were 0%; missing-safety minimum was 0%.",
+      "implication": "Store pre-question, observation, failure, next-question, next-action and belief transitions, not only the final label."
+    },
+    {
+      "id": "process-supervision",
+      "status": "supported-in-controlled-fixture",
+      "evidence": "Process SFT reached 100% holdout recall/reject and recovered ASK on all missing-observation cases, but exact question recovery varied by model seed.",
+      "implication": "Question identity needs more counterfactual and missing-field support before promotion."
+    },
+    {
+      "id": "reward-update",
+      "status": "conservative-supported-dpo-unstable",
+      "evidence": "Conservative update kept exact question recovery at 100% across three seeds; DPO ranged from 0% to 100% on that metric.",
+      "implication": "Keep SFT/KL anchors and evaluate per-seed minima; a mean score can hide a failed policy seed."
+    }
+  ],
+  "failures": [],
+  "interpretation": "PG-277 structurally supports the representation and process-supervision hypotheses in one controlled family. It also exposes final-only and DPO failure modes. The result does not prove real multi-family vulnerability capability; the next dataset must contain independent implementations, missing-observation recovery and real replay-backed typed oracles.",
+  "audit_sha256": "59a141860fead6ed1afaaab590c50d5edbb9f499db33bd885a418c9b01c0db9c"
+}

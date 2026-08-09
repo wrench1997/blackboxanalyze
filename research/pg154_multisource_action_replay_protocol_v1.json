@@ -1,0 +1,22 @@
+{
+  "protocol_id": "pg-pk-154-multisource-action-replay-v1",
+  "schema_version": "pg154-multisource-action-replay-protocol-v1",
+  "objective": "multi_source_real_trace_action_head_replay_and_false_stop_suppression",
+  "variants": [
+    "action_only",
+    "lm_anchor",
+    "false_stop_guard"
+  ],
+  "real_fraction": 0.25,
+  "replay_count": 1200,
+  "epochs": 2,
+  "false_stop_guard": {
+    "non_stop_margin": "softplus(stop_logit - max_safe_logit)",
+    "unknown_hint_target": "abstain_unknown_oracle"
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  }
+}

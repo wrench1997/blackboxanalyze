@@ -1,0 +1,10 @@
+{
+  "protocol_id": "pg-pk-117-double-implementation-encoding-holdout-v1",
+  "proposal_id": "pg117-double-holdout-proposal-v1",
+  "question": "PG-116 在 identity 编码上学到的轨迹规则，能否转移到独立 gamma 实现和 url_percent→html_entity 双重编码，而不把编码深度当作新漏洞族？",
+  "intervention": "冻结 PG-116 checkpoint，在 3 个独立 gamma seed、4 个表面、GET/POST 成对复放上评估；所有 target/evaluator label 留在模型输入之外",
+  "primary_metrics": ["route_positive_recall", "decoy_false_accept_count", "blind_oracle_abstain_rate", "step_accuracy", "step_macro_f1"],
+  "failure_interpretation": "若 route 正例召回为零而 decoy/unknown 门通过，优先诊断抽象 transition-delta 特征缺失，不扩大模型容量或把 gamma 样本直接写入长期记忆",
+  "next_if_pass": "PG118 只做跨种子稳定性和第三实现复放，不提升长期记忆",
+  "next_if_fail": "PG118 增加 family-free transition-delta slot 与双重编码训练/开发配对，并用本保持出重新盲测"
+}

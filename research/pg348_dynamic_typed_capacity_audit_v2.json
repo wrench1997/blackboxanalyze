@@ -1,0 +1,121 @@
+{
+  "protocol_id": "pg-pk-331-model-capacity-audit-v1",
+  "schema_version": "pg331-model-capacity-audit-v1",
+  "status": "blocked",
+  "information_audit_status": "blocked",
+  "dataset": "research\\pg348_dynamic_typed_source_rows_v1.json",
+  "dataset_sha256": "e6f6dc6f142858913be366b11d699f273f496f485fb484c500062c7f15176fb2",
+  "information_audit": "research\\pg331_information_preservation_audit_v1.json",
+  "information_audit_sha256": "9d097b448ef64b07969b1084690edd2be1f7a50083b711b8455890cdc155f6b0",
+  "ontology": "research\\pg331_web_token_ontology_v1.json",
+  "ontology_sha256": "2c695b2b9fa86e54a0443c995277e186fc00b8231814a8b49e3611cdf1066189",
+  "vocabulary": "research\\pg348_dynamic_typed_vocabulary_v2.json",
+  "vocabulary_sha256": "2cd280b8c5d270429923b66ec52b2401c54a156f46695d5ebe1fb66604cf4331",
+  "input_vocabulary_size": 1207,
+  "target_vocabulary_size": 66,
+  "model_vocabulary_size": 1252,
+  "model_vocabulary_sha256": "5b9c5886474c9beb1f13824e927af928a4f6f44a50025b35906fb8af26a3b36f",
+  "required_inventory_count": 758,
+  "inventory_missing_count": 0,
+  "inventory_missing": [],
+  "dataset_context_length": {
+    "min": 371,
+    "max": 600,
+    "mean": 447.813462,
+    "count": 2600
+  },
+  "dataset_target_length": {
+    "min": 10,
+    "max": 10,
+    "mean": 10.0,
+    "count": 2600
+  },
+  "representative_page": {
+    "canonical_context_tokens": 353,
+    "model_context_tokens": 365,
+    "chunk_count": 2,
+    "chunk_size": 256,
+    "training_eligible": true
+  },
+  "target_budget": 32,
+  "required_context_window": 790,
+  "variants": [
+    {
+      "config": {
+        "id": "pg322_legacy",
+        "d_model": 64,
+        "layers": 2,
+        "experts": 2,
+        "expert_ff": 128,
+        "max_length": 72
+      },
+      "parameters": 184708,
+      "embedding_parameters": 84736,
+      "token_embedding_parameters": 80128,
+      "position_embedding_parameters": 4608,
+      "lm_head_parameters": 0,
+      "tied_lm_head": 1,
+      "model_vocabulary_size": 1252,
+      "estimated_fp16_activation_bytes": 147456,
+      "context_window_required": 790,
+      "context_window_pass": false,
+      "vocabulary_inventory_pass": true,
+      "capacity_pass": false,
+      "truncation_risk": true
+    },
+    {
+      "config": {
+        "id": "pg331_minimum",
+        "d_model": 128,
+        "layers": 4,
+        "experts": 4,
+        "expert_ff": 512,
+        "max_length": 790
+      },
+      "parameters": 2640400,
+      "embedding_parameters": 261376,
+      "token_embedding_parameters": 160256,
+      "position_embedding_parameters": 101120,
+      "lm_head_parameters": 0,
+      "tied_lm_head": 1,
+      "model_vocabulary_size": 1252,
+      "estimated_fp16_activation_bytes": 6471680,
+      "context_window_required": 790,
+      "context_window_pass": true,
+      "vocabulary_inventory_pass": true,
+      "capacity_pass": true,
+      "truncation_risk": false
+    },
+    {
+      "config": {
+        "id": "pg331_balanced",
+        "d_model": 192,
+        "layers": 6,
+        "experts": 4,
+        "expert_ff": 768,
+        "max_length": 1024
+      },
+      "parameters": 8443800,
+      "embedding_parameters": 436992,
+      "token_embedding_parameters": 240384,
+      "position_embedding_parameters": 196608,
+      "lm_head_parameters": 0,
+      "tied_lm_head": 1,
+      "model_vocabulary_size": 1252,
+      "estimated_fp16_activation_bytes": 18874368,
+      "context_window_required": 790,
+      "context_window_pass": true,
+      "vocabulary_inventory_pass": true,
+      "capacity_pass": true,
+      "truncation_risk": false
+    }
+  ],
+  "interpretation": "词表和上下文窗口是独立硬门；旧 PG-322 max_length=72 无法容纳整网页代表序列，不能通过截断或删词伪装通过。",
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "audit_sha256": "e3be4e3ecebe1938534532b0b1cd415a7e87ab57d989c2d30791ed2fecca3ac5"
+}

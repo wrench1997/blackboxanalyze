@@ -1,0 +1,685 @@
+{
+  "protocol_id": "pg-pk-158-hard-quota-lm-pareto-v1",
+  "schema_version": "pg158-hard-quota-lm-pareto-report-v1",
+  "status": "completed_pg158_hard_quota_lm_pareto",
+  "device": "cuda",
+  "seed": 15801,
+  "source": {
+    "label_count": 696,
+    "train_count": 216,
+    "dev_count": 216,
+    "holdout_count": 264,
+    "synthetic_train_count": 6400,
+    "synthetic_dev_count": 800,
+    "synthetic_holdout_count": 800,
+    "real_train_count": 216,
+    "real_dev_count": 216,
+    "real_holdout_count": 264,
+    "real_repeated_count": 2133,
+    "action_mix_count": 8533,
+    "lm_replay_count": 1200,
+    "unknown_hint_count": 120,
+    "surface_unknown_count": 6,
+    "language_canary_count": 1210,
+    "real_fraction": 0.25,
+    "balanced_replay_count": 1200,
+    "balanced_synthetic_count": 600,
+    "balanced_real_count": 600,
+    "surface_anchor_count": 300,
+    "surface_anchor_source": "pg147_training_eligible_abstract_surface_proxy",
+    "pg145_training_eligible": false,
+    "pg146_training_labels_used": false,
+    "unseen_authorization_family_count": 12,
+    "hard_quota_variants": {
+      "200": {
+        "count": 400,
+        "source_counts": {
+          "pg136_real": 200,
+          "pg149_synthetic": 200
+        },
+        "family_counts": {
+          "resource": 60,
+          "decoy": 60,
+          "steady": 80,
+          "procedural_causal_family": 200
+        }
+      },
+      "400": {
+        "count": 800,
+        "source_counts": {
+          "pg136_real": 400,
+          "pg149_synthetic": 400
+        },
+        "family_counts": {
+          "resource": 120,
+          "decoy": 148,
+          "steady": 103,
+          "scope": 29,
+          "procedural_causal_family": 400
+        }
+      },
+      "600": {
+        "count": 1200,
+        "source_counts": {
+          "pg136_real": 600,
+          "pg149_synthetic": 600
+        },
+        "family_counts": {
+          "resource": 100,
+          "decoy": 100,
+          "steady": 100,
+          "scope": 100,
+          "latch": 100,
+          "blind": 100,
+          "procedural_causal_family": 600
+        }
+      }
+    }
+  },
+  "variants": [
+    {
+      "variant": "lm_anchor_baseline",
+      "mode": "baseline",
+      "lm_weight": 0.5,
+      "train_count": 0,
+      "hard_negative_count": 0,
+      "surface_anchor_train_count": 300,
+      "selection": {
+        "selection_used_holdout_labels": false
+      },
+      "parameter_count": 38059713,
+      "temperature": 1.25,
+      "abstain_threshold": 0.0,
+      "raw_synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.85625,
+        "false_stop_count": 0,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 800,
+        "coverage": 1.0,
+        "selective_accuracy": 0.85625,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 264,
+        "coverage": 1.0,
+        "selective_accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 12,
+        "coverage": 1.0,
+        "selective_accuracy": 0.75,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_surface_unknown": {
+        "count": 0,
+        "accepted_count": 0,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 24.03385735,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": 0.0,
+          "relative_perplexity_increase": 0.0,
+          "next_token_accuracy_drop": 0.0,
+          "mean_logit_kl": 3e-08
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [],
+      "elapsed_seconds": 5.88
+    },
+    {
+      "variant": "q400_lm025",
+      "mode": "q400_lm025",
+      "lm_weight": 0.25,
+      "train_count": 11753,
+      "hard_negative_count": 400,
+      "surface_anchor_train_count": 300,
+      "selection": {
+        "selection_used_dev_labels": false,
+        "selection_used_holdout_labels": false,
+        "score": "1-max_probability + 0.75*label_disagreement + 0.75*false_stop",
+        "source_counts": {
+          "pg136_real": 200,
+          "pg149_synthetic": 200
+        },
+        "family_counts": {
+          "resource": 60,
+          "decoy": 60,
+          "steady": 80,
+          "procedural_causal_family": 200
+        },
+        "selected_count": 400
+      },
+      "parameter_count": 38059713,
+      "temperature": 1.25,
+      "abstain_threshold": 0.74,
+      "raw_synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.85125,
+        "false_stop_count": 69,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.82954545,
+        "false_stop_count": 6,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 3,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 204,
+        "coverage": 0.77272727,
+        "selective_accuracy": 0.97058824,
+        "false_stop_count": 0,
+        "abstain_count": 60,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 6,
+        "coverage": 0.5,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 6,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_surface_unknown": {
+        "count": 0,
+        "accepted_count": 0,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 76.54762268,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.97277361,
+          "perplexity": 2.64527125,
+          "next_token_accuracy": 0.51608582,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.09510543,
+          "relative_perplexity_increase": -0.03470524,
+          "next_token_accuracy_drop": -0.00921948,
+          "mean_logit_kl": 0.04140645
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.4990418,
+          "action_loss": 0.25501963,
+          "lm_loss": 0.61906744,
+          "surface_lm_loss": 0.56632912,
+          "false_stop_loss": 0.10207728,
+          "unknown_loss": 1.121e-05,
+          "dev": {
+            "count": 1016,
+            "accuracy": 0.86023622,
+            "false_stop_count": 54,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          }
+        }
+      ],
+      "elapsed_seconds": 75.738
+    },
+    {
+      "variant": "q800_lm050",
+      "mode": "q800_lm050",
+      "lm_weight": 0.5,
+      "train_count": 12153,
+      "hard_negative_count": 800,
+      "surface_anchor_train_count": 300,
+      "selection": {
+        "selection_used_dev_labels": false,
+        "selection_used_holdout_labels": false,
+        "score": "1-max_probability + 0.75*label_disagreement + 0.75*false_stop",
+        "source_counts": {
+          "pg136_real": 400,
+          "pg149_synthetic": 400
+        },
+        "family_counts": {
+          "resource": 120,
+          "decoy": 148,
+          "steady": 103,
+          "scope": 29,
+          "procedural_causal_family": 400
+        },
+        "selected_count": 800
+      },
+      "parameter_count": 38059713,
+      "temperature": 1.15,
+      "abstain_threshold": 0.78,
+      "raw_synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.8625,
+        "false_stop_count": 106,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 3,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 192,
+        "coverage": 0.72727273,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 72,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 6,
+        "coverage": 0.5,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 6,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_surface_unknown": {
+        "count": 0,
+        "accepted_count": 0,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 48.04273987,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.96951324,
+          "perplexity": 2.63666072,
+          "next_token_accuracy": 0.51252594,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.10371596,
+          "relative_perplexity_increase": -0.03784734,
+          "next_token_accuracy_drop": -0.0056596,
+          "mean_logit_kl": 0.04339586
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.72568962,
+          "action_loss": 0.27065577,
+          "lm_loss": 0.60469361,
+          "surface_lm_loss": 0.53469842,
+          "false_stop_loss": 0.10823992,
+          "unknown_loss": 1.018e-05,
+          "dev": {
+            "count": 1016,
+            "accuracy": 0.87893701,
+            "false_stop_count": 94,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          }
+        }
+      ],
+      "elapsed_seconds": 99.186
+    },
+    {
+      "variant": "q1200_lm100",
+      "mode": "q1200_lm100",
+      "lm_weight": 1.0,
+      "train_count": 12553,
+      "hard_negative_count": 1200,
+      "surface_anchor_train_count": 300,
+      "selection": {
+        "selection_used_dev_labels": false,
+        "selection_used_holdout_labels": false,
+        "score": "1-max_probability + 0.75*label_disagreement + 0.75*false_stop",
+        "source_counts": {
+          "pg136_real": 600,
+          "pg149_synthetic": 600
+        },
+        "family_counts": {
+          "resource": 100,
+          "decoy": 100,
+          "steady": 100,
+          "scope": 100,
+          "latch": 100,
+          "blind": 100,
+          "procedural_causal_family": 600
+        },
+        "selected_count": 1200
+      },
+      "parameter_count": 38059713,
+      "temperature": 1.2,
+      "abstain_threshold": 0.77,
+      "raw_synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.8575,
+        "false_stop_count": 106,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 6,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 3,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 192,
+        "coverage": 0.72727273,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 72,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 6,
+        "coverage": 0.5,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 6,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_surface_unknown": {
+        "count": 0,
+        "accepted_count": 0,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 31.8050251,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.96830088,
+          "perplexity": 2.63346608,
+          "next_token_accuracy": 0.51456533,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.1069106,
+          "relative_perplexity_increase": -0.0390131,
+          "next_token_accuracy_drop": -0.00769899,
+          "mean_logit_kl": 0.03945855
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 1.1522037,
+          "action_loss": 0.26922026,
+          "lm_loss": 0.5935399,
+          "surface_lm_loss": 0.5393536,
+          "false_stop_loss": 0.11687301,
+          "unknown_loss": 8.42e-06,
+          "dev": {
+            "count": 1016,
+            "accuracy": 0.87893701,
+            "false_stop_count": 91,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          }
+        }
+      ],
+      "elapsed_seconds": 147.447
+    }
+  ],
+  "objective": "hard_negative_quota_x_lm_anchor_weight_pareto_with_unseen_authorization_family",
+  "data_policy": {
+    "raw_payloads": false,
+    "raw_responses": false,
+    "external_network_targets": false,
+    "pg145_training_eligible": false,
+    "pg146_training_labels_used": false,
+    "unseen_authorization_family_training_used": false,
+    "selection_used_dev_labels": false,
+    "selection_used_holdout_labels": false,
+    "calibration_fit_on_holdout": false
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  },
+  "report_sha256": "718d157792b20661c9f872fb9ec91a7b5499b776f66980e0166b8951f36a8dc7"
+}

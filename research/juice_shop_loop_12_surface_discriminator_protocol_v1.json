@@ -1,0 +1,11 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-surface-discriminator-v1",
+  "status": "frozen-before-training",
+  "objective": "family-specific classification of sanitized single-response shadow surfaces for multi-step belief updates",
+  "families": ["access_control", "authentication", "input_validation", "injection", "observability", "url_redirect", "xss"],
+  "input_contract": {"visible": ["action.path", "status_code", "content_type", "body_shape", "body_length", "transport_error"], "excluded": ["family", "challenge_key", "evaluator_state", "source_code"]},
+  "model": "two-tower surface/context MLP with calibrated abstention",
+  "training": {"seed": 20260931, "fresh_seeds": [20260937, 20260941, 20260943], "examples_per_family": 600, "device_policy": "cuda when available"},
+  "acceptance": {"validation_accuracy_min": 0.95, "fresh_min_accuracy": 0.85, "precision_gate": 0.98},
+  "safety": {"local_only": true, "get_only": true, "no_evaluator_endpoints": true, "no_external_callbacks": true}
+}

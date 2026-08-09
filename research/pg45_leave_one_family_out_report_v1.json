@@ -1,0 +1,195 @@
+{
+  "protocol_id": "sift-pg45-leave-one-family-out-v1",
+  "schema_version": "pg-pk-45-leave-one-family-out-report-v1",
+  "status": "diagnostic_only",
+  "held_out": {
+    "family": "injection",
+    "semantic_reference": "operator-context",
+    "removed_from_training": true
+  },
+  "training": {
+    "catalog": "research\\pg40_semantic_router_catalog_v1.json",
+    "pair_count": 128,
+    "positive_count": 28,
+    "remaining_semantic_index": {
+      "auth-boundary": 0,
+      "local-canary": 1,
+      "markup-context": 2,
+      "ordinary-surface": 3,
+      "scalar-boundary": 4,
+      "state-invariant": 5,
+      "subject-boundary": 6,
+      "url-target": 7
+    },
+    "output_families": [
+      "access_control",
+      "authentication",
+      "command_injection",
+      "input_validation",
+      "logic",
+      "ordinary_response",
+      "url_redirect",
+      "xss"
+    ],
+    "pg42_used_for_training": false,
+    "typed_oracle_consumed_by_model": false,
+    "epochs": 360,
+    "seed": 20450802,
+    "device": "cuda",
+    "best_selection": 0.100803,
+    "history_tail": [
+      {
+        "epoch": 120,
+        "train_loss": 0.067226,
+        "seed_loss": 0.067225,
+        "selection": 0.100839
+      },
+      {
+        "epoch": 180,
+        "train_loss": 0.067208,
+        "seed_loss": 0.067208,
+        "selection": 0.100812
+      },
+      {
+        "epoch": 240,
+        "train_loss": 0.067204,
+        "seed_loss": 0.067204,
+        "selection": 0.100805
+      },
+      {
+        "epoch": 300,
+        "train_loss": 0.067202,
+        "seed_loss": 0.067202,
+        "selection": 0.100804
+      },
+      {
+        "epoch": 360,
+        "train_loss": 0.067202,
+        "seed_loss": 0.067202,
+        "selection": 0.100803
+      }
+    ]
+  },
+  "seed_holdout": {
+    "pair_count": 64,
+    "positive_count": 14,
+    "negative_count": 50,
+    "known_positive_count": 14,
+    "known_family_recall": 1.0,
+    "unknown_positive_count": 0,
+    "unknown_effect_recall": 0.0,
+    "accepted_count": 14,
+    "precision": 1.0,
+    "false_positive_rate": 0.0,
+    "unknown_misname_count": 0,
+    "unknown_not_abstain_count": 0,
+    "unknown_strict_abstain": true,
+    "mean_decoder_confidence": 0.991245
+  },
+  "pg42_splits": {
+    "retained_known": {
+      "pair_count": 720,
+      "positive_count": 144,
+      "negative_count": 576,
+      "known_positive_count": 144,
+      "known_family_recall": 1.0,
+      "unknown_positive_count": 0,
+      "unknown_effect_recall": 0.0,
+      "accepted_count": 144,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "mean_decoder_confidence": 0.989161
+    },
+    "held_out_family": {
+      "pair_count": 144,
+      "positive_count": 36,
+      "negative_count": 108,
+      "known_positive_count": 0,
+      "known_family_recall": 0.0,
+      "unknown_positive_count": 36,
+      "unknown_effect_recall": 1.0,
+      "accepted_count": 0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "mean_decoder_confidence": 0.397539
+    },
+    "other_unknown": {
+      "pair_count": 576,
+      "positive_count": 144,
+      "negative_count": 432,
+      "known_positive_count": 0,
+      "known_family_recall": 0.0,
+      "unknown_positive_count": 144,
+      "unknown_effect_recall": 1.0,
+      "accepted_count": 0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "mean_decoder_confidence": 0.397539
+    },
+    "negative_control": {
+      "pair_count": 144,
+      "positive_count": 0,
+      "negative_count": 144,
+      "known_positive_count": 0,
+      "known_family_recall": 0.0,
+      "unknown_positive_count": 0,
+      "unknown_effect_recall": 0.0,
+      "accepted_count": 0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "mean_decoder_confidence": 0.991245
+    }
+  },
+  "routes": {
+    "retained_known": {
+      "unknown_surface": 576,
+      "xss": 36,
+      "authentication": 36,
+      "access_control": 36,
+      "input_validation": 36
+    },
+    "held_out_family": {
+      "unknown_surface": 144
+    },
+    "other_unknown": {
+      "unknown_surface": 576
+    },
+    "negative_control": {
+      "unknown_surface": 144
+    }
+  },
+  "safe_leave_one_out_gate": {
+    "status": "passed",
+    "claim_allowed": true,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "formal_capability_claim_allowed": false,
+  "formal_claim_blockers": [
+    "removed_family_is_not_named",
+    "positive_named_evidence_for_new_family_is_absent"
+  ],
+  "promotion": {
+    "status": "quarantined_candidate",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "checkpoint": {
+    "path": "artifacts\\pg45-leave-one-family-out\\leave_one_out.pt",
+    "sha256": "99e5e6b83d76e1d88b0002acd1e44ec2a63becd65f06c2992c892399bdfad4bb"
+  },
+  "manifest_sha256": "6fb6ef57083ed3cffa124658d1daebbfe1dad8851f7d542c35282ddf25cbbcd1"
+}

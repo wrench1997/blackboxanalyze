@@ -1,0 +1,80 @@
+{
+  "schema_version": "pg331-web-token-ontology-v1",
+  "purpose": "把网页、请求、响应、脚本和过程状态拆成可组合、可审计的抽象 token；不把整个页面压成少数标签。",
+  "design_principles": [
+    "每个可观察字段至少生成一个带轴前缀的 token；字段缺失生成显式 not_observed，而不是 false、零或省略。",
+    "token 轴是 append-only、带版本和来源；不得为了单次准确率删除低频轴。",
+    "原始 URL、payload、响应正文、凭据、oracle 答案和漏洞族标签不进入模型上下文；只保留结构、类型、长度桶、位置桶、编码链和脱敏哈希。",
+    "长页面按有序 section/element chunk 产生 token 序列；压缩必须保留计数、顺序、字段覆盖和 chunk hash，不能只留一个 surface 类别。",
+    "unknown 与 not_observed、empty、negative、blocked 是不同 token；观测不可得时模型应能生成 ASK。"
+  ],
+  "axes": {
+    "document_structure": {
+      "required": true,
+      "presence_token": "document_presence",
+      "token_prefixes": ["doc_", "dom_", "head_", "body_", "section_", "element_", "attribute_", "text_shape_"],
+      "fields": ["doctype", "html_lang", "head_count", "title_shape", "meta_count", "style_count", "body_section_order", "dom_tag", "dom_depth_bucket", "dom_sibling_count_bucket", "element_role", "element_id_shape", "element_class_shape", "aria_role", "attribute_presence", "visible_text_shape", "text_length_bucket", "repeated_element_count"],
+      "redaction": "literal text/ids/classes become bounded shape, semantic role, length and salted digest; no raw text"
+    },
+    "navigation": {
+      "required": true,
+      "presence_token": "navigation_presence",
+      "token_prefixes": ["nav_", "link_", "route_shape_", "query_key_", "fragment_"],
+      "fields": ["link_count", "link_method", "link_target_shape", "same_origin_bucket", "path_segment_count", "path_segment_shape", "query_present", "query_key_count", "query_key_shape", "fragment_present", "form_action_shape", "navigation_event"],
+      "redaction": "origin/route literal is not retained; preserve segment count, character class, length bucket, key role and salted digest"
+    },
+    "request_transport": {
+      "required": true,
+      "presence_token": "request_transport_presence",
+      "token_prefixes": ["request_", "transport_", "param_", "header_", "cookie_", "csrf_", "encoding_"],
+      "fields": ["method", "placement", "content_type_class", "query_count", "form_count", "json_field_count", "multipart_part_count", "parameter_role", "parameter_name_shape", "parameter_value_type", "parameter_presence", "parameter_order", "header_presence_class", "cookie_presence_class", "csrf_presence_class", "content_length_bucket", "encoding_chain", "charset_class", "body_shape"],
+      "redaction": "names/values use role, type, shape, order and bounded digest; secret/auth/cookie values are never stored"
+    },
+    "response_transport": {
+      "required": true,
+      "presence_token": "response_transport_presence",
+      "token_prefixes": ["response_", "status_", "content_", "body_", "header_", "redirect_", "cache_"],
+      "fields": ["status_class", "status_shape", "content_type_class", "charset_class", "body_length_bucket", "body_shape", "header_presence_class", "cache_shape", "redirect_hop_count", "redirect_location_class", "redirect_chain_shape", "connection_outcome"],
+      "redaction": "body text is excluded; preserve only bounded shape/count/type and a non-reversible projection hash"
+    },
+    "javascript_surface": {
+      "required": true,
+      "presence_token": "javascript_presence",
+      "token_prefixes": ["script_", "js_", "event_", "fetch_", "xhr_", "source_", "sink_", "ast_"],
+      "fields": ["script_count", "script_kind", "module_presence", "inline_external_class", "event_handler_kind", "fetch_method", "fetch_target_shape", "xhr_method", "xhr_target_shape", "source_category", "sink_category", "parser_error_class", "syntax_shape", "ast_node_shape", "dynamic_code_presence", "storage_api_presence"],
+      "redaction": "JavaScript literals and identifiers become syntax/AST/source/sink categories, counts and shape hashes; executable source is not model input"
+    },
+    "failure_feedback": {
+      "required": true,
+      "presence_token": "failure_feedback_presence",
+      "token_prefixes": ["failure_", "feedback_", "error_", "timeout_", "blocked_", "repair_"],
+      "fields": ["failure_class", "failure_stage", "error_shape", "parse_error_class", "encoding_error_class", "redirect_error_class", "timeout_bucket", "blocked_reason_class", "environment_failure_class", "previous_action", "next_action", "repair_delta_axis", "repair_outcome"],
+      "redaction": "error message literals become class/phase/shape; preserve transition identity and one-variable repair delta"
+    },
+    "belief_and_replay": {
+      "required": true,
+      "presence_token": "belief_replay_presence",
+      "token_prefixes": ["belief_", "history_", "observation_", "oracle_state_", "replay_", "evidence_", "budget_"],
+      "fields": ["observation_presence", "observation_delta_axis", "belief_prior_bucket", "belief_posterior_bucket", "belief_delta_axis", "history_action", "history_length_bucket", "typed_available", "evidence_present", "negative_control", "fresh_reset", "replay_ready", "reference_present", "candidate_present", "step_budget", "probe_count_bucket", "evidence_hash_present"],
+      "redaction": "oracle answer/effect type is evaluator-only; model sees availability, evidence presence, deltas and replay state"
+    }
+  },
+  "reserved_tokens": {
+    "universal": ["[BOS]", "[EOS]", "[TARGET_BOS]", "[TARGET_EOS]", "unknown", "not_observed", "empty", "present", "absent", "blocked", "chunk_boundary=begin", "chunk_boundary=end"],
+    "bucket_policy": ["zero", "one", "two", "few", "many", "short", "medium", "long", "low", "mid", "high"],
+    "overflow_policy": "bounded_overflow_plus_count_and_digest; overflow is a loss report, never silent truncation"
+  },
+  "context_firewall": {
+    "forbidden_literals": ["raw_payload", "raw_response", "response_body", "oracle_answer", "evaluator_answer", "family_label", "route_literal", "credential", "cookie_value", "authorization_value", "secret"],
+    "allowed_form": "axis=value where value is an ontology enum, bucket, role, shape or non-reversible digest"
+  },
+  "quality_gates": {
+    "axis_coverage": "every record carries every required axis or explicit axis=not_observed",
+    "entropy": "per-axis source and fixed-holdout predictive entropy relative drop <= 0.25",
+    "sequence_diversity": "unique complete sequences, not seed-only copies, are reported",
+    "field_ablation": "removing one axis changes only that axis and produces a measurable downstream delta or is marked unused",
+    "split": "source, implementation, family and near-duplicate groups are isolated",
+    "tokenizer": "ontology hash, tokenizer hash and context/target offsets are recorded"
+  },
+  "status": "ontology_contract_only_until_pg331_audit_passes"
+}

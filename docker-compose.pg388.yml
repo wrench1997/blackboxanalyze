@@ -1,0 +1,52 @@
+services:
+  pg388-backend:
+    image: pg388-logic-backend:local
+    build:
+      context: .
+      dockerfile: fixtures/pg388/Dockerfile
+      args:
+        PYTHON_IMAGE_DIGEST: ${PG388_PYTHON_IMAGE_DIGEST:?set reviewed Python base digest}
+    environment:
+      PG388_BIND: 0.0.0.0
+      PG388_PORT: 8088
+      PG388_NETWORK_MODE: internal_private_display
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    security_opt:
+      - no-new-privileges:true
+    expose:
+      - "8088"
+    networks:
+      - pg388_internal
+    restart: "no"
+
+  pg388-frontend:
+    image: pg388-frontend:local
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      args:
+        NODE_BASE_IMAGE: ${PG388_NODE_BASE_IMAGE:?set reviewed Node base image@sha256 digest}
+        PG388_API_URL: http://pg388-backend:8088
+    environment:
+      PG388_API_URL: http://pg388-backend:8088
+    ports:
+      - "127.0.0.1:3000:3000"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - pg388-backend
+    networks:
+      - pg388_internal
+      - pg388_display
+    restart: "no"
+
+networks:
+  pg388_internal:
+    internal: true
+  pg388_display:
+    driver: bridge

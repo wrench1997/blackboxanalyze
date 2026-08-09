@@ -1,0 +1,253 @@
+{
+  "protocol_id": "pg-pk-242-pikachu-xss-dom-acceptance-v1",
+  "schema_version": "pg242-pikachu-xss-dom-acceptance-report-v1",
+  "status": "completed_local_xss_dom_browser_dual_channel",
+  "device": "cuda",
+  "model": {
+    "variant": "frozen_xxl_field_token_decoder",
+    "base_parameter_count": 101487169,
+    "ai_selects_abstract_dom_channel": true,
+    "runtime_binder_is_vetted_local_catalog": true
+  },
+  "runtime": {
+    "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+    "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+    "loopback_only": true,
+    "fresh_container_per_episode": true,
+    "external_network": false
+  },
+  "seeds": [
+    26215
+  ],
+  "counts": {
+    "fresh_container_count": 1,
+    "preflight_count": 0,
+    "get_episode_count": 1,
+    "post_episode_count": 0,
+    "ai_send_count": 1,
+    "reference_send_count": 1,
+    "confirmed_positive_count": 1,
+    "negative_control_confirmed_count": 0,
+    "timing_or_stateful_abstain_count": 0,
+    "oracle_gap_count": 0,
+    "model_missed_positive_count": 0,
+    "false_positive_count": 0,
+    "external_network_count": 0,
+    "external_request_blocked_count": 1,
+    "wire_display_count": 4
+  },
+  "results": [
+    {
+      "schema_version": "pg242-pikachu-xss-dom-episode-v1",
+      "source": "pg242_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 26215,
+      "target_instance_hash": "1f74e458c441c00303dedb1769132398057e8f66c7fdbf0cb98696ad4cfffe0e",
+      "route": "/vul/xss/xss_dom_x.php",
+      "method": "GET",
+      "fields": [
+        "text"
+      ],
+      "family": "xss",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-26215-0",
+        "reset_epoch": "26215-0",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "1f74e458c441c00303dedb1769132398057e8f66c7fdbf0cb98696ad4cfffe0e",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "1bd2180a94f1710ebc95b7fa9aa4c28c2408a1e6dfe3e9edfecc088f93a67bc4",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "dom_effect": false,
+        "script_execution": false,
+        "oracle_available": true,
+        "oracle_mode": "dom_marker",
+        "external_network": false,
+        "external_request_blocked": true,
+        "external_blocked_count": 1,
+        "request_count": 23,
+        "body_sha256": "ea63b67f4e530d953595c1fd2a3c34eae41184d33fb4144ab6408b8378a612f7"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "dom_effect": false,
+        "script_execution": false,
+        "oracle_available": true,
+        "oracle_mode": "dom_marker",
+        "external_network": false,
+        "external_request_blocked": true,
+        "external_blocked_count": 1,
+        "request_count": 23,
+        "body_sha256": "7c6928a2519347037723f0fd86d6c45f56907757fafd5461ee3e189536f62513"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9999606609344482,
+          "encoding": "dom_markup",
+          "encoding_confidence": 0.9999845027923584,
+          "failure": "no_effect",
+          "failure_confidence": 0.9999874830245972,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "1ae64e15886ddc5e088e21af4247bfa6fa6c6d3ccdcc08b4cfcbbd9da6807382"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/xss/xss_dom_x.php",
+          "placement": "query",
+          "field_names": [
+            "text"
+          ],
+          "payload_sha256": "ae6ce369f4f87669300f254aa483f18de966c0e444b48dca78d789e8cd5b01b2",
+          "raw_payload_stored": false
+        },
+        "candidate": {
+          "candidate_id": "722f6e6a179aecd94516",
+          "family": "xss",
+          "method": "GET",
+          "path": "/vul/xss/xss_dom_x.php",
+          "probe_kind": "inert_dom_markup",
+          "probe_sha256": "dbef51176de90eefd5525a852ea1d669baf570250556e6e9263588a7e4c22832",
+          "payload_sha256": "cbfd90dfb7dd75ed273e35493d175fd59634151cb160df8c5f1479ffe58daced",
+          "expected_keys": [
+            "browser_sink_observed",
+            "dom_change"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "marker_observed": true,
+          "marker_sha256": "532be9ce9fb24a86f429c0d83fb332e7cf806353eb4849584cedf01afe58b934",
+          "dom_effect": true,
+          "script_execution": true,
+          "oracle_available": true,
+          "oracle_mode": "dom_marker",
+          "external_network": false,
+          "external_request_blocked": true,
+          "external_blocked_count": 1,
+          "request_count": 24,
+          "body_sha256": "e4bca17f954229dafc45dd878b45bb48c055563e92515c0f50969f77eed89e6b"
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/xss/xss_dom_x.php",
+          "placement": "query",
+          "field_names": [
+            "text"
+          ],
+          "payload_sha256": "fa3322d4e5e06d5ee8250d27c9cf08ea88c45df5edc2a0dac034134bedfed4bc",
+          "raw_payload_stored": false
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "marker_observed": true,
+          "marker_sha256": "77cbe0a9f965d8bcadb0a36a155f7f89f0b72abb881ec226d865529de6e9d782",
+          "dom_effect": true,
+          "script_execution": true,
+          "oracle_available": true,
+          "oracle_mode": "dom_marker",
+          "external_network": false,
+          "external_request_blocked": true,
+          "external_blocked_count": 1,
+          "request_count": 24,
+          "body_sha256": "5b5a2ff9fdd95d4010b8dc9e2fde1ab8c4ac132f997df8d2d70936f4d0227744"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg242-controlled-browser-dom-v1",
+        "oracle_available": true,
+        "oracle_mode": "dom_marker",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "negative_control_confirmed": false,
+        "reasons": [],
+        "evidence_hash": "a642c677edfce9c9e63ed0bdc7f100c1464b2323d93862eda3bff584cb185222",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    }
+  ],
+  "promotion": {
+    "training_eligible": true,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "honesty": {
+    "browser_marker_only": true,
+    "no_cookie_or_alert_or_external_callback": true,
+    "stored_xss_write_routes_preflight_only": true,
+    "general_web_capability_not_established": true
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": true,
+    "script_execution_is_dom_marker_only": true,
+    "database_write": false,
+    "credentials_used_only_for_local_test_login": true,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "report_sha256": "22a6aa288b58e4a9d1e67d1909fcfcca1fd98f5a97dadcf445909f10d3f9b04a"
+}

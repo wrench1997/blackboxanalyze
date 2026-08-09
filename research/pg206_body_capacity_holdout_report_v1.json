@@ -1,0 +1,271 @@
+{
+  "protocol_id": "pg-pk-206-body-capacity-holdout-v1",
+  "schema_version": "pg206-body-capacity-holdout-report-v1",
+  "status": "completed_matched_large_xxl_field_token_holdout",
+  "device": "cuda",
+  "data": {
+    "train_rows": 75,
+    "base_rows": 15,
+    "augmentation_rows": 60,
+    "holdout_rows": 42,
+    "old_replay_rows": 15,
+    "fresh_route_replay_rows": 10,
+    "source_split": "PG-199 seed 19901 train / PG-199 seed 19902 replay / PG-200 holdout / PG-205 fresh route replay"
+  },
+  "variants": [
+    {
+      "variant": "large",
+      "body_parameter_count": 19272990,
+      "source": "artifacts/pg189-structured-get-trace-action-v1/large.pt",
+      "adapter_parameter_count": 19305164,
+      "warm_start": {
+        "source": "fresh_large_field_adapter",
+        "copied_keys": [],
+        "field_projection_initialized": true
+      },
+      "training": {
+        "schema_version": "pg205-field-aware-grounding-adapter-v1",
+        "train_rows": 75,
+        "holdout_rows": 42,
+        "epochs": 60,
+        "history": [
+          {
+            "epoch": 1,
+            "loss": 2.74349999,
+            "holdout": {
+              "count": 42,
+              "action_accuracy": 0.5714286,
+              "candidate_recall": 0.4,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 0.14285715,
+              "failure_accuracy": 0.5714286
+            }
+          },
+          {
+            "epoch": 20,
+            "loss": 0.01299624,
+            "holdout": {
+              "count": 42,
+              "action_accuracy": 1.0,
+              "candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 0.0,
+              "failure_accuracy": 0.42857143
+            }
+          },
+          {
+            "epoch": 40,
+            "loss": 0.00171407,
+            "holdout": {
+              "count": 42,
+              "action_accuracy": 1.0,
+              "candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 0.0,
+              "failure_accuracy": 0.42857143
+            }
+          },
+          {
+            "epoch": 60,
+            "loss": 0.00093248,
+            "holdout": {
+              "count": 42,
+              "action_accuracy": 1.0,
+              "candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 0.0,
+              "failure_accuracy": 0.42857143
+            }
+          }
+        ],
+        "train": {
+          "count": 75,
+          "action_accuracy": 1.0,
+          "candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 1.0,
+          "failure_accuracy": 1.0
+        },
+        "holdout": {
+          "count": 42,
+          "action_accuracy": 1.0,
+          "candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 0.0,
+          "failure_accuracy": 0.42857143
+        }
+      },
+      "replay": {
+        "count": 15,
+        "action_accuracy": 1.0,
+        "candidate_recall": 1.0,
+        "abstain_recall": 1.0,
+        "unsafe_allow_count": 0,
+        "encoding_accuracy": 1.0,
+        "failure_accuracy": 1.0
+      },
+      "fresh_route_replay": {
+        "count": 10,
+        "action_accuracy": 0.80000001,
+        "candidate_recall": 1.0,
+        "abstain_recall": 0.75,
+        "unsafe_allow_count": 2,
+        "encoding_accuracy": 0.40000001,
+        "failure_accuracy": 0.80000001
+      },
+      "catastrophic_forgetting_detected": false,
+      "unsafe_allow_total": 2
+    },
+    {
+      "variant": "xxl",
+      "body_parameter_count": 101487169,
+      "source": "artifacts/pg203-token-aware-adapter-v1/xxl_token_aware_adapter.pt",
+      "adapter_parameter_count": 101535727,
+      "warm_start": {
+        "source": "pg203_token_aware_adapter",
+        "copied_keys": [
+          "context_projection.0.weight",
+          "context_projection.0.bias",
+          "feature_projection.0.weight",
+          "feature_projection.0.bias",
+          "token_projection.0.weight",
+          "token_projection.0.bias",
+          "action_head.weight",
+          "action_head.bias",
+          "encoding_head.weight",
+          "encoding_head.bias",
+          "failure_head.weight",
+          "failure_head.bias",
+          "shared.0.bias",
+          "shared.2.weight",
+          "shared.2.bias",
+          "shared.0.weight_padded"
+        ],
+        "field_projection_initialized": true
+      },
+      "training": {
+        "schema_version": "pg205-field-aware-grounding-adapter-v1",
+        "train_rows": 75,
+        "holdout_rows": 42,
+        "epochs": 60,
+        "history": [
+          {
+            "epoch": 1,
+            "loss": 3.14215112,
+            "holdout": {
+              "count": 42,
+              "action_accuracy": 0.71428573,
+              "candidate_recall": 0.6,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 0.92857146,
+              "failure_accuracy": 1.0
+            }
+          },
+          {
+            "epoch": 20,
+            "loss": 0.00239845,
+            "holdout": {
+              "count": 42,
+              "action_accuracy": 0.92857146,
+              "candidate_recall": 0.9,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 1.0,
+              "failure_accuracy": 1.0
+            }
+          },
+          {
+            "epoch": 40,
+            "loss": 0.0001415,
+            "holdout": {
+              "count": 42,
+              "action_accuracy": 1.0,
+              "candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 1.0,
+              "failure_accuracy": 1.0
+            }
+          },
+          {
+            "epoch": 60,
+            "loss": 7.387e-05,
+            "holdout": {
+              "count": 42,
+              "action_accuracy": 1.0,
+              "candidate_recall": 1.0,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 1.0,
+              "failure_accuracy": 1.0
+            }
+          }
+        ],
+        "train": {
+          "count": 75,
+          "action_accuracy": 1.0,
+          "candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 1.0,
+          "failure_accuracy": 1.0
+        },
+        "holdout": {
+          "count": 42,
+          "action_accuracy": 1.0,
+          "candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 1.0,
+          "failure_accuracy": 1.0
+        }
+      },
+      "replay": {
+        "count": 15,
+        "action_accuracy": 1.0,
+        "candidate_recall": 1.0,
+        "abstain_recall": 1.0,
+        "unsafe_allow_count": 0,
+        "encoding_accuracy": 1.0,
+        "failure_accuracy": 1.0
+      },
+      "fresh_route_replay": {
+        "count": 10,
+        "action_accuracy": 1.0,
+        "candidate_recall": 1.0,
+        "abstain_recall": 1.0,
+        "unsafe_allow_count": 0,
+        "encoding_accuracy": 1.0,
+        "failure_accuracy": 1.0
+      },
+      "catastrophic_forgetting_detected": false,
+      "unsafe_allow_total": 0
+    }
+  ],
+  "capacity_101m_better": true,
+  "promotion": {
+    "training_eligible": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "selected_variant": "xxl"
+  },
+  "safety": {
+    "local_projection_only": true,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "online_weight_update": false
+  },
+  "report_sha256": "ea9329cebc4c557fb1f3d4072ef7442443e7a4ecdb1abb1d0da7534618ef9f4c"
+}

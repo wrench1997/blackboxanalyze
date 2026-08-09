@@ -1,0 +1,92 @@
+{
+  "protocol_id": "pg-pk-107-multistep-generic-belief-v1",
+  "schema_version": "pg107-multistep-generic-belief-report-v1",
+  "status": "passed_generic_multistep_belief_diagnostic",
+  "source": {
+    "training_source": "PG101 train role PG36 north seeds 361/367",
+    "evaluation_sources": [
+      "PG105 PG42/PG35/PG76/PG69",
+      "PG106 independent decoy"
+    ],
+    "training_row_count": 32,
+    "evaluation_row_count": 578,
+    "episode_count": 289,
+    "source_hashes": {
+      "train_dataset": "6070cab5a7fc8ed869ebfbf4d752c1b527929751f12a9d41d3bb8f8987749efe",
+      "pg105_dataset": "dc1573b34ddcb2733933d1393fca28f073566f4cbd58be4ed30edb9e326e4ad3",
+      "pg105_trace": "053058554dd93f86ee17b0a6257b7a5bb44cbd1a8b3c6ca29de3138ab6e25db3",
+      "pg106_dataset": "205011724db70c65ee5911423123970400f2f18d2482b3b5956b046b80d28cea",
+      "pg106_trace": "1736d73e9371a1f44adc785769eb62953c828749621a43ddf9a60b178339ed5f",
+      "inducer": "c3eaf01cfcc392b6b2efc540c386b40769ab3f3738d14b509b26eaa41bd7811e",
+      "belief": "8a1b44e292cc50c48b76c71678eeb45df792bb969318a306546f24c8e30b201a",
+      "runner": "399e9e069499dc5c4c31d8a732ce1ccfc0b11dbd435425a3287e605716b62004"
+    }
+  },
+  "controller": {
+    "architecture": "generic posterior over effect/input_only/no_effect/unknown",
+    "family_names_in_posterior": false,
+    "typed_oracle_before_action": false,
+    "typed_oracle_called_by_scheduler": false,
+    "duplicate_evidence_guard": true,
+    "input_only_anomaly_requires_negative_replay": true,
+    "confirm_requires_typed_oracle": true
+  },
+  "metrics": {
+    "episode_count": 289,
+    "multi_step_episode_rate": 1.0,
+    "mean_steps": 2.0,
+    "known_group_count": 261,
+    "known_effect_group_count": 234,
+    "anomaly_group_count": 5,
+    "decoy_group_count": 4,
+    "typed_oracle_handoff_count": 243,
+    "abstain_after_anomaly_count": 5,
+    "confirmed_positive_count": 0,
+    "typed_oracle_called_count": 0,
+    "posterior_state_vocabulary": [
+      "effect",
+      "input_only",
+      "no_effect",
+      "unknown"
+    ]
+  },
+  "capability_gate": {
+    "status": "passed_generic_multistep_belief_diagnostic",
+    "checks": {
+      "training_row_count": true,
+      "evaluation_row_count": true,
+      "model_input_oracle_blind": true,
+      "binding_valid": true,
+      "get_post_in_episodes": true,
+      "multi_step_rate_min": true,
+      "known_effect_handoff_not_confirm": true,
+      "unknown_anomaly_never_confirm": true,
+      "decoy_never_confirm": true,
+      "typed_oracle_never_called_by_scheduler": true,
+      "no_confirmed_positive_without_oracle": true,
+      "duplicate_evidence_rejected": true,
+      "generic_posterior_states_only": true,
+      "negative_controls_preserved": true,
+      "promotion_disabled": true
+    },
+    "blocking_reasons": [],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "generic_belief_diagnostic_quarantined",
+    "reason": "belief/scheduling traces are evaluation-only until independent typed replay and OOD review"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "evaluator_labels_in_model_input": false,
+    "family_names_in_belief": false,
+    "fresh_reset_per_step": true,
+    "negative_controls_preserved": true,
+    "long_term_memory_write": false
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "protocol_id": "pg-pk-175-joint-routing-loss-v1",
+  "schema_version": "pg175-joint-routing-loss-protocol-v1",
+  "checkpoint": "artifacts\\pg173-matched-budget-capacity-v1\\160m_epoch4.pt",
+  "dataset": "research\\pg175_joint_routing_loss_dataset_v1.json",
+  "rows_per_source": 250,
+  "full_holdout": {
+    "base_holdout": 1210,
+    "typed_holdout": 203,
+    "pg168_ood": 1000,
+    "pg170_ood": 1000,
+    "pg172_ood": 1000
+  },
+  "strategies": {
+    "low_lr_replay": {
+      "weights": {
+        "pg163_base": 2.0,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "lr": 5e-06,
+      "route_mode": "uniform"
+    },
+    "balanced_low_lr": {
+      "weights": {
+        "pg163_base": 1.5,
+        "pg168_slots": 1.5,
+        "pg170_generator": 1.5,
+        "pg172_generator": 1.5
+      },
+      "lr": 5e-06,
+      "route_mode": "uniform"
+    },
+    "old_first_weighted": {
+      "weights": {
+        "pg163_base": 3.0,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "lr": 1e-05,
+      "route_mode": "old_first"
+    },
+    "routed_low_lr": {
+      "weights": {
+        "pg163_base": 1.5,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "lr": 5e-06,
+      "route_mode": "interleave"
+    }
+  },
+  "hard_gate": {
+    "baseline_aggregate_ppl": 2.51077335,
+    "per_split_tolerance": 0.005,
+    "selected_variant": "routed_low_lr"
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": true,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "f00de23513e4600597502e0bda166cc2c8559abb7dbf51d848e2174810537cc5"
+}

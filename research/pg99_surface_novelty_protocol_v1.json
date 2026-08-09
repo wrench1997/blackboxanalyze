@@ -1,0 +1,55 @@
+{
+  "protocol_id": "pg-pk-99-surface-novelty-audit-v1",
+  "schema_version": "pg99-surface-novelty-protocol-v1",
+  "purpose": "determine whether bounded surface novelty can support unknown-family abstention without family leakage",
+  "training_contract": {
+    "source": "pg94 seeds 361/367",
+    "pg42_excluded": true,
+    "oracle_visible": false
+  },
+  "evaluation_contract": {
+    "source": "pg42 cobalt/quartz seeds 401/409/419",
+    "family_labels_used_after_projection_only": true
+  },
+  "visible_fields": [
+    "method",
+    "encoding_class",
+    "phase",
+    "safe_probe",
+    "baseline_summary",
+    "candidate_summary"
+  ],
+  "forbidden_fields": [
+    "family",
+    "oracle_projection",
+    "marker",
+    "raw_probe",
+    "raw_response",
+    "route_identity",
+    "hash identifiers"
+  ],
+  "discriminator": {
+    "type": "exact_bounded_support_ood",
+    "in_domain_action": "continue_to_typed_oracle",
+    "novel_action": "abstain"
+  },
+  "impossibility_check": {
+    "requires_known_unknown_fingerprint_overlap_audit": true,
+    "promotion_on_overlap": false
+  },
+  "safety_contract": {
+    "loopback_only": true,
+    "get_post_required": true,
+    "fresh_reset_required": true,
+    "negative_control_required": true,
+    "evidence_sha256_required": true
+  },
+  "result": {
+    "status": "blocked",
+    "blocking_reasons": [
+      "not_all_abstain",
+      "known_positive_not_all_abstain",
+      "known_unknown_visible_equivalence_impossible"
+    ]
+  }
+}

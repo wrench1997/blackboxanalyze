@@ -1,0 +1,273 @@
+{
+  "protocol_id": "pg-pk-153-long-context-replay-v1",
+  "schema_version": "pg153-long-context-replay-report-v1",
+  "status": "completed_pg153_long_context_replay",
+  "device": "cuda",
+  "seed": 15301,
+  "source": {
+    "label_count": 696,
+    "train_count": 216,
+    "dev_count": 216,
+    "holdout_count": 264,
+    "synthetic_train_count": 6400,
+    "synthetic_holdout_count": 800,
+    "real_repeated_count": 2133,
+    "new_train_count": 8533,
+    "replay_count": 1200,
+    "long_train_count": 3442,
+    "long_holdout_count": 416,
+    "old_canary_count": 1210,
+    "surface_eval_count": 6,
+    "real_fraction": 0.25
+  },
+  "variants": [
+    {
+      "variant": "short_context_replay",
+      "context_length": 128,
+      "train_count": 9733,
+      "replay_rows": 1200,
+      "parameter_count": 38055098,
+      "before_new_short_holdout": {
+        "perplexity": 3.1516563,
+        "next_token_accuracy": 0.61697785,
+        "token_count": 82802
+      },
+      "after_new_short_holdout": {
+        "perplexity": 1.81662296,
+        "next_token_accuracy": 0.69679476,
+        "token_count": 82802
+      },
+      "after_new_long_holdout": {
+        "perplexity": 3.11889552,
+        "next_token_accuracy": 0.64532859,
+        "token_count": 52832
+      },
+      "old_canary_forgetting": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 0.93795174,
+          "perplexity": 2.55474329,
+          "next_token_accuracy": 0.52128687,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.99877,
+          "perplexity": 2.71494039,
+          "next_token_accuracy": 0.51357581,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": 0.1601971,
+          "relative_perplexity_increase": 0.06270575,
+          "next_token_accuracy_drop": 0.00771106,
+          "mean_logit_kl": 0.07354659
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "surface_after": {
+        "perplexity": 35.67204286,
+        "next_token_accuracy": 0.36666667,
+        "token_count": 60
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.68736452,
+          "new_short_holdout": {
+            "perplexity": 1.81662296,
+            "next_token_accuracy": 0.69679476,
+            "token_count": 82802
+          },
+          "new_long_holdout": {
+            "perplexity": 3.11889552,
+            "next_token_accuracy": 0.64532859,
+            "token_count": 52832
+          }
+        }
+      ],
+      "elapsed_seconds": 36.98
+    },
+    {
+      "variant": "long_context_replay",
+      "context_length": 256,
+      "train_count": 4642,
+      "replay_rows": 1200,
+      "parameter_count": 38120634,
+      "before_new_short_holdout": {
+        "perplexity": 3.1516563,
+        "next_token_accuracy": 0.61697785,
+        "token_count": 82802
+      },
+      "after_new_short_holdout": {
+        "perplexity": 1.89937731,
+        "next_token_accuracy": 0.67805125,
+        "token_count": 82802
+      },
+      "after_new_long_holdout": {
+        "perplexity": 1.88684254,
+        "next_token_accuracy": 0.68927286,
+        "token_count": 89474
+      },
+      "old_canary_forgetting": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 0.93795174,
+          "perplexity": 2.55474329,
+          "next_token_accuracy": 0.52128687,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.98161244,
+          "perplexity": 2.66875599,
+          "next_token_accuracy": 0.50995559,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": 0.1140127,
+          "relative_perplexity_increase": 0.04462785,
+          "next_token_accuracy_drop": 0.01133128,
+          "mean_logit_kl": 0.05837784
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "surface_after": {
+        "perplexity": 24.6768104,
+        "next_token_accuracy": 0.41666667,
+        "token_count": 60
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.78023716,
+          "new_short_holdout": {
+            "perplexity": 1.89937731,
+            "next_token_accuracy": 0.67805125,
+            "token_count": 82802
+          },
+          "new_long_holdout": {
+            "perplexity": 1.88684254,
+            "next_token_accuracy": 0.68927286,
+            "token_count": 89474
+          }
+        }
+      ],
+      "elapsed_seconds": 40.431
+    },
+    {
+      "variant": "long_context_no_replay",
+      "context_length": 256,
+      "train_count": 3442,
+      "replay_rows": 0,
+      "parameter_count": 38120634,
+      "before_new_short_holdout": {
+        "perplexity": 3.1516563,
+        "next_token_accuracy": 0.61697785,
+        "token_count": 82802
+      },
+      "after_new_short_holdout": {
+        "perplexity": 1.89919783,
+        "next_token_accuracy": 0.67794256,
+        "token_count": 82802
+      },
+      "after_new_long_holdout": {
+        "perplexity": 1.91592092,
+        "next_token_accuracy": 0.68224289,
+        "token_count": 89474
+      },
+      "old_canary_forgetting": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 0.93795174,
+          "perplexity": 2.55474329,
+          "next_token_accuracy": 0.52128687,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 1.15556288,
+          "perplexity": 3.17581051,
+          "next_token_accuracy": 0.48281604,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": 0.62106722,
+          "relative_perplexity_increase": 0.24310357,
+          "next_token_accuracy_drop": 0.03847083,
+          "mean_logit_kl": 0.23477727
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": true,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": true
+        },
+        "catastrophic_forgetting_detected": true,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "surface_after": {
+        "perplexity": 12.62027974,
+        "next_token_accuracy": 0.5,
+        "token_count": 60
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.76968511,
+          "new_short_holdout": {
+            "perplexity": 1.89919783,
+            "next_token_accuracy": 0.67794256,
+            "token_count": 82802
+          },
+          "new_long_holdout": {
+            "perplexity": 1.91592092,
+            "next_token_accuracy": 0.68224289,
+            "token_count": 89474
+          }
+        }
+      ],
+      "elapsed_seconds": 31.691
+    }
+  ],
+  "objective": "source_heldout_long_context_and_continual_replay_forgetting",
+  "data_policy": {
+    "raw_payloads": false,
+    "raw_responses": false,
+    "external_network_targets": false,
+    "old_holdout_used_for_optimization": false,
+    "labels_in_lm_input": false
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  },
+  "report_sha256": "54a42eee90b9a001c4c25564a0d5d3827f23962e2acbf246e12fad53060eeae3"
+}

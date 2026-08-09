@@ -1,0 +1,49 @@
+{
+  "protocol_id": "pg-pk-24-cross-lab-registry-v1",
+  "schema_version": "sift-cross-lab-registry-protocol-v1",
+  "objective": "Inventory local lab sources and establish source/target-disjoint data contracts before cross-lab training.",
+  "scope": {
+    "read_only": true,
+    "loopback_only": true,
+    "external_network": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "evaluator_labels_stored": false
+  },
+  "registered_sources": [
+    "Pikachu local Catalog",
+    "Juice Shop Loop 12 shadow/hidden matrix",
+    "SQL differential fixture",
+    "logic/access fixture",
+    "heterogeneous surface fixture",
+    "Pikachu PG-52 authoritative local oracle",
+    "PG-53 cross-source typed replay (PG-35/PG-36)",
+    "PG-53 webpage feature funnel and Codex review",
+    "PG-54 PG-42 independent envelope and unknown-family Rule IR holdout",
+    "abstract rule maze"
+  ],
+  "training_entry_contract": {
+    "source_hash": true,
+    "container_or_fixture_digest": true,
+    "fresh_reset": true,
+    "authorized_loopback_scope": true,
+    "safe_probe_manifest": true,
+    "bounded_oracle_projection": true,
+    "rule_ir_binding": true,
+    "evidence_hash": true,
+    "independent_target_instances": 3,
+    "independent_sampling_seeds": 2
+  },
+  "split_policy": {
+    "source_holdout": "never mix one source hash across train and test",
+    "target_holdout": "hold out container/fixture instances, not only labels",
+    "surface_holdout": "hold out surface roles and encodings jointly",
+    "same_template_rule": "relabeling the same template is not a new source"
+  },
+  "promotion_policy": {
+    "unattested_sources": "evaluation_only",
+    "evaluator_only_labels": "never enter visible model features",
+    "zero_false_accept_gate": true,
+    "unsupported_surface": "abstain"
+  }
+}

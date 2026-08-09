@@ -1,0 +1,53 @@
+{
+  "protocol_id": "pg-pk-177-data-capacity-v1",
+  "schema_version": "pg177-data-capacity-protocol-v1",
+  "start_checkpoint": "artifacts\\pg176-routed-multiseed-new-ood-v1\\seed_17601.pt",
+  "dataset": "research\\pg177_data_capacity_dataset_v1.json",
+  "seeds": [
+    17701,
+    17702
+  ],
+  "capacity_configs": {
+    "160m_scratch": {
+      "d_model": 1152,
+      "nhead": 18,
+      "layers": 10
+    },
+    "200m_scratch": {
+      "d_model": 1280,
+      "nhead": 20,
+      "layers": 10
+    }
+  },
+  "train_row_count": 7200,
+  "hard_gate": {
+    "existing_holdout_keys": [
+      "base_holdout",
+      "typed_holdout",
+      "pg168_ood",
+      "pg170_ood",
+      "pg172_ood",
+      "pg176_ood"
+    ],
+    "per_split_tolerance": 0.005,
+    "new_ood_aggregate_must_improve": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": true,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "b780d786a550eb5bc476bd9befe05dea5a9c843dc089dd7240003b578b2c84d5"
+}

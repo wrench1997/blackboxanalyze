@@ -1,0 +1,1430 @@
+{
+  "protocol_id": "pg-pk-10-logic-access-typed-oracle-v1",
+  "schema_version": "sift-pg-pk-10-logic-access-report-v1",
+  "target": {
+    "fresh_target_holdout": true,
+    "target_count": 3,
+    "variants": [
+      "gamma",
+      "delta",
+      "epsilon"
+    ],
+    "fixture_source_sha256": "b7f65440043bb02f50e6ef45f97dffb1e314613d13a0626933da428fd27b854d",
+    "loopback_only": true,
+    "external_network": false
+  },
+  "training_boundary": {
+    "checkpoint": "artifacts\\logic-access-decoder-pg-pk-10\\logic_access_decoder.pt",
+    "training_targets": [
+      "alpha:8795",
+      "beta:8796"
+    ],
+    "evaluation_targets": [
+      "gamma:8797",
+      "delta:8798",
+      "epsilon:8799"
+    ],
+    "oracle_and_evaluator_labels_hidden_from_features": true
+  },
+  "sample_count": 60,
+  "model_only_accepted_count": 24,
+  "model_only_counterfactual_accept_count": 0,
+  "counterfactual_count": 36,
+  "oracle_revalidated_sample_count": 24,
+  "oracle_revalidated_pair_count": 12,
+  "oracle_control_accept_count": 0,
+  "strict_target_holdout_abstain_count": 0,
+  "target_summary": {
+    "gamma:8797": {
+      "sample_count": 20,
+      "model_only_accepted_count": 8,
+      "counterfactual_model_candidates": 0,
+      "oracle_revalidated_pair_count": 4
+    },
+    "delta:8798": {
+      "sample_count": 20,
+      "model_only_accepted_count": 8,
+      "counterfactual_model_candidates": 0,
+      "oracle_revalidated_pair_count": 4
+    },
+    "epsilon:8799": {
+      "sample_count": 20,
+      "model_only_accepted_count": 8,
+      "counterfactual_model_candidates": 0,
+      "oracle_revalidated_pair_count": 4
+    }
+  },
+  "pair_results": [
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-below-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-coupon-below-control-plain-165a3edfbfd9",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-coupon-below-control-url-percent-b3bdc6a5b9ac",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-boundary",
+      "expected_family": "logic",
+      "expected_signal": "business_boundary_mismatch",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "observed_signals": [
+        "business_boundary_mismatch"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "logic"
+      ],
+      "evidence_hashes": [
+        "6b85d1c7ba6099360f9a7b04898691a55aa679901396c62f8221d790e501fb18",
+        "f98204b4a0afb8a41efe6acc5e9a1f033414824098ac8d91e2022b7fdc160c98"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-coupon-boundary-plain-91fc4ecfd667",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-coupon-boundary-url-percent-af41778de4b3",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-nonmember-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-coupon-nonmember-control-plain-822cda6527f8",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-coupon-nonmember-control-url-percent-6dd07dcb2623",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-admin-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-gate-admin-control-plain-9e0d5245bc99",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-gate-admin-control-url-percent-fc299a683a71",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-denied-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-gate-denied-control-plain-c5d5a72228f6",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-gate-denied-control-url-percent-dbdb083c9ec8",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-negative",
+      "expected_family": "access_control",
+      "expected_signal": "authorization_boundary_divergence",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "observed_signals": [
+        "authorization_boundary_divergence"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "access_control"
+      ],
+      "evidence_hashes": [
+        "c3f64c2bb0bf240b4d872f48ddd347a11b9ba9d3b48cb4e7c1af229459a067a4",
+        "e94da994c51d2e42c00e1c8369d100df5901410e4afca62e1549dbaab7371aaa"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-gate-negative-plain-31eaa880c9a9",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-gate-negative-url-percent-13386a8d645b",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-truthy",
+      "expected_family": "access_control",
+      "expected_signal": "authorization_boundary_divergence",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "observed_signals": [
+        "authorization_boundary_divergence"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "access_control"
+      ],
+      "evidence_hashes": [
+        "af6bde7eb82f6be49daacb8aba64b0f8c8cbffbcc809626b2581519dd59f28a0",
+        "e24b4028c80a8498f58e5a25bb28c6309ee9991ff4bcd304370d7e5b1b845f76"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-gate-truthy-plain-b9df647a7c9e",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-gate-truthy-url-percent-69653685c8af",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-ordinary-200-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_ordinary_control_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-ordinary-200-control-plain-11fba26fc1ba",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-ordinary-200-control-url-percent-d31a261046f4",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-replay-bound-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_history_binding_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-replay-bound-control-plain-5a4503e130ec",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-replay-bound-control-url-percent-33918719a9bb",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-replay-mismatch",
+      "expected_family": "logic",
+      "expected_signal": "history_binding_mismatch",
+      "oracle_names": [
+        "synthetic_history_binding_v1"
+      ],
+      "observed_signals": [
+        "history_binding_mismatch"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "logic"
+      ],
+      "evidence_hashes": [
+        "05b9d89e440269e868f59b55f8352c2ab5176ec194b1353e1034b6c131142a8d",
+        "a45466578bad1fe9811f52984fa288533a07f175a04bf4bab795625200389602"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-replay-mismatch-plain-d963cc6d1ae4",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-gamma-logic-pg10-replay-mismatch-url-percent-0a85c728bfd4",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-below-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-coupon-below-control-plain-46ac5ac9d445",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-coupon-below-control-url-percent-ca5ef94205de",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-boundary",
+      "expected_family": "logic",
+      "expected_signal": "business_boundary_mismatch",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "observed_signals": [
+        "business_boundary_mismatch"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "logic"
+      ],
+      "evidence_hashes": [
+        "51dc704717f3e1f6d36847f2d27aa1f34d708c9066b92c31d788cdee225b5bd6",
+        "c3053e84adf02f74bf68cf6e00925bb18dc02be280cb1a0bf495cc1069c381ff"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-coupon-boundary-plain-b7f228d2b6e1",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-coupon-boundary-url-percent-cdcc324d1dcf",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-nonmember-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-coupon-nonmember-control-plain-f75d0c004511",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-coupon-nonmember-control-url-percent-f5c8a9ee619d",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-admin-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-gate-admin-control-plain-d30beab41f17",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-gate-admin-control-url-percent-700e5c168e5e",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-denied-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-gate-denied-control-plain-e51facf74f43",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-gate-denied-control-url-percent-85abe6751fb3",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-negative",
+      "expected_family": "access_control",
+      "expected_signal": "authorization_boundary_divergence",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "observed_signals": [
+        "authorization_boundary_divergence"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "access_control"
+      ],
+      "evidence_hashes": [
+        "3769343332d305c6fa64c86b7101bb50b59acb5d6cc563060c14ac741e2e8ede",
+        "53d59565502a513d0358a6f717b39aeb6c7e61893c77434b0d3e57def1fa17cf"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-gate-negative-plain-9044754e3eba",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-gate-negative-url-percent-083a3f830661",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-truthy",
+      "expected_family": "access_control",
+      "expected_signal": "authorization_boundary_divergence",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "observed_signals": [
+        "authorization_boundary_divergence"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "access_control"
+      ],
+      "evidence_hashes": [
+        "73fa81c32cbeddf1f8e1ed6cfcfb8dce4ad50d577b24f34c3e5026da9ef3e84f",
+        "dbe127a09f0ec38443b2878babe040b854b2c959c9908c3feaaa2118efe51b55"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-gate-truthy-plain-8065860524c0",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-gate-truthy-url-percent-ea735b1af2ce",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-ordinary-200-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_ordinary_control_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-ordinary-200-control-plain-eb75a0122525",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-ordinary-200-control-url-percent-8fde966261b3",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-replay-bound-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_history_binding_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-replay-bound-control-plain-ddf751556683",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-replay-bound-control-url-percent-47815279523b",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-replay-mismatch",
+      "expected_family": "logic",
+      "expected_signal": "history_binding_mismatch",
+      "oracle_names": [
+        "synthetic_history_binding_v1"
+      ],
+      "observed_signals": [
+        "history_binding_mismatch"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "logic"
+      ],
+      "evidence_hashes": [
+        "4288fc7483150162a15903edd031512bba451c43c88b1824486c60495390a16d",
+        "8bcb6f2360e24aca714f31815edb77a765444ebd4008e18e7ce3679759f2d82a"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-replay-mismatch-plain-2c49376177bf",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-delta-logic-pg10-replay-mismatch-url-percent-4f1171c6701f",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-below-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-coupon-below-control-plain-82a8246d6121",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-coupon-below-control-url-percent-12d3d9f95e1e",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-boundary",
+      "expected_family": "logic",
+      "expected_signal": "business_boundary_mismatch",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "observed_signals": [
+        "business_boundary_mismatch"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "logic"
+      ],
+      "evidence_hashes": [
+        "0d89d36d2c7258082bb8a52afa2fba15285ebdde6c9c935f85b4f1522bd82a24",
+        "6d230132958412679e3f0b9f885667ad70b8029d1c4f061e6833cdb6239bdccf"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-coupon-boundary-plain-37249028e250",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-coupon-boundary-url-percent-1f0fae47ed77",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-coupon-nonmember-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_business_invariant_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-coupon-nonmember-control-plain-5d550db870ce",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-coupon-nonmember-control-url-percent-1a40396cf4ca",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-admin-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-gate-admin-control-plain-e8e79f326577",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-gate-admin-control-url-percent-6f00f7aa9f40",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-denied-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-gate-denied-control-plain-25ebde4209d2",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-gate-denied-control-url-percent-933fbe259765",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-negative",
+      "expected_family": "access_control",
+      "expected_signal": "authorization_boundary_divergence",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "observed_signals": [
+        "authorization_boundary_divergence"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "access_control"
+      ],
+      "evidence_hashes": [
+        "958e2134f8af05de24db1d19e35408142d745aa6bddfdaaad23741ab1307e624",
+        "9c72c5dc0b1d912fa9f587a7b9ab531fed6c4e500ae59607b23e70d28539aa56"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-gate-negative-plain-b470faa52abe",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-gate-negative-url-percent-e78108a59c45",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-gate-truthy",
+      "expected_family": "access_control",
+      "expected_signal": "authorization_boundary_divergence",
+      "oracle_names": [
+        "synthetic_authorization_boundary_v1"
+      ],
+      "observed_signals": [
+        "authorization_boundary_divergence"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "access_control"
+      ],
+      "evidence_hashes": [
+        "2d49b03be4d09870ad4571146e8967e8d2b777b46913c1aecbb994fb84c186a2",
+        "aa5bdb62b62beb7c56ca50ca6222c3d7a6effad0a5566ce0684f66e4fe997c36"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-gate-truthy-plain-092674e7436b",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-gate-truthy-url-percent-aa98fc32de93",
+          "candidate_family": "access_control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-ordinary-200-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_ordinary_control_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-ordinary-200-control-plain-c582edcbcd09",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-ordinary-200-control-url-percent-250dd0d7eda0",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-counterfactual-pair-v1",
+      "accepted": false,
+      "reasons": [
+        "counterfactual_oracle_not_positive"
+      ],
+      "record_count": 2,
+      "pair_id": "logic-pg10-replay-bound-control",
+      "expected_family": "control",
+      "oracle_names": [
+        "synthetic_history_binding_v1"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-replay-bound-control-plain-bd15b90e6b02",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-replay-bound-control-url-percent-526eca15c9d5",
+          "candidate_family": "control",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    },
+    {
+      "schema_version": "sift-logic-access-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "logic-pg10-replay-mismatch",
+      "expected_family": "logic",
+      "expected_signal": "history_binding_mismatch",
+      "oracle_names": [
+        "synthetic_history_binding_v1"
+      ],
+      "observed_signals": [
+        "history_binding_mismatch"
+      ],
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "logic"
+      ],
+      "evidence_hashes": [
+        "08d816b5d53aad6af63d0e050a090681aaf7fa8b4f41572931222d9c15f159f9",
+        "445b9443b18f79769fed57cf7258e0d203b5b006ac2ce2ddfb5b789b91441a1d"
+      ],
+      "candidate_predictions": [
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-replay-mismatch-plain-33c54a298758",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        },
+        {
+          "sample_id": "logic-access-eval-epsilon-logic-pg10-replay-mismatch-url-percent-61bbc02b0d46",
+          "candidate_family": "logic",
+          "confidence": 1.0,
+          "abstained": false
+        }
+      ]
+    }
+  ],
+  "promotion_ledger": [
+    {
+      "dataset_id": "logic-access-eval-gamma",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-gamma-8797",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "6b85d1c7ba6099360f9a7b04898691a55aa679901396c62f8221d790e501fb18",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-gamma",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-gamma-8797",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "f98204b4a0afb8a41efe6acc5e9a1f033414824098ac8d91e2022b7fdc160c98",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-gamma",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-gamma-8797",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "c3f64c2bb0bf240b4d872f48ddd347a11b9ba9d3b48cb4e7c1af229459a067a4",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-gamma",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-gamma-8797",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "e94da994c51d2e42c00e1c8369d100df5901410e4afca62e1549dbaab7371aaa",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-gamma",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-gamma-8797",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "af6bde7eb82f6be49daacb8aba64b0f8c8cbffbcc809626b2581519dd59f28a0",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-gamma",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-gamma-8797",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "e24b4028c80a8498f58e5a25bb28c6309ee9991ff4bcd304370d7e5b1b845f76",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-gamma",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-gamma-8797",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "05b9d89e440269e868f59b55f8352c2ab5176ec194b1353e1034b6c131142a8d",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-gamma",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-gamma-8797",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "a45466578bad1fe9811f52984fa288533a07f175a04bf4bab795625200389602",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-delta",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-delta-8798",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "51dc704717f3e1f6d36847f2d27aa1f34d708c9066b92c31d788cdee225b5bd6",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-delta",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-delta-8798",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "c3053e84adf02f74bf68cf6e00925bb18dc02be280cb1a0bf495cc1069c381ff",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-delta",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-delta-8798",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "3769343332d305c6fa64c86b7101bb50b59acb5d6cc563060c14ac741e2e8ede",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-delta",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-delta-8798",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "53d59565502a513d0358a6f717b39aeb6c7e61893c77434b0d3e57def1fa17cf",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-delta",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-delta-8798",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "73fa81c32cbeddf1f8e1ed6cfcfb8dce4ad50d577b24f34c3e5026da9ef3e84f",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-delta",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-delta-8798",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "dbe127a09f0ec38443b2878babe040b854b2c959c9908c3feaaa2118efe51b55",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-delta",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-delta-8798",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "4288fc7483150162a15903edd031512bba451c43c88b1824486c60495390a16d",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-delta",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-delta-8798",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "8bcb6f2360e24aca714f31815edb77a765444ebd4008e18e7ce3679759f2d82a",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-epsilon",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-epsilon-8799",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "0d89d36d2c7258082bb8a52afa2fba15285ebdde6c9c935f85b4f1522bd82a24",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-epsilon",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-epsilon-8799",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "6d230132958412679e3f0b9f885667ad70b8029d1c4f061e6833cdb6239bdccf",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-epsilon",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-epsilon-8799",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "958e2134f8af05de24db1d19e35408142d745aa6bddfdaaad23741ab1307e624",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-epsilon",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-epsilon-8799",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "9c72c5dc0b1d912fa9f587a7b9ab531fed6c4e500ae59607b23e70d28539aa56",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-epsilon",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-epsilon-8799",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "2d49b03be4d09870ad4571146e8967e8d2b777b46913c1aecbb994fb84c186a2",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-epsilon",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-epsilon-8799",
+      "rule_key": "access_control::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "aa5bdb62b62beb7c56ca50ca6222c3d7a6effad0a5566ce0684f66e4fe997c36",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-epsilon",
+      "sampling_seed": 20260821,
+      "target_instance_id": "eval-epsilon-8799",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "08d816b5d53aad6af63d0e050a090681aaf7fa8b4f41572931222d9c15f159f9",
+      "local_only": true
+    },
+    {
+      "dataset_id": "logic-access-eval-epsilon",
+      "sampling_seed": 20260827,
+      "target_instance_id": "eval-epsilon-8799",
+      "rule_key": "logic::typed_boundary",
+      "accepted": true,
+      "oracle_revalidated": true,
+      "false_positive": false,
+      "evidence_hash": "445b9443b18f79769fed57cf7258e0d203b5b006ac2ce2ddfb5b789b91441a1d",
+      "local_only": true
+    }
+  ],
+  "provenance": {
+    "source_hashes": [
+      "b7f65440043bb02f50e6ef45f97dffb1e314613d13a0626933da428fd27b854d"
+    ],
+    "target_instance_ids": [
+      "eval-delta-8798",
+      "eval-epsilon-8799",
+      "eval-gamma-8797"
+    ],
+    "dataset_ids": [
+      "logic-access-eval-delta",
+      "logic-access-eval-epsilon",
+      "logic-access-eval-gamma"
+    ],
+    "sampling_seeds": [
+      20260821,
+      20260827
+    ],
+    "evidence_hash_count": 60
+  },
+  "memory_promotion": {
+    "access_control": {
+      "schema_version": "sift-memory-promotion-gate-v1",
+      "rule_key": "access_control::typed_boundary",
+      "status": "promote",
+      "promote": true,
+      "reasons": [],
+      "requirements": {
+        "min_distinct_datasets": 3,
+        "min_sampling_seeds_per_dataset": 2,
+        "min_target_instances": 3,
+        "min_observations_per_dataset": 2,
+        "min_accepted_per_dataset": 1,
+        "max_false_positive_rate": 0.0,
+        "require_evidence_hash": true,
+        "require_local_only": true,
+        "require_oracle_revalidation": true
+      },
+      "summary": {
+        "evaluation_count": 12,
+        "distinct_dataset_count": 3,
+        "distinct_target_instance_count": 3,
+        "distinct_evidence_hash_count": 12
+      },
+      "per_dataset": {
+        "logic-access-eval-delta": {
+          "observation_count": 4,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 4,
+          "reasons": []
+        },
+        "logic-access-eval-epsilon": {
+          "observation_count": 4,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 4,
+          "reasons": []
+        },
+        "logic-access-eval-gamma": {
+          "observation_count": 4,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 4,
+          "reasons": []
+        }
+      }
+    },
+    "logic": {
+      "schema_version": "sift-memory-promotion-gate-v1",
+      "rule_key": "logic::typed_boundary",
+      "status": "promote",
+      "promote": true,
+      "reasons": [],
+      "requirements": {
+        "min_distinct_datasets": 3,
+        "min_sampling_seeds_per_dataset": 2,
+        "min_target_instances": 3,
+        "min_observations_per_dataset": 2,
+        "min_accepted_per_dataset": 1,
+        "max_false_positive_rate": 0.0,
+        "require_evidence_hash": true,
+        "require_local_only": true,
+        "require_oracle_revalidation": true
+      },
+      "summary": {
+        "evaluation_count": 12,
+        "distinct_dataset_count": 3,
+        "distinct_target_instance_count": 3,
+        "distinct_evidence_hash_count": 12
+      },
+      "per_dataset": {
+        "logic-access-eval-delta": {
+          "observation_count": 4,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 4,
+          "reasons": []
+        },
+        "logic-access-eval-epsilon": {
+          "observation_count": 4,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 4,
+          "reasons": []
+        },
+        "logic-access-eval-gamma": {
+          "observation_count": 4,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 4,
+          "reasons": []
+        }
+      }
+    }
+  },
+  "safety": {
+    "local_only": true,
+    "read_only_get": true,
+    "raw_body_stored": false,
+    "credentials_accessed": false,
+    "state_mutated": false,
+    "external_network": false,
+    "database_touched": false
+  },
+  "report_path": "research\\pg_pk_10_logic_access_v1.json",
+  "protocol_path": "research\\pg_pk_10_logic_access_protocol_v1.json"
+}

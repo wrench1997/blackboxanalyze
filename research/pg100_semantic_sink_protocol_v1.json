@@ -1,0 +1,35 @@
+{
+  "protocol_id": "pg-pk-100-independent-semantic-sink-replay-v1",
+  "schema_version": "pg100-independent-semantic-sink-protocol-v1",
+  "target_contract": {
+    "image": "tavenli/pikachu-labs@sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "loopback_ports": [
+      8767,
+      8768
+    ],
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_disposable_container_per_case": true,
+    "external_network": false,
+    "state_change_allowed": false
+  },
+  "oracle_contract": {
+    "implementation": "sift-pg100-independent-semantic-sink-oracle-v1",
+    "typed_modalities": [
+      "browser_dom_execution",
+      "sql_ast_differential",
+      "redirect_destination_controlled"
+    ],
+    "old_verdict_fields_not_read": true,
+    "negative_control": "same allow-listed case with inert/control branch",
+    "evidence": "canonical SHA-256"
+  },
+  "evaluation_boundary": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "unknown_family_claim_allowed": false
+  },
+  "status": "blocked"
+}

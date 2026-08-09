@@ -1,0 +1,69 @@
+{
+  "protocol_id": "pg-pk-133-history-token-policy-v1",
+  "schema_version": "pg133-history-token-protocol-v1",
+  "objective": "验证页面 source token + Rule IR token 的分层 token 表示能否在同一当前观察、不同历史 prefix 的反事实任务上选择不同安全动作。",
+  "training_source": "fresh PG-133 history latch plus PG-127/PG-125 accepted replay targets",
+  "holdout_sources": [
+    "fresh PG-133 disjoint seeds",
+    "fresh PG-127 seed holdout",
+    "fresh PG-125 family holdout",
+    "fresh PG-122 family holdout"
+  ],
+  "model_input": {
+    "source_layers": "bounded parser tokens only",
+    "rule_ir_layer": "slot=value tokens only",
+    "special_tokens": [
+      "[SRC_HTML]",
+      "[SRC_JAVASCRIPT]",
+      "[SRC_TRANSPORT]",
+      "[IR]",
+      "[STEP]"
+    ],
+    "masked_fields": [
+      "raw_html",
+      "raw_javascript",
+      "raw_probe",
+      "raw_response",
+      "history_stage",
+      "workflow_action",
+      "positive_authority",
+      "typed_available",
+      "target_id",
+      "family"
+    ]
+  },
+  "required_gates": {
+    "fresh_checkpoint": true,
+    "same_capacity_ablation": true,
+    "tokenizer_backend_open_source": true,
+    "source_and_ir_layers_present": true,
+    "special_token_window_bounded": true,
+    "scalar_dim": true,
+    "seed_disjoint": true,
+    "get_post_balanced": true,
+    "pg133_holdout_not_training": true,
+    "pg133_full_accuracy_floor": true,
+    "pg133_current_history_accuracy_floor": true,
+    "pg133_counterfactual_pair_conflicts": true,
+    "pg133_counterfactual_prediction_separation": true,
+    "pg133_current_only_ablation_drop": true,
+    "pg127_family_accuracy_floor": true,
+    "pg125_family_accuracy_floor": true,
+    "pg122_family_accuracy_floor": true,
+    "unknown_blind_abstain": true,
+    "negative_false_stop_zero": true,
+    "token_embedding_ablation_changes": true,
+    "uniform_weight_ablation_changes": true,
+    "failure_weight_ablation_changes": true,
+    "zero_ablation_changes": true,
+    "history_authority_not_model_input": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "hard_gates_passed": true,
+    "training_eligible": false,
+    "cross_implementation_review_complete": false,
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

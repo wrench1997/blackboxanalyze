@@ -1,0 +1,1986 @@
+{
+  "protocol_id": "pg-pk-183-independent-fixture-replay-v1",
+  "schema_version": "pg183-independent-fixture-replay-report-v1",
+  "status": "completed_independent_implementation_evaluation",
+  "training_source": "Pikachu PG-181 frozen manifest decoder",
+  "target": {
+    "implementation": "in_repo_surface_fixture",
+    "base_url": "http://127.0.0.1:8791",
+    "fixture_source_sha256": "5ab3ff33ae22bf08cc23fc867388ee0ca71ce81292352bcf3e7cbb2b5ea3e03d",
+    "independent_from_pikachu": true,
+    "loopback_only": true,
+    "external_network": false,
+    "fresh_server_per_surface": true
+  },
+  "model": {
+    "variant": "moe_large",
+    "checkpoint": "artifacts\\pg181-manifest-decoder-v1\\url_holdout\\moe_large_seed18101.pt",
+    "checkpoint_sha256": "4473588feb9df674cb819fe4c80e81684db8544a74b58fa7ae5f4c6a51ee79b4",
+    "online_weight_update": false,
+    "memory_promotion_allowed": false
+  },
+  "runs": [
+    {
+      "surface": "fixture_attribute",
+      "path": "/attribute",
+      "source_hash": "5ab3ff33ae22bf08cc23fc867388ee0ca71ce81292352bcf3e7cbb2b5ea3e03d",
+      "target_instance_hash": "e63c5230095a6ee60b9d823714361f9b2f074a8e658a361d133f16107ee77dd9",
+      "step_count": 5,
+      "sent_count": 5,
+      "candidate_sent_count": 2,
+      "controller_abstain_count": 0,
+      "typed_positive_count": 0,
+      "vulnerability_claim_allowed": false,
+      "steps": [
+        {
+          "step_index": 1,
+          "model_action": "baseline",
+          "confidence": 0.999994,
+          "controller_decision": "send_safe_baseline",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "none",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-negative_control",
+            "probe_sha256": "1fd1cafd552be0f3fd4607b028f11ba564218251f8c2ef392325720205b88218",
+            "field_names": [],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "5558714d3bc8be2ebf61587f84656c3b6d8b0aea5fec99aeccad81f5a2e0d957",
+            "semantic_body_sha256": "5558714d3bc8be2ebf61587f84656c3b6d8b0aea5fec99aeccad81f5a2e0d957",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": false,
+              "location": "none",
+              "count": 0
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "0fc506bb24fdd3df0ff3240d499ff87b46c273279b3ad9b9f8c9c1b9a06ce02e",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "267d0c5aefd49fae876018004322fd8805aa2624b96fec8723eb9e2359169881"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "negative_control",
+            "candidate_signal": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": false,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "267d0c5aefd49fae876018004322fd8805aa2624b96fec8723eb9e2359169881"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "no_surface_delta",
+            "failed_gate": "matched_negative_control",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 1,
+            "remaining_probe_budget": 4,
+            "key_feature_weights": {
+              "failure_kind": 0.086957,
+              "failed_gate": 0.217391,
+              "candidate_signal": 0.086957,
+              "observed_method": 0.156522,
+              "methods_seen": 0.191304,
+              "probe_budget": 0.26087
+            },
+            "key_features_ranked": [
+              "probe_budget",
+              "failed_gate",
+              "methods_seen",
+              "observed_method",
+              "candidate_signal",
+              "failure_kind"
+            ],
+            "next_action": "repeat_matched_negative_pair",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_observed_effect": 0.6,
+            "unknown_surface": 0.4
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 2,
+          "model_action": "matched_control",
+          "confidence": 0.999992,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-control",
+            "probe_sha256": "79cdebafadc7d6a752f5e77055e096c5f52d17cd985f8b8cef21e64b158344e8",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "78dc776f265f1f3078c8cfaf172029dbc6a56b9318eb4e1c54b7f65b444d219d",
+            "semantic_body_sha256": "78dc776f265f1f3078c8cfaf172029dbc6a56b9318eb4e1c54b7f65b444d219d",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "85d4b0e52c59b10828e92a67095f4e1345ca56c2cff520c42fac35528d3e5c7b",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "3c06b62f2524f5354661215505424517dc8335b0f35ced2da806118c982e1dd3"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "surface_signal_without_typed_effect",
+            "candidate_signal": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": true,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "3c06b62f2524f5354661215505424517dc8335b0f35ced2da806118c982e1dd3"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 2,
+            "remaining_probe_budget": 3,
+            "key_feature_weights": {
+              "failure_kind": 0.09009,
+              "failed_gate": 0.234234,
+              "candidate_signal": 0.198198,
+              "observed_method": 0.09009,
+              "methods_seen": 0.162162,
+              "probe_budget": 0.225225
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "probe_budget",
+              "candidate_signal",
+              "methods_seen",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "replay_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "candidate_surface_signal": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 3,
+          "model_action": "safe_candidate",
+          "confidence": 0.999986,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-candidate",
+            "probe_sha256": "9285f5ab2ed58dc7e0a839271bb10898d294137375c407499c9fa5eabc227fc8",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "42ef743a1edd2d773b7b0ddc82090bcb65c80fe51f20ae5ebb309b0c8b7a055e",
+            "semantic_body_sha256": "42ef743a1edd2d773b7b0ddc82090bcb65c80fe51f20ae5ebb309b0c8b7a055e",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "3bf77dfc484f5f01772a595d270a8570765bb9e4e5546b3634c3ab2e758c752b",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "b3c0faf6b1a0a93b9507cd3a6750177c3eb867080bb97942f7659f0433d862df"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "surface_signal_without_typed_effect",
+            "candidate_signal": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": true,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "b3c0faf6b1a0a93b9507cd3a6750177c3eb867080bb97942f7659f0433d862df"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 3,
+            "remaining_probe_budget": 2,
+            "key_feature_weights": {
+              "failure_kind": 0.09434,
+              "failed_gate": 0.245283,
+              "candidate_signal": 0.207547,
+              "observed_method": 0.09434,
+              "methods_seen": 0.169811,
+              "probe_budget": 0.188679
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "probe_budget",
+              "methods_seen",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "replay_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "candidate_surface_signal": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 4,
+          "model_action": "matched_control",
+          "confidence": 0.999992,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-control",
+            "probe_sha256": "79cdebafadc7d6a752f5e77055e096c5f52d17cd985f8b8cef21e64b158344e8",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "78dc776f265f1f3078c8cfaf172029dbc6a56b9318eb4e1c54b7f65b444d219d",
+            "semantic_body_sha256": "78dc776f265f1f3078c8cfaf172029dbc6a56b9318eb4e1c54b7f65b444d219d",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "85d4b0e52c59b10828e92a67095f4e1345ca56c2cff520c42fac35528d3e5c7b",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "3c06b62f2524f5354661215505424517dc8335b0f35ced2da806118c982e1dd3"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "surface_signal_without_typed_effect",
+            "candidate_signal": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": true,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "3c06b62f2524f5354661215505424517dc8335b0f35ced2da806118c982e1dd3"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 4,
+            "remaining_probe_budget": 1,
+            "key_feature_weights": {
+              "failure_kind": 0.09901,
+              "failed_gate": 0.257426,
+              "candidate_signal": 0.217822,
+              "observed_method": 0.09901,
+              "methods_seen": 0.178218,
+              "probe_budget": 0.148515
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "methods_seen",
+              "probe_budget",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "replay_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "candidate_surface_signal": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 5,
+          "model_action": "safe_candidate",
+          "confidence": 0.99999,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-candidate",
+            "probe_sha256": "9285f5ab2ed58dc7e0a839271bb10898d294137375c407499c9fa5eabc227fc8",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "42ef743a1edd2d773b7b0ddc82090bcb65c80fe51f20ae5ebb309b0c8b7a055e",
+            "semantic_body_sha256": "42ef743a1edd2d773b7b0ddc82090bcb65c80fe51f20ae5ebb309b0c8b7a055e",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "3bf77dfc484f5f01772a595d270a8570765bb9e4e5546b3634c3ab2e758c752b",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "b3c0faf6b1a0a93b9507cd3a6750177c3eb867080bb97942f7659f0433d862df"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "surface_signal_without_typed_effect",
+            "candidate_signal": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": true,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "b3c0faf6b1a0a93b9507cd3a6750177c3eb867080bb97942f7659f0433d862df"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 5,
+            "remaining_probe_budget": 0,
+            "key_feature_weights": {
+              "failure_kind": 0.104167,
+              "failed_gate": 0.270833,
+              "candidate_signal": 0.229167,
+              "observed_method": 0.104167,
+              "methods_seen": 0.1875,
+              "probe_budget": 0.104167
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "methods_seen",
+              "failure_kind",
+              "observed_method",
+              "probe_budget"
+            ],
+            "next_action": "abstain_budget_exhausted",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "candidate_surface_signal": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        }
+      ]
+    },
+    {
+      "surface": "fixture_json",
+      "path": "/json",
+      "source_hash": "5ab3ff33ae22bf08cc23fc867388ee0ca71ce81292352bcf3e7cbb2b5ea3e03d",
+      "target_instance_hash": "f0194a44b0496ba9d101727aedc5e39570bd2d6b182969c868560e322287919b",
+      "step_count": 5,
+      "sent_count": 5,
+      "candidate_sent_count": 2,
+      "controller_abstain_count": 0,
+      "typed_positive_count": 0,
+      "vulnerability_claim_allowed": false,
+      "steps": [
+        {
+          "step_index": 1,
+          "model_action": "baseline",
+          "confidence": 0.999994,
+          "controller_decision": "send_safe_baseline",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "none",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-negative_control",
+            "probe_sha256": "84f1bd104105649e0d01c92becfe2236aaf1059e9f1326ab9e4ddac478255daf",
+            "field_names": [],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "27a85400ca71bf03742a8e2a34f440795b5376a180f5c74c24c3651576b86a83",
+            "semantic_body_sha256": "27a85400ca71bf03742a8e2a34f440795b5376a180f5c74c24c3651576b86a83",
+            "shape": {
+              "kind": "other",
+              "field_count": 0,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": false,
+              "location": "none",
+              "count": 0
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "88ec51005eafe4e171e1340b6d78d96b0c1a274e41c0fb0c1b32ea40ad4a8970",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "aecef1fefc0c2bc73f2fa9fbdc0dacb1cf0979c290e5f8e8954229dc78c08568"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "negative_control",
+            "candidate_signal": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": false,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "aecef1fefc0c2bc73f2fa9fbdc0dacb1cf0979c290e5f8e8954229dc78c08568"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "no_surface_delta",
+            "failed_gate": "matched_negative_control",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 1,
+            "remaining_probe_budget": 4,
+            "key_feature_weights": {
+              "failure_kind": 0.086957,
+              "failed_gate": 0.217391,
+              "candidate_signal": 0.086957,
+              "observed_method": 0.156522,
+              "methods_seen": 0.191304,
+              "probe_budget": 0.26087
+            },
+            "key_features_ranked": [
+              "probe_budget",
+              "failed_gate",
+              "methods_seen",
+              "observed_method",
+              "candidate_signal",
+              "failure_kind"
+            ],
+            "next_action": "repeat_matched_negative_pair",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_observed_effect": 0.6,
+            "unknown_surface": 0.4
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 2,
+          "model_action": "matched_control",
+          "confidence": 0.999992,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-control",
+            "probe_sha256": "f276aa5dc9dcfccf6175b5385974808f792472ae49966f26f3f995595227ef63",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "282963c7e63e3515e000488688b4b6a40c8f53d8ca34d506dd3871cc2da39c5b",
+            "semantic_body_sha256": "282963c7e63e3515e000488688b4b6a40c8f53d8ca34d506dd3871cc2da39c5b",
+            "shape": {
+              "kind": "other",
+              "field_count": 0,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "7c680aeeb04cc394d4e242f25c0decfbf5baddc9a5f348936661a9826386d067",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "44fa4fa8d72894caaf6560712fbdabdd70d3586fa76d5682d8d0843e7b353060"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "surface_signal_without_typed_effect",
+            "candidate_signal": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": true,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "44fa4fa8d72894caaf6560712fbdabdd70d3586fa76d5682d8d0843e7b353060"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 2,
+            "remaining_probe_budget": 3,
+            "key_feature_weights": {
+              "failure_kind": 0.09009,
+              "failed_gate": 0.234234,
+              "candidate_signal": 0.198198,
+              "observed_method": 0.09009,
+              "methods_seen": 0.162162,
+              "probe_budget": 0.225225
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "probe_budget",
+              "candidate_signal",
+              "methods_seen",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "replay_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "candidate_surface_signal": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 3,
+          "model_action": "safe_candidate",
+          "confidence": 0.999986,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-candidate",
+            "probe_sha256": "9f571b565b98db4cd1b42bf0196366bb57fde9e9b174423b2145e9993e1af52c",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "6ddffa43cc5d97e168a4e5f2f3dc442574ad0f847ee729b709160713938869be",
+            "semantic_body_sha256": "6ddffa43cc5d97e168a4e5f2f3dc442574ad0f847ee729b709160713938869be",
+            "shape": {
+              "kind": "other",
+              "field_count": 0,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "b542eda08fcb735d9c2508d629ed6945de290bfdda1f1d0d38b2cd9f15d0b6e9",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "1137ec4b90194513a9f38c1db74d757d044e08ee2433219bc66495157e1028d1"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "surface_signal_without_typed_effect",
+            "candidate_signal": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": true,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "1137ec4b90194513a9f38c1db74d757d044e08ee2433219bc66495157e1028d1"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 3,
+            "remaining_probe_budget": 2,
+            "key_feature_weights": {
+              "failure_kind": 0.09434,
+              "failed_gate": 0.245283,
+              "candidate_signal": 0.207547,
+              "observed_method": 0.09434,
+              "methods_seen": 0.169811,
+              "probe_budget": 0.188679
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "probe_budget",
+              "methods_seen",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "replay_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "candidate_surface_signal": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 4,
+          "model_action": "matched_control",
+          "confidence": 0.999992,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-control",
+            "probe_sha256": "f276aa5dc9dcfccf6175b5385974808f792472ae49966f26f3f995595227ef63",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "282963c7e63e3515e000488688b4b6a40c8f53d8ca34d506dd3871cc2da39c5b",
+            "semantic_body_sha256": "282963c7e63e3515e000488688b4b6a40c8f53d8ca34d506dd3871cc2da39c5b",
+            "shape": {
+              "kind": "other",
+              "field_count": 0,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "7c680aeeb04cc394d4e242f25c0decfbf5baddc9a5f348936661a9826386d067",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "44fa4fa8d72894caaf6560712fbdabdd70d3586fa76d5682d8d0843e7b353060"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "surface_signal_without_typed_effect",
+            "candidate_signal": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": true,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "44fa4fa8d72894caaf6560712fbdabdd70d3586fa76d5682d8d0843e7b353060"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 4,
+            "remaining_probe_budget": 1,
+            "key_feature_weights": {
+              "failure_kind": 0.09901,
+              "failed_gate": 0.257426,
+              "candidate_signal": 0.217822,
+              "observed_method": 0.09901,
+              "methods_seen": 0.178218,
+              "probe_budget": 0.148515
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "methods_seen",
+              "probe_budget",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "replay_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "candidate_surface_signal": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 5,
+          "model_action": "safe_candidate",
+          "confidence": 0.99999,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-candidate",
+            "probe_sha256": "9f571b565b98db4cd1b42bf0196366bb57fde9e9b174423b2145e9993e1af52c",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "6ddffa43cc5d97e168a4e5f2f3dc442574ad0f847ee729b709160713938869be",
+            "semantic_body_sha256": "6ddffa43cc5d97e168a4e5f2f3dc442574ad0f847ee729b709160713938869be",
+            "shape": {
+              "kind": "other",
+              "field_count": 0,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "b542eda08fcb735d9c2508d629ed6945de290bfdda1f1d0d38b2cd9f15d0b6e9",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "1137ec4b90194513a9f38c1db74d757d044e08ee2433219bc66495157e1028d1"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "surface_signal_without_typed_effect",
+            "candidate_signal": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": true,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "1137ec4b90194513a9f38c1db74d757d044e08ee2433219bc66495157e1028d1"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 5,
+            "remaining_probe_budget": 0,
+            "key_feature_weights": {
+              "failure_kind": 0.104167,
+              "failed_gate": 0.270833,
+              "candidate_signal": 0.229167,
+              "observed_method": 0.104167,
+              "methods_seen": 0.1875,
+              "probe_budget": 0.104167
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "methods_seen",
+              "failure_kind",
+              "observed_method",
+              "probe_budget"
+            ],
+            "next_action": "abstain_budget_exhausted",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "candidate_surface_signal": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        }
+      ]
+    },
+    {
+      "surface": "fixture_header",
+      "path": "/header",
+      "source_hash": "5ab3ff33ae22bf08cc23fc867388ee0ca71ce81292352bcf3e7cbb2b5ea3e03d",
+      "target_instance_hash": "0bb8cc2abfb5faee693f0631c3b02d078305ef697199883f85aa2da9961a5cf9",
+      "step_count": 5,
+      "sent_count": 5,
+      "candidate_sent_count": 2,
+      "controller_abstain_count": 0,
+      "typed_positive_count": 0,
+      "vulnerability_claim_allowed": false,
+      "steps": [
+        {
+          "step_index": 1,
+          "model_action": "baseline",
+          "confidence": 0.999994,
+          "controller_decision": "send_safe_baseline",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "none",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-negative_control",
+            "probe_sha256": "03e7bc4240d436057cf18b893554d7b22e73af40ba84440dbcd7e45d29e2813b",
+            "field_names": [],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "semantic_body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": false,
+              "location": "none",
+              "count": 0
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "4d4f8823a4ff769ccd30aac7683bd8bf4df8c58461a7be8c43226feaa19fec1a",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "negative_control",
+            "candidate_signal": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": false,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "no_surface_delta",
+            "failed_gate": "matched_negative_control",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 1,
+            "remaining_probe_budget": 4,
+            "key_feature_weights": {
+              "failure_kind": 0.086957,
+              "failed_gate": 0.217391,
+              "candidate_signal": 0.086957,
+              "observed_method": 0.156522,
+              "methods_seen": 0.191304,
+              "probe_budget": 0.26087
+            },
+            "key_features_ranked": [
+              "probe_budget",
+              "failed_gate",
+              "methods_seen",
+              "observed_method",
+              "candidate_signal",
+              "failure_kind"
+            ],
+            "next_action": "repeat_matched_negative_pair",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_observed_effect": 0.6,
+            "unknown_surface": 0.4
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 2,
+          "model_action": "matched_control",
+          "confidence": 0.999992,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-control",
+            "probe_sha256": "a2a20bb18206a8d2b45194d365182e976d9c6e91e54dc64902b4a7017cb4d5ad",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "semantic_body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": false,
+              "location": "none",
+              "count": 0
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "4d4f8823a4ff769ccd30aac7683bd8bf4df8c58461a7be8c43226feaa19fec1a",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "negative_control",
+            "candidate_signal": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": false,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "no_surface_delta",
+            "failed_gate": "matched_negative_control",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 2,
+            "remaining_probe_budget": 3,
+            "key_feature_weights": {
+              "failure_kind": 0.090909,
+              "failed_gate": 0.227273,
+              "candidate_signal": 0.090909,
+              "observed_method": 0.163636,
+              "methods_seen": 0.2,
+              "probe_budget": 0.227273
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "probe_budget",
+              "methods_seen",
+              "observed_method",
+              "candidate_signal",
+              "failure_kind"
+            ],
+            "next_action": "repeat_matched_negative_pair",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_surface_delta": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 3,
+          "model_action": "safe_candidate",
+          "confidence": 0.999992,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-candidate",
+            "probe_sha256": "c59ea8d0613ac886359dc0aa028af1fd142e560407c05ffac455a53f90a959b7",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "semantic_body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": false,
+              "location": "none",
+              "count": 0
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "4d4f8823a4ff769ccd30aac7683bd8bf4df8c58461a7be8c43226feaa19fec1a",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "negative_control",
+            "candidate_signal": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": false,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 3,
+            "remaining_probe_budget": 2,
+            "key_feature_weights": {
+              "failure_kind": 0.104167,
+              "failed_gate": 0.270833,
+              "candidate_signal": 0.125,
+              "observed_method": 0.104167,
+              "methods_seen": 0.1875,
+              "probe_budget": 0.208333
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "probe_budget",
+              "methods_seen",
+              "candidate_signal",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "replay_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_observed_effect": 0.6,
+            "unknown_surface": 0.4
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 4,
+          "model_action": "matched_control",
+          "confidence": 0.999993,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-control",
+            "probe_sha256": "a2a20bb18206a8d2b45194d365182e976d9c6e91e54dc64902b4a7017cb4d5ad",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "semantic_body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": false,
+              "location": "none",
+              "count": 0
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "4d4f8823a4ff769ccd30aac7683bd8bf4df8c58461a7be8c43226feaa19fec1a",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "negative_control",
+            "candidate_signal": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": false,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "no_surface_delta",
+            "failed_gate": "matched_negative_control",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 4,
+            "remaining_probe_budget": 1,
+            "key_feature_weights": {
+              "failure_kind": 0.1,
+              "failed_gate": 0.25,
+              "candidate_signal": 0.1,
+              "observed_method": 0.18,
+              "methods_seen": 0.22,
+              "probe_budget": 0.15
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "methods_seen",
+              "observed_method",
+              "probe_budget",
+              "candidate_signal",
+              "failure_kind"
+            ],
+            "next_action": "repeat_matched_negative_pair",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_surface_delta": 0.65,
+            "unknown_surface": 0.35
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 5,
+          "model_action": "safe_candidate",
+          "confidence": 0.999993,
+          "controller_decision": "send_safe_canary",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_ref": "pg179b-safe-xss-canary-candidate",
+            "probe_sha256": "c59ea8d0613ac886359dc0aa028af1fd142e560407c05ffac455a53f90a959b7",
+            "field_names": [
+              "message"
+            ],
+            "safety": {
+              "no_external_network": true,
+              "does_not_execute": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "1-255",
+            "body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "semantic_body_sha256": "31bdbfec22322febe989829253070d1c992bf09f464723a964cc1c1c8f635c0f",
+            "shape": {
+              "kind": "other",
+              "field_count": 3,
+              "scalar_count": 0
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": false,
+              "location": "none",
+              "count": 0
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "4d4f8823a4ff769ccd30aac7683bd8bf4df8c58461a7be8c43226feaa19fec1a",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+          },
+          "oracle_projection": {
+            "oracle_id": "pg179b-xss-surface-signal-v1",
+            "oracle_contract_sha256": "5292d60535137966a780fe9e8d01021be049c4b363039b115bef9d511423050c",
+            "family": "xss",
+            "modality": "negative_control",
+            "candidate_signal": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "method": "GET",
+              "marker_reflected": false,
+              "sql_error_shape": false,
+              "redirect_present": false,
+              "external_redirect": false,
+              "status_changed": false,
+              "status_chain_sha256": "74c366ec5e09b3f29d8c89a8e3916a7dc9f8ee771e4d159706aa895d10a02ba1"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "persistent_state_mutated": false,
+              "credentials_accessed": false,
+              "raw_body_stored": false
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "oracle_unavailable",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": false,
+            "positive_authority": false,
+            "probe_round": 5,
+            "remaining_probe_budget": 0,
+            "key_feature_weights": {
+              "failure_kind": 0.116279,
+              "failed_gate": 0.302326,
+              "candidate_signal": 0.139535,
+              "observed_method": 0.116279,
+              "methods_seen": 0.209302,
+              "probe_budget": 0.116279
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "methods_seen",
+              "candidate_signal",
+              "failure_kind",
+              "observed_method",
+              "probe_budget"
+            ],
+            "next_action": "abstain_budget_exhausted",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_observed_effect": 0.6,
+            "unknown_surface": 0.4
+          },
+          "decision": "abstain",
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        }
+      ]
+    }
+  ],
+  "retention": {
+    "old_checkpoint_hash_unchanged": true,
+    "old_training_report": "research/pg181_manifest_decoder_replay_report_v1.json",
+    "catastrophic_forgetting_claim": false,
+    "reason": "frozen checkpoint; independent evaluation only"
+  },
+  "oracle": {
+    "typed_execution_available": false,
+    "family_specific_oracle_available": false,
+    "positive_count": 0,
+    "vulnerability_claim_allowed": false
+  },
+  "safety": {
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "memory_promotion_allowed": false
+  },
+  "report_sha256": "34be6e8b6c4ff987c0bca5d9a3529def63a67231f662c361a27287436f7ad137"
+}

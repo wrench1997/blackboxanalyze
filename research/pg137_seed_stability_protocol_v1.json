@@ -1,0 +1,21 @@
+{
+  "protocol_id": "pg-pk-137-seed-stability-v1",
+  "schema_version": "pg137-seed-stability-protocol-v1",
+  "objective": "在同一 fresh local replay 上，以三个固定种子复核 PG-137 四种迁移策略的动作、安全和 unknown-abstain 稳定性。",
+  "seeds": [13741, 13743, 13745],
+  "strategies": ["scratch", "frozen_body", "low_lr_full", "joint_lm_action"],
+  "required_gates": {
+    "fresh_replay": true,
+    "raw_and_guarded_metrics": true,
+    "per_seed_unknown_abstain": true,
+    "per_seed_safety_floor": true,
+    "pg135_accuracy_range_at_most_0.10": true,
+    "cross_implementation_review": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "training_eligible": false,
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

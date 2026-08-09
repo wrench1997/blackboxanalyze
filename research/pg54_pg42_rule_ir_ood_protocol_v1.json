@@ -1,0 +1,97 @@
+{
+  "protocol_id": "pg-pk-54-pg42-rule-ir-ood-v1",
+  "schema_version": "pg54-pg42-rule-ir-ood-protocol-v1",
+  "objective": "在 PG-53 Codex 审核后的匿名 geometry 特征上，对 PG-42 的独立响应包络、布局和 template_injection 族进行 Rule IR 族外验证。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false,
+    "persistent_state_mutation": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false
+  },
+  "target": {
+    "fixture": "app/pg42_independent_semantic_fixture.py",
+    "implementations": ["cobalt", "quartz"],
+    "variants": ["ledger", "envelope", "framed"],
+    "surface_count": 10,
+    "families": [
+      "xss",
+      "injection",
+      "authentication",
+      "access_control",
+      "logic",
+      "url_redirect",
+      "input_validation",
+      "command_injection",
+      "template_injection",
+      "ordinary_response"
+    ],
+    "methods": ["GET", "POST"],
+    "sampling_seeds": [401, 409, 419],
+    "fresh_target_per_case": true
+  },
+  "model_contract": {
+    "checkpoint": "artifacts/pg53-rule-ir-candidate/decoder.pt",
+    "feature_source": "research/pg53_web_feature_funnel_dataset_v1.json",
+    "reviewer_id": "codex-primary-feature-funnel-review-v1",
+    "selected_features_are_reviewed": true,
+    "typed_oracle_in_features": false,
+    "family_label_in_features": false,
+    "raw_request_response_in_features": false,
+    "training_during_run": false
+  },
+  "unknown_family_gate": {
+    "family": "template_injection",
+    "model_class_present": false,
+    "must_abstain": true,
+    "unknown_misname_must_be_zero_for_promotion": true
+  },
+  "oracle_contract": {
+    "positive_requires": [
+      "fresh_target",
+      "matched_negative_control",
+      "bounded_effect_signal",
+      "proof_bounded_and_read_only",
+      "safety_fields_all_false",
+      "evidence_hash"
+    ],
+    "screen_stage_is_not_positive": true,
+    "oracle_is_evaluation_label_not_model_feature": true
+  },
+  "promotion_gate": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_claim_requires": [
+      "known-family recall on independent implementations",
+      "zero negative false accepts",
+      "zero unknown-family misnames",
+      "strict unknown abstain",
+      "feature review remains passed"
+    ]
+  },
+  "run_result": {
+    "script": "scripts/run_pg54_pg42_rule_ir_ood.py",
+    "report": "research/pg54_pg42_rule_ir_ood_report_v1.json",
+    "trace": "research/pg54_pg42_rule_ir_ood_trace_v1.json",
+    "status": "completed_diagnostic_gate_blocked",
+    "case_count": 360,
+    "confirmed_positive_count": 324,
+    "confirmed_negative_count": 36,
+    "get_post_covered": {"GET": 180, "POST": 180},
+    "negative_control_pass_count": 360,
+    "known_family_recall": 0.0,
+    "unknown_family": "template_injection",
+    "unknown_misname_count": 0,
+    "negative_effect_false_accept_count": 0,
+    "abstain_rate": 1.0,
+    "density_gate_enabled": true,
+    "density_gate_calibration_source": "pg53-pg35-dev-only",
+    "feature_transfer_gate": "blocked",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_claim_allowed": false
+  }
+}

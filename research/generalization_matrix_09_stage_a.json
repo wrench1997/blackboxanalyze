@@ -1,0 +1,349 @@
+{
+  "schema_version": "sift-generalization-matrix-result-v1",
+  "experiment": "generalization-matrix-09-stage-A-frozen-zero-shot",
+  "status": "completed",
+  "seed": 20261001,
+  "device": "cuda",
+  "checkpoint": {
+    "path": "artifacts\\frontend-loop-05-routed-memory-20260801\\tiny_rule_gpt.pt",
+    "sha256": "7b85b41770121be1a894517adff416efe1ccc7bc847e0b55b9460c27936fbe10",
+    "parameters": 908546
+  },
+  "lineage": {
+    "preregistration": "research/generalization_matrix_preregistration.json",
+    "preregistration_sha256": "faf6184e1887157c23ea49df1cb71dff7d6154ef3dc0318340524c110515c6d9",
+    "dataset_manifest": "artifacts\\generalization-matrix-09-seed-20261001\\manifest.json",
+    "dataset_sha256": "dba26a94a60c25fa74483667c954b4832f3d61c96aed7a784cee6ee5a9e825b5"
+  },
+  "guardrails": {
+    "target_family_examples_in_training": 0,
+    "checkpoint_frozen_before_family_creation": true,
+    "source_family_rule_ir_cwe_and_intended_output_hidden": true,
+    "new_learned_parameters": 0
+  },
+  "data": {
+    "programs": 2700,
+    "target_programs": 900,
+    "target_examples": 3600,
+    "families": [
+      "compound_origin_role",
+      "dom_double_decode",
+      "numeric_string_coercion",
+      "state_replay_window",
+      "unicode_casefold_role",
+      "url_scheme_downgrade"
+    ]
+  },
+  "results": {
+    "with_executable_memory": {
+      "accuracy": 0.596111,
+      "correct": 2146,
+      "total": 3600,
+      "by_family": {
+        "dom_double_decode": 0.5,
+        "unicode_casefold_role": 0.768333,
+        "numeric_string_coercion": 0.531667,
+        "compound_origin_role": 0.623333,
+        "state_replay_window": 0.605,
+        "url_scheme_downgrade": 0.548333
+      },
+      "failures": [
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002336",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110l2:1|input.payload=m:0000l2:0|input.payload=m:0001l3:1|input.payload=m:0000l4:0|input.payload=m:0000l1:0|input.payload=m:0000l3:1<RULEMEM><QUERY>input.payload=m:0001l1<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002444",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l1:0|input.payload=m:0000l2:0|input.payload=m:0001l3:1|input.payload=m:0001l1:0|input.payload=m:0000l3:1|input.payload=m:1110l2:1<RULEMEM><QUERY>input.payload=m:0000l3<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002030",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l3:1|input.payload=m:0001l3:1|input.payload=m:0001l1:0|input.payload=m:0000l3:0|input.payload=m:1110l2:1|input.payload=m:0000l2:0<RULEMEM><QUERY>input.payload=m:0000l1<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0001779",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=OWNER:1|input.quota=0,input.role=OWNER:1|input.quota=-1,input.role= owner:1|input.quota=1,input.role=member:1|input.quota=0,input.role=owner:1|input.quota=0,input.role=member:0|input.quota=1,input.role= owner:1|input.quota=0,input.role=guest:0<RULEMEM><QUERY>input.quota=0,input.role= owner<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001184",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l1:0|input.payload=m:0000l3:1|input.payload=m:1110l2:1|input.payload=m:0000l4:0|input.payload=m:0001l3:1|input.payload=m:0001l1:0<RULEMEM><QUERY>input.payload=m:0000l2<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001006",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=8:1|input.amount=08:1|input.amount=8e0:1|input.amount=Infinity:0|input.amount=NaN:0|input.amount=9:0|input.amount=:1|input.amount= 8 :1<RULEMEM><QUERY>input.amount=0x10<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000896",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l4:0|input.payload=m:0001l3:1|input.payload=m:0000l3:1|input.payload=m:1110l2:1|input.payload=m:0000l1:0|input.payload=m:0000l2:0<RULEMEM><QUERY>input.payload=m:0001l1<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002119",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:ws|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=null:0|input.origin=u:https|sub.portal.test|/:0<RULEMEM>input.origin#suffix=portal.test|q=0|fit=6/7<QUERY>input.origin=u:https|portal.test|/<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0002176",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=0x10:1|input.amount=29:1|input.amount=29e0:1|input.amount=29.0:1|input.amount=:1|input.amount=Infinity:0|input.amount=30:0|input.amount= 29 :1<RULEMEM><QUERY>input.amount=NaN<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001564",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=0x10:0|input.amount=05:1|input.amount=6:0|input.amount=:1|input.amount=NaN:0|input.amount=5.0:1|input.amount= 5 :1|input.amount=5e0:1<RULEMEM><QUERY>input.amount=Infinity<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000628",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=NaN:0|input.amount=36:1|input.amount=36e0:1|input.amount=37:0|input.amount= 36 :1|input.amount=36.0:1|input.amount=0x10:1|input.amount=036:1<RULEMEM><QUERY>input.amount=Infinity<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000358",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=36:0|input.amount=NaN:0|input.amount=0x10:1|input.amount= 35 :1|input.amount=35e0:1|input.amount=035:1|input.amount=35:1|input.amount=:1<RULEMEM><QUERY>input.amount=Infinity<ANSWER>"
+        }
+      ]
+    },
+    "without_memory": {
+      "accuracy": 0.457222,
+      "correct": 1646,
+      "total": 3600,
+      "by_family": {
+        "dom_double_decode": 0.318333,
+        "unicode_casefold_role": 0.526667,
+        "numeric_string_coercion": 0.478333,
+        "compound_origin_role": 0.415,
+        "state_replay_window": 0.505,
+        "url_scheme_downgrade": 0.5
+      },
+      "failures": [
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002336",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110l2:1|input.payload=m:0000l2:0|input.payload=m:0001l3:1|input.payload=m:0000l4:0|input.payload=m:0000l1:0|input.payload=m:0000l3:1<RULEMEM><QUERY>input.payload=m:0001l1<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0001743",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=ROOT:1|input.quota=0,input.role=member:0|input.quota=0,input.role= root:0|input.quota=-1,input.role= root:1|input.quota=0,input.role=guest:0|input.quota=1,input.role=Root:1|input.quota=1,input.role=guest:1|input.quota=-1,input.role=member:1<RULEMEM>generic=(input.quota!=0)or(input.role==Root)|q=1|fit=8/8<QUERY>input.quota=-1,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002444",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l1:0|input.payload=m:0000l2:0|input.payload=m:0001l3:1|input.payload=m:0001l1:0|input.payload=m:0000l3:1|input.payload=m:1110l2:1<RULEMEM><QUERY>input.payload=m:0000l3<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000412",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount= 9 :1|input.amount=9.0:1|input.amount=NaN:0|input.amount=:1|input.amount=10:0|input.amount=0x10:0|input.amount=Infinity:0|input.amount=09:1<RULEMEM><QUERY>input.amount=9<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0002085",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role= operator:0|input.quota=-1,input.role=operator:1|input.quota=1,input.role= operator:1|input.quota=0,input.role=guest:0|input.quota=1,input.role=member:1|input.quota=0,input.role=member:0|input.quota=-1,input.role= operator:1|input.quota=-1,input.role=OPERATOR:1<RULEMEM>generic=(input.quota!=0)or(input.role==operator)|q=1|fit=8/8<QUERY>input.quota=1,input.role=Operator<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002030",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l3:1|input.payload=m:0001l3:1|input.payload=m:0001l1:0|input.payload=m:0000l3:0|input.payload=m:1110l2:1|input.payload=m:0000l2:0<RULEMEM><QUERY>input.payload=m:0000l1<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0001385",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test|/,input.quota=1,input.role=guest:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=root:0|input.origin=u:https|portal.test|/,input.quota=0,input.role=member:1|input.origin=u:https|evilportal.test|/,input.quota=-1,input.role=guest:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=guest:0|input.origin=u:http|portal.test|/,input.quota=-1,input.role=member:1|input.origin=u:https|evilportal.test|/,input.quota=1,input.role=member:1<RULEMEM>input.origin#suffix=l.test|q"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001114",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=:1|input.amount=036:1|input.amount=37:0|input.amount=36:1|input.amount=NaN:0|input.amount=Infinity:0|input.amount=36e0:1|input.amount=0x10:1<RULEMEM><QUERY>input.amount=36.0<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001184",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l1:0|input.payload=m:0000l3:1|input.payload=m:1110l2:1|input.payload=m:0000l4:0|input.payload=m:0001l3:1|input.payload=m:0001l1:0<RULEMEM><QUERY>input.payload=m:0000l2<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000896",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000l4:0|input.payload=m:0001l3:1|input.payload=m:0000l3:1|input.payload=m:1110l2:1|input.payload=m:0000l1:0|input.payload=m:0000l2:0<RULEMEM><QUERY>input.payload=m:0001l1<ANSWER>"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0000378",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=n39-c:0|input.token=n60-d:1|input.token=n39-c:0|input.token=n63-b:1|input.token=n63-b:0|input.token=n39-c:1|input.token=n39-c:0|input.token=n94-a:0<RULEMEM><QUERY>input.token=n94-a<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000609",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=Admin:1|input.quota=0,input.role=member:0|input.quota=1,input.role=ADMIN:1|input.quota=1,input.role=admin:1|input.quota=0,input.role=guest:0|input.quota=0,input.role= admin:0|input.quota=-1,input.role=guest:1|input.quota=-1,input.role=member:1<RULEMEM>generic=(input.quota!=0)or(input.role==Admin)|q=1|fit=8/8<QUERY>input.quota=-1,input.role=ADMIN<ANSWER>"
+        }
+      ]
+    },
+    "memory_delta": 0.138889,
+    "counterexample_at_10": {
+      "k": 10,
+      "score": 1.0,
+      "successful_programs": 900,
+      "total_programs": 900,
+      "by_family": {
+        "url_scheme_downgrade": 1.0,
+        "dom_double_decode": 1.0,
+        "unicode_casefold_role": 1.0,
+        "numeric_string_coercion": 1.0,
+        "compound_origin_role": 1.0,
+        "state_replay_window": 1.0
+      },
+      "top1": 0.664444,
+      "random_top1": 0.646651,
+      "top1_lift": 0.017794,
+      "precision_at_k": 0.70004,
+      "random_precision_at_k": 0.646651,
+      "random_success_at_k": 1.0,
+      "metric_warning": "Counterexample@K is non-discriminative when the random success baseline is near one.",
+      "policy_visibility": "declared intended output is visible only to the verifier, not to the behavior model"
+    },
+    "per_axis": {
+      "compositional_shift": {
+        "family": "compound_origin_role",
+        "behavior_agreement": 0.623333,
+        "without_memory": 0.415,
+        "memory_delta": 0.208333,
+        "executable_memory_coverage": 0.826667,
+        "counterexample_top1": null
+      },
+      "encoding_depth": {
+        "family": "dom_double_decode",
+        "behavior_agreement": 0.5,
+        "without_memory": 0.318333,
+        "memory_delta": 0.181667,
+        "executable_memory_coverage": 0.0,
+        "counterexample_top1": null
+      },
+      "coercion_representation": {
+        "family": "numeric_string_coercion",
+        "behavior_agreement": 0.531667,
+        "without_memory": 0.478333,
+        "memory_delta": 0.053334,
+        "executable_memory_coverage": 0.0,
+        "counterexample_top1": null
+      },
+      "state_and_history_shift": {
+        "family": "state_replay_window",
+        "behavior_agreement": 0.605,
+        "without_memory": 0.505,
+        "memory_delta": 0.1,
+        "executable_memory_coverage": 0.0,
+        "counterexample_top1": null
+      },
+      "language_string_semantics": {
+        "family": "unicode_casefold_role",
+        "behavior_agreement": 0.768333,
+        "without_memory": 0.526667,
+        "memory_delta": 0.241666,
+        "executable_memory_coverage": 0.723333,
+        "counterexample_top1": null
+      },
+      "runtime_url_semantics": {
+        "family": "url_scheme_downgrade",
+        "behavior_agreement": 0.548333,
+        "without_memory": 0.5,
+        "memory_delta": 0.048333,
+        "executable_memory_coverage": 0.101667,
+        "counterexample_top1": null
+      }
+    }
+  },
+  "diagnostic": [
+    {
+      "axis": "compositional_shift",
+      "family": "compound_origin_role",
+      "classification": "decoder or composition gap despite available episode memory",
+      "score": 0.623333
+    },
+    {
+      "axis": "encoding_depth",
+      "family": "dom_double_decode",
+      "classification": "primitive/representation gap: no executable episode rule was induced",
+      "score": 0.5
+    },
+    {
+      "axis": "coercion_representation",
+      "family": "numeric_string_coercion",
+      "classification": "primitive/representation gap: no executable episode rule was induced",
+      "score": 0.531667
+    },
+    {
+      "axis": "state_and_history_shift",
+      "family": "state_replay_window",
+      "classification": "history representation gap: current prompt projection omits trace.history",
+      "score": 0.605
+    },
+    {
+      "axis": "language_string_semantics",
+      "family": "unicode_casefold_role",
+      "classification": "no blocking gap in frozen zero-shot pilot",
+      "score": 0.768333
+    },
+    {
+      "axis": "runtime_url_semantics",
+      "family": "url_scheme_downgrade",
+      "classification": "decoder or composition gap despite available episode memory",
+      "score": 0.548333
+    }
+  ],
+  "decision": "Use this map to select primitive-only stage-B adaptations; do not scale model size."
+}

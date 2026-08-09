@@ -1,0 +1,428 @@
+{
+  "protocol_id": "pg-pk-07-surface-generalization-v1",
+  "schema_version": "sift-pg-pk-07-surface-generalization-report-v1",
+  "target": {
+    "base_url": "http://127.0.0.1:8791",
+    "target_instance_id": "surface-pid-63692",
+    "fixture_source_sha256": "5ab3ff33ae22bf08cc23fc867388ee0ca71ce81292352bcf3e7cbb2b5ea3e03d",
+    "external_network": false,
+    "loopback_only": true,
+    "fresh_target": true
+  },
+  "training_boundary": {
+    "training_checkpoint": "artifacts\\pg-pk-02-pair-invariance\\joint_holdout\\pair_encoding_invariant\\decoder.pt",
+    "training_target": "Pikachu only",
+    "surface_fixture_seen_during_training": false,
+    "visible_projection_labels_hidden": true
+  },
+  "sample_count": 9,
+  "strict_ood_abstain_count": 9,
+  "model_only_accepted_count": 9,
+  "non_attribute_model_only_candidate_count": 7,
+  "non_attribute_secondary_surface_rejection_count": 7,
+  "positive_secondary_surface_abstain_count": 2,
+  "surface_role_positive_accept_count": 0,
+  "surface_role_non_attribute_accept_count": 0,
+  "surface_role_positive_recall": 0.0,
+  "oracle_revalidated_sample_count": 2,
+  "oracle_revalidated_pair_count": 1,
+  "surface_summary": {
+    "header_echo": {
+      "sample_count": 2,
+      "model_only_accepted_count": 2,
+      "oracle_signal_count": 0,
+      "oracle_revalidated_pair_count": 0
+    },
+    "json_echo": {
+      "sample_count": 2,
+      "model_only_accepted_count": 2,
+      "oracle_signal_count": 0,
+      "oracle_revalidated_pair_count": 0
+    },
+    "plain_control": {
+      "sample_count": 1,
+      "model_only_accepted_count": 1,
+      "oracle_signal_count": 0,
+      "oracle_revalidated_pair_count": 0
+    },
+    "reflected_attribute": {
+      "sample_count": 2,
+      "model_only_accepted_count": 2,
+      "oracle_signal_count": 2,
+      "oracle_revalidated_pair_count": 1
+    },
+    "reflected_text": {
+      "sample_count": 2,
+      "model_only_accepted_count": 2,
+      "oracle_signal_count": 0,
+      "oracle_revalidated_pair_count": 0
+    }
+  },
+  "pair_results": [
+    {
+      "schema_version": "sift-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "surface-pair-01",
+      "surface_role": "reflected_attribute",
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "xss"
+      ],
+      "evidence_hashes": [
+        "25e2f514f637838ea89c1080dec96b8e1b09de947903bbdc14733d333b1de2b9",
+        "5640df4a7f57bc1b11caa9a45a31d41ee3758bb75b30adfb7ac790b4184c2212"
+      ]
+    },
+    {
+      "schema_version": "sift-oracle-revalidation-v1",
+      "accepted": false,
+      "reasons": [
+        "positive_oracle_not_satisfied",
+        "sink_binding_mismatch",
+        "attribute_oracle_signal_missing"
+      ],
+      "record_count": 2,
+      "pair_id": "surface-pair-02",
+      "surface_role": "reflected_text",
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "xss"
+      ],
+      "evidence_hashes": [
+        "0ca4f2527e78c597ac121f5af6cae29c3e32dd3e39cc992d5cd0e9286a333806",
+        "8d9525a50441e636f6f1dfaf84bafa16a4edcf0f4f68294183b5435e24c29d45"
+      ]
+    },
+    {
+      "schema_version": "sift-oracle-revalidation-v1",
+      "accepted": false,
+      "reasons": [
+        "positive_oracle_not_satisfied",
+        "sink_binding_mismatch",
+        "attribute_oracle_signal_missing"
+      ],
+      "record_count": 2,
+      "pair_id": "surface-pair-03",
+      "surface_role": "json_echo",
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "xss"
+      ],
+      "evidence_hashes": [
+        "7c709ce3eba5e660f059d3ffb6d072c9d845a47a45c67168be297cfdb85e8349",
+        "c7193245c19afc4e5ae167b07c1dccea774466fc73b001dbbdf259760fd19254"
+      ]
+    },
+    {
+      "schema_version": "sift-oracle-revalidation-v1",
+      "accepted": false,
+      "reasons": [
+        "positive_oracle_not_satisfied",
+        "sink_binding_mismatch",
+        "attribute_oracle_signal_missing"
+      ],
+      "record_count": 2,
+      "pair_id": "surface-pair-04",
+      "surface_role": "header_echo",
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "xss"
+      ],
+      "evidence_hashes": [
+        "4b6d2b2b2cee32ddd49461cf82f263c07cdec8a816157558e6c383432be8b6f7",
+        "6278b91464e23ff4544b067aa88158c2c3c7cccba59756b51264cf02092cffcd"
+      ]
+    }
+  ],
+  "predictions": [
+    {
+      "sample_id": "fixture-pg07-attribute-plain-c6fadc6267a9",
+      "pair_id": "surface-pair-01",
+      "variant": "plain",
+      "surface": "fixture_reflected_attribute",
+      "candidate_family": "xss",
+      "model_probability": 0.722175,
+      "margin": 0.449088,
+      "ood_distance": 2795.0896,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": true,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.263492,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "plain_control",
+      "surface_role_confidence": 0.820228,
+      "surface_role_abstained": false
+    },
+    {
+      "sample_id": "fixture-pg07-attribute-url-percent-90aee93e0ee3",
+      "pair_id": "surface-pair-01",
+      "variant": "url_percent",
+      "surface": "fixture_reflected_attribute",
+      "candidate_family": "xss",
+      "model_probability": 0.650752,
+      "margin": 0.30632,
+      "ood_distance": 3307.191895,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": true,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.259608,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "plain_control",
+      "surface_role_confidence": 0.820228,
+      "surface_role_abstained": false
+    },
+    {
+      "sample_id": "fixture-pg07-text-plain-dfcd2504ac7a",
+      "pair_id": "surface-pair-02",
+      "variant": "plain",
+      "surface": "fixture_reflected_text",
+      "candidate_family": "xss",
+      "model_probability": 0.722175,
+      "margin": 0.449088,
+      "ood_distance": 2795.0896,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": false,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.263492,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "plain_control",
+      "surface_role_confidence": 0.806945,
+      "surface_role_abstained": true
+    },
+    {
+      "sample_id": "fixture-pg07-text-url-percent-aff1f6ace3d6",
+      "pair_id": "surface-pair-02",
+      "variant": "url_percent",
+      "surface": "fixture_reflected_text",
+      "candidate_family": "xss",
+      "model_probability": 0.650752,
+      "margin": 0.30632,
+      "ood_distance": 3307.191895,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": false,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.259608,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "plain_control",
+      "surface_role_confidence": 0.806945,
+      "surface_role_abstained": true
+    },
+    {
+      "sample_id": "fixture-pg07-json-plain-2f21e4783ae1",
+      "pair_id": "surface-pair-03",
+      "variant": "plain",
+      "surface": "fixture_json_echo",
+      "candidate_family": "xss",
+      "model_probability": 0.723646,
+      "margin": 0.452023,
+      "ood_distance": 2795.088379,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": false,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.263491,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "json_echo",
+      "surface_role_confidence": 0.952737,
+      "surface_role_abstained": false
+    },
+    {
+      "sample_id": "fixture-pg07-json-url-percent-7cb2634e60bc",
+      "pair_id": "surface-pair-03",
+      "variant": "url_percent",
+      "surface": "fixture_json_echo",
+      "candidate_family": "xss",
+      "model_probability": 0.65219,
+      "margin": 0.309192,
+      "ood_distance": 3307.190918,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": false,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.259607,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "json_echo",
+      "surface_role_confidence": 0.952737,
+      "surface_role_abstained": false
+    },
+    {
+      "sample_id": "fixture-pg07-header-plain-9e304c50e5b6",
+      "pair_id": "surface-pair-04",
+      "variant": "plain",
+      "surface": "fixture_header_echo",
+      "candidate_family": "xss",
+      "model_probability": 0.722175,
+      "margin": 0.449088,
+      "ood_distance": 2795.0896,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": false,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.263492,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "json_echo",
+      "surface_role_confidence": 0.550453,
+      "surface_role_abstained": true
+    },
+    {
+      "sample_id": "fixture-pg07-header-url-percent-fa7423dc4d4e",
+      "pair_id": "surface-pair-04",
+      "variant": "url_percent",
+      "surface": "fixture_header_echo",
+      "candidate_family": "xss",
+      "model_probability": 0.650752,
+      "margin": 0.30632,
+      "ood_distance": 3307.191895,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": false,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.259608,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "json_echo",
+      "surface_role_confidence": 0.550453,
+      "surface_role_abstained": true
+    },
+    {
+      "sample_id": "fixture-pg07-plain-control-b716261c8637",
+      "pair_id": null,
+      "variant": null,
+      "surface": "fixture_plain_control",
+      "candidate_family": "xss",
+      "model_probability": 0.722175,
+      "margin": 0.449088,
+      "ood_distance": 2795.0896,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": false,
+      "surface_discriminator_family": "xss",
+      "surface_discriminator_probability": 0.263492,
+      "surface_discriminator_abstained": true,
+      "surface_role_candidate": "json_echo",
+      "surface_role_confidence": 0.547706,
+      "surface_role_abstained": true
+    }
+  ],
+  "memory_promotion_probe": {
+    "schema_version": "sift-memory-promotion-gate-v1",
+    "rule_key": "xss::reflected_attribute",
+    "status": "quarantine",
+    "promote": false,
+    "reasons": [
+      "insufficient_distinct_datasets",
+      "insufficient_target_instances"
+    ],
+    "requirements": {
+      "min_distinct_datasets": 3,
+      "min_sampling_seeds_per_dataset": 2,
+      "min_target_instances": 3,
+      "min_observations_per_dataset": 2,
+      "min_accepted_per_dataset": 1,
+      "max_false_positive_rate": 0.0,
+      "require_evidence_hash": true,
+      "require_local_only": true,
+      "require_oracle_revalidation": true
+    },
+    "summary": {
+      "evaluation_count": 2,
+      "distinct_dataset_count": 1,
+      "distinct_target_instance_count": 1,
+      "distinct_evidence_hash_count": 2
+    },
+    "per_dataset": {
+      "surface-fixture-pg-pk-07": {
+        "observation_count": 2,
+        "sampling_seed_count": 2,
+        "target_instance_count": 1,
+        "false_positive_count": 0,
+        "false_positive_rate": 0.0,
+        "accepted_count": 2,
+        "reasons": []
+      }
+    }
+  },
+  "ood_fit": {
+    "schema_version": "sift-feature-ood-gate-v1",
+    "reference_count": 6,
+    "feature_dim": 256,
+    "quantile": 0.95,
+    "slack": 1.25,
+    "leave_one_out_max": 10.478549003601074,
+    "threshold": 12.081438302993774
+  },
+  "surface_discriminator": {
+    "checkpoint": "artifacts\\surface-discriminator-loop-12-20260931\\surface_discriminator.pt",
+    "used_as_positive_gate": false,
+    "non_attribute_rejection_count": 7,
+    "positive_abstain_count": 2
+  },
+  "surface_role_discriminator": {
+    "checkpoint": "artifacts\\surface-role-discriminator-pg-pk-08\\surface_role_discriminator.pt",
+    "used_as_positive_gate": false,
+    "positive_accept_count": 0,
+    "non_attribute_accept_count": 0,
+    "positive_recall": 0.0
+  },
+  "surface_role_gate": {
+    "schema_version": "sift-surface-role-gate-v1",
+    "status": "diagnostic_only",
+    "enabled": false,
+    "reasons": [
+      "training_stability_below_gate",
+      "positive_recall_below_gate"
+    ],
+    "requirements": {
+      "min_positive_recall": 0.9,
+      "max_non_attribute_accept_rate": 0.05,
+      "min_validation_precision": 0.99
+    },
+    "metrics": {
+      "sample_count": 9,
+      "positive_count": 2,
+      "positive_accept_count": 0,
+      "positive_recall": 0.0,
+      "non_attribute_count": 7,
+      "non_attribute_accept_count": 0,
+      "non_attribute_accept_rate": 0.0,
+      "validation_precision": 0.992,
+      "training_acceptance": false
+    }
+  },
+  "safety": {
+    "raw_body_stored": false,
+    "evaluator_state_visible": false,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "mutations": false
+  },
+  "report_path": "research\\pg_pk_07_surface_generalization_v1.json",
+  "protocol_path": "research\\pg_pk_07_surface_generalization_protocol_v1.json"
+}

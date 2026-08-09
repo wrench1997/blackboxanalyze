@@ -1,0 +1,70 @@
+{
+  "protocol_id": "pg-pk-101-active-probe-signature-v1",
+  "schema_version": "pg101-active-probe-signature-protocol-v1",
+  "hypothesis": "A fixed bank of safe, canonical probe actions can expose a transferable response signature that separates known families from an unseen family without exposing oracle labels.",
+  "target_contract": {
+    "sources": [
+      "pg36",
+      "pg42",
+      "pg35"
+    ],
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_loopback_episode_per_surface_seed_variant_method": true,
+    "state_change_allowed": false,
+    "external_network": false
+  },
+  "source_hashes": {
+    "pg36_fixture": "433c2bd75650ef6db67ee59947516a50d6803a923491450eae6d7287c3dcaeb3",
+    "pg42_fixture": "30fa2d04f82a889b05a2a39311865c86d549794009c3d2380cf31de756678477",
+    "pg35_fixture": "0160951d9f8ccfcea1ae75381009b726481977d57e69b4b9802308ec3fa3232a",
+    "active_probe_module": "0ada04b9012a07bb143b3465deda0f41f26862d1780ee550ed6cf786a141fe1a",
+    "runner": "8632fe94480fd59f7914f2a7cc0800bd5ad16dab1b99f2e703c1f15530bade99"
+  },
+  "probe_bank": {
+    "canonical_ids": [
+      "p0",
+      "p1",
+      "p2",
+      "p3",
+      "p4",
+      "p5",
+      "p6",
+      "p7",
+      "p8"
+    ],
+    "values_persisted": false,
+    "inert_only": true
+  },
+  "model_contract": {
+    "visible": [
+      "canonical_probe_id",
+      "generic_geometry_delta",
+      "bounded_transport_delta",
+      "method",
+      "phase"
+    ],
+    "family_label_in_features": false,
+    "oracle_label_in_features": false,
+    "raw_body_in_features": false,
+    "route_in_features": false
+  },
+  "evaluation_contract": {
+    "train_source": "pg36-north",
+    "dev_source": "pg36-south",
+    "eval_source": "pg42-cobalt-quartz",
+    "third_implementation": "pg35-alpha-beta-gamma",
+    "unknown_family": "template_injection",
+    "unknown_must_abstain": true,
+    "negative_false_accept_must_be_zero": true,
+    "order_permutation_must_be_invariant": true
+  },
+  "run_result": {
+    "status": "passed",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "next_experiment": "PG102 train a neural permutation-aware set decoder on the same signature traces and re-run fresh PG42 plus a third implementation"
+}

@@ -1,0 +1,50 @@
+{
+  "protocol_id": "pg-pk-125-failure-policy-ood-v1",
+  "schema_version": "pg125-failure-policy-ood-protocol-v1",
+  "objective": "检验 failure-token policy 是否跨到独立 scope/tenant 逻辑族。",
+  "frozen_model": "artifacts/pg124-failure-conditioned-policy-v1/failure_conditioned.pt",
+  "target": "app/pg125_scope_logic_target.py",
+  "bridge": "app/pg125_scope_logic_replay.py",
+  "no_training_rows_added": true,
+  "collection": {
+    "targets": 9,
+    "episodes": 36,
+    "steps": 144,
+    "get": 72,
+    "post": 72,
+    "seeds": [
+      12501,
+      12503,
+      12505
+    ],
+    "strengths": [
+      0,
+      1,
+      2
+    ]
+  },
+  "gates": {
+    "frozen_checkpoint": true,
+    "previous_checkpoint_not_retrained": true,
+    "cross_family_implementation": true,
+    "target_instance_count": true,
+    "get_post_balanced": true,
+    "fresh_reset_per_step": true,
+    "evidence_hashes_valid": true,
+    "failure_signature_all_steps": true,
+    "failure_authority_fields_masked": true,
+    "no_raw_probe_strings": true,
+    "no_raw_response_bodies": true,
+    "full_accuracy_nonzero": true,
+    "full_compliance_nonzero": true,
+    "full_non_abstain_nonzero": true,
+    "all_surface_accuracy_floor": false,
+    "scope_surface_accuracy_floor": false,
+    "failure_slots_change_behavior": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": "pg-pk-35-encoding-pair-protocol-v1",
+  "protocol_id": "PG-35",
+  "title": "授权本地靶场同族多编码与第三独立实现盲测",
+  "objective": "让模型把同一抽象规则的 identity/url_percent 传输变体映射到同一 Rule IR 槽位，并在第三种独立路由/字段实现上保持安全 abstain。",
+  "scope": {
+    "targets": ["127.0.0.1", "localhost", "workspace_authorized_docker_only"],
+    "methods": ["GET", "POST"],
+    "encodings": ["identity", "url_percent"],
+    "fresh_reset_per_control_and_candidate": true,
+    "external_network": false,
+    "credentials": false,
+    "state_mutation": false,
+    "raw_probe_or_response_persistence": false,
+    "destructive_actions": false
+  },
+  "fixture": {
+    "implementation": "app/pg35_independent_fixture.py",
+    "collector": "scripts/run_pg35_independent_fixture_catalog.py",
+    "catalog": "research/pg35_independent_fixture_catalog_v1.json",
+    "trace": "research/pg35_independent_fixture_trace_v1.json",
+    "independent_route_variants": ["alpha", "beta", "gamma"],
+    "family_count": 9,
+    "sample_count": 648,
+    "typed_positive_count": 288,
+    "negative_count": 360,
+    "encoding_pair_count": 324,
+    "episode_count": 81,
+    "accepted_evaluation_episode_count": 72,
+    "seeds": [351, 357, 367]
+  },
+  "data_contract": {
+    "required_context": [
+      "http_method",
+      "route_template_id",
+      "placement_or_form_schema",
+      "encoding_chain",
+      "baseline_projection",
+      "response_projection",
+      "typed_oracle_projection",
+      "negative_control_pair",
+      "fresh_reset",
+      "evidence_sha256"
+    ],
+    "pair_invariant_slots": ["family_candidate", "surface_role", "oracle_contract", "transport_method"],
+    "model_input_excludes": ["family", "positive", "positive_authority", "evaluator_state", "source_id", "target_instance_id", "evidence_sha256"],
+    "positive_authority_source": "typed_local_oracle_after_replay",
+    "rule_ir_executable": false
+  },
+  "split_plan": {
+    "train": {
+      "families": ["xss", "injection"],
+      "source_variants": ["alpha"],
+      "encodings": ["identity", "url_percent"]
+    },
+    "dev": {
+      "families": ["authentication", "access_control"],
+      "source_variants": ["alpha", "beta"],
+      "encodings": ["identity", "url_percent"]
+    },
+    "family_holdout": {
+      "families": ["logic", "url_redirect"],
+      "source_variants": ["beta"],
+      "encodings": ["identity", "url_percent"]
+    },
+    "ood_source": {
+      "families": ["input_validation", "command_injection"],
+      "source_variants": ["gamma"],
+      "encodings": ["identity", "url_percent"]
+    },
+    "negative_control": {
+      "families": ["ordinary_response"],
+      "source_variants": ["alpha", "beta", "gamma"],
+      "encodings": ["identity", "url_percent"]
+    }
+  },
+  "training_policy": {
+    "first_train_only_on_acceptance_rows": true,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "online_weight_update": false,
+    "long_term_memory_write": false,
+    "checkpoint_selection_must_not_use_accuracy_only": true,
+    "pair_consistency_loss_required": true,
+    "typed_oracle_hidden_until_after_probe": true
+  },
+  "capability_gate": {
+    "minimum_independent_source_hashes": 3,
+    "minimum_independent_seeds": 3,
+    "minimum_target_instances": 3,
+    "zero_negative_false_accept": true,
+    "strict_ood_abstain": true,
+    "encoding_pair_agreement_required": true,
+    "typed_recall_gain_over_frozen_baseline_required": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "pending_cross_source_model_run"
+  },
+  "source_transfer_diagnostic": {
+    "script": "scripts/run_pg35_source_transfer_diagnostic.py",
+    "report": "research/pg35_source_transfer_diagnostic_v1.json",
+    "training_variant": "alpha",
+    "blind_variants": ["beta", "gamma"],
+    "family_coverage_in_training": "all_nine_safe_families",
+    "beta_typed_recall": 1.0,
+    "gamma_typed_recall": 1.0,
+    "beta_precision": 1.0,
+    "gamma_precision": 1.0,
+    "beta_false_positive_rate": 0.0,
+    "gamma_false_positive_rate": 0.0,
+    "encoding_pair_agreement": 1.0,
+    "capability_claim_allowed": false,
+    "interpretation": "source_transfer_only; this does not satisfy family-holdout generalization"
+  },
+  "strict_family_holdout_run": {
+    "script": "scripts/train_pg35_pair_rule_ir.py",
+    "report": "research/pg35_pair_rule_ir_report_v1.json",
+    "training_sources": ["PG-33", "PG-34-train-dev", "PG-35-alpha"],
+    "family_holdout_typed_recall": 0.0,
+    "family_holdout_false_positive_rate": 0.5,
+    "ood_source_typed_recall": 0.0,
+    "negative_control_false_positive_rate": 0.0,
+    "capability_gate_status": "no_proven_gain",
+    "capability_claim_allowed": false,
+    "failure_class": "representation_or_family_coverage_problem"
+  },
+  "status": "model_runs_completed_capability_gate_failed",
+  "failure_policy": "report_data_problem_vs_model_problem_separately; do_not_promote_on_schema_or_unit_test_success"
+}

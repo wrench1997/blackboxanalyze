@@ -1,0 +1,16 @@
+{
+  "protocol_id": "pg-pk-116-multisource-trace-training-v1",
+  "proposal_id": "pg116-multisource-trace-training-proposal-v1",
+  "question": "引入真实本地 GET/POST typed trace 后，模型能否改善中间 candidate/decoy/abstain 状态，而不依赖目标名字？",
+  "intervention": "两个不同参数表面 profile、12 个目标实例、48 个 episode、192 个动作；仅把 train seeds 平衡后训练，dev seeds 独立，PG-114 完全盲测",
+  "observed_fields": ["method", "placement", "encoding_chain", "status_class", "shape_class", "candidate_signal", "generic_belief", "BSP bounded projection"],
+  "excluded_fields": ["raw probe", "raw response body", "family", "typed oracle", "target instance id", "route id"],
+  "success_definition": {
+    "positive_recall_nonzero": true,
+    "decoy_false_accept_zero": true,
+    "unknown_abstain_nonzero": true,
+    "all_abstain_not_success": true
+  },
+  "next_if_pass": "PG-117 增加第三个独立 profile，并在目标实现/编码链双重留出集上复测",
+  "next_if_fail": "按逐步混淆矩阵增加反事实配对，禁止先加模型容量"
+}

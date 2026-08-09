@@ -1,0 +1,428 @@
+{
+  "protocol_id": "pg-pk-151-moe-capacity-v1",
+  "schema_version": "pg151-moe-capacity-report-v1",
+  "status": "completed_pg151_moe_capacity_sweep",
+  "device": "cuda",
+  "seed": 15101,
+  "corpus": {
+    "base_count": 12092,
+    "base_train_count": 9673,
+    "generated_count": 8000,
+    "train_count": 17673,
+    "dev_count": 1209,
+    "holdout_count": 1210,
+    "unique_count": 20092,
+    "duplicate_count": 0,
+    "augmentation_attempts": 8000,
+    "vocabulary_size": 170,
+    "max_length": 128,
+    "real_surface_eval_count": 6,
+    "source_files": [
+      "research/pg147_model_capacity_sweep_dataset_v1.json",
+      "research/pg146_public_lab_replay_model_dataset_v1.json"
+    ]
+  },
+  "variants": [
+    {
+      "variant": "moe_large_4e",
+      "config": {
+        "d_model": 512,
+        "nhead": 8,
+        "layers": 4,
+        "n_experts": 4,
+        "expert_ff": 2048,
+        "batch_size": 32,
+        "epochs": 3,
+        "lr": 0.00015,
+        "aux_weight": 0.01
+      },
+      "parameter_count": 38055098,
+      "train": {
+        "loss": 0.93919016,
+        "perplexity": 2.55790909,
+        "next_token_accuracy": 0.52243907,
+        "token_count": 1207737,
+        "auxiliary_balance_loss": 0.99836924,
+        "expert_load": [
+          0.25054619,
+          0.25387922,
+          0.2542133,
+          0.24136129
+        ],
+        "routing_entropy": 1.38607764
+      },
+      "dev": {
+        "loss": 0.94013862,
+        "perplexity": 2.56033631,
+        "next_token_accuracy": 0.51962399,
+        "token_count": 82552,
+        "auxiliary_balance_loss": 0.9984217,
+        "expert_load": [
+          0.25050417,
+          0.25381073,
+          0.25399294,
+          0.24169219
+        ],
+        "routing_entropy": 1.38609374
+      },
+      "holdout": {
+        "loss": 0.93795182,
+        "perplexity": 2.55474348,
+        "next_token_accuracy": 0.52128687,
+        "token_count": 82868,
+        "auxiliary_balance_loss": 0.99873614,
+        "expert_load": [
+          0.24998063,
+          0.25382799,
+          0.25425258,
+          0.24193877
+        ],
+        "routing_entropy": 1.38609791
+      },
+      "real_surface_projection": {
+        "loss": 1.304562,
+        "perplexity": 3.68607423,
+        "next_token_accuracy": 0.85,
+        "token_count": 60,
+        "auxiliary_balance_loss": 2.53684044,
+        "expert_load": [
+          0.0,
+          0.18333334,
+          0.29583335,
+          0.52083331
+        ],
+        "routing_entropy": 1.01108146
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 1.07137171,
+          "train_ce": 1.06071885,
+          "train_aux": 1.06528581,
+          "dev": {
+            "loss": 0.94601093,
+            "perplexity": 2.57541563,
+            "next_token_accuracy": 0.51987838,
+            "token_count": 82552,
+            "auxiliary_balance_loss": 1.01081798,
+            "expert_load": [
+              0.263906,
+              0.26651263,
+              0.24348773,
+              0.22609365
+            ],
+            "routing_entropy": 1.38411415
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.95372097,
+          "train_ce": 0.94368668,
+          "train_aux": 1.00342866,
+          "dev": {
+            "loss": 0.94135263,
+            "perplexity": 2.56344648,
+            "next_token_accuracy": 0.51875182,
+            "token_count": 82552,
+            "auxiliary_balance_loss": 1.00003924,
+            "expert_load": [
+              0.25854352,
+              0.25401554,
+              0.2506927,
+              0.23674829
+            ],
+            "routing_entropy": 1.38575935
+          }
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.95062119,
+          "train_ce": 0.94063235,
+          "train_aux": 0.99888431,
+          "dev": {
+            "loss": 0.94013862,
+            "perplexity": 2.56033631,
+            "next_token_accuracy": 0.51962399,
+            "token_count": 82552,
+            "auxiliary_balance_loss": 0.9984217,
+            "expert_load": [
+              0.25050417,
+              0.25381073,
+              0.25399294,
+              0.24169219
+            ],
+            "routing_entropy": 1.38609374
+          }
+        }
+      ],
+      "elapsed_seconds": 242.48,
+      "checkpoint": "artifacts\\pg151-moe-capacity-v1\\moe_large_4e.pt"
+    },
+    {
+      "variant": "moe_xl_4e",
+      "config": {
+        "d_model": 768,
+        "nhead": 12,
+        "layers": 6,
+        "n_experts": 4,
+        "expert_ff": 3072,
+        "batch_size": 16,
+        "epochs": 2,
+        "lr": 0.0001,
+        "aux_weight": 0.01
+      },
+      "parameter_count": 127910594,
+      "train": {
+        "loss": 0.94100257,
+        "perplexity": 2.56254927,
+        "next_token_accuracy": 0.52239271,
+        "token_count": 1207737,
+        "auxiliary_balance_loss": 0.9996673,
+        "expert_load": [
+          0.25136697,
+          0.2463367,
+          0.2333518,
+          0.26894456
+        ],
+        "routing_entropy": 1.38499629
+      },
+      "dev": {
+        "loss": 0.94222231,
+        "perplexity": 2.56567682,
+        "next_token_accuracy": 0.51929693,
+        "token_count": 82552,
+        "auxiliary_balance_loss": 0.99977848,
+        "expert_load": [
+          0.25175166,
+          0.24628569,
+          0.23326962,
+          0.26869306
+        ],
+        "routing_entropy": 1.38500571
+      },
+      "holdout": {
+        "loss": 0.93876337,
+        "perplexity": 2.55681762,
+        "next_token_accuracy": 0.52376068,
+        "token_count": 82868,
+        "auxiliary_balance_loss": 1.00001148,
+        "expert_load": [
+          0.25154078,
+          0.24693434,
+          0.23263638,
+          0.2688885
+        ],
+        "routing_entropy": 1.38495708
+      },
+      "real_surface_projection": {
+        "loss": 1.25447629,
+        "perplexity": 3.50600178,
+        "next_token_accuracy": 0.85,
+        "token_count": 60,
+        "auxiliary_balance_loss": 1.85883498,
+        "expert_load": [
+          0.21388888,
+          0.28611112,
+          0.21944445,
+          0.28055558
+        ],
+        "routing_entropy": 1.377316
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 1.00552988,
+          "train_ce": 0.99497793,
+          "train_aux": 1.055195,
+          "dev": {
+            "loss": 0.95056431,
+            "perplexity": 2.58716922,
+            "next_token_accuracy": 0.51987838,
+            "token_count": 82552,
+            "auxiliary_balance_loss": 1.00745094,
+            "expert_load": [
+              0.24028282,
+              0.24939474,
+              0.23828366,
+              0.27203879
+            ],
+            "routing_entropy": 1.38487935
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.95410797,
+          "train_ce": 0.9440738,
+          "train_aux": 1.00341704,
+          "dev": {
+            "loss": 0.94222231,
+            "perplexity": 2.56567682,
+            "next_token_accuracy": 0.51929693,
+            "token_count": 82552,
+            "auxiliary_balance_loss": 0.99977848,
+            "expert_load": [
+              0.25175166,
+              0.24628569,
+              0.23326962,
+              0.26869306
+            ],
+            "routing_entropy": 1.38500571
+          }
+        }
+      ],
+      "elapsed_seconds": 512.236,
+      "checkpoint": "artifacts\\pg151-moe-capacity-v1\\moe_xl_4e.pt"
+    },
+    {
+      "variant": "moe_xl_8e",
+      "config": {
+        "d_model": 768,
+        "nhead": 12,
+        "layers": 6,
+        "n_experts": 8,
+        "expert_ff": 2048,
+        "batch_size": 16,
+        "epochs": 2,
+        "lr": 0.0001,
+        "aux_weight": 0.01
+      },
+      "parameter_count": 165720794,
+      "train": {
+        "loss": 0.93902802,
+        "perplexity": 2.55749437,
+        "next_token_accuracy": 0.52226354,
+        "token_count": 1207737,
+        "auxiliary_balance_loss": 1.00138244,
+        "expert_load": [
+          0.12042566,
+          0.12491816,
+          0.12267914,
+          0.1186538,
+          0.12753868,
+          0.14333096,
+          0.12043259,
+          0.12202101
+        ],
+        "routing_entropy": 2.07774258
+      },
+      "dev": {
+        "loss": 0.93935611,
+        "perplexity": 2.55833359,
+        "next_token_accuracy": 0.52041138,
+        "token_count": 82552,
+        "auxiliary_balance_loss": 1.00134178,
+        "expert_load": [
+          0.12054792,
+          0.12529752,
+          0.12240322,
+          0.11858732,
+          0.12744105,
+          0.14329381,
+          0.12029804,
+          0.12213112
+        ],
+        "routing_entropy": 2.07774234
+      },
+      "holdout": {
+        "loss": 0.93718462,
+        "perplexity": 2.55278423,
+        "next_token_accuracy": 0.52231259,
+        "token_count": 82868,
+        "auxiliary_balance_loss": 1.00171012,
+        "expert_load": [
+          0.12005861,
+          0.1251173,
+          0.1222422,
+          0.11873107,
+          0.12756743,
+          0.14323184,
+          0.12060218,
+          0.12244935
+        ],
+        "routing_entropy": 2.07775211
+      },
+      "real_surface_projection": {
+        "loss": 1.26601664,
+        "perplexity": 3.54669663,
+        "next_token_accuracy": 0.85,
+        "token_count": 60,
+        "auxiliary_balance_loss": 2.13037443,
+        "expert_load": [
+          0.1,
+          0.25833336,
+          0.14722222,
+          0.18888889,
+          0.09444445,
+          0.05555556,
+          0.05277778,
+          0.10277778
+        ],
+        "routing_entropy": 1.94929934
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 1.01445425,
+          "train_ce": 1.00373969,
+          "train_aux": 1.07145552,
+          "dev": {
+            "loss": 0.9451098,
+            "perplexity": 2.57309589,
+            "next_token_accuracy": 0.52241012,
+            "token_count": 82552,
+            "auxiliary_balance_loss": 1.00890294,
+            "expert_load": [
+              0.11788135,
+              0.11652283,
+              0.12768845,
+              0.11636195,
+              0.12633896,
+              0.15652962,
+              0.12679456,
+              0.11188228
+            ],
+            "routing_entropy": 2.07419395
+          }
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.9534381,
+          "train_ce": 0.94338578,
+          "train_aux": 1.00523229,
+          "dev": {
+            "loss": 0.93935611,
+            "perplexity": 2.55833359,
+            "next_token_accuracy": 0.52041138,
+            "token_count": 82552,
+            "auxiliary_balance_loss": 1.00134178,
+            "expert_load": [
+              0.12054792,
+              0.12529752,
+              0.12240322,
+              0.11858732,
+              0.12744105,
+              0.14329381,
+              0.12029804,
+              0.12213112
+            ],
+            "routing_entropy": 2.07774234
+          }
+        }
+      ],
+      "elapsed_seconds": 779.015,
+      "checkpoint": "artifacts\\pg151-moe-capacity-v1\\moe_xl_8e.pt"
+    }
+  ],
+  "objective": "large_model_capacity_and_sparse_routing_comparison_with_seeded_data_augmentation",
+  "architecture_notes": {
+    "routing": "top_1_token_choice",
+    "expert_balance_loss": "switch_style_importance_times_load",
+    "labels_in_lm_input": false,
+    "raw_payload_or_response_in_corpus": false,
+    "external_network_targets": false
+  },
+  "capability_claim_allowed": false,
+  "long_term_memory_promotion_allowed": false,
+  "training_artifact_promotion_allowed": false,
+  "report_sha256": "4b7700933ef4a77628a3acea7a626890899cf565ee0ff0f0c289d5bd3d66aee9"
+}

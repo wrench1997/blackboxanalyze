@@ -1,0 +1,135 @@
+{
+  "schema_version": "pg-pk-37-counterfactual-protocol-v1",
+  "protocol_id": "PG-37",
+  "title": "同族多表面反事实配对与 Rule IR 表示消融",
+  "objective": "区分模型是否学习漏洞族不变量，还是只记忆响应表面；同一族在 compact、nested、headerized 三种响应形状下保持相同 typed oracle，正负控制均须独立 fresh replay。",
+  "scope": {
+    "targets": ["127.0.0.1", "localhost", "workspace_authorized_docker_only"],
+    "methods": ["GET", "POST"],
+    "phases": ["screen", "confirm", "error", "timeout"],
+    "surface_variants": ["compact", "nested", "headerized"],
+    "families": ["xss", "injection", "authentication", "access_control", "logic", "url_redirect", "input_validation", "command_injection", "ordinary_response", "unknown_surface"],
+    "implementations": ["atlas", "orbit"],
+    "seeds": [361, 367, 373],
+    "fresh_reset_per_control_and_candidate": true,
+    "external_network": false,
+    "credentials": false,
+    "state_mutation": false,
+    "real_sleep": false,
+    "raw_probe_or_response_persistence": false,
+    "destructive_actions": false
+  },
+  "counterfactual_contract": {
+    "same_family_across_variants": true,
+    "same_typed_effect_across_variants": true,
+    "negative_control_matches_variant": true,
+    "screen_is_ambiguous": true,
+    "confirm_is_only_known_positive_phase": true,
+    "error_and_timeout_are_deterministic_negative_controls": true,
+    "surface_variant_is_not_family_label": true,
+    "typed_oracle_hidden_until_after_probe": true,
+    "pair_consistency_must_not_force_control_candidate_equality": true,
+    "unknown_surface_must_abstain": true
+  },
+  "fixture": {
+    "implementation": "app/pg37_counterfactual_fixture.py",
+    "collector": "scripts/run_pg37_counterfactual_catalog_parallel.py",
+    "route_layouts": ["atlas", "orbit"],
+    "surface_variants": ["compact", "nested", "headerized"],
+    "family_count": 10,
+    "seed_count": 3,
+    "planned_sample_count": 2880,
+    "planned_typed_positive_count": 288,
+    "planned_negative_count": 2592,
+    "planned_episode_count": 180,
+    "planned_accepted_evaluation_episode_count": 144
+  },
+  "split_plan": {
+    "train": "atlas; xss/injection/authentication/access_control; seeds 361,367",
+    "seed_holdout": "atlas; same train families; seed 373",
+    "surface_holdout": "atlas; all train families; headerized variant held out",
+    "family_holdout": "atlas; logic/url_redirect; all variants and seeds",
+    "ood_source": "atlas; input_validation/command_injection; all variants and seeds",
+    "source_holdout": "orbit; train families; all variants and seeds",
+    "negative_control": "both implementations; ordinary_response/unknown_surface",
+    "counterfactual_pair_eval": "same family, method, phase and seed across compact/nested/headerized"
+  },
+  "model_input_contract": {
+    "allowed": ["http_method", "phase", "abstract_probe_kind", "encoding_class", "status_class", "content_type_class", "bounded_response_shape"],
+    "excluded": ["family", "positive", "positive_authority", "typed_effect_ready", "evaluator_state", "implementation", "source_id", "target_instance_id", "surface_variant_label", "evidence_sha256", "raw_probe", "raw_response_body"],
+    "typed_oracle_is_label_not_feature": true,
+    "rule_ir_executable": false,
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "planned_ablations": [
+    {"id": "surface_only", "description": "无反事实配对损失，检查是否记忆表面形状", "promotion_allowed": false},
+    {"id": "counterfactual_paired", "description": "同族多表面配对的 family/effect 一致性损失", "promotion_allowed": false},
+    {"id": "phase_only", "description": "只保留方法、阶段和通用形状，检查 confirm 线索上界", "promotion_allowed": false}
+  ],
+  "promotion_gate": {
+    "minimum_independent_seeds": 3,
+    "minimum_independent_source_hashes": 2,
+    "minimum_target_instances": 3,
+    "surface_holdout_required": true,
+    "family_holdout_required": true,
+    "zero_negative_false_accept": true,
+    "unknown_surface_strict_abstain": true,
+    "counterfactual_pair_agreement_gain_required": true,
+    "family_holdout_typed_recall_gain_required": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "pending_ablation"
+  },
+  "collection_result": {
+    "catalog": "research/pg37_counterfactual_catalog_v1.json",
+    "trace": "research/pg37_counterfactual_trace_v1.json",
+    "sample_count": 2880,
+    "typed_positive_count": 288,
+    "negative_count": 2592,
+    "counterfactual_pair_count": 480,
+    "episode_count": 180,
+    "accepted_evaluation_episode_count": 144,
+    "fresh_reset_count": 2880,
+    "source_count": 2,
+    "methods": ["GET", "POST"],
+    "max_workers": 8,
+    "worker_ports": "31937-31944",
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "collection_engineering_note": "sequential collector exceeded the five-minute budget; bounded worker-port allocation was added, and a first parallel run failed due modulo-port collision before producing artifacts; the final run used one fixed port per worker and completed"
+  },
+  "ablation_result": {
+    "script": "scripts/train_pg37_representation_ablation.py",
+    "report": "research/pg37_representation_ablation_report_v1.json",
+    "device": "cuda",
+    "training_count_per_ablation": 256,
+    "train_variants": ["compact", "nested"],
+    "surface_holdout_variant": "headerized",
+    "results": {
+      "surface_only": {
+        "pair_agreement": 0.625,
+        "family_holdout_typed_recall": 0.0,
+        "source_holdout_typed_recall": 0.25,
+        "unknown_false_positive_rate": 0.0
+      },
+      "counterfactual_paired": {
+        "pair_agreement": 0.625,
+        "family_holdout_typed_recall": 0.0,
+        "source_holdout_typed_recall": 0.25,
+        "unknown_false_positive_rate": 0.0
+      },
+      "phase_only": {
+        "pair_agreement": 1.0,
+        "family_holdout_typed_recall": 0.0,
+        "source_holdout_typed_recall": 0.0,
+        "unknown_false_positive_rate": 0.0
+      }
+    },
+    "all_capability_gates": "blocked",
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "simple counterfactual pairing did not improve agreement or unseen-family recall; phase-only agreement is vacuous because it abstains everywhere; a stronger invariant representation or family-agnostic effect head is required"
+  },
+  "status": "ablation_completed_capability_gate_failed_no_promotion"
+}

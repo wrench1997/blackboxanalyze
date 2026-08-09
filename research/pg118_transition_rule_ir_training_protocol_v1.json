@@ -1,0 +1,73 @@
+{
+  "protocol_id": "pg-pk-118-transition-rule-ir-training-v1",
+  "schema_version": "pg118-transition-rule-ir-training-protocol-v1",
+  "objective": "在不把目标族、oracle 标签或原始 probe 泄露给模型的前提下，为 Rule IR 增加通用 transition-delta slot，并用一种双编码顺序训练、另一种双编码顺序做族外复放。",
+  "sources": {
+    "training": [
+      "pg116_identity",
+      "pg118_delta_double_encoding"
+    ],
+    "holdout": [
+      "pg117_gamma_double_encoding",
+      "pg114_family_holdout_decoy_replay"
+    ]
+  },
+  "transport": "in_process_loopback_asgi_get_post",
+  "encoding_split": {
+    "train_dev_chain": ["html_entity", "url_percent"],
+    "gamma_holdout_chain": ["url_percent", "html_entity"],
+    "gamma_rows_excluded_from_training": true
+  },
+  "action_contract": {
+    "methods": ["GET", "POST"],
+    "sequence": ["control_get", "candidate_get", "control_post", "candidate_post"],
+    "fresh_reset_per_action": true,
+    "matched_negative_control_required": true,
+    "target_evidence_sha256_required": true,
+    "bridge_evidence_sha256_required": true,
+    "rule_ir_slot_binding_after_typed_oracle": true
+  },
+  "model_contract": {
+    "implementation": "app/pg118_transition_rule_ir_decoder.py",
+    "feature_dim": 44,
+    "hidden_dim": 48,
+    "parameter_count": 4804,
+    "decision_set": ["confirmed_positive", "confirmed_negative", "candidate", "abstain"],
+    "transition_slots": [
+      "current_response_location_changed",
+      "prior_response_location_changed",
+      "location_changed_and_method_changed",
+      "location_changed_and_candidate_signal"
+    ],
+    "previous_checkpoint_reuse_forbidden": true,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "hard_gate": {
+    "pg114_confirm_recall_nonzero": true,
+    "pg114_decoy_false_accept_zero": true,
+    "pg114_unknown_abstain_nonzero": true,
+    "pg117_route_positive_recall_nonzero": true,
+    "pg117_decoy_false_accept_zero": true,
+    "pg117_unknown_abstain_nonzero": true,
+    "all_abstain_is_not_success": true,
+    "step_macro_f1_reported": true,
+    "slot_binding_evidence_hash_required": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "本轮证明的是受控本地 fixture 上的表示修复；在更多 family、seed、实现和真实 typed oracle 复核前，不把 checkpoint 或 slot 绑定写入长期能力。"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "real_sleep_performed": false,
+    "destructive_payloads": false
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "protocol_id": "pg-pk-62-target-zone-feature-funnel-v1",
+  "schema_version": "pg62-target-zone-feature-funnel-protocol-v1",
+  "objective": "以特征漏斗和跨布局/种子置换消融，筛掉依赖布局、标签或偶然表面编码的目标区动作特征。",
+  "input_contract": {
+    "pre_oracle_only": true,
+    "candidate_surface_features": [
+      "surface_class",
+      "response_shape",
+      "channel_hint",
+      "route_depth",
+      "parameter_count_bucket"
+    ],
+    "action_is_decision_input": true,
+    "oracle_is_label_only": true,
+    "family_is_not_feature": true,
+    "raw_probe_response_forbidden": true
+  },
+  "required_stages": {
+    "observable_safe": true,
+    "non_constant_across_train_holdout": true,
+    "permutation_by_layout": true,
+    "permutation_by_seed_bucket": true,
+    "seed_bucket_modulus": 3,
+    "baseline_negative_false_accept_zero": true,
+    "baseline_unknown_strict_abstain": true,
+    "baseline_action_entropy_min": 0.5,
+    "codex_review_required": true
+  },
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "fixture_replay_only": true,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false,
+    "state_mutation": false
+  },
+  "run_result": {
+    "status": "passed",
+    "accepted_features": [
+      "channel_hint"
+    ],
+    "hard_gate": "passed"
+  }
+}

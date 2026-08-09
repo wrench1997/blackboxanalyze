@@ -1,0 +1,42 @@
+{
+  "protocol_id": "pg-pk-67-independent-rule-ir-oracle-noise-v1",
+  "schema_version": "pg67-independent-rule-ir-oracle-noise-protocol-v1",
+  "objective": "在独立目标族与 typed-oracle 噪声下验证 effect confirmation、Rule IR family binding、矛盾拒绝和未知族弃权的分离。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "fixture_replay_only": true,
+    "state_mutation": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false
+  },
+  "input_contract": {
+    "pre_oracle_model_input": [
+      "surface_projection",
+      "belief_before",
+      "candidate_action"
+    ],
+    "family_before_action_forbidden": true,
+    "typed_oracle_after_action_only": true,
+    "rule_ir_binding_after_typed_exit_only": true,
+    "raw_probe_response_forbidden": true
+  },
+  "required_gates": {
+    "effect_recall_min": 0.8,
+    "known_family_recall_min": 0.8,
+    "unknown_misname_zero": true,
+    "negative_false_accept_zero": true,
+    "unknown_strict_abstain": true,
+    "contradictory_oracle_must_abstain": true,
+    "fresh_reset_per_action": true,
+    "evidence_hash_per_action": true,
+    "training_promotion_on_fixture": false,
+    "memory_promotion_on_fixture": false
+  },
+  "run_result": {
+    "status": "passed",
+    "known_family_recall": 0.844037,
+    "unknown_misname_count": 0,
+    "negative_false_accept_count": 0
+  }
+}

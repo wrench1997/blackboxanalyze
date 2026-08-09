@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sift.local/schemas/common-semantic-rule-v1.json",
+  "title": "SIFT Common Semantic Rule",
+  "description": "Language-neutral representation used for training, retrieval and human-readable rule evidence.",
+  "type": "object",
+  "required": ["schema_version", "behavior", "invariant", "dependencies", "language_semantics", "evidence"],
+  "properties": {
+    "schema_version": { "const": "common-semantic-rule-v1" },
+    "source": {
+      "type": "object",
+      "required": ["language", "frontend", "discovery_mode"],
+      "properties": {
+        "language": { "type": "string" },
+        "frontend": { "enum": ["ast", "bytecode", "ir", "trace", "manual"] },
+        "adapter_version": { "type": "string" },
+        "discovery_mode": { "enum": ["white_box_extraction", "gray_box_reconciliation", "black_box_induction"] },
+        "provenance": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidence_pointers": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "behavior": {
+      "type": "object",
+      "required": ["rule_ir", "primitive_families"],
+      "properties": {
+        "rule_ir": { "type": "object" },
+        "primitive_families": {
+          "type": "array",
+          "items": { "enum": ["boolean_logic", "numeric_boundary", "coercion", "string_match", "state_transition", "history_dependency", "authorization", "source_sink", "exception_flow", "concurrency"] }
+        },
+        "human_rule": { "type": "string" }
+      }
+    },
+    "invariant": {
+      "type": "object",
+      "required": ["expected", "observed_deviation"],
+      "properties": {
+        "expected": { "type": "string" },
+        "observed_deviation": { "type": "string" },
+        "security_property": { "type": "string" }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "inputs": { "type": "array", "items": { "type": "string" } },
+        "state": { "type": "array", "items": { "type": "string" } },
+        "history_offsets": { "type": "array", "items": { "type": "integer" } },
+        "external_effects": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "language_semantics": {
+      "type": "object",
+      "required": ["coercions", "numeric_model", "evaluation_order", "exception_model"],
+      "properties": {
+        "coercions": { "type": "array", "items": { "type": "string" } },
+        "numeric_model": { "type": "string" },
+        "evaluation_order": { "type": "string" },
+        "exception_model": { "type": "string" },
+        "overflow_behavior": { "type": "string" },
+        "nullish_behavior": { "type": "string" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["counterexamples", "reproducible"],
+      "properties": {
+        "counterexamples": { "type": "array", "items": { "type": "object" } },
+        "reproducible": { "type": "boolean" },
+        "oracle_fingerprint": { "type": "string" },
+        "coverage_scope": { "type": "string" }
+      }
+    }
+  }
+}

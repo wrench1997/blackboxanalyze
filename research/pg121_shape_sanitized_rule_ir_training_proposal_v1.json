@@ -1,0 +1,17 @@
+{
+  "protocol_id": "pg-pk-121-shape-sanitized-rule-ir-training-v1",
+  "proposal_id": "pg121-shape-sanitized-rule-ir-training-proposal-v1",
+  "question": "移除 shape hash shortcut 后，PG-120 的未知族能否正确 abstain，同时不损失 metadata 正例召回？",
+  "intervention": "沿用 PG-119 已审核训练行，仅把四个 shape hash bucket 在训练与评估中固定为零；新建同容量 fresh decoder。",
+  "observed_fields": ["method", "placement", "encoding_chain", "status_class", "shape flags", "candidate_signal", "location_changed", "metadata_changed", "transition_delta", "generic_belief", "BSP bounded projection"],
+  "excluded_fields": ["shape hash bucket", "raw probe", "raw response body", "family", "typed oracle", "target id", "evidence hash"],
+  "success_definition": {
+    "pg120_unknown_abstain_nonzero": true,
+    "pg120_positive_recall_nonzero": true,
+    "pg120_decoy_false_accept_zero": true,
+    "capacity_unchanged": true,
+    "all_abstain_not_success": true
+  },
+  "next_if_pass": "PG-122 增加新漏洞族的跨实现 holdout，继续检查通用形状 flags 是否仍存在语义泄漏。",
+  "next_if_fail": "冻结 PG-121，按混淆矩阵定位 metadata slot 或 unknown calibration 缺口，不写入长期记忆。"
+}

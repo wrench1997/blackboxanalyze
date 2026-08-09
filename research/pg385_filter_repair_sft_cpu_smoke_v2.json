@@ -1,0 +1,180 @@
+{
+  "schema_version": "pg380-abstract-reasoning-sft-candidate-v1",
+  "status": "cpu_smoke_candidate_only",
+  "dataset": "research\\pg385_filter_repair_adversarial_dataset_v1.json",
+  "dataset_sha256": "9441a726a9659386f8c3e8f5d161675a5f5412c17ce4322d8d410d2e11909835",
+  "dataset_internal_sha256": "02ff925c15f5357f319a5a2fb601024c022712ba1a501ced60398282089a04d8",
+  "data": {
+    "train_rows": 80,
+    "holdout_rows": 80,
+    "vocabulary_scope": "declared_abstract_ontology",
+    "raw_rows_loaded": false,
+    "target_slots": 13
+  },
+  "execution_gate": {
+    "timestamp": "2026-08-09T23:34:19.220311+08:00",
+    "weekend": true,
+    "allowed_time_window": true,
+    "explicit_remote_flag": false,
+    "cuda_visible_devices": "",
+    "device": "cpu",
+    "passed": true
+  },
+  "training": {
+    "device": "cpu",
+    "seeds": [
+      38001,
+      38002,
+      38003
+    ],
+    "epochs": 1,
+    "microbatch": 2,
+    "action_balance_replication": false,
+    "config": {
+      "d_model": 32,
+      "n_heads": 4,
+      "n_layers": 1,
+      "experts": 2,
+      "expert_hidden": 64,
+      "top_k": 2,
+      "dropout": 0.05,
+      "max_length": 128,
+      "initializer_range": 0.02
+    },
+    "vocabulary_scope": "declared_ontology_manifest",
+    "vocabulary_size": 83,
+    "vocabulary_gaps": {
+      "unknown_token_count": 0,
+      "unknown_tokens_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "unknown_slot_value_count": 0,
+      "unknown_slot_values": {},
+      "blocked": false
+    },
+    "cpu_diagnostic_union": false,
+    "required_context_window": 29,
+    "checkpoint_dir": null
+  },
+  "candidates": [
+    {
+      "seed": 38001,
+      "baseline": {
+        "rows": 80,
+        "token_accuracy": 0.003333,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.35,
+        "ask_recall": 1.0,
+        "repair_recall": 0.375,
+        "positive_recall": 0.0,
+        "negative_false_allow": 0,
+        "negative_total": 32,
+        "predictive_entropy": 4.412488
+      },
+      "post": {
+        "rows": 80,
+        "token_accuracy": 0.22,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.421154,
+        "ask_recall": 0.75,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 16,
+        "negative_total": 32,
+        "predictive_entropy": 4.411094
+      },
+      "entropy_relative_drop": 0.000316,
+      "checkpoint": {
+        "path": null,
+        "sha256": null
+      }
+    },
+    {
+      "seed": 38002,
+      "baseline": {
+        "rows": 80,
+        "token_accuracy": 0.0,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.386538,
+        "ask_recall": 1.0,
+        "repair_recall": 0.375,
+        "positive_recall": 0.041667,
+        "negative_false_allow": 0,
+        "negative_total": 32,
+        "predictive_entropy": 4.412667
+      },
+      "post": {
+        "rows": 80,
+        "token_accuracy": 0.191667,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.373077,
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 16,
+        "negative_total": 32,
+        "predictive_entropy": 4.410868
+      },
+      "entropy_relative_drop": 0.000408,
+      "checkpoint": {
+        "path": null,
+        "sha256": null
+      }
+    },
+    {
+      "seed": 38003,
+      "baseline": {
+        "rows": 80,
+        "token_accuracy": 0.011667,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.442308,
+        "ask_recall": 0.5,
+        "repair_recall": 0.708333,
+        "positive_recall": 0.0,
+        "negative_false_allow": 0,
+        "negative_total": 32,
+        "predictive_entropy": 4.41266
+      },
+      "post": {
+        "rows": 80,
+        "token_accuracy": 0.13,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.357692,
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 16,
+        "negative_total": 32,
+        "predictive_entropy": 4.411013
+      },
+      "entropy_relative_drop": 0.000373,
+      "checkpoint": {
+        "path": null,
+        "sha256": null
+      }
+    }
+  ],
+  "worst_seed": {
+    "sequence_exact_min": 0.0,
+    "slot_accuracy_min": 0.357692,
+    "ask_recall_min": 0.75,
+    "repair_recall_min": 1.0,
+    "positive_recall_min": 1.0,
+    "negative_false_allow_max": 16,
+    "entropy_relative_drop_max": 0.000408
+  },
+  "scientific_gate": {
+    "typed_live_replay_with_model_selected_wire": false,
+    "independent_implementation": false,
+    "claim_allowed": false,
+    "holdout_vocabulary_closed": true,
+    "abstract_reasoning_only": true,
+    "model_selected_wire_replay": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "PG-380 只验证抽象 ASK/repair/negative/replay 学习；没有真实 payload、target contact 或漏洞能力晋级。",
+  "report_sha256": "379502515aef22a154d7bde9030a6fde226668d07a91997caa2feda82501ad91"
+}

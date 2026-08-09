@@ -1,0 +1,50 @@
+{
+  "protocol_id": "pg-pk-185-pikachu-dom-replay-v1",
+  "schema_version": "pg185-pikachu-dom-replay-protocol-v1",
+  "observed_parameter_authority": true,
+  "routes": [
+    {
+      "path": "/vul/xss/xss_reflected_get.php",
+      "surface": "xss_reflected_get",
+      "field_names": [
+        "message",
+        "submit"
+      ],
+      "manifest_row_sha256": "593220b065f742a1cd594c9974f03e01f6516abcaea85c1439eef91cf029c04f"
+    },
+    {
+      "path": "/vul/xss/xss_dom_x.php",
+      "surface": "xss_dom_x",
+      "field_names": [
+        "text"
+      ],
+      "manifest_row_sha256": "71a61d514599082be3173017d68c1433d7106192ca6a9e37881ae3519ad7f724"
+    }
+  ],
+  "model_output_allowlist": [
+    "baseline",
+    "matched_control",
+    "safe_candidate",
+    "abstain"
+  ],
+  "manifest_validator_before_send": true,
+  "probe_contract": {
+    "kind": "inert_dom_markup",
+    "script_execution": false,
+    "raw_value_persistence": false
+  },
+  "oracle_contract": {
+    "detached_dom_surface_only": true,
+    "typed_dom_effect_not_vulnerability": true,
+    "typed_positive_count_required_for_vulnerability": false
+  },
+  "gates": {
+    "loopback_only": true,
+    "fresh_container": true,
+    "unknown_oracle_action": "abstain",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "checkpoint_sha256": "4473588feb9df674cb819fe4c80e81684db8544a74b58fa7ae5f4c6a51ee79b4",
+  "protocol_sha256": "ab8701306c3053bd8c5c95d02f68d5835f81cf642103f675b62104cfcb163dd9"
+}

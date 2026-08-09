@@ -1,0 +1,42 @@
+{
+  "protocol_id": "pg-pk-146-public-lab-replay-v1",
+  "schema_version": "pg146-public-lab-replay-protocol-v1",
+  "objective": "在固定公开漏洞靶场的 loopback 实例上采集真实 GET/POST 因果表面基线。",
+  "targets": [
+    {
+      "target_id": "pg146_webgoat_login_surface",
+      "lab": "webgoat",
+      "container": "sift-pg146-webgoat",
+      "image_digest": "webgoat/webgoat@sha256:3101bd9e7bcfe122d7ef91e690ef3720de36cc4e86b3d06763a1ddf2e2751a4b",
+      "base_url": "http://127.0.0.1:31450"
+    },
+    {
+      "target_id": "pg146_dvwa_login_surface",
+      "lab": "dvwa",
+      "container": "sift-pg146-dvwa",
+      "image_digest": "vulnerables/web-dvwa@sha256:dae203fe11646a86937bf04db0079adef295f426da68a92b40e3b181f337daa7",
+      "base_url": "http://127.0.0.1:31452"
+    },
+    {
+      "target_id": "pg146_juice_shop_login_surface",
+      "lab": "juice_shop",
+      "container": "sift-pg146-juice",
+      "image_digest": "bkimminich/juice-shop@sha256:28870b9d2bec49e605d6ebbf4b22ed1ec1ca0a72347ef19217bbbb21ea44e3fe",
+      "base_url": "http://127.0.0.1:31453"
+    }
+  ],
+  "collection_contract": {
+    "fresh_reset_before_each_step": true,
+    "get_post_balanced": true,
+    "response_projection_in_memory": true,
+    "raw_request_response_persistence": false,
+    "typed_oracle_required_for_positive": true,
+    "unknown_oracle_cannot_train": true
+  },
+  "source_repositories": {
+    "juice_shop": "https://github.com/juice-shop/juice-shop",
+    "webgoat": "https://github.com/WebGoat/WebGoat",
+    "dvwa": "https://github.com/digininja/DVWA"
+  },
+  "run_report": "research\\pg146_public_lab_replay_report_v1.json"
+}

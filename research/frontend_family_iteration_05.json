@@ -1,0 +1,48 @@
+{
+  "schema_version": "sift-experiment-iteration-v1",
+  "parent_experiment": "frontend-structured-semantics-loop-01",
+  "iteration": 5,
+  "registered_before_iteration_05_results": true,
+  "observed_partial_success": {
+    "dom_sink_injection": 1.0,
+    "postmessage_origin": 0.516667,
+    "counterexample_top1_lift": 0.235417,
+    "interpretation": "Primitive curriculum transfers markup semantics but byte attention does not bind an episode-specific hostname suffix."
+  },
+  "root_cause_hypothesis": {
+    "layer": "memory_write_retrieve_or_staleness",
+    "claim": "URL behavior requires a program-specific rule variable derived across positive and negative traces. Per-input projection cannot represent that variable."
+  },
+  "minimal_change": {
+    "name": "Episode Rule Memory suffix head plus routed semantic adapter",
+    "learned_parameters_added": 0,
+    "episode_rule_memory": "Infer the longest common suffix of positive string observations, verify at least 75% context fit, and expose only suffix, query relation, and fit as memory tokens.",
+    "routed_adapter": "Use structured URL and markup tokens only on matching fields; preserve raw number, boolean, enum, and ordinary string values.",
+    "source_rule_ir_cwe_intended_output_visible": false,
+    "query_output_visible": false
+  },
+  "curriculum": {
+    "programs": 1800,
+    "train_families": [
+      "numeric_boundary",
+      "truthiness_gate",
+      "substring_origin",
+      "authorization_or",
+      "string_suffix_primitive",
+      "markup_lexeme_primitive"
+    ],
+    "heldout_families": [
+      "postmessage_origin",
+      "dom_sink_injection"
+    ]
+  },
+  "unchanged_success_criteria": {
+    "postmessage_origin_behavior_agreement_min": 0.85,
+    "dom_sink_injection_behavior_agreement_min": 0.85,
+    "counterexample_at_10_min": 0.8,
+    "old_family_regression_max_absolute": 0.02,
+    "required_independent_seeds": 3,
+    "counterexample_top1_lift_over_random_min": 0.15
+  },
+  "decision": "Run the routed semantic plus Episode Rule Memory treatment on seed 20260801. If it clears both held-out family thresholds, run a raw plus identical Episode Rule Memory control and then the remaining seeds."
+}

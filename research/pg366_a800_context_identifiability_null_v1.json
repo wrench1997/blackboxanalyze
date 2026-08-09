@@ -1,0 +1,235 @@
+{
+  "schema_version": "pg366-context-identifiability-null-v1",
+  "status": "diagnostic_null_control_only",
+  "purpose": "test whether normal holdout performance survives when training targets are permuted in memory",
+  "dataset": "research/pg364_compositional_rule_ir_dataset_v1.json",
+  "dataset_sha256": "9eb16a89e7ca813b42f1a473945ea44ff7ac9a39964c23e07e169aa0d58fd618",
+  "audit": "research/pg366_context_identifiability_audit_v1.json",
+  "audit_sha256": "fece2332ab5021c47aaf9292c880fa88064881c4aee77e0dc4a6c57c180402a0",
+  "rules_sha256": "fc8778d064d6c13662c6e038490d6e036dea4d7d0b5b4fe473349ff936957a95",
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "cuda_visible_devices": "0",
+    "seeds": [
+      36601,
+      36602,
+      36603
+    ],
+    "epochs": 4,
+    "batch_size": 16,
+    "target_tokens_used_as_permuted_labels_only": true,
+    "contexts_unchanged": true,
+    "holdout_targets_unmodified": true
+  },
+  "counts": {
+    "train_rows": 1600,
+    "implementation_holdout_rows": 1000
+  },
+  "per_seed": [
+    {
+      "seed": 36601,
+      "permutation": {
+        "row_count": 1600,
+        "permutation_seed": 136601,
+        "identity_target_rows": 10,
+        "target_multiset_preserved": true,
+        "contexts_unchanged": true
+      },
+      "null_train": {
+        "rows": 1600,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.4,
+          "repair_action": 0.6,
+          "transport_ref": 0.595,
+          "field_role_ref": 0.10875,
+          "encoding_ref": 0.290625,
+          "syntax_category_ref": 0.28125,
+          "probe_variant_ref": 0.245,
+          "safe_to_send": 0.6,
+          "payload_shape_ref": 0.3225,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 640
+      },
+      "untouched_holdout": {
+        "rows": 1000,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.4,
+          "repair_action": 0.6,
+          "transport_ref": 0.5,
+          "field_role_ref": 0.125,
+          "encoding_ref": 0.17,
+          "syntax_category_ref": 0.0,
+          "probe_variant_ref": 0.212,
+          "safe_to_send": 0.6,
+          "payload_shape_ref": 0.665,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 400
+      },
+      "baseline_holdout_predictive_entropy": 6.687477,
+      "post_holdout_predictive_entropy": 4.416522,
+      "relative_entropy_drop": 0.339583
+    },
+    {
+      "seed": 36602,
+      "permutation": {
+        "row_count": 1600,
+        "permutation_seed": 136602,
+        "identity_target_rows": 8,
+        "target_multiset_preserved": true,
+        "contexts_unchanged": true
+      },
+      "null_train": {
+        "rows": 1600,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.4,
+          "repair_action": 0.6,
+          "transport_ref": 0.59375,
+          "field_role_ref": 0.108125,
+          "encoding_ref": 0.290625,
+          "syntax_category_ref": 0.28375,
+          "probe_variant_ref": 0.20375,
+          "safe_to_send": 0.603125,
+          "payload_shape_ref": 0.315625,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 635
+      },
+      "untouched_holdout": {
+        "rows": 1000,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.4,
+          "repair_action": 0.6,
+          "transport_ref": 0.5,
+          "field_role_ref": 0.125,
+          "encoding_ref": 0.17,
+          "syntax_category_ref": 0.0,
+          "probe_variant_ref": 0.2,
+          "safe_to_send": 0.6,
+          "payload_shape_ref": 0.665,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 400
+      },
+      "baseline_holdout_predictive_entropy": 6.688578,
+      "post_holdout_predictive_entropy": 4.330539,
+      "relative_entropy_drop": 0.352547
+    },
+    {
+      "seed": 36603,
+      "permutation": {
+        "row_count": 1600,
+        "permutation_seed": 136603,
+        "identity_target_rows": 8,
+        "target_multiset_preserved": true,
+        "contexts_unchanged": true
+      },
+      "null_train": {
+        "rows": 1600,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.4,
+          "repair_action": 0.6,
+          "transport_ref": 0.59375,
+          "field_role_ref": 0.109375,
+          "encoding_ref": 0.290625,
+          "syntax_category_ref": 0.285625,
+          "probe_variant_ref": 0.246875,
+          "safe_to_send": 0.6,
+          "payload_shape_ref": 0.315625,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 640
+      },
+      "untouched_holdout": {
+        "rows": 1000,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.4,
+          "repair_action": 0.6,
+          "transport_ref": 0.5,
+          "field_role_ref": 0.125,
+          "encoding_ref": 0.17,
+          "syntax_category_ref": 0.0,
+          "probe_variant_ref": 0.2,
+          "safe_to_send": 0.6,
+          "payload_shape_ref": 0.665,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 400
+      },
+      "baseline_holdout_predictive_entropy": 6.685897,
+      "post_holdout_predictive_entropy": 4.591356,
+      "relative_entropy_drop": 0.313277
+    }
+  ],
+  "worst": {
+    "holdout_sequence_exact_max": 0.0,
+    "holdout_sequence_exact_min": 0.0,
+    "holdout_negative_false_allow_max": 400,
+    "max_relative_entropy_drop": 0.352547
+  },
+  "interpretation": "null control is diagnostic only; good holdout performance would indicate a split/evaluator leak, while poor holdout performance confirms the normal result depends on context-target correlation",
+  "raw_payload_in_context": false,
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "6f29d9600d60c0fadf8dda18a693eb43ae890633c1b0a3750b9d04bde5aca0a2"
+}

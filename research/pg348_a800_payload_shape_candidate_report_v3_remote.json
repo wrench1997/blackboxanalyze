@@ -1,0 +1,152 @@
+{
+  "schema_version": "pg348-a800-payload-shape-candidate-v1",
+  "status": "completed_payload_shape_candidate_only",
+  "gate": {
+    "schema_version": "pg348-a800-payload-shape-candidate-v1",
+    "status": "ready_payload_shape_candidate",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "train_rows_valid": true,
+      "implementation_holdout_valid": true,
+      "information_diagnostic_without_failures": true,
+      "multi_implementation_source_split": true,
+      "typed_fresh_negative_replay_complete": true,
+      "vocabulary_coverage_complete": true,
+      "capacity_balanced_1024": true,
+      "rules_schema_present": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "max_length": 1024,
+    "vocabulary_size": 1308,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      34801,
+      34802,
+      34803
+    ],
+    "epochs": 4,
+    "learning_rate": 0.0001,
+    "target_weight": 8.0,
+    "context_weight": 0.25,
+    "negative_safe_weight": 24.0,
+    "positive_safe_weight": 3.0,
+    "config": {
+      "d_model": 192,
+      "n_heads": 4,
+      "n_layers": 6,
+      "experts": 4,
+      "expert_hidden": 768,
+      "top_k": 2,
+      "dropout": 0.05,
+      "max_length": 1024,
+      "initializer_range": 0.02
+    }
+  },
+  "candidates": [
+    {
+      "seed": 34801,
+      "train": {
+        "count": 1200,
+        "token_accuracy": 0.448667,
+        "sequence_exact_accuracy": 0.004167,
+        "positive_recall": 0.577778,
+        "hard_negative_false_allow": 282,
+        "safe_reject_rate": 0.4125,
+        "missing_question_recall": 0.0,
+        "unnecessary_question_rate": 0.0,
+        "missing_question_count": 240
+      },
+      "implementation_holdout": {
+        "count": 1400,
+        "token_accuracy": 0.362857,
+        "sequence_exact_accuracy": 0.0,
+        "positive_recall": 0.911905,
+        "hard_negative_false_allow": 523,
+        "safe_reject_rate": 0.066071,
+        "missing_question_recall": 0.0,
+        "unnecessary_question_rate": 0.0,
+        "missing_question_count": 280
+      }
+    },
+    {
+      "seed": 34802,
+      "train": {
+        "count": 1200,
+        "token_accuracy": 0.719167,
+        "sequence_exact_accuracy": 0.0875,
+        "positive_recall": 0.702778,
+        "hard_negative_false_allow": 157,
+        "safe_reject_rate": 0.672917,
+        "missing_question_recall": 0.983333,
+        "unnecessary_question_rate": 0.0,
+        "missing_question_count": 240
+      },
+      "implementation_holdout": {
+        "count": 1400,
+        "token_accuracy": 0.165143,
+        "sequence_exact_accuracy": 0.0,
+        "positive_recall": 0.334524,
+        "hard_negative_false_allow": 28,
+        "safe_reject_rate": 0.95,
+        "missing_question_recall": 1.0,
+        "unnecessary_question_rate": 0.832143,
+        "missing_question_count": 280
+      }
+    },
+    {
+      "seed": 34803,
+      "train": {
+        "count": 1200,
+        "token_accuracy": 0.718667,
+        "sequence_exact_accuracy": 0.099167,
+        "positive_recall": 0.701389,
+        "hard_negative_false_allow": 149,
+        "safe_reject_rate": 0.689583,
+        "missing_question_recall": 1.0,
+        "unnecessary_question_rate": 0.0,
+        "missing_question_count": 240
+      },
+      "implementation_holdout": {
+        "count": 1400,
+        "token_accuracy": 0.174286,
+        "sequence_exact_accuracy": 0.0,
+        "positive_recall": 0.022619,
+        "hard_negative_false_allow": 0,
+        "safe_reject_rate": 1.0,
+        "missing_question_recall": 1.0,
+        "unnecessary_question_rate": 0.832143,
+        "missing_question_count": 280
+      }
+    }
+  ],
+  "locks": {
+    "dataset": "ab3ee1a967d257b56bc82fe3dbf1cf0cd20b5f6a851c2bedd68ea935a56823b8",
+    "information_audit": "eeb4e1bbd79e39407097a8976696e488a553cd56cb3fffe325fb555a16dac3fd",
+    "capacity_audit": "7ad800fca9af948ee4ed6d2fb3c39927bcedc2362d379d73955b6f2b044f8242",
+    "vocabulary": "a892694aaa3b4325516a12f7857cdbd748103cbe870f6efb5739020e8865b0d5",
+    "rules": "5b60139894ef5f7c43d5d8d7b6b4732dc3c15b24d20b5d0d2b05fa114b27abe4",
+    "script": "fa0161548db2a15a2584580154e4948f2c7ba83061930c1b87b459e79c8587ef",
+    "model": "a585e106859a9b023568af9df30b33973ef4e36bc0a4ce3c7b00499afd5a5e79"
+  },
+  "checkpoint_sha256": "b9c8e9d3d9f18bfe4cafb4ebfbb7661d5cf53a3ae34be27d8d6f9de2945fe6c1",
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "1a45c3ea8f746db73a06f5ef035ad0763e3dc7c0af2352a168b9ff6d42e95977"
+}

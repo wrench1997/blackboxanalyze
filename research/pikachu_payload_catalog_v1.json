@@ -1,0 +1,1485 @@
+{
+  "schema_version": "sift-authorized-payload-catalog-v1",
+  "catalog_id": "pikachu-payload-grounding-v1",
+  "sources": [
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pikachu-local-container-pg-pk-01",
+        "source_type": "authorized_local_container",
+        "origin": "app/pikachu_replay_collector.py",
+        "license": "local_container",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:8766"
+        ],
+        "captured_at": "2026-08-01T20:51:04.506846+00:00",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+        "source_sha256": "6b647f6995d6d99681007dcfe2797e78c40d5a4aecba9e328ec3d0972fb08e58"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pikachu-local-pg03-xss-reflected-get-safe-canary-664c5750bbf9",
+          "source_id": "pikachu-local-container-pg-pk-01",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/xss/xss_reflected_get.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pk-safe-probe-a1"
+            },
+            "marker": "pk-safe-probe-a1",
+            "probe_kind": "http_canary",
+            "probe": "pk-safe-probe-a1",
+            "expected": {},
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "664c5750bbf9e4bfe605476fb81e492ce51cba933cc6ed444c6e464deb07edff"
+          },
+          "probe_artifact": {
+            "original": "pk-safe-probe-a1",
+            "encoding": "query_percent_encoding",
+            "probe_sha256": "b2ec7873099f1a05610d703b4593ca34e5058705101bf76d5e061c54c816c906"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "xss_reflected_get",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "marker_reflection_only"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/xss/xss_reflected_get.php",
+            "params": {
+              "message": "pk-safe-probe-a1",
+              "submit": "submit"
+            },
+            "fresh_reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "47433a00ba9a1728de62",
+              "sequence": 1,
+              "state_change_allowed": false
+            },
+            "transport": "httpx_loopback"
+          },
+          "response_projection": {
+            "body_length": 33718,
+            "body_sha256": "5e96e7616b6304d92a4c90790194ad9de7b0541caa96bd9e94a6dcd68fc07169",
+            "headers": {
+              "content-type": "text/html"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "body_length_delta": 59,
+            "body_length_delta_abs": 59,
+            "content_type_class": "html",
+            "external_redirect": false,
+            "form_count": 1,
+            "html_tag_count": 427,
+            "input_count": 2,
+            "marker_count": 1,
+            "marker_in_attribute": false,
+            "marker_in_html_text": true,
+            "marker_in_script_source": false,
+            "marker_reflected": true,
+            "redirect_present": false,
+            "script_count": 16,
+            "sql_error_shape": false,
+            "status_changed": false,
+            "title_present": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33659,
+              "body_sha256": "1f76cf85c1b8499a7e0059e7bd6baba7a416841d76f86668f84438fc4c811eba",
+              "headers": {
+                "content-type": "text/html"
+              },
+              "status_code": 200
+            },
+            "collector": "sift-pikachu-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "beba419e85ce51ce40eb220c4ea7f5268149828a464b96fc97800ecdfacbbcbd",
+            "local_http_loopback": true,
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "body_length_delta": 59,
+              "body_length_delta_abs": 59,
+              "content_type_class": "html",
+              "external_redirect": false,
+              "form_count": 1,
+              "html_tag_count": 427,
+              "input_count": 2,
+              "marker_count": 1,
+              "marker_in_attribute": false,
+              "marker_in_html_text": true,
+              "marker_in_script_source": false,
+              "marker_reflected": true,
+              "redirect_present": false,
+              "script_count": 16,
+              "sql_error_shape": false,
+              "status_changed": false,
+              "title_present": true
+            },
+            "path": "/vul/xss/xss_reflected_get.php",
+            "real_sleep_performed": false,
+            "reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "47433a00ba9a1728de62",
+              "sequence": 1,
+              "state_change_allowed": false
+            },
+            "response": {
+              "body_length": 33718,
+              "body_sha256": "5e96e7616b6304d92a4c90790194ad9de7b0541caa96bd9e94a6dcd68fc07169",
+              "headers": {
+                "content-type": "text/html"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:8766"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_in_attribute"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_in_script_source"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_reflected"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "or"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_in_attribute\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_in_script_source\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_reflected\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"or\"}",
+          "rule_ir_complexity": 10,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pikachu-local-pg03-xss-dom-safe-canary-d5a908a49202",
+          "source_id": "pikachu-local-container-pg-pk-01",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/xss/xss_dom.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pk-safe-probe-a1"
+            },
+            "marker": "pk-safe-probe-a1",
+            "probe_kind": "inert_dom_markup",
+            "probe": "<span data-sift-marker=\"pk-safe-probe-a1\">x</span>",
+            "expected": {},
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "d5a908a49202618c38d9aef54ac21e864d80ab53965788972abc766e403f7c8c"
+          },
+          "probe_artifact": {
+            "original": "<span data-sift-marker=\"pk-safe-probe-a1\">x</span>",
+            "encoding": "query_percent_encoding",
+            "probe_sha256": "bd4188463bed5c475092c80119fc8f5b632226aa15790aebcf2903718339eda8"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "xss_dom_value_source",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "dom_source_reflection_without_execution"
+          },
+          "structural_feature": "dom:inert_dom_markup",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/xss/xss_dom.php",
+            "params": {
+              "text": "pk-safe-probe-a1"
+            },
+            "fresh_reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "108fd7b4b13aa35bd96e",
+              "sequence": 2,
+              "state_change_allowed": false
+            },
+            "transport": "httpx_loopback"
+          },
+          "response_projection": {
+            "body_length": 34041,
+            "body_sha256": "fa291cc2d095c7fa38170840ee1b50bd49cee3dc87a4ede8f4763722e268aacf",
+            "headers": {
+              "content-type": "text/html;charset=utf-8"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "body_length_delta": 0,
+            "body_length_delta_abs": 0,
+            "content_type_class": "html",
+            "external_redirect": false,
+            "form_count": 0,
+            "html_tag_count": 426,
+            "input_count": 2,
+            "marker_count": 0,
+            "marker_in_attribute": false,
+            "marker_in_html_text": false,
+            "marker_in_script_source": false,
+            "marker_reflected": false,
+            "redirect_present": false,
+            "script_count": 17,
+            "sql_error_shape": false,
+            "status_changed": false,
+            "title_present": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 34041,
+              "body_sha256": "fa291cc2d095c7fa38170840ee1b50bd49cee3dc87a4ede8f4763722e268aacf",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "collector": "sift-pikachu-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "17b806a24d87b46e4ed1cb9a787c60441dec5179e01a2c13edd0180597640f34",
+            "local_http_loopback": true,
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "body_length_delta": 0,
+              "body_length_delta_abs": 0,
+              "content_type_class": "html",
+              "external_redirect": false,
+              "form_count": 0,
+              "html_tag_count": 426,
+              "input_count": 2,
+              "marker_count": 0,
+              "marker_in_attribute": false,
+              "marker_in_html_text": false,
+              "marker_in_script_source": false,
+              "marker_reflected": false,
+              "redirect_present": false,
+              "script_count": 17,
+              "sql_error_shape": false,
+              "status_changed": false,
+              "title_present": true
+            },
+            "path": "/vul/xss/xss_dom.php",
+            "real_sleep_performed": false,
+            "reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "108fd7b4b13aa35bd96e",
+              "sequence": 2,
+              "state_change_allowed": false
+            },
+            "response": {
+              "body_length": 34041,
+              "body_sha256": "fa291cc2d095c7fa38170840ee1b50bd49cee3dc87a4ede8f4763722e268aacf",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:8766"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_in_attribute"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_in_script_source"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_reflected"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "or"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_in_attribute\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_in_script_source\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_reflected\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"or\"}",
+          "rule_ir_complexity": 10,
+          "rule_ir_result": false
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pikachu-local-pg03-urlredirect-safe-baseline-515a31eb4908",
+          "source_id": "pikachu-local-container-pg-pk-01",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/urlredirect/urlredirect.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pk-safe-probe-a1"
+            },
+            "marker": "pk-safe-probe-a1",
+            "probe_kind": "http_canary",
+            "probe": "pk-safe-probe-a1",
+            "expected": {},
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "515a31eb490876167a23271192bbec73dfe19b6ec60d295fb68d067c646fe435"
+          },
+          "probe_artifact": {
+            "original": "pk-safe-probe-a1",
+            "encoding": "query_percent_encoding",
+            "probe_sha256": "b2ec7873099f1a05610d703b4593ca34e5058705101bf76d5e061c54c816c906"
+          },
+          "semantic": {
+            "family": "url_redirect",
+            "surface": "url_redirect_response",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "no_external_redirect"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/urlredirect/urlredirect.php",
+            "params": {},
+            "fresh_reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "ee6925fe59e241cb0c8b",
+              "sequence": 3,
+              "state_change_allowed": false
+            },
+            "transport": "httpx_loopback"
+          },
+          "response_projection": {
+            "body_length": 33771,
+            "body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+            "headers": {
+              "content-type": "text/html"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "body_length_delta": 0,
+            "body_length_delta_abs": 0,
+            "content_type_class": "html",
+            "external_redirect": false,
+            "form_count": 0,
+            "html_tag_count": 428,
+            "input_count": 0,
+            "marker_count": 0,
+            "marker_in_attribute": false,
+            "marker_in_html_text": false,
+            "marker_in_script_source": false,
+            "marker_reflected": false,
+            "redirect_present": false,
+            "script_count": 16,
+            "sql_error_shape": false,
+            "status_changed": false,
+            "title_present": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33771,
+              "body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+              "headers": {
+                "content-type": "text/html"
+              },
+              "status_code": 200
+            },
+            "collector": "sift-pikachu-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "0c650f19c0f4c44ebb965d5d2dedf18c0dab74e01cd730a5e2c7d9fa7a87999c",
+            "local_http_loopback": true,
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "body_length_delta": 0,
+              "body_length_delta_abs": 0,
+              "content_type_class": "html",
+              "external_redirect": false,
+              "form_count": 0,
+              "html_tag_count": 428,
+              "input_count": 0,
+              "marker_count": 0,
+              "marker_in_attribute": false,
+              "marker_in_html_text": false,
+              "marker_in_script_source": false,
+              "marker_reflected": false,
+              "redirect_present": false,
+              "script_count": 16,
+              "sql_error_shape": false,
+              "status_changed": false,
+              "title_present": true
+            },
+            "path": "/vul/urlredirect/urlredirect.php",
+            "real_sleep_performed": false,
+            "reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "ee6925fe59e241cb0c8b",
+              "sequence": 3,
+              "state_change_allowed": false
+            },
+            "response": {
+              "body_length": 33771,
+              "body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+              "headers": {
+                "content-type": "text/html"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:8766"
+          },
+          "rule_ir": {
+            "left": {
+              "op": "const",
+              "value": true
+            },
+            "op": "eq",
+            "right": {
+              "op": "field",
+              "path": "oracle_projection.external_redirect"
+            }
+          },
+          "rule_ir_canonical": "{\"left\":{\"op\":\"const\",\"value\":true},\"op\":\"eq\",\"right\":{\"op\":\"field\",\"path\":\"oracle_projection.external_redirect\"}}",
+          "rule_ir_complexity": 3,
+          "rule_ir_result": false
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pikachu-local-pg03-sql-sqli_str-safe-canary-341c6e0618af",
+          "source_id": "pikachu-local-container-pg-pk-01",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_str.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pk-safe-probe-a1"
+            },
+            "marker": "pk-safe-probe-a1",
+            "probe_kind": "sql_channel_class",
+            "probe": "plain",
+            "expected": {},
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "341c6e0618af6144f81081ac7effcdc25f5564ad0f45ea30e355e548a57f81f2"
+          },
+          "probe_artifact": {
+            "original": "plain",
+            "encoding": "query_percent_encoding",
+            "probe_sha256": "a116c9ed46d6207734a43317d30fd88f52ac8634c37d904bbf4e41d865f90475"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sqli_str",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "bounded_sql_error_or_shape_delta"
+          },
+          "structural_feature": "sql:sql_channel_class:plain",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_str.php",
+            "params": {
+              "name": "pk-safe-probe-a1",
+              "submit": "查询"
+            },
+            "fresh_reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "032f61a7aba85db4bd53",
+              "sequence": 4,
+              "state_change_allowed": false
+            },
+            "transport": "httpx_loopback"
+          },
+          "response_projection": {
+            "body_length": 33678,
+            "body_sha256": "db2f757449bf1d580bc2129aba43a6a0f509aaf404c7fe712261f4badf6a5ade",
+            "headers": {
+              "content-type": "text/html;charset=utf-8"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "body_length_delta": 72,
+            "body_length_delta_abs": 72,
+            "content_type_class": "html",
+            "external_redirect": false,
+            "form_count": 1,
+            "html_tag_count": 427,
+            "input_count": 2,
+            "marker_count": 0,
+            "marker_in_attribute": false,
+            "marker_in_html_text": false,
+            "marker_in_script_source": false,
+            "marker_reflected": false,
+            "redirect_present": false,
+            "script_count": 16,
+            "sql_error_shape": false,
+            "status_changed": false,
+            "title_present": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33606,
+              "body_sha256": "2a865d76b0557cded08a04f697cb6a025caf4300200dad1761e9e556d458e4ac",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "collector": "sift-pikachu-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "7c68003a76a7622245de4e7423402313b92b42bc291220376aafded91f3526cf",
+            "local_http_loopback": true,
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "body_length_delta": 72,
+              "body_length_delta_abs": 72,
+              "content_type_class": "html",
+              "external_redirect": false,
+              "form_count": 1,
+              "html_tag_count": 427,
+              "input_count": 2,
+              "marker_count": 0,
+              "marker_in_attribute": false,
+              "marker_in_html_text": false,
+              "marker_in_script_source": false,
+              "marker_reflected": false,
+              "redirect_present": false,
+              "script_count": 16,
+              "sql_error_shape": false,
+              "status_changed": false,
+              "title_present": true
+            },
+            "path": "/vul/sqli/sqli_str.php",
+            "real_sleep_performed": false,
+            "reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "032f61a7aba85db4bd53",
+              "sequence": 4,
+              "state_change_allowed": false
+            },
+            "response": {
+              "body_length": 33678,
+              "body_sha256": "db2f757449bf1d580bc2129aba43a6a0f509aaf404c7fe712261f4badf6a5ade",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:8766"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.body_length_delta_abs"
+                },
+                "op": "ge",
+                "right": {
+                  "op": "const",
+                  "value": 256
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.sql_error_shape"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "or"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.body_length_delta_abs\"},\"op\":\"ge\",\"right\":{\"op\":\"const\",\"value\":256}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.sql_error_shape\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"or\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": false
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pikachu-local-pg03-sql-sqli_search-safe-canary-56dff8de390a",
+          "source_id": "pikachu-local-container-pg-pk-01",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_search.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pk-safe-probe-a1"
+            },
+            "marker": "pk-safe-probe-a1",
+            "probe_kind": "sql_channel_class",
+            "probe": "plain",
+            "expected": {},
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "56dff8de390ac7dea83d2ffde49f72e327c9a3cce74001c1e808bb318f2598d6"
+          },
+          "probe_artifact": {
+            "original": "plain",
+            "encoding": "query_percent_encoding",
+            "probe_sha256": "a116c9ed46d6207734a43317d30fd88f52ac8634c37d904bbf4e41d865f90475"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sqli_search",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "bounded_sql_error_or_shape_delta"
+          },
+          "structural_feature": "sql:sql_channel_class:plain",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_search.php",
+            "params": {
+              "name": "pk-safe-probe-a1",
+              "submit": "搜索"
+            },
+            "fresh_reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "c1052aef4c8c96a95e6e",
+              "sequence": 5,
+              "state_change_allowed": false
+            },
+            "transport": "httpx_loopback"
+          },
+          "response_projection": {
+            "body_length": 33738,
+            "body_sha256": "c971f32efc80b94080b56bfbe871bea33e82a7fb1ee8bcc7b7c52575b750ef59",
+            "headers": {
+              "content-type": "text/html;charset=utf-8"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "body_length_delta": 65,
+            "body_length_delta_abs": 65,
+            "content_type_class": "html",
+            "external_redirect": false,
+            "form_count": 1,
+            "html_tag_count": 428,
+            "input_count": 2,
+            "marker_count": 0,
+            "marker_in_attribute": false,
+            "marker_in_html_text": false,
+            "marker_in_script_source": false,
+            "marker_reflected": false,
+            "redirect_present": false,
+            "script_count": 16,
+            "sql_error_shape": false,
+            "status_changed": false,
+            "title_present": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33673,
+              "body_sha256": "e1270dbc282f16d6b6800ca772b15b3335a9b64501f6b87e816aa9ffbc580e04",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "collector": "sift-pikachu-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "6cef99c92b0fb0a3689ad064f2d15901906e8980b5e83dbaa1e64310c01def68",
+            "local_http_loopback": true,
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "body_length_delta": 65,
+              "body_length_delta_abs": 65,
+              "content_type_class": "html",
+              "external_redirect": false,
+              "form_count": 1,
+              "html_tag_count": 428,
+              "input_count": 2,
+              "marker_count": 0,
+              "marker_in_attribute": false,
+              "marker_in_html_text": false,
+              "marker_in_script_source": false,
+              "marker_reflected": false,
+              "redirect_present": false,
+              "script_count": 16,
+              "sql_error_shape": false,
+              "status_changed": false,
+              "title_present": true
+            },
+            "path": "/vul/sqli/sqli_search.php",
+            "real_sleep_performed": false,
+            "reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "c1052aef4c8c96a95e6e",
+              "sequence": 5,
+              "state_change_allowed": false
+            },
+            "response": {
+              "body_length": 33738,
+              "body_sha256": "c971f32efc80b94080b56bfbe871bea33e82a7fb1ee8bcc7b7c52575b750ef59",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:8766"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.body_length_delta_abs"
+                },
+                "op": "ge",
+                "right": {
+                  "op": "const",
+                  "value": 256
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.sql_error_shape"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "or"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.body_length_delta_abs\"},\"op\":\"ge\",\"right\":{\"op\":\"const\",\"value\":256}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.sql_error_shape\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"or\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": false
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pikachu-local-pg03-sql-sqli_blind_boolean-safe-canary-6b7751bede75",
+          "source_id": "pikachu-local-container-pg-pk-01",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_blind_b.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pk-safe-probe-a1"
+            },
+            "marker": "pk-safe-probe-a1",
+            "probe_kind": "sql_channel_class",
+            "probe": "plain",
+            "expected": {},
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "6b7751bede751d1a5366956bc093838fc478e81f85dca5b6b4a4ae6d34a35bea"
+          },
+          "probe_artifact": {
+            "original": "plain",
+            "encoding": "query_percent_encoding",
+            "probe_sha256": "a116c9ed46d6207734a43317d30fd88f52ac8634c37d904bbf4e41d865f90475"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sqli_blind_boolean",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "bounded_sql_error_or_shape_delta"
+          },
+          "structural_feature": "sql:sql_channel_class:plain",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_blind_b.php",
+            "params": {
+              "name": "pk-safe-probe-a1",
+              "submit": "查询"
+            },
+            "fresh_reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "e325c8b4dae837b95a72",
+              "sequence": 6,
+              "state_change_allowed": false
+            },
+            "transport": "httpx_loopback"
+          },
+          "response_projection": {
+            "body_length": 33675,
+            "body_sha256": "34fef391b608e80afcef1a49f6073875010aedb292d48e6b9f041443309a746c",
+            "headers": {
+              "content-type": "text/html;charset=utf-8"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "body_length_delta": 72,
+            "body_length_delta_abs": 72,
+            "content_type_class": "html",
+            "external_redirect": false,
+            "form_count": 1,
+            "html_tag_count": 427,
+            "input_count": 2,
+            "marker_count": 0,
+            "marker_in_attribute": false,
+            "marker_in_html_text": false,
+            "marker_in_script_source": false,
+            "marker_reflected": false,
+            "redirect_present": false,
+            "script_count": 16,
+            "sql_error_shape": false,
+            "status_changed": false,
+            "title_present": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33603,
+              "body_sha256": "724a78dafa1fbe8ea481a615fe6ded97792daf08c35a08d4d4fba71fd256b2c3",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "collector": "sift-pikachu-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "59e7653b885c30ab4df6ad5fec70ffa533e4b726c2b2032c8fa7432c8ecee2f0",
+            "local_http_loopback": true,
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "body_length_delta": 72,
+              "body_length_delta_abs": 72,
+              "content_type_class": "html",
+              "external_redirect": false,
+              "form_count": 1,
+              "html_tag_count": 427,
+              "input_count": 2,
+              "marker_count": 0,
+              "marker_in_attribute": false,
+              "marker_in_html_text": false,
+              "marker_in_script_source": false,
+              "marker_reflected": false,
+              "redirect_present": false,
+              "script_count": 16,
+              "sql_error_shape": false,
+              "status_changed": false,
+              "title_present": true
+            },
+            "path": "/vul/sqli/sqli_blind_b.php",
+            "real_sleep_performed": false,
+            "reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "e325c8b4dae837b95a72",
+              "sequence": 6,
+              "state_change_allowed": false
+            },
+            "response": {
+              "body_length": 33675,
+              "body_sha256": "34fef391b608e80afcef1a49f6073875010aedb292d48e6b9f041443309a746c",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:8766"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.body_length_delta_abs"
+                },
+                "op": "ge",
+                "right": {
+                  "op": "const",
+                  "value": 256
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.sql_error_shape"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "or"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.body_length_delta_abs\"},\"op\":\"ge\",\"right\":{\"op\":\"const\",\"value\":256}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.sql_error_shape\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"or\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": false
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pikachu-local-pg03-sql-sqli_blind_time-safe-canary-52b80d35229a",
+          "source_id": "pikachu-local-container-pg-pk-01",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_blind_t.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pk-safe-probe-a1"
+            },
+            "marker": "pk-safe-probe-a1",
+            "probe_kind": "sql_channel_class",
+            "probe": "plain",
+            "expected": {},
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "52b80d35229a622353fcbf4ca999fff7dedb7c7b73061ca27dec98e724efe3f5"
+          },
+          "probe_artifact": {
+            "original": "plain",
+            "encoding": "query_percent_encoding",
+            "probe_sha256": "a116c9ed46d6207734a43317d30fd88f52ac8634c37d904bbf4e41d865f90475"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sqli_blind_time",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "bounded_sql_error_or_shape_delta"
+          },
+          "structural_feature": "sql:sql_channel_class:plain",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_blind_t.php",
+            "params": {
+              "name": "pk-safe-probe-a1",
+              "submit": "查询"
+            },
+            "fresh_reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "0c152fd9a4a2115de032",
+              "sequence": 7,
+              "state_change_allowed": false
+            },
+            "transport": "httpx_loopback"
+          },
+          "response_projection": {
+            "body_length": 33649,
+            "body_sha256": "c3b0700e5e17e544b11825a06ccbcabbdce52ce1da0caf28521278dc60c6480b",
+            "headers": {
+              "content-type": "text/html;charset=utf-8"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "body_length_delta": 47,
+            "body_length_delta_abs": 47,
+            "content_type_class": "html",
+            "external_redirect": false,
+            "form_count": 1,
+            "html_tag_count": 427,
+            "input_count": 2,
+            "marker_count": 0,
+            "marker_in_attribute": false,
+            "marker_in_html_text": false,
+            "marker_in_script_source": false,
+            "marker_reflected": false,
+            "redirect_present": false,
+            "script_count": 16,
+            "sql_error_shape": false,
+            "status_changed": false,
+            "title_present": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33602,
+              "body_sha256": "3c1b5166dfe2267840778270c2a34c3331540af237a881ba66c47afe47d7653d",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "collector": "sift-pikachu-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "e068c5ae7310d0664ccb0c898c290d26b744c9fe4ab34fe78028727f562864b3",
+            "local_http_loopback": true,
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "body_length_delta": 47,
+              "body_length_delta_abs": 47,
+              "content_type_class": "html",
+              "external_redirect": false,
+              "form_count": 1,
+              "html_tag_count": 427,
+              "input_count": 2,
+              "marker_count": 0,
+              "marker_in_attribute": false,
+              "marker_in_html_text": false,
+              "marker_in_script_source": false,
+              "marker_reflected": false,
+              "redirect_present": false,
+              "script_count": 16,
+              "sql_error_shape": false,
+              "status_changed": false,
+              "title_present": true
+            },
+            "path": "/vul/sqli/sqli_blind_t.php",
+            "real_sleep_performed": false,
+            "reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "0c152fd9a4a2115de032",
+              "sequence": 7,
+              "state_change_allowed": false
+            },
+            "response": {
+              "body_length": 33649,
+              "body_sha256": "c3b0700e5e17e544b11825a06ccbcabbdce52ce1da0caf28521278dc60c6480b",
+              "headers": {
+                "content-type": "text/html;charset=utf-8"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:8766"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.body_length_delta_abs"
+                },
+                "op": "ge",
+                "right": {
+                  "op": "const",
+                  "value": 256
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.sql_error_shape"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "or"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.body_length_delta_abs\"},\"op\":\"ge\",\"right\":{\"op\":\"const\",\"value\":256}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.sql_error_shape\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"or\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": false
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pikachu-local-container-pg-pk-01-xss-reflected-get-safe-canary-refinement-01-7cc9a768616c",
+          "source_id": "pikachu-local-container-pg-pk-01",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/xss/xss_reflected_get.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pk-refine-01"
+            },
+            "marker": "pk-refine-01",
+            "probe_kind": "encoded_dom_markup",
+            "probe": "&lt;span data-sift-marker=&#34;pk-refine-01&#34;&gt;x&lt;/span&gt;",
+            "expected": {},
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "7cc9a768616c38e9e6a6210a7772ee89972ebfab1bde8607c809f8fc57dd3885"
+          },
+          "probe_artifact": {
+            "original": "&lt;span data-sift-marker=&#34;pk-refine-01&#34;&gt;x&lt;/span&gt;",
+            "encoding": "html_entity_encode_depth_1_inert",
+            "probe_sha256": "29d8a1915664ad11899b321339bf1143efe4f0af1adf5fc1f3296b2d649e2a3b"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "xss_reflected_get_encoded_variant",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "encoding_boundary_only"
+          },
+          "structural_feature": "dom:encoded_dom_markup",
+          "evaluator_state_visible": false,
+          "replay": {
+            "target": "http://127.0.0.1:8766",
+            "method": "GET",
+            "path": "/vul/xss/xss_reflected_get.php",
+            "params": {
+              "message": "&lt;span data-sift-marker=&#34;pk-refine-01&#34;&gt;x&lt;/span&gt;",
+              "submit": "submit"
+            },
+            "fresh_reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "f4bac7e15f99eb3298b4",
+              "sequence": 8,
+              "state_change_allowed": false
+            },
+            "transport": "httpx_loopback"
+          },
+          "response_projection": {
+            "body_length": 33768,
+            "body_sha256": "82369414374c8f6c10791b75ee81110e6153fc765abcd7a80db58f7b5c1e1d45",
+            "headers": {
+              "content-type": "text/html"
+            },
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "body_length_delta": 109,
+            "body_length_delta_abs": 109,
+            "content_type_class": "html",
+            "external_redirect": false,
+            "form_count": 1,
+            "html_tag_count": 427,
+            "input_count": 2,
+            "marker_count": 1,
+            "marker_in_attribute": true,
+            "marker_in_html_text": true,
+            "marker_in_script_source": false,
+            "marker_reflected": true,
+            "redirect_present": false,
+            "script_count": 16,
+            "sql_error_shape": false,
+            "status_changed": false,
+            "title_present": true
+          },
+          "evidence": {
+            "baseline": {
+              "body_length": 33659,
+              "body_sha256": "1f76cf85c1b8499a7e0059e7bd6baba7a416841d76f86668f84438fc4c811eba",
+              "headers": {
+                "content-type": "text/html"
+              },
+              "status_code": 200
+            },
+            "collector": "sift-pikachu-replay-collector-v1",
+            "credentials_accessed": false,
+            "database_touched": false,
+            "evidence_hash": "2cf10005d06092763dd2685caff9fb996629f451468ff13a684759dc4e6f0289",
+            "local_http_loopback": true,
+            "method": "GET",
+            "navigation": false,
+            "network_access": false,
+            "oracle_projection": {
+              "body_length_delta": 109,
+              "body_length_delta_abs": 109,
+              "content_type_class": "html",
+              "external_redirect": false,
+              "form_count": 1,
+              "html_tag_count": 427,
+              "input_count": 2,
+              "marker_count": 1,
+              "marker_in_attribute": true,
+              "marker_in_html_text": true,
+              "marker_in_script_source": false,
+              "marker_reflected": true,
+              "redirect_present": false,
+              "script_count": 16,
+              "sql_error_shape": false,
+              "status_changed": false,
+              "title_present": true
+            },
+            "path": "/vul/xss/xss_reflected_get.php",
+            "real_sleep_performed": false,
+            "reset": {
+              "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh": false,
+              "kind": "pinned_container_read_only",
+              "reset_id": "f4bac7e15f99eb3298b4",
+              "sequence": 8,
+              "state_change_allowed": false
+            },
+            "response": {
+              "body_length": 33768,
+              "body_sha256": "82369414374c8f6c10791b75ee81110e6153fc765abcd7a80db58f7b5c1e1d45",
+              "headers": {
+                "content-type": "text/html"
+              },
+              "status_code": 200
+            },
+            "script_execution": false,
+            "target": "http://127.0.0.1:8766"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_in_attribute"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_in_script_source"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle_projection.marker_reflected"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "or"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_in_attribute\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_in_script_source\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle_projection.marker_reflected\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"or\"}",
+          "rule_ir_complexity": 10,
+          "rule_ir_result": true
+        }
+      ]
+    }
+  ],
+  "safety": {
+    "local_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_touched": false,
+    "evaluator_state_visible": false,
+    "real_exploit_strings": false
+  },
+  "catalog_sha256": "a03f321e22891e27a8ea8cbe3652ea8ce79efaad85b6c4e91faf84f3c3194b48"
+}

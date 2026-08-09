@@ -1,0 +1,2744 @@
+{
+  "protocol_id": "pg-pk-246-vulnerableapp-independent-dom-holdout-v1",
+  "schema_version": "pg246-vulnerableapp-independent-dom-holdout-report-v1",
+  "status": "completed_independent_implementation_route_holdout",
+  "device": "cuda",
+  "model": {
+    "variant": "frozen_xxl_field_token_decoder",
+    "artifact": "artifacts\\pg206-body-capacity-v1\\xxl_field_token_adapter.pt",
+    "artifact_sha256": "0bcb124e974d18a1c4f764bfb2430ffb419ca5a6d6138baffbbfc30b71a3af2c",
+    "online_weight_update": false,
+    "ai_selects_abstract_channel": true
+  },
+  "source": {
+    "source_id": "pg246_vulnerableapp_source_independent",
+    "target_id": "owasp_vulnerableapp_2_1_44",
+    "app_family": "owasp_vulnerableapp",
+    "target_implementation": "sasanlabs-vulnerableapp-java-spring",
+    "source_commit": "sasanlabs-vulnerableapp-2.1.44",
+    "license": "local-container",
+    "authorization": "workspace_local_only",
+    "loopback_origin": "http://127.0.0.1:19090",
+    "container_image_digest": "sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+    "reset_script_sha256": "3c98bd8ed605204e37e0a755fd69333cb4ae873cc80ef48ad1a4ca1d5c8e9a59",
+    "independent_from_pikachu": true,
+    "external_network": false
+  },
+  "generator": {
+    "id": "pg246-vulnerableapp-dom-surface-generator-v1",
+    "independent_from_pikachu_binder": true
+  },
+  "parameter_discovery": {
+    "source": "VulnerableApp scanner metadata plus local class-level RequestParam annotation audit",
+    "route_parameter_fields": {
+      "vapp_html_level1_get": [
+        "probe"
+      ],
+      "vapp_html_level4_secure_get": [
+        "probe"
+      ],
+      "vapp_img_level1_get": [
+        "src"
+      ],
+      "vapp_img_level6_secure_get": [
+        "src"
+      ],
+      "vapp_html_level1_post_405": [
+        "probe"
+      ],
+      "vapp_img_level1_post_405": [
+        "src"
+      ]
+    },
+    "raw_source_persisted": false,
+    "route_parameter_hashes": {
+      "vapp_html_level1_get": "ba9c736f19e7f60b7f6764adb0b7908c0a2b394e09b6c09863528c7f2bc86095",
+      "vapp_html_level4_secure_get": "ba9c736f19e7f60b7f6764adb0b7908c0a2b394e09b6c09863528c7f2bc86095",
+      "vapp_img_level1_get": "25a6634263c1b1f6fc4697a04e2b9904ea4b042a89af59dc93ec1f5d44848a26",
+      "vapp_img_level6_secure_get": "25a6634263c1b1f6fc4697a04e2b9904ea4b042a89af59dc93ec1f5d44848a26",
+      "vapp_html_level1_post_405": "ba9c736f19e7f60b7f6764adb0b7908c0a2b394e09b6c09863528c7f2bc86095",
+      "vapp_img_level1_post_405": "25a6634263c1b1f6fc4697a04e2b9904ea4b042a89af59dc93ec1f5d44848a26"
+    }
+  },
+  "seeds": [
+    24601,
+    24602,
+    24603
+  ],
+  "cases": [
+    {
+      "case_id": "vapp_html_level1_get",
+      "field": "probe",
+      "method": "GET",
+      "surface_role": "xss_html_tag_surface",
+      "expected": "positive",
+      "style": "html",
+      "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2"
+    },
+    {
+      "case_id": "vapp_html_level4_secure_get",
+      "field": "probe",
+      "method": "GET",
+      "surface_role": "xss_html_tag_surface",
+      "expected": "negative",
+      "style": "html",
+      "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02"
+    },
+    {
+      "case_id": "vapp_img_level1_get",
+      "field": "src",
+      "method": "GET",
+      "surface_role": "xss_img_attribute_surface",
+      "expected": "positive",
+      "style": "img",
+      "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86"
+    },
+    {
+      "case_id": "vapp_img_level6_secure_get",
+      "field": "src",
+      "method": "GET",
+      "surface_role": "xss_img_attribute_surface",
+      "expected": "negative",
+      "style": "img",
+      "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45"
+    },
+    {
+      "case_id": "vapp_html_level1_post_405",
+      "field": "probe",
+      "method": "POST",
+      "surface_role": "xss_html_tag_surface",
+      "expected": "unsupported_post",
+      "style": "html",
+      "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2"
+    },
+    {
+      "case_id": "vapp_img_level1_post_405",
+      "field": "src",
+      "method": "POST",
+      "surface_role": "xss_img_attribute_surface",
+      "expected": "unsupported_post",
+      "style": "img",
+      "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86"
+    }
+  ],
+  "counts": {
+    "seed_count": 3,
+    "case_count": 6,
+    "initial_episode_count": 18,
+    "replay_count": 18,
+    "fresh_container_count": 36,
+    "get_count": 12,
+    "post_count": 6,
+    "model_safe_candidate_count": 12,
+    "ai_send_count": 12,
+    "reference_send_count": 12,
+    "confirmed_positive_count": 6,
+    "negative_control_clean_count": 18,
+    "model_missed_positive_count": 0,
+    "model_false_positive_count": 0,
+    "environment_failure_count": 6,
+    "post_405_abstain_count": 6,
+    "replay_match_count": 18,
+    "external_network_count": 0,
+    "external_request_blocked_count": 0,
+    "wire_display_count": 78,
+    "dataset_record_count": 54,
+    "gold_record_count": 12,
+    "hard_negative_record_count": 42,
+    "quarantine_record_count": 0
+  },
+  "route_holdout": {
+    "positive_cases": [
+      "vapp_html_level1_get",
+      "vapp_img_level1_get"
+    ],
+    "secure_negative_cases": [
+      "vapp_html_level4_secure_get",
+      "vapp_img_level6_secure_get"
+    ],
+    "positive_recall": 1.0,
+    "secure_false_accept_count": 0,
+    "post_abstain_recall": 1.0,
+    "implementation_holdout_from_pikachu": true
+  },
+  "episodes": [
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level1_get",
+      "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+      "surface_role": "xss_html_tag_surface",
+      "method": "GET",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "positive",
+      "seed": 24601,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24601-0-83a3cc135c1a",
+        "target_instance_hash": "7b5f0155f1387ca2a5a2ff0e4c2226d3fcb71b4c8c51d0ad8a538a2c514c75c3",
+        "state_epoch": "pg246-24601-0-83a3cc135c1a",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "aa2d6acce0dedba1c179670b3aad584879927aabf00234edd4b64df598a766bb",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "no_effect",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "2a1da5b6c9a4cc30d136596ad690622b5d89a84a6888cb45ed65ce4af996e4c7"
+        },
+        "binding_sha256": "2a1da5b6c9a4cc30d136596ad690622b5d89a84a6888cb45ed65ce4af996e4c7"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "57606c1921070e157a7433c2ece5e9ec41f2923b19d709b3f7d8086106d8f593",
+          "marker_observed": true,
+          "marker_sha256": "83bf01f42a81aabe0d2905ea7af3260d21d4d76e6740ae7ff2311ac08cd86ed9",
+          "script_execution": true,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "055412794782096b9980940176de880bfcfe6d3a9d259c2c5b50d92507e8780b",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "af6e8df02906df04ef3b146c70a95be868380165a4d7f8afb1808f5c66011847",
+          "marker_observed": true,
+          "marker_sha256": "b3aa595ba1af66cb581de282f8a5411f2c0030d666e2242abba353d70242857b",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "c3412758f5a467a6ee2496cea8f17d6dffc647aeb578a8b6282a5de5d311bc65"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": true,
+        "negative_control_clean": true,
+        "evidence_hash": "ccc009de959d4df622cbefbc864f2e58fcfcc934c27a6418b32767351293a73b",
+        "reasons": []
+      },
+      "failure_signature": "typed_effect",
+      "failure_stage": "oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24601:vapp_html_level1_get:20223af7608a",
+      "record_id": "pg246:24601:vapp_html_level1_get:ccc009de959d",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24601-1000-9aeca0580df5",
+          "target_instance_hash": "366cf9d2b8e1c6bb01b31de692490f76193638d3955a0063e8e068d7e7f2d2af",
+          "state_epoch": "pg246-24601-1000-9aeca0580df5",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a682482cd4854eab4dcc3f9cb18a6b1fd18af2d7ddd13f82ddbb9cee49ee4581",
+          "marker_observed": true,
+          "marker_sha256": "f6129ee7b28853b16553fba678a03418445a1347be526bed6faf6361f38924b7",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": true,
+        "expected_match": true,
+        "evidence_hash": "5ead72cb9fa834a0e83b5db78bbb215119ee8b3d9392dfed42057c146efb0eab",
+        "record_id": "pg246:24601:vapp_html_level1_get:5ead72cb9fa8"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level4_secure_get",
+      "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+      "surface_role": "xss_html_tag_surface",
+      "method": "GET",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "negative",
+      "seed": 24601,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24601-1-2cd1e2337524",
+        "target_instance_hash": "39d8ca511ebe7f50335a27e7435c7f32a99dff719020573e27a07b4872de4ab7",
+        "state_epoch": "pg246-24601-1-2cd1e2337524",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "6c6fb40233e072f48db578b117fac38316d3fd1c8dfbee95c55a8ddc88619f4a",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "no_effect",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "748ead82e6e5115a7bbca5acb76d51d078b31b7cc0fe5e09300b7cebdbae3a85"
+        },
+        "binding_sha256": "748ead82e6e5115a7bbca5acb76d51d078b31b7cc0fe5e09300b7cebdbae3a85"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "5f001a3d470c3a83040dbaadd2c795731a8cce127f1e7beffbe29e56d8ae5b37",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "3865d887a2e88e6599977bd9506e12c068cddd9ae9b86af000e46ac3d83fe00c",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "88279d245c91b44355ac50ecd5027e9f95acf33ea3e89acb71a8371421e2688f",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "5fb89105a179368eef5eee018ede8202d01db55e24daeb54bf71184a4bb5d4da"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "9d069a63ec2e4f8e08146d4fc363b6e860ddcef4e26b529576133a03c03dff4a",
+        "reasons": [
+          "counterfactual_candidate_no_effect"
+        ]
+      },
+      "failure_signature": "counterfactual_candidate_no_effect",
+      "failure_stage": "typed_oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24601:vapp_html_level4_secure_get:906ed02e696b",
+      "record_id": "pg246:24601:vapp_html_level4_secure_get:9d069a63ec2e",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24601-1001-16edfb7a10a3",
+          "target_instance_hash": "51fcb506b419181414fbcb93d241bc0284aba0605e584ee84239a79d6ba8049e",
+          "state_epoch": "pg246-24601-1001-16edfb7a10a3",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "9266d41cda0dca563f7d2d27f0e177a5c8805abc2c2df2f9e05dd80ae6a00453",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "6cf9f2ffecb049d408729b9f98a61dc2af8b913cdf2ce16b6c3c6ee6c18e4cbe",
+        "record_id": "pg246:24601:vapp_html_level4_secure_get:6cf9f2ffecb0"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level1_get",
+      "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "GET",
+      "field_names": [
+        "src"
+      ],
+      "expected": "positive",
+      "seed": 24601,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24601-2-7cf6c065d353",
+        "target_instance_hash": "642e0b3e608660f9bf89c9d2a7a4228a331fd18238017364c53e9a855e6b10f6",
+        "state_epoch": "pg246-24601-2-7cf6c065d353",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "8cf0a977e0647572fc6afad0332714c9d8163953dd2bc3c57702ca8c9986cab3",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 2,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "789d5c203255d03e59d6466110f25738401ae136b029aeefab73c8b93b8d128f"
+        },
+        "binding_sha256": "789d5c203255d03e59d6466110f25738401ae136b029aeefab73c8b93b8d128f"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "2e25b25247c28160e9ca98eaf204ed49ca3cb3bc48d92e72ab9caaadea271cf3",
+          "marker_observed": true,
+          "marker_sha256": "9482a5f3810cb9f627317b1a871b8c7a2f04ec1d6f761b30a019f2a2734466db",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "77c03590e946cf7e1883ad2a00e55ee75ad8064925120a359909e37eebe45158",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "15f4f5e3ea2fac591c29153ece2d017b9061a1a88a87b258afa6db7d315f1d02",
+          "marker_observed": true,
+          "marker_sha256": "b16529c0d7413fcb62e67dcd49e305456e0dd47c4f87502adac3b127950ab229",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "27522a3ecd02e05f6763701265d0472493792a8fbff67236290b32c4cd7ec6e5"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": true,
+        "negative_control_clean": true,
+        "evidence_hash": "11b349aefe6cbb39abf1b4d16252be791c32f2886984af28a76b0271bb3d27a6",
+        "reasons": []
+      },
+      "failure_signature": "typed_effect",
+      "failure_stage": "oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24601:vapp_img_level1_get:8e17e3fc4146",
+      "record_id": "pg246:24601:vapp_img_level1_get:11b349aefe6c",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24601-1002-e3e0d8605d91",
+          "target_instance_hash": "0285f0b3c1a082f048f4e0b852b9bda18a16386cd2dff56c9df4255ecef13639",
+          "state_epoch": "pg246-24601-1002-e3e0d8605d91",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "b9081aacdee9f86707c00744d4232efdef25e85d4bb60959157b36ef51fd8353",
+          "marker_observed": true,
+          "marker_sha256": "dd474dd0147e575be6f3b5926ca45b002a4d8fca0a7dd950746512831ccd432e",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": true,
+        "expected_match": true,
+        "evidence_hash": "90e2732df86062601493a5bf1a1417f688a768bd71da2a532784f2e2682e1f47",
+        "record_id": "pg246:24601:vapp_img_level1_get:90e2732df860"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level6_secure_get",
+      "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "GET",
+      "field_names": [
+        "src"
+      ],
+      "expected": "negative",
+      "seed": 24601,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24601-3-231fda3b535e",
+        "target_instance_hash": "0d007e3024ff8507b2a385f4a54386498bb53e4be733faa495407388cef5a9bd",
+        "state_epoch": "pg246-24601-3-231fda3b535e",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "a737c9f68e91ea670e8ee9a9c0514ac9bf13d8c233e759d8984afcd1857d3b88"
+        },
+        "binding_sha256": "a737c9f68e91ea670e8ee9a9c0514ac9bf13d8c233e759d8984afcd1857d3b88"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "8fd625f2f1f890dcc52496a4a387b41a6a6856b75fe8cca92c183d8b1d1ca6a2",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "4a826e03763946051775511566de54fe6a1e9f7ffea72f94166f2e7719450df6"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "28a6b483f98dd819a79c622b82217d89f43c73ed5382e8c2b659c4d88646f680",
+        "reasons": [
+          "counterfactual_candidate_no_effect"
+        ]
+      },
+      "failure_signature": "counterfactual_candidate_no_effect",
+      "failure_stage": "typed_oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24601:vapp_img_level6_secure_get:f1c3d9b8ed50",
+      "record_id": "pg246:24601:vapp_img_level6_secure_get:28a6b483f98d",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24601-1003-2ad499f15415",
+          "target_instance_hash": "18d06ec1041c6f7ad5059ef38a8711c26dd30f1761cf40dadd5d5606b9fa7e7f",
+          "state_epoch": "pg246-24601-1003-2ad499f15415",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "8fecc2bada7c4c8b149181c3b2535556c656f683bc5dce0fb016badc69479406",
+        "record_id": "pg246:24601:vapp_img_level6_secure_get:8fecc2bada7c"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level1_post_405",
+      "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+      "surface_role": "xss_html_tag_surface",
+      "method": "POST",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "unsupported_post",
+      "seed": 24601,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24601-4-f5fbdefc40ea",
+        "target_instance_hash": "4f5deb1b04a7364ba0b2d94ab1831e094fb2b45b9c18c38f1ab7e35f202c73e1",
+        "state_epoch": "pg246-24601-4-f5fbdefc40ea",
+        "fresh_target": true,
+        "method": "POST",
+        "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 6,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "abstain",
+        "effective_action": "abstain",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "f88319baf078198c9a3e97a5f010dd0ec00c140bdf39d88ae5b86215a33f564d"
+        },
+        "binding_sha256": "f88319baf078198c9a3e97a5f010dd0ec00c140bdf39d88ae5b86215a33f564d"
+      },
+      "ai": {
+        "sent": false
+      },
+      "reference": {
+        "sent": false,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "dc1c7d6bf6269adb597fa5c6de1bccc69e42cf1f585ff887a625f5d37fca9162"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": false,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "5ac2f0d0967dc1cda22ad4121474235a8bf48ff36abe7b49624b83795468755a",
+        "reasons": [
+          "unsupported_post_405"
+        ]
+      },
+      "failure_signature": "unsupported_post_405",
+      "failure_stage": "transport_or_adapter",
+      "failure_is_model_or_environment": "environment",
+      "counterfactual_record_id": "pg246:24601:vapp_html_level1_post_405:6ba927548dd8",
+      "record_id": "pg246:24601:vapp_html_level1_post_405:5ac2f0d0967d",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24601-1004-4a09cb89f1e1",
+          "target_instance_hash": "cb730a436ac328ee5f15bd8af30577a9346f32231420b49c26714b4c9a421687",
+          "state_epoch": "pg246-24601-1004-4a09cb89f1e1",
+          "fresh_target": true,
+          "method": "POST",
+          "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "568e8b8c3123103be59825439189ed1f6d19426c998a1589bbe2f908d1288658",
+        "record_id": "pg246:24601:vapp_html_level1_post_405:568e8b8c3123"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level1_post_405",
+      "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "POST",
+      "field_names": [
+        "src"
+      ],
+      "expected": "unsupported_post",
+      "seed": 24601,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24601-5-5e9a45f5b5ab",
+        "target_instance_hash": "81b74b388871b94f63ac20228f125b28c2d84b0b5b03a19c6ea805a22c40e552",
+        "state_epoch": "pg246-24601-5-5e9a45f5b5ab",
+        "fresh_target": true,
+        "method": "POST",
+        "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "abstain",
+        "effective_action": "abstain",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "e68e16003c90aa1c9219af6cd8c4d016416878bf1286b7f3cadc5a3e4a927b17"
+        },
+        "binding_sha256": "e68e16003c90aa1c9219af6cd8c4d016416878bf1286b7f3cadc5a3e4a927b17"
+      },
+      "ai": {
+        "sent": false
+      },
+      "reference": {
+        "sent": false,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "dc1c7d6bf6269adb597fa5c6de1bccc69e42cf1f585ff887a625f5d37fca9162"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": false,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "0725bbd14c5ea74fd97a3b15d0c858fbb8e9f25272fcd191fbaffcfc39a2d4b1",
+        "reasons": [
+          "unsupported_post_405"
+        ]
+      },
+      "failure_signature": "unsupported_post_405",
+      "failure_stage": "transport_or_adapter",
+      "failure_is_model_or_environment": "environment",
+      "counterfactual_record_id": "pg246:24601:vapp_img_level1_post_405:2522a73bf9e3",
+      "record_id": "pg246:24601:vapp_img_level1_post_405:0725bbd14c5e",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24601-1005-96ae6ac35227",
+          "target_instance_hash": "e05acf501a33482747258ba2ca1ef2d08221c2dcf5b800e04c654baca8a1144c",
+          "state_epoch": "pg246-24601-1005-96ae6ac35227",
+          "fresh_target": true,
+          "method": "POST",
+          "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "dc7871cb8b2ee33c02d09b1c80b92ec391373a00194c1021dc0e1a61adb4c8e5",
+        "record_id": "pg246:24601:vapp_img_level1_post_405:dc7871cb8b2e"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level1_get",
+      "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+      "surface_role": "xss_html_tag_surface",
+      "method": "GET",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "positive",
+      "seed": 24602,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24602-6-082f974fb0a1",
+        "target_instance_hash": "3568dae21af1cda6c5083abec3e68e1113209f47fc2d50893a50c68da136ca2c",
+        "state_epoch": "pg246-24602-6-082f974fb0a1",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "124feda9a266d0acce6cef2b9c080459f397f94a9cd2ac3d31d37fe0a85ada5a",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "no_effect",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "c777a3efc4f9e59c1df7de9fec97bf0c8d24aa9eaf3b1a21af5a2d0ca4f5d230"
+        },
+        "binding_sha256": "c777a3efc4f9e59c1df7de9fec97bf0c8d24aa9eaf3b1a21af5a2d0ca4f5d230"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "900c5160772e4ae99a33c6aeb9486137512cc69778d6769b6febba2bf2159d6d",
+          "marker_observed": true,
+          "marker_sha256": "cdf025c6ca2b27ce82ec4fa67e64246a6540b550552d889ea810ae9d597ab1ec",
+          "script_execution": true,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "881131f50064d207cb4c237dbe4e3bc187ffad284ab0897e7ee3c7225971cc66",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "8feb365fc8bbd814a3926fcc69aff2d86bebcf7e5d18cdde63724f0ecb9c9ff1",
+          "marker_observed": true,
+          "marker_sha256": "a917ad50b08f610e0ffffb2f76a402a494cc802b7365cf412a83eb84218ea96d",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "4a6b2241011c6b3d79ffbb3b65d340ce10f19bfa5b5c7949f653085f3ef9792d"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": true,
+        "negative_control_clean": true,
+        "evidence_hash": "ca05a9997631bf1d2995980bc963dbbdc8e5548697e4683dcba387a9752345c2",
+        "reasons": []
+      },
+      "failure_signature": "typed_effect",
+      "failure_stage": "oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24602:vapp_html_level1_get:642c5fedfe71",
+      "record_id": "pg246:24602:vapp_html_level1_get:ca05a9997631",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24602-1006-3104f7df4d8e",
+          "target_instance_hash": "020a1cbaa9706c65bc6f327701ba2e0abbc227f94c8bdce572d83fe1df7680e2",
+          "state_epoch": "pg246-24602-1006-3104f7df4d8e",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "746adf93b78b26409e287887ced3dd87097ca1d81257a0964bd51cafedd69c08",
+          "marker_observed": true,
+          "marker_sha256": "9893d5ee635a71a6a5e37cad3a320f9c3401c250729547677173d432c7c38f40",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": true,
+        "expected_match": true,
+        "evidence_hash": "2eb73e0fe18200a198ef22eecc3ba3624bb4236f2c7b67ec2c9fa73ade39ba68",
+        "record_id": "pg246:24602:vapp_html_level1_get:2eb73e0fe182"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level4_secure_get",
+      "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+      "surface_role": "xss_html_tag_surface",
+      "method": "GET",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "negative",
+      "seed": 24602,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24602-7-e85b46ea3421",
+        "target_instance_hash": "dd24d2d7bc8581685fa0a1e6cf9148016e2c8d5d1df99a5d265db90a86f1bccb",
+        "state_epoch": "pg246-24602-7-e85b46ea3421",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "7d9d741d0ca650a929b9233e1148d947a020b6c9a8e449c97060b5518c024960",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "no_effect",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "dc8fb0e9c326d52ba12807f52da7ece123973f5b3738fb0b5324f4c91a0c810d"
+        },
+        "binding_sha256": "dc8fb0e9c326d52ba12807f52da7ece123973f5b3738fb0b5324f4c91a0c810d"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "99fcb1195dbd1e3b8a981487c1e9225a734abb0db8bee6c0a2f3fb958f48668a",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "ab62feafd090492efa2adacd860a1743092fb54e1a7555df006dcdbcb292267e",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "3fd06f8a8a2e75e318884cb5b2036f85f655885cd24efdb42a5622b616202416",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "89c579edae21ace8ae45d2a17469ffa366e216fd74c0ea723ac373626c02b6e6"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "fd7c7bd0fbe393d0dfa9cee32355a7a44a27e903a0b82d3b1ff88632d56d6b49",
+        "reasons": [
+          "counterfactual_candidate_no_effect"
+        ]
+      },
+      "failure_signature": "counterfactual_candidate_no_effect",
+      "failure_stage": "typed_oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24602:vapp_html_level4_secure_get:3d032dfe89e4",
+      "record_id": "pg246:24602:vapp_html_level4_secure_get:fd7c7bd0fbe3",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24602-1007-76758ab88c58",
+          "target_instance_hash": "7e561c1633d5d5d8176f55f8b4de61db65affafc76fd96e05a44face8ec17b70",
+          "state_epoch": "pg246-24602-1007-76758ab88c58",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "8360e83e0be501b37b850119b74c11ec596986b78be4baf0b17a8f212a17dc3f",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "ebb0e6d75769426da0a979d6b904115144e3b8e4d7e16876d17c9cfdab5d4785",
+        "record_id": "pg246:24602:vapp_html_level4_secure_get:ebb0e6d75769"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level1_get",
+      "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "GET",
+      "field_names": [
+        "src"
+      ],
+      "expected": "positive",
+      "seed": 24602,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24602-8-7dc9ba703cf4",
+        "target_instance_hash": "ea2d5d72108ba03aedd3e8b5e652d89d938e1d1fccdce9020c3ba8eb958afcfc",
+        "state_epoch": "pg246-24602-8-7dc9ba703cf4",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "9bc8b73ca5ba84fd99de68d504c2874cb38ccb601e13fde5320aae8fbc4ccdc6",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 2,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "7f79df341acdd5112b4952c0e47aa7400b16b79fabd7d7df477c244c6d92315d"
+        },
+        "binding_sha256": "7f79df341acdd5112b4952c0e47aa7400b16b79fabd7d7df477c244c6d92315d"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "7bb6fa7c39d6a2e2034555dfcc9cc751eef52465fc15b14b0983c4b02de5dec1",
+          "marker_observed": true,
+          "marker_sha256": "c6c7467bb8f388cb40fc1d385ccae9f464cb8636a4213e573b26819c9eabe2f9",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "4bacf2eabfc1df07cbe9a057c44d1f867a0512cb1b80f7d310a45fe2cfefa497",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "d48e603ed8b49144819ff49105ced61a4a5ece6c56e1d552439022c60250f3b9",
+          "marker_observed": true,
+          "marker_sha256": "55dcf334fd9b177233a30b8c255ad6bb47aa7f3069f315b37e71854f5aa81d69",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "cc711e664608e55b758db8e5783d09c3cc571f388cf541ea285e7e30c70fa67e"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": true,
+        "negative_control_clean": true,
+        "evidence_hash": "610b6352528965e91d9e928fb58d0ba8428966c77f4a673bc79954e5b2e41cb8",
+        "reasons": []
+      },
+      "failure_signature": "typed_effect",
+      "failure_stage": "oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24602:vapp_img_level1_get:e092ec9dfa81",
+      "record_id": "pg246:24602:vapp_img_level1_get:610b63525289",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24602-1008-b58fb8072c6d",
+          "target_instance_hash": "6124c2781e70fbff77f566127ddcd6f76115f2f1465ccf02d41bad3573085413",
+          "state_epoch": "pg246-24602-1008-b58fb8072c6d",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "10dedee7fc4ddb5ea41e9190f91936e4d5fbafeed9da5edebe49d9e6ffa56fc3",
+          "marker_observed": true,
+          "marker_sha256": "85a897a70fa7f8352dad299e2a31d5db119eeaa21bb74bc32a4d4f4da2cc2e0f",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": true,
+        "expected_match": true,
+        "evidence_hash": "12f2219a1eedfc9ee158a670ef401d8d5270ce494c136658ca322c6279273bdd",
+        "record_id": "pg246:24602:vapp_img_level1_get:12f2219a1eed"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level6_secure_get",
+      "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "GET",
+      "field_names": [
+        "src"
+      ],
+      "expected": "negative",
+      "seed": 24602,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24602-9-1cef87bbf9ff",
+        "target_instance_hash": "c93cd772b10a2ece354a43877f836e49441dfdc48c2e8a52bfa9333d1f5b3c8f",
+        "state_epoch": "pg246-24602-9-1cef87bbf9ff",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "36ee2b90b76a5ec49f48e5b476413a20788f0754f3b01460188cb70112148c70"
+        },
+        "binding_sha256": "36ee2b90b76a5ec49f48e5b476413a20788f0754f3b01460188cb70112148c70"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "ba9d3c23b68e57604756cf3f7b77ab96beb0abeb2440336e98ac4371bb42bf62",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "a6067e6edbefff64186d1c88a184e81641339851fb3fc0d45c59651b5e039d05"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "ff9940378dd3ec9e5b245588572c12d3573ef417e12b5b1cd7c0b5972f6dc7a3",
+        "reasons": [
+          "counterfactual_candidate_no_effect"
+        ]
+      },
+      "failure_signature": "counterfactual_candidate_no_effect",
+      "failure_stage": "typed_oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24602:vapp_img_level6_secure_get:2f0c8c97ff46",
+      "record_id": "pg246:24602:vapp_img_level6_secure_get:ff9940378dd3",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24602-1009-69f7f3fab98b",
+          "target_instance_hash": "64900e06be72fafb2b1bc1d604643cacad7ff41319a8485b7194acd5df8da18d",
+          "state_epoch": "pg246-24602-1009-69f7f3fab98b",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "44fdbc7065684dfc9d4a86ca0753ce946331169974675dfa7e4f436c1dda6f90",
+        "record_id": "pg246:24602:vapp_img_level6_secure_get:44fdbc706568"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level1_post_405",
+      "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+      "surface_role": "xss_html_tag_surface",
+      "method": "POST",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "unsupported_post",
+      "seed": 24602,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24602-10-25c2a30fdff1",
+        "target_instance_hash": "6a0317b02b0dc5d9c981aa22a259bc7440498417852387e34997dce3e12dc515",
+        "state_epoch": "pg246-24602-10-25c2a30fdff1",
+        "fresh_target": true,
+        "method": "POST",
+        "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "abstain",
+        "effective_action": "abstain",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "3510cab59898c08cb7cad3389952cd5483a4bb403df8b022f3303eb38a5f1b53"
+        },
+        "binding_sha256": "3510cab59898c08cb7cad3389952cd5483a4bb403df8b022f3303eb38a5f1b53"
+      },
+      "ai": {
+        "sent": false
+      },
+      "reference": {
+        "sent": false,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "36cd83140859d53a4446b8959a609e8d55948b0956bd42f1d46f8120d48105bf"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": false,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "cf9f4c6bc056ed8d9eba456963d723ab2f55ed8c0c256f6fa5b7101a2e949050",
+        "reasons": [
+          "unsupported_post_405"
+        ]
+      },
+      "failure_signature": "unsupported_post_405",
+      "failure_stage": "transport_or_adapter",
+      "failure_is_model_or_environment": "environment",
+      "counterfactual_record_id": "pg246:24602:vapp_html_level1_post_405:09472ae8abab",
+      "record_id": "pg246:24602:vapp_html_level1_post_405:cf9f4c6bc056",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24602-1010-3415e6f7d138",
+          "target_instance_hash": "54d22ee757ac57995e4ac3808326bb3c9c831d0fa1507f47b4f7624bde435357",
+          "state_epoch": "pg246-24602-1010-3415e6f7d138",
+          "fresh_target": true,
+          "method": "POST",
+          "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "534d2213117981b08b7d4f919ed62249be03b6663c88d18e446dfcd91e033b5a",
+        "record_id": "pg246:24602:vapp_html_level1_post_405:534d22131179"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level1_post_405",
+      "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "POST",
+      "field_names": [
+        "src"
+      ],
+      "expected": "unsupported_post",
+      "seed": 24602,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24602-11-5c0cddd8fd74",
+        "target_instance_hash": "bc6b0b609d02162edc5d39e0269cfade8b6b4deff5615c414837359305648cbd",
+        "state_epoch": "pg246-24602-11-5c0cddd8fd74",
+        "fresh_target": true,
+        "method": "POST",
+        "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "abstain",
+        "effective_action": "abstain",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "eb20d657db01f85c03f7f7f5e04452ce0cf24d8fd126f6f602b13c26b5bc5341"
+        },
+        "binding_sha256": "eb20d657db01f85c03f7f7f5e04452ce0cf24d8fd126f6f602b13c26b5bc5341"
+      },
+      "ai": {
+        "sent": false
+      },
+      "reference": {
+        "sent": false,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "36cd83140859d53a4446b8959a609e8d55948b0956bd42f1d46f8120d48105bf"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": false,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "3048a6691becb3c906db3be6fa950423fd6edb9c8916136863cc09cc5a62bb9f",
+        "reasons": [
+          "unsupported_post_405"
+        ]
+      },
+      "failure_signature": "unsupported_post_405",
+      "failure_stage": "transport_or_adapter",
+      "failure_is_model_or_environment": "environment",
+      "counterfactual_record_id": "pg246:24602:vapp_img_level1_post_405:feb8c4ba27a3",
+      "record_id": "pg246:24602:vapp_img_level1_post_405:3048a6691bec",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24602-1011-8558e80be3ee",
+          "target_instance_hash": "98ef1c7a0b65cf57e96d896ef418db29a38e25cd5a379498b11970b028202ab6",
+          "state_epoch": "pg246-24602-1011-8558e80be3ee",
+          "fresh_target": true,
+          "method": "POST",
+          "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "596e986c475f36a924266919527f63d4d3f727825a2ee3fbea7f376d72bc81c7",
+        "record_id": "pg246:24602:vapp_img_level1_post_405:596e986c475f"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level1_get",
+      "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+      "surface_role": "xss_html_tag_surface",
+      "method": "GET",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "positive",
+      "seed": 24603,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24603-12-929d4f5a6d6c",
+        "target_instance_hash": "12a9f13b5e44774226a7b5ec09290575cfdda483df4e82567e7203525108fca6",
+        "state_epoch": "pg246-24603-12-929d4f5a6d6c",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "366499206566a9a5e8af746644def12e316c9dc90e74b72d17d76a9646b25930",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "no_effect",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "193f0af8d10ff55eae2c70081fdf8f22f97d15ff918edbd0f738ede97c449284"
+        },
+        "binding_sha256": "193f0af8d10ff55eae2c70081fdf8f22f97d15ff918edbd0f738ede97c449284"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "2441d440bf27d9ed7fbf73feb85e20b916eeb91db60cbc1df380ac58a9055ecb",
+          "marker_observed": true,
+          "marker_sha256": "6c630755b4674989877887ee19157b29b4976a063d8b7cbc1c8705f41a6fe532",
+          "script_execution": true,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "d735f0177d18724f4ae98e3ea755387fbd1d76e6d03736e1e713d94b084089d7",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "373b03e9b615387ce200a2869ab71c5e6998a2f6469d811b3b2cdf0027506751",
+          "marker_observed": true,
+          "marker_sha256": "5e033554acf21bcff261266728cc586395f87e76684639c9f50aa08d9a49ec0a",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "87ff43b5df232ebd042c93d85ab9f776bf157018a021a2e556efb2331f5cdef2"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": true,
+        "negative_control_clean": true,
+        "evidence_hash": "010d02e582bd951aa6800e334ad8e0ca1ab189056d365e01c8c1f0431d101e64",
+        "reasons": []
+      },
+      "failure_signature": "typed_effect",
+      "failure_stage": "oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24603:vapp_html_level1_get:18b79fb62df5",
+      "record_id": "pg246:24603:vapp_html_level1_get:010d02e582bd",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24603-1012-1ecab9b0cb55",
+          "target_instance_hash": "aeccf273516665410238c4dcf95eb80eef0bcd6801a5fdc31580eef4fb0f9d31",
+          "state_epoch": "pg246-24603-1012-1ecab9b0cb55",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "685fdb91cd521d93cd5247fdd51468b2dcc029ed03abd538c79fa9ed7bb405ce",
+          "marker_observed": true,
+          "marker_sha256": "4fca7872c4d9e8070f5ebda455aeaf2e4b5b8f44960ea979ed042554517efff9",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": true,
+        "expected_match": true,
+        "evidence_hash": "cc4a8c60ed530f966c89803ec2bb6fc9c17157ea68ae50103f6c8e4c0f12d919",
+        "record_id": "pg246:24603:vapp_html_level1_get:cc4a8c60ed53"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level4_secure_get",
+      "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+      "surface_role": "xss_html_tag_surface",
+      "method": "GET",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "negative",
+      "seed": 24603,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24603-13-91416beb2be3",
+        "target_instance_hash": "dd298fdaecf642645fc8982dbad78a321e5013b97356efa86dbf0e446f6a4fd7",
+        "state_epoch": "pg246-24603-13-91416beb2be3",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "60a99aca9ba39145e39e5b85fd597bb7ccf18679c50383a22f1374db4ebf10f0",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "no_effect",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "155ff529a53b55c907a08355a62e1b2974d39a59b16c3f00d888157a60e7d73d"
+        },
+        "binding_sha256": "155ff529a53b55c907a08355a62e1b2974d39a59b16c3f00d888157a60e7d73d"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "ec5bf5e35029086b67d2ddd15c9579f3993a56279f532f7d7ba1c7d889538219",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "2d34a0367dcb6c803c6594c4ccdc24ba2aa07fc5722d4f0010f59dc07764f489",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "cdda090e392605d5d6ed33365b56390753337a4fddd117f9c477ca406588ab6d",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "6e68005b21043fd9dbc85518f457042e50138417fdfe92da1918d997e129b9e3"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "6313fc6203b440ae0403ce313dd3c7dedc4ac277a5bf1450819699be8d8826c9",
+        "reasons": [
+          "counterfactual_candidate_no_effect"
+        ]
+      },
+      "failure_signature": "counterfactual_candidate_no_effect",
+      "failure_stage": "typed_oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24603:vapp_html_level4_secure_get:051aca06ddfc",
+      "record_id": "pg246:24603:vapp_html_level4_secure_get:6313fc6203b4",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24603-1013-14636007c367",
+          "target_instance_hash": "08572d0ea13e08d6ef7676e1e626ecd7db007cc7e46ec79b49a855d5bbc3842c",
+          "state_epoch": "pg246-24603-1013-14636007c367",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "dead0717d94210932a70fc04067bc3ac2c2a5d52f18ef2b3942774dddacf9c02",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a42419354e54ed7b82c8fc2d14a9a19c472da54e60eeafdb1f9f6714b79b5caa",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "3ca91bae08764bb06967be47a8e9062fa79b827c8c982a070da5e381fe8496b2",
+        "record_id": "pg246:24603:vapp_html_level4_secure_get:3ca91bae0876"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level1_get",
+      "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "GET",
+      "field_names": [
+        "src"
+      ],
+      "expected": "positive",
+      "seed": 24603,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24603-14-053d8f9c0860",
+        "target_instance_hash": "211c7f544170bbbaf34a2da8f8472aa1bd4b947544ab8940d53c1d56770b1301",
+        "state_epoch": "pg246-24603-14-053d8f9c0860",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "2xx",
+        "status_code": 200,
+        "body_length_bucket": "1-255",
+        "body_sha256": "3b402c8545fd148c0f4554afcae294c7c74e8ccd5dd3b59c182f7bc534ec522d",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 2,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "5094b467ca15c7c57c53361ce1151b256cfd2aafacddfdeabc6a09dc482f5c76"
+        },
+        "binding_sha256": "5094b467ca15c7c57c53361ce1151b256cfd2aafacddfdeabc6a09dc482f5c76"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "fc07cd0d26f3ea057e60a1cedc066ce90bac1a04f8e0e8c1bc468811c790c904",
+          "marker_observed": true,
+          "marker_sha256": "2496b7ee1df6207623fead438e055b4b55b2014f8a4f2ff6d3a1724daec481c0",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "2924b9b1f9c973e67f9dc1761e975a247d3925dd4caf9964668b4080dfe71a7e",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "4b8ecf236afe2e8ac47c07ae5877a90b2823fb623d244e3039cd64199c1b8431",
+          "marker_observed": true,
+          "marker_sha256": "8f0ab795e2894759b722a323dc1baf968f65107c1c0d64f2bca6ff22d152f6b6",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "353ed47719bba3649626e0cb4746e3a5bdc44320f360eb914a11104db2d30245"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": true,
+        "negative_control_clean": true,
+        "evidence_hash": "16c8a19558483172cd2abfce48dcbf19074da857532dff01ab5f55deabd81c7f",
+        "reasons": []
+      },
+      "failure_signature": "typed_effect",
+      "failure_stage": "oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24603:vapp_img_level1_get:1d45b2655f52",
+      "record_id": "pg246:24603:vapp_img_level1_get:16c8a1955848",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24603-1014-6c1dd72e16e5",
+          "target_instance_hash": "1b561608dfab8b7f8f01a1339348685d219875d7e3cd6772b2ca46434721f566",
+          "state_epoch": "pg246-24603-1014-6c1dd72e16e5",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "2xx",
+          "status_code": 200,
+          "body_length_bucket": "1-255",
+          "body_sha256": "cfb27b05272390249d36ba3aeb70f8a01ef325a0c3286cf0b1a3372abcc29845",
+          "marker_observed": true,
+          "marker_sha256": "63beb01b4ff6e3240505f0f2968f2ecc9328a366121fa831fa1e97f35d6ff126",
+          "script_execution": true,
+          "request_count": 2,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": true,
+        "expected_match": true,
+        "evidence_hash": "f9572818d4101e6bd138646e38b583dc020da4fca5439a113803d8feb6f79fcc",
+        "record_id": "pg246:24603:vapp_img_level1_get:f9572818d410"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level6_secure_get",
+      "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "GET",
+      "field_names": [
+        "src"
+      ],
+      "expected": "negative",
+      "seed": 24603,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24603-15-fe36adf6a6a3",
+        "target_instance_hash": "ab280f955aaa5eef2f6c4c8cd361c764da75d137327a8242a412e4bef66c6682",
+        "state_epoch": "pg246-24603-15-fe36adf6a6a3",
+        "fresh_target": true,
+        "method": "GET",
+        "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 400,
+        "body_length_bucket": "1-255",
+        "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 1,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "safe_candidate",
+        "effective_action": "safe_candidate",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "3643869641157b8b61119a4fc0d62ae57f081fbfb13a027f883c73c31c10e12c"
+        },
+        "binding_sha256": "3643869641157b8b61119a4fc0d62ae57f081fbfb13a027f883c73c31c10e12c"
+      },
+      "ai": {
+        "sent": true,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "8e7b96f1538ea596d1d84830ecc1457f07e204006ed1d9c854b5350b8fa4f29e",
+        "generator_id": "pg246-vulnerableapp-dom-surface-generator-v1"
+      },
+      "reference": {
+        "sent": true,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "862ca2f8845e22fc5590f1b53be6d2c80385e29512e26a257035ad54e370d3f7"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": true,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "6faf84a17427f43c7cd0a4aa1e82d4779ddfc3faf01efbe9c3df47c076b8c30a",
+        "reasons": [
+          "counterfactual_candidate_no_effect"
+        ]
+      },
+      "failure_signature": "counterfactual_candidate_no_effect",
+      "failure_stage": "typed_oracle",
+      "failure_is_model_or_environment": "none",
+      "counterfactual_record_id": "pg246:24603:vapp_img_level6_secure_get:e9490c7544b8",
+      "record_id": "pg246:24603:vapp_img_level6_secure_get:6faf84a17427",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24603-1015-f35dcda55ec8",
+          "target_instance_hash": "8e7a1ada51f0effb3d04341b67dce0cc361cfea22e81310db5514605f6c6c07b",
+          "state_epoch": "pg246-24603-1015-f35dcda55ec8",
+          "fresh_target": true,
+          "method": "GET",
+          "route_template_hash": "5dba11cc01265f25fe8b7e481c160dd7b2b3c7cc18b8896246d0c2355dd5fb45",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 400,
+          "body_length_bucket": "1-255",
+          "body_sha256": "a7fe83ec64bb23eb28090598db3d166ed98e52e39d1afbbfd74c579553f93e4e",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 1,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "d699d342e8b6be58bf2ae2df20a2f3348da3c02bbf48ce52810ed5a1fa07bb00",
+        "record_id": "pg246:24603:vapp_img_level6_secure_get:d699d342e8b6"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_html_level1_post_405",
+      "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+      "surface_role": "xss_html_tag_surface",
+      "method": "POST",
+      "field_names": [
+        "probe"
+      ],
+      "expected": "unsupported_post",
+      "seed": 24603,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24603-16-149e27f0b12c",
+        "target_instance_hash": "9aed25e6772518aba7de20d8bf55428b1e7cc0f1eba83da0356b28e375ab2463",
+        "state_epoch": "pg246-24603-16-149e27f0b12c",
+        "fresh_target": true,
+        "method": "POST",
+        "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "abstain",
+        "effective_action": "abstain",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "88b05c0a36e27898ba6957b353b8b182a8e540da6929d72c3a2df93b0ae38dcd"
+        },
+        "binding_sha256": "88b05c0a36e27898ba6957b353b8b182a8e540da6929d72c3a2df93b0ae38dcd"
+      },
+      "ai": {
+        "sent": false
+      },
+      "reference": {
+        "sent": false,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "00b5a3cceaceb220933a55d64702e172a968a2986af87019a72cdc94920940af"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": false,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "cc21713ff0b0c2c797c4e45843b0babea181e6b92d49ee2ecd4e7beefce08cbf",
+        "reasons": [
+          "unsupported_post_405"
+        ]
+      },
+      "failure_signature": "unsupported_post_405",
+      "failure_stage": "transport_or_adapter",
+      "failure_is_model_or_environment": "environment",
+      "counterfactual_record_id": "pg246:24603:vapp_html_level1_post_405:1b73e1738b89",
+      "record_id": "pg246:24603:vapp_html_level1_post_405:cc21713ff0b0",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24603-1016-de577ab7c384",
+          "target_instance_hash": "f9fcb5fec1390bc99164590cb39cdc47210abc57986f07f7812150eaacb7df2d",
+          "state_epoch": "pg246-24603-1016-de577ab7c384",
+          "fresh_target": true,
+          "method": "POST",
+          "route_template_hash": "1bcd727afe2c59adfd8d77c8a6afdcee8984613348526f04dd446923559eb6f2",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "8978d50f8fcaee8d32bc5a72723b5a8e579b3d3f82dbde42ee8d27fcb6169611",
+        "record_id": "pg246:24603:vapp_html_level1_post_405:8978d50f8fca"
+      }
+    },
+    {
+      "schema_version": "pg246-vulnerableapp-dom-episode-v1",
+      "source_id": "pg246_vulnerableapp_source_independent",
+      "case_id": "vapp_img_level1_post_405",
+      "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+      "surface_role": "xss_img_attribute_surface",
+      "method": "POST",
+      "field_names": [
+        "src"
+      ],
+      "expected": "unsupported_post",
+      "seed": 24603,
+      "reset": {
+        "phase": "initial",
+        "reset_id": "pg246-reset-24603-17-62e3649e8550",
+        "target_instance_hash": "ba480a6bfc1555ba891a5231ee412f50cea5bd1b3e73afc8f3c3e4a4597a8273",
+        "state_epoch": "pg246-24603-17-62e3649e8550",
+        "fresh_target": true,
+        "method": "POST",
+        "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+        "bind_or_volume_mount_count": 0
+      },
+      "baseline": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "negative": {
+        "status_class": "4xx",
+        "status_code": 405,
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "marker_observed": false,
+        "marker_sha256": null,
+        "script_execution": false,
+        "request_count": 11,
+        "external_request_blocked": 0,
+        "external_network": false,
+        "transport_error": false
+      },
+      "model": {
+        "action": "abstain",
+        "effective_action": "abstain",
+        "encoding": "dom_markup",
+        "failure": "status_changed",
+        "candidate_count": 2,
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "745234e01501eb3a185808784247a8ad89ef907a8eb4e8dca2fa63bc9c3e825a"
+        },
+        "binding_sha256": "745234e01501eb3a185808784247a8ad89ef907a8eb4e8dca2fa63bc9c3e825a"
+      },
+      "ai": {
+        "sent": false
+      },
+      "reference": {
+        "sent": false,
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "payload_sha256": "00b5a3cceaceb220933a55d64702e172a968a2986af87019a72cdc94920940af"
+      },
+      "typed_oracle": {
+        "oracle_id": "pg246-controlled-browser-dom-marker-v1",
+        "oracle_available": false,
+        "confirmed_positive": false,
+        "negative_control_clean": true,
+        "evidence_hash": "70db9ffe5edbbb433f0db6650c27201e3cf5fd3f1d0d2f289ea5693269cb38bd",
+        "reasons": [
+          "unsupported_post_405"
+        ]
+      },
+      "failure_signature": "unsupported_post_405",
+      "failure_stage": "transport_or_adapter",
+      "failure_is_model_or_environment": "environment",
+      "counterfactual_record_id": "pg246:24603:vapp_img_level1_post_405:bfbeec94ace1",
+      "record_id": "pg246:24603:vapp_img_level1_post_405:70db9ffe5edb",
+      "external_network": false,
+      "external_request_blocked": 0,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "vulnerability_claim_allowed": false,
+      "replay": {
+        "reset": {
+          "phase": "replay",
+          "reset_id": "pg246-reset-24603-1017-aa69b98546c8",
+          "target_instance_hash": "5db720063234f1baaf43988158b1cd15a4d026bc318375667e3f35701d3380a8",
+          "state_epoch": "pg246-24603-1017-aa69b98546c8",
+          "fresh_target": true,
+          "method": "POST",
+          "route_template_hash": "02cde0bdcb3834e03a9870711aa6abf77c7f6d78a7c9fe903fe9b4796786db86",
+          "bind_or_volume_mount_count": 0
+        },
+        "response": {
+          "status_class": "4xx",
+          "status_code": 405,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "marker_observed": false,
+          "marker_sha256": null,
+          "script_execution": false,
+          "request_count": 11,
+          "external_request_blocked": 0,
+          "external_network": false,
+          "transport_error": false
+        },
+        "marker_observed": false,
+        "expected_match": true,
+        "evidence_hash": "a22bff79a96a9f6f0ba316ea801962a084d6aa7a2f3655571cb6364694502ce7",
+        "record_id": "pg246:24603:vapp_img_level1_post_405:a22bff79a96a"
+      }
+    }
+  ],
+  "promotion": {
+    "training_eligible": true,
+    "training_artifact_generated": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "honesty": {
+    "typed_dom_marker_only": true,
+    "independent_reference_required": true,
+    "counterfactual_and_fresh_replay_present": true,
+    "general_web_capability_not_established": true,
+    "payload_strings_are_stdout_only": true
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": true,
+    "script_execution_dom_marker_only": true,
+    "database_write": false,
+    "credentials_accessed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "data_repair": {
+    "repair_id": "pg246-lane-reclassification-v1",
+    "reason": "positive fresh-replay rows were incorrectly treated as negative_control_confirmed",
+    "network_replay_performed": false,
+    "oracle_evidence_changed": false,
+    "parent_dataset_sha256": "94ac4392dc2e71f77e3c8009bb0185f55e0e9fdc39bc7e9d3dd07558e2cd0c90",
+    "lane_rule": "negative_control_confirmed is distinct from negative_clean; typed positive rows may be gold"
+  },
+  "report_sha256": "f90fbf566f204cc780e1a5d4a5b32f6db442273166ed9dcb8db14e70779a1801"
+}

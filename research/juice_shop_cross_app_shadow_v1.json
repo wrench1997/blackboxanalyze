@@ -1,0 +1,121 @@
+{
+  "protocol_id": "pg-pk-05-cross-app-shadow-v1",
+  "schema_version": "sift-juice-shop-cross-app-shadow-report-v1",
+  "target": {
+    "base_url": "http://127.0.0.1:3100",
+    "container": "sift-loop12-juice-v20",
+    "target_instance_id": "fbf0925de6c46b6b07db1ef22ec1d8fae6274377e3d60d5a3c648730170cb864",
+    "container_image": "bkimminich/juice-shop@sha256:28870b9d2bec49e605d6ebbf4b22ed1ec1ca0a72347ef19217bbbb21ea44e3fe",
+    "external_network": false,
+    "loopback_only": true,
+    "fresh_target": false
+  },
+  "training_boundary": {
+    "training_checkpoint": "artifacts\\pg-pk-02-pair-invariance\\joint_holdout\\pair_encoding_invariant\\decoder.pt",
+    "training_target": "Pikachu only",
+    "cross_app_surface_seen_during_training": false,
+    "visible_projection_labels_hidden": true
+  },
+  "protocol_path": "research\\juice_shop_cross_app_shadow_protocol_v1.json",
+  "sample_count": 5,
+  "model_only_accepted_count": 5,
+  "oracle_gate_accepted_count": 0,
+  "oracle_gate_abstain_rate": 1.0,
+  "ood_gate_abstain_count": 5,
+  "ood_gate_abstain_rate": 1.0,
+  "unsupported_surface_count": 5,
+  "ood_fit": {
+    "schema_version": "sift-feature-ood-gate-v1",
+    "reference_count": 6,
+    "feature_dim": 256,
+    "quantile": 0.95,
+    "slack": 1.25,
+    "leave_one_out_max": 10.478549003601074,
+    "threshold": 12.081438302993774
+  },
+  "predictions": [
+    {
+      "sample_id": "juice-shop-shadow-pg05-spa-shell-74e4ba2777b2",
+      "surface": "juice_spa_shell",
+      "candidate_family": "xss",
+      "model_probability": 0.941472,
+      "margin": 0.886488,
+      "oracle_support": 0.02,
+      "ood_distance": 4330.128906,
+      "ood": true,
+      "evidence_fused_confidence": 0.247149,
+      "model_only_accepted": true,
+      "oracle_gate_accepted": false,
+      "expected_action": "abstain_unsupported_surface",
+      "rule_ir_emitted": false
+    },
+    {
+      "sample_id": "juice-shop-shadow-pg05-robots-text-fb9a5caa42ca",
+      "surface": "juice_robots_text",
+      "candidate_family": "xss",
+      "model_probability": 0.981111,
+      "margin": 0.965174,
+      "oracle_support": 0.02,
+      "ood_distance": 3307.190918,
+      "ood": true,
+      "evidence_fused_confidence": 0.514564,
+      "model_only_accepted": true,
+      "oracle_gate_accepted": false,
+      "expected_action": "abstain_unsupported_surface",
+      "rule_ir_emitted": false
+    },
+    {
+      "sample_id": "juice-shop-shadow-pg05-search-unknown-1add6aa9b4bd",
+      "surface": "juice_search_unknown",
+      "candidate_family": "xss",
+      "model_probability": 0.84493,
+      "margin": 0.693765,
+      "oracle_support": 0.02,
+      "ood_distance": 3535.536377,
+      "ood": true,
+      "evidence_fused_confidence": 0.100071,
+      "model_only_accepted": true,
+      "oracle_gate_accepted": false,
+      "expected_action": "abstain_unsupported_surface",
+      "rule_ir_emitted": false
+    },
+    {
+      "sample_id": "juice-shop-shadow-pg05-search-common-b7f60e44b481",
+      "surface": "juice_search_common",
+      "candidate_family": "xss",
+      "model_probability": 0.84493,
+      "margin": 0.693765,
+      "oracle_support": 0.02,
+      "ood_distance": 3535.536377,
+      "ood": true,
+      "evidence_fused_confidence": 0.100071,
+      "model_only_accepted": true,
+      "oracle_gate_accepted": false,
+      "expected_action": "abstain_unsupported_surface",
+      "rule_ir_emitted": false
+    },
+    {
+      "sample_id": "juice-shop-shadow-pg05-search-percent-input-039fa9e3e051",
+      "surface": "juice_search_percent_input",
+      "candidate_family": "xss",
+      "model_probability": 0.846712,
+      "margin": 0.697311,
+      "oracle_support": 0.02,
+      "ood_distance": 4145.787598,
+      "ood": true,
+      "evidence_fused_confidence": 0.101307,
+      "model_only_accepted": true,
+      "oracle_gate_accepted": false,
+      "expected_action": "abstain_unsupported_surface",
+      "rule_ir_emitted": false
+    }
+  ],
+  "safety": {
+    "raw_body_stored": false,
+    "evaluator_state_visible": false,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false
+  },
+  "report_path": "research\\juice_shop_cross_app_shadow_v1.json"
+}

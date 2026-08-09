@@ -1,0 +1,27 @@
+{
+  "protocol_id": "pg-pk-201-multitask-decoder-v1",
+  "schema_version": "pg201-multitask-decoder-protocol-v1",
+  "model": "101M XXL frozen body + multitask action/encoding/failure adapter",
+  "tasks": [
+    "next_action",
+    "encoding_class",
+    "failure_class"
+  ],
+  "source_split": {
+    "train_source": "pg199_crawl_grounding_seed_19901",
+    "replay_source": "pg199_crawl_grounding_seed_19902",
+    "holdout_source": [
+      "pg200_sql_v6",
+      "pg200_post_failure"
+    ],
+    "train_rows": 15,
+    "replay_rows": 15,
+    "holdout_rows": 42
+  },
+  "catastrophic_forgetting_metric": "replay_action_accuracy_and_unsafe_allow_count",
+  "raw_payload_and_response_excluded": true,
+  "training_promotion_allowed": false,
+  "memory_promotion_allowed": false,
+  "vulnerability_claim_allowed": false,
+  "protocol_sha256": "4ac49b15a67022bb7405128f7d13bee2c199d5c16c63ad7a062fa87714309dfc"
+}

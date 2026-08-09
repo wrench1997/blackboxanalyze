@@ -1,0 +1,233 @@
+{
+  "protocol_id": "sift-pg44-rule-ir-decoder-v1",
+  "schema_version": "pg-pk-44-rule-ir-decoder-report-v1",
+  "status": "diagnostic_only",
+  "training": {
+    "catalog": "research\\pg40_semantic_router_catalog_v1.json",
+    "pair_count": 144,
+    "positive_count": 32,
+    "implementation": "atlas",
+    "seeds": [
+      361,
+      367
+    ],
+    "semantic_reference_contains_family_name": false,
+    "semantic_reference_contains_raw_probe": false,
+    "typed_oracle_consumed_by_model": false,
+    "pg42_used_for_training": false,
+    "epochs": 360,
+    "seed": 20440802,
+    "device": "cuda",
+    "best_selection": 0.103973,
+    "history_tail": [
+      {
+        "epoch": 120,
+        "train_loss": 0.069344,
+        "seed_loss": 0.069343,
+        "selection": 0.104015
+      },
+      {
+        "epoch": 180,
+        "train_loss": 0.069324,
+        "seed_loss": 0.069324,
+        "selection": 0.103986
+      },
+      {
+        "epoch": 240,
+        "train_loss": 0.069319,
+        "seed_loss": 0.069319,
+        "selection": 0.103978
+      },
+      {
+        "epoch": 300,
+        "train_loss": 0.069317,
+        "seed_loss": 0.069317,
+        "selection": 0.103975
+      },
+      {
+        "epoch": 360,
+        "train_loss": 0.069316,
+        "seed_loss": 0.069316,
+        "selection": 0.103973
+      }
+    ]
+  },
+  "model": {
+    "class": "RuleIRDecoder",
+    "semantic_index": {
+      "auth-boundary": 0,
+      "local-canary": 1,
+      "markup-context": 2,
+      "operator-context": 3,
+      "ordinary-surface": 4,
+      "scalar-boundary": 5,
+      "state-invariant": 6,
+      "subject-boundary": 7,
+      "url-target": 8
+    },
+    "families": [
+      "access_control",
+      "authentication",
+      "command_injection",
+      "injection",
+      "input_validation",
+      "logic",
+      "ordinary_response",
+      "url_redirect",
+      "xss"
+    ],
+    "input_contract": "invariant shape delta + bounded semantic one-hot",
+    "checkpoint": "artifacts\\pg44-rule-ir-decoder\\rule_ir_decoder.pt",
+    "checkpoint_sha256": "55ac7cb5bf78ec3b6546ecc06e5cd9b4285df1f4e0bb364cc613cd4c84e9f047",
+    "executable": false
+  },
+  "pg40_seed_holdout": {
+    "pair_count": 72,
+    "positive_count": 16,
+    "negative_count": 56,
+    "accepted_count": 16,
+    "typed_recall": 1.0,
+    "known_positive_count": 16,
+    "known_family_recall": 1.0,
+    "unknown_positive_count": 0,
+    "unknown_effect_recall": 0.0,
+    "precision": 1.0,
+    "false_positive_rate": 0.0,
+    "unknown_misname_count": 0,
+    "unknown_not_abstain_count": 0,
+    "unknown_strict_abstain": true,
+    "decoder_confidence_mean": 0.991105
+  },
+  "pg42_splits": {
+    "train_role_diagnostic": {
+      "pair_count": 256,
+      "positive_count": 64,
+      "negative_count": 192,
+      "accepted_count": 40,
+      "typed_recall": 0.625,
+      "known_positive_count": 40,
+      "known_family_recall": 1.0,
+      "unknown_positive_count": 24,
+      "unknown_effect_recall": 1.0,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "decoder_confidence_mean": 0.78254
+    },
+    "dev": {
+      "pair_count": 320,
+      "positive_count": 80,
+      "negative_count": 240,
+      "accepted_count": 50,
+      "typed_recall": 0.625,
+      "known_positive_count": 50,
+      "known_family_recall": 1.0,
+      "unknown_positive_count": 30,
+      "unknown_effect_recall": 1.0,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "decoder_confidence_mean": 0.78254
+    },
+    "implementation_holdout": {
+      "pair_count": 576,
+      "positive_count": 144,
+      "negative_count": 432,
+      "accepted_count": 90,
+      "typed_recall": 0.625,
+      "known_positive_count": 90,
+      "known_family_recall": 1.0,
+      "unknown_positive_count": 54,
+      "unknown_effect_recall": 1.0,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "decoder_confidence_mean": 0.78254
+    },
+    "family_holdout": {
+      "pair_count": 144,
+      "positive_count": 36,
+      "negative_count": 108,
+      "accepted_count": 0,
+      "typed_recall": 0.0,
+      "known_positive_count": 0,
+      "known_family_recall": 0.0,
+      "unknown_positive_count": 36,
+      "unknown_effect_recall": 1.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "decoder_confidence_mean": 0.447972
+    },
+    "negative_control": {
+      "pair_count": 144,
+      "positive_count": 0,
+      "negative_count": 144,
+      "accepted_count": 0,
+      "typed_recall": 0.0,
+      "known_positive_count": 0,
+      "known_family_recall": 0.0,
+      "unknown_positive_count": 0,
+      "unknown_effect_recall": 0.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "unknown_misname_count": 0,
+      "unknown_not_abstain_count": 0,
+      "unknown_strict_abstain": true,
+      "decoder_confidence_mean": 0.991104
+    }
+  },
+  "routes": {
+    "train_role_diagnostic": {
+      "unknown_surface": 216,
+      "xss": 8,
+      "injection": 8,
+      "authentication": 8,
+      "access_control": 8,
+      "input_validation": 8
+    },
+    "dev": {
+      "unknown_surface": 270,
+      "xss": 10,
+      "injection": 10,
+      "authentication": 10,
+      "access_control": 10,
+      "input_validation": 10
+    },
+    "implementation_holdout": {
+      "unknown_surface": 486,
+      "xss": 18,
+      "injection": 18,
+      "authentication": 18,
+      "access_control": 18,
+      "input_validation": 18
+    },
+    "family_holdout": {
+      "unknown_surface": 144
+    },
+    "negative_control": {
+      "unknown_surface": 144
+    }
+  },
+  "unknown_route": "unknown_surface",
+  "unknown_requires_abstain": true,
+  "formal_capability_claim_allowed": false,
+  "formal_claim_blockers": [
+    "closed_world_ontology_prior_is_not_unseen_family_learning",
+    "Rule_IR_decoder_has_not_been_validated_on_a_new_family_name"
+  ],
+  "promotion": {
+    "status": "quarantined_candidate",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "manifest_sha256": "5decd7da9f08cdf0c2b30d3f76dfc1b69ae98e8916714d2c05a5a0fa7fd0bb25"
+}

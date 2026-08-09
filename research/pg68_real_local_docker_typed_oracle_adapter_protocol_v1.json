@@ -1,0 +1,43 @@
+{
+  "protocol_id": "pg-pk-68-real-local-docker-typed-oracle-adapter-v1",
+  "schema_version": "sift-pg68-real-local-docker-typed-oracle-adapter-protocol-v1",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "pinned_image": "tavenli/pikachu-labs@sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "external_network": false,
+    "state_change_allowed": false,
+    "raw_persistence": false
+  },
+  "input_contract": {
+    "source_report": "PG-52 real local typed oracle",
+    "family_before_action_forbidden": true,
+    "oracle_after_action_only": true,
+    "catalog_role": "evaluation_only_quarantined",
+    "trace_role": "rejected_until_hard_gate"
+  },
+  "required_gates": {
+    "get_post_both": true,
+    "matched_negative_control": true,
+    "fresh_reset_per_action": true,
+    "evidence_hash_per_action": true,
+    "family_heldout": true,
+    "independent_source": true,
+    "raw_probe_and_response_persistence_forbidden": true
+  },
+  "run_result": {
+    "status": "blocked",
+    "hard_gate_checks": {
+      "real_image_pinned": true,
+      "typed_oracle_contract_complete": true,
+      "get_post_both_covered": true,
+      "matched_negative_controls": true,
+      "evidence_hash_per_action": true,
+      "fresh_reset_per_action": false,
+      "family_heldout_replay": false,
+      "independent_source_count": false
+    },
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "next_experiment": "PG69 per-action disposable Docker reset plus a genuinely unseen family/implementation before any training write"
+}

@@ -1,0 +1,55 @@
+{
+  "protocol_id": "pg-pk-169-replay-slot-ratio-v1",
+  "schema_version": "pg169-replay-slot-ratio-protocol-v1",
+  "base_checkpoint": "artifacts\\pg164-xxl-capacity-v1\\xxl_typed_mix.pt",
+  "slot_dataset": "research\\pg168_discriminative_slot_dataset_v1.json",
+  "ratios": {
+    "ratio_1_1": {
+      "old_rows": 8000,
+      "slot_rows": 8000,
+      "old_to_slot": "1:1"
+    },
+    "ratio_1_2": {
+      "old_rows": 4000,
+      "slot_rows": 8000,
+      "old_to_slot": "1:2"
+    },
+    "ratio_1_4": {
+      "old_rows": 2000,
+      "slot_rows": 8000,
+      "old_to_slot": "1:4"
+    }
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 2e-05,
+    "epochs": 1
+  },
+  "selection": {
+    "objective": "minimize slot_ood perplexity subject to typed_holdout perplexity <= 1.45351808 * 1.10 and base_holdout perplexity <= 2.5717967 * 1.02",
+    "promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "feasible_variants": [
+      "ratio_1_1"
+    ],
+    "selected_variant": "ratio_1_1"
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "d435e7f6189f8802a83c862e887f237ff1c6dc7807d2ec3490403649d59a1597"
+}

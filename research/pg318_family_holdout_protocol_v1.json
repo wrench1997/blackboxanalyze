@@ -1,0 +1,53 @@
+{
+  "protocol_id": "pg-pk-318-family-heldout-replay-v1",
+  "schema_version": "pg318-family-holdout-protocol-v1",
+  "scope": {
+    "target": "authorized local Docker Pikachu fixed image",
+    "image": "sift/pikachu-fixed@sha256:cca4288b6b701725e7a771f47ce7fcafd6cea9bd7622fa34ef2ed0b440f472c6",
+    "network": "none",
+    "network_internal": false,
+    "host_port_published": false,
+    "external_network": false,
+    "route_families": [
+      "sql",
+      "xss"
+    ],
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "seed_count": 3
+  },
+  "model_contract": {
+    "decoder_only_next_token": true,
+    "abstract_slot_assembly": true,
+    "family_hidden_from_context": true,
+    "failure_feedback_repair": true,
+    "oracle_target_off_input": true
+  },
+  "required_gates": {
+    "multi_missing_question": true,
+    "get_post_pair": true,
+    "sql_dom_typed_oracle": true,
+    "matched_negative": true,
+    "fresh_reset": true,
+    "evidence_hash": true,
+    "docker_network_none": true,
+    "raw_payload_training_excluded": true
+  },
+  "forbidden": [
+    "public_target",
+    "external_callback",
+    "time_delay",
+    "database_write",
+    "stateful_xss_write",
+    "credential_access"
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "payload_catalog_promotion_allowed": false
+  },
+  "protocol_sha256": "b2abaee5f4b23394e27a53b1330bffa51ab738ff18cf9dc3ce10d7a91afc823d"
+}

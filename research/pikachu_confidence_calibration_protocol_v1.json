@@ -1,0 +1,43 @@
+{
+  "protocol_id": "pg-pk-04-confidence-calibration-v1",
+  "objective": "Calibrate the frozen abstract-family decoder and prevent Rule IR emission when family-specific bounded evidence is absent.",
+  "model": {
+    "checkpoint_is_frozen": true,
+    "retraining_in_this_round": false,
+    "temperature_fit_only_on_calibration_split": true
+  },
+  "data": {
+    "positive_train_variants": ["plain", "url_percent"],
+    "positive_test_variants": ["html_entity", "double_html_entity"],
+    "negative_control_train_variant": "counterfactual_marker_substitution_plain",
+    "negative_control_test_variant": "counterfactual_marker_substitution_url_percent",
+    "raw_body_or_evaluator_state_visible": false
+  },
+  "gates": {
+    "model_only": {
+      "confidence_threshold": 0.45,
+      "margin_threshold": 0.10
+    },
+    "family_oracle": {
+      "fused_confidence_threshold": 0.70,
+      "oracle_support_threshold": 0.50,
+      "rule_ir_emission_requires_both": true
+    }
+  },
+  "xss_sink_policy": {
+    "attribute_or_script_source": "strong_support",
+    "html_text_only": "low_support",
+    "json_or_header_echo": "low_support",
+    "reflection_without_sink": "low_support",
+    "model_confidence_cannot_override_sink_policy": true
+  },
+  "metrics": ["multiclass_nll", "expected_calibration_error", "brier_score", "false_positive_rate", "abstain_rate"],
+  "loop_memory_promotion_rule": "research/loop_memory_promotion_rule_v1.json",
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "real_exploit_strings": false
+  }
+}

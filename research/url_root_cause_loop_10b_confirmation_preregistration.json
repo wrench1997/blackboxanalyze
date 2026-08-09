@@ -1,0 +1,43 @@
+{
+  "schema_version": "sift-url-root-cause-confirmation-preregistration-v1",
+  "experiment_id": "url-root-cause-loop-10b-fresh-confirmation",
+  "registered_at": "2026-08-01T18:45:00+08:00",
+  "status": "frozen_before-fresh-seed-generation",
+  "origin": {
+    "discovery_experiment": "url-root-cause-loop-10",
+    "posthoc_change": "C5 selects the highest empirical-fit rule and abstains when equally fitting rules disagree on the query",
+    "reason": "C4 caused a -2.17pp string-suffix regression because hostname equality and text suffix were observationally indistinguishable in some episodes"
+  },
+  "confirmation_protocol": {
+    "fresh_data_seeds": [20261123, 20261211],
+    "frozen_model_checkpoints": [20261001, 20261019, 20261107],
+    "cross_product_evaluations": 6,
+    "programs_per_data_seed": 2700,
+    "traces_per_program": 20,
+    "examples_per_program": 4,
+    "memory_items": 8,
+    "target_family": "url_scheme_downgrade",
+    "regression_families": ["numeric_boundary", "truthiness_gate", "substring_origin", "authorization_or", "string_suffix_primitive", "url_hostname_primitive"],
+    "no_retraining": true,
+    "new_learned_parameters": 0
+  },
+  "locked_C5_algorithm": [
+    "induce scheme, hostname and effective-port predicates only when both positive and negative observations exist",
+    "retain candidates with at least 75% empirical fit",
+    "select only among candidates with maximum empirical fit",
+    "abstain if maximum-fit candidates disagree on the query",
+    "otherwise use semantic priority hostname > scheme > port > generic > suffix"
+  ],
+  "acceptance": {
+    "url_behavior_agreement_each_cross_product_min": 0.90,
+    "regression_family_delta_each_min": -0.02,
+    "target_family_examples_seen_in_training": 0,
+    "neural_generalization_claim": false,
+    "algorithm_changes_after_registration": 0
+  },
+  "frozen_artifacts": {
+    "scripts/train_rule_memory_pilot.py": "46FB7019EDDA4F4999C253411CF4DD2F936BD64FFB53E74A5B14D8AC711ED202",
+    "scripts/evaluate_url_root_cause.py": "9C713DB1AE49FC8C6D14DF1B39DECB49F54C4435142513F94A9466E0AA1A3D85",
+    "research/url_root_cause_loop_10_results.json": "20DDAF53AAF87876D57C70196C46B49C2677FD86EF35605E4D6C173703C1E1BC"
+  }
+}

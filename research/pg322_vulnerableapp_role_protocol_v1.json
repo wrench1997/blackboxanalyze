@@ -1,0 +1,51 @@
+{
+  "protocol_id": "pg-pk-322-vulnerableapp-role-replay-v1",
+  "schema_version": "pg322-vulnerableapp-role-protocol-v1",
+  "scope": {
+    "target": "authorized local Docker OWASP VulnerableApp image",
+    "image": "sasanlabs/owasp-vulnerableapp@sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+    "network": "none",
+    "host_port_published": false,
+    "external_network": false,
+    "route_families": [
+      "xss"
+    ],
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "seed_count": 3
+  },
+  "model_contract": {
+    "decoder_only_next_token": true,
+    "abstract_slot_assembly": true,
+    "family_hidden_from_context": true,
+    "failure_feedback_repair": true,
+    "oracle_target_off_input": true
+  },
+  "required_gates": {
+    "multi_missing_question": true,
+    "get_post_pair": true,
+    "dom_typed_oracle": true,
+    "matched_negative": true,
+    "fresh_reset": true,
+    "evidence_hash": true,
+    "docker_network_none": true,
+    "raw_payload_training_excluded": true
+  },
+  "forbidden": [
+    "public_target",
+    "external_callback",
+    "time_delay",
+    "database_write",
+    "stateful_xss_write",
+    "credential_access"
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "payload_catalog_promotion_allowed": false
+  },
+  "protocol_sha256": "c972ea9d6be012211dc528c49dd1a08060cb06f1e00f880a65664017b3b946af"
+}

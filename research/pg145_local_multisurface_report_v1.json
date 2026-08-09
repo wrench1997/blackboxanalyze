@@ -1,0 +1,73 @@
+{
+  "protocol_id": "pg-pk-145-local-multisurface-v1",
+  "schema_version": "pg145-local-multisurface-report-v1",
+  "status": "completed_pg145_local_multisurface_vulnerability_catalog",
+  "hard_gates_passed": true,
+  "training_eligible": false,
+  "memory_promotion_allowed": false,
+  "catalog_file": "pg145_local_multisurface_vulnerability_catalog_v1.json",
+  "dataset_file": "pg145_local_multisurface_model_dataset_v1.json",
+  "style_reference_manifest_file": "pg145_style_reference_manifest_v1.json",
+  "summary": {
+    "target_instance_count": 150,
+    "row_count": 900,
+    "model_row_count": 900,
+    "family_counts": {
+      "sql_ast_boundary": 200,
+      "xss_reflection": 200,
+      "xxe_entity_parser": 200
+    },
+    "style_counts": {
+      "dashboard_like": 144,
+      "govuk_like": 156,
+      "material_like": 156,
+      "primer_like": 144
+    },
+    "method_counts": {
+      "GET": 300,
+      "POST": 300
+    },
+    "positive_count": 300,
+    "matched_negative_count": 300,
+    "unknown_oracle_count": 300,
+    "get_post_balance": true,
+    "fresh_reset_count": 900,
+    "typed_oracle_count": 600,
+    "source_hash_count": 12,
+    "implementation_holdout_count": 180,
+    "vulnerability_family_count": 3,
+    "surface_style_count": 4
+  },
+  "required_gates": {
+    "target_instance_count_ge_150": true,
+    "get_post_balance": true,
+    "positive_and_matched_negative": true,
+    "fresh_reset_per_row": true,
+    "typed_oracle_evidence": true,
+    "implementation_holdout": true,
+    "raw_model_input_absent": true,
+    "waf_training_scope_local_mock_only": true,
+    "external_bypass_payloads_forbidden": true
+  },
+  "model_input_contract": {
+    "raw_source_included": false,
+    "raw_marker_included": false,
+    "raw_payload_included": false,
+    "target_identity_included": false,
+    "source_hash_included": false,
+    "oracle_authority_included": false,
+    "family_label_included": false,
+    "waf_scope": "local_mock_only",
+    "external_bypass_payloads": false
+  },
+  "promotion": {
+    "training_eligible": false,
+    "memory_promotion_allowed": false,
+    "reason": "multi-surface fixtures require independent replay and model ablation before any training promotion"
+  },
+  "source": {
+    "runner": "be00ba0cef299f2433a645b38c6bca1ef269b90f543b1c8ffcc8583ea5d8a2b6",
+    "module": "e3ea2bc1ce573cf73ca6285b39096014882d8b9d8231195d7ebd39c542423041"
+  },
+  "report_sha256": "5c12685de0550eed0e551d8146af8672f5802096da000592eb783687d8fabe08"
+}

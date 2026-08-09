@@ -1,0 +1,53 @@
+{
+  "protocol_id": "pg-pk-102-neural-active-probe-decoder-v1",
+  "schema_version": "pg102-neural-active-probe-decoder-protocol-v1",
+  "purpose": "test whether a small neural set decoder learns an active label-free probe signature across unseen implementations",
+  "training_contract": {
+    "source": "pg101",
+    "role": "train",
+    "known_families_only": true,
+    "pg42_excluded": true,
+    "pg35_excluded": true,
+    "typed_oracle_visible": false
+  },
+  "development_contract": {
+    "source": "pg101",
+    "role": "dev",
+    "seed": 373,
+    "calibration_only": true
+  },
+  "evaluation_contract": {
+    "source": "pg101",
+    "pg42": "cobalt/quartz seeds 401/409/419",
+    "pg35": "alpha/beta/gamma seeds 351/357/367",
+    "unknown_family": "template_injection"
+  },
+  "model_contract": {
+    "architecture": "DeepSets mean/max pooling",
+    "order_invariant": true,
+    "unseen_probe_guard": true,
+    "family_targets_only": true
+  },
+  "safety_contract": {
+    "loopback_only": true,
+    "get_post_required": true,
+    "fresh_reset_required": true,
+    "matched_negative_required": true,
+    "evidence_sha256_required": true,
+    "no_raw_persistence": true
+  },
+  "gate": {
+    "guarded_known_recall_min": 0.8,
+    "false_accept_count": 0,
+    "unknown_family_strict_abstain": true,
+    "not_all_abstain": true,
+    "third_implementation_recall_min": 0.8,
+    "order_permutation_invariant": true,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "passed_guarded_diagnostic",
+    "blocking_reasons": [],
+    "raw_failure_visible": true
+  }
+}

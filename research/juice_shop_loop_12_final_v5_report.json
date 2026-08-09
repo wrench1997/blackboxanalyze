@@ -1,0 +1,24 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-final-v5",
+  "status": "belief_engineering_completed_action_search_gap_remains",
+  "supersedes": "research/juice_shop_loop_12_final_v4_report.json",
+  "model_stack": {
+    "response_head": {"cross_seed_mean": 0.999722, "cross_seed_min": 0.998889, "old_regression_worst_delta_pp": 0.0, "device": "cuda"},
+    "rule_ir_decoder": {"validation_accuracy": 1.0, "fresh_holdout_mean": 0.845833, "dom_double_decode": 1.0, "device": "cuda"},
+    "surface_discriminator": {"validation_accuracy": 1.0, "fresh_seed_mean": 1.0, "calibrated_threshold": 0.888045, "device": "cuda", "domain_shift_note": "real shadow confidence is lower on ordinary/ambiguous surfaces"}
+  },
+  "belief_loop": {
+    "protocol": "research/juice_shop_loop_12_hidden_matrix_protocol_v6.json",
+    "update": "prior-mixed softened likelihood; likelihood power 0.35, prior mixing 0.20",
+    "selection": "0.90 Jensen-Shannon information gain + 0.05 local entropy + 0.05 response score",
+    "policies": {
+      "trained_response_head_v3_rule_ir_bound_v4_belief_v2": {"evaluator_hit": "0/7", "fully_bound": "6/7", "information_gain_all_nonnegative": true, "final_entropy": 1.935418},
+      "trained_response_head_v3_rule_ir_bound_v4_belief_v2_ablation": {"evaluator_hit": "0/7", "fully_bound": "7/7", "information_gain_all_nonnegative": true, "final_entropy": 1.940252}
+    },
+    "posterior_collapse_fixed": true,
+    "trajectory_persisted": true
+  },
+  "confirmed_vulnerability_scope": {"new_hidden_family_confirmed": 0, "previous_single_surface_observability_confirmation": "retained from earlier /metrics experiment", "binding_is_not_confirmation": true},
+  "tests": {"command": "PYTHONPATH=. python -m pytest -q", "passed": 57, "warnings": 1},
+  "next_gap": "action bank lacks feedback-rich, family-disambiguating transitions; next engineering step is within-target adaptive episodes with safe state reset and per-action outcome likelihood calibration"
+}

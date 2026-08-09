@@ -1,0 +1,34 @@
+{
+  "schema_version": "sift-pg-pk-14-failure-replay-v1",
+  "protocol_id": "pg-pk-14-sql-v2-active-generalization-v1",
+  "status": "quarantine",
+  "preserved_failed_run": true,
+  "failure_class": "experiment_problem",
+  "root_cause": "SQL decoder trained only on v1 response geometry classified v2 parameterized value-only controls as injection",
+  "pre_fix": {
+    "target_count": 3,
+    "seed_count": 3,
+    "complete_pair_count": 45,
+    "oracle_revalidated_pair_count": 45,
+    "false_positive_ledger_row_count": 9,
+    "decoder_abstain_count": 0
+  },
+  "source_hash": "6ad473b1f576353ca22c54f9f39a18453e7ee98ea0983f7c580b7c3d038bda62",
+  "remediation": {
+    "change": "add only v2 value_only/baseline counterfactual controls to SQL decoder training",
+    "positive_v2_channels_remain_holdout": true,
+    "replayed": ["PG-PK-09 active", "PG-PK-09 differential", "PG-PK-14 v2 active"]
+  },
+  "post_fix": {
+    "false_positive_ledger_row_count": 0,
+    "oracle_revalidated_pair_count": 45,
+    "old_source_regression_checked": true
+  },
+  "safety": {
+    "local_only": true,
+    "raw_body_stored": false,
+    "external_network": false,
+    "database_touched": false,
+    "real_sleep_performed": false
+  }
+}

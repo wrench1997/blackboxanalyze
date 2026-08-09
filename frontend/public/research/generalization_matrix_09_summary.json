@@ -1,0 +1,436 @@
+{
+  "schema_version": "sift-generalization-matrix-summary-v1",
+  "experiment": "generalization-matrix-09",
+  "status": "three_seed_partial_success_with_blocking_url_failure",
+  "scope": "research pilot; synthetic local targets only; no production vulnerability detection claim",
+  "model": {
+    "parameters": 908546,
+    "architecture": "4-layer causal Transformer plus zero-parameter executable Rule Memory",
+    "target_family_examples_seen_in_training": 0
+  },
+  "data": {
+    "seeds": [
+      20261001,
+      20261019,
+      20261107
+    ],
+    "programs_per_seed": 2700,
+    "programs_total": 8100,
+    "verified_traces_by_seed": {
+      "20261001": 30298,
+      "20261019": 30300,
+      "20261107": 30300
+    },
+    "verified_traces_total": 90898,
+    "verified_counterexamples_total": 51352,
+    "families": 18,
+    "target_families": 6,
+    "complete_target_family_holdout": true
+  },
+  "aggregate": {
+    "baseline_macro": {
+      "mean": 0.661204,
+      "population_std": 0.0044,
+      "min": 0.655,
+      "max": 0.664722
+    },
+    "candidate_macro": {
+      "mean": 0.716667,
+      "population_std": 0.003713,
+      "min": 0.712778,
+      "max": 0.721667
+    },
+    "paired_macro_delta": {
+      "mean": 0.055463,
+      "population_std": 0.005359,
+      "min": 0.048056,
+      "max": 0.060556
+    },
+    "counterexample_top1": {
+      "mean": 0.781481,
+      "population_std": 0.021874,
+      "min": 0.753333,
+      "max": 0.806667
+    },
+    "random_top1": {
+      "mean": 0.646003,
+      "population_std": 0.000996,
+      "min": 0.644595,
+      "max": 0.646762
+    },
+    "old_family_worst_delta": {
+      "mean": -0.000556,
+      "population_std": 0.000786,
+      "min": -0.001667,
+      "max": 0.0
+    },
+    "per_family": {
+      "url_scheme_downgrade": {
+        "label": "URL runtime semantics",
+        "baseline": {
+          "mean": 0.536111,
+          "population_std": 0.010999,
+          "min": 0.521667,
+          "max": 0.548333
+        },
+        "candidate": {
+          "mean": 0.43,
+          "population_std": 0.057203,
+          "min": 0.373333,
+          "max": 0.508333
+        },
+        "delta": {
+          "mean": -0.106111,
+          "population_std": 0.066393,
+          "min": -0.165,
+          "max": -0.013334
+        },
+        "per_seed_delta": {
+          "20261001": -0.14,
+          "20261019": -0.165,
+          "20261107": -0.013334
+        },
+        "conclusion": "confirmed_negative_transfer"
+      },
+      "dom_double_decode": {
+        "label": "Encoding depth",
+        "baseline": {
+          "mean": 0.5,
+          "population_std": 0.0,
+          "min": 0.5,
+          "max": 0.5
+        },
+        "candidate": {
+          "mean": 0.591667,
+          "population_std": 0.064993,
+          "min": 0.5,
+          "max": 0.643333
+        },
+        "delta": {
+          "mean": 0.091667,
+          "population_std": 0.064993,
+          "min": 0.0,
+          "max": 0.143333
+        },
+        "per_seed_delta": {
+          "20261001": 0.131667,
+          "20261019": 0.143333,
+          "20261107": 0.0
+        },
+        "conclusion": "high_variance_not_confirmed"
+      },
+      "unicode_casefold_role": {
+        "label": "Unicode / casefold",
+        "baseline": {
+          "mean": 0.787222,
+          "population_std": 0.019689,
+          "min": 0.771667,
+          "max": 0.815
+        },
+        "candidate": {
+          "mean": 0.803333,
+          "population_std": 0.025423,
+          "min": 0.775,
+          "max": 0.836667
+        },
+        "delta": {
+          "mean": 0.016111,
+          "population_std": 0.009061,
+          "min": 0.003333,
+          "max": 0.023333
+        },
+        "per_seed_delta": {
+          "20261001": 0.023333,
+          "20261019": 0.003333,
+          "20261107": 0.021667
+        },
+        "conclusion": "stable_small_gain_below_preregistered_effect"
+      },
+      "numeric_string_coercion": {
+        "label": "Numeric coercion",
+        "baseline": {
+          "mean": 0.513889,
+          "population_std": 0.022621,
+          "min": 0.488333,
+          "max": 0.543333
+        },
+        "candidate": {
+          "mean": 0.817778,
+          "population_std": 0.007856,
+          "min": 0.806667,
+          "max": 0.823333
+        },
+        "delta": {
+          "mean": 0.303889,
+          "population_std": 0.017015,
+          "min": 0.28,
+          "max": 0.318334
+        },
+        "per_seed_delta": {
+          "20261001": 0.318334,
+          "20261019": 0.28,
+          "20261107": 0.313333
+        },
+        "conclusion": "confirmed_training_generalization"
+      },
+      "compound_origin_role": {
+        "label": "Rule composition",
+        "baseline": {
+          "mean": 0.63,
+          "population_std": 0.008278,
+          "min": 0.618333,
+          "max": 0.636667
+        },
+        "candidate": {
+          "mean": 0.657222,
+          "population_std": 0.006286,
+          "min": 0.648333,
+          "max": 0.661667
+        },
+        "delta": {
+          "mean": 0.027222,
+          "population_std": 0.002079,
+          "min": 0.025,
+          "max": 0.03
+        },
+        "per_seed_delta": {
+          "20261001": 0.03,
+          "20261019": 0.026667,
+          "20261107": 0.025
+        },
+        "conclusion": "stable_small_gain_below_preregistered_effect"
+      },
+      "state_replay_window": {
+        "label": "State / history",
+        "baseline": {
+          "mean": 1.0,
+          "population_std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "candidate": {
+          "mean": 1.0,
+          "population_std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "delta": {
+          "mean": 0.0,
+          "population_std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "per_seed_delta": {
+          "20261001": 0.0,
+          "20261019": 0.0,
+          "20261107": 0.0
+        },
+        "conclusion": "confirmed_rule_architecture_fix_not_neural_learning"
+      }
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 20261001,
+      "dataset_sha256": "dba26a94a60c25fa74483667c954b4832f3d61c96aed7a784cee6ee5a9e825b5",
+      "baseline_macro": 0.655,
+      "candidate_macro": 0.715556,
+      "macro_delta": 0.060556,
+      "per_family": {
+        "url_scheme_downgrade": {
+          "baseline": 0.548333,
+          "candidate": 0.408333,
+          "delta": -0.14,
+          "baseline_neural": 0.631667,
+          "candidate_neural": 0.441667
+        },
+        "dom_double_decode": {
+          "baseline": 0.5,
+          "candidate": 0.631667,
+          "delta": 0.131667,
+          "baseline_neural": 0.5,
+          "candidate_neural": 0.631667
+        },
+        "unicode_casefold_role": {
+          "baseline": 0.775,
+          "candidate": 0.798333,
+          "delta": 0.023333,
+          "baseline_neural": 0.565,
+          "candidate_neural": 0.663333
+        },
+        "numeric_string_coercion": {
+          "baseline": 0.488333,
+          "candidate": 0.806667,
+          "delta": 0.318334,
+          "baseline_neural": 0.488333,
+          "candidate_neural": 0.806667
+        },
+        "compound_origin_role": {
+          "baseline": 0.618333,
+          "candidate": 0.648333,
+          "delta": 0.03,
+          "baseline_neural": 0.458333,
+          "candidate_neural": 0.553333
+        },
+        "state_replay_window": {
+          "baseline": 1.0,
+          "candidate": 1.0,
+          "delta": 0.0,
+          "baseline_neural": 0.508333,
+          "candidate_neural": 0.503333
+        }
+      },
+      "counterexample_top1": 0.784444,
+      "random_top1": 0.646651,
+      "old_family_worst_delta": -0.001667,
+      "old_family_regression_passes": true
+    },
+    {
+      "seed": 20261019,
+      "dataset_sha256": "4c90b06294a17e2fc95b94475b51296ca6173dda1985343f88f2a4a8f67b9d5c",
+      "baseline_macro": 0.664722,
+      "candidate_macro": 0.712778,
+      "macro_delta": 0.048056,
+      "per_family": {
+        "compound_origin_role": {
+          "baseline": 0.635,
+          "candidate": 0.661667,
+          "delta": 0.026667,
+          "baseline_neural": 0.448333,
+          "candidate_neural": 0.586667,
+          "neural_delta": 0.138334
+        },
+        "dom_double_decode": {
+          "baseline": 0.5,
+          "candidate": 0.643333,
+          "delta": 0.143333,
+          "baseline_neural": 0.5,
+          "candidate_neural": 0.643333,
+          "neural_delta": 0.143333
+        },
+        "numeric_string_coercion": {
+          "baseline": 0.543333,
+          "candidate": 0.823333,
+          "delta": 0.28,
+          "baseline_neural": 0.543333,
+          "candidate_neural": 0.823333,
+          "neural_delta": 0.28
+        },
+        "state_replay_window": {
+          "baseline": 1.0,
+          "candidate": 1.0,
+          "delta": 0.0,
+          "baseline_neural": 0.511667,
+          "candidate_neural": 0.533333,
+          "neural_delta": 0.021666
+        },
+        "unicode_casefold_role": {
+          "baseline": 0.771667,
+          "candidate": 0.775,
+          "delta": 0.003333,
+          "baseline_neural": 0.583333,
+          "candidate_neural": 0.645,
+          "neural_delta": 0.061667
+        },
+        "url_scheme_downgrade": {
+          "baseline": 0.538333,
+          "candidate": 0.373333,
+          "delta": -0.165,
+          "baseline_neural": 0.628333,
+          "candidate_neural": 0.453333,
+          "neural_delta": -0.175
+        }
+      },
+      "counterexample_top1": 0.806667,
+      "random_top1": 0.646762,
+      "old_family_worst_delta": 0.0,
+      "old_family_regression_passes": true
+    },
+    {
+      "seed": 20261107,
+      "dataset_sha256": "c8fc3e6971f255ef7444de7c9aebb5e65efda874802a8e2b28a3733c8befd5d5",
+      "baseline_macro": 0.663889,
+      "candidate_macro": 0.721667,
+      "macro_delta": 0.057778,
+      "per_family": {
+        "compound_origin_role": {
+          "baseline": 0.636667,
+          "candidate": 0.661667,
+          "delta": 0.025,
+          "baseline_neural": 0.503333,
+          "candidate_neural": 0.615,
+          "neural_delta": 0.111667
+        },
+        "dom_double_decode": {
+          "baseline": 0.5,
+          "candidate": 0.5,
+          "delta": 0.0,
+          "baseline_neural": 0.5,
+          "candidate_neural": 0.5,
+          "neural_delta": 0.0
+        },
+        "numeric_string_coercion": {
+          "baseline": 0.51,
+          "candidate": 0.823333,
+          "delta": 0.313333,
+          "baseline_neural": 0.51,
+          "candidate_neural": 0.823333,
+          "neural_delta": 0.313333
+        },
+        "state_replay_window": {
+          "baseline": 1.0,
+          "candidate": 1.0,
+          "delta": 0.0,
+          "baseline_neural": 0.523333,
+          "candidate_neural": 0.545,
+          "neural_delta": 0.021667
+        },
+        "unicode_casefold_role": {
+          "baseline": 0.815,
+          "candidate": 0.836667,
+          "delta": 0.021667,
+          "baseline_neural": 0.606667,
+          "candidate_neural": 0.71,
+          "neural_delta": 0.103333
+        },
+        "url_scheme_downgrade": {
+          "baseline": 0.521667,
+          "candidate": 0.508333,
+          "delta": -0.013334,
+          "baseline_neural": 0.615,
+          "candidate_neural": 0.566667,
+          "neural_delta": -0.048333
+        }
+      },
+      "counterexample_top1": 0.753333,
+      "random_top1": 0.644595,
+      "old_family_worst_delta": 0.0,
+      "old_family_regression_passes": true
+    }
+  ],
+  "causal_attribution": {
+    "state_history": "The frozen checkpoint also reaches 100% after the new history projection and executable prev-step rule; attribute this to representation/architecture, not training.",
+    "numeric_coercion": "Primitive-only training improves every seed by at least 28pp on an entirely held-out composed family; this is the only preregistered training-generalization effect confirmed across all seeds.",
+    "double_decode": "Two seeds improve by more than 13pp and one remains at chance; classify as high variance and unconfirmed.",
+    "url_semantics": "Hostname-primitive adaptation causes negative transfer on scheme downgrade; URL projection/rule arbitration is the next root-cause target.",
+    "sampling_bug": "An earlier Stage-B run used a global stride split that removed two whole families from training. It is retained as an invalid diagnostic and excluded from every aggregate here."
+  },
+  "decision": {
+    "numeric_coercion_generalization_confirmed": true,
+    "double_decode_generalization_confirmed": false,
+    "state_fix_is_model_learning": false,
+    "url_negative_transfer_blocks_engineering_scale_up": true,
+    "all_old_family_regressions_within_2pp": true,
+    "next_experiment": "Factor URL into scheme/hostname/port primitives and add confidence arbitration that prevents raw suffix rules from overriding structured URL evidence; keep model size fixed."
+  },
+  "lineage": {
+    "preregistration": "research/generalization_matrix_preregistration.json",
+    "invalid_stage_b_diagnostic": "research/generalization_matrix_09_stage_b.json",
+    "stage_a_current_representation": "research/generalization_matrix_09_stage_a_current_representation.json",
+    "stage_b_seed_reports": [
+      "research/generalization_matrix_09_stage_b_stratified.json",
+      "research/generalization_matrix_09_stage_b_20261019.json",
+      "research/generalization_matrix_09_stage_b_20261107.json"
+    ]
+  }
+}

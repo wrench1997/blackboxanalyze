@@ -1,0 +1,37 @@
+{
+  "protocol_id": "pg-pk-190-dual-head-action-gate-replay-v1",
+  "schema_version": "pg190-dual-head-action-gate-replay-protocol-v1",
+  "training_source": "PG-189 structured GET traces",
+  "replay_source": "PG-179B observed POST routes",
+  "route_count": 2,
+  "methods": [
+    "GET",
+    "POST"
+  ],
+  "fresh_container_per_route": true,
+  "model_outputs": {
+    "action": [
+      "baseline",
+      "matched_control",
+      "safe_candidate",
+      "abstain"
+    ],
+    "safety_gate": [
+      "abstain",
+      "allow"
+    ]
+  },
+  "manifest_validator_before_send": true,
+  "typed_oracle_required_before_positive": true,
+  "unknown_oracle_action": "abstain",
+  "raw_payload_and_response_excluded": true,
+  "gates": {
+    "gate_holdout_abstain_recall_min": 0.95,
+    "unsafe_allow_count_max": 0,
+    "manifest_validation_failure_max": 0,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "protocol_sha256": "2b7ce59ea7415f81293be482f8544b3b37a1b371773fe73f8fccd950f9e465b9"
+}

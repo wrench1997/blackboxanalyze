@@ -1,0 +1,63 @@
+{
+  "protocol_id": "pg-pk-146-public-lab-replay-v1",
+  "schema_version": "pg146-public-lab-replay-report-v1",
+  "status": "completed_pg146_public_lab_replay",
+  "scope": {
+    "labs": [
+      "webgoat",
+      "dvwa",
+      "juice_shop"
+    ],
+    "pinned_images": true,
+    "loopback_only": true,
+    "safe_probe_scope": "baseline GET plus empty/invalid-form POST only"
+  },
+  "counts": {
+    "target_count": 3,
+    "row_count": 6,
+    "get_count": 3,
+    "post_count": 3,
+    "fresh_reset_count": 6,
+    "ready_count": 4,
+    "unknown_oracle_count": 6,
+    "typed_oracle_count": 0
+  },
+  "hard_checks": {
+    "three_pinned_targets": true,
+    "six_rows": true,
+    "get_post_balanced": true,
+    "all_target_surfaces_ready": false,
+    "all_loopback": true,
+    "all_fresh_reset": true,
+    "all_evidence_hashes_present": true,
+    "response_hashes_present": true,
+    "html_or_response_projection_present": true,
+    "all_unknown_without_typed_oracle": true,
+    "raw_bodies_excluded_from_model": true
+  },
+  "hard_gates_passed": false,
+  "training_eligible": false,
+  "training_artifact_promotion_allowed": false,
+  "memory_promotion_allowed": false,
+  "model_input_contract": {
+    "raw_request_body_in_model": false,
+    "raw_response_body_in_model": false,
+    "target_identity_in_model": false,
+    "oracle_authority_in_model": false,
+    "external_payloads": false
+  },
+  "diagnosis": {
+    "experiment_vs_engineering": "real_loopback_surface_collection",
+    "typed_oracle_available": false,
+    "environment_failure": true,
+    "ready_count": 4,
+    "next_required_step": "lab-specific evaluator-only oracle and matched negative/positive replay before capability training"
+  },
+  "artifacts": {
+    "protocol": "research\\pg146_public_lab_replay_protocol_v1.json",
+    "catalog": "research\\pg146_public_lab_replay_catalog_v1.json",
+    "model_dataset": "research\\pg146_public_lab_replay_model_dataset_v1.json",
+    "trace": "research\\pg146_public_lab_replay_trace_v1.json"
+  },
+  "report_sha256": "ce59defe0caa9d170e36da8e38d31108803fe4e963024a64f3766b31d69036c3"
+}

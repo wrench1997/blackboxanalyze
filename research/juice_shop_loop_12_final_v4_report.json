@@ -1,0 +1,22 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-final-v4",
+  "status": "engineering_iteration_completed_with_action_search_gap",
+  "supersedes": "research/juice_shop_loop_12_final_v3_report.json",
+  "engineering_changes": {
+    "calibrated_abstention": {"validation_precision_gate": 0.95, "persisted_threshold": 0.337907, "validation_coverage": 1.0},
+    "binding_provenance": {"hash": "sha256-canonical-json", "count_consistency_validation": true, "executable_binding": false},
+    "active_probe": {"score": "0.75 normalized decoder entropy + 0.20 abstention margin + 0.05 response score", "family_labels_used": false, "methods": ["GET"]}
+  },
+  "active_matrix": {
+    "protocol": "research/juice_shop_loop_12_hidden_matrix_protocol_v4.json",
+    "shadow_action_count": 28,
+    "policies": {
+      "trained_response_head_v3_rule_ir_bound_v4_active": {"hidden_family_hit_count": 0, "evaluation_action_count": 7, "fully_bound_action_count": 4, "bound_slot_count": 8, "decoder_abstained_action_count": 3},
+      "trained_response_head_v3_rule_ir_bound_v4_active_ablation": {"hidden_family_hit_count": 0, "evaluation_action_count": 7, "fully_bound_action_count": 4, "bound_slot_count": 8, "decoder_abstained_action_count": 3}
+    },
+    "active_vs_fixed": "active entropy changed the selected probe in four or more banks while preserving the same 0/7 evaluator-hit result; evidence coverage increased from the fixed v4 training policy's 3/7 to 4/7"
+  },
+  "decoder": {"checkpoint": "artifacts/rule-ir-decoder-loop-12-20260899-v4/rule_ir_decoder.pt", "validation_accuracy": 1.0, "fresh_holdout_mean_accuracy": 0.845833, "dom_double_decode_accuracy": 1.0, "cuda_device": "NVIDIA GeForce RTX 3060"},
+  "tests": {"command": "PYTHONPATH=. python -m pytest -q", "passed": 54, "warnings": 1},
+  "remaining_gap": "decoder candidates for ordinary API surfaces can still be semantically wrong; evaluator action search remains 0/7 and needs family-disambiguating probe outcomes or a richer interaction model"
+}

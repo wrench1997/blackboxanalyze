@@ -1,0 +1,65 @@
+{
+  "protocol_id": "sift-payload-grounding-ablation-v1",
+  "version": "1.0",
+  "purpose": "检验受限 detection-probe grammar 是否能在无漏洞族标签的条件下从本地 oracle 反馈中学习，并把成功 probe 复用于后续轨迹。",
+  "hypotheses": [
+    "在相同混合候选池和预算下，反馈驱动策略的 warmup 发现率不低于随机策略。",
+    "标准 UCB 在发现阶段有效，但短 replay 预算可能因持续探索而不稳定。",
+    "加入显式 success-memory gate 后，ucb_memory 的 replay 命中率和复放精度应高于标准 UCB/随机基线。"
+  ],
+  "policy_input_contract": {
+    "visible": [
+      "candidate_id",
+      "validated_detection_payload",
+      "oracle_evidence_hash",
+      "bounded_status_reward"
+    ],
+    "hidden": [
+      "vulnerability_family",
+      "target_id",
+      "required_probe",
+      "evaluator_state"
+    ],
+    "probe_kinds_are_not_family_labels": true
+  },
+  "strategies": {
+    "random": "从混合候选池均匀随机选择，不使用历史反馈。",
+    "ucb": "标准确定性 UCB；发现成功后仍保留探索项。",
+    "ucb_memory": "warmup 使用标准 UCB，replay 若已有 observable_success 则优先选择成功记忆，否则回退 UCB。"
+  },
+  "targets": [
+    "xss_double_decode",
+    "sql_time_channel",
+    "sql_error_channel",
+    "sql_blind_branch"
+  ],
+  "design": {
+    "seeds": [20260811, 20260817, 20260823, 20260829, 20260831],
+    "mixed_candidate_count": 9,
+    "warmup_budget": 10,
+    "replay_budget": 3,
+    "stable_replay_repetitions": 2,
+    "fresh_marker_replay": true,
+    "evaluator_confirmation_expected": 0
+  },
+  "metrics": {
+    "warmup_success_rate": "首次 warmup 命中率",
+    "mean_warmup_first_success_step": "只在命中的 seed 上平均首次步数",
+    "replay_success_rate": "replay 预算内至少命中一次的 seed 比例",
+    "replay_success_precision": "replay 内 observable_success / replay attempts",
+    "stable_replay_rate": "同一成功 probe 两次证据哈希和状态均稳定的比例",
+    "fresh_target_replay_rate": "换 marker 后同一抽象 grammar 再命中的比例",
+    "evaluator_confirmation_rate": "本实验固定为 0，防止把隐藏 evaluator 当策略输入"
+  },
+  "safety": {
+    "local_only": true,
+    "network_execution": false,
+    "script_execution": false,
+    "database_execution": false,
+    "real_sleep_performed": false,
+    "public_payload_corpus_ingested": false,
+    "real_exploit_strings": false
+  },
+  "runner": "scripts/run_payload_grounding_ablation.py",
+  "result": "research/payload_grounding_ablation_v1.json"
+}

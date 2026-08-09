@@ -1,0 +1,37 @@
+{
+  "schema_version": "sift-url-meta-v2-preregistration-v1",
+  "experiment_id": "neural-url-loop-11-url-meta-v2-pilot",
+  "registered_at": "2026-08-01T20:25:00+08:00",
+  "status": "frozen-before-retraining",
+  "ablation_correction": {
+    "substring_with_set_head": 0.888333,
+    "substring_same_checkpoint_without_set_head": 0.76,
+    "canonical_baseline": 0.945,
+    "conclusion": "the learned set head mitigates rather than causes the regression; meta-label permutation on substring_origin damages the base Transformer"
+  },
+  "single_change": {
+    "previous_meta_families": ["substring_origin", "string_suffix_primitive", "url_hostname_primitive"],
+    "candidate_meta_families": ["string_suffix_primitive", "url_hostname_primitive"],
+    "removed": "substring_origin"
+  },
+  "fixed": {
+    "parameters": 908546,
+    "architecture": "unchanged learned URL set head",
+    "canonical_url_slots": true,
+    "programs": 2700,
+    "epochs": 10,
+    "training_seed": 20261529,
+    "target_family_training_examples": 0,
+    "no_identifiability_router_added": true
+  },
+  "acceptance": {
+    "url_target_min": 0.70,
+    "set_head_gain_min": 0.10,
+    "all_old_family_delta_min": -0.02,
+    "fresh_confirmation_required": true
+  },
+  "lineage": {
+    "selective_meta_failure": "research/neural_url_loop_11_selective_meta_pilot.json",
+    "original_confirmation_failure": "research/neural_url_loop_11_confirmation.json"
+  }
+}

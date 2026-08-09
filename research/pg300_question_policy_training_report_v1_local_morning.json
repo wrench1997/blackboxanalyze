@@ -1,0 +1,319 @@
+{
+  "protocol_id": "pg300-question-policy-training-v1",
+  "schema_version": "pg300-question-policy-training-report-v1",
+  "status": "completed_local_morning_pg300_question_policy",
+  "source": {
+    "dataset": "research/pg300_question_policy_dataset_v1.json",
+    "dataset_sha256": "e0cbd93744665f228d4cc94e005742383a3f06876f170b17febcf392665e1562",
+    "audit": "research/pg300_question_policy_audit_v1.json",
+    "audit_sha256": "692847750944ab85360c33d7d7334d533b3cbc3c124b011b092f54068f23d530",
+    "oracle_blind": true,
+    "literal_payload_in_context": false,
+    "wire_emission": false
+  },
+  "device": {
+    "execution_mode": "local_morning",
+    "timestamp": "2026-08-07T09:53:37.689205+08:00",
+    "cuda_visible_devices": "0",
+    "visible_device_count": 1,
+    "current_device": 0,
+    "device_name": "NVIDIA GeForce RTX 3060"
+  },
+  "config": {
+    "d_model": 32,
+    "n_heads": 2,
+    "n_layers": 1,
+    "experts": 2,
+    "expert_hidden": 64,
+    "top_k": 1,
+    "dropout": 0.05,
+    "max_length": 64
+  },
+  "loss_token_weights": {
+    "question=ask_typed_availability": 1.8,
+    "question=ask_feedback_state": 1.5,
+    "question=ask_replay_readiness": 1.5,
+    "question=ask_evidence_presence": 1.5,
+    "question=none": 1.0
+  },
+  "split": {
+    "total": 1368,
+    "train": 1332,
+    "implementation_holdout": 24,
+    "hard_negative_eval": 12,
+    "seeds": [
+      30001,
+      30002,
+      30003
+    ],
+    "epochs": 80
+  },
+  "metrics": {
+    "train": {
+      "count": {
+        "mean": 1332.0,
+        "min": 1332.0,
+        "max": 1332.0
+      },
+      "hard_negative_false_allow": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "missing_question_count": {
+        "mean": 852.0,
+        "min": 852.0,
+        "max": 852.0
+      },
+      "missing_question_recall": {
+        "mean": 0.760954,
+        "min": 0.732394,
+        "max": 0.818075
+      },
+      "safe_reject_rate": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "sequence_exact_accuracy": {
+        "mean": 0.606857,
+        "min": 0.468468,
+        "max": 0.883634
+      },
+      "token_accuracy": {
+        "mean": 0.803428,
+        "min": 0.734234,
+        "max": 0.941817
+      },
+      "unnecessary_question_rate": {
+        "mean": 0.666667,
+        "min": 0.0,
+        "max": 1.0
+      }
+    },
+    "implementation_holdout": {
+      "count": {
+        "mean": 24.0,
+        "min": 24.0,
+        "max": 24.0
+      },
+      "hard_negative_false_allow": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "missing_question_count": {
+        "mean": 24.0,
+        "min": 24.0,
+        "max": 24.0
+      },
+      "missing_question_recall": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "safe_reject_rate": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "sequence_exact_accuracy": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "token_accuracy": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "hard_negative": {
+      "count": {
+        "mean": 12.0,
+        "min": 12.0,
+        "max": 12.0
+      },
+      "hard_negative_false_allow": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "missing_question_count": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "safe_reject_rate": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "sequence_exact_accuracy": {
+        "mean": 0.333333,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "token_accuracy": {
+        "mean": 0.666667,
+        "min": 0.5,
+        "max": 1.0
+      },
+      "unnecessary_question_rate": {
+        "mean": 0.666667,
+        "min": 0.0,
+        "max": 1.0
+      }
+    },
+    "per_seed": [
+      {
+        "seed": 30001,
+        "train": {
+          "count": 1332,
+          "token_accuracy": 0.941817,
+          "sequence_exact_accuracy": 0.883634,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.818075,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 852
+        },
+        "implementation_holdout": {
+          "count": 24,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": null,
+          "missing_question_count": 24
+        },
+        "hard_negative": {
+          "count": 12,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 0
+        }
+      },
+      {
+        "seed": 30002,
+        "train": {
+          "count": 1332,
+          "token_accuracy": 0.734234,
+          "sequence_exact_accuracy": 0.468468,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.732394,
+          "unnecessary_question_rate": 1.0,
+          "missing_question_count": 852
+        },
+        "implementation_holdout": {
+          "count": 24,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": null,
+          "missing_question_count": 24
+        },
+        "hard_negative": {
+          "count": 12,
+          "token_accuracy": 0.5,
+          "sequence_exact_accuracy": 0.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 1.0,
+          "missing_question_count": 0
+        }
+      },
+      {
+        "seed": 30003,
+        "train": {
+          "count": 1332,
+          "token_accuracy": 0.734234,
+          "sequence_exact_accuracy": 0.468468,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.732394,
+          "unnecessary_question_rate": 1.0,
+          "missing_question_count": 852
+        },
+        "implementation_holdout": {
+          "count": 24,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": null,
+          "missing_question_count": 24
+        },
+        "hard_negative": {
+          "count": 12,
+          "token_accuracy": 0.5,
+          "sequence_exact_accuracy": 0.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 1.0,
+          "missing_question_count": 0
+        }
+      }
+    ]
+  },
+  "engineering_gate": {
+    "status": "blocked",
+    "checks": {
+      "dataset_audit_pass": true,
+      "resource_contract": true,
+      "causal_question_only": true,
+      "surface_holdout_present": true,
+      "observation_holdout_present": true,
+      "implementation_holdout_present": true,
+      "question_recall_min": true,
+      "hard_negative_zero_false_allow": true,
+      "hard_negative_unnecessary_question_max": false,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "scientific_gate": {
+    "status": "blocked",
+    "checks": {
+      "fresh_real_evaluator": false,
+      "real_application_gold": false,
+      "literal_payload_success": false,
+      "implementation_holdout": true
+    },
+    "reasons": [
+      "question-only abstract data",
+      "no fresh typed replay",
+      "no real application gold"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "payload_catalog_promotion_allowed": false
+  },
+  "conclusion": "PG-300 tests compositional question-token generalization; it is not an attack or payload success claim.",
+  "elapsed_seconds": 164.39,
+  "report_sha256": "006ec2f3beff42a885cf8a520fedd10ec96cea90e6b2f3bec737e49a627c8234"
+}

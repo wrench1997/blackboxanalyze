@@ -1,0 +1,46 @@
+{
+  "protocol_id": "pg-pk-161-adapter-seed-source-v1",
+  "schema_version": "pg161-adapter-seed-source-protocol-v1",
+  "objective": "adapter_only_multiseed_source_heldout_replay",
+  "variants": [
+    {
+      "name": "seed_16101",
+      "seed": 16101,
+      "held_out_source": null
+    },
+    {
+      "name": "seed_16102",
+      "seed": 16102,
+      "held_out_source": null
+    },
+    {
+      "name": "seed_16103",
+      "seed": 16103,
+      "held_out_source": null
+    },
+    {
+      "name": "source_heldout_pg149",
+      "seed": 16104,
+      "held_out_source": "pg149_synthetic"
+    },
+    {
+      "name": "source_heldout_pg136",
+      "seed": 16105,
+      "held_out_source": "pg136_real"
+    }
+  ],
+  "source_checkpoint": "PG-159 shared_adapter_256",
+  "training": {
+    "body_frozen": true,
+    "head_lr": 0.0001,
+    "epochs": 2,
+    "batch_size": 64
+  },
+  "source_heldout": "pg149_synthetic and pg136_real are removed from both action train and balanced replay; holdouts remain untouched",
+  "threshold_fit": "training-available dev only, zero false-stop coverage",
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  }
+}

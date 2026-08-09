@@ -1,0 +1,46 @@
+{
+  "schema_version": "pg265-external-device-contract-v1",
+  "experiment": "PG-265 growth-augmented large-capacity training",
+  "status": "awaiting_user_supplied_authorized_device",
+  "source_scope": "127.0.0.1 Pikachu Docker abstract-token dataset only",
+  "input_artifacts": {
+    "dataset": "research/pg264_pikachu_growth_collection_dataset_v1.json",
+    "dataset_sha256": "a2de6626162b51d41246ff3eb587b7913ddd5cd7ea33f4b6e9f43cd0ef651469",
+    "audit": "research/pg264_pikachu_growth_collection_audit_v1.json",
+    "audit_sha256": "6681da3bc54bc124c57148fd49eedcecce1df5605ec8e05e56112046fa5668f8",
+    "report": "research/pg264_pikachu_growth_collection_report_v1.json",
+    "report_sha256": "ab9dee7fa73751cd4966c867d60f69294892f47d0620d4a2bc8c73cbf15d1cc6"
+  },
+  "capacity_matrix": [4096, 8192, 12288],
+  "training_contract": {
+    "train_steps": 170,
+    "micro_batch_size": 16,
+    "gradient_accumulation": true,
+    "resume_from_partial_weights": false,
+    "oracle_target_in_model_input": false,
+    "raw_payload_or_response_persistence": false,
+    "promotion_after_run": false
+  },
+  "device_requirements": {
+    "minimum_cuda_devices": 1,
+    "recommended_vram_mib": 16384,
+    "single_gpu_sequential_branches": true,
+    "foreign_gpu_process_policy": "do not terminate other projects; run only when the device owner authorizes contention",
+    "required_validation": "scripts/validate_pg265_external_device.py"
+  },
+  "launch": {
+    "command": "python scripts/run_pg265_growth_augmented_large_capacity_training.py",
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0",
+      "PG265_MICRO_BATCH_SIZE": "16",
+      "PG265_TRAIN_STEPS": "170"
+    },
+    "post_run": "python scripts/audit_pg265_report.py"
+  },
+  "safety": {
+    "authorized_local_lab_only": true,
+    "public_target_scanning": false,
+    "vulnerability_claim_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

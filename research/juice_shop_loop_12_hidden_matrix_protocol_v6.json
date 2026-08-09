@@ -1,0 +1,34 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-hidden-family-matrix-v6",
+  "status": "frozen-before-matrix-execution",
+  "supersedes": "research/juice_shop_loop_12_hidden_matrix_protocol_v5.json",
+  "scope": "seven hidden families from catalog v3; local pinned Juice Shop only",
+  "families": ["observability", "access_control", "authentication", "input_validation", "injection", "url_redirect", "xss"],
+  "action_banks": {
+    "observability": ["/", "/metrics", "/logs/", "/debug/", "/ftp/"],
+    "access_control": ["/rest/basket/1", "/rest/admin/application-configuration", "/api/Users", "/rest/user/whoami", "/rest/order-history"],
+    "authentication": ["/rest/user/whoami", "/rest/user/login", "/api/SecurityQuestions", "/rest/user/reset-password", "/api/Users"],
+    "input_validation": ["/rest/products/search?q=", "/rest/products/search?q=%00", "/api/Products?limit=1", "/api/Products/1?quantity=-1", "/rest/products/search?q=%3Cscript%3E"],
+    "injection": ["/rest/products/search?q=normal", "/rest/products/search?q=%27", "/rest/products/search?q=%27%20OR%201%3D1--", "/rest/products/search?q=%27%20UNION%20SELECT%20NULL--", "/rest/products/search?q=1"],
+    "url_redirect": ["/redirect?to=https%3A%2F%2Fexample.com", "/redirect?to=%2F%2Fexample.com", "/redirect?url=https%3A%2F%2Fexample.com", "/", "/rest/products/search?q=normal"],
+    "xss": ["/rest/products/search?q=%3Cscript%3E", "/rest/products/search?q=%3Cimg%20src=x%20onerror=alert(1)%3E", "/", "/api/Products?limit=1", "/robots.txt"]
+  },
+  "belief_loop": {
+    "likelihood_source": "surface discriminator probabilities",
+    "update": "posterior <- prior-mixed softened likelihood; likelihood power 0.35, prior mixing 0.20",
+    "selection": "0.90 Jensen-Shannon information gain + 0.05 local likelihood entropy + 0.05 response score",
+    "family_labels_in_update": false,
+    "trajectory_persisted": true,
+    "negative_entropy_change_reported": true
+  },
+  "policies": {
+    "trained_response_head_v3_rule_ir_bound_v4_belief_v2": "corrected multi-step belief active selection with response score enabled",
+    "trained_response_head_v3_rule_ir_bound_v4_belief_v2_ablation": "same corrected belief loop with response slots disabled"
+  },
+  "artifacts": {
+    "response_checkpoint": "artifacts/neural-juice-loop-12-response-head-v3-20262113/tiny_rule_set_gpt.pt",
+    "rule_ir_checkpoint": "artifacts/rule-ir-decoder-loop-12-20260899-v4/rule_ir_decoder.pt",
+    "surface_checkpoint": "artifacts/surface-discriminator-loop-12-20260931/surface_discriminator.pt"
+  },
+  "safety": {"methods": ["GET"], "no_external_callbacks": true, "no_destructive_writes": true, "no_evaluator_endpoints": true, "xss_interpretation": "HTTP-only matrix cell; browser/DOM execution is not claimed"}
+}

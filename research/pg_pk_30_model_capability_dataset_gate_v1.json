@@ -1,0 +1,89 @@
+{
+  "schema_version": "pg-pk-30-model-capability-dataset-gate-v1",
+  "purpose": "Prevent engineering regression scores from being reported as model capability gains.",
+  "claim_boundary": {
+    "unit_regression_pass": "engineering_health_only",
+    "dataset_test_pass": "required_for_model_improvement_claim",
+    "training_or_memory_promotion": "blocked_until_capability_gate_passes"
+  },
+  "required_dataset_roles": [
+    "train",
+    "dev",
+    "family_holdout",
+    "ood_source",
+    "negative_control"
+  ],
+  "independence": {
+    "minimum_distinct_dataset_ids": 3,
+    "minimum_distinct_source_hashes": 3,
+    "minimum_independent_sampling_seeds": 3,
+    "minimum_target_instances": 3,
+    "minimum_family_holdout_runs": 1,
+    "train_eval_source_overlap": false,
+    "train_eval_target_overlap": false,
+    "train_eval_family_overlap": false,
+    "train_eval_split_manifest_overlap": false,
+    "duplicate_evidence_hash": false,
+    "duplicate_sample_id": false,
+    "duplicate_probe_hash": false,
+    "duplicate_dataset_manifest": false,
+    "duplicate_split_manifest": false,
+    "minimum_independent_seeds_per_role": 3
+  },
+  "required_row_lineage": [
+    "sample_id",
+    "dataset_id",
+    "source_id",
+    "source_hash",
+    "target_instance_id",
+    "target_instance_ids",
+    "family_set",
+    "sampling_seed",
+    "dataset_manifest_sha256",
+    "split_manifest_sha256",
+    "probe_sha256",
+    "oracle_contract_sha256",
+    "checkpoint_sha256",
+    "sample_count",
+    "unique_sample_count",
+    "denominator",
+    "metrics_status"
+  ],
+  "per_cell_metrics": {
+    "required": true,
+    "baseline_and_candidate_required": true,
+    "recall_gain_required_roles": ["family_holdout", "ood_source"],
+    "guardrails_required_for_all_roles": true,
+    "worst_case_baseline_and_candidate_required": true
+  },
+  "required_metrics": [
+    "typed_recall",
+    "precision",
+    "false_positive_rate",
+    "abstain_precision",
+    "ece",
+    "median_queries"
+  ],
+  "candidate_must_beat_baseline": {
+    "minimum_holdout_recall_gain": 0.01,
+    "maximum_precision_regression": 0.0,
+    "maximum_false_positive_rate_regression": 0.0,
+    "maximum_abstain_precision_regression": 0.0,
+    "maximum_ece_regression": 0.0,
+    "false_positive_ledger_max": 0
+  },
+  "required_attestations": [
+    "unit_tests_passed",
+    "oracle_validated",
+    "data_lineage_complete",
+    "authorized_sources_attested",
+    "raw_data_retained_false",
+    "baseline_checkpoint_and_candidate_checkpoint"
+  ],
+  "failure_states": {
+    "missing_dataset_evidence": "blocked",
+    "metric_or_holdout_regression": "no_proven_gain",
+    "any_failure": "no_claim_no_training_no_memory_promotion"
+  },
+  "implementation": "app/model_capability_gate.py"
+}

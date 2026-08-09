@@ -1,0 +1,71 @@
+{
+  "protocol_id": "pg-pk-99-surface-novelty-audit-v1",
+  "schema_version": "pg99-surface-novelty-report-v1",
+  "status": "blocked",
+  "source": {
+    "training_design": "pg94 seeds 361/367",
+    "evaluation_source": "pg42 cobalt/quartz seeds 401/409/419",
+    "training_excludes_pg42": true,
+    "surface_projection_schema": "bounded-surface-novelty-v1",
+    "oracle_after_surface_projection": true,
+    "training": false,
+    "memory_write": false
+  },
+  "metrics": {
+    "pg42_novelty": {
+      "count": 1440,
+      "typed_positive_count": 324,
+      "typed_negative_count": 1116,
+      "positive_novel_surface_abstain_rate": 1.0,
+      "negative_novel_surface_abstain_rate": 1.0,
+      "positive_in_domain_count": 0,
+      "negative_in_domain_count": 0,
+      "all_rows_abstain": true,
+      "support_size": 24
+    },
+    "pg42_known_unknown_overlap": {
+      "known_positive_fingerprint_count": 6,
+      "unknown_positive_fingerprint_count": 6,
+      "known_unknown_fingerprint_overlap_count": 6,
+      "unknown_positive_rows": 36,
+      "unknown_rows_with_known_positive_fingerprint": 36,
+      "unknown_overlap_rate": 1.0,
+      "equivalence_class_conflict_count": 6,
+      "impossibility_witness": true,
+      "reason": "same visible fingerprint carries known-positive and template_injection-positive oracle outcomes"
+    }
+  },
+  "capability_gate": {
+    "status": "blocked",
+    "checks": {
+      "model_input_has_no_oracle_or_family": true,
+      "fresh_reset_per_pair": true,
+      "negative_control_matched": true,
+      "evidence_hashes_valid": true,
+      "get_post_covered": true,
+      "unknown_overlap_audited": true,
+      "not_all_abstain": false,
+      "known_positive_not_all_abstain": false
+    },
+    "blocking_reasons": [
+      "not_all_abstain",
+      "known_positive_not_all_abstain",
+      "known_unknown_visible_equivalence_impossible"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "novelty_audit_only",
+    "reason": "surface novelty is an abstention aid, not a typed vulnerability detector; exact known/unknown overlap blocks family claims"
+  },
+  "safety": {
+    "loopback_only": true,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "evaluator_labels_in_model_input": false,
+    "typed_oracle_used_only_after_projection": true,
+    "evidence_hashes_verified": true
+  }
+}

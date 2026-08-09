@@ -1,0 +1,90 @@
+{
+  "protocol_id": "pg-pk-125-failure-policy-ood-v1",
+  "proposal_id": "pg125-failure-policy-ood-proposal-v1",
+  "question": "在未见的 scope/tenant 逻辑语义中，failure token 是否仍能选择正确的安全复放动作？",
+  "intervention": "冻结 PG-124，不训练 PG-125；用新路由、新 schema、新 transition 名称、新 seed 和三档 decoy strength 做 GET/POST/fresh-reset 复放。",
+  "success_definition": {
+    "full_accuracy_nonzero": true,
+    "full_compliance_nonzero": true,
+    "full_non_abstain_nonzero": true,
+    "failure_slot_ablation_changes_behavior": true,
+    "memory_promotion_forbidden": true
+  },
+  "observed": {
+    "full_failure_input": {
+      "accuracy": 0.9375,
+      "safety_compliance_rate": 0.9375,
+      "non_abstain_count": 108,
+      "mean_confidence": 0.988173,
+      "per_surface": {
+        "blind": {
+          "count": 36.0,
+          "accuracy": 1.0,
+          "compliance": 1.0
+        },
+        "decoy": {
+          "count": 36.0,
+          "accuracy": 1.0,
+          "compliance": 1.0
+        },
+        "scope": {
+          "count": 36.0,
+          "accuracy": 0.75,
+          "compliance": 0.75
+        },
+        "steady": {
+          "count": 36.0,
+          "accuracy": 1.0,
+          "compliance": 1.0
+        }
+      },
+      "action_counts": {
+        "replay_other_method": 9,
+        "repeat_matched_negative_pair": 72,
+        "probe_candidate_other_method": 27,
+        "abstain_candidate_only": 27,
+        "abstain_unknown_oracle": 9,
+        "stop_confirmed_positive": 0,
+        "abstain_budget_exhausted": 0
+      }
+    },
+    "full_model_failure_zeroed": {
+      "accuracy": 0.472222,
+      "safety_compliance_rate": 0.472222,
+      "non_abstain_count": 107,
+      "mean_confidence": 0.826851,
+      "per_surface": {
+        "blind": {
+          "count": 36.0,
+          "accuracy": 0.25,
+          "compliance": 0.25
+        },
+        "decoy": {
+          "count": 36.0,
+          "accuracy": 0.75,
+          "compliance": 0.75
+        },
+        "scope": {
+          "count": 36.0,
+          "accuracy": 0.5,
+          "compliance": 0.5
+        },
+        "steady": {
+          "count": 36.0,
+          "accuracy": 0.388889,
+          "compliance": 0.388889
+        }
+      },
+      "action_counts": {
+        "replay_other_method": 0,
+        "repeat_matched_negative_pair": 27,
+        "probe_candidate_other_method": 80,
+        "abstain_candidate_only": 37,
+        "abstain_unknown_oracle": 0,
+        "stop_confirmed_positive": 0,
+        "abstain_budget_exhausted": 0
+      }
+    }
+  },
+  "next": "若通过，迁移到第三族并加入长序列闭环；若失败，保留族外失败，拆分表示泛化与动作策略问题。"
+}

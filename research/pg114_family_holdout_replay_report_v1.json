@@ -1,0 +1,126 @@
+{
+  "protocol_id": "pg-pk-114-family-holdout-decoy-replay-v1",
+  "schema_version": "pg114-family-holdout-replay-report-v1",
+  "status": "passed_pg114_family_holdout_replay",
+  "scope": {
+    "execution_mode": "fresh_loopback_uvicorn_process",
+    "loopback_only": true,
+    "external_network": false,
+    "implementation_count": 3,
+    "family_holdout_claim_allowed": true,
+    "trained_model_claim_allowed": false,
+    "docker_claimed": false
+  },
+  "source": {
+    "reference_reports": [
+      "research/pg112_python_bsp_local_replay_report_v1.json",
+      "research/pg113_cross_implementation_replay_report_v1.json"
+    ],
+    "source_hashes": {
+      "target": "98c9624624635d11f04c2557ff97d9d5883944014412dae0b0b6bbb2f8470658",
+      "bridge": "93ba64706633eb876667f91354b765a5caab15ceb8ad0053001b8c1130f5dbdb",
+      "bsp_core": "7164a49481fa1ec19bfc09f90c2dde0c6566b1c4bf2d95eb6f79247bab745019",
+      "runner": "12565eb8871d50aca326e2e4b1637523d97d508996e8e97ba1f8e46ec066678b",
+      "pg112_report": "2c6e9d35228abb30b62a8e490b31537ccb5e50c725596b8f90096da46f452f4f",
+      "pg113_report": "28f411206b8dcdd6b0776c751dd6b88dc1c56462a93a2036d116fcda54c8b45b"
+    }
+  },
+  "metrics": {
+    "target_instance_count": 3,
+    "surface_count": 4,
+    "episode_count": 12,
+    "step_count": 48,
+    "get_step_count": 24,
+    "post_step_count": 24,
+    "fresh_reset_count": 48,
+    "evidence_hash_valid_count": 48,
+    "typed_oracle_called_count": 36,
+    "oracle_withheld_step_count": 12,
+    "confirmed_positive_count": 3,
+    "confirmed_negative_count": 33,
+    "candidate_count": 9,
+    "abstain_count": 3,
+    "family_holdout_positive_episode_count": 3,
+    "family_holdout_confirm_recall": 1.0,
+    "decoy_episode_count": 3,
+    "decoy_false_accept_count": 0,
+    "withheld_oracle_abstain_rate": 1.0,
+    "bsp_parameter_unchanged_rate": 1.0
+  },
+  "cross_experiment": {
+    "pg112_protocol": "pg-pk-112-python-bsp-local-replay-v1",
+    "pg113_protocol": "pg-pk-113-cross-implementation-replay-v1",
+    "family_holdout_is_not_in_prior_surface_matrix": true,
+    "prior_training_allowed": false,
+    "claim": "family-heldout replay and decoy rejection only; no trained-model capability claim"
+  },
+  "checks": {
+    "target_instance_count_three": true,
+    "independent_target_identity": true,
+    "surface_matrix_complete": true,
+    "get_post_balanced": true,
+    "fresh_reset_every_step": true,
+    "reset_epoch_unique_per_target": true,
+    "evidence_hashes_valid": true,
+    "target_oracle_hashes_bound": true,
+    "family_holdout_confirm_recall": true,
+    "decoy_false_accept_zero": true,
+    "neutral_negative_stability": true,
+    "withheld_oracle_abstains": true,
+    "all_abstain_not_success": true,
+    "cross_seed_surface_consistency": true,
+    "bsp_parameters_unchanged": true,
+    "bsp_mass_conserved": true,
+    "model_input_oracle_blind": true,
+    "model_input_family_free": true,
+    "no_raw_values_stored": true,
+    "no_training_or_memory_write": true,
+    "prior_gate_not_reused_as_training": true
+  },
+  "capability_gate": {
+    "status": "passed_pg114_family_holdout_replay",
+    "checks": {
+      "target_instance_count_three": true,
+      "independent_target_identity": true,
+      "surface_matrix_complete": true,
+      "get_post_balanced": true,
+      "fresh_reset_every_step": true,
+      "reset_epoch_unique_per_target": true,
+      "evidence_hashes_valid": true,
+      "target_oracle_hashes_bound": true,
+      "family_holdout_confirm_recall": true,
+      "decoy_false_accept_zero": true,
+      "neutral_negative_stability": true,
+      "withheld_oracle_abstains": true,
+      "all_abstain_not_success": true,
+      "cross_seed_surface_consistency": true,
+      "bsp_parameters_unchanged": true,
+      "bsp_mass_conserved": true,
+      "model_input_oracle_blind": true,
+      "model_input_family_free": true,
+      "no_raw_values_stored": true,
+      "no_training_or_memory_write": true,
+      "prior_gate_not_reused_as_training": true
+    },
+    "blocking_reasons": [],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "family_holdout_evaluation_only",
+    "reason": "OOD/decoy replay establishes a gate for future training data but is not itself training evidence"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "fresh_reset_per_action": true,
+    "matched_negative_controls": true,
+    "bsp_weights_updated": false,
+    "long_term_memory_write": false
+  }
+}

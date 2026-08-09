@@ -1,0 +1,54 @@
+{
+  "protocol_id": "pg-pk-117-double-implementation-encoding-holdout-v1",
+  "schema_version": "pg117-double-holdout-protocol-v1",
+  "objective": "在独立实现和双重编码链上冻结 PG-116 Rule IR 解码器，测量未见表面召回、decoy 误接受和未知 oracle 弃权",
+  "source": {
+    "implementation": "app/pg117_gamma_target.py:create_app(seed)",
+    "bridge": "app/pg117_double_holdout_replay.py:collect_target(seed)",
+    "target_seeds": [11701, 11703, 11705],
+    "surface_set": ["route", "decoy", "steady", "blind"],
+    "encoding_chain": ["url_percent", "html_entity"],
+    "pg116_training_encoding_chain": ["identity"],
+    "implementation_unseen_in_pg116": true,
+    "encoding_unseen_in_pg116": true
+  },
+  "action_contract": {
+    "methods": ["GET", "POST"],
+    "sequence": ["control_get", "candidate_get", "control_post", "candidate_post"],
+    "fresh_reset_per_action": true,
+    "matched_negative_control_required": true,
+    "target_evidence_sha256_required": true,
+    "bridge_evidence_sha256_required": true,
+    "raw_response_bodies_stored": false,
+    "raw_probe_strings_stored": false
+  },
+  "model_contract": {
+    "checkpoint": "artifacts/pg116-multisource-rule-ir-decoder-v1/model.pt",
+    "feature_extractor": "app/pg115_small_rule_ir_decoder.py:model_input_feature_vector",
+    "decision_set": ["confirmed_positive", "confirmed_negative", "candidate", "abstain"],
+    "weights_frozen": true,
+    "training_rows_added": false,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false
+  },
+  "hard_gate": {
+    "positive_recall_nonzero": true,
+    "decoy_false_accept_zero": true,
+    "unknown_oracle_strict_abstain": true,
+    "all_abstain_is_not_success": true,
+    "step_macro_f1_reported": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "double holdout is a capability diagnosis; frozen positive recall failure requires a family-free transition-delta repair"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "real_sleep_performed": false
+  }
+}

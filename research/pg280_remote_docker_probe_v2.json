@@ -1,0 +1,57 @@
+{
+  "schema_version": "pg280-authorized-remote-docker-adapter-v1",
+  "scope": {
+    "remote_host": "112.111.7.91:60228",
+    "ssh_target": "jirongtech@112.111.7.91",
+    "authorization": "operator_allowlisted_remote_docker",
+    "command_allowlist": [
+      [
+        "command",
+        "-v",
+        "docker"
+      ],
+      [
+        "docker",
+        "version",
+        "--format={{json .Server}}"
+      ],
+      [
+        "docker",
+        "ps",
+        "--format={{.Names}}"
+      ]
+    ],
+    "mutating_docker_commands_allowed": false,
+    "container_creation_allowed": false,
+    "container_restart_allowed": false,
+    "container_removal_allowed": false,
+    "external_network": false,
+    "target_private_address_required": true,
+    "raw_response_body_stored": false,
+    "training_or_replay_started": false
+  },
+  "status": "unavailable",
+  "ssh_reachable": true,
+  "docker_binary": false,
+  "docker_server": false,
+  "docker_server_version": null,
+  "running_containers": [],
+  "command_results": {
+    "docker_binary": {
+      "returncode": 1,
+      "stderr_class": "remote_exit_1"
+    },
+    "docker_version": {
+      "returncode": 127,
+      "stderr_class": "command_unavailable"
+    },
+    "docker_ps": {
+      "returncode": 127,
+      "stderr_class": "command_unavailable"
+    }
+  },
+  "real_application_gold_rows": 0,
+  "training_or_replay_started": false,
+  "interpretation": "远程主机未提供可用 Docker daemon；没有启动容器，也没有生成真实应用 gold。",
+  "evidence_sha256": "4a57386350adf151fa928024de9ead7707d498b7dfe97a0626bac5221647eb53"
+}

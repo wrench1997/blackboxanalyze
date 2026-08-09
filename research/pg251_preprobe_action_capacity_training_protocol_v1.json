@@ -1,0 +1,67 @@
+{
+  "protocol_id": "pg-pk-251-preprobe-action-capacity-training-v1",
+  "schema_version": "pg251-preprobe-action-capacity-training-protocol-v1",
+  "capacity_variants": [
+    1024,
+    2048,
+    4096,
+    8192
+  ],
+  "train_steps": 180,
+  "seed_holdout": [
+    23702,
+    23632
+  ],
+  "extended_source_holdout_substrings": [],
+  "extended_source_holdout_pairs": [
+    [
+      "pg242_pikachu_source_native",
+      [
+        24202
+      ]
+    ],
+    [
+      "pg244_pikachu_sql_repair",
+      [
+        24402
+      ]
+    ],
+    [
+      "pg244_pikachu_xss_repair",
+      [
+        24402
+      ]
+    ]
+  ],
+  "excluded_source_substrings": [
+    "pg246_vulnerableapp_source_independent"
+  ],
+  "holdout_must_contain_positive_and_abstain": true,
+  "typed_positive_contract": [
+    "fresh_reset",
+    "candidate_reference_agreement",
+    "negative_clean",
+    "typed_effect",
+    "result_fixture"
+  ],
+  "false_send_is_hard_failure": true,
+  "next_token_loss_not_promotion_gate": true,
+  "frozen_body_required": true,
+  "promotion_blocked": true,
+  "raw_payload_and_response_excluded": true,
+  "protocol_sha256": "3a2988ac810aa2b1ed6157ab86a60085825fb50245f7ea525a37b5b8c837f1a8",
+  "preprobe_schema": "pg251-preprobe-action-record-v1",
+  "training_sources": [
+    "research\\pg244_failure_repair_capacity_training_dataset_v1.json",
+    "research\\pg230_next_token_quality_funnel_dataset_v1.json"
+  ],
+  "preprobe_target": "send_candidate iff audited positive; otherwise abstain",
+  "pika_holdout": [
+    "pg242_pikachu_source_native:24202",
+    "pg244_pikachu_sql_repair:24402",
+    "pg244_pikachu_xss_repair:24402"
+  ],
+  "implementation_ood": "pg246_vulnerableapp_source_independent:all_seeds",
+  "causal_classification_position": "phase=diagnose immediately after observe prefix",
+  "post_result_canary_required": true
+}

@@ -1,0 +1,51 @@
+{
+  "protocol_id": "pg-pk-115-small-rule-ir-decoder-v1",
+  "schema_version": "pg115-small-rule-ir-decoder-protocol-v1",
+  "objective": "训练一个小型 Rule IR 决策解码器，并在 PG-114 族外回放上盲测，而不是宣称可扫描任意真实网址",
+  "training_fixture": "research/pg115_small_rule_ir_train_dataset_v1.json",
+  "blind_evaluation": "research/pg114_family_holdout_replay_visible_dataset_v1.json",
+  "model": {
+    "implementation": "app/pg115_small_rule_ir_decoder.py",
+    "feature_dim": 40,
+    "hidden_dim": 48,
+    "decision_set": [
+      "confirmed_positive",
+      "confirmed_negative",
+      "candidate",
+      "abstain"
+    ],
+    "epochs": 30,
+    "optimizer": "AdamW",
+    "device_policy": "cuda_if_available_else_cpu",
+    "previous_checkpoint_reuse_forbidden": true
+  },
+  "split": {
+    "train_seeds": [11501, 11502],
+    "dev_seeds": [11503, 11504],
+    "pg114_excluded_from_training": true,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "hard_metrics": {
+    "family_holdout_confirm_recall": "report",
+    "decoy_false_accept_count": "must_be_zero_for_trial_pass",
+    "withheld_oracle_abstain_rate": "report",
+    "all_abstain_is_not_success": true,
+    "step_macro_f1": "report"
+  },
+  "promotion": {
+    "checkpoint_written": true,
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "compact synthetic fixture plus one blind OOD replay is not sufficient for a general scanner claim"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "protocol_id": "pg-pk-269-failure-guided-replay-v1",
+  "schema_version": "pg269-failure-guided-replay-report-v1",
+  "status": "completed_local_failure_guided_replay",
+  "runtime_image": "sift/pikachu-fixed@sha256:cca4288b6b701725e7a771f47ce7fcafd6cea9bd7622fa34ef2ed0b440f472c6",
+  "seed": 27102,
+  "counts": {
+    "surface_count": 40,
+    "get_count": 23,
+    "post_count": 17,
+    "complete_count": 40,
+    "initial_confirmed_count": 3,
+    "final_confirmed_count": 4,
+    "repair_attempt_count": 14,
+    "repair_success_count": 1,
+    "abstain_count": 36,
+    "false_positive_count": 0,
+    "source_attested_count": 40,
+    "elapsed_seconds": 521.687
+  },
+  "action_counts": {
+    "no_typed_repair_available": 23,
+    "sql_boolean_false_repair": 5,
+    "dom_marker_encoding_repair": 9
+  },
+  "failure_counts": {
+    "logic_oracle_gap": 9,
+    "other_oracle_gap": 1,
+    "file_oracle_gap": 3,
+    "infoleak_oracle_gap": 1,
+    "rce_abstain": 1,
+    "rce_oracle_gap": 1,
+    "sql_abstain": 5,
+    "sql_oracle_gap": 3,
+    "ssrf_oracle_gap": 2,
+    "serialization_oracle_gap": 1,
+    "xss_abstain": 9,
+    "xxe_abstain": 1
+  },
+  "promotion": {
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "fresh_container_per_surface": true,
+    "no_volume_or_bind_mount": true,
+    "database_health_gate_required": true,
+    "no_sql_write": true,
+    "no_sql_time_delay": true,
+    "no_comments": true,
+    "no_external_callback": true,
+    "raw_payloads_human_catalog_only": true,
+    "raw_response_bodies_stored": false,
+    "context_excludes_oracle": true,
+    "context_excludes_raw_payload": true
+  },
+  "training": {
+    "next": "expert_sft",
+    "preference_pairs_ready": false,
+    "process_reward_ready": true,
+    "offline_rl_ready": false
+  },
+  "report_sha256": "dd19074a0f2f3df17916ad34d9c2bd3b2983bb21e56ab540e9673e960f022a56",
+  "evaluation_audit": {
+    "audit_id": "pg271_independent_seed_failure_guided_replay-independent-audit-v1",
+    "independent_audit_pass": true,
+    "structural_checks": {
+      "status_complete": true,
+      "surface_count_40": true,
+      "get_post_counts_match": true,
+      "fresh_complete_all": true,
+      "source_attested_all": true,
+      "multi_step_all": true,
+      "repair_labels_consistent": true,
+      "context_target_split": true,
+      "context_no_oracle_payload_response": true,
+      "dataset_raw_values_excluded": true,
+      "dataset_record_count_matches": true,
+      "catalog_hash_valid": true,
+      "dataset_hash_valid": true,
+      "report_hash_valid": true,
+      "no_false_positive": true,
+      "promotion_blocked": true,
+      "training_contract_split": true
+    },
+    "context_forbidden_terms": [
+      "oracle",
+      "payload",
+      "echo_excerpt",
+      "response_body",
+      "body_sha256",
+      "confirmed_positive",
+      "outcome_class"
+    ],
+    "oracle_target_in_context": false,
+    "raw_payload_in_context": false
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "pg111-bsp-v3-adapter-proposal-v1",
+  "evaluation_only": true,
+  "training_eligible": false,
+  "structure_contract": {
+    "schema_version": "bsp-v3-structure-contract-v1",
+    "pages": {
+      "kind": "fixed_page_budget",
+      "routing_signal": "bounded_page_mass",
+      "mass_conservation_required": true
+    },
+    "nodes": {
+      "kind": "bounded_dynamic_node_pool",
+      "topology": "runtime_split_merge_with_compact_plan",
+      "capacity_is_fixed_budget": true
+    },
+    "experts": {
+      "kind": "routed_rank_factorized_expert_slots",
+      "parameter_update": "outside_this_policy_adapter",
+      "unit_kinds": [
+        "bsp_node",
+        "bsp_page",
+        "expert_slot",
+        "fragment_head"
+      ]
+    },
+    "controller": {
+      "typed_pressure_required": true,
+      "wake_before_growth": true,
+      "merge_before_ablation": true,
+      "fresh_holdout_before_after": true,
+      "rollback_on_regression": true
+    },
+    "lineage": {
+      "architecture_transfer_mode": "bsp_v3_structure_contract_only",
+      "previous_weights_reuse_forbidden": true,
+      "fresh_checkpoint_required": true,
+      "mandarin_foundation_isolated": true
+    }
+  },
+  "structure_contract_sha256": "baceba05f8bafa38a3493aff55cc591a9195b99197d622e09c42f11cab12c9f4",
+  "rule_ir_sha256": "f7904ec060ce7c4863992793c446e909125a19cbb0a6d16b600cc07c1a34ef47",
+  "capacity_observation_sha256": "b06ac918e3c6775e427f32d9cbba86ad96532757db6db085b7e8899c2b665d5b",
+  "lineage": {
+    "schema_version": "bsp-v3-fresh-lineage-v1",
+    "architecture_transfer_mode": "bsp_v3_structure_contract_only",
+    "checkpoint_role": "fresh_structure_replay_smoke",
+    "parent_checkpoint_reused": false,
+    "weight_load_performed": false,
+    "foundation_stage": "mandarin_foundation",
+    "security_replay_stage": "post_training_security_trace",
+    "dataset_merge": false,
+    "contract_sha256": "baceba05f8bafa38a3493aff55cc591a9195b99197d622e09c42f11cab12c9f4",
+    "lineage_id": "68b2c853305ae5317d23c45b18ce6125c93240c371cdd19be8c87674c15ba3ae"
+  },
+  "replay_package": {
+    "schema_version": "bsp-v3-rule-ir-replay-v1",
+    "implementation": "bsp_v3_zig_cuda_structure_contract",
+    "architecture_transfer_mode": "bsp_v3_structure_contract_only",
+    "structure_contract_sha256": "baceba05f8bafa38a3493aff55cc591a9195b99197d622e09c42f11cab12c9f4",
+    "lineage_id": "68b2c853305ae5317d23c45b18ce6125c93240c371cdd19be8c87674c15ba3ae",
+    "rule_ir": {
+      "schema_version": "generic-rule-assembly-v1",
+      "decision": "await_typed_oracle",
+      "slot": "p0",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "atoms": [
+        "effect_present",
+        "get_post_repeat",
+        "negative_control_clear",
+        "probe_binding_valid"
+      ],
+      "canonical_sha256": "f7904ec060ce7c4863992793c446e909125a19cbb0a6d16b600cc07c1a34ef47"
+    },
+    "structural_event": {
+      "unit_kind": "bsp_node",
+      "target_ref": "25d149a406a35f1e453d0c71f76eaaa31ce30e10129098805ee02e4ea39e3b3b",
+      "action": "merge_then_ablate_low_contribution_units",
+      "rule_ir_sha256": "f7904ec060ce7c4863992793c446e909125a19cbb0a6d16b600cc07c1a34ef47",
+      "observation_sha256": "b06ac918e3c6775e427f32d9cbba86ad96532757db6db085b7e8899c2b665d5b"
+    },
+    "replay_sequence": [
+      "rule_ir",
+      "structural_event",
+      "fresh_holdout_gate",
+      "typed_oracle_handoff"
+    ],
+    "executable": false,
+    "mutates_weights": false,
+    "mutates_topology": false,
+    "typed_oracle_required": true,
+    "training_eligible": false,
+    "promotion_eligible": false,
+    "long_term_memory_write": false,
+    "replay_sha256": "458f5171066eada4449ce5d517053a14dbd741fa09d4fe2c47606a2994994401"
+  },
+  "python_reference_core": {
+    "schema_version": "bsp-v3-python-research-core-v1",
+    "fresh_only": true,
+    "old_weights_loaded": false,
+    "training_started": false
+  },
+  "decision": "await_typed_oracle",
+  "executable": false,
+  "promotion_eligible": false
+}

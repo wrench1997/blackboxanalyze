@@ -1,0 +1,43 @@
+{
+  "schema_version": "sift-preregistered-experiment-v1",
+  "protocol_id": "pg-pk-20-evidence-integrity-v1",
+  "scope": "offline belief evidence replay protection and deterministic Rule IR binding validation",
+  "root_cause_hypotheses": [
+    "MultiStepBelief treats the same evidence hash as independent evidence on every observation, so replay frequency can manufacture confidence.",
+    "Status-derived Rule IR slots treat status_code=0 after a transport error as an accepted HTTP response.",
+    "validate_binding authenticates the evidence envelope but does not recompute derived slot bindings, so a mutated binding value can remain valid."
+  ],
+  "pre_fix_observations": {
+    "same_hash_repeat_count": 20,
+    "same_hash_xss_posterior_after_replay": 0.802448,
+    "posterior_crossed_0_55_at_step": 5,
+    "transport_error_subject_authenticated": true,
+    "tampered_binding_validated": true
+  },
+  "interventions": [
+    "Record duplicate evidence-hash observations but do not update the posterior more than once.",
+    "Keep response-derived slots unbound when transport_error is present or status_code is not positive.",
+    "Recompute expected slots from abstract Rule IR plus evidence during validate_binding and reject any mismatch."
+  ],
+  "predictions": {
+    "same_hash_twenty_replays_equal_one_update": true,
+    "different_hashes_remain_accumulative": true,
+    "duplicate_step_information_gain": 0.0,
+    "transport_error_response_slots": "unbound",
+    "tampered_binding_rejected": true,
+    "existing_tests_must_pass": true
+  },
+  "protected_invariants": {
+    "model_or_checkpoint_unchanged": true,
+    "family_specific_oracle_authority_unchanged": true,
+    "request_or_payload_generation_unchanged": true,
+    "path_and_query_visible_slots_remain_bindable_without_a_response": true
+  },
+  "failure_conditions": [
+    "a duplicate evidence hash changes posterior state",
+    "independent evidence hashes stop accumulating",
+    "a transport failure binds an authentication or authorization result",
+    "mutating a derived binding still validates",
+    "any existing test fails"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "protocol_id": "pg278-multifamily-question-policy-v1",
+  "schema_version": "pg278-multifamily-question-policy-protocol-v1",
+  "comparators": [
+    "coarse_process_sft",
+    "final_only_sft",
+    "enriched_process_sft",
+    "conservative_offline_update",
+    "dpo_preference_update"
+  ],
+  "reward": {
+    "question_match": 1.0,
+    "action_match": 1.3,
+    "belief_match": 1.3,
+    "slot_match": 1.1,
+    "premature_non_ask": -3.0,
+    "unsupported_positive": -4.0
+  },
+  "constraints": {
+    "behavior_kl_anchor": true,
+    "supervised_anchor": true,
+    "external_requests": false,
+    "controlled_loopback_only": true
+  },
+  "split": {
+    "train_count": 192,
+    "holdout_count": 96,
+    "implementation_holdout": true,
+    "families": [
+      "dom_effect",
+      "logic_access",
+      "redirect_contract",
+      "sql_differential"
+    ],
+    "model_seeds": [
+      27811,
+      27812,
+      27813
+    ]
+  },
+  "checks": {
+    "dataset_audit_pass": true,
+    "coarse_collision_detected": true,
+    "enriched_collision_zero": true,
+    "post_observation_collision_zero": true,
+    "implementation_pre_transition_min": true,
+    "implementation_post_transition_min": true,
+    "implementation_slot_min": true,
+    "paired_counterfactual_min": true,
+    "missing_safe_min": true,
+    "family_holdout_question_min": true,
+    "conservative_no_regression": true,
+    "dpo_no_regression": true,
+    "promotion_blocked": true
+  },
+  "report_sha256": "e3a435edee66a5864e30f06c9cec9d9d83b9f1514f9b71c19fe9a198378b255b",
+  "next_experiment": "PG-279 collect real local replay records with the same slots, then test a source-heldout, frozen retention suite",
+  "protocol_sha256": "031b60bef1a6580899c0683605a7a38659f5b0cc8d55ff54151461e68cfcfd8d"
+}

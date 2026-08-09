@@ -1,0 +1,32 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-shadow-replay-v1",
+  "status": "frozen-before-shadow-execution",
+  "scope": "local pinned Juice Shop only; shadow and evaluation containers have no published ports and no egress",
+  "shadow_phase": {
+    "purpose": "observe generic response semantics without counting shadow challenge state",
+    "actions": [
+      {"method": "GET", "path": "/"},
+      {"method": "GET", "path": "/robots.txt"},
+      {"method": "GET", "path": "/.well-known/security.txt"},
+      {"method": "GET", "path": "/sitemap.xml"},
+      {"method": "GET", "path": "/metrics"}
+    ],
+    "state_isolation": "shadow container is destroyed before evaluation target is started",
+    "policy_input": "only sanitized same-origin response status, headers and body length; no challenge state or catalog"
+  },
+  "evaluation_phase": {
+    "request_budget": 1,
+    "action": "GET the path selected from shadow observations",
+    "fresh_target_required": true
+  },
+  "policies": {
+    "response_projection": "select highest target-neutral response projection score; stable path-order tie break",
+    "ablation_disabled_projection": "select the first shadow action; same shadow observations and budget"
+  },
+  "acceptance": {
+    "descriptive_goal": "separate response-grounded action selection from target-state side effects",
+    "neural_gain_claimed": false,
+    "same_component_ablation_required": true,
+    "fresh_environment_required": true
+  }
+}

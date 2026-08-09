@@ -1,0 +1,56 @@
+{
+  "protocol_id": "pg-pk-178-matched-budget-epochs-v1",
+  "schema_version": "pg178-matched-budget-epochs-protocol-v1",
+  "pg177_dataset": "research\\pg177_data_capacity_dataset_v1.json",
+  "pg177_reference_artifacts": [
+    "artifacts/pg177-data-capacity-v1/seed_17701_160m_scratch.pt",
+    "artifacts/pg177-data-capacity-v1/seed_17701_200m_scratch.pt",
+    "artifacts/pg177-data-capacity-v1/seed_17702_160m_scratch.pt",
+    "artifacts/pg177-data-capacity-v1/seed_17702_200m_scratch.pt"
+  ],
+  "seeds": [
+    17701,
+    17702
+  ],
+  "target_epochs": [
+    2,
+    4
+  ],
+  "capacity_configs": {
+    "160m": {
+      "d_model": 1152,
+      "nhead": 18,
+      "layers": 10
+    },
+    "200m": {
+      "d_model": 1280,
+      "nhead": 20,
+      "layers": 10
+    }
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 7e-05,
+    "weight_decay": 0.01,
+    "batch_size": 8,
+    "reset_at_pg177_boundary": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "963a441ae351f1dc545e431f16cfa29bbf8c6c8d5e65c23293639db1607c7721"
+}

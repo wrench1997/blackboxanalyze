@@ -1,0 +1,170 @@
+{
+  "protocol_id": "pg-pk-06-positive-oracle-revalidation-v1",
+  "schema_version": "sift-pg-pk-06-positive-oracle-report-v1",
+  "target": {
+    "base_url": "http://127.0.0.1:8790",
+    "target_instance_id": "fixture-pid-69532",
+    "fixture_source_sha256": "823eadf3f7a17e3c1097775d53fbf4de80ca69d7721f464f31b1d47eaa382912",
+    "external_network": false,
+    "loopback_only": true,
+    "fresh_target": true
+  },
+  "training_boundary": {
+    "training_checkpoint": "artifacts\\pg-pk-02-pair-invariance\\joint_holdout\\pair_encoding_invariant\\decoder.pt",
+    "training_target": "Pikachu only",
+    "fixture_seen_during_training": false,
+    "visible_projection_labels_hidden": true
+  },
+  "sample_count": 3,
+  "strict_ood_abstain_count": 3,
+  "strict_ood_abstain_rate": 1.0,
+  "model_only_accepted_count": 3,
+  "oracle_revalidated_sample_count": 2,
+  "oracle_revalidated_pair_count": 1,
+  "negative_control_revalidated_count": 0,
+  "ood_fit": {
+    "schema_version": "sift-feature-ood-gate-v1",
+    "reference_count": 6,
+    "feature_dim": 256,
+    "quantile": 0.95,
+    "slack": 1.25,
+    "leave_one_out_max": 10.478549003601074,
+    "threshold": 12.081438302993774
+  },
+  "pair_results": [
+    {
+      "schema_version": "sift-oracle-revalidation-v1",
+      "accepted": true,
+      "reasons": [],
+      "record_count": 2,
+      "pair_id": "fixture-pair-01",
+      "surface_role": "reflected_attribute",
+      "variants": [
+        "plain",
+        "url_percent"
+      ],
+      "candidate_families": [
+        "xss"
+      ],
+      "evidence_hashes": [
+        "d5eb9de24d0df0ed58e51e113e1e2ef3ed162687bc46558a3ec1ef894ff718df",
+        "e5c1c91b5c5e8e5af1a9e8d1cc168f4ec8b6cd11f523f77e747233f7d814d0b9"
+      ]
+    },
+    {
+      "schema_version": "sift-oracle-revalidation-v1",
+      "accepted": false,
+      "reasons": [
+        "unexpected_surface_role",
+        "required_encoding_pair_missing_or_duplicated",
+        "positive_oracle_not_satisfied",
+        "sink_binding_mismatch",
+        "attribute_oracle_signal_missing"
+      ],
+      "record_count": 1,
+      "pair_id": "fixture-pair-02",
+      "surface_role": "plain_control",
+      "variants": [
+        "plain"
+      ],
+      "candidate_families": [
+        "xss"
+      ],
+      "evidence_hashes": [
+        "4ceb1900eb028866979b5b47246f025f8ae4db0ccdf8c3ebe3e334400b217c52"
+      ]
+    }
+  ],
+  "memory_promotion_probe": {
+    "schema_version": "sift-memory-promotion-gate-v1",
+    "rule_key": "xss::reflected_attribute",
+    "status": "quarantine",
+    "promote": false,
+    "reasons": [
+      "insufficient_distinct_datasets",
+      "insufficient_target_instances"
+    ],
+    "requirements": {
+      "min_distinct_datasets": 3,
+      "min_sampling_seeds_per_dataset": 2,
+      "min_target_instances": 3,
+      "min_observations_per_dataset": 2,
+      "min_accepted_per_dataset": 1,
+      "max_false_positive_rate": 0.0,
+      "require_evidence_hash": true,
+      "require_local_only": true,
+      "require_oracle_revalidation": true
+    },
+    "summary": {
+      "evaluation_count": 2,
+      "distinct_dataset_count": 1,
+      "distinct_target_instance_count": 1,
+      "distinct_evidence_hash_count": 2
+    },
+    "per_dataset": {
+      "fixture-pg-pk-06": {
+        "observation_count": 2,
+        "sampling_seed_count": 2,
+        "target_instance_count": 1,
+        "false_positive_count": 0,
+        "false_positive_rate": 0.0,
+        "accepted_count": 2,
+        "reasons": []
+      }
+    }
+  },
+  "predictions": [
+    {
+      "sample_id": "fixture-pg06-reflect-attribute-plain-dffd1a5e3bba",
+      "pair_id": "fixture-pair-01",
+      "variant": "plain",
+      "surface": "fixture_reflected_attribute",
+      "candidate_family": "xss",
+      "model_probability": 0.722175,
+      "margin": 0.449088,
+      "ood_distance": 2795.0896,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": true
+    },
+    {
+      "sample_id": "fixture-pg06-reflect-attribute-url-percent-214e5a5ce775",
+      "pair_id": "fixture-pair-01",
+      "variant": "url_percent",
+      "surface": "fixture_reflected_attribute",
+      "candidate_family": "xss",
+      "model_probability": 0.650752,
+      "margin": 0.30632,
+      "ood_distance": 3307.191895,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": true
+    },
+    {
+      "sample_id": "fixture-pg06-plain-control-7a91ee165fa7",
+      "pair_id": "fixture-pair-02",
+      "variant": "plain",
+      "surface": "fixture_reflected_attribute",
+      "candidate_family": "xss",
+      "model_probability": 0.722175,
+      "margin": 0.449088,
+      "ood_distance": 2795.0896,
+      "ood": true,
+      "model_only_accepted": true,
+      "strict_ood_action": "abstain",
+      "oracle_revalidated": false
+    }
+  ],
+  "safety": {
+    "raw_body_stored": false,
+    "evaluator_state_visible": false,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "mutations": false
+  },
+  "report_path": "research\\pg_pk_06_positive_oracle_v1.json",
+  "protocol_path": "research\\pg_pk_06_positive_oracle_protocol_v1.json"
+}

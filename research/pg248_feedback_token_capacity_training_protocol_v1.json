@@ -1,0 +1,83 @@
+{
+  "protocol_id": "pg-pk-248-feedback-token-capacity-training-v1",
+  "schema_version": "pg248-feedback-token-capacity-training-protocol-v1",
+  "capacity_variants": [
+    512,
+    1024,
+    2048,
+    4096
+  ],
+  "train_steps": 180,
+  "seed_holdout": [
+    23702,
+    23632
+  ],
+  "extended_source_holdout_substrings": [
+    "pikachu"
+  ],
+  "extended_source_holdout_pairs": [
+    [
+      "pg246_vulnerableapp_source_independent",
+      [
+        24603
+      ]
+    ]
+  ],
+  "holdout_must_contain_positive_and_abstain": true,
+  "typed_positive_contract": [
+    "fresh_reset",
+    "candidate_reference_agreement",
+    "negative_clean",
+    "typed_effect",
+    "result_fixture"
+  ],
+  "false_send_is_hard_failure": true,
+  "next_token_loss_not_promotion_gate": true,
+  "frozen_body_required": true,
+  "promotion_blocked": true,
+  "raw_payload_and_response_excluded": true,
+  "protocol_sha256": "49d844db53dfd9431dedc478ee92c0ac82fc8534cd5b6d15ceab2061b102625b",
+  "training_sources": [
+    "research\\pg244_failure_repair_capacity_training_dataset_v1.json",
+    "research\\pg246_vulnerableapp_independent_dom_holdout_dataset_v1.json",
+    "research\\pg230_next_token_quality_funnel_dataset_v1.json"
+  ],
+  "input_encoder": {
+    "version": "pg248-observable-feedback-alias-v1",
+    "aliases": {
+      "result_verified=0": "ir.oracle.availability=unknown",
+      "result_verified=1": "history::gate::typed_effect",
+      "typed_effect=0": "ir.oracle.availability=unknown",
+      "typed_effect=1": "ir.failure.kind=typed_positive",
+      "feedback=result_verified": "history::gate::typed_effect",
+      "feedback=failure_adjusted": "ir.failure.recovery_phase=failure_adjusted",
+      "feedback=abstain": "ir.oracle.availability=unknown"
+    },
+    "forbidden_fields": [
+      "payload_grounded_eligible",
+      "negative_clean",
+      "lane",
+      "repair_action",
+      "expected_oracle"
+    ],
+    "oracle_labels_as_input": false
+  },
+  "implementation_holdout": "all sources containing pikachu",
+  "same_implementation_seed_holdout": [
+    "pg246_vulnerableapp_source_independent:24603"
+  ],
+  "old_canary": [
+    "pg242_pikachu_source_native",
+    "pg244_pikachu_sql_repair",
+    "pg244_pikachu_xss_repair"
+  ],
+  "canary_replay_required_after_update": true,
+  "final_judge_hard_gates": [
+    "capacity_safety_abstain",
+    "capacity_positive_capability",
+    "holdout_has_send_and_abstain",
+    "canary_no_guardrail_regression",
+    "input_alias_does_not_include_expected_labels",
+    "no_raw_payload_or_response_persistence"
+  ]
+}

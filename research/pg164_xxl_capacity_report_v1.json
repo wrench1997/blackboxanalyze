@@ -1,0 +1,114 @@
+{
+  "schema_version": "pg164-xxl-capacity-report-v1",
+  "protocol_id": "pg-pk-164-xxl-capacity-v1",
+  "status": "completed_pg164_xxl_capacity",
+  "scope": {
+    "claim": "capacity pressure for abstract Rule-IR language modeling",
+    "real_vulnerability_scanner_claim_allowed": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "source": "research\\pg163_large_typed_mix_dataset_v1.json",
+    "train_count": 9999,
+    "base_dev_count": 1209,
+    "base_holdout_count": 1210,
+    "typed_holdout_count": 203,
+    "vocabulary_size": 233
+  },
+  "result": {
+    "variant": "xxl_typed_mix",
+    "config": {
+      "d_model": 1024,
+      "nhead": 16,
+      "layers": 8,
+      "batch_size": 8,
+      "gradient_accumulation_steps": 2,
+      "epochs": 2,
+      "lr": 7e-05
+    },
+    "parameter_count": 101380329,
+    "train": {
+      "loss": 0.92591286,
+      "perplexity": 2.52417143,
+      "next_token_accuracy": 0.5346654,
+      "token_count": 682150
+    },
+    "base_dev": {
+      "loss": 0.94809835,
+      "perplexity": 2.58079722,
+      "next_token_accuracy": 0.51763737,
+      "token_count": 82552
+    },
+    "base_holdout": {
+      "loss": 0.94460476,
+      "perplexity": 2.5717967,
+      "next_token_accuracy": 0.52225226,
+      "token_count": 82868
+    },
+    "typed_holdout": {
+      "loss": 0.37398688,
+      "perplexity": 1.45351808,
+      "next_token_accuracy": 0.83348866,
+      "token_count": 6438
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.02950155,
+        "base_dev": {
+          "loss": 0.9516072,
+          "perplexity": 2.58986874,
+          "next_token_accuracy": 0.52184078,
+          "token_count": 82552
+        },
+        "typed_holdout": {
+          "loss": 0.52657697,
+          "perplexity": 1.69312675,
+          "next_token_accuracy": 0.81127679,
+          "token_count": 6438
+        }
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.93279346,
+        "base_dev": {
+          "loss": 0.94809835,
+          "perplexity": 2.58079722,
+          "next_token_accuracy": 0.51763737,
+          "token_count": 82552
+        },
+        "typed_holdout": {
+          "loss": 0.37398688,
+          "perplexity": 1.45351808,
+          "next_token_accuracy": 0.83348866,
+          "token_count": 6438
+        }
+      }
+    ],
+    "elapsed_seconds": 264.328,
+    "checkpoint": "artifacts\\pg164-xxl-capacity-v1\\xxl_typed_mix.pt"
+  },
+  "comparison": {
+    "pg163_xl_parameter_count": 57160937,
+    "pg163_xl_typed_holdout_perplexity": 1.58142564,
+    "pg163_xl_base_holdout_perplexity": 2.57545756,
+    "interpretation": "XXL 结果只有在相同 token/data/epoch 与多 seed 复验后才能归因于容量；本轮不宣称漏洞能力提升。"
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false
+  },
+  "source": {
+    "runner_sha256": "cdc4dc2d89e2dce525dbe0a5705651e076f6082c3ac8a250cfb5249e3cb54a2b",
+    "dataset_sha256": "8edda7ad0e9db70ca6fa00f3ee892e77f7fe68ee6dcb909c032e4eaff4453d30",
+    "protocol_sha256": "8dc9363d3e9dabdc842f44ce500349a49b794ff79257a8647c27385c5fe688e9"
+  },
+  "report_sha256": "b2bda8875a10d0289c3cc11e8300c9ae9321d9afe6c63e69df54d31a06306d7f"
+}

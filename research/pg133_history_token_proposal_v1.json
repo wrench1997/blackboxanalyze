@@ -1,0 +1,16 @@
+{
+  "protocol_id": "pg-pk-133-history-token-policy-v1",
+  "proposal_id": "pg133-history-token-proposal-v1",
+  "question": "当当前 Rule IR/source observation 完全相同、只有过去 control/candidate 顺序不同，双层 token Transformer 是否能选择不同的 allow-listed safe action？",
+  "prediction": {
+    "pg133_accuracy": ">=0.95",
+    "counterfactual_label_conflicts": 3,
+    "counterfactual_prediction_separation": 1.0,
+    "current_only_accuracy": "<=0.75",
+    "unknown_blind_abstain": 1.0,
+    "negative_false_stop": 0
+  },
+  "intervention": "control_first 与 candidate_first 共享当前 POST candidate observation，只有过去 prefix 不同；history_stage/workflow_action 只在 evaluator authority 中，不进入 model input。",
+  "failure_rule": "任一反事实、族外、GET/POST、typed oracle、负对照、fresh reset、证据哈希或人工审核门失败，保留失败 trace，禁止训练和长期记忆晋升。",
+  "next": "在第三独立实现上复放相同历史任务，并增加 source-only/IR-only 分层消融；仍不生成攻击 payload。"
+}

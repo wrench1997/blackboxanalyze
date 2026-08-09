@@ -1,0 +1,302 @@
+{
+  "protocol_id": "pg-pk-154-multisource-action-replay-v1",
+  "schema_version": "pg154-multisource-action-replay-report-v1",
+  "status": "completed_pg154_multisource_action_replay",
+  "device": "cuda",
+  "seed": 15401,
+  "source": {
+    "label_count": 696,
+    "train_count": 216,
+    "dev_count": 216,
+    "holdout_count": 264,
+    "synthetic_train_count": 6400,
+    "synthetic_dev_count": 800,
+    "synthetic_holdout_count": 800,
+    "real_train_count": 216,
+    "real_dev_count": 216,
+    "real_holdout_count": 264,
+    "real_repeated_count": 2133,
+    "action_mix_count": 8533,
+    "lm_replay_count": 1200,
+    "unknown_hint_count": 120,
+    "surface_unknown_count": 6,
+    "language_canary_count": 1210,
+    "real_fraction": 0.25
+  },
+  "variants": [
+    {
+      "variant": "action_only",
+      "mode": "action_only",
+      "train_count": 8533,
+      "action_train_count": 8533,
+      "lm_replay_count": 0,
+      "unknown_hint_count": 0,
+      "parameter_count": 38059713,
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.8575,
+        "false_stop_count": 24,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.84090909,
+        "false_stop_count": 3,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "evaluation_only_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 3.86458656,
+        "next_token_accuracy": 0.83333333,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 0.93795174,
+          "perplexity": 2.55474329,
+          "next_token_accuracy": 0.52128687,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.95814806,
+          "perplexity": 2.60686425,
+          "next_token_accuracy": 0.52260221,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": 0.05212096,
+          "relative_perplexity_increase": 0.02040164,
+          "next_token_accuracy_drop": -0.00131534,
+          "mean_logit_kl": 0.02141654
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [],
+      "elapsed_seconds": 4.857,
+      "resumed_from_checkpoint": true
+    },
+    {
+      "variant": "lm_anchor",
+      "mode": "lm_anchor",
+      "train_count": 9733,
+      "action_train_count": 8533,
+      "lm_replay_count": 1200,
+      "unknown_hint_count": 0,
+      "parameter_count": 38059713,
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.85625,
+        "false_stop_count": 0,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "evaluation_only_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 24.03386084,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 0.93795174,
+          "perplexity": 2.55474329,
+          "next_token_accuracy": 0.52128687,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": 0.18563339,
+          "relative_perplexity_increase": 0.07266225,
+          "next_token_accuracy_drop": 0.01442053,
+          "mean_logit_kl": 0.08309458
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [],
+      "elapsed_seconds": 4.561,
+      "resumed_from_checkpoint": true
+    },
+    {
+      "variant": "false_stop_guard",
+      "mode": "false_stop_guard",
+      "train_count": 9853,
+      "action_train_count": 8533,
+      "lm_replay_count": 1200,
+      "unknown_hint_count": 120,
+      "parameter_count": 38059713,
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.86625,
+        "false_stop_count": 6,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "evaluation_only_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 18.37615171,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 0.93795174,
+          "perplexity": 2.55474329,
+          "next_token_accuracy": 0.52128687,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 1.00740039,
+          "perplexity": 2.7384728,
+          "next_token_accuracy": 0.50634744,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": 0.18372951,
+          "relative_perplexity_increase": 0.07191701,
+          "next_token_accuracy_drop": 0.01493943,
+          "mean_logit_kl": 0.08259288
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.89491719,
+          "action_loss": 0.48512089,
+          "false_stop_guard_loss": 0.11186445,
+          "unknown_hint_loss": 0.06076347,
+          "synthetic_dev": {
+            "count": 1016,
+            "accuracy": 0.84350394,
+            "false_stop_count": 0,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          },
+          "real_dev": {
+            "count": 264,
+            "accuracy": 0.84090909,
+            "false_stop_count": 0,
+            "unknown_count": 66,
+            "unknown_abstain_rate": 1.0
+          }
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 0.59465695,
+          "action_loss": 0.23303027,
+          "false_stop_guard_loss": 0.08266341,
+          "unknown_hint_loss": 2.534e-05,
+          "synthetic_dev": {
+            "count": 1016,
+            "accuracy": 0.85629921,
+            "false_stop_count": 12,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          },
+          "real_dev": {
+            "count": 264,
+            "accuracy": 0.86363636,
+            "false_stop_count": 0,
+            "unknown_count": 66,
+            "unknown_abstain_rate": 1.0
+          }
+        }
+      ],
+      "elapsed_seconds": 227.277,
+      "resumed_from_checkpoint": false
+    }
+  ],
+  "objective": "multi_source_real_trace_action_head_replay_and_false_stop_suppression",
+  "data_policy": {
+    "raw_payloads": false,
+    "raw_responses": false,
+    "external_network_targets": false,
+    "pg146_training_labels_used": false,
+    "labels_in_lm_input": false,
+    "old_holdout_used_for_optimization": false
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  },
+  "report_sha256": "7d4395d6556fda4d0fd806c786ec84e50e980e88c7d8b7922f40c66eda69edc7"
+}

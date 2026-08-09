@@ -1,0 +1,98 @@
+{
+  "schema_version": "sift-preregistration-v1",
+  "experiment_id": "frontend-structured-semantics-loop-01",
+  "registered_at": "2026-08-01T15:30:00+08:00",
+  "status": "frozen_before_new-family-results",
+  "research_question": "Can a fixed small causal Transformer use observable structured URL/DOM semantics to recover browser-side behavior in fully held-out vulnerability families from black-box traces?",
+  "hypothesis": "Adding deterministic, label-free URL and markup projections will improve held-out postmessage_origin and dom_sink_injection behavior recovery and Counterexample@10 without requiring a larger model.",
+  "model_visibility": {
+    "allowed": [
+      "black_box_input",
+      "black_box_output",
+      "previous_trace_memory",
+      "deterministic_input_semantic_projection"
+    ],
+    "forbidden": [
+      "javascript_source",
+      "family_name",
+      "rule_ir",
+      "cwe_label",
+      "vulnerability_label",
+      "counterexample_flag",
+      "intended_output"
+    ]
+  },
+  "frozen_model": {
+    "type": "causal_transformer_classifier",
+    "hidden": 128,
+    "layers": 4,
+    "heads": 4,
+    "max_length": 640,
+    "memory_items": 8,
+    "parameter_scale": "approximately 0.9M; identical between ablations"
+  },
+  "training_budget": {
+    "epochs": 10,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0004,
+    "weight_decay": 0.02,
+    "checkpoint_selection": "maximum old-family IID accuracy plus old-family validation accuracy",
+    "no_early_stopping_on_new_holdout_families": true
+  },
+  "data_protocol": {
+    "programs": 1800,
+    "traces_per_program": 20,
+    "examples_per_program": 4,
+    "train_families": [
+      "numeric_boundary",
+      "truthiness_gate",
+      "substring_origin",
+      "authorization_or"
+    ],
+    "heldout_families": [
+      "postmessage_origin",
+      "dom_sink_injection"
+    ],
+    "old_family_regression_fraction": 0.2,
+    "seeds": [20260801, 20260817, 20260903],
+    "split_rule": "Hold out complete vulnerability families; never split near-duplicate program instances across train and holdout."
+  },
+  "ablation": {
+    "control": "raw black-box trace text",
+    "treatment": "same trace plus deterministic URL/markup/numeric semantic projection",
+    "identical": [
+      "model architecture",
+      "programs",
+      "queries",
+      "memory budget",
+      "epochs",
+      "optimizer",
+      "random seed"
+    ]
+  },
+  "primary_success_criteria": {
+    "postmessage_origin_behavior_agreement_min": 0.85,
+    "dom_sink_injection_behavior_agreement_min": 0.85,
+    "counterexample_at_10_min": 0.8,
+    "old_family_regression_max_absolute": 0.02,
+    "required_independent_seeds": 3
+  },
+  "failure_conditions": [
+    "Either held-out family has mean behavior agreement below 0.85.",
+    "Counterexample@10 is below 0.80.",
+    "Any old family regresses by more than 0.02 against the raw-feature control.",
+    "The result depends on source, family, Rule IR, CWE, intended output, or counterexample leakage.",
+    "The effect does not repeat across three independent seeds."
+  ],
+  "decision_policy": {
+    "pass": "Consolidate the structured projection and families into the research curriculum.",
+    "fail": "Keep the experiment research-only, classify the root cause, and make the smallest representation/data change before any scale increase."
+  },
+  "frozen_baseline_artifacts": {
+    "research/tiny_rule_gpt_experiment.json": "84137DEABCF20D13D853AA4E4568B623A5BF2D1203F8B2417221BFD2325EDFE6",
+    "research/tiny_rule_gpt_no_memory_experiment.json": "5BAE5FCD7C7A2462497A1D37CF609BF92C9CDA9827DDF395250024735C7A8A8B",
+    "app/synthetic_curriculum.py": "088C5AB104F1A1184936A1B8E8744A2CD9485476BC75CDA8A8C28B9E6BF35E99",
+    "scripts/train_rule_memory_pilot.py": "976FB9FA03426667D0C143A82A0EBD7146D7F9B5F27CC59BF9CA2C3BD29936CC"
+  }
+}

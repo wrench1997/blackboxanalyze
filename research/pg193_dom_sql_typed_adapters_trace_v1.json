@@ -1,0 +1,723 @@
+{
+  "schema_version": "pg193-dom-sql-typed-adapters-trace-v1",
+  "evaluation_only": true,
+  "runs": [
+    {
+      "surface": "pg193_xss_reflected_get",
+      "path": "/vul/xss/xss_reflected_get.php",
+      "family": "xss",
+      "target_instance_hash": "d5d9b87a351648a9ec2e996903241ce854ba33583553a40822eb5ce2f0ceb56b",
+      "fresh_container": true,
+      "typed_oracle_available": true,
+      "typed_surface_effect": true,
+      "confirmed_positive": false,
+      "vulnerability_claim_allowed": false,
+      "steps": [
+        {
+          "step_index": 1,
+          "model_action": "baseline",
+          "action_confidence": 0.999736,
+          "safety_gate": "allow",
+          "gate_confidence": 1.0,
+          "controller_decision": "send_safe_baseline_get",
+          "method": "GET",
+          "action_manifest": null,
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "1f76cf85c1b8499a7e0059e7bd6baba7a416841d76f86668f84438fc4c811eba",
+            "semantic_body_sha256": "1f76cf85c1b8499a7e0059e7bd6baba7a416841d76f86668f84438fc4c811eba",
+            "shape": {
+              "kind": "other",
+              "field_count": 426,
+              "scalar_count": 1
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": false,
+              "location": "none",
+              "count": 0
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "92223beab4edbc45818f761d5d248202f21ce30376100def109c093063da255d",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "87e03f90d21d9893446d8e15acabe84c99247a21e287f7e7cada06e23f3a7d13"
+          },
+          "typed_oracle": {
+            "oracle_id": "pg193-browser-dom-nojs-v1",
+            "modality": "negative_or_untyped_surface",
+            "typed_surface_effect": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "marker_hits": 0,
+              "body_text_hits": 0,
+              "element_count": 426,
+              "script_tag_count": 16,
+              "browser_dom_observed": true,
+              "dom_change": false,
+              "script_execution": false,
+              "network_request_count": 0,
+              "evidence_hash": "7f5b8735580bf7e030ee63a103973115072d6deb052a961aeb5558235f120379"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "navigation": false,
+              "raw_body_stored": false
+            }
+          },
+          "typed_surface_effect": false,
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "no_surface_delta",
+            "failed_gate": "surface_delta",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": true,
+            "positive_authority": false,
+            "probe_round": 1,
+            "remaining_probe_budget": 2,
+            "key_feature_weights": {
+              "failure_kind": 0.113636,
+              "failed_gate": 0.227273,
+              "candidate_signal": 0.204545,
+              "observed_method": 0.113636,
+              "methods_seen": 0.113636,
+              "probe_budget": 0.227273
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "probe_budget",
+              "candidate_signal",
+              "failure_kind",
+              "methods_seen",
+              "observed_method"
+            ],
+            "next_action": "probe_candidate_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_dom_effect": 0.65,
+            "unknown_oracle": 0.35
+          },
+          "evidence": {
+            "target_instance_hash": "d5d9b87a351648a9ec2e996903241ce854ba33583553a40822eb5ce2f0ceb56b",
+            "manifest_sha256": null,
+            "projection_sha256": "92223beab4edbc45818f761d5d248202f21ce30376100def109c093063da255d",
+            "oracle_sha256": "a3c580b640a853626faba37a12e20b142a006553acc6aadd962fc614a58be2b6",
+            "failure_sha256": "5a6b74d6ae72c268691c55dd8a16ba73e22c66897ba1dbfbba228db7015e88eb"
+          },
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 2,
+          "model_action": "matched_control",
+          "action_confidence": 0.999427,
+          "safety_gate": "allow",
+          "gate_confidence": 1.0,
+          "controller_decision": "send_matched_control",
+          "method": "GET",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_kind": "inert_dom_markup",
+            "probe_ref": "pg185-inert-dom-pg193_xss_reflected_get-control",
+            "payload_sha256": "13f9965e3b4c6665022531002d85d06fad95e14acbdb31fefaf4ad7bad90ac29",
+            "manifest_sha256": "a8a494a67af3715b2493f44f259dfa6402dc71d9d1fe95c434e9febad55819b7",
+            "marker_sha256": "8e1682220088b9c3276469f568503aca14e600642bf05cf09f2d60a62cad837e",
+            "safety": {
+              "does_not_execute": true,
+              "no_external_network": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "ba23be8b1f16705f170b9442e48252712bb2930efb9ed670da54148f33b8c247",
+            "semantic_body_sha256": "ba23be8b1f16705f170b9442e48252712bb2930efb9ed670da54148f33b8c247",
+            "shape": {
+              "kind": "other",
+              "field_count": 427,
+              "scalar_count": 1
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 1
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "28f8930b793dded606fed89fe7db0fdc6492d70139aa9bdc2be3cfe2f443cf19",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "87e03f90d21d9893446d8e15acabe84c99247a21e287f7e7cada06e23f3a7d13"
+          },
+          "typed_oracle": {
+            "oracle_id": "pg193-browser-dom-nojs-v1",
+            "modality": "negative_or_untyped_surface",
+            "typed_surface_effect": false,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "none",
+            "signals": {
+              "marker_hits": 0,
+              "body_text_hits": 1,
+              "element_count": 427,
+              "script_tag_count": 16,
+              "browser_dom_observed": true,
+              "dom_change": false,
+              "script_execution": false,
+              "network_request_count": 0,
+              "evidence_hash": "9a1eedfcbfe935d2abc421d79549d0dabd06abab6891abde2d59af014c64b1a2"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "navigation": false,
+              "raw_body_stored": false
+            }
+          },
+          "typed_surface_effect": false,
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "no_surface_delta",
+            "failed_gate": "matched_negative_control",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": true,
+            "positive_authority": false,
+            "probe_round": 2,
+            "remaining_probe_budget": 1,
+            "key_feature_weights": {
+              "failure_kind": 0.1,
+              "failed_gate": 0.25,
+              "candidate_signal": 0.1,
+              "observed_method": 0.18,
+              "methods_seen": 0.22,
+              "probe_budget": 0.15
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "methods_seen",
+              "observed_method",
+              "probe_budget",
+              "candidate_signal",
+              "failure_kind"
+            ],
+            "next_action": "repeat_matched_negative_pair",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_dom_effect": 0.65,
+            "unknown_oracle": 0.35
+          },
+          "evidence": {
+            "target_instance_hash": "d5d9b87a351648a9ec2e996903241ce854ba33583553a40822eb5ce2f0ceb56b",
+            "manifest_sha256": "a8a494a67af3715b2493f44f259dfa6402dc71d9d1fe95c434e9febad55819b7",
+            "projection_sha256": "28f8930b793dded606fed89fe7db0fdc6492d70139aa9bdc2be3cfe2f443cf19",
+            "oracle_sha256": "7791b8938d25a117e5b0960b75e600d8dccecc2e17b37eac9f593032cbdb0306",
+            "failure_sha256": "d16600a31bb0d3452ecfe8ce1b1188e5bb5b099f30e8bb176d61a6b00544f790"
+          },
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        },
+        {
+          "step_index": 3,
+          "model_action": "abstain",
+          "action_confidence": 0.999567,
+          "safety_gate": "allow",
+          "gate_confidence": 1.0,
+          "controller_decision": "send_typed_dom_active_candidate",
+          "method": "GET",
+          "action_manifest": {
+            "method": "GET",
+            "placement": "query",
+            "encoding_chain": [
+              "identity"
+            ],
+            "probe_kind": "inert_dom_markup",
+            "probe_ref": "pg185-inert-dom-pg193_xss_reflected_get-candidate",
+            "payload_sha256": "c73715331e3befa5922b6790bcf2b2487e0e3f0391650bf79a83923e738035f7",
+            "manifest_sha256": "a3955bbd85418747cd8dadd8b5014f8d45f0ded621f8ffe683ad0d26549ce214",
+            "marker_sha256": "e5f53004f973a7a4cbb780331a3a5f6c499558e65eead8c121130af0b7c8f066",
+            "safety": {
+              "does_not_execute": true,
+              "no_external_network": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true
+            }
+          },
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "content_type_class": "other",
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "1705c186eabf224fa39fd72544ec1a7425d1cab7f7339f54b52f359936411a10",
+            "semantic_body_sha256": "1705c186eabf224fa39fd72544ec1a7425d1cab7f7339f54b52f359936411a10",
+            "shape": {
+              "kind": "other",
+              "field_count": 428,
+              "scalar_count": 1
+            },
+            "header_names": [
+              "content-type"
+            ],
+            "marker": {
+              "reflected": true,
+              "location": "html_text",
+              "count": 2
+            },
+            "frame_policy": "unknown",
+            "transport_error": false,
+            "status_changed": false,
+            "state_changed": false,
+            "location_origin_changed": false,
+            "projection_sha256": "ffed560124bcdd72a59aa1bed8145e660c7f51c9c9e57d9d22db6cdbadf8bbf0",
+            "status_chain": [
+              200
+            ],
+            "redirect_chain": [],
+            "redirect_external_blocked": false,
+            "redirect_hop_count": 0,
+            "status_chain_sha256": "87e03f90d21d9893446d8e15acabe84c99247a21e287f7e7cada06e23f3a7d13"
+          },
+          "typed_oracle": {
+            "oracle_id": "pg193-browser-dom-nojs-v1",
+            "modality": "typed_dom_surface_effect",
+            "typed_surface_effect": true,
+            "positive": false,
+            "positive_authority": false,
+            "confirmed_effect": "dom_structure",
+            "signals": {
+              "marker_hits": 1,
+              "body_text_hits": 1,
+              "element_count": 428,
+              "script_tag_count": 16,
+              "browser_dom_observed": true,
+              "dom_change": true,
+              "script_execution": false,
+              "network_request_count": 0,
+              "evidence_hash": "bcfd61c97bcc39aaa15160613eaf6a44377731e3ee430af4270be7a2587df076"
+            },
+            "safety": {
+              "external_network": false,
+              "script_execution": false,
+              "database_write": false,
+              "navigation": false,
+              "raw_body_stored": false
+            }
+          },
+          "typed_surface_effect": true,
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "no_surface_delta",
+            "failed_gate": "surface_delta",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": false,
+            "typed_available": true,
+            "positive_authority": false,
+            "probe_round": 3,
+            "remaining_probe_budget": 0,
+            "key_feature_weights": {
+              "failure_kind": 0.128205,
+              "failed_gate": 0.25641,
+              "candidate_signal": 0.230769,
+              "observed_method": 0.128205,
+              "methods_seen": 0.128205,
+              "probe_budget": 0.128205
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "failure_kind",
+              "methods_seen",
+              "observed_method",
+              "probe_budget"
+            ],
+            "next_action": "abstain_budget_exhausted",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "typed_dom_surface_effect": 0.7,
+            "unknown_oracle": 0.3
+          },
+          "evidence": {
+            "target_instance_hash": "d5d9b87a351648a9ec2e996903241ce854ba33583553a40822eb5ce2f0ceb56b",
+            "manifest_sha256": "a3955bbd85418747cd8dadd8b5014f8d45f0ded621f8ffe683ad0d26549ce214",
+            "projection_sha256": "ffed560124bcdd72a59aa1bed8145e660c7f51c9c9e57d9d22db6cdbadf8bbf0",
+            "oracle_sha256": "7d11407f21141a8defe9c145c6805f7e982059875aad64e07a2c102e225378e2",
+            "failure_sha256": "ee975f9c02f777f6dbe3810fdf9e142425d91c4035fcb6e3f077994f6b291c19"
+          },
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "online_weight_update": false,
+          "long_term_memory_write": false
+        }
+      ]
+    },
+    {
+      "surface": "pg193_sql_v3_fixture",
+      "target": "http://127.0.0.1:8810",
+      "variant": "beta",
+      "fresh_target": true,
+      "typed_oracle_available": true,
+      "source_hash": "d8393e88bc6777dfc59d3d8bb5e92fd3ff441f1b718de527847a0ee05980f432",
+      "steps": [
+        {
+          "step_index": 1,
+          "lab_id": "baseline-control",
+          "mode": null,
+          "model_action": "baseline",
+          "action_confidence": 0.999736,
+          "safety_gate": "allow",
+          "gate_confidence": 1.0,
+          "controller_decision": "send_sql_typed_fixture_probe",
+          "typed_oracle": {
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "modality": "ast_shape",
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "interpreter_boundary": false,
+            "baseline_ast_sha256": "a15aa8e2f1a6aadac0a0737c95318de03564eadac060faab0834e61d7e31105c",
+            "candidate_ast_sha256": "33c24c62a7c399fda433d15cef26c176faffd478baf9d958abd8ed5071ec3e13",
+            "execution": "not_run",
+            "database_touched": false,
+            "network_access": false,
+            "parameterized_baseline": true,
+            "syntax_error_observed": false,
+            "error_differential": false,
+            "blind_boolean_differential": false,
+            "row_shape_differential": false,
+            "timing_differential": false,
+            "simulated_latency_ms": 0,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "real_sleep_performed": false,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "external_network": false,
+            "evidence_hash": "bb123a0ee837b29b6100b8dc86d1bee7a5fd5c2ed307a3b46745b30b998fa5c7",
+            "body_length_delta_abs": 0,
+            "status_changed": false,
+            "fixture_mode": "baseline"
+          },
+          "response_projection": {
+            "status_code": 200,
+            "headers": {
+              "content-type": "application/json"
+            },
+            "body_length": 74,
+            "body_sha256": "d05b2d863c39a513cd79ef663e9005400cd6df8415eba5f608e44ec998ff1666",
+            "json_shape": {
+              "key_count": 4,
+              "type": "object",
+              "scalar_count": 3
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "candidate_without_typed_effect",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": true,
+            "positive_authority": false,
+            "probe_round": 1,
+            "remaining_probe_budget": 2,
+            "key_feature_weights": {
+              "failure_kind": 0.09434,
+              "failed_gate": 0.245283,
+              "candidate_signal": 0.207547,
+              "observed_method": 0.09434,
+              "methods_seen": 0.169811,
+              "probe_budget": 0.188679
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "probe_budget",
+              "methods_seen",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "probe_candidate_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_typed_boundary": 0.65,
+            "unknown_oracle": 0.35
+          },
+          "evidence_hash": "098a79cea5d893bbf3438b73f520e2fc4dcb88db7cd759c9b56c1134a2fcce0b",
+          "raw_probe_stored": false,
+          "raw_response_stored": false,
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false
+        },
+        {
+          "step_index": 2,
+          "lab_id": "literal-only-plain",
+          "mode": null,
+          "model_action": "matched_control",
+          "action_confidence": 0.999608,
+          "safety_gate": "allow",
+          "gate_confidence": 1.0,
+          "controller_decision": "send_sql_typed_fixture_probe",
+          "typed_oracle": {
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "modality": "ast_shape",
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "interpreter_boundary": false,
+            "baseline_ast_sha256": "a15aa8e2f1a6aadac0a0737c95318de03564eadac060faab0834e61d7e31105c",
+            "candidate_ast_sha256": "33c24c62a7c399fda433d15cef26c176faffd478baf9d958abd8ed5071ec3e13",
+            "execution": "not_run",
+            "database_touched": false,
+            "network_access": false,
+            "parameterized_baseline": true,
+            "syntax_error_observed": false,
+            "error_differential": false,
+            "blind_boolean_differential": false,
+            "row_shape_differential": false,
+            "timing_differential": false,
+            "simulated_latency_ms": 0,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "real_sleep_performed": false,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "external_network": false,
+            "evidence_hash": "bb123a0ee837b29b6100b8dc86d1bee7a5fd5c2ed307a3b46745b30b998fa5c7",
+            "body_length_delta_abs": 0,
+            "status_changed": false,
+            "fixture_mode": "literal_only"
+          },
+          "response_projection": {
+            "status_code": 200,
+            "headers": {
+              "content-type": "application/json"
+            },
+            "body_length": 74,
+            "body_sha256": "d05b2d863c39a513cd79ef663e9005400cd6df8415eba5f608e44ec998ff1666",
+            "json_shape": {
+              "key_count": 4,
+              "type": "object",
+              "scalar_count": 3
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "candidate_without_typed_effect",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": true,
+            "positive_authority": false,
+            "probe_round": 2,
+            "remaining_probe_budget": 1,
+            "key_feature_weights": {
+              "failure_kind": 0.09901,
+              "failed_gate": 0.257426,
+              "candidate_signal": 0.217822,
+              "observed_method": 0.09901,
+              "methods_seen": 0.178218,
+              "probe_budget": 0.148515
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "methods_seen",
+              "probe_budget",
+              "failure_kind",
+              "observed_method"
+            ],
+            "next_action": "probe_candidate_other_method",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "no_typed_boundary": 0.65,
+            "unknown_oracle": 0.35
+          },
+          "evidence_hash": "12f70f58bc08875f85c86b6a446fba96c0bf187e1bde1c724ea363fdd5acd5c3",
+          "raw_probe_stored": false,
+          "raw_response_stored": false,
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false
+        },
+        {
+          "step_index": 3,
+          "lab_id": "branch_check-plain",
+          "mode": null,
+          "model_action": "abstain",
+          "action_confidence": 0.982766,
+          "safety_gate": "abstain",
+          "gate_confidence": 0.995965,
+          "controller_decision": "send_sql_typed_fixture_probe",
+          "typed_oracle": {
+            "oracle": "synthetic_sql_ast_differential_v1",
+            "modality": "blind_response",
+            "candidate_signal": true,
+            "controlled_differential": true,
+            "interpreter_boundary": true,
+            "baseline_ast_sha256": "a15aa8e2f1a6aadac0a0737c95318de03564eadac060faab0834e61d7e31105c",
+            "candidate_ast_sha256": "df6df30b5ad79226315e7e2769c3a68adada482004f4aead047d932d1d55c811",
+            "execution": "not_run",
+            "database_touched": false,
+            "network_access": false,
+            "parameterized_baseline": true,
+            "syntax_error_observed": false,
+            "error_differential": false,
+            "blind_boolean_differential": true,
+            "row_shape_differential": false,
+            "timing_differential": false,
+            "simulated_latency_ms": 0,
+            "timeout_budget_ms": null,
+            "timeout_observed": false,
+            "real_sleep_performed": false,
+            "local_callback_observed": false,
+            "local_callback_only": false,
+            "external_network": false,
+            "evidence_hash": "d9a77d021ec33f012d8fd4973804f3080a0e7620415af697e4d86319f26fcee2",
+            "body_length_delta_abs": 15,
+            "status_changed": false,
+            "fixture_mode": "branch_check"
+          },
+          "response_projection": {
+            "status_code": 200,
+            "headers": {
+              "content-type": "application/json"
+            },
+            "body_length": 59,
+            "body_sha256": "8d6606f01e1ef575c3b7a365807c634e70e75982e4114ca67e3dc9cb6d67dc7d",
+            "json_shape": {
+              "key_count": 4,
+              "type": "object",
+              "scalar_count": 3
+            }
+          },
+          "failure_signature": {
+            "schema_version": "sift-failure-signature-v1",
+            "kind": "candidate_without_typed_effect",
+            "failed_gate": "typed_effect",
+            "observed_method": "GET",
+            "methods_seen": [
+              "GET"
+            ],
+            "candidate_signal": true,
+            "typed_available": true,
+            "positive_authority": false,
+            "probe_round": 3,
+            "remaining_probe_budget": 0,
+            "key_feature_weights": {
+              "failure_kind": 0.104167,
+              "failed_gate": 0.270833,
+              "candidate_signal": 0.229167,
+              "observed_method": 0.104167,
+              "methods_seen": 0.1875,
+              "probe_budget": 0.104167
+            },
+            "key_features_ranked": [
+              "failed_gate",
+              "candidate_signal",
+              "methods_seen",
+              "failure_kind",
+              "observed_method",
+              "probe_budget"
+            ],
+            "next_action": "abstain_budget_exhausted",
+            "model_visible": true,
+            "raw_probe_retained": false,
+            "raw_response_retained": false,
+            "memory_promotion_allowed": false
+          },
+          "belief_after": {
+            "typed_sql_differential": 0.9,
+            "unknown_oracle": 0.1
+          },
+          "evidence_hash": "a1a67082b7783c3fddc65fe9f1a6a35aff9ae0d27cabfea288012e85dd76fd59",
+          "raw_probe_stored": false,
+          "raw_response_stored": false,
+          "confirmed_positive": true,
+          "vulnerability_claim_allowed": false
+        }
+      ],
+      "typed_positive_count": 1,
+      "vulnerability_claim_allowed": false,
+      "training_eligible": false
+    }
+  ],
+  "training_eligible": false,
+  "memory_promotion_allowed": false,
+  "raw_payload_strings_stored": false,
+  "raw_response_bodies_stored": false
+}

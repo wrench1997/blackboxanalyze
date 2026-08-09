@@ -1,0 +1,788 @@
+{
+  "protocol_id": "pg-pk-62-target-zone-feature-funnel-v1",
+  "schema_version": "pg62-target-zone-feature-funnel-report-v1",
+  "status": "diagnostic_only",
+  "source_report": "research\\pg61_target_zone_counterfactual_report_v1.json",
+  "source_checkpoint": "artifacts\\pg61-target-zone-counterfactual\\action_value.pt",
+  "device": "cuda",
+  "threshold_from_dev": 0.5,
+  "input_contract_audit": {
+    "feature_function_present": true,
+    "forbidden_label_or_oracle_constants_present": [],
+    "oracle_is_label_not_feature": true,
+    "target_method_is_label_not_feature": true,
+    "layout_id_is_not_feature": true,
+    "raw_request_response_is_not_feature": true
+  },
+  "candidate_features": [
+    "surface_class",
+    "response_shape",
+    "channel_hint",
+    "route_depth",
+    "parameter_count_bucket"
+  ],
+  "funnel": {
+    "stages": [
+      "observable_safe",
+      "non_constant_across_train_holdout",
+      "cross_layout_permutation_utility",
+      "cross_seed_permutation_utility"
+    ],
+    "rows": [
+      {
+        "feature": "surface_class",
+        "observable_safe": true,
+        "train_holdout_variation_cardinality": 3,
+        "non_constant": true,
+        "global_permutation": {
+          "task_count": 160,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "drop_to_mode": {
+          "task_count": 160,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "layout_utility_drops": {
+          "delta": 0.0,
+          "ember": 0.0
+        },
+        "seed_bucket_utility_drops": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0
+        },
+        "mean_layout_utility_drop": 0.0,
+        "stable_utility_across_layouts_and_seeds": false,
+        "funnel_decision": "reject"
+      },
+      {
+        "feature": "response_shape",
+        "observable_safe": true,
+        "train_holdout_variation_cardinality": 3,
+        "non_constant": true,
+        "global_permutation": {
+          "task_count": 160,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "drop_to_mode": {
+          "task_count": 160,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "layout_utility_drops": {
+          "delta": 0.0,
+          "ember": 0.0
+        },
+        "seed_bucket_utility_drops": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0
+        },
+        "mean_layout_utility_drop": 0.0,
+        "stable_utility_across_layouts_and_seeds": false,
+        "funnel_decision": "reject"
+      },
+      {
+        "feature": "channel_hint",
+        "observable_safe": true,
+        "train_holdout_variation_cardinality": 3,
+        "non_constant": true,
+        "global_permutation": {
+          "task_count": 160,
+          "positive_action_accuracy": 0.5,
+          "target_success_rate": 0.375,
+          "negative_false_accept_count": 28,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "drop_to_mode": {
+          "task_count": 160,
+          "positive_action_accuracy": 0.5,
+          "target_success_rate": 0.5,
+          "negative_false_accept_count": 40,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.0,
+          "selected_action_counts": {
+            "POST": 160
+          }
+        },
+        "layout_utility_drops": {
+          "delta": 0.633333,
+          "ember": 0.633333
+        },
+        "seed_bucket_utility_drops": {
+          "0": 0.625,
+          "1": 0.55,
+          "2": 0.625
+        },
+        "mean_layout_utility_drop": 0.633333,
+        "stable_utility_across_layouts_and_seeds": true,
+        "funnel_decision": "retain"
+      },
+      {
+        "feature": "route_depth",
+        "observable_safe": true,
+        "train_holdout_variation_cardinality": 3,
+        "non_constant": true,
+        "global_permutation": {
+          "task_count": 160,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "drop_to_mode": {
+          "task_count": 160,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "layout_utility_drops": {
+          "delta": 0.0,
+          "ember": 0.0
+        },
+        "seed_bucket_utility_drops": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0
+        },
+        "mean_layout_utility_drop": 0.0,
+        "stable_utility_across_layouts_and_seeds": false,
+        "funnel_decision": "reject"
+      },
+      {
+        "feature": "parameter_count_bucket",
+        "observable_safe": true,
+        "train_holdout_variation_cardinality": 3,
+        "non_constant": true,
+        "global_permutation": {
+          "task_count": 160,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "drop_to_mode": {
+          "task_count": 160,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.954434,
+          "selected_action_counts": {
+            "POST": 100,
+            "GET": 60
+          }
+        },
+        "layout_utility_drops": {
+          "delta": 0.0,
+          "ember": 0.0
+        },
+        "seed_bucket_utility_drops": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0
+        },
+        "mean_layout_utility_drop": 0.0,
+        "stable_utility_across_layouts_and_seeds": false,
+        "funnel_decision": "reject"
+      }
+    ],
+    "accepted_features": [
+      "channel_hint"
+    ]
+  },
+  "baseline_holdout": {
+    "task_count": 160,
+    "positive_action_accuracy": 1.0,
+    "target_success_rate": 1.0,
+    "negative_false_accept_count": 0,
+    "unknown_strict_abstain": true,
+    "selected_action_entropy": 0.954434,
+    "selected_action_counts": {
+      "POST": 100,
+      "GET": 60
+    }
+  },
+  "baseline_by_layout": {
+    "delta": {
+      "task_count": 80,
+      "positive_action_accuracy": 1.0,
+      "target_success_rate": 1.0,
+      "negative_false_accept_count": 0,
+      "unknown_strict_abstain": true,
+      "selected_action_entropy": 0.811278,
+      "selected_action_counts": {
+        "POST": 60,
+        "GET": 20
+      }
+    },
+    "ember": {
+      "task_count": 80,
+      "positive_action_accuracy": 1.0,
+      "target_success_rate": 1.0,
+      "negative_false_accept_count": 0,
+      "unknown_strict_abstain": true,
+      "selected_action_entropy": 1.0,
+      "selected_action_counts": {
+        "POST": 40,
+        "GET": 40
+      }
+    }
+  },
+  "baseline_by_seed_bucket": {
+    "0": {
+      "task_count": 54,
+      "positive_action_accuracy": 1.0,
+      "target_success_rate": 1.0,
+      "negative_false_accept_count": 0,
+      "unknown_strict_abstain": true,
+      "selected_action_entropy": 0.950956,
+      "selected_action_counts": {
+        "POST": 34,
+        "GET": 20
+      }
+    },
+    "1": {
+      "task_count": 52,
+      "positive_action_accuracy": 1.0,
+      "target_success_rate": 1.0,
+      "negative_false_accept_count": 0,
+      "unknown_strict_abstain": true,
+      "selected_action_entropy": 0.961237,
+      "selected_action_counts": {
+        "GET": 20,
+        "POST": 32
+      }
+    },
+    "2": {
+      "task_count": 54,
+      "positive_action_accuracy": 1.0,
+      "target_success_rate": 1.0,
+      "negative_false_accept_count": 0,
+      "unknown_strict_abstain": true,
+      "selected_action_entropy": 0.950956,
+      "selected_action_counts": {
+        "POST": 34,
+        "GET": 20
+      }
+    }
+  },
+  "permutation_ablation": {
+    "surface_class": {
+      "global": {
+        "task_count": 160,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "negative_false_accept_count": 0,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      },
+      "by_layout": {
+        "delta": {
+          "task_count": 80,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.811278,
+          "selected_action_counts": {
+            "POST": 60,
+            "GET": 20
+          }
+        },
+        "ember": {
+          "task_count": 80,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 1.0,
+          "selected_action_counts": {
+            "POST": 40,
+            "GET": 40
+          }
+        }
+      },
+      "by_seed_bucket": {
+        "0": {
+          "task_count": 54,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "POST": 34,
+            "GET": 20
+          }
+        },
+        "1": {
+          "task_count": 52,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.961237,
+          "selected_action_counts": {
+            "GET": 20,
+            "POST": 32
+          }
+        },
+        "2": {
+          "task_count": 54,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "POST": 34,
+            "GET": 20
+          }
+        }
+      },
+      "drop_to_mode": {
+        "task_count": 160,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "negative_false_accept_count": 0,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      }
+    },
+    "response_shape": {
+      "global": {
+        "task_count": 160,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "negative_false_accept_count": 0,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      },
+      "by_layout": {
+        "delta": {
+          "task_count": 80,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.811278,
+          "selected_action_counts": {
+            "POST": 60,
+            "GET": 20
+          }
+        },
+        "ember": {
+          "task_count": 80,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 1.0,
+          "selected_action_counts": {
+            "POST": 40,
+            "GET": 40
+          }
+        }
+      },
+      "by_seed_bucket": {
+        "0": {
+          "task_count": 54,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "POST": 34,
+            "GET": 20
+          }
+        },
+        "1": {
+          "task_count": 52,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.961237,
+          "selected_action_counts": {
+            "GET": 20,
+            "POST": 32
+          }
+        },
+        "2": {
+          "task_count": 54,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "POST": 34,
+            "GET": 20
+          }
+        }
+      },
+      "drop_to_mode": {
+        "task_count": 160,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "negative_false_accept_count": 0,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      }
+    },
+    "channel_hint": {
+      "global": {
+        "task_count": 160,
+        "positive_action_accuracy": 0.5,
+        "target_success_rate": 0.375,
+        "negative_false_accept_count": 28,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      },
+      "by_layout": {
+        "delta": {
+          "task_count": 80,
+          "positive_action_accuracy": 0.516667,
+          "target_success_rate": 0.366667,
+          "negative_false_accept_count": 16,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.811278,
+          "selected_action_counts": {
+            "POST": 60,
+            "GET": 20
+          }
+        },
+        "ember": {
+          "task_count": 80,
+          "positive_action_accuracy": 0.483333,
+          "target_success_rate": 0.366667,
+          "negative_false_accept_count": 16,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 1.0,
+          "selected_action_counts": {
+            "POST": 40,
+            "GET": 40
+          }
+        }
+      },
+      "by_seed_bucket": {
+        "0": {
+          "task_count": 54,
+          "positive_action_accuracy": 0.5,
+          "target_success_rate": 0.375,
+          "negative_false_accept_count": 10,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "GET": 20,
+            "POST": 34
+          }
+        },
+        "1": {
+          "task_count": 52,
+          "positive_action_accuracy": 0.575,
+          "target_success_rate": 0.45,
+          "negative_false_accept_count": 11,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.961237,
+          "selected_action_counts": {
+            "POST": 32,
+            "GET": 20
+          }
+        },
+        "2": {
+          "task_count": 54,
+          "positive_action_accuracy": 0.5,
+          "target_success_rate": 0.375,
+          "negative_false_accept_count": 8,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "GET": 20,
+            "POST": 34
+          }
+        }
+      },
+      "drop_to_mode": {
+        "task_count": 160,
+        "positive_action_accuracy": 0.5,
+        "target_success_rate": 0.5,
+        "negative_false_accept_count": 40,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.0,
+        "selected_action_counts": {
+          "POST": 160
+        }
+      }
+    },
+    "route_depth": {
+      "global": {
+        "task_count": 160,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "negative_false_accept_count": 0,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      },
+      "by_layout": {
+        "delta": {
+          "task_count": 80,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.811278,
+          "selected_action_counts": {
+            "POST": 60,
+            "GET": 20
+          }
+        },
+        "ember": {
+          "task_count": 80,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 1.0,
+          "selected_action_counts": {
+            "POST": 40,
+            "GET": 40
+          }
+        }
+      },
+      "by_seed_bucket": {
+        "0": {
+          "task_count": 54,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "POST": 34,
+            "GET": 20
+          }
+        },
+        "1": {
+          "task_count": 52,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.961237,
+          "selected_action_counts": {
+            "GET": 20,
+            "POST": 32
+          }
+        },
+        "2": {
+          "task_count": 54,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "POST": 34,
+            "GET": 20
+          }
+        }
+      },
+      "drop_to_mode": {
+        "task_count": 160,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "negative_false_accept_count": 0,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      }
+    },
+    "parameter_count_bucket": {
+      "global": {
+        "task_count": 160,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "negative_false_accept_count": 0,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      },
+      "by_layout": {
+        "delta": {
+          "task_count": 80,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.811278,
+          "selected_action_counts": {
+            "POST": 60,
+            "GET": 20
+          }
+        },
+        "ember": {
+          "task_count": 80,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 1.0,
+          "selected_action_counts": {
+            "POST": 40,
+            "GET": 40
+          }
+        }
+      },
+      "by_seed_bucket": {
+        "0": {
+          "task_count": 54,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "POST": 34,
+            "GET": 20
+          }
+        },
+        "1": {
+          "task_count": 52,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.961237,
+          "selected_action_counts": {
+            "GET": 20,
+            "POST": 32
+          }
+        },
+        "2": {
+          "task_count": 54,
+          "positive_action_accuracy": 1.0,
+          "target_success_rate": 1.0,
+          "negative_false_accept_count": 0,
+          "unknown_strict_abstain": true,
+          "selected_action_entropy": 0.950956,
+          "selected_action_counts": {
+            "POST": 34,
+            "GET": 20
+          }
+        }
+      },
+      "drop_to_mode": {
+        "task_count": 160,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "negative_false_accept_count": 0,
+        "unknown_strict_abstain": true,
+        "selected_action_entropy": 0.954434,
+        "selected_action_counts": {
+          "POST": 100,
+          "GET": 60
+        }
+      }
+    }
+  },
+  "hard_gate": {
+    "schema_version": "pg62-target-zone-feature-funnel-hard-gate-v1",
+    "status": "passed",
+    "claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "reasons": []
+  },
+  "promotion": {
+    "status": "quarantined_feature_funnel_audit",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "interpretation": "PG62 审核的是输入特征稳定性，不是漏洞发现能力；即使硬门通过，也不把 PG61 fixture 标签或特征重要性写入长期记忆。"
+}

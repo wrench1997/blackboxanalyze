@@ -1,0 +1,180 @@
+{
+  "schema_version": "pg380-abstract-reasoning-sft-candidate-v1",
+  "status": "abstract_reasoning_sft_candidate_only",
+  "dataset": "research/pg385_filter_repair_adversarial_dataset_v1.json",
+  "dataset_sha256": "9441a726a9659386f8c3e8f5d161675a5f5412c17ce4322d8d410d2e11909835",
+  "dataset_internal_sha256": "02ff925c15f5357f319a5a2fb601024c022712ba1a501ced60398282089a04d8",
+  "data": {
+    "train_rows": 80,
+    "holdout_rows": 80,
+    "vocabulary_scope": "declared_abstract_ontology",
+    "raw_rows_loaded": false,
+    "target_slots": 13
+  },
+  "execution_gate": {
+    "timestamp": "2026-08-09T23:39:48.571826+08:00",
+    "weekend": true,
+    "allowed_time_window": true,
+    "explicit_remote_flag": true,
+    "cuda_visible_devices": "0",
+    "device": "cuda:0",
+    "passed": true
+  },
+  "training": {
+    "device": "cuda:0",
+    "seeds": [
+      38001,
+      38002,
+      38003
+    ],
+    "epochs": 4,
+    "microbatch": 16,
+    "action_balance_replication": false,
+    "config": {
+      "d_model": 512,
+      "n_heads": 8,
+      "n_layers": 8,
+      "experts": 8,
+      "expert_hidden": 2048,
+      "top_k": 2,
+      "dropout": 0.05,
+      "max_length": 128,
+      "initializer_range": 0.02
+    },
+    "vocabulary_scope": "declared_ontology_manifest",
+    "vocabulary_size": 83,
+    "vocabulary_gaps": {
+      "unknown_token_count": 0,
+      "unknown_tokens_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "unknown_slot_value_count": 0,
+      "unknown_slot_values": {},
+      "blocked": false
+    },
+    "cpu_diagnostic_union": false,
+    "required_context_window": 29,
+    "checkpoint_dir": "artifacts/pg385-filter-sft"
+  },
+  "candidates": [
+    {
+      "seed": 38001,
+      "baseline": {
+        "rows": 80,
+        "token_accuracy": 0.01,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.363462,
+        "ask_recall": 0.5,
+        "repair_recall": 0.833333,
+        "positive_recall": 0.0,
+        "negative_false_allow": 4,
+        "negative_total": 32,
+        "predictive_entropy": 4.314917
+      },
+      "post": {
+        "rows": 80,
+        "token_accuracy": 0.686667,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.794231,
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32,
+        "predictive_entropy": 2.63065
+      },
+      "entropy_relative_drop": 0.390336,
+      "checkpoint": {
+        "path": "artifacts/pg385-filter-sft/pg370_seed_38001.pt",
+        "sha256": "19dfb73eeb7fedd652a58f77b90ee42dc519fcf55705db42d28ebbc16d284ede"
+      }
+    },
+    {
+      "seed": 38002,
+      "baseline": {
+        "rows": 80,
+        "token_accuracy": 0.005,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.263462,
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 32,
+        "negative_total": 32,
+        "predictive_entropy": 4.297938
+      },
+      "post": {
+        "rows": 80,
+        "token_accuracy": 0.786667,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.834615,
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32,
+        "predictive_entropy": 2.527507
+      },
+      "entropy_relative_drop": 0.411926,
+      "checkpoint": {
+        "path": "artifacts/pg385-filter-sft/pg370_seed_38002.pt",
+        "sha256": "84c0b214d6d93c25afd4706b734a59e9ca4c75f28e7fd65cc7a8489ec8ef9c66"
+      }
+    },
+    {
+      "seed": 38003,
+      "baseline": {
+        "rows": 80,
+        "token_accuracy": 0.006667,
+        "sequence_exact": 0.0,
+        "slot_accuracy": 0.319231,
+        "ask_recall": 0.0,
+        "repair_recall": 1.0,
+        "positive_recall": 0.0,
+        "negative_false_allow": 0,
+        "negative_total": 32,
+        "predictive_entropy": 4.330904
+      },
+      "post": {
+        "rows": 80,
+        "token_accuracy": 0.766667,
+        "sequence_exact": 0.05,
+        "slot_accuracy": 0.936538,
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32,
+        "predictive_entropy": 2.234385
+      },
+      "entropy_relative_drop": 0.484083,
+      "checkpoint": {
+        "path": "artifacts/pg385-filter-sft/pg370_seed_38003.pt",
+        "sha256": "f6265ecd19acb1d53c8debba5cb9ca8002bd9b2edc3e0c183dee75b8fddec98f"
+      }
+    }
+  ],
+  "worst_seed": {
+    "sequence_exact_min": 0.0,
+    "slot_accuracy_min": 0.794231,
+    "ask_recall_min": 1.0,
+    "repair_recall_min": 1.0,
+    "positive_recall_min": 1.0,
+    "negative_false_allow_max": 0,
+    "entropy_relative_drop_max": 0.484083
+  },
+  "scientific_gate": {
+    "typed_live_replay_with_model_selected_wire": false,
+    "independent_implementation": false,
+    "claim_allowed": false,
+    "holdout_vocabulary_closed": true,
+    "abstract_reasoning_only": true,
+    "model_selected_wire_replay": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "PG-380 只验证抽象 ASK/repair/negative/replay 学习；没有真实 payload、target contact 或漏洞能力晋级。",
+  "report_sha256": "e3703f849afeff4ef60719f1e9ae9a3fb579bdca7f7e79400d3fd50eb5ac1b02"
+}

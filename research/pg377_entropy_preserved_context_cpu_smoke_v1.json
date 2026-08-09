@@ -1,0 +1,119 @@
+{
+  "schema_version": "pg377-entropy-preserved-context-candidate-v1",
+  "status": "entropy_preserved_candidate_only",
+  "gate": {
+    "dataset_candidate": true,
+    "audit_passed_candidate": true,
+    "train_only_vocabulary": true,
+    "holdout_not_optimized": true,
+    "target_tokens_read": false,
+    "teacher_is_trained": true,
+    "entropy_threshold": 0.25,
+    "worst_entropy_relative_drop": -7.740244,
+    "entropy_gate_passed": true,
+    "training_allowed": true
+  },
+  "data": {
+    "train_rows": 2,
+    "holdout_rows": 2,
+    "source_train_count": 1208,
+    "source_holdout_count": 572,
+    "train_context_vocab_size": 738,
+    "vocabulary_size": 740,
+    "vocabulary_scope": "train_context_only",
+    "required_context_window": 499
+  },
+  "training": {
+    "device": "cpu",
+    "seeds": [
+      37701
+    ],
+    "epochs": 1,
+    "batch_size": 2,
+    "learning_rate": 0.0001,
+    "temperature": 2.0,
+    "kl_weight": 1.0,
+    "entropy_weight": 0.25,
+    "context_only": true,
+    "target_tokens_read": false,
+    "capability_training": false,
+    "holdout_used_for_optimization": false,
+    "config": {
+      "d_model": 32,
+      "n_heads": 4,
+      "n_layers": 1,
+      "experts": 2,
+      "expert_hidden": 64,
+      "top_k": 2,
+      "dropout": 0.05,
+      "max_length": 768,
+      "initializer_range": 0.02
+    },
+    "teacher": {
+      "checkpoint_sha256": "6c7c54056d6a0d4ba1fcef9a4e8fd281d79bc1e798e41730f4eaae107eadaecc",
+      "seed": 37521,
+      "config": {
+        "d_model": 384,
+        "n_heads": 4,
+        "n_layers": 6,
+        "experts": 4,
+        "expert_hidden": 1024,
+        "top_k": 2,
+        "dropout": 0.05,
+        "max_length": 606,
+        "initializer_range": 0.02
+      },
+      "target_tokens_read": false,
+      "legacy_context_contract": true
+    }
+  },
+  "execution": {
+    "optimizer_started": true,
+    "gpu_touched": false,
+    "docker_started": false,
+    "network_used": false,
+    "checkpoint_written": false
+  },
+  "candidates": [
+    {
+      "seed": 37701,
+      "teacher_holdout": {
+        "rows": 2,
+        "next_token_count": 774,
+        "mean_next_token_loss": 0.485339,
+        "mean_predictive_entropy_nats": 0.755152,
+        "token_accuracy": 0.918605,
+        "teacher_kl": null,
+        "entropy_gap_abs": null
+      },
+      "student_holdout": {
+        "rows": 2,
+        "next_token_count": 774,
+        "mean_next_token_loss": 6.604427,
+        "mean_predictive_entropy_nats": 6.600213,
+        "token_accuracy": 0.0,
+        "teacher_kl": 5.849783,
+        "entropy_gap_abs": 5.845062
+      },
+      "entropy_relative_drop_vs_trained_teacher": -7.740244,
+      "checkpoint": {
+        "path": null,
+        "sha256": null
+      }
+    }
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "88347b31d7e09371828820278718121351c7b28be2c2251a400fe4ba0002afd2",
+  "locks": {
+    "dataset_sha256": "3c40f0841ab1d8f6d22030f3ca3400b68f158175ea5a7c9267af6fa544210c72",
+    "audit_sha256": "b5c8c9333c2dc09e33461824de0ab5b1ee0aca39742564658850b59e53edc5b6",
+    "rules_sha256": "6beef2d0358c925b5b926542fe2a38487bb462909819f32bec244f929e1c8a19",
+    "runner_sha256": "6dec257d0cd3ca118501961909ef5ad401f5055c8a0603067265e49720892c91",
+    "teacher_checkpoint_sha256": "6c7c54056d6a0d4ba1fcef9a4e8fd281d79bc1e798e41730f4eaae107eadaecc"
+  }
+}

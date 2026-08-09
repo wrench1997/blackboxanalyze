@@ -1,0 +1,539 @@
+{
+  "experiment": "generalization-matrix-09-stage-B-primitive-only",
+  "status": "completed",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 3060",
+  "model": {
+    "type": "causal_transformer_classifier",
+    "parameters": 908546,
+    "hidden": 128,
+    "layers": 4,
+    "heads": 4,
+    "max_length": 640,
+    "semantic_features": false,
+    "compact_semantic_features": false,
+    "routed_semantic_features": true,
+    "episode_rule_features": true,
+    "rule_memory_gate": true
+  },
+  "data": {
+    "programs": 2700,
+    "train_examples": 4800,
+    "iid_examples": 1200,
+    "validation_family_examples": 1200,
+    "test_family_examples": 3600,
+    "train_families": [
+      "authorization_or",
+      "casefold_primitive",
+      "html_entity_decode_primitive",
+      "numeric_coercion_primitive",
+      "string_suffix_primitive",
+      "substring_origin",
+      "truthiness_gate",
+      "url_hostname_primitive"
+    ],
+    "validation_families": [
+      "markup_lexeme_primitive",
+      "numeric_boundary"
+    ],
+    "test_families": [
+      "compound_origin_role",
+      "dom_double_decode",
+      "numeric_string_coercion",
+      "state_replay_window",
+      "unicode_casefold_role",
+      "url_scheme_downgrade"
+    ],
+    "source_or_rule_ir_visible_to_model": false,
+    "feature_mode": "routed_semantic_projection",
+    "meta_label_permutation_in_training_only": false
+  },
+  "baselines": {
+    "balanced_majority_accuracy": 0.5
+  },
+  "results": {
+    "iid": {
+      "accuracy": 0.7,
+      "correct": 840,
+      "total": 1200,
+      "by_family": {
+        "markup_lexeme_primitive": 0.5,
+        "numeric_boundary": 0.9
+      },
+      "failures": [
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001700",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0000d00l1:0|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1|input.message=m:1110d11l2:1|input.message=m:0100d00l1:0|input.message=m:1110d11l1:1|input.message=m:1000d00l1:0|input.message=m:0000d00l0:0<RULEMEM><QUERY>input.message=m:1100d00l1<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0002431",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=101:1|input.age=103:0|input.age=104:0|input.age=204:0|input.age=100:1|input.age=0:1<RULEMEM>generic=input.age#lt=103|q=1|fit=6/6<QUERY>input.age=102<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0002456",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1110d11l1:1|input.message=m:0000d00l0:0|input.message=m:1100d00l1:0|input.message=m:1110d11l2:1|input.message=m:1110d11l2:1|input.message=m:0100d00l1:0|input.message=m:0001d11l3:0|input.message=m:1110d11l1:1<RULEMEM><QUERY>input.message=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001214",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1000d00l1:0|input.message=m:0000d00l0:0|input.message=m:1110d11l1:1|input.message=m:0001d11l3:0|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:0000d00l1:0<RULEMEM><QUERY>input.message=m:1100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001250",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1110d11l1:1|input.message=m:0001d11l3:0|input.message=m:1100d00l1:0|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1|input.message=m:0100d00l1:0|input.message=m:1110d11l2:1|input.message=m:0000d00l1:0<RULEMEM><QUERY>input.message=m:1000d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0002294",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1|input.message=m:0001d11l3:0|input.message=m:1100d00l1:0|input.message=m:1110d11l2:1|input.message=m:0000d00l0:0|input.message=m:0000d00l1:0<RULEMEM><QUERY>input.message=m:0100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000278",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0000d00l1:0|input.message=m:1110d11l2:1|input.message=m:0100d00l1:0|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1|input.message=m:0000d00l0:0|input.message=m:1110d11l1:1|input.message=m:1100d00l1:0<RULEMEM><QUERY>input.message=m:0001d11l3<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001700",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0000d00l0:0|input.message=m:1000d00l1:0|input.message=m:0001d11l3:0|input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:0000d00l1:0|input.message=m:1110d11l1:1|input.message=m:1110d11l1:1<RULEMEM><QUERY>input.message=m:1100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001448",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0100d00l1:0|input.message=m:1110d11l2:1|input.message=m:0001d11l3:0|input.message=m:1110d11l2:1|input.message=m:1000d00l1:0|input.message=m:1110d11l1:1|input.message=m:1110d11l1:1|input.message=m:0000d00l1:0<RULEMEM><QUERY>input.message=m:1100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001286",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1110d11l2:1|input.message=m:1000d00l1:0|input.message=m:1110d11l2:1|input.message=m:0001d11l3:0|input.message=m:1100d00l1:0|input.message=m:1110d11l2:1|input.message=m:0100d00l1:0|input.message=m:1110d11l1:1<RULEMEM><QUERY>input.message=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001736",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0100d00l1:0|input.message=m:0000d00l0:0|input.message=m:1000d00l1:0|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1|input.message=m:1110d11l2:1|input.message=m:0001d11l3:0|input.message=m:1110d11l1:1<RULEMEM><QUERY>input.message=m:1100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0002078",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1100d00l1:0|input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:1000d00l1:0|input.message=m:0000d00l1:0|input.message=m:1110d11l1:1|input.message=m:0000d00l0:0|input.message=m:1110d11l2:1<RULEMEM><QUERY>input.message=m:0100d00l1<ANSWER>"
+        }
+      ]
+    },
+    "validation_family_holdout": {
+      "accuracy": 0.6975,
+      "correct": 837,
+      "total": 1200,
+      "by_family": {
+        "markup_lexeme_primitive": 0.5,
+        "numeric_boundary": 0.895
+      },
+      "failures": [
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000854",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1|input.message=m:1000d00l1:0|input.message=m:1100d00l1:0|input.message=m:0000d00l1:0|input.message=m:0100d00l1:0<RULEMEM><QUERY>input.message=m:0000d00l0<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0002096",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1110d11l1:1|input.message=m:1000d00l1:0|input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:0000d00l0:0|input.message=m:0000d00l1:0|input.message=m:0001d11l3:0|input.message=m:1110d11l2:1<RULEMEM><QUERY>input.message=m:1100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0002258",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0100d00l1:0|input.message=m:1000d00l1:0|input.message=m:1110d11l2:1|input.message=m:0000d00l0:0|input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:1110d11l1:1|input.message=m:0000d00l1:0<RULEMEM><QUERY>input.message=m:0001d11l3<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001585",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.total=5:1|input.total=14:0|input.total=8:0|input.total=0:1|input.total=9:0|input.total=6:1<RULEMEM>generic=input.total#lt=8|q=1|fit=6/6<QUERY>input.total=7<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000494",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0001d11l3:0|input.message=m:1110d11l2:1|input.message=m:0000d00l0:0|input.message=m:1110d11l2:1|input.message=m:0000d00l1:0|input.message=m:1100d00l1:0|input.message=m:1110d11l2:1|input.message=m:1110d11l1:1<RULEMEM><QUERY>input.message=m:1000d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000656",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0100d00l1:0|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1|input.message=m:0000d00l1:0|input.message=m:1100d00l1:0|input.message=m:0000d00l0:0|input.message=m:1110d11l1:1|input.message=m:1110d11l2:1<RULEMEM><QUERY>input.message=m:1000d00l1<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001837",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=47:0|input.balance=44:1|input.balance=0:1|input.balance=45:1|input.balance=48:0|input.balance=92:0<RULEMEM>generic=input.balance#lt=47|q=1|fit=6/6<QUERY>input.balance=46<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001819",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=40:1|input.age=39:1|input.age=37:0|input.age=76:1|input.age=36:0|input.age=0:0<RULEMEM>generic=input.age#gt=37|q=1|fit=6/6<QUERY>input.age=38<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0002582",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1110d11l1:1|input.message=m:0000d00l1:0|input.message=m:1100d00l1:0|input.message=m:1110d11l2:1|input.message=m:1000d00l1:0|input.message=m:1110d11l1:1|input.message=m:0000d00l0:0|input.message=m:1110d11l1:1<RULEMEM><QUERY>input.message=m:0100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000998",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:0000d00l1:0|input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:1110d11l1:1|input.message=m:0000d00l0:0|input.message=m:1110d11l2:1|input.message=m:1100d00l1:0|input.message=m:0001d11l3:0<RULEMEM><QUERY>input.message=m:0100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0002204",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1100d00l1:0|input.message=m:1000d00l1:0|input.message=m:1110d11l2:1|input.message=m:1110d11l2:1|input.message=m:1110d11l1:1|input.message=m:0000d00l0:0|input.message=m:0000d00l1:0|input.message=m:1110d11l1:1<RULEMEM><QUERY>input.message=m:0100d00l1<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001574",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.message=m:1110d11l1:1|input.message=m:1000d00l1:0|input.message=m:0000d00l0:0|input.message=m:0000d00l1:0|input.message=m:1110d11l2:1|input.message=m:1110d11l2:1|input.message=m:1110d11l2:1|input.message=m:0100d00l1:0<RULEMEM><QUERY>input.message=m:1100d00l1<ANSWER>"
+        }
+      ]
+    },
+    "test_family_with_memory": {
+      "accuracy": 0.638056,
+      "correct": 2297,
+      "total": 3600,
+      "by_family": {
+        "dom_double_decode": 0.5,
+        "compound_origin_role": 0.63,
+        "unicode_casefold_role": 0.77,
+        "url_scheme_downgrade": 0.411667,
+        "numeric_string_coercion": 0.516667,
+        "state_replay_window": 1.0
+      },
+      "failures": [
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001742",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l2:0|input.payload=m:0000d01l3:1|input.payload=m:0000d00l3:0|input.payload=m:1110d11l2:1|input.payload=m:0001d00l1:0|input.payload=m:0001d11l3:1<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000826",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:20e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:20|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:020|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:21|canon:1|ws:0|hex:0|exp:0:0<RULEMEM><QUERY>input.amount=s: 20 |canon:0|ws:1|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0001853",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:http|portal.test|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilpor"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000715",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal.evil.test|/:0|input.origin=u:https|sub.account.internal|/:0|input.origin=null:0|input.origin=u:ws|account.internal|/:1|input.origin=u:ftp|account.internal|/:1<RULEMEM><QUERY>input.origin=u:http|account.internal|/<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000863",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|portal.test|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:http|portal.test|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:owner|cf:owner:0|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:owner|cf:owner:1|input.origin=u:https|evil"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002461",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:https|portal.test|/:1|input.origin=null:0|input.origin=u:https|sub.portal.test|/:0|input.origin=u:ws|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:ftp|portal.test|/:1<RULEMEM><QUERY>input.origin=u:http|portal.test|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002443",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|input.origin=u:ftp|portal.test|/:1|input.origin=u:ws|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=u:https|sub.portal.test|/:0<RULEMEM><QUERY>input.origin=u:https|portal.test.evil.test|/<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000321",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=1,input.role=s:Admin|cf:admin:1|input.quota=1,input.role=s:guest|cf:guest:1|input.quota=-1,input.role=s:admin|cf:admin:1|input.quota=0,input.role=s: admin|cf: admin:0|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:member|cf:member:1|input.quota=0,input.role=s:ADMIN|cf:admin:1|input.quota=0,input.role=s:guest|cf:guest:0<RULEMEM>generic=(input.quota!=0)or(input.role==ADMIN)|q=0|fit=8/8<QUERY>input.quota=0,input.role=s:admin|cf:admin<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001726",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:5|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:6|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s: 5 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:5.0|canon:0|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:5e0|canon:0|ws:0|hex:0|exp:1<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002138",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d01l3:1|input.payload=m:0000d00l3:0|input.payload=m:0000d00l1:0|input.payload=m:1110d11l2:1|input.payload=m:0001d00l1:0|input.payload=m:0001d11l3:1<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001960",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s: 26 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:27|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:26.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:026|canon:0|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:26e0|canon:0|ws:0|hex:0|exp:1<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000176",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d01l3:1|input.payload=m:0000d00l3:0|input.payload=m:0001d00l1:0<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        }
+      ]
+    },
+    "test_family_without_memory": {
+      "accuracy": 0.500556,
+      "correct": 1802,
+      "total": 3600,
+      "by_family": {
+        "dom_double_decode": 0.5,
+        "compound_origin_role": 0.511667,
+        "unicode_casefold_role": 0.448333,
+        "url_scheme_downgrade": 0.396667,
+        "numeric_string_coercion": 0.643333,
+        "state_replay_window": 0.503333
+      },
+      "failures": [
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001742",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l2:0|input.payload=m:0000d01l3:1|input.payload=m:0000d00l3:0|input.payload=m:1110d11l2:1|input.payload=m:0001d00l1:0|input.payload=m:0001d11l3:1<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0002661",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:guest|cf:guest:0|input.quota=0,input.role=s: owner|cf: owner:0|input.quota=-1,input.role=s:Owner|cf:owner:1|input.quota=-1,input.role=s:owner|cf:owner:1|input.quota=1,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:OWNER|cf:owner:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=1,input.role=s:owner|cf:owner:1<RULEMEM>generic=(input.quota!=0)or(input.role==owner)|q=0|fit=8/8<QUERY>input.quota=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002389",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|input.origin=u:https|sub.safe.local|/:0|input.origin=u:ftp|safe.local|/:1|input.origin=u:https|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:https|safe.local|/:1|input.origin=u:ws|safe.local|/:1<RULEMEM><QUERY>input.origin=u:https|safe.local.evil.test|/<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0001853",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:http|portal.test|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilpor"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0001692",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=s:n71-b|cf:n71-b,prev1.input.token=s:n71-b|cf:n71-b:1|input.token=s:n72-d|cf:n72-d,prev1.input.token=s:n71-b|cf:n71-b:0|input.token=s:n72-d|cf:n72-d,prev1.input.token=s:n14-a|cf:n14-a:0|input.token=s:n71-b|cf:n71-b,prev1.input.token=s:n72-d|cf:n72-d:0|input.token=s:n71-b|cf:n71-b,prev1.input.token=s:n14-a|cf:n14-a:0|input.token=s:n14-a|cf:n14-a,prev1.input.token=s:n71-b|cf:n71-b:0|input.token=s:n91-c|cf:n91-c,prev1.input.token=s:n91-c|cf:n91-c:1|input.token=s:n14-a|cf:n14-a,prev1.input.token=s:n14-a|cf:n14-a:1<RULEMEM>generic=input.token#eq_prev1|q=1|fit=8/8<QUERY>inpu"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002443",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|input.origin=u:ftp|portal.test|/:1|input.origin=u:ws|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=u:https|sub.portal.test|/:0<RULEMEM><QUERY>input.origin=u:https|portal.test.evil.test|/<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002138",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d01l3:1|input.payload=m:0000d00l3:0|input.payload=m:0000d00l1:0|input.payload=m:1110d11l2:1|input.payload=m:0001d00l1:0|input.payload=m:0001d11l3:1<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0002537",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:http|trusted.com|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|eviltrusted.com|/,input.quota=1,input.role=s:admin|cf:admin:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:admin|cf:admin:1|input.origin=u:http|trusted.com|/,input.quota=-1,input.role=s:admin|cf:admin:1|input.origin=u:http|trusted.com|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|trusted.com|"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000176",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d01l3:1|input.payload=m:0000d00l3:0|input.payload=m:0001d00l1:0<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0001638",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.token=s:n40-b|cf:n40-b,prev1.input.token=s:n40-b|cf:n40-b:1|input.token=s:n40-b|cf:n40-b,prev1.input.token=s:n87-c|cf:n87-c:0|input.token=s:n15-d|cf:n15-d,prev1.input.token=s:n87-c|cf:n87-c:0|input.token=s:n60-a|cf:n60-a,prev1.input.token=s:n87-c|cf:n87-c:0|input.token=s:n60-a|cf:n60-a,prev1.input.token=s:n60-a|cf:n60-a:1|input.token=s:n60-a|cf:n60-a,prev1.input.token=s:n40-b|cf:n40-b:0|input.token=s:n15-d|cf:n15-d,prev1.input.token=s:n15-d|cf:n15-d:1|input.token=s:n87-c|cf:n87-c,prev1.input.token=s:n87-c|cf:n87-c:1<RULEMEM>generic=input.token#eq_prev1|q=0|fit=8/8<QUERY>inpu"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000664",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:035|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:35.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:35|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1|input.amount=s:35e0|canon:0|ws:0|hex:0|exp:1:1<RULEMEM><QUERY>input.amount=s:36|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0002610",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=s:n42-b|cf:n42-b,prev1.input.token=s:n34-a|cf:n34-a:0|input.token=s:n48-c|cf:n48-c,prev1.input.token=s:n42-b|cf:n42-b:0|input.token=s:n91-d|cf:n91-d,prev1.input.token=s:n91-d|cf:n91-d:1|input.token=s:n34-a|cf:n34-a,prev1.input.token=s:n34-a|cf:n34-a:1|input.token=s:n48-c|cf:n48-c,prev1.input.token=s:n48-c|cf:n48-c:1|input.token=s:n91-d|cf:n91-d,prev1.input.token=s:n48-c|cf:n48-c:0|input.token=s:n42-b|cf:n42-b,prev1.input.token=s:n48-c|cf:n48-c:0|input.token=s:n91-d|cf:n91-d,prev1.input.token=s:n34-a|cf:n34-a:0<RULEMEM>generic=input.token#eq_prev1|q=1|fit=8/8<QUERY>inpu"
+        }
+      ]
+    },
+    "counterexample_at_k": {
+      "k": 10,
+      "score": 1.0,
+      "successful_programs": 900,
+      "total_programs": 900,
+      "by_family": {
+        "url_scheme_downgrade": 1.0,
+        "dom_double_decode": 1.0,
+        "unicode_casefold_role": 1.0,
+        "numeric_string_coercion": 1.0,
+        "compound_origin_role": 1.0,
+        "state_replay_window": 1.0
+      },
+      "top1": 0.662222,
+      "random_top1": 0.646651,
+      "top1_lift": 0.015571,
+      "precision_at_k": 0.689595,
+      "random_precision_at_k": 0.646651,
+      "random_success_at_k": 1.0,
+      "metric_warning": "Counterexample@K is non-discriminative when the random success baseline is near one.",
+      "policy_visibility": "declared intended output is visible only to the verifier, not to the behavior model"
+    },
+    "memory_delta": 0.1375
+  },
+  "training": {
+    "epochs": 10,
+    "seconds": 152.962,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.602412,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.385618,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.270947,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.225545,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.193785,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.159958,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.132684,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.109863,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.080787,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.073033,
+        "iid_accuracy": 0.7,
+        "validation_family_accuracy": 0.6975
+      }
+    ]
+  },
+  "research_guardrails": {
+    "family_holdout": true,
+    "black_box_only_input": true,
+    "failure_examples_preserved": true,
+    "claim_scope": "pilot only; no claim of production generalization"
+  }
+}

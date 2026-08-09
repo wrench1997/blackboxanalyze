@@ -1,0 +1,83 @@
+{
+  "schema_version": "pg-pk-50-stability-matrix-protocol-v1",
+  "protocol_id": "PG-50",
+  "title": "多实现、多种子、多表面 GET/POST 泛化稳定性矩阵",
+  "objective": "在三套独立 HTTP 布局、五个采样种子、三种响应封装和十个语义表面上，训练 pre-probe action-value head 只使用 semantic/channel/action/belief，并对未参与训练的 frost/quartz 实现进行正负 oracle、未知族 abstain 与跨矩阵稳定性验收。",
+  "authorization": {
+    "scope": "workspace_local_only",
+    "host": "127.0.0.1",
+    "external_network": false,
+    "read_only": true,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "target": {
+    "fixture": "app/pg50_stability_matrix_fixture.py",
+    "collector": "scripts/run_pg50_stability_matrix_catalog.py",
+    "trainer": "scripts/train_pg50_stability_preprobe.py",
+    "implementations": ["ember", "frost", "quartz"],
+    "training_implementation": "ember",
+    "holdout_implementations": ["frost", "quartz"],
+    "seeds": [503, 509, 521, 523, 541],
+    "variants": ["plain", "wrapped", "framed"],
+    "methods": ["GET", "POST"],
+    "phases": ["screen", "confirm", "error", "timeout"],
+    "families": ["xss", "injection", "authentication", "access_control", "logic", "url_redirect", "input_validation", "command_injection", "template_injection", "ordinary_response"]
+  },
+  "split_plan": {
+    "train": "ember, non-template/non-command surfaces, seeds 503/509/521, plain/wrapped",
+    "dev": "ember, non-holdout surfaces, framed variant or seeds 523/541",
+    "implementation_holdout": "frost and quartz, all seeds and variants",
+    "family_holdout": "command-boundary and template-boundary surfaces",
+    "negative_control": "ordinary-surface"
+  },
+  "model_input_contract": {
+    "included": ["semantic slot one-hot", "channel slot one-hot", "action one-hot", "belief posterior"],
+    "excluded": ["typed_oracle", "positive", "family", "response_projection", "raw_probe", "raw_response_body", "evidence_sha256"],
+    "holdout_labels_not_features": true,
+    "response_projection_consumed_by_policy": false
+  },
+  "promotion_gate": {
+    "fresh_reset_per_catalog_row": true,
+    "typed_positive_and_negative_oracle_required": true,
+    "get_post_coverage_required": true,
+    "known_family_recall_required": true,
+    "unknown_strict_abstain_required": true,
+    "zero_negative_effect_false_accept_required": true,
+    "all_trace_episodes_accepted_required": true,
+    "training_and_memory_blocked_on_failure": true,
+    "formal_capability_claim_requires_more_than_synthetic_matrix": true
+  },
+  "run_result": {
+    "catalog_rows": 7200,
+    "catalog_typed_positive_count": 405,
+    "catalog_negative_count": 6795,
+    "catalog_fresh_reset_count": 7200,
+    "catalog_source_count": 3,
+    "catalog_target_instance_count": 7200,
+    "catalog_episode_count": 450,
+    "catalog_accepted_episode_count": 450,
+    "train_pair_count": 168,
+    "dev_pair_count": 252,
+    "frost_holdout_episode_count": 150,
+    "quartz_holdout_episode_count": 150,
+    "frost_effect_success_rate": 1.0,
+    "quartz_effect_success_rate": 1.0,
+    "frost_known_family_recall": 1.0,
+    "quartz_known_family_recall": 1.0,
+    "frost_unknown_strict_abstain": true,
+    "quartz_unknown_strict_abstain": true,
+    "frost_negative_false_accept_count": 0,
+    "quartz_negative_false_accept_count": 0,
+    "frost_mean_queries": 3.1,
+    "quartz_mean_queries": 3.1,
+    "safe_gate_status": "passed",
+    "formal_capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "status": "run_completed_stability_gate_passed_no_promotion"
+}

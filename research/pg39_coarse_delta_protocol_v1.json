@@ -1,0 +1,65 @@
+{
+  "schema_version": "pg-pk-39-coarse-delta-protocol-v1",
+  "protocol_id": "PG-39",
+  "title": "表面不变的粗粒度响应差分与 typed-effect 检测",
+  "objective": "把 candidate-control 的高维表面差分压缩为 bounded 形状增量、状态变化和阶段通道，验证 effect 检测能否跨表面/族迁移；Rule IR family 分类仍单独验收。",
+  "input": {
+    "catalog": "research/pg37_counterfactual_catalog_v1.json",
+    "fresh_replay_provenance": true,
+    "methods": ["GET", "POST"],
+    "surface_variants": ["compact", "nested", "headerized"],
+    "implementations": ["atlas", "orbit"],
+    "seeds": [361, 367, 373],
+    "external_network": false,
+    "raw_probe_or_response_persistence": false
+  },
+  "coarse_feature_contract": {
+    "allowed": ["bounded_shape_count_delta", "bounded_status_delta", "bounded_length_bucket_delta", "bounded_content_type_delta", "bounded_phase", "bounded_method"],
+    "excluded": ["family", "positive", "positive_authority", "typed_effect_ready", "surface_variant_label", "body_sha256", "semantic_body_sha256", "evidence_sha256", "raw_probe", "raw_response_body"],
+    "effect_head_family_agnostic": true,
+    "typed_oracle_is_label_not_feature": true,
+    "zero_delta_negative_controls_retained": true
+  },
+  "split_plan": {
+    "train": "atlas; train/dev families; compact+nested; seeds 361,367",
+    "surface_holdout": "atlas; train/dev families; headerized; all seeds",
+    "family_holdout": "atlas; logic/url_redirect; all variants and seeds",
+    "ood_source": "atlas; input_validation/command_injection; all variants and seeds",
+    "source_holdout": "orbit; train/dev families; all variants and seeds",
+    "negative_control": "atlas+orbit; ordinary_response/unknown_surface"
+  },
+  "promotion_gate": {
+    "minimum_independent_seeds": 3,
+    "minimum_independent_source_hashes": 2,
+    "zero_effect_false_positive": true,
+    "family_holdout_typed_recall_required": true,
+    "unknown_surface_strict_abstain": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "pending_run"
+  },
+  "run_result": {
+    "script": "scripts/train_pg39_coarse_delta_candidate.py",
+    "report": "research/pg39_coarse_delta_candidate_report_v1.json",
+    "device": "cuda",
+    "effect_recall_any_family": {
+      "surface_holdout": 1.0,
+      "family_holdout": 1.0,
+      "ood_source": 1.0,
+      "source_holdout": 1.0,
+      "negative_control": 0.0
+    },
+    "typed_recall": {
+      "surface_holdout": 0.0,
+      "family_holdout": 0.0,
+      "ood_source": 0.0,
+      "source_holdout": 0.25
+    },
+    "effect_false_positive_rate": 0.0,
+    "capability_gate_status": "blocked",
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "coarse delta learns the existence of a typed effect across all unseen surfaces and families with zero effect FPR, but cannot name unseen Rule IR families; effect success is not full vulnerability-family success"
+  },
+  "status": "run_completed_effect_gain_family_gate_failed_no_promotion"
+}

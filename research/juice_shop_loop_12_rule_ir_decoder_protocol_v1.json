@@ -1,0 +1,44 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-rule-ir-decoder-v1",
+  "status": "frozen-before-training",
+  "objective": "decode visible black-box traces into a language-neutral abstract Rule IR family template after cross-seed response-head stability",
+  "families": ["access_control", "authentication", "input_validation", "injection", "observability", "url_redirect", "xss"],
+  "input_contract": {
+    "visible_fields": ["input", "context", "state", "history", "output"],
+    "anonymous_field_hash_buckets": 32,
+    "excluded_fields": ["family", "record_id", "intended_output", "is_counterexample", "evaluator_state", "challenge_key", "source_code"],
+    "source_language": "language-neutral value-shape projection"
+  },
+  "output_contract": {
+    "representation": "RULE_FAMILY_TEMPLATES policy-slot AST",
+    "grammar_validation": "app.rule_ir_decoder.validate_abstract_rule_ir",
+    "binding": "abstract policy slots remain unbound until evidence reconciliation; no evaluator label is emitted"
+  },
+  "training": {
+    "model": "256-feature MLP encoder + 7-way constrained template head",
+    "device_policy": "cuda when available, otherwise cpu and report reason",
+    "primary_seed": 20260829,
+    "fresh_holdout_seeds": [20260831, 20260837, 20260841],
+    "optimizer": "AdamW",
+    "epochs": 40,
+    "batch_size": 256
+  },
+  "generalization": {
+    "holdout_families": ["url_scheme_downgrade", "dom_double_decode", "unicode_casefold_role", "numeric_string_coercion", "compound_origin_role", "state_replay_window"],
+    "holdout_axis": "runtime_url_semantics, encoding_depth, language_string_semantics, coercion_representation, compositional_shift, state_and_history_shift",
+    "metric": "exact abstract-template match plus confidence-gated coverage"
+  },
+  "acceptance_gates": {
+    "grammar_valid_for_all_templates": true,
+    "training_validation_accuracy_min": 0.90,
+    "fresh_holdout_min_accuracy": 0.70,
+    "fresh_holdout_seed_count_min": 3,
+    "oracle_leakage": "must remain false"
+  },
+  "safety": {
+    "local_only": true,
+    "no_target_requests": true,
+    "no_evaluator_endpoints": true,
+    "no_browser_execution": true
+  }
+}

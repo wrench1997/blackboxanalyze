@@ -1,0 +1,205 @@
+{
+  "schema_version": "pg349-payload-probe-vocabulary-v1",
+  "status": "abstract_source_grounded_evaluator_binding_required",
+  "purpose": "将公开测试指南中的 payload 选择知识压缩为可组合的 Rule-IR 词表；不保存可执行原始字符串。",
+  "source_basis": [
+    {
+      "source_id": "owasp-wstg-reflected-xss",
+      "url": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/01-Testing_for_Reflected_Cross_Site_Scripting",
+      "scope": "输入回显、反射位置和结果分析",
+      "license_status": "public_documentation_reference_only"
+    },
+    {
+      "source_id": "portswigger-xss-contexts",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/contexts",
+      "scope": "HTML 文本、属性、JavaScript 字符串/模板和 DOM 上下文",
+      "license_status": "public_documentation_reference_only"
+    },
+    {
+      "source_id": "owasp-wstg-sql-injection",
+      "url": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_SQL_Injection",
+      "scope": "GET/POST 参数、查询干扰和响应/错误差分",
+      "license_status": "public_documentation_reference_only"
+    },
+    {
+      "source_id": "owasp-wstg-xml-injection",
+      "url": "https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/07-Input_Validation_Testing/07-Testing_for_XML_Injection",
+      "scope": "XML 元字符、节点/属性结构和解析结果",
+      "license_status": "public_documentation_reference_only"
+    }
+  ],
+  "retrieved_on": "2026-08-09",
+  "storage_policy": {
+    "raw_strings_stored": false,
+    "raw_strings_in_model_context": false,
+    "raw_examples_allowed_only": "ephemeral_evaluator_side_manual_review",
+    "source_text_copied": false,
+    "evaluator_binding": "A reviewed loopback adapter resolves a shape reference into a runtime canary; the model sees only abstract slots and evidence classes.",
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "token_dimensions": {
+    "surface_context": [
+      "html_text_node",
+      "html_attribute_quoted",
+      "html_attribute_unquoted",
+      "html_url_attribute",
+      "html_form_value",
+      "javascript_string",
+      "javascript_template",
+      "javascript_expression",
+      "dom_html_sink",
+      "dom_script_sink",
+      "css_value",
+      "json_string",
+      "sql_string",
+      "sql_numeric",
+      "xml_text",
+      "xml_attribute",
+      "path_segment",
+      "query_parameter",
+      "fragment_identifier",
+      "header_value",
+      "state_transition",
+      "unknown"
+    ],
+    "boundary_strategy": [
+      "preserve_context",
+      "close_text_context",
+      "close_quoted_attribute",
+      "close_unquoted_attribute",
+      "introduce_sibling_attribute",
+      "introduce_safe_element",
+      "introduce_scriptable_context",
+      "terminate_script_container",
+      "terminate_javascript_string",
+      "interpolate_template_expression",
+      "insert_expression_node",
+      "insert_json_value",
+      "insert_sql_fragment",
+      "insert_xml_node",
+      "repair_following_syntax",
+      "no_boundary_action",
+      "unknown"
+    ],
+    "syntax_category": [
+      "marker_only",
+      "html_element_token",
+      "html_attribute_token",
+      "javascript_expression_token",
+      "template_expression_token",
+      "css_token",
+      "json_value_token",
+      "sql_boolean_branch",
+      "sql_string_fragment",
+      "sql_numeric_fragment",
+      "xml_node_token",
+      "xml_attribute_token",
+      "path_component_token",
+      "header_value_token",
+      "state_transition_token",
+      "syntax_error_probe",
+      "unknown"
+    ],
+    "encoding_layer": [
+      "identity",
+      "url_percent",
+      "form_urlencoded",
+      "html_entity",
+      "javascript_unicode",
+      "javascript_string_escape",
+      "json_escape",
+      "xml_entity",
+      "utf8_normalization",
+      "single_layer",
+      "double_layer_order_sensitive",
+      "encoding_rejected",
+      "unknown"
+    ],
+    "transport_placement": [
+      "get_query",
+      "get_path",
+      "get_fragment",
+      "post_form",
+      "post_json",
+      "post_multipart",
+      "header",
+      "client_side_source",
+      "stateful_form",
+      "unknown"
+    ],
+    "probe_variant": [
+      "baseline_marker",
+      "reference_shape",
+      "source_attested_candidate",
+      "matched_negative",
+      "one_variable_repair",
+      "fresh_replay",
+      "unsupported_abstain",
+      "unknown"
+    ],
+    "oracle_kind": [
+      "reflection_exact",
+      "reflection_normalized",
+      "response_shape_difference",
+      "response_error_class_difference",
+      "dom_structure_difference",
+      "dom_sink_execution_canary",
+      "script_dialog_or_event_canary",
+      "typed_state_delta",
+      "redirect_shape_difference",
+      "xml_parse_shape_difference",
+      "negative_no_effect",
+      "oracle_missing",
+      "external_callback_forbidden",
+      "timing_channel_forbidden",
+      "unknown"
+    ],
+    "action_class": [
+      "observe_surface",
+      "ask_missing_field",
+      "assemble_rule_ir",
+      "select_probe_variant",
+      "send_single_probe",
+      "inspect_response_shape",
+      "repair_one_variable",
+      "fresh_reset",
+      "replay_for_confirmation",
+      "abstain"
+    ]
+  },
+  "composition_contract": {
+    "required_slots": [
+      "surface_context",
+      "boundary_strategy",
+      "syntax_category",
+      "encoding_layer",
+      "transport_placement",
+      "probe_variant",
+      "oracle_kind"
+    ],
+    "rule_ir_shape": "surface_context + parameter_role + boundary_strategy + syntax_category + encoding_layer + transport_placement + expected_oracle + stop_condition",
+    "one_variable_repair": true,
+    "raw_binding_slot": "evaluator_only_runtime_probe_ref",
+    "safe_to_send_default": false,
+    "positive_requires": [
+      "authorized_loopback_target",
+      "fresh_reset",
+      "candidate_reference_negative_triplet",
+      "typed_oracle",
+      "evidence_sha256",
+      "replay_consistency"
+    ],
+    "missing_observation_action": "ask_typed",
+    "missing_observation_is_not_negative": true
+  },
+  "family_mapping": {
+    "xss": ["html_text_node", "html_attribute_quoted", "html_url_attribute", "javascript_string", "javascript_template", "dom_html_sink", "dom_script_sink"],
+    "sql_injection": ["sql_string", "sql_numeric", "query_parameter", "post_form", "response_error_class_difference", "response_shape_difference"],
+    "xml_injection": ["xml_text", "xml_attribute", "xml_node_token", "xml_parse_shape_difference"],
+    "logic_or_state": ["state_transition", "stateful_form", "typed_state_delta", "fresh_replay"],
+    "unsupported_oracle": ["oracle_missing", "unsupported_abstain", "external_callback_forbidden", "timing_channel_forbidden"]
+  }
+}

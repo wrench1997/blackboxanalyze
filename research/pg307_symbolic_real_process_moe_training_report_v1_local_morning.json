@@ -1,0 +1,419 @@
+{
+  "protocol_id": "pg307-symbolic-real-process-moe-v1",
+  "schema_version": "pg307-symbolic-real-process-moe-training-report-v1",
+  "status": "completed_local_morning_pg307_symbolic_slot_copy",
+  "source": {
+    "dataset": "research\\pg307_symbolic_real_process_dataset_v1.json",
+    "dataset_sha256": "15bec982b67cf63e3d27cade5ec851b00f3fdfa4dfbe31792650fe2d73365b72",
+    "audit": "research\\pg307_symbolic_real_process_dataset_audit_v1.json",
+    "audit_sha256": "3e193e70081ae2a9f2a5360516ef8eba4a8d49c76f31f395fd853d4405dcb0ab",
+    "live_evaluator_report": "research\\pg305_live_loopback_replay_report_v1.json",
+    "live_report_sha256": "1e924347b03b9fb5b6eeb427a690591d805a849caf163e18288d4f42d5740324",
+    "raw_payload_in_context": false,
+    "raw_response_body_in_context": false,
+    "wire_emission": false
+  },
+  "training": {
+    "architecture": "causal_transformer_moe_next_token",
+    "target_representation": "symbolic_slot_copy_refs",
+    "binder": "deterministic_pg302_slot_copy",
+    "config": {
+      "d_model": 48,
+      "n_heads": 2,
+      "n_layers": 1,
+      "experts": 2,
+      "expert_hidden": 96,
+      "top_k": 1,
+      "dropout": 0.05,
+      "max_length": 64
+    },
+    "device": "cpu",
+    "seeds": [
+      30701,
+      30702,
+      30703
+    ],
+    "question_pretrain_epochs": 60,
+    "assembly_epochs": 100,
+    "question_pretrain_rows": 324,
+    "fit_count": 108,
+    "token_weights": {
+      "question=ask_typed_availability": 1.8,
+      "question=ask_replay_readiness": 1.8,
+      "question=ask_evidence_presence": 1.8,
+      "question=ask_feedback_state": 1.8,
+      "question=ask_negative_control": 1.8,
+      "question=ask_fresh_reset": 1.8,
+      "safe_to_send=0": 1.8,
+      "safe_to_send=1": 1.5,
+      "next_action=request_observation": 2.0,
+      "next_action=repair_abstract_plan": 2.0,
+      "repair_action=retry_bounded_variant": 2.0,
+      "stop_condition=repair_feedback_or_abstain": 2.0
+    },
+    "train_count": 108,
+    "holdout_count": 32,
+    "hard_negative_count": 16,
+    "elapsed_seconds": 24.359
+  },
+  "metrics": {
+    "implementation_and_live_holdout_missing_question_recall": {
+      "mean": 0.924242,
+      "min": 0.909091,
+      "max": 0.954545
+    },
+    "implementation_and_live_holdout_raw_sequence_exact": {
+      "mean": 0.760417,
+      "min": 0.75,
+      "max": 0.78125
+    },
+    "implementation_and_live_holdout_bound_assembly_slot_exact": {
+      "mean": 0.770833,
+      "min": 0.75,
+      "max": 0.8125
+    },
+    "implementation_and_live_holdout_unnecessary_question_rate": {
+      "mean": 0.333333,
+      "min": 0.0,
+      "max": 0.6
+    },
+    "implementation_and_live_holdout_bound_false_allow": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "hard_negative_bound_false_allow": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "best_seed": 30703
+  },
+  "per_seed": [
+    {
+      "seed": 30701,
+      "train": {
+        "causal_symbolic": {
+          "count": 108,
+          "token_accuracy": 0.858586,
+          "sequence_exact_accuracy": 0.777778,
+          "positive_recall": 0.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.918919,
+          "unnecessary_question_rate": 0.352941,
+          "missing_question_count": 74
+        },
+        "bound_concrete": {
+          "count": 108,
+          "sequence_exact_accuracy": 0.777778,
+          "slot_accuracy": {
+            "transport": 0.833333,
+            "field_role": 0.833333,
+            "encoding": 0.833333,
+            "oracle": 1.0,
+            "stop_condition": 0.777778
+          },
+          "assembly_slot_exact": 0.777778,
+          "missing_question_recall": 0.918919,
+          "unnecessary_question_rate": 0.352941,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 32,
+          "token_accuracy": 0.840909,
+          "sequence_exact_accuracy": 0.75,
+          "positive_recall": 0.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.909091,
+          "unnecessary_question_rate": 0.4,
+          "missing_question_count": 22
+        },
+        "bound_concrete": {
+          "count": 32,
+          "sequence_exact_accuracy": 0.75,
+          "slot_accuracy": {
+            "transport": 0.8125,
+            "field_role": 0.8125,
+            "encoding": 0.8125,
+            "oracle": 1.0,
+            "stop_condition": 0.75
+          },
+          "assembly_slot_exact": 0.75,
+          "missing_question_recall": 0.909091,
+          "unnecessary_question_rate": 0.4,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 16,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 0
+        },
+        "bound_concrete": {
+          "count": 16,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "assembly_slot_exact": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "selection_score": 1.659091
+    },
+    {
+      "seed": 30702,
+      "train": {
+        "causal_symbolic": {
+          "count": 108,
+          "token_accuracy": 0.877104,
+          "sequence_exact_accuracy": 0.796296,
+          "positive_recall": 0.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.945946,
+          "unnecessary_question_rate": 0.470588,
+          "missing_question_count": 74
+        },
+        "bound_concrete": {
+          "count": 108,
+          "sequence_exact_accuracy": 0.796296,
+          "slot_accuracy": {
+            "transport": 0.833333,
+            "field_role": 0.833333,
+            "encoding": 0.833333,
+            "oracle": 1.0,
+            "stop_condition": 0.833333
+          },
+          "assembly_slot_exact": 0.833333,
+          "missing_question_recall": 0.945946,
+          "unnecessary_question_rate": 0.470588,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 32,
+          "token_accuracy": 0.860795,
+          "sequence_exact_accuracy": 0.78125,
+          "positive_recall": 0.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.954545,
+          "unnecessary_question_rate": 0.6,
+          "missing_question_count": 22
+        },
+        "bound_concrete": {
+          "count": 32,
+          "sequence_exact_accuracy": 0.78125,
+          "slot_accuracy": {
+            "transport": 0.8125,
+            "field_role": 0.8125,
+            "encoding": 0.8125,
+            "oracle": 1.0,
+            "stop_condition": 0.8125
+          },
+          "assembly_slot_exact": 0.8125,
+          "missing_question_recall": 0.954545,
+          "unnecessary_question_rate": 0.6,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 16,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 0
+        },
+        "bound_concrete": {
+          "count": 16,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "assembly_slot_exact": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "selection_score": 1.767045
+    },
+    {
+      "seed": 30703,
+      "train": {
+        "causal_symbolic": {
+          "count": 108,
+          "token_accuracy": 0.919192,
+          "sequence_exact_accuracy": 0.777778,
+          "positive_recall": 1.0,
+          "hard_negative_false_allow": 6,
+          "safe_reject_rate": 0.933333,
+          "missing_question_recall": 0.918919,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 74
+        },
+        "bound_concrete": {
+          "count": 108,
+          "sequence_exact_accuracy": 0.777778,
+          "slot_accuracy": {
+            "transport": 0.833333,
+            "field_role": 0.833333,
+            "encoding": 0.833333,
+            "oracle": 1.0,
+            "stop_condition": 0.944444
+          },
+          "assembly_slot_exact": 0.777778,
+          "missing_question_recall": 0.918919,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 32,
+          "token_accuracy": 0.909091,
+          "sequence_exact_accuracy": 0.75,
+          "positive_recall": 1.0,
+          "hard_negative_false_allow": 2,
+          "safe_reject_rate": 0.923077,
+          "missing_question_recall": 0.909091,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 22
+        },
+        "bound_concrete": {
+          "count": 32,
+          "sequence_exact_accuracy": 0.75,
+          "slot_accuracy": {
+            "transport": 0.8125,
+            "field_role": 0.8125,
+            "encoding": 0.8125,
+            "oracle": 1.0,
+            "stop_condition": 0.9375
+          },
+          "assembly_slot_exact": 0.75,
+          "missing_question_recall": 0.909091,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 16,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 0
+        },
+        "bound_concrete": {
+          "count": 16,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "assembly_slot_exact": 1.0,
+          "missing_question_recall": null,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_expected_symbolic_plan_count": 0,
+          "invalid_predicted_symbolic_plan_count": 0,
+          "binder": "deterministic_pg302_slot_copy"
+        }
+      },
+      "selection_score": 2.659091
+    }
+  ],
+  "hypothesis_gate": {
+    "status": "blocked",
+    "checks": {
+      "dataset_audit_pass": true,
+      "real_process_rows": true,
+      "missing_counterfactuals": true,
+      "question_recall_min": true,
+      "bound_assembly_slot_exact_min": false,
+      "holdout_zero_false_allow": true,
+      "hard_negative_zero_false_allow": true,
+      "unnecessary_question_max": false,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "scientific_gate": {
+    "status": "blocked",
+    "reasons": [
+      "PG-305 model candidate send count was 0/4; typed gold effects are evaluator evidence only",
+      "PG-307 is a symbolic projection of four real routes, not a new family-level sample",
+      "source-grounded binding remains deterministic and outside the neural decoder",
+      "fresh family/implementation holdout and multi-target replay are still required"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "checkpoint_role": "research_candidate_only"
+  },
+  "checkpoint": "artifacts\\pg307-symbolic-real-process\\pg307_symbolic_real_process_moe_local_morning.pt",
+  "report_sha256": "af93d4581b10103ef25f082af9188721d633403d7e819f118914634dc1d5df11"
+}

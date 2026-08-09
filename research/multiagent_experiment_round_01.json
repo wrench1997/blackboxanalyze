@@ -1,0 +1,84 @@
+{
+  "schema_version": "sift-multiagent-experiment-round-v1",
+  "round_id": "multiagent-experiment-round-01",
+  "date": "2026-08-02",
+  "scope": "local offline reliability and provenance experiments",
+  "safety": {
+    "external_network": false,
+    "external_targets": false,
+    "credentials_used": false,
+    "model_or_checkpoint_changed": false,
+    "payload_generation_changed": false
+  },
+  "agents": [
+    {
+      "agent": "luna_worker_generalization",
+      "track": "cross-dataset/source and seed independence",
+      "result": "found_gate_bypass",
+      "evidence": [
+        "PG-PK-04 XSS had 24/24 accepted and 0 FP while only 12 distinct evidence hashes were reused across two seed labels",
+        "PG-PK-15/18 real ledgers have three source hashes and remain valid under the repaired gate",
+        "same-source relabeling and same-evidence seed copying were not rejected by the old gate"
+      ]
+    },
+    {
+      "agent": "luna_worker_belief",
+      "track": "belief, active probe, and Rule IR binding",
+      "result": "found_reliability_gaps",
+      "evidence": [
+        "duplicate evidence replay raised an erroneous posterior to 0.783607",
+        "status=0 plus transport error bound subject_authenticated=true",
+        "mutated derived bindings still validated",
+        "generic active probe preferred an uninformative uniform candidate"
+      ]
+    },
+    {
+      "agent": "luna_worker_oracles",
+      "track": "offline oracle and projection integrity",
+      "result": "found_projection_binding_gap",
+      "evidence": [
+        "8 existing oracle tests passed",
+        "top-level oracle_projection was not checked against the hashed embedded projection"
+      ]
+    }
+  ],
+  "implemented_experiments": [
+    {
+      "protocol": "pg-pk-19-triage-signal-integrity-v1",
+      "result": "pass",
+      "cases": "5/5",
+      "report": "research/pg_pk_19_triage_signal_integrity_v1.json"
+    },
+    {
+      "protocol": "pg-pk-21-memory-source-integrity-v1",
+      "result": "pass",
+      "cases": "7/7",
+      "report": "research/pg_pk_21_memory_source_integrity_v1.json"
+    },
+    {
+      "protocol": "pg-pk-22-oracle-projection-binding-v1",
+      "result": "pass",
+      "cases": "6/6",
+      "report": "research/pg_pk_22_oracle_projection_binding_v1.json"
+    }
+  ],
+  "engineering_changes": [
+    "preserve unregistered triage signals and block authorization until they are mapped",
+    "deduplicate repeated evidence hashes in MultiStepBelief",
+    "keep response-derived Rule IR slots unbound on transport failure or non-positive status",
+    "recompute derived Rule IR bindings during validation",
+    "require source-hash diversity, independent seed evidence manifests, and deduplicated counts for memory promotion",
+    "require top-level oracle projections to match the hashed embedded projection"
+  ],
+  "regression": {
+    "pytest": "175 passed, 1 warning",
+    "pg17_joint_regression": "pass",
+    "pg17_triage": "inconclusive (clean/no failure signal; model and scale authorization remain false)"
+  },
+  "next_experiments": [
+    "Add an explicit abstain contract for conflicting or zero-information belief sequences",
+    "Replace generic entropy-only active probing with an outcome-model information-gain policy",
+    "Make Pikachu runner support argparse --help, --dry-run, unique container names, and report-path isolation",
+    "Collect a fresh PG-PK-04 ledger with source hash and independent seed manifests before reconsidering XSS promotion"
+  ]
+}

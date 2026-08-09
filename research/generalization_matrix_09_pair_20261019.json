@@ -1,0 +1,478 @@
+{
+  "schema_version": "sift-checkpoint-pair-evaluation-v1",
+  "experiment": "generalization-matrix-09-target-pair-20261019",
+  "status": "completed",
+  "seed": 20261019,
+  "data": {
+    "programs": 900,
+    "examples": 3600,
+    "families": [
+      "compound_origin_role",
+      "dom_double_decode",
+      "numeric_string_coercion",
+      "state_replay_window",
+      "unicode_casefold_role",
+      "url_scheme_downgrade"
+    ],
+    "identical_prompts": true
+  },
+  "baseline": {
+    "path": "artifacts\\frontend-loop-05-routed-memory-20260801\\tiny_rule_gpt.pt",
+    "sha256": "7b85b41770121be1a894517adff416efe1ccc7bc847e0b55b9460c27936fbe10",
+    "with_rule_head": {
+      "accuracy": 0.664722,
+      "correct": 2393,
+      "total": 3600,
+      "by_family": {
+        "unicode_casefold_role": 0.771667,
+        "dom_double_decode": 0.5,
+        "state_replay_window": 1.0,
+        "compound_origin_role": 0.635,
+        "url_scheme_downgrade": 0.538333,
+        "numeric_string_coercion": 0.543333
+      },
+      "failures": [
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:owner|cf:owner:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|evi"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000320",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l3:0|input.payload=m:0001d11l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000825",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:Operator|cf:operator:1|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:OPERATOR|cf:operator:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:operator|cf:operator:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=1,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.quota=0,input.role=s: operator|cf: operator<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000249",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:member|cf:member:0|input.quota=0,input.role=s:admin|cf:admin:1|input.quota=1,input.role=s:ADMIN|cf:admin:1|input.quota=1,input.role=s:member|cf:member:1|input.quota=0,input.role=s:Admin|cf:admin:1|input.quota=0,input.role=s: admin|cf: admin:0|input.quota=-1,input.role=s:Admin|cf:admin:1|input.quota=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.quota=1,input.role=s:admin|cf:admin<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001705",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:ftp|safe.local|/:1|input.origin=u:https|sub.safe.local|/:0|input.origin=u:https|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:ws|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|safe.local|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000340",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=s:15.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:15e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s: 15 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:15|canon:1|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:16|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0002267",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|trusted.com|/,input.quota=-1,input.role=s:admin|cf:admin:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:admin|cf:admin:0|input.origin=u:http|trusted.com|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|trusted.com|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:http|trusted."
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000661",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|sub.account.internal|/:0|input.origin=u:ws|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:http|account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal.evil.test|/:0<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000554",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l4:0|input.payload=m:1110d11l2:1|input.payload=m:0001d11l3:1|input.payload=m:0000d00l1:0|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001940",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0001d11l3:1|input.payload=m:0000d00l1:0|input.payload=m:0001d00l1:0|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l3<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000392",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l3:0|input.payload=m:1110d11l2:1|input.payload=m:0000d01l3:1|input.payload=m:0000d00l1:0|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000341",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:https|trusted.com|/,input.quota=-1,input.role=s:root|cf:root:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:root|cf:root:1|input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:https|eviltrusted.com|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:http|trusted.com|/,input.quota=0,input.role=s:root|cf:root:1|input.origin=u:https|evil"
+        }
+      ]
+    },
+    "neural_only": {
+      "accuracy": 0.535833,
+      "correct": 1929,
+      "total": 3600,
+      "by_family": {
+        "unicode_casefold_role": 0.583333,
+        "dom_double_decode": 0.5,
+        "state_replay_window": 0.511667,
+        "compound_origin_role": 0.448333,
+        "url_scheme_downgrade": 0.628333,
+        "numeric_string_coercion": 0.543333
+      },
+      "failures": [
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0001563",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=1,input.role=s:guest|cf:guest:1|input.quota=1,input.role=s:Admin|cf:admin:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:ADMIN|cf:admin:1|input.quota=0,input.role=s: admin|cf: admin:0|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=1,input.role=s:ADMIN|cf:admin:1|input.quota=0,input.role=s:ADMIN|cf:admin:1<RULEMEM>generic=(input.quota!=0)or(input.role==ADMIN)|q=0|fit=8/8<QUERY>input.quota=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000320",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l3:0|input.payload=m:0001d11l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000825",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:Operator|cf:operator:1|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:OPERATOR|cf:operator:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:operator|cf:operator:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=1,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.quota=0,input.role=s: operator|cf: operator<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000249",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:member|cf:member:0|input.quota=0,input.role=s:admin|cf:admin:1|input.quota=1,input.role=s:ADMIN|cf:admin:1|input.quota=1,input.role=s:member|cf:member:1|input.quota=0,input.role=s:Admin|cf:admin:1|input.quota=0,input.role=s: admin|cf: admin:0|input.quota=-1,input.role=s:Admin|cf:admin:1|input.quota=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.quota=1,input.role=s:admin|cf:admin<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001705",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:ftp|safe.local|/:1|input.origin=u:https|sub.safe.local|/:0|input.origin=u:https|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:ws|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|safe.local|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000340",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=s:15.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:15e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s: 15 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:15|canon:1|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:16|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0002267",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|trusted.com|/,input.quota=-1,input.role=s:admin|cf:admin:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:admin|cf:admin:0|input.origin=u:http|trusted.com|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|trusted.com|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:http|trusted."
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000661",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|sub.account.internal|/:0|input.origin=u:ws|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:http|account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal.evil.test|/:0<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000554",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l4:0|input.payload=m:1110d11l2:1|input.payload=m:0001d11l3:1|input.payload=m:0000d00l1:0|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001940",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0001d11l3:1|input.payload=m:0000d00l1:0|input.payload=m:0001d00l1:0|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l3<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000392",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l3:0|input.payload=m:1110d11l2:1|input.payload=m:0000d01l3:1|input.payload=m:0000d00l1:0|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000341",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:https|trusted.com|/,input.quota=-1,input.role=s:root|cf:root:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:root|cf:root:1|input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:https|eviltrusted.com|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:http|trusted.com|/,input.quota=0,input.role=s:root|cf:root:1|input.origin=u:https|evil"
+        }
+      ]
+    }
+  },
+  "candidate": {
+    "path": "artifacts\\generalization-matrix-09-stage-b-stratified-20261019\\tiny_rule_gpt.pt",
+    "sha256": "79000cf387279c482d14eebd241ad89ebaea2186523a019be00b56c47645a090",
+    "with_rule_head": {
+      "accuracy": 0.712778,
+      "correct": 2566,
+      "total": 3600,
+      "by_family": {
+        "unicode_casefold_role": 0.775,
+        "dom_double_decode": 0.643333,
+        "state_replay_window": 1.0,
+        "compound_origin_role": 0.661667,
+        "url_scheme_downgrade": 0.373333,
+        "numeric_string_coercion": 0.823333
+      },
+      "failures": [
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:owner|cf:owner:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|evi"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000320",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l3:0|input.payload=m:0001d11l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000825",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:Operator|cf:operator:1|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:OPERATOR|cf:operator:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:operator|cf:operator:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=1,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.quota=0,input.role=s: operator|cf: operator<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001705",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:ftp|safe.local|/:1|input.origin=u:https|sub.safe.local|/:0|input.origin=u:https|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:ws|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|safe.local|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0002267",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|trusted.com|/,input.quota=-1,input.role=s:admin|cf:admin:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:admin|cf:admin:0|input.origin=u:http|trusted.com|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|trusted.com|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:http|trusted."
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0002068",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:32.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:33|canon:1|ws:0|hex:0|exp:0:0|input.amount=s: 32 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1|input.amount=s:32e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0<RULEMEM><QUERY>input.amount=s:032|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001202",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110d11l2:1|input.payload=m:0000d00l4:0|input.payload=m:0001d00l1:0|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d00l1:0<RULEMEM><QUERY>input.payload=m:0000d01l3<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001417",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|sub.account.internal|/:0|input.origin=u:ws|account.internal|/:1|input.origin=null:0|input.origin=u:https|account.internal.evil.test|/:0|input.origin=u:https|account.internal|/:1<RULEMEM><QUERY>input.origin=u:https|account.internal|/<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000377",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|eviltrusted.com|/,input.quota=0,input.role=s:admin|cf:admin:1|input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:admin|cf:admin:1|input.origin=u:http|trusted.com|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:https|trusted.com|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:http|trusted.com|/,input.quota=1,input.role=s:admin|cf:admin:1|input.origin=u:https|trusted.com|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|eviltrusted.com|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:h"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001273",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|safe.local|/:1|input.origin=u:ws|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|safe.local|/:1|input.origin=u:https|safe.local|/:1|input.origin=null:0|input.origin=u:ftp|safe.local|/:1<RULEMEM><QUERY>input.origin=u:https|sub.safe.local|/<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000717",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=1,input.role=s: owner|cf: owner:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=1,input.role=s:member|cf:member:1|input.quota=1,input.role=s:owner|cf:owner:1|input.quota=0,input.role=s: owner|cf: owner:0|input.quota=1,input.role=s:OWNER|cf:owner:1|input.quota=0,input.role=s:member|cf:member:0<RULEMEM>generic=(input.quota!=0)or(input.role==owner)|q=0|fit=8/8<QUERY>input.quota=0,input.role=s:Owner|cf:owner<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000049",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=null:0|input.origin=u:https|portal.test|/:1|input.origin=u:ws|portal.test|/:1|input.origin=u:https|sub.portal.test|/:0<RULEMEM><QUERY>input.origin=u:https|portal.test.evil.test|/<ANSWER>"
+        }
+      ]
+    },
+    "neural_only": {
+      "accuracy": 0.614167,
+      "correct": 2211,
+      "total": 3600,
+      "by_family": {
+        "unicode_casefold_role": 0.645,
+        "dom_double_decode": 0.643333,
+        "state_replay_window": 0.533333,
+        "compound_origin_role": 0.586667,
+        "url_scheme_downgrade": 0.453333,
+        "numeric_string_coercion": 0.823333
+      },
+      "failures": [
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0001563",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=1,input.role=s:guest|cf:guest:1|input.quota=1,input.role=s:Admin|cf:admin:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:ADMIN|cf:admin:1|input.quota=0,input.role=s: admin|cf: admin:0|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=1,input.role=s:ADMIN|cf:admin:1|input.quota=0,input.role=s:ADMIN|cf:admin:1<RULEMEM>generic=(input.quota!=0)or(input.role==ADMIN)|q=0|fit=8/8<QUERY>input.quota=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000521",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evil.test|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:owner|cf:owner:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|evi"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000320",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l3:0|input.payload=m:0001d11l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000825",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:Operator|cf:operator:1|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:OPERATOR|cf:operator:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:operator|cf:operator:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=1,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.quota=0,input.role=s: operator|cf: operator<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001705",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:ftp|safe.local|/:1|input.origin=u:https|sub.safe.local|/:0|input.origin=u:https|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:ws|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|safe.local|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000755",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|safe.local|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|evilsafe.local|/,input.quota=0,input.role=s:owner|cf:owner:1|input.origin=u:http|safe.local|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:http|safe.local|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:https|safe.local|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:https|evilsafe.local|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:member|cf:member:0|input.origin=u:https|evil.tes"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0002068",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:32.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:33|canon:1|ws:0|hex:0|exp:0:0|input.amount=s: 32 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1|input.amount=s:32e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0<RULEMEM><QUERY>input.amount=s:032|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0002304",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.token=s:n98-b|cf:n98-b,prev1.input.token=s:n98-b|cf:n98-b:1|input.token=s:n90-a|cf:n90-a,prev1.input.token=s:n46-d|cf:n46-d:0|input.token=s:n98-b|cf:n98-b,prev1.input.token=s:n90-a|cf:n90-a:0|input.token=s:n45-c|cf:n45-c,prev1.input.token=s:n90-a|cf:n90-a:0|input.token=s:n45-c|cf:n45-c,prev1.input.token=s:n46-d|cf:n46-d:0|input.token=s:n90-a|cf:n90-a,prev1.input.token=s:n90-a|cf:n90-a:1|input.token=s:n45-c|cf:n45-c,prev1.input.token=s:n45-c|cf:n45-c:1|input.token=s:n46-d|cf:n46-d,prev1.input.token=s:n46-d|cf:n46-d:1<RULEMEM>generic=input.token#eq_prev1|q=0|fit=8/8<QUERY>inpu"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001202",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110d11l2:1|input.payload=m:0000d00l4:0|input.payload=m:0001d00l1:0|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d00l1:0<RULEMEM><QUERY>input.payload=m:0000d01l3<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0002535",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:OPERATOR|cf:operator:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=-1,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=1,input.role=s: operator|cf: operator:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:guest|cf:guest:1|input.quota=-1,input.role=s:OPERATOR|cf:operator:1<RULEMEM>generic=(input.quota!=0)or(input.role==OPERATOR)|q=0|fit=8/8<QUERY>input.quota=0,input.role=s: operator|cf: operator<ANSWER>"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0002430",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=s:n53-c|cf:n53-c,prev1.input.token=s:n90-d|cf:n90-d:0|input.token=s:n90-d|cf:n90-d,prev1.input.token=s:n90-d|cf:n90-d:1|input.token=s:n53-c|cf:n53-c,prev1.input.token=s:n53-c|cf:n53-c:1|input.token=s:n53-c|cf:n53-c,prev1.input.token=s:n19-b|cf:n19-b:0|input.token=s:n19-b|cf:n19-b,prev1.input.token=s:n36-a|cf:n36-a:0|input.token=s:n19-b|cf:n19-b,prev1.input.token=s:n19-b|cf:n19-b:1|input.token=s:n90-d|cf:n90-d,prev1.input.token=s:n53-c|cf:n53-c:0|input.token=s:n36-a|cf:n36-a,prev1.input.token=s:n19-b|cf:n19-b:0<RULEMEM>generic=input.token#eq_prev1|q=1|fit=8/8<QUERY>inpu"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001417",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|sub.account.internal|/:0|input.origin=u:ws|account.internal|/:1|input.origin=null:0|input.origin=u:https|account.internal.evil.test|/:0|input.origin=u:https|account.internal|/:1<RULEMEM><QUERY>input.origin=u:https|account.internal|/<ANSWER>"
+        }
+      ]
+    }
+  },
+  "per_family": {
+    "compound_origin_role": {
+      "baseline": 0.635,
+      "candidate": 0.661667,
+      "delta": 0.026667,
+      "baseline_neural": 0.448333,
+      "candidate_neural": 0.586667,
+      "neural_delta": 0.138334
+    },
+    "dom_double_decode": {
+      "baseline": 0.5,
+      "candidate": 0.643333,
+      "delta": 0.143333,
+      "baseline_neural": 0.5,
+      "candidate_neural": 0.643333,
+      "neural_delta": 0.143333
+    },
+    "numeric_string_coercion": {
+      "baseline": 0.543333,
+      "candidate": 0.823333,
+      "delta": 0.28,
+      "baseline_neural": 0.543333,
+      "candidate_neural": 0.823333,
+      "neural_delta": 0.28
+    },
+    "state_replay_window": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0,
+      "baseline_neural": 0.511667,
+      "candidate_neural": 0.533333,
+      "neural_delta": 0.021666
+    },
+    "unicode_casefold_role": {
+      "baseline": 0.771667,
+      "candidate": 0.775,
+      "delta": 0.003333,
+      "baseline_neural": 0.583333,
+      "candidate_neural": 0.645,
+      "neural_delta": 0.061667
+    },
+    "url_scheme_downgrade": {
+      "baseline": 0.538333,
+      "candidate": 0.373333,
+      "delta": -0.165,
+      "baseline_neural": 0.628333,
+      "candidate_neural": 0.453333,
+      "neural_delta": -0.175
+    }
+  },
+  "decision": {
+    "max_allowed_regression": 0.02,
+    "worst_family_delta": -0.165,
+    "passes": false
+  }
+}

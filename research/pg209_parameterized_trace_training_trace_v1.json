@@ -1,0 +1,258 @@
+{
+  "schema_version": "pg209-parameterized-trace-training-trace-v1",
+  "evaluation_only": true,
+  "data": {
+    "base_train_rows": 15,
+    "pg208_train_rows": 10,
+    "train_rows": 25,
+    "old_holdout_rows": 42,
+    "pg208_holdout_rows": 16,
+    "holdout_rows": 58,
+    "route_holdout": [
+      "/vul/sqli/sqli_x.php",
+      "/vul/xss/xss_04.php",
+      "/vul/xss/xss_dom_x.php"
+    ],
+    "seed_train": 20801,
+    "seed_holdout": 20802
+  },
+  "variants": [
+    {
+      "variant": "large",
+      "body_parameter_count": 19272990,
+      "source": "pg189_large_body",
+      "adapter_parameter_count": 19305164,
+      "warm_start": {
+        "source": "fresh_large_field_adapter",
+        "copied_keys": []
+      },
+      "training": {
+        "schema_version": "pg205-field-aware-grounding-adapter-v1",
+        "train_rows": 25,
+        "holdout_rows": 58,
+        "epochs": 60,
+        "history": [
+          {
+            "epoch": 1,
+            "loss": 3.1387794,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.44827586,
+              "candidate_recall": 0.23684211,
+              "abstain_recall": 0.85,
+              "unsafe_allow_count": 3,
+              "encoding_accuracy": 0.15517241,
+              "failure_accuracy": 0.58620691
+            }
+          },
+          {
+            "epoch": 20,
+            "loss": 0.03730676,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.58620691,
+              "candidate_recall": 0.36842105,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 0.79310346,
+              "failure_accuracy": 0.58620691
+            }
+          },
+          {
+            "epoch": 40,
+            "loss": 0.00364553,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.63793105,
+              "candidate_recall": 0.44736842,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 0.79310346,
+              "failure_accuracy": 0.58620691
+            }
+          },
+          {
+            "epoch": 60,
+            "loss": 0.00174121,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.63793105,
+              "candidate_recall": 0.44736842,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 0.79310346,
+              "failure_accuracy": 0.58620691
+            }
+          }
+        ],
+        "train": {
+          "count": 25,
+          "action_accuracy": 1.0,
+          "candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 1.0,
+          "failure_accuracy": 1.0
+        },
+        "holdout": {
+          "count": 58,
+          "action_accuracy": 0.63793105,
+          "candidate_recall": 0.44736842,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 0.79310346,
+          "failure_accuracy": 0.58620691
+        }
+      },
+      "old_replay": {
+        "count": 15,
+        "action_accuracy": 1.0,
+        "candidate_recall": 1.0,
+        "abstain_recall": 1.0,
+        "unsafe_allow_count": 0,
+        "encoding_accuracy": 1.0,
+        "failure_accuracy": 1.0
+      },
+      "pg208_holdout": {
+        "count": 16,
+        "action_accuracy": 1.0,
+        "candidate_recall": 1.0,
+        "abstain_recall": 1.0,
+        "unsafe_allow_count": 0,
+        "encoding_accuracy": 1.0,
+        "failure_accuracy": 1.0
+      },
+      "catastrophic_forgetting_detected": false,
+      "unsafe_allow_total": 0
+    },
+    {
+      "variant": "xxl",
+      "body_parameter_count": 101487169,
+      "source": "pg206_xxl_body",
+      "adapter_parameter_count": 101535727,
+      "warm_start": {
+        "source": "pg203_token_aware_adapter",
+        "copied_keys": [
+          "context_projection.0.weight",
+          "context_projection.0.bias",
+          "feature_projection.0.weight",
+          "feature_projection.0.bias",
+          "token_projection.0.weight",
+          "token_projection.0.bias",
+          "action_head.weight",
+          "action_head.bias",
+          "encoding_head.weight",
+          "encoding_head.bias",
+          "failure_head.weight",
+          "failure_head.bias",
+          "shared.0.bias",
+          "shared.2.weight",
+          "shared.2.bias",
+          "shared.0.weight_padded"
+        ],
+        "field_projection_initialized": true
+      },
+      "training": {
+        "schema_version": "pg205-field-aware-grounding-adapter-v1",
+        "train_rows": 25,
+        "holdout_rows": 58,
+        "epochs": 60,
+        "history": [
+          {
+            "epoch": 1,
+            "loss": 3.04761982,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.68965518,
+              "candidate_recall": 0.68421053,
+              "abstain_recall": 0.7,
+              "unsafe_allow_count": 6,
+              "encoding_accuracy": 0.89655173,
+              "failure_accuracy": 1.0
+            }
+          },
+          {
+            "epoch": 20,
+            "loss": 0.00384337,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.84482759,
+              "candidate_recall": 0.76315789,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 1.0,
+              "failure_accuracy": 1.0
+            }
+          },
+          {
+            "epoch": 40,
+            "loss": 0.00026918,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.89655173,
+              "candidate_recall": 0.84210526,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 1.0,
+              "failure_accuracy": 1.0
+            }
+          },
+          {
+            "epoch": 60,
+            "loss": 0.0001424,
+            "holdout": {
+              "count": 58,
+              "action_accuracy": 0.89655173,
+              "candidate_recall": 0.84210526,
+              "abstain_recall": 1.0,
+              "unsafe_allow_count": 0,
+              "encoding_accuracy": 1.0,
+              "failure_accuracy": 0.89655173
+            }
+          }
+        ],
+        "train": {
+          "count": 25,
+          "action_accuracy": 1.0,
+          "candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 1.0,
+          "failure_accuracy": 1.0
+        },
+        "holdout": {
+          "count": 58,
+          "action_accuracy": 0.89655173,
+          "candidate_recall": 0.84210526,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 1.0,
+          "failure_accuracy": 0.89655173
+        }
+      },
+      "old_replay": {
+        "count": 15,
+        "action_accuracy": 1.0,
+        "candidate_recall": 1.0,
+        "abstain_recall": 1.0,
+        "unsafe_allow_count": 0,
+        "encoding_accuracy": 1.0,
+        "failure_accuracy": 1.0
+      },
+      "pg208_holdout": {
+        "count": 16,
+        "action_accuracy": 1.0,
+        "candidate_recall": 1.0,
+        "abstain_recall": 1.0,
+        "unsafe_allow_count": 0,
+        "encoding_accuracy": 1.0,
+        "failure_accuracy": 1.0
+      },
+      "catastrophic_forgetting_detected": false,
+      "unsafe_allow_total": 0
+    }
+  ],
+  "training_eligible": false,
+  "raw_payload_strings_stored": false,
+  "raw_response_bodies_stored": false
+}

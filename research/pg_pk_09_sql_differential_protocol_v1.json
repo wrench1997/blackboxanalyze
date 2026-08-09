@@ -1,0 +1,47 @@
+{
+  "protocol_id": "pg-pk-09-sql-differential-v1",
+  "objective": "Exercise abstract SQL error, blind, row-shape, bounded-timeout, local-side-channel, and interpreter-boundary classes without executing SQL.",
+  "target": {
+    "kind": "ephemeral_in_repo_sql_fixture",
+    "base_url": "http://127.0.0.1:8793",
+    "source_code_pinned": true,
+    "external_network": false
+  },
+  "modes": ["syntax_error", "blind_boolean", "row_shape", "time_delay", "local_side_channel", "operator_like", "plain"],
+  "pair_design": {
+    "variants": ["plain", "url_percent"],
+    "same_abstract_mode_required": true,
+    "pair_agreement_required": true,
+    "raw_sql_text_forbidden": true
+  },
+  "oracle_contract": {
+    "name": "synthetic_sql_ast_differential_v1",
+    "requires": ["controlled_differential", "interpreter_boundary", "fresh_evidence_hash"],
+    "database_execution": false,
+    "real_sleep": false,
+    "external_network": false
+  },
+  "family_decoder": {
+    "kind": "small_sql_channel_head",
+    "global_decoder_is_not_overridden": true,
+    "training_features_exclude_oracle_fields": true,
+    "fresh_target_accuracy_and_control_false_acceptance_required": true,
+    "failure_action": "diagnostic_only_and_abstain"
+  },
+  "decision_layers": {
+    "strict_ood": "unknown target remains abstain",
+    "sql_revalidation": "only allow-listed abstract modes with safe AST differential evidence may revalidate",
+    "plain_parameterized_control": "must remain negative",
+    "unsafe_or_unapproved": "abstain"
+  },
+  "safety": {
+    "methods": ["GET"],
+    "paths": ["/query"],
+    "raw_body_stored": false,
+    "credentials": false,
+    "mutations": false,
+    "database_touched": false,
+    "real_sleep_performed": false
+  },
+  "memory_promotion_rule": "research/loop_memory_promotion_rule_v1.json"
+}

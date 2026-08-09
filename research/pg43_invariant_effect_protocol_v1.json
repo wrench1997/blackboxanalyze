@@ -1,0 +1,47 @@
+{
+  "schema_version": "pg-pk-43-invariant-effect-protocol-v1",
+  "protocol_id": "PG-43",
+  "title": "zero-variance 防护后的 invariant effect head",
+  "objective": "针对 PG-42 triage 发现的零方差归一化问题，只用 PG-37 训练 sign-binned shape-delta effect head，再在未参与训练的 PG-42 独立实现上复放。",
+  "root_cause_from_pg42": {
+    "zero_variance_dimensions": [2, 4, 5, 8, 10, 11, 12, 15, 16, 17, 26, 27, 28, 29, 30, 31],
+    "failure_mode": "new envelope/body/header dimensions are amplified by PG-39 normalization and rejected by novelty gate",
+    "triage_artifact": "research/pg42_independent_ood_triage_v1.json"
+  },
+  "training_contract": {
+    "training_catalog": "research/pg37_counterfactual_catalog_v1.json",
+    "holdout_catalog": "research/pg42_independent_semantic_catalog_v1.json",
+    "representation": "sign_binned_shape_delta_and_change_bits",
+    "invariant_indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 18, 19],
+    "excluded_nuisance_indices": [13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25],
+    "typed_oracle_is_label_not_feature": true,
+    "family_agnostic": true,
+    "pg42_used_for_training": false,
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "run_result": {
+    "trainer": "scripts/train_pg43_invariant_effect_candidate.py",
+    "router": "scripts/run_pg43_safe_router_on_pg42.py",
+    "pg42_pair_count": 1440,
+    "pg42_effect_recall": 1.0,
+    "pg42_negative_effect_false_accept_count": 0,
+    "known_family_recall": 1.0,
+    "unknown_effect_recall": 1.0,
+    "unknown_misname_count": 0,
+    "unknown_not_abstain_count": 0,
+    "unknown_strict_abstain": true,
+    "effect_gate_status": "passed",
+    "formal_capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "表示层跨实现 effect 与安全 unknown 路由恢复；族命名仍是审计 ontology prior，不构成正式 Rule IR 泛化晋升。"
+  },
+  "promotion_gate": {
+    "formal_family_decoder_still_required": true,
+    "independent_source_and_family_holdout_required": true,
+    "training_and_memory_blocked_until_full_gate": true,
+    "status": "effect_gate_passed_formal_capability_gate_pending"
+  },
+  "status": "run_completed_effect_gate_passed_no_promotion"
+}

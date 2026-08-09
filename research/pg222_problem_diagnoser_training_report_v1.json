@@ -1,0 +1,1247 @@
+{
+  "protocol_id": "pg-pk-222-problem-diagnoser-v1",
+  "schema_version": "pg222-problem-diagnoser-v1",
+  "status": "completed_structured_problem_diagnosis_training",
+  "device": "cuda",
+  "source_reports": [
+    "research\\pg217_pikachu_typed_sql_oracle_report_v1.json",
+    "research\\pg218_pikachu_result_fixture_report_v1.json",
+    "research\\pg220_live_shadow_replay_report_v1.json",
+    "research\\pg221_pikachu_boolean_blind_oracle_report_v1.json"
+  ],
+  "source_report_hashes": [
+    "f849d12526f42c955c437c7424c601e1d14ceb1464cf88946c1989dd409add30",
+    "3adeb023073c4efd2d84dcf72263ca40917b0008e979f41f9c93c8206af3ab72",
+    "5adc8593682fc74e3021b7ec2d4960a6f9b2547556c6cb50b9d7b6fa78c13787",
+    "2c965f2bfcf5e264d95a51490c0a3c77575aff495bea15f29bcca05c8c71a2db"
+  ],
+  "dataset": "research\\pg222_problem_diagnoser_dataset_v1.json",
+  "row_counts": {
+    "total": 340,
+    "train": 90,
+    "holdout": 250,
+    "counterfactual": 306
+  },
+  "label_counts": {
+    "all": {
+      "oracle_unavailable": 46,
+      "confirmed_local_effect": 52,
+      "model_decision_error": 38,
+      "environment_failure": 34,
+      "binding_failure": 34,
+      "candidate_no_effect": 34,
+      "reference_disagreement": 34,
+      "result_mismatch": 34,
+      "inconclusive": 34
+    },
+    "train": {
+      "confirmed_local_effect": 15,
+      "oracle_unavailable": 11,
+      "model_decision_error": 10,
+      "environment_failure": 9,
+      "binding_failure": 9,
+      "candidate_no_effect": 9,
+      "reference_disagreement": 9,
+      "result_mismatch": 9,
+      "inconclusive": 9
+    },
+    "holdout": {
+      "oracle_unavailable": 35,
+      "confirmed_local_effect": 37,
+      "model_decision_error": 28,
+      "environment_failure": 25,
+      "binding_failure": 25,
+      "candidate_no_effect": 25,
+      "reference_disagreement": 25,
+      "result_mismatch": 25,
+      "inconclusive": 25
+    }
+  },
+  "variants": [
+    {
+      "schema_version": "pg222-problem-diagnoser-v1",
+      "feature_dim": 38,
+      "feature_names": [
+        "fresh_reset_ok",
+        "database_health_ok",
+        "backend_observed",
+        "transport_error",
+        "container_restart_used",
+        "status_5xx",
+        "reset_completed",
+        "method_get",
+        "method_post",
+        "field_count_0",
+        "field_count_1",
+        "field_count_2",
+        "field_count_3_plus",
+        "binding_valid",
+        "candidate_sent",
+        "reference_sent",
+        "negative_sent",
+        "oracle_available",
+        "typed_effect_observed",
+        "result_fixture_verified",
+        "boolean_differential",
+        "candidate_reference_agreement",
+        "negative_clean",
+        "candidate_result_present",
+        "negative_result_absent",
+        "candidate_sql_error_shape",
+        "result_mismatch_observed",
+        "model_claimed_positive",
+        "model_abstained",
+        "feedback_none",
+        "feedback_no_effect",
+        "feedback_environment_failure",
+        "feedback_reference_disagreement",
+        "feedback_result_verified",
+        "history_seen",
+        "history_deep",
+        "source_hash_present",
+        "evidence_hash_present"
+      ],
+      "diagnosis_names": [
+        "environment_failure",
+        "binding_failure",
+        "oracle_unavailable",
+        "candidate_no_effect",
+        "reference_disagreement",
+        "result_mismatch",
+        "model_decision_error",
+        "confirmed_local_effect",
+        "inconclusive"
+      ],
+      "next_step_names": [
+        "inspect_environment",
+        "inspect_binding",
+        "recheck_oracle",
+        "retry_candidate",
+        "compare_reference",
+        "abstain"
+      ],
+      "train_rows": 90,
+      "holdout_rows": 250,
+      "epochs": 120,
+      "history": [
+        {
+          "epoch": 1,
+          "loss": 2.86623049,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.108,
+            "guarded_diagnosis_accuracy": 0.74400002,
+            "next_step_accuracy": 0.104,
+            "confirmed_local_effect_recall": 0.0,
+            "guarded_confirmed_local_effect_recall": 0.0,
+            "raw_positive_false_accept_count": 2,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "candidate_no_effect": 29,
+                "oracle_unavailable": 1,
+                "result_mismatch": 6,
+                "reference_disagreement": 1
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 23,
+                "inconclusive": 2
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "oracle_unavailable": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 30,
+          "loss": 1.3274492,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.83600003,
+            "guarded_diagnosis_accuracy": 0.99200004,
+            "next_step_accuracy": 0.66800004,
+            "confirmed_local_effect_recall": 0.94594595,
+            "guarded_confirmed_local_effect_recall": 0.94594595,
+            "raw_positive_false_accept_count": 0,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 35,
+                "model_decision_error": 2
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 60,
+          "loss": 0.12531793,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.99200004,
+            "guarded_diagnosis_accuracy": 0.99200004,
+            "next_step_accuracy": 1.0,
+            "confirmed_local_effect_recall": 0.94594595,
+            "guarded_confirmed_local_effect_recall": 0.94594595,
+            "raw_positive_false_accept_count": 0,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 35,
+                "model_decision_error": 2
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 90,
+          "loss": 0.01826459,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.99600005,
+            "guarded_diagnosis_accuracy": 0.99600005,
+            "next_step_accuracy": 1.0,
+            "confirmed_local_effect_recall": 0.97297297,
+            "guarded_confirmed_local_effect_recall": 0.97297297,
+            "raw_positive_false_accept_count": 0,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 36,
+                "model_decision_error": 1
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 120,
+          "loss": 0.00890553,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.99600005,
+            "guarded_diagnosis_accuracy": 0.99600005,
+            "next_step_accuracy": 1.0,
+            "confirmed_local_effect_recall": 0.97297297,
+            "guarded_confirmed_local_effect_recall": 0.97297297,
+            "raw_positive_false_accept_count": 0,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 36,
+                "model_decision_error": 1
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        }
+      ],
+      "train": {
+        "count": 90,
+        "diagnosis_accuracy": 1.0,
+        "guarded_diagnosis_accuracy": 1.0,
+        "next_step_accuracy": 1.0,
+        "confirmed_local_effect_recall": 1.0,
+        "guarded_confirmed_local_effect_recall": 1.0,
+        "raw_positive_false_accept_count": 0,
+        "guarded_positive_false_accept_count": 0,
+        "confusion": {
+          "confirmed_local_effect": {
+            "confirmed_local_effect": 15
+          },
+          "oracle_unavailable": {
+            "oracle_unavailable": 11
+          },
+          "model_decision_error": {
+            "model_decision_error": 10
+          },
+          "environment_failure": {
+            "environment_failure": 9
+          },
+          "binding_failure": {
+            "binding_failure": 9
+          },
+          "candidate_no_effect": {
+            "candidate_no_effect": 9
+          },
+          "reference_disagreement": {
+            "reference_disagreement": 9
+          },
+          "result_mismatch": {
+            "result_mismatch": 9
+          },
+          "inconclusive": {
+            "inconclusive": 9
+          }
+        }
+      },
+      "holdout": {
+        "count": 250,
+        "diagnosis_accuracy": 0.99600005,
+        "guarded_diagnosis_accuracy": 0.99600005,
+        "next_step_accuracy": 1.0,
+        "confirmed_local_effect_recall": 0.97297297,
+        "guarded_confirmed_local_effect_recall": 0.97297297,
+        "raw_positive_false_accept_count": 0,
+        "guarded_positive_false_accept_count": 0,
+        "confusion": {
+          "oracle_unavailable": {
+            "oracle_unavailable": 35
+          },
+          "confirmed_local_effect": {
+            "confirmed_local_effect": 36,
+            "model_decision_error": 1
+          },
+          "model_decision_error": {
+            "model_decision_error": 28
+          },
+          "environment_failure": {
+            "environment_failure": 25
+          },
+          "binding_failure": {
+            "binding_failure": 25
+          },
+          "candidate_no_effect": {
+            "candidate_no_effect": 25
+          },
+          "reference_disagreement": {
+            "reference_disagreement": 25
+          },
+          "result_mismatch": {
+            "result_mismatch": 25
+          },
+          "inconclusive": {
+            "inconclusive": 25
+          }
+        }
+      },
+      "hidden_dim": 32,
+      "device": "cuda"
+    },
+    {
+      "schema_version": "pg222-problem-diagnoser-v1",
+      "feature_dim": 38,
+      "feature_names": [
+        "fresh_reset_ok",
+        "database_health_ok",
+        "backend_observed",
+        "transport_error",
+        "container_restart_used",
+        "status_5xx",
+        "reset_completed",
+        "method_get",
+        "method_post",
+        "field_count_0",
+        "field_count_1",
+        "field_count_2",
+        "field_count_3_plus",
+        "binding_valid",
+        "candidate_sent",
+        "reference_sent",
+        "negative_sent",
+        "oracle_available",
+        "typed_effect_observed",
+        "result_fixture_verified",
+        "boolean_differential",
+        "candidate_reference_agreement",
+        "negative_clean",
+        "candidate_result_present",
+        "negative_result_absent",
+        "candidate_sql_error_shape",
+        "result_mismatch_observed",
+        "model_claimed_positive",
+        "model_abstained",
+        "feedback_none",
+        "feedback_no_effect",
+        "feedback_environment_failure",
+        "feedback_reference_disagreement",
+        "feedback_result_verified",
+        "history_seen",
+        "history_deep",
+        "source_hash_present",
+        "evidence_hash_present"
+      ],
+      "diagnosis_names": [
+        "environment_failure",
+        "binding_failure",
+        "oracle_unavailable",
+        "candidate_no_effect",
+        "reference_disagreement",
+        "result_mismatch",
+        "model_decision_error",
+        "confirmed_local_effect",
+        "inconclusive"
+      ],
+      "next_step_names": [
+        "inspect_environment",
+        "inspect_binding",
+        "recheck_oracle",
+        "retry_candidate",
+        "compare_reference",
+        "abstain"
+      ],
+      "train_rows": 90,
+      "holdout_rows": 250,
+      "epochs": 120,
+      "history": [
+        {
+          "epoch": 1,
+          "loss": 2.84807348,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.2,
+            "guarded_diagnosis_accuracy": 0.62400001,
+            "next_step_accuracy": 0.28400001,
+            "confirmed_local_effect_recall": 0.32432432,
+            "guarded_confirmed_local_effect_recall": 0.32432432,
+            "raw_positive_false_accept_count": 48,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 29,
+                "inconclusive": 6
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 12,
+                "result_mismatch": 22,
+                "candidate_no_effect": 2,
+                "environment_failure": 1
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "inconclusive": 8,
+                "environment_failure": 17
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "inconclusive": 12,
+                "candidate_no_effect": 13
+              },
+              "reference_disagreement": {
+                "inconclusive": 16,
+                "reference_disagreement": 9
+              },
+              "result_mismatch": {
+                "result_mismatch": 23,
+                "inconclusive": 2
+              },
+              "inconclusive": {
+                "oracle_unavailable": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 30,
+          "loss": 0.3190605,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.99600005,
+            "guarded_diagnosis_accuracy": 1.0,
+            "next_step_accuracy": 0.99600005,
+            "confirmed_local_effect_recall": 1.0,
+            "guarded_confirmed_local_effect_recall": 1.0,
+            "raw_positive_false_accept_count": 0,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 37
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 60,
+          "loss": 0.00600617,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 1.0,
+            "guarded_diagnosis_accuracy": 1.0,
+            "next_step_accuracy": 1.0,
+            "confirmed_local_effect_recall": 1.0,
+            "guarded_confirmed_local_effect_recall": 1.0,
+            "raw_positive_false_accept_count": 0,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 37
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 90,
+          "loss": 0.00215186,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 1.0,
+            "guarded_diagnosis_accuracy": 1.0,
+            "next_step_accuracy": 1.0,
+            "confirmed_local_effect_recall": 1.0,
+            "guarded_confirmed_local_effect_recall": 1.0,
+            "raw_positive_false_accept_count": 0,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 37
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 120,
+          "loss": 0.00148005,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 1.0,
+            "guarded_diagnosis_accuracy": 1.0,
+            "next_step_accuracy": 1.0,
+            "confirmed_local_effect_recall": 1.0,
+            "guarded_confirmed_local_effect_recall": 1.0,
+            "raw_positive_false_accept_count": 0,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 37
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 25
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        }
+      ],
+      "train": {
+        "count": 90,
+        "diagnosis_accuracy": 1.0,
+        "guarded_diagnosis_accuracy": 1.0,
+        "next_step_accuracy": 1.0,
+        "confirmed_local_effect_recall": 1.0,
+        "guarded_confirmed_local_effect_recall": 1.0,
+        "raw_positive_false_accept_count": 0,
+        "guarded_positive_false_accept_count": 0,
+        "confusion": {
+          "confirmed_local_effect": {
+            "confirmed_local_effect": 15
+          },
+          "oracle_unavailable": {
+            "oracle_unavailable": 11
+          },
+          "model_decision_error": {
+            "model_decision_error": 10
+          },
+          "environment_failure": {
+            "environment_failure": 9
+          },
+          "binding_failure": {
+            "binding_failure": 9
+          },
+          "candidate_no_effect": {
+            "candidate_no_effect": 9
+          },
+          "reference_disagreement": {
+            "reference_disagreement": 9
+          },
+          "result_mismatch": {
+            "result_mismatch": 9
+          },
+          "inconclusive": {
+            "inconclusive": 9
+          }
+        }
+      },
+      "holdout": {
+        "count": 250,
+        "diagnosis_accuracy": 1.0,
+        "guarded_diagnosis_accuracy": 1.0,
+        "next_step_accuracy": 1.0,
+        "confirmed_local_effect_recall": 1.0,
+        "guarded_confirmed_local_effect_recall": 1.0,
+        "raw_positive_false_accept_count": 0,
+        "guarded_positive_false_accept_count": 0,
+        "confusion": {
+          "oracle_unavailable": {
+            "oracle_unavailable": 35
+          },
+          "confirmed_local_effect": {
+            "confirmed_local_effect": 37
+          },
+          "model_decision_error": {
+            "model_decision_error": 28
+          },
+          "environment_failure": {
+            "environment_failure": 25
+          },
+          "binding_failure": {
+            "binding_failure": 25
+          },
+          "candidate_no_effect": {
+            "candidate_no_effect": 25
+          },
+          "reference_disagreement": {
+            "reference_disagreement": 25
+          },
+          "result_mismatch": {
+            "result_mismatch": 25
+          },
+          "inconclusive": {
+            "inconclusive": 25
+          }
+        }
+      },
+      "hidden_dim": 64,
+      "device": "cuda"
+    },
+    {
+      "schema_version": "pg222-problem-diagnoser-v1",
+      "feature_dim": 38,
+      "feature_names": [
+        "fresh_reset_ok",
+        "database_health_ok",
+        "backend_observed",
+        "transport_error",
+        "container_restart_used",
+        "status_5xx",
+        "reset_completed",
+        "method_get",
+        "method_post",
+        "field_count_0",
+        "field_count_1",
+        "field_count_2",
+        "field_count_3_plus",
+        "binding_valid",
+        "candidate_sent",
+        "reference_sent",
+        "negative_sent",
+        "oracle_available",
+        "typed_effect_observed",
+        "result_fixture_verified",
+        "boolean_differential",
+        "candidate_reference_agreement",
+        "negative_clean",
+        "candidate_result_present",
+        "negative_result_absent",
+        "candidate_sql_error_shape",
+        "result_mismatch_observed",
+        "model_claimed_positive",
+        "model_abstained",
+        "feedback_none",
+        "feedback_no_effect",
+        "feedback_environment_failure",
+        "feedback_reference_disagreement",
+        "feedback_result_verified",
+        "history_seen",
+        "history_deep",
+        "source_hash_present",
+        "evidence_hash_present"
+      ],
+      "diagnosis_names": [
+        "environment_failure",
+        "binding_failure",
+        "oracle_unavailable",
+        "candidate_no_effect",
+        "reference_disagreement",
+        "result_mismatch",
+        "model_decision_error",
+        "confirmed_local_effect",
+        "inconclusive"
+      ],
+      "next_step_names": [
+        "inspect_environment",
+        "inspect_binding",
+        "recheck_oracle",
+        "retry_candidate",
+        "compare_reference",
+        "abstain"
+      ],
+      "train_rows": 90,
+      "holdout_rows": 250,
+      "epochs": 120,
+      "history": [
+        {
+          "epoch": 1,
+          "loss": 2.92959356,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.064,
+            "guarded_diagnosis_accuracy": 0.53600001,
+            "next_step_accuracy": 0.33200002,
+            "confirmed_local_effect_recall": 0.10810811,
+            "guarded_confirmed_local_effect_recall": 0.10810811,
+            "raw_positive_false_accept_count": 57,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "inconclusive": 28,
+                "oracle_unavailable": 7
+              },
+              "confirmed_local_effect": {
+                "inconclusive": 11,
+                "result_mismatch": 22,
+                "confirmed_local_effect": 4
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "inconclusive": 10,
+                "environment_failure": 15
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "inconclusive": 23,
+                "candidate_no_effect": 2
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 21,
+                "inconclusive": 4
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "oracle_unavailable": 18,
+                "inconclusive": 7
+              }
+            }
+          }
+        },
+        {
+          "epoch": 30,
+          "loss": 0.02101495,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.98800004,
+            "guarded_diagnosis_accuracy": 0.99200004,
+            "next_step_accuracy": 0.97200006,
+            "confirmed_local_effect_recall": 1.0,
+            "guarded_confirmed_local_effect_recall": 1.0,
+            "raw_positive_false_accept_count": 2,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 37
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 23,
+                "inconclusive": 2
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 60,
+          "loss": 0.00067503,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.99200004,
+            "guarded_diagnosis_accuracy": 0.99600005,
+            "next_step_accuracy": 0.97200006,
+            "confirmed_local_effect_recall": 1.0,
+            "guarded_confirmed_local_effect_recall": 1.0,
+            "raw_positive_false_accept_count": 1,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 37
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 24,
+                "inconclusive": 1
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 90,
+          "loss": 0.00035337,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.99200004,
+            "guarded_diagnosis_accuracy": 0.99600005,
+            "next_step_accuracy": 0.97600007,
+            "confirmed_local_effect_recall": 1.0,
+            "guarded_confirmed_local_effect_recall": 1.0,
+            "raw_positive_false_accept_count": 1,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 37
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 24,
+                "inconclusive": 1
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        },
+        {
+          "epoch": 120,
+          "loss": 0.00026782,
+          "holdout": {
+            "count": 250,
+            "diagnosis_accuracy": 0.99200004,
+            "guarded_diagnosis_accuracy": 0.99600005,
+            "next_step_accuracy": 0.97600007,
+            "confirmed_local_effect_recall": 1.0,
+            "guarded_confirmed_local_effect_recall": 1.0,
+            "raw_positive_false_accept_count": 1,
+            "guarded_positive_false_accept_count": 0,
+            "confusion": {
+              "oracle_unavailable": {
+                "oracle_unavailable": 35
+              },
+              "confirmed_local_effect": {
+                "confirmed_local_effect": 37
+              },
+              "model_decision_error": {
+                "model_decision_error": 28
+              },
+              "environment_failure": {
+                "environment_failure": 25
+              },
+              "binding_failure": {
+                "binding_failure": 25
+              },
+              "candidate_no_effect": {
+                "candidate_no_effect": 24,
+                "inconclusive": 1
+              },
+              "reference_disagreement": {
+                "reference_disagreement": 25
+              },
+              "result_mismatch": {
+                "result_mismatch": 25
+              },
+              "inconclusive": {
+                "inconclusive": 25
+              }
+            }
+          }
+        }
+      ],
+      "train": {
+        "count": 90,
+        "diagnosis_accuracy": 1.0,
+        "guarded_diagnosis_accuracy": 1.0,
+        "next_step_accuracy": 1.0,
+        "confirmed_local_effect_recall": 1.0,
+        "guarded_confirmed_local_effect_recall": 1.0,
+        "raw_positive_false_accept_count": 0,
+        "guarded_positive_false_accept_count": 0,
+        "confusion": {
+          "confirmed_local_effect": {
+            "confirmed_local_effect": 15
+          },
+          "oracle_unavailable": {
+            "oracle_unavailable": 11
+          },
+          "model_decision_error": {
+            "model_decision_error": 10
+          },
+          "environment_failure": {
+            "environment_failure": 9
+          },
+          "binding_failure": {
+            "binding_failure": 9
+          },
+          "candidate_no_effect": {
+            "candidate_no_effect": 9
+          },
+          "reference_disagreement": {
+            "reference_disagreement": 9
+          },
+          "result_mismatch": {
+            "result_mismatch": 9
+          },
+          "inconclusive": {
+            "inconclusive": 9
+          }
+        }
+      },
+      "holdout": {
+        "count": 250,
+        "diagnosis_accuracy": 0.99200004,
+        "guarded_diagnosis_accuracy": 0.99600005,
+        "next_step_accuracy": 0.97600007,
+        "confirmed_local_effect_recall": 1.0,
+        "guarded_confirmed_local_effect_recall": 1.0,
+        "raw_positive_false_accept_count": 1,
+        "guarded_positive_false_accept_count": 0,
+        "confusion": {
+          "oracle_unavailable": {
+            "oracle_unavailable": 35
+          },
+          "confirmed_local_effect": {
+            "confirmed_local_effect": 37
+          },
+          "model_decision_error": {
+            "model_decision_error": 28
+          },
+          "environment_failure": {
+            "environment_failure": 25
+          },
+          "binding_failure": {
+            "binding_failure": 25
+          },
+          "candidate_no_effect": {
+            "candidate_no_effect": 24,
+            "inconclusive": 1
+          },
+          "reference_disagreement": {
+            "reference_disagreement": 25
+          },
+          "result_mismatch": {
+            "result_mismatch": 25
+          },
+          "inconclusive": {
+            "inconclusive": 25
+          }
+        }
+      },
+      "hidden_dim": 128,
+      "device": "cuda"
+    }
+  ],
+  "selected": {
+    "hidden_dim": 64,
+    "checkpoint": "artifacts\\pg222-problem-diagnoser-v1\\problem_diagnoser_hidden64.pt",
+    "checkpoint_sha256": "570b1bef52747ad079e964bf23d731f8fd1d11c593af99d74ca2a644fcd53c2b",
+    "holdout": {
+      "count": 250,
+      "diagnosis_accuracy": 1.0,
+      "guarded_diagnosis_accuracy": 1.0,
+      "next_step_accuracy": 1.0,
+      "confirmed_local_effect_recall": 1.0,
+      "guarded_confirmed_local_effect_recall": 1.0,
+      "raw_positive_false_accept_count": 0,
+      "guarded_positive_false_accept_count": 0,
+      "confusion": {
+        "oracle_unavailable": {
+          "oracle_unavailable": 35
+        },
+        "confirmed_local_effect": {
+          "confirmed_local_effect": 37
+        },
+        "model_decision_error": {
+          "model_decision_error": 28
+        },
+        "environment_failure": {
+          "environment_failure": 25
+        },
+        "binding_failure": {
+          "binding_failure": 25
+        },
+        "candidate_no_effect": {
+          "candidate_no_effect": 25
+        },
+        "reference_disagreement": {
+          "reference_disagreement": 25
+        },
+        "result_mismatch": {
+          "result_mismatch": 25
+        },
+        "inconclusive": {
+          "inconclusive": 25
+        }
+      }
+    }
+  },
+  "guardrails": {
+    "raw_positive_false_accept_count": 0,
+    "guarded_positive_false_accept_count": 0,
+    "confirmed_local_effect_is_not_a_vulnerability_claim": true,
+    "payload_generation": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "honesty": {
+    "counterfactuals_are_not_live_evidence": true,
+    "small_dataset": true,
+    "source_and_route_holdout_used": true,
+    "general_website_capability_not_established": true
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "database_write": false,
+    "time_delay_used": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "report_sha256": "bb69699635a635707fe7e7a56f81344b95a6e40ba49f9d6b1da559c8ef0a2214"
+}

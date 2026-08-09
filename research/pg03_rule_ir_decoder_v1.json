@@ -1,0 +1,425 @@
+{
+  "protocol_id": "sift-pg03-rule-ir-decoder-v1",
+  "schema_version": "sift-pg03-rule-ir-decoder-report-v1",
+  "catalog": {
+    "path": "research\\payload_replay_catalog_v1.json",
+    "catalog_sha256": "c76cf1fa1aa123d1641e34775ba6aea25c480545afe90a6233e888033210e537",
+    "sample_count": 20
+  },
+  "model": {
+    "class": "CatalogRuleIRDecoder",
+    "parameters": 34661,
+    "feature_dim": 256,
+    "families": [
+      "access_control",
+      "injection",
+      "logic",
+      "url_redirect",
+      "xss"
+    ],
+    "device": "cuda",
+    "cuda_available": true,
+    "abstain_threshold": 0.25,
+    "margin_threshold": 0.08,
+    "novelty_gate": true,
+    "threshold_rationale": "exploratory confidence floor above 1/5 random baseline; margin and novelty gates remain mandatory"
+  },
+  "target_scope": {
+    "base_url": "http://127.0.0.1:3100",
+    "independent_target_implementation": false,
+    "holdout_kind": "source, family and observable-surface isolation inside the in-repo local adapter",
+    "not_claimed": "third-party or separately implemented target generalization"
+  },
+  "training": {
+    "source_split_same_family": {
+      "train_count": 10,
+      "test_count": 10,
+      "train_families": [
+        "access_control",
+        "injection",
+        "logic",
+        "url_redirect",
+        "xss"
+      ],
+      "test_families": [
+        "access_control",
+        "injection",
+        "logic",
+        "url_redirect",
+        "xss"
+      ],
+      "train_accuracy": 0.8,
+      "novelty_threshold": 14.348315,
+      "history_tail": [
+        {
+          "epoch": 156,
+          "loss": 0.375208,
+          "train_accuracy": 0.8
+        },
+        {
+          "epoch": 157,
+          "loss": 0.37983,
+          "train_accuracy": 0.8
+        },
+        {
+          "epoch": 158,
+          "loss": 0.380096,
+          "train_accuracy": 0.8
+        },
+        {
+          "epoch": 159,
+          "loss": 0.403625,
+          "train_accuracy": 0.8
+        },
+        {
+          "epoch": 160,
+          "loss": 0.406385,
+          "train_accuracy": 0.8
+        }
+      ]
+    },
+    "family_holdout_structural_transfer": {
+      "train_count": 8,
+      "test_count": 2,
+      "train_families": [
+        "access_control",
+        "injection",
+        "xss"
+      ],
+      "test_families": [
+        "logic",
+        "url_redirect"
+      ],
+      "train_accuracy": 1.0,
+      "novelty_threshold": 13.305252,
+      "history_tail": [
+        {
+          "epoch": 156,
+          "loss": 0.058284,
+          "train_accuracy": 1.0
+        },
+        {
+          "epoch": 157,
+          "loss": 0.058254,
+          "train_accuracy": 1.0
+        },
+        {
+          "epoch": 158,
+          "loss": 0.058397,
+          "train_accuracy": 1.0
+        },
+        {
+          "epoch": 159,
+          "loss": 0.058266,
+          "train_accuracy": 1.0
+        },
+        {
+          "epoch": 160,
+          "loss": 0.058305,
+          "train_accuracy": 1.0
+        }
+      ]
+    },
+    "family_holdout_unseen_surface": {
+      "train_count": 7,
+      "test_count": 3,
+      "train_families": [
+        "injection",
+        "xss"
+      ],
+      "test_families": [
+        "access_control",
+        "logic",
+        "url_redirect"
+      ],
+      "train_accuracy": 1.0,
+      "novelty_threshold": 12.768783,
+      "history_tail": [
+        {
+          "epoch": 156,
+          "loss": 0.05804,
+          "train_accuracy": 1.0
+        },
+        {
+          "epoch": 157,
+          "loss": 0.058084,
+          "train_accuracy": 1.0
+        },
+        {
+          "epoch": 158,
+          "loss": 0.058527,
+          "train_accuracy": 1.0
+        },
+        {
+          "epoch": 159,
+          "loss": 0.058477,
+          "train_accuracy": 1.0
+        },
+        {
+          "epoch": 160,
+          "loss": 0.058804,
+          "train_accuracy": 1.0
+        }
+      ]
+    }
+  },
+  "evaluations": [
+    {
+      "split": "source_split_same_family",
+      "total": 10,
+      "exit_found_rate": 0.2,
+      "false_positive_rate": 0.0,
+      "abstain_rate": 0.8,
+      "rule_ir_emission_rate": 0.2,
+      "abstain_threshold": 0.25,
+      "margin_threshold": 0.08,
+      "predictions": [
+        {
+          "sample_id": "pg03-source-01-b-maze_dom_sink_replay-f7fb0b69fee9",
+          "expected_family": "xss",
+          "predicted_family": "xss",
+          "candidate_family": "xss",
+          "confidence": 0.335499,
+          "margin": 0.146753,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": true,
+          "false_positive": false,
+          "abstained": false,
+          "rule_ir_emitted": true
+        },
+        {
+          "sample_id": "pg03-source-01-b-maze_dom_double_decode_replay-55b07694b2de",
+          "expected_family": "xss",
+          "predicted_family": "xss",
+          "candidate_family": "xss",
+          "confidence": 0.30057,
+          "margin": 0.114727,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": true,
+          "false_positive": false,
+          "abstained": false,
+          "rule_ir_emitted": true
+        },
+        {
+          "sample_id": "pg03-source-02-b-maze_sql_operator_like_replay-0e6766b4e1db",
+          "expected_family": "injection",
+          "predicted_family": null,
+          "candidate_family": "injection",
+          "confidence": 0.273455,
+          "margin": 0.077427,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-02-b-maze_sql_syntax_error_replay-caf1eaa8cbd6",
+          "expected_family": "injection",
+          "predicted_family": null,
+          "candidate_family": "injection",
+          "confidence": 0.273455,
+          "margin": 0.077427,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-02-b-maze_sql_blind_boolean_replay-3c7a6303b1c6",
+          "expected_family": "injection",
+          "predicted_family": null,
+          "candidate_family": "injection",
+          "confidence": 0.273455,
+          "margin": 0.077427,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-02-b-maze_sql_time_delay_replay-21e3df3faf12",
+          "expected_family": "injection",
+          "predicted_family": null,
+          "candidate_family": "injection",
+          "confidence": 0.273455,
+          "margin": 0.077427,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-02-b-maze_sql_local_side_channel_replay-f123d0a4c65e",
+          "expected_family": "injection",
+          "predicted_family": null,
+          "candidate_family": "injection",
+          "confidence": 0.263036,
+          "margin": 0.0537,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-03-b-maze_access_control_registry_replay-2095d0b43aa9",
+          "expected_family": "access_control",
+          "predicted_family": null,
+          "candidate_family": "logic",
+          "confidence": 0.229912,
+          "margin": 0.016583,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-04-b-maze_url_redirect_registry_replay-2095d0b43aa9",
+          "expected_family": "url_redirect",
+          "predicted_family": null,
+          "candidate_family": "logic",
+          "confidence": 0.229912,
+          "margin": 0.016583,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-05-b-maze_logic_registry_replay-2095d0b43aa9",
+          "expected_family": "logic",
+          "predicted_family": null,
+          "candidate_family": "logic",
+          "confidence": 0.229912,
+          "margin": 0.016583,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        }
+      ]
+    },
+    {
+      "split": "family_holdout_structural_transfer",
+      "total": 2,
+      "exit_found_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "abstain_rate": 1.0,
+      "rule_ir_emission_rate": 0.0,
+      "abstain_threshold": 0.25,
+      "margin_threshold": 0.08,
+      "predictions": [
+        {
+          "sample_id": "pg03-source-04-b-maze_url_redirect_registry_replay-2095d0b43aa9",
+          "expected_family": "url_redirect",
+          "predicted_family": null,
+          "candidate_family": "access_control",
+          "confidence": 0.313631,
+          "margin": 0.068557,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-05-b-maze_logic_registry_replay-2095d0b43aa9",
+          "expected_family": "logic",
+          "predicted_family": null,
+          "candidate_family": "access_control",
+          "confidence": 0.313631,
+          "margin": 0.068557,
+          "distance": 0.0,
+          "novel_surface": false,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        }
+      ]
+    },
+    {
+      "split": "family_holdout_unseen_surface",
+      "total": 3,
+      "exit_found_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "abstain_rate": 1.0,
+      "rule_ir_emission_rate": 0.0,
+      "abstain_threshold": 0.25,
+      "margin_threshold": 0.08,
+      "predictions": [
+        {
+          "sample_id": "pg03-source-03-b-maze_access_control_registry_replay-2095d0b43aa9",
+          "expected_family": "access_control",
+          "predicted_family": null,
+          "candidate_family": "injection",
+          "confidence": 0.267432,
+          "margin": 0.056383,
+          "distance": 2165.064453,
+          "novel_surface": true,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-04-b-maze_url_redirect_registry_replay-2095d0b43aa9",
+          "expected_family": "url_redirect",
+          "predicted_family": null,
+          "candidate_family": "injection",
+          "confidence": 0.267432,
+          "margin": 0.056383,
+          "distance": 2165.064453,
+          "novel_surface": true,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        },
+        {
+          "sample_id": "pg03-source-05-b-maze_logic_registry_replay-2095d0b43aa9",
+          "expected_family": "logic",
+          "predicted_family": null,
+          "candidate_family": "injection",
+          "confidence": 0.267432,
+          "margin": 0.056383,
+          "distance": 2165.064453,
+          "novel_surface": true,
+          "exit_found": false,
+          "false_positive": false,
+          "abstained": true,
+          "rule_ir_emitted": false
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    "artifacts\\pg03-rule-ir-decoder\\source_split_same_family\\decoder.pt",
+    "artifacts\\pg03-rule-ir-decoder\\family_holdout_structural_transfer\\decoder.pt",
+    "artifacts\\pg03-rule-ir-decoder\\family_holdout_unseen_surface\\decoder.pt"
+  ],
+  "evaluator_confirmation_count": 0,
+  "public_corpus_ingested": false,
+  "visible_projection_labels": false,
+  "elapsed_seconds": 6.48,
+  "report_path": "research\\pg03_rule_ir_decoder_v1.json",
+  "protocol_path": "research/pg03_rule_ir_decoder_protocol_v1.json"
+}

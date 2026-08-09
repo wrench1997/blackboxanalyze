@@ -1,0 +1,1015 @@
+{
+  "protocol_id": "pg-pk-327-a800-replay-train-v1",
+  "schema_version": "pg327-a800-replay-training-report-v1",
+  "status": "completed_remote_a800_pg327_candidate",
+  "sources": {
+    "dataset": "research/pg323_decoy_ask_anchor_dataset_v1.json",
+    "dataset_sha256": "b7c68329a0e31676f5f5e7152ab1c26971eb319a285ed983fc048ad387f5141c",
+    "audit": "research/pg323_decoy_ask_anchor_dataset_audit_v1.json",
+    "audit_sha256": "5423155eae7462dc761875266aeb621a21f449f3605e497e0b3ab591582cc587",
+    "role_dataset": "research/pg321_variant_role_lattice_dataset_v1.json",
+    "lattice_dataset": "research/pg320_observation_lattice_dataset_v1.json",
+    "family_trace": "research/pg321_family_holdout_trace_v1.json",
+    "base_checkpoint_dir": "artifacts/pg322-cross-impl-decoy/seeds"
+  },
+  "training": {
+    "architecture": "causal_transformer_moe_next_token",
+    "target": "abstract Rule-IR payload assembly with role-conditioned probe variant",
+    "device": "cuda:0",
+    "execution_mode": "remote_a800_gpu0",
+    "visible_cuda_devices": "0",
+    "gpu_name": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      31901,
+      31902,
+      31903
+    ],
+    "train_count": 328,
+    "implementation_holdout_count": 8,
+    "third_surface_holdout_count": 24,
+    "ask_holdout_count": 60,
+    "hard_negative_count": 9,
+    "wire_emission": false,
+    "raw_payload_in_context": false,
+    "raw_response_body_in_context": false,
+    "promotion_reason": "PG-327 strict failure-action, role-bound evidence and paired before/after replay are still incomplete"
+  },
+  "metrics": {
+    "implementation_question_min": {
+      "mean": null,
+      "min": null,
+      "max": null,
+      "count": 0,
+      "status": "not_applicable"
+    },
+    "implementation_variant_min": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 3,
+      "status": "measured"
+    },
+    "third_surface_question_min": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 3,
+      "status": "measured"
+    },
+    "third_surface_variant_min": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 3,
+      "status": "measured"
+    },
+    "ask_question_min": {
+      "mean": 0.994444,
+      "min": 0.983333,
+      "max": 1.0,
+      "count": 3,
+      "status": "measured"
+    },
+    "ask_unsafe_allow_max": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "count": 3,
+      "status": "measured"
+    },
+    "hard_false_allow_max": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "count": 3,
+      "status": "measured"
+    },
+    "family_question_min": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 3,
+      "status": "measured"
+    },
+    "family_variant_min": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 3,
+      "status": "measured"
+    },
+    "old_family_drop_max": 0.0,
+    "best_seed": 31902
+  },
+  "per_seed": [
+    {
+      "seed": 31901,
+      "before": {
+        "implementation": {
+          "bound_probe": {
+            "count": 8,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 2,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "third": {
+          "bound_probe": {
+            "count": 24,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "ask": {
+          "bound_probe": {
+            "count": 60,
+            "sequence_exact_accuracy": 0.933333,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 0.933333,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "hard": {
+          "bound_probe": {
+            "count": 9,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "family": {
+          "bound_probe": {
+            "count": 342,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 18,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        }
+      },
+      "after": {
+        "implementation": {
+          "bound_probe": {
+            "count": 8,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 2,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "third": {
+          "bound_probe": {
+            "count": 24,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "ask": {
+          "bound_probe": {
+            "count": 60,
+            "sequence_exact_accuracy": 0.983333,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 0.983333,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "hard": {
+          "bound_probe": {
+            "count": 9,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "family": {
+          "bound_probe": {
+            "count": 342,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 18,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        }
+      },
+      "old_family_drop": 0.0,
+      "selection_score": 5.983333,
+      "checkpoint": "artifacts/pg327-a800-replay/seeds/pg322_cross_impl_decoy_seed_31901.pt"
+    },
+    {
+      "seed": 31902,
+      "before": {
+        "implementation": {
+          "bound_probe": {
+            "count": 8,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 2,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "third": {
+          "bound_probe": {
+            "count": 24,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "ask": {
+          "bound_probe": {
+            "count": 60,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "hard": {
+          "bound_probe": {
+            "count": 9,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "family": {
+          "bound_probe": {
+            "count": 342,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 18,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        }
+      },
+      "after": {
+        "implementation": {
+          "bound_probe": {
+            "count": 8,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 2,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "third": {
+          "bound_probe": {
+            "count": 24,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "ask": {
+          "bound_probe": {
+            "count": 60,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "hard": {
+          "bound_probe": {
+            "count": 9,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "family": {
+          "bound_probe": {
+            "count": 342,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 18,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        }
+      },
+      "old_family_drop": 0.0,
+      "selection_score": 6.0,
+      "checkpoint": "artifacts/pg327-a800-replay/seeds/pg322_cross_impl_decoy_seed_31902.pt"
+    },
+    {
+      "seed": 31903,
+      "before": {
+        "implementation": {
+          "bound_probe": {
+            "count": 8,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 2,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "third": {
+          "bound_probe": {
+            "count": 24,
+            "sequence_exact_accuracy": 0.833333,
+            "slot_accuracy": {
+              "transport": 0.833333,
+              "field_role": 0.833333,
+              "encoding": 0.833333,
+              "oracle": 1.0,
+              "stop_condition": 0.833333
+            },
+            "variant_accuracy": {
+              "probe_variant": 0.833333,
+              "encoding_chain": 0.833333
+            },
+            "variant_exact": 0.833333,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 4,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "ask": {
+          "bound_probe": {
+            "count": 60,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "hard": {
+          "bound_probe": {
+            "count": 9,
+            "sequence_exact_accuracy": 0.777778,
+            "slot_accuracy": {
+              "transport": 0.777778,
+              "field_role": 0.777778,
+              "encoding": 0.777778,
+              "oracle": 1.0,
+              "stop_condition": 0.777778
+            },
+            "variant_accuracy": {
+              "probe_variant": 0.777778,
+              "encoding_chain": 0.777778
+            },
+            "variant_exact": 0.777778,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 2,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "family": {
+          "bound_probe": {
+            "count": 342,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 18,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        }
+      },
+      "after": {
+        "implementation": {
+          "bound_probe": {
+            "count": 8,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 2,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "third": {
+          "bound_probe": {
+            "count": 24,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "ask": {
+          "bound_probe": {
+            "count": 60,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "hard": {
+          "bound_probe": {
+            "count": 9,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 0,
+            "repair_exact": 0.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        },
+        "family": {
+          "bound_probe": {
+            "count": 342,
+            "sequence_exact_accuracy": 1.0,
+            "slot_accuracy": {
+              "transport": 1.0,
+              "field_role": 1.0,
+              "encoding": 1.0,
+              "oracle": 1.0,
+              "stop_condition": 1.0
+            },
+            "variant_accuracy": {
+              "probe_variant": 1.0,
+              "encoding_chain": 1.0
+            },
+            "variant_exact": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "hard_negative_false_allow": 0,
+            "invalid_predicted_plan_count": 0
+          },
+          "repair": {
+            "count": 18,
+            "repair_exact": 1.0,
+            "safe_allow": 0,
+            "variant_non_none": 0
+          }
+        }
+      },
+      "old_family_drop": 0.0,
+      "selection_score": 6.0,
+      "checkpoint": "artifacts/pg327-a800-replay/seeds/pg322_cross_impl_decoy_seed_31903.pt"
+    }
+  ],
+  "hypothesis_gate": {
+    "status": "blocked",
+    "checks": {
+      "implementation_variant": true,
+      "third_surface_ask": true,
+      "ask_question": true,
+      "ask_zero_unsafe_allow": true,
+      "hard_zero_false_allow": true,
+      "family_question": true,
+      "old_retention": true,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": true,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "checkpoint_role": "research_candidate_only",
+    "promotion_blocked": true
+  },
+  "checkpoint": "artifacts/pg327-a800-replay/pg327_a800_replay_candidate.pt",
+  "elapsed_seconds": 56.229,
+  "report_sha256": "390a710e017fa3af9c525b4db5c20403fa6bd02d64be3c97a2cbd048374814c1",
+  "provenance": {
+    "training_script_sha256": "7def304b574c8f37b7b8f436580c99bb051002a92f10d65ccdff7313fcd8887a",
+    "parent_loop_sha256": "88db79891b506770a77f5b6f28cb2ba4ab345470b5287986d882571d033fa08e",
+    "model_impl_sha256": "7b59151daa69c39faf52b6dbf7752a3607cd1dbb7f66e712436b21e317afeeb4",
+    "dataset_file_sha256": "5102ed4466b477c17a24638e947c1e178dc9e3ef4821cbdf9032f83461487cc1",
+    "audit_file_sha256": "7ebb399907f146498d101b5992ae2951b757e0b8be0e276cdcf3240e02f8cec1",
+    "checkpoint_sha256": {
+      "artifacts/pg327-a800-replay/seeds/pg322_cross_impl_decoy_seed_31901.pt": "5020a7c3a5a48f96ad846e68487d8b0969ec77ba0fc3cd0a38fd1472fd1258d7",
+      "artifacts/pg327-a800-replay/seeds/pg322_cross_impl_decoy_seed_31902.pt": "693ad3e32a3a01dc10abb46d2c6a392de1ad22ad02e4dcee0ffd38223c344e9f",
+      "artifacts/pg327-a800-replay/seeds/pg322_cross_impl_decoy_seed_31903.pt": "140e1ca7b99a8e5a041352f5d10cbe07006d39b4cd8b1512064712d0c442d693",
+      "artifacts/pg327-a800-replay/pg327_a800_replay_candidate.pt": "c0eff96d4e55542872e4a80539fd1357a435f09043fdf5da98078e16e1604ea0"
+    },
+    "captured_at": "2026-08-08T00:35:30.313451+08:00"
+  }
+}

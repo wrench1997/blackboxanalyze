@@ -1,0 +1,2168 @@
+{
+  "schema_version": "sift-authorized-payload-catalog-v1",
+  "catalog_id": "pg69-per-action-reset-evaluation-only",
+  "sources": [
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg69-real-pikachu-get",
+        "source_type": "authorized_local_container",
+        "origin": "research/pg69_per_action_reset_unseen_family_report_v1.json",
+        "license": "local_container",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:8767"
+        ],
+        "captured_at": "2026-08-02T21:58:18+00:00",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+        "source_sha256": "97d61fc8e321a06dd2bd7931743f1da57eaed5ba0e6c56fa6838eb2e918755af"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-00",
+          "source_id": "pg69-real-pikachu-get",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/xss/xss_reflected_get.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-00"
+            },
+            "marker": "pg69-probe-00",
+            "probe_kind": "inert_dom_markup",
+            "probe": "dom_event_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_dom_execution",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "1c0aece5efba2b340a386c316415671492b25267ae481e12ef2a43d17c0ad6ba"
+          },
+          "probe_artifact": {
+            "original": "dom_event_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "67fdd7833b6a2871ed0cda84899302b1299db47ba28a42b22454a8dcbc6ad6d8"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "xss_reflected_get",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "typed_dom_execution"
+          },
+          "structural_feature": "dom:inert_dom_markup",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-00",
+            "variant": "abstract_class",
+            "surface_role": "xss_reflected_get",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-00"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/xss/xss_reflected_get.php",
+            "params": {},
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": true,
+              "kind": "pg69-fresh-pikachu-container-per-case",
+              "read_only_round": true,
+              "reset_adapter_sha256": "d1439e885d243693b8808f7062582951b555d7292851840db138531ddbba7870",
+              "reset_id": "pg52-reset-docker-reflected-get-b514ef7224a4",
+              "reset_scope": "fresh_disposable_target_per_action_pair",
+              "state_change_allowed": false,
+              "state_epoch": "b514ef7224a4fa67-read-only",
+              "target_instance_id": "b514ef7224a4fa67a6b689e6"
+            },
+            "transport": "loopback"
+          },
+          "response_projection": {
+            "body_length": 33750,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "f300be58c12d37927e81b785e411fcf3ce9d6edd6c7c2c154b0efde823e498a3",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 1,
+            "has_location": false,
+            "html_tag_count": 428,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 1,
+            "marker_reflected": true,
+            "projection_sha256": "05bcac464e1d133d8845fa234ee7b4c92fb6fbfea1596a82f2d0b45b13f134cc",
+            "script_count": 16,
+            "semantic_body_sha256": "f300be58c12d37927e81b785e411fcf3ce9d6edd6c7c2c154b0efde823e498a3",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "dom_structure",
+            "modality": "browser_dom_execution",
+            "oracle_id": "pg52-browser-reflected_get-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "execution_path": "automatic",
+              "external_request_count": 0,
+              "marker_set_in_page": true,
+              "mode": "reflected_get",
+              "navigation_count": 0,
+              "same_origin": true,
+              "stripped_external_resource_count": 34
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "2dafc0ac4f312c967f44b8c6c8ab52d93baa14d631ab898a46b0aa77fc81c66e",
+            "control_evidence_sha256": "69dbf9586f61498ce9045870ffd0ea324f631ac184c5c7b7f0aadc84c45ba87d"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-02",
+          "source_id": "pg69-real-pikachu-get",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_search.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-02"
+            },
+            "marker": "pg69-probe-02",
+            "probe_kind": "sql_channel_class",
+            "probe": "operator_like",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_ast_differential",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "3a40f6171456147e306eb09224dbafef44fcaf9e701078fefc959009bb0e8f8d"
+          },
+          "probe_artifact": {
+            "original": "operator_like",
+            "encoding": "abstract_class",
+            "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sqli_search",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "typed_ast_differential"
+          },
+          "structural_feature": "sql:sql_channel_class:operator_like",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-02",
+            "variant": "abstract_class",
+            "surface_role": "sqli_search",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-02"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_search.php",
+            "params": {},
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": true,
+              "kind": "pg69-fresh-pikachu-container-per-case",
+              "read_only_round": true,
+              "reset_adapter_sha256": "a1e8b45f2f77051115daa358bb60bd7cc62d445fdf3f48a96fe93a74f93151d1",
+              "reset_id": "pg52-reset-docker-sqli-search-eb5062498ae9",
+              "reset_scope": "fresh_disposable_target_per_action_pair",
+              "state_change_allowed": false,
+              "state_epoch": "eb5062498ae9dc47-read-only",
+              "target_instance_id": "eb5062498ae9dc473405c1f4"
+            },
+            "transport": "loopback"
+          },
+          "response_projection": {
+            "body_length": 34353,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "4514fa358b1bdd4c5bdf05f318ee89c3914a7121b717f25f7ea663e3ad97946c",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 1,
+            "has_location": false,
+            "html_tag_count": 450,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 1,
+            "marker_reflected": true,
+            "projection_sha256": "cd1237f5197fc1039f7d8eff1aa3f0a929405f33f1bf8b37144fe53109d50c07",
+            "query_seen": true,
+            "result_row_count": 7,
+            "script_count": 16,
+            "semantic_body_sha256": "4514fa358b1bdd4c5bdf05f318ee89c3914a7121b717f25f7ea663e3ad97946c",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "interpreter_boundary",
+            "modality": "sql_ast_differential",
+            "oracle_id": "pg52-sql-ast-differential-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "ast_changed": true,
+              "candidate_ast_sha256": "a96a0a29d159ce662a8636317f90af9b91b06f24a2ca4b3925d2e80c66061c4e",
+              "candidate_operator_set": [
+                "like",
+                "or"
+              ],
+              "candidate_result_row_count": 7,
+              "control_ast_sha256": "ee7f9f47f786235a22744629b0cf120cf31190f502d11d705010d4ec218de4e3",
+              "control_operator_set": [
+                "like"
+              ],
+              "control_result_row_count": 0,
+              "marker_binding": "4fc45364f9fafd6edb100bd1027acc4f3426c6053a7fd2ce9228423cb9498ead",
+              "safe_read_only_select": true,
+              "semantic_differential": true
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "167838ca39644c29f01e8ebe1394d5789d2e99c36e1c6f36e4f9ff83a7ce52d8",
+            "control_evidence_sha256": "1ca8bc39dbe724eca789d47f024e7ac73fdbae654e1f00908e314e5368a2849e"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-03",
+          "source_id": "pg69-real-pikachu-get",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/urlredirect/urlredirect.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-03"
+            },
+            "marker": "pg69-probe-03",
+            "probe_kind": "http_canary",
+            "probe": "loopback_destination_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_redirect_destination",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "f70cb6134371f0994a3c012df9ca462776632f3a7b4ddc2cfc3351e47cdd9dbe"
+          },
+          "probe_artifact": {
+            "original": "loopback_destination_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "7761eea19ea43f3b4f538e0367cfca3549b73f084a343b1c07e70b46f2f02790"
+          },
+          "semantic": {
+            "family": "url_redirect",
+            "surface": "url_redirect",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "typed_redirect_destination"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-03",
+            "variant": "abstract_class",
+            "surface_role": "url_redirect",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-03"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/urlredirect/urlredirect.php",
+            "params": {},
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": true,
+              "kind": "pg69-fresh-pikachu-container-per-case",
+              "read_only_round": true,
+              "reset_adapter_sha256": "e5f497519f96cffd9f5ecb29febd84698f294d1850d9e182a8162a226da00e15",
+              "reset_id": "pg52-reset-docker-redirect-eeca78e0c868",
+              "reset_scope": "fresh_disposable_target_per_action_pair",
+              "state_change_allowed": false,
+              "state_epoch": "eeca78e0c8688d91-read-only",
+              "target_instance_id": "eeca78e0c8688d91d7c53656"
+            },
+            "transport": "loopback"
+          },
+          "response_projection": {
+            "body_length": 33771,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 0,
+            "has_location": true,
+            "html_tag_count": 428,
+            "input_count": 0,
+            "location_origin": "loopback",
+            "location_sha256": "84dd3284c38000b4ce6e80fe033e56fc65f4bbcbb44090639decd7410af4efd8",
+            "marker_count": 0,
+            "marker_reflected": false,
+            "projection_sha256": "4a3e09339ce6af5597dbf0bea0cd7f3865fdc61841369146691354c05f7d0337",
+            "script_count": 16,
+            "semantic_body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+            "status_class": "3xx",
+            "status_code": 302
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "redirect_origin",
+            "modality": "redirect_destination_controlled",
+            "oracle_id": "pg52-url-redirect-loopback-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "destination_origin": "loopback",
+              "location_exact": true,
+              "location_present": true,
+              "location_sha256": "84dd3284c38000b4ce6e80fe033e56fc65f4bbcbb44090639decd7410af4efd8",
+              "parsed_scheme_present": true,
+              "status_class": "3xx"
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "c9d429a13898ff0614bc42649a3fd882dabcb129d952516c85dda6b575758d02",
+            "control_evidence_sha256": "ee6c05de38bc084e46d4f53a5aa3504bebb4568b58555da006974517d1e15b11"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg69-real-pikachu-post",
+        "source_type": "authorized_local_container",
+        "origin": "research/pg69_per_action_reset_unseen_family_report_v1.json",
+        "license": "local_container",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:8768"
+        ],
+        "captured_at": "2026-08-02T21:58:18+00:00",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+        "source_sha256": "29338eed6bd988e954fa2e8b96acfb2af57b52d660defbdb33481176b385bdaf"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-01",
+          "source_id": "pg69-real-pikachu-post",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8768",
+            "method": "POST",
+            "path": "/vul/xss/xsspost/xss_reflected_post.php",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-01"
+            },
+            "marker": "pg69-probe-01",
+            "probe_kind": "inert_dom_markup",
+            "probe": "dom_event_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_dom_execution",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "form": {
+              "value": "pg69-probe-01"
+            },
+            "payload_sha256": "e0ae652004594b617f5e87d0ea3f6b4438840ced04034bb9aea7eecc69b3c9b9"
+          },
+          "probe_artifact": {
+            "original": "dom_event_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "67fdd7833b6a2871ed0cda84899302b1299db47ba28a42b22454a8dcbc6ad6d8"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "xss_reflected_post",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "typed_dom_execution"
+          },
+          "structural_feature": "dom:inert_dom_markup",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-01",
+            "variant": "abstract_class",
+            "surface_role": "xss_reflected_post",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-01"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8768",
+            "method": "POST",
+            "path": "/vul/xss/xsspost/xss_reflected_post.php",
+            "params": {},
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": true,
+              "kind": "pg69-fresh-pikachu-container-per-case",
+              "read_only_round": true,
+              "reset_adapter_sha256": "cc791a910d528135a397d4bdf202d4ef3c667776756f0461d72edceb1cea8bad",
+              "reset_id": "pg52-reset-docker-reflected-post-7b9bbc15607d",
+              "reset_scope": "fresh_disposable_target_per_action_pair",
+              "state_change_allowed": false,
+              "state_epoch": "7b9bbc15607d1a91-read-only",
+              "target_instance_id": "7b9bbc15607d1a91f579ebc9"
+            },
+            "transport": "loopback",
+            "form": {
+              "value": "pg69-probe-01"
+            }
+          },
+          "response_projection": {
+            "body_length": 34157,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "4da76b9044db748c248fa0c25cbfab36c7c3a318e25378652d9a25eef648df75",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 1,
+            "has_location": false,
+            "html_tag_count": 431,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 1,
+            "marker_reflected": true,
+            "projection_sha256": "65fb9ef468fa978071706e9fbac0aea93f845066818c377375873127c97bf949",
+            "script_count": 16,
+            "semantic_body_sha256": "4da76b9044db748c248fa0c25cbfab36c7c3a318e25378652d9a25eef648df75",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "dom_structure",
+            "modality": "browser_dom_execution",
+            "oracle_id": "pg52-browser-reflected_post-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "execution_path": "automatic",
+              "external_request_count": 0,
+              "marker_set_in_page": true,
+              "mode": "reflected_post",
+              "navigation_count": 0,
+              "same_origin": true,
+              "stripped_external_resource_count": 34
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "cf4d8e78876cbeab2a9ef3c8e4caab89c55511f57bc8e4e8eebee96d50e38281",
+            "control_evidence_sha256": "d823efb58d6ce8965817371f1b54451514f89b95e13f4b955358ea1622c1c7de"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg69-workflow-amber",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/pg69_workflow_fixture.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:8815"
+        ],
+        "captured_at": "2026-08-02T21:58:18+00:00",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "f2a379c1c933dff2b13c4b6f1f4d0fb040551c41d4cf8539b401e361911c2e3e"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-04",
+          "source_id": "pg69-workflow-amber",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8815",
+            "method": "GET",
+            "path": "/handoff",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-04"
+            },
+            "marker": "pg69-probe-04",
+            "probe_kind": "http_canary",
+            "probe": "workflow_boundary_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_workflow_invariant",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "ac34c3fdf87ce870dac8a4e21ec5ed914b81c1c7e12814894df71217fedc3209"
+          },
+          "probe_artifact": {
+            "original": "workflow_boundary_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "b632dc0ace9f22623f61069f4a7cd73e5dfae86fe72b0af0230ace99f05691e0"
+          },
+          "semantic": {
+            "family": "workflow_invariant",
+            "surface": "workflow_handoff",
+            "expected_oracle": "pg69_typed_workflow_invariant_v1",
+            "expected_signal": "typed_workflow_invariant"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-04",
+            "variant": "abstract_class",
+            "surface_role": "workflow_handoff",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-04"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8815",
+            "method": "GET",
+            "path": "/handoff",
+            "params": {},
+            "fresh_reset": {
+              "candidate": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-candidate-04",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "831a366fd3c6704b55ed1944",
+                "target_instance_id": "4e4fb5f9ac924610a917bb54"
+              },
+              "control": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-control-04",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "6af842f02d4427ed05e79ab6",
+                "target_instance_id": "c8e496f52b8b5b6b11d10d58"
+              }
+            },
+            "transport": "loopback"
+          },
+          "response_projection": {
+            "body_length_bucket": "1-255",
+            "body_sha256": "26c32c5b6bf83fdbf029d8b070888ca03ec0147a46ab97a1231b0cdc0cd0d475",
+            "content_type_class": "application/json",
+            "external_network": false,
+            "header_names": [
+              "content-type",
+              "x-sift-workflow-variant"
+            ],
+            "projection_sha256": "751fb179b8c9f6aceac2de528e4128159b944f3a53480ded3ba97660771a0d82",
+            "semantic_body_sha256": "dc40b2de16519b8489dffa36af89badb662cfee98b97e0dc07d30cc973120bf4",
+            "shape": {
+              "array_count": 0,
+              "key_count": 3,
+              "kind": "object",
+              "scalar_count": 3
+            },
+            "state_changed": false,
+            "status_class": "2xx",
+            "status_code": 200,
+            "transport_error": false
+          },
+          "oracle_projection": {
+            "confirmed_effect": "history_binding_mismatch",
+            "evaluator_state_hidden": true,
+            "modality": "semantic_contract",
+            "oracle_id": "pg69-workflow-history-binding-v1",
+            "oracle_signal": "history_binding_mismatch",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "script_execution": false,
+              "state_mutated": false
+            },
+            "typed": {
+              "challenge_matches": false,
+              "commit_action": true,
+              "previous_verified": true,
+              "unexpected_replay_accept": true
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "aa9d0d1e6d8f4e0aed76115024c593f41e40ea0ef09b6ccb0c492778ba24e918",
+            "control_evidence_sha256": "2fbe415c3a4a6463f4d8e39853ab0f19ef9443549660a98f5c7b58de50dbb2bb"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-05",
+          "source_id": "pg69-workflow-amber",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8815",
+            "method": "POST",
+            "path": "/handoff",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-05"
+            },
+            "marker": "pg69-probe-05",
+            "probe_kind": "http_canary",
+            "probe": "workflow_boundary_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_workflow_invariant",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "form": {
+              "verb": "pg69-probe-05"
+            },
+            "payload_sha256": "b8a95d6d7f0c05b0b3ded6f1c4603a104d2c290a5cf22155e38d678f90274bbc"
+          },
+          "probe_artifact": {
+            "original": "workflow_boundary_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "b632dc0ace9f22623f61069f4a7cd73e5dfae86fe72b0af0230ace99f05691e0"
+          },
+          "semantic": {
+            "family": "workflow_invariant",
+            "surface": "workflow_handoff",
+            "expected_oracle": "pg69_typed_workflow_invariant_v1",
+            "expected_signal": "typed_workflow_invariant"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-05",
+            "variant": "abstract_class",
+            "surface_role": "workflow_handoff",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-05"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8815",
+            "method": "POST",
+            "path": "/handoff",
+            "params": {},
+            "fresh_reset": {
+              "candidate": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-candidate-05",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "56f18d27fac39f2d26c2c2d5",
+                "target_instance_id": "3601b6b36696363f5f3aaed7"
+              },
+              "control": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-control-05",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "56723871412b956d8a6d7f4c",
+                "target_instance_id": "bc73efba26300779c4884f05"
+              }
+            },
+            "transport": "loopback",
+            "form": {
+              "verb": "pg69-probe-05"
+            }
+          },
+          "response_projection": {
+            "body_length_bucket": "1-255",
+            "body_sha256": "26c32c5b6bf83fdbf029d8b070888ca03ec0147a46ab97a1231b0cdc0cd0d475",
+            "content_type_class": "application/json",
+            "external_network": false,
+            "header_names": [
+              "content-type",
+              "x-sift-workflow-variant"
+            ],
+            "projection_sha256": "751fb179b8c9f6aceac2de528e4128159b944f3a53480ded3ba97660771a0d82",
+            "semantic_body_sha256": "dc40b2de16519b8489dffa36af89badb662cfee98b97e0dc07d30cc973120bf4",
+            "shape": {
+              "array_count": 0,
+              "key_count": 3,
+              "kind": "object",
+              "scalar_count": 3
+            },
+            "state_changed": false,
+            "status_class": "2xx",
+            "status_code": 200,
+            "transport_error": false
+          },
+          "oracle_projection": {
+            "confirmed_effect": "history_binding_mismatch",
+            "evaluator_state_hidden": true,
+            "modality": "semantic_contract",
+            "oracle_id": "pg69-workflow-history-binding-v1",
+            "oracle_signal": "history_binding_mismatch",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "script_execution": false,
+              "state_mutated": false
+            },
+            "typed": {
+              "challenge_matches": false,
+              "commit_action": true,
+              "previous_verified": true,
+              "unexpected_replay_accept": true
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "2f385b217320dcae343762d147dd27e3f1ed7d9418fe663f043bec7230e637e4",
+            "control_evidence_sha256": "2fbe415c3a4a6463f4d8e39853ab0f19ef9443549660a98f5c7b58de50dbb2bb"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-06",
+          "source_id": "pg69-workflow-amber",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8815",
+            "method": "GET",
+            "path": "/quota",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-06"
+            },
+            "marker": "pg69-probe-06",
+            "probe_kind": "http_canary",
+            "probe": "workflow_boundary_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_workflow_invariant",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "00fd96dc33783db44eeefd96faa438064ea98b5faf43801a9693666eabac3781"
+          },
+          "probe_artifact": {
+            "original": "workflow_boundary_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "b632dc0ace9f22623f61069f4a7cd73e5dfae86fe72b0af0230ace99f05691e0"
+          },
+          "semantic": {
+            "family": "workflow_invariant",
+            "surface": "workflow_quota",
+            "expected_oracle": "pg69_typed_workflow_invariant_v1",
+            "expected_signal": "typed_workflow_invariant"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-06",
+            "variant": "abstract_class",
+            "surface_role": "workflow_quota",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-06"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8815",
+            "method": "GET",
+            "path": "/quota",
+            "params": {},
+            "fresh_reset": {
+              "candidate": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-candidate-06",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "1b6abe8bc492ad37ae2ca1bf",
+                "target_instance_id": "3eaaf97ee72c9335d8db7d72"
+              },
+              "control": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-control-06",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "82903d07713967ab9741426b",
+                "target_instance_id": "7ea306d61e70d5fb7fcaafa2"
+              }
+            },
+            "transport": "loopback"
+          },
+          "response_projection": {
+            "body_length_bucket": "1-255",
+            "body_sha256": "b7f597603276ba7a6fd5a03cd689d9af3a155cfb41e694cf872f9c13bde164f6",
+            "content_type_class": "application/json",
+            "external_network": false,
+            "header_names": [
+              "content-type",
+              "x-sift-workflow-variant"
+            ],
+            "projection_sha256": "b0a8e21ba3ca9504d0ab9a2e28dd3cfbfc4c13c096f666ee7dc6781395cdf4d2",
+            "semantic_body_sha256": "dc40b2de16519b8489dffa36af89badb662cfee98b97e0dc07d30cc973120bf4",
+            "shape": {
+              "array_count": 0,
+              "key_count": 3,
+              "kind": "object",
+              "scalar_count": 3
+            },
+            "state_changed": false,
+            "status_class": "2xx",
+            "status_code": 200,
+            "transport_error": false
+          },
+          "oracle_projection": {
+            "confirmed_effect": "business_boundary_mismatch",
+            "evaluator_state_hidden": true,
+            "modality": "semantic_contract",
+            "oracle_id": "pg69-workflow-boundary-v1",
+            "oracle_signal": "business_boundary_mismatch",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "script_execution": false,
+              "state_mutated": false
+            },
+            "typed": {
+              "boundary_hit": true,
+              "expected_issued": true,
+              "invariant_violation": true,
+              "member": true,
+              "observed_issued": false
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "ca600b237675cda14596937d4d7f3fba4f03dd98c3dd3ef39e9e8edbed33d0af",
+            "control_evidence_sha256": "b0f2510be61e4674cb19ddca3a0f50c52b87c119b3d1d7f664c1b7b86623df7d"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-07",
+          "source_id": "pg69-workflow-amber",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8815",
+            "method": "POST",
+            "path": "/quota",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-07"
+            },
+            "marker": "pg69-probe-07",
+            "probe_kind": "http_canary",
+            "probe": "workflow_boundary_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_workflow_invariant",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "form": {
+              "member": "pg69-probe-07"
+            },
+            "payload_sha256": "20f82987b5b58b7365021f53821f554612952673d59eb889b561fdc7bd354f4d"
+          },
+          "probe_artifact": {
+            "original": "workflow_boundary_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "b632dc0ace9f22623f61069f4a7cd73e5dfae86fe72b0af0230ace99f05691e0"
+          },
+          "semantic": {
+            "family": "workflow_invariant",
+            "surface": "workflow_quota",
+            "expected_oracle": "pg69_typed_workflow_invariant_v1",
+            "expected_signal": "typed_workflow_invariant"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-07",
+            "variant": "abstract_class",
+            "surface_role": "workflow_quota",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-07"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8815",
+            "method": "POST",
+            "path": "/quota",
+            "params": {},
+            "fresh_reset": {
+              "candidate": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-candidate-07",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "cbf321c86e05d5a63dcdd8b8",
+                "target_instance_id": "0d3889074697db4acc78fede"
+              },
+              "control": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-control-07",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "5740790c19a1a39cb3d690dd",
+                "target_instance_id": "9352912f5662dfee9be20efe"
+              }
+            },
+            "transport": "loopback",
+            "form": {
+              "member": "pg69-probe-07"
+            }
+          },
+          "response_projection": {
+            "body_length_bucket": "1-255",
+            "body_sha256": "b7f597603276ba7a6fd5a03cd689d9af3a155cfb41e694cf872f9c13bde164f6",
+            "content_type_class": "application/json",
+            "external_network": false,
+            "header_names": [
+              "content-type",
+              "x-sift-workflow-variant"
+            ],
+            "projection_sha256": "b0a8e21ba3ca9504d0ab9a2e28dd3cfbfc4c13c096f666ee7dc6781395cdf4d2",
+            "semantic_body_sha256": "dc40b2de16519b8489dffa36af89badb662cfee98b97e0dc07d30cc973120bf4",
+            "shape": {
+              "array_count": 0,
+              "key_count": 3,
+              "kind": "object",
+              "scalar_count": 3
+            },
+            "state_changed": false,
+            "status_class": "2xx",
+            "status_code": 200,
+            "transport_error": false
+          },
+          "oracle_projection": {
+            "confirmed_effect": "business_boundary_mismatch",
+            "evaluator_state_hidden": true,
+            "modality": "semantic_contract",
+            "oracle_id": "pg69-workflow-boundary-v1",
+            "oracle_signal": "business_boundary_mismatch",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "script_execution": false,
+              "state_mutated": false
+            },
+            "typed": {
+              "boundary_hit": true,
+              "expected_issued": true,
+              "invariant_violation": true,
+              "member": true,
+              "observed_issued": false
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "3c0cc8d8df7b493c710f1f8ef6a34b5c6ef39bab42ceba8057863359b3fa1852",
+            "control_evidence_sha256": "b0f2510be61e4674cb19ddca3a0f50c52b87c119b3d1d7f664c1b7b86623df7d"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg69-workflow-violet",
+        "source_type": "in_repo_synthetic",
+        "origin": "app/pg69_workflow_fixture.py",
+        "license": "in_repo_synthetic",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:8816"
+        ],
+        "captured_at": "2026-08-02T21:58:18+00:00",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "source_sha256": "7a5edcdec175f14143c19e50e08031e2c8e6f67ad99014354c4dcea9faedef7b"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-08",
+          "source_id": "pg69-workflow-violet",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8816",
+            "method": "GET",
+            "path": "/handoff",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-08"
+            },
+            "marker": "pg69-probe-08",
+            "probe_kind": "http_canary",
+            "probe": "workflow_boundary_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_workflow_invariant",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "a989f9626a06e36a87dabf8b11873e0a96f8260a3d1468eecb2554ae5b5afebc"
+          },
+          "probe_artifact": {
+            "original": "workflow_boundary_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "b632dc0ace9f22623f61069f4a7cd73e5dfae86fe72b0af0230ace99f05691e0"
+          },
+          "semantic": {
+            "family": "workflow_invariant",
+            "surface": "workflow_handoff",
+            "expected_oracle": "pg69_typed_workflow_invariant_v1",
+            "expected_signal": "typed_workflow_invariant"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-08",
+            "variant": "abstract_class",
+            "surface_role": "workflow_handoff",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-08"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8816",
+            "method": "GET",
+            "path": "/handoff",
+            "params": {},
+            "fresh_reset": {
+              "candidate": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-candidate-08",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "8ce6497928278ecd52e80fe3",
+                "target_instance_id": "dc9851051c7df6bfdcee1d14"
+              },
+              "control": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-control-08",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "56c89a735e8a7dba46e05b47",
+                "target_instance_id": "2714bd9dbe09457919b97993"
+              }
+            },
+            "transport": "loopback"
+          },
+          "response_projection": {
+            "body_length_bucket": "1-255",
+            "body_sha256": "d7fcbff8b44a8d9108a0b601ba8fa0456d2c6b745d9de8129c658bc65719e57d",
+            "content_type_class": "application/json",
+            "external_network": false,
+            "header_names": [
+              "content-type",
+              "x-sift-workflow-variant"
+            ],
+            "projection_sha256": "ef1ebbb1de8ab89d40916ef16902497c291e11439a6b7ea9dde6ec7a1abba0e6",
+            "semantic_body_sha256": "dc40b2de16519b8489dffa36af89badb662cfee98b97e0dc07d30cc973120bf4",
+            "shape": {
+              "array_count": 0,
+              "key_count": 3,
+              "kind": "object",
+              "scalar_count": 3
+            },
+            "state_changed": false,
+            "status_class": "2xx",
+            "status_code": 200,
+            "transport_error": false
+          },
+          "oracle_projection": {
+            "confirmed_effect": "history_binding_mismatch",
+            "evaluator_state_hidden": true,
+            "modality": "semantic_contract",
+            "oracle_id": "pg69-workflow-history-binding-v1",
+            "oracle_signal": "history_binding_mismatch",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "script_execution": false,
+              "state_mutated": false
+            },
+            "typed": {
+              "challenge_matches": false,
+              "commit_action": true,
+              "previous_verified": true,
+              "unexpected_replay_accept": true
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "84908e07df8ea4a0639be43d0c49833c39ca51ada777d028eafc8d0a15d85fe1",
+            "control_evidence_sha256": "2a06d67d4013e9d75fbf4718472cb99db4e6632d5a696765e0aa5d74882e15aa"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-09",
+          "source_id": "pg69-workflow-violet",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8816",
+            "method": "POST",
+            "path": "/handoff",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-09"
+            },
+            "marker": "pg69-probe-09",
+            "probe_kind": "http_canary",
+            "probe": "workflow_boundary_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_workflow_invariant",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "form": {
+              "verb": "pg69-probe-09"
+            },
+            "payload_sha256": "5c26b49d381cf227ba5a7bd531023fb0e4c5df3cc4b9347f2c02f610b099e18f"
+          },
+          "probe_artifact": {
+            "original": "workflow_boundary_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "b632dc0ace9f22623f61069f4a7cd73e5dfae86fe72b0af0230ace99f05691e0"
+          },
+          "semantic": {
+            "family": "workflow_invariant",
+            "surface": "workflow_handoff",
+            "expected_oracle": "pg69_typed_workflow_invariant_v1",
+            "expected_signal": "typed_workflow_invariant"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-09",
+            "variant": "abstract_class",
+            "surface_role": "workflow_handoff",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-09"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8816",
+            "method": "POST",
+            "path": "/handoff",
+            "params": {},
+            "fresh_reset": {
+              "candidate": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-candidate-09",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "f805b9228cded4b27c3b18a8",
+                "target_instance_id": "09ef0a71a8e964da9fb96686"
+              },
+              "control": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-control-09",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "40738493114fba3f2ecb49ed",
+                "target_instance_id": "2ec59fa30dcc3b375cc6962a"
+              }
+            },
+            "transport": "loopback",
+            "form": {
+              "verb": "pg69-probe-09"
+            }
+          },
+          "response_projection": {
+            "body_length_bucket": "1-255",
+            "body_sha256": "d7fcbff8b44a8d9108a0b601ba8fa0456d2c6b745d9de8129c658bc65719e57d",
+            "content_type_class": "application/json",
+            "external_network": false,
+            "header_names": [
+              "content-type",
+              "x-sift-workflow-variant"
+            ],
+            "projection_sha256": "ef1ebbb1de8ab89d40916ef16902497c291e11439a6b7ea9dde6ec7a1abba0e6",
+            "semantic_body_sha256": "dc40b2de16519b8489dffa36af89badb662cfee98b97e0dc07d30cc973120bf4",
+            "shape": {
+              "array_count": 0,
+              "key_count": 3,
+              "kind": "object",
+              "scalar_count": 3
+            },
+            "state_changed": false,
+            "status_class": "2xx",
+            "status_code": 200,
+            "transport_error": false
+          },
+          "oracle_projection": {
+            "confirmed_effect": "history_binding_mismatch",
+            "evaluator_state_hidden": true,
+            "modality": "semantic_contract",
+            "oracle_id": "pg69-workflow-history-binding-v1",
+            "oracle_signal": "history_binding_mismatch",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "script_execution": false,
+              "state_mutated": false
+            },
+            "typed": {
+              "challenge_matches": false,
+              "commit_action": true,
+              "previous_verified": true,
+              "unexpected_replay_accept": true
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "9c0863a353e0ec9b533ac3fa45537994277b09e8a087c1ed9307c976b1ce43db",
+            "control_evidence_sha256": "2a06d67d4013e9d75fbf4718472cb99db4e6632d5a696765e0aa5d74882e15aa"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-10",
+          "source_id": "pg69-workflow-violet",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8816",
+            "method": "GET",
+            "path": "/quota",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-10"
+            },
+            "marker": "pg69-probe-10",
+            "probe_kind": "http_canary",
+            "probe": "workflow_boundary_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_workflow_invariant",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "59fe40b9367913de27e8f77df6adba1403ad35631b323a9b90ecdff867d5de2d"
+          },
+          "probe_artifact": {
+            "original": "workflow_boundary_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "b632dc0ace9f22623f61069f4a7cd73e5dfae86fe72b0af0230ace99f05691e0"
+          },
+          "semantic": {
+            "family": "workflow_invariant",
+            "surface": "workflow_quota",
+            "expected_oracle": "pg69_typed_workflow_invariant_v1",
+            "expected_signal": "typed_workflow_invariant"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-10",
+            "variant": "abstract_class",
+            "surface_role": "workflow_quota",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-10"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8816",
+            "method": "GET",
+            "path": "/quota",
+            "params": {},
+            "fresh_reset": {
+              "candidate": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-candidate-10",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "f2c34dfef7abb85bdaf588df",
+                "target_instance_id": "ee42d19a247f9a5e2a9df509"
+              },
+              "control": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-control-10",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "6c32f03af690fe6a2a7a388c",
+                "target_instance_id": "403499708a9d12823c502777"
+              }
+            },
+            "transport": "loopback"
+          },
+          "response_projection": {
+            "body_length_bucket": "1-255",
+            "body_sha256": "fe6fe8a912641dc8e1e76dc10179cd69a15d246ce2c96d76d8e82fdf00cf8b2a",
+            "content_type_class": "application/json",
+            "external_network": false,
+            "header_names": [
+              "content-type",
+              "x-sift-workflow-variant"
+            ],
+            "projection_sha256": "b54db46d5a20599d9d74ce6c4e0194a83e7d9c9dc7edb352c78116ebf6f9052c",
+            "semantic_body_sha256": "dc40b2de16519b8489dffa36af89badb662cfee98b97e0dc07d30cc973120bf4",
+            "shape": {
+              "array_count": 0,
+              "key_count": 3,
+              "kind": "object",
+              "scalar_count": 3
+            },
+            "state_changed": false,
+            "status_class": "2xx",
+            "status_code": 200,
+            "transport_error": false
+          },
+          "oracle_projection": {
+            "confirmed_effect": "business_boundary_mismatch",
+            "evaluator_state_hidden": true,
+            "modality": "semantic_contract",
+            "oracle_id": "pg69-workflow-boundary-v1",
+            "oracle_signal": "business_boundary_mismatch",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "script_execution": false,
+              "state_mutated": false
+            },
+            "typed": {
+              "boundary_hit": true,
+              "expected_issued": true,
+              "invariant_violation": true,
+              "member": true,
+              "observed_issued": false
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "c5ee1964c13f656c53292fbcb060f1ddffdc38405c744b9db97e225bcd34e7fc",
+            "control_evidence_sha256": "d535099ffba8c92c3043ccb26dc40791db192d7da25c99a8dab4b0fba1263c11"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg69-sample-11",
+          "source_id": "pg69-workflow-violet",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8816",
+            "method": "POST",
+            "path": "/quota",
+            "headers": {
+              "accept": "application/json",
+              "x-sift-probe": "pg69-probe-11"
+            },
+            "marker": "pg69-probe-11",
+            "probe_kind": "http_canary",
+            "probe": "workflow_boundary_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_workflow_invariant",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "form": {
+              "member": "pg69-probe-11"
+            },
+            "payload_sha256": "8d8461d8df64082782fb027f25cc5d580bbe5e33d47cc1a4ea4a47d04bf31e93"
+          },
+          "probe_artifact": {
+            "original": "workflow_boundary_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "b632dc0ace9f22623f61069f4a7cd73e5dfae86fe72b0af0230ace99f05691e0"
+          },
+          "semantic": {
+            "family": "workflow_invariant",
+            "surface": "workflow_quota",
+            "expected_oracle": "pg69_typed_workflow_invariant_v1",
+            "expected_signal": "typed_workflow_invariant"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg69-pair-11",
+            "variant": "abstract_class",
+            "surface_role": "workflow_quota",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg69-sample-11"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8816",
+            "method": "POST",
+            "path": "/quota",
+            "params": {},
+            "fresh_reset": {
+              "candidate": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-candidate-11",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "f47ac15684615f4c74708084",
+                "target_instance_id": "98f6720804984554ff127122"
+              },
+              "control": {
+                "completed": true,
+                "evaluator_state_hidden": true,
+                "external_network": false,
+                "fresh_target": true,
+                "kind": "pg69-fresh-action-target",
+                "read_only_round": true,
+                "reset_adapter_sha256": "223a3c49e0a5c7c79f5a02e8f165752fe47e2f1b178585abf6b8f93d7aa02829",
+                "reset_id": "pg69-control-11",
+                "reset_scope": "fresh_disposable_target_per_action_pair",
+                "state_change_allowed": false,
+                "state_epoch": "f864011c7aba056b471dd864",
+                "target_instance_id": "4191bd1fa2d723743c6cb653"
+              }
+            },
+            "transport": "loopback",
+            "form": {
+              "member": "pg69-probe-11"
+            }
+          },
+          "response_projection": {
+            "body_length_bucket": "1-255",
+            "body_sha256": "fe6fe8a912641dc8e1e76dc10179cd69a15d246ce2c96d76d8e82fdf00cf8b2a",
+            "content_type_class": "application/json",
+            "external_network": false,
+            "header_names": [
+              "content-type",
+              "x-sift-workflow-variant"
+            ],
+            "projection_sha256": "b54db46d5a20599d9d74ce6c4e0194a83e7d9c9dc7edb352c78116ebf6f9052c",
+            "semantic_body_sha256": "dc40b2de16519b8489dffa36af89badb662cfee98b97e0dc07d30cc973120bf4",
+            "shape": {
+              "array_count": 0,
+              "key_count": 3,
+              "kind": "object",
+              "scalar_count": 3
+            },
+            "state_changed": false,
+            "status_class": "2xx",
+            "status_code": 200,
+            "transport_error": false
+          },
+          "oracle_projection": {
+            "confirmed_effect": "business_boundary_mismatch",
+            "evaluator_state_hidden": true,
+            "modality": "semantic_contract",
+            "oracle_id": "pg69-workflow-boundary-v1",
+            "oracle_signal": "business_boundary_mismatch",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "script_execution": false,
+              "state_mutated": false
+            },
+            "typed": {
+              "boundary_hit": true,
+              "expected_issued": true,
+              "invariant_violation": true,
+              "member": true,
+              "observed_issued": false
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "34a625f4383fe79a254a3f07947fe48a4be63b224a5086808df48aafa800bc15",
+            "control_evidence_sha256": "d535099ffba8c92c3043ccb26dc40791db192d7da25c99a8dab4b0fba1263c11"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    }
+  ],
+  "safety": {
+    "local_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_touched": false,
+    "evaluator_state_visible": false,
+    "real_exploit_strings": false
+  },
+  "catalog_sha256": "77444a9e5a24a21f3f0b520ae468c1d53f43e0ef155e32b7e27fbaea1209f95e"
+}

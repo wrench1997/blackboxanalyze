@@ -1,0 +1,48 @@
+{
+  "protocol_id": "pg-pk-219-result-aware-policy-training-v1",
+  "schema_version": "pg219-result-aware-policy-training-protocol-v1",
+  "sources": [
+    "research\\pg217_pikachu_typed_sql_oracle_report_v1.json",
+    "research\\pg218_pikachu_result_fixture_report_v1.json"
+  ],
+  "split": {
+    "train_seeds": [
+      21701,
+      21801
+    ],
+    "holdout_seeds": [
+      21702,
+      21802
+    ],
+    "complete_route_holdout": "/vul/sqli/sqli_x.php"
+  },
+  "steps": [
+    "preflight",
+    "candidate_feedback",
+    "verification_feedback"
+  ],
+  "actions": [
+    "abstain",
+    "safe_candidate",
+    "retry_alternate"
+  ],
+  "outcomes": [
+    "no_effect",
+    "typed_effect",
+    "result_verified",
+    "environment_failure"
+  ],
+  "large_body_frozen": true,
+  "oracle_labels_as_features": false,
+  "route_identity_as_feature": false,
+  "hard_gate": [
+    "typed_available",
+    "fresh_reset_ok",
+    "database_health_ok",
+    "backend_observed",
+    "negative_clean",
+    "binding_valid"
+  ],
+  "promotion_allowed": false,
+  "protocol_sha256": "a95f36ad998d62e743f3c7e19f657e733a1881993c2026e5245373016acd365d"
+}

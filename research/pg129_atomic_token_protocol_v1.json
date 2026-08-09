@@ -1,0 +1,89 @@
+{
+  "protocol_id": "pg-pk-129-atomic-token-v1",
+  "schema_version": "pg129-atomic-token-protocol-v1",
+  "objective": "将失败轨迹尽量细拆为原子 token，验证 token 权重和顺序对安全动作组装的贡献。",
+  "token_contract": {
+    "groups": [
+      "failure_kind",
+      "failed_gate",
+      "candidate_signal",
+      "observed_method",
+      "methods_seen",
+      "probe_budget"
+    ],
+    "tokens_per_step": 6,
+    "max_steps": 6,
+    "feature_dim": 16,
+    "weight_sources": [
+      "group focus",
+      "trajectory recency",
+      "remaining probe budget"
+    ],
+    "raw_fields_forbidden": [
+      "raw_probe",
+      "raw_response",
+      "positive_authority",
+      "typed_available",
+      "evidence_hash",
+      "target_id",
+      "family"
+    ]
+  },
+  "training": {
+    "pg125_fresh_train_seeds": [
+      12531,
+      12533,
+      12535
+    ],
+    "pg127_long_train_seeds": [
+      12911,
+      12913,
+      12915
+    ],
+    "pg127_long_dev_seeds": [
+      12912,
+      12914,
+      12916
+    ],
+    "pg127_long_holdout_seeds": [
+      12901,
+      12903,
+      12905
+    ],
+    "holdout_never_in_training": true
+  },
+  "evaluation": {
+    "required_methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_reset_per_action": true,
+    "six_step_long_horizon": true,
+    "positive_negative_unknown_surfaces": true,
+    "weighted_vs_uniform_token_ablation": true,
+    "gates": {
+      "fresh_checkpoint": true,
+      "same_capacity_ablation": true,
+      "atomic_feature_dim": true,
+      "atomic_token_window": true,
+      "all_groups_tokenized": true,
+      "seed_disjoint": true,
+      "get_post_balanced": true,
+      "holdout_not_training": true,
+      "six_step_replay_accepted": true,
+      "full_accuracy_floor": true,
+      "full_compliance_floor": true,
+      "all_surface_accuracy_floor": true,
+      "budget_accuracy_floor": true,
+      "negative_false_stop_zero": true,
+      "full_non_abstain_nonzero": true,
+      "atomic_weight_ablation_changes_behavior": false,
+      "zero_ablation_changes_behavior": true,
+      "memory_promotion_forbidden": true
+    }
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

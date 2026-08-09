@@ -1,0 +1,21 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-response-head-v3",
+  "status": "frozen-before-v3-training",
+  "prior_v2_seed_warning": "research/juice_shop_loop_12_response_head_fresh_seeds.json",
+  "base_checkpoint": "artifacts/neural-url-loop-11-url-meta-v2-20261529/tiny_rule_set_gpt.pt",
+  "parameter_budget": 908546,
+  "architecture": "first 120 existing URL set slots plus 8 mutually exclusive body-shape response slots; legacy modality gate zeros response slots",
+  "response_slots": ["prometheus", "directory_listing", "diagnostic", "traceback", "source_map", "spa_shell", "robots_or_security_text", "ordinary_json_or_not_found"],
+  "shadow_observation": "body-shape label derived locally from status, media type and bounded structural markers; response body text is not stored in the policy record",
+  "training_data": "synthetic compositional HTTP surfaces only; no Juice Shop challenge metadata or target observations",
+  "training_seed": 20262113,
+  "epochs": 8,
+  "learning_rate": 0.05,
+  "acceptance": {
+    "response_validation_minimum": 0.95,
+    "fresh_seed_minimum": 0.90,
+    "old_synthetic_regression_delta_at_least": -0.02,
+    "parameter_count_unchanged": true,
+    "full_hidden_matrix_required_after_training": true
+  }
+}

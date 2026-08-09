@@ -1,0 +1,44 @@
+{
+  "protocol_id": "pg274-score-rl-policy-v1",
+  "schema_version": "pg274-score-rl-protocol-v1",
+  "algorithm": {
+    "sft": "teacher-forced action+belief cross entropy",
+    "score_weighted": "teacher episode score weighted CE",
+    "offline_rl": "REINFORCE on recorded typed outcomes + value baseline + KL(anchor) + supervised anchor",
+    "reward": {
+      "action_match": 1.5,
+      "belief_match": 1.5,
+      "safe_abstain": 0.75,
+      "unsupported_positive": -3.0,
+      "missed_positive_abstain": -1.0
+    }
+  },
+  "split": {
+    "train": "heterogeneous_surface_v1",
+    "holdout": "heterogeneous_surface_v2",
+    "implementation_disjoint": true
+  },
+  "gates": {
+    "positive_recall_min": 0.5,
+    "negative_reject_min": 0.8,
+    "false_positive_zero": true,
+    "promotion_blocked": true
+  },
+  "result": {
+    "capability_gate": {
+      "status": "blocked",
+      "checks": {
+        "implementation_disjoint": true,
+        "rl_holdout_evaluated": true,
+        "score_rl_positive_recall_min": false,
+        "score_rl_negative_reject_min": true,
+        "score_rl_false_positive_zero": true,
+        "promotion_blocked": true
+      },
+      "claim_allowed": false
+    },
+    "report_sha256": "6dab5b8ea6d799630108f68c3001085b2ecda78a88d496f71f0f15fbe450863f"
+  },
+  "next_experiment": "PG-275 fresh v2 variant plus independent seed; if score_rl fails, add active-question and response-shape tokens before changing architecture",
+  "protocol_sha256": "7f8646336efc1c6a8e86d2e589c75ee06de02c2c6bdf043765b460429134ba10"
+}

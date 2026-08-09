@@ -1,0 +1,55 @@
+{
+  "protocol_id": "pg-pk-59-oracle-semantic-router-v1",
+  "schema_version": "pg59-oracle-semantic-router-protocol-v1",
+  "objective": "检验丰富的、探针后 typed Oracle 语义能否让独立 Rule IR 路由器正确绑定漏洞族，同时严格拒绝未知族和阴性对照。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false
+  },
+  "input_contract": {
+    "training_source": "PG-53 typed oracle",
+    "evaluation_source": "PG-42 independent semantic catalog",
+    "oracle_semantics_are_post_probe_evidence": true,
+    "family_name_in_features": false,
+    "raw_probe_in_features": false,
+    "raw_response_body_in_features": false,
+    "unknown_modality_fail_closed": true,
+    "modalities": ["DOM", "AST", "AUTH_BOUNDARY", "ACCESS_BOUNDARY", "LOGIC", "REDIRECT", "VALIDATION", "CANARY", "OTHER", "NEGATIVE"]
+  },
+  "split_plan": {
+    "training": "PG-53 all 270 rows, family labels target only",
+    "dev": "PG-42 dataset_role=dev, 640 rows",
+    "holdout": "PG-42 ood_source + family_holdout + negative_control, 1728 rows"
+  },
+  "gates": {
+    "zero_known_wrong_family_required": true,
+    "zero_unknown_misname_required": true,
+    "zero_negative_false_accept_required": true,
+    "known_family_recall_required": true,
+    "unknown_modality_must_abstain": true,
+    "calibration_source_dev_only": true,
+    "post_probe_router_is_not_discovery_claim": true,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "run_result": {
+    "status": "quarantined_typed_oracle_router_ablation_passed",
+    "device": "cuda",
+    "train_rows": 270,
+    "dev_rows": 640,
+    "holdout_rows": 1728,
+    "holdout_known_family_recall": 1.0,
+    "holdout_known_wrong_family_count": 0,
+    "holdout_unknown_misname_count": 0,
+    "holdout_negative_false_accept_count": 0,
+    "holdout_abstain_rate": 0.916667,
+    "interpretation": "Rich post-probe typed semantics are sufficient for safe family routing on this independent catalog; this does not measure pre-oracle probe discovery and cannot alone authorize memory promotion.",
+    "report": "research/pg59_oracle_semantic_router_report_v1.json"
+  }
+}

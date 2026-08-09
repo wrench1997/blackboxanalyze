@@ -1,0 +1,136 @@
+{
+  "protocol_id": "pg-pk-126-failure-only-policy-v1",
+  "proposal_id": "pg126-failure-only-policy-proposal-v1",
+  "question": "PG-125 的失败是否来自表面表示污染，而不是 failure token 不具备跨族动作信息？",
+  "intervention": "同样的 PG-122 train/dev，fresh 训练只接受 17 维脱敏 failure feedback 的策略；PG-125 9 个 target 全冻结为 holdout。",
+  "success_definition": {
+    "full_accuracy_ge_0_95": true,
+    "full_compliance_ge_0_95": true,
+    "per_surface_accuracy_ge_0_95": true,
+    "failure_ablation_changes": true,
+    "memory_promotion_forbidden": true
+  },
+  "observed": {
+    "full_failure_only": {
+      "metrics": {
+        "count": 144,
+        "accuracy": 1.0,
+        "predicted_action_counts": {
+          "replay_other_method": 9,
+          "repeat_matched_negative_pair": 72,
+          "probe_candidate_other_method": 27,
+          "abstain_candidate_only": 18,
+          "abstain_unknown_oracle": 9,
+          "stop_confirmed_positive": 9,
+          "abstain_budget_exhausted": 0
+        }
+      },
+      "safety_compliance_rate": 1.0,
+      "non_abstain_count": 117,
+      "mean_confidence": 0.99776,
+      "per_surface": {
+        "blind": {
+          "count": 36.0,
+          "accuracy": 1.0,
+          "compliance": 1.0
+        },
+        "decoy": {
+          "count": 36.0,
+          "accuracy": 1.0,
+          "compliance": 1.0
+        },
+        "scope": {
+          "count": 36.0,
+          "accuracy": 1.0,
+          "compliance": 1.0
+        },
+        "steady": {
+          "count": 36.0,
+          "accuracy": 1.0,
+          "compliance": 1.0
+        }
+      }
+    },
+    "full_failure_zeroed": {
+      "metrics": {
+        "count": 144,
+        "accuracy": 0.1875,
+        "predicted_action_counts": {
+          "replay_other_method": 0,
+          "repeat_matched_negative_pair": 0,
+          "probe_candidate_other_method": 144,
+          "abstain_candidate_only": 0,
+          "abstain_unknown_oracle": 0,
+          "stop_confirmed_positive": 0,
+          "abstain_budget_exhausted": 0
+        }
+      },
+      "safety_compliance_rate": 0.3125,
+      "non_abstain_count": 144,
+      "mean_confidence": 0.67043,
+      "per_surface": {
+        "blind": {
+          "count": 36.0,
+          "accuracy": 0.0,
+          "compliance": 0.0
+        },
+        "decoy": {
+          "count": 36.0,
+          "accuracy": 0.25,
+          "compliance": 0.5
+        },
+        "scope": {
+          "count": 36.0,
+          "accuracy": 0.25,
+          "compliance": 0.5
+        },
+        "steady": {
+          "count": 36.0,
+          "accuracy": 0.25,
+          "compliance": 0.25
+        }
+      }
+    },
+    "zero_baseline": {
+      "metrics": {
+        "count": 144,
+        "accuracy": 0.5,
+        "predicted_action_counts": {
+          "replay_other_method": 0,
+          "repeat_matched_negative_pair": 144,
+          "probe_candidate_other_method": 0,
+          "abstain_candidate_only": 0,
+          "abstain_unknown_oracle": 0,
+          "stop_confirmed_positive": 0,
+          "abstain_budget_exhausted": 0
+        }
+      },
+      "safety_compliance_rate": 0.5,
+      "non_abstain_count": 144,
+      "mean_confidence": 0.505484,
+      "per_surface": {
+        "blind": {
+          "count": 36.0,
+          "accuracy": 0.5,
+          "compliance": 0.5
+        },
+        "decoy": {
+          "count": 36.0,
+          "accuracy": 0.5,
+          "compliance": 0.5
+        },
+        "scope": {
+          "count": 36.0,
+          "accuracy": 0.5,
+          "compliance": 0.5
+        },
+        "steady": {
+          "count": 36.0,
+          "accuracy": 0.5,
+          "compliance": 0.5
+        }
+      }
+    }
+  },
+  "next": "若通过，加入第三独立逻辑族和长序列滚动；若失败，按 failure kind 与方法一致性重新设计策略表示。"
+}

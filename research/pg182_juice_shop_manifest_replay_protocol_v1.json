@@ -1,0 +1,25 @@
+{
+  "protocol_id": "pg-pk-182-juice-shop-manifest-replay-v1",
+  "schema_version": "pg182-juice-shop-manifest-replay-protocol-v1",
+  "source_model": "artifacts\\pg181-manifest-decoder-v1\\url_holdout\\moe_large_seed18101.pt",
+  "target_image": "bkimminich/juice-shop@sha256:28870b9d2bec49e605d6ebbf4b22ed1ec1ca0a72347ef19217bbbb21ea44e3fe",
+  "loopback_port": 3101,
+  "parameter_authority": "allow-listed q from Juice Shop shadow collector",
+  "safe_canary_only": true,
+  "fresh_container_required": true,
+  "model_output_allowlist": [
+    "baseline",
+    "matched_control",
+    "safe_candidate",
+    "abstain"
+  ],
+  "gates": {
+    "manifest_validator_before_send": true,
+    "unobserved_parameter_forbidden": true,
+    "family_oracle_required_for_positive": true,
+    "unknown_oracle_action": "abstain",
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "d70b55de9235e1b1f2f28b26008b5d992d7340b83ae9165d07be9598b32bf6e9"
+}

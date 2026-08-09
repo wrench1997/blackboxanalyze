@@ -1,0 +1,14 @@
+{
+  "protocol_id": "pg-pk-128-trajectory-token-v1",
+  "proposal_id": "pg128-trajectory-token-proposal-v1",
+  "question": "过去轨迹中每个失败 token 是否需要独立权重，才能在当前 gate 与历史证据之间组装准确下一步？",
+  "prediction": {
+    "weighted_accuracy": ">=0.95",
+    "weighted_budget_accuracy": ">=0.95",
+    "negative_false_stop_count": 0,
+    "uniform_token_ablation_changes": true
+  },
+  "intervention": "把每个 prefix failure_signature 编成一个 token，按 recency、unmet gate focus 和 probe budget 归一化加权，再用 GRU + weighted context 预测 allow-listed action",
+  "failure_rule": "若 token 权重只让模型记住表面或把 oracle 当输入，立即保留失败 trace、拆分实验/工程问题并阻断训练和记忆晋升。",
+  "next": "若通过，再在第三独立实现与更长序列上做 family/seed/encoding OOD；若失败，先检查 token 权重与轨迹标注是否错位。"
+}

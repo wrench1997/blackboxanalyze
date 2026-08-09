@@ -1,0 +1,52 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-final-v2",
+  "status": "research_complete_with_follow_up_gaps",
+  "supersedes": "research/juice_shop_loop_12_final_report.json",
+  "scope": "local pinned Juice Shop, seven-family shadow matrix, response-head stability, abstract Rule IR decoder",
+  "response_head_stability": {
+    "checkpoint": "artifacts/neural-juice-loop-12-response-head-v3-20262113/tiny_rule_set_gpt.pt",
+    "device": "cuda",
+    "seeds": [20262117, 20262119, 20262123, 20262129],
+    "mean_accuracy": 0.999722,
+    "minimum_accuracy": 0.998889,
+    "old_regression_worst_delta_pp": 0.0,
+    "accepted": true
+  },
+  "hidden_family_matrix": {
+    "protocol": "research/juice_shop_loop_12_hidden_matrix_protocol_v1_1.json",
+    "families": ["observability", "access_control", "authentication", "input_validation", "injection", "url_redirect", "xss"],
+    "shadow_action_count": 28,
+    "fresh_target_per_policy": true,
+    "policies": {
+      "trained_response_head_v3": {"device": "cuda", "evaluation_action_count": 7, "hidden_family_hit_count": 0},
+      "trained_response_head_v3_ablation": {"device": "cuda", "evaluation_action_count": 7, "hidden_family_hit_count": 0}
+    },
+    "head_minus_ablation_family_hit_delta": 0,
+    "interpretation": "response-shape scoring did not produce a cross-family evaluator transition; this is an action-search/interface gap, not evidence that the hidden families are impossible"
+  },
+  "rule_ir_decoder": {
+    "protocol": "research/juice_shop_loop_12_rule_ir_decoder_protocol_v1.json",
+    "checkpoint": "artifacts/rule-ir-decoder-loop-12-20260829/rule_ir_decoder.pt",
+    "device": "cuda",
+    "cuda_device_name": "NVIDIA GeForce RTX 3060",
+    "parameters": 88135,
+    "training_examples": 1260,
+    "validation_examples": 140,
+    "holdout_examples": 300,
+    "validation_accuracy": 1.0,
+    "fresh_holdout_seeds": [20260831, 20260837, 20260841],
+    "fresh_holdout_mean_accuracy": 0.75,
+    "fresh_holdout_min_accuracy": 0.733333,
+    "fresh_holdout_max_abstain_rate": 0.5,
+    "accepted": true,
+    "known_gap": "dom_double_decode holdout accuracy is 0.0; encoding-depth features and confidence coverage need a follow-up curriculum"
+  },
+  "engineering_repairs": [
+    "startup health probe now treats transient ECONNREFUSED as a wait condition",
+    "shadow probe captures bounded partial responses with response_aborted transport evidence",
+    "redirect query values are percent-encoded to satisfy the origin-relative action guard",
+    "all matrix policies use the same pinned image, local network, GET-only action space and append-only evidence ledger"
+  ],
+  "tests": {"command": "PYTHONPATH=. python -m pytest -q", "passed": 50, "warnings": 1},
+  "next_experiment": "add an explicit encoding-depth Rule IR curriculum and a probe policy that can bind abstract slots before rerunning the seven-family matrix"
+}

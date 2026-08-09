@@ -1,0 +1,42 @@
+{
+  "schema_version": "sift-neural-set-head-preregistration-v1",
+  "experiment_id": "neural-url-loop-11-learned-set-head-pilot",
+  "registered_at": "2026-08-01T19:35:00+08:00",
+  "status": "frozen-before-architecture-training",
+  "trigger": {
+    "canonical_meta_pilot_target": 0.543333,
+    "required_target": 0.70,
+    "counterexample_top1": 0.026667,
+    "conclusion": "canonical representation and meta-label optimization are insufficient for the byte Transformer to learn component binding"
+  },
+  "architecture": {
+    "base": "4-layer causal byte Transformer, hidden 128, heads 4",
+    "position_embeddings": 639,
+    "freed_parameters": 128,
+    "new_head": "128-weight learned URL query-to-labeled-set comparison head",
+    "comparison_inputs": ["scheme_equal", "hostname_equal", "effective_port_equal", "path_equal", "all 16 conjunction masks", "all 16 exact equality patterns", "positive and negative context mean and any aggregations"],
+    "total_parameters": 908546,
+    "deterministic_rule_output": false,
+    "family_name_visible": false
+  },
+  "training": {
+    "programs": 2700,
+    "epochs": 10,
+    "seed": 20261317,
+    "canonical_url_slot": true,
+    "meta_label_permutation_training_only": true,
+    "episode_rule_memory": false,
+    "target_family_training_examples": 0,
+    "checkpoint_selection": "neural iid plus neural validation"
+  },
+  "pilot_acceptance": {
+    "url_scheme_downgrade_neural_min": 0.70,
+    "learned_head_ablation_gain_min": 0.10,
+    "old_family_regression_max_absolute": 0.02,
+    "confirmation_requires_fresh_data": true
+  },
+  "frozen_artifacts": {
+    "research/neural_url_loop_11_pilot.json": "5B6DD343D7F7D778D1F3715C7C0B874732EFBD31A37970026239111DC158B120",
+    "canonical_meta_checkpoint": "F55DE2B7FCD83D3BCC32B387BB89E09FDEF26AF676AD57D9255A83352B8288FB"
+  }
+}

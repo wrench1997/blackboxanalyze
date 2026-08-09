@@ -1,0 +1,57 @@
+{
+  "audit_id": "pg280-ontology-policy-independent-audit-v1",
+  "status": "passed",
+  "audit_checks": {
+    "dataset_hash": true,
+    "dataset_audit_hash": true,
+    "report_hash": true,
+    "trace_hash": true,
+    "protocol_hash": true,
+    "dataset_audit_pass": true,
+    "remote_scope": true,
+    "a800_gpu0_only": true,
+    "report_dataset_binding": true,
+    "trace_protocol_binding": true,
+    "status_namespace": true,
+    "identifiability_gate": true,
+    "final_only_no_pre_supervision": true,
+    "process_pre_supervision_present": true,
+    "process_ask_safe": true,
+    "final_only_classification_visible": true,
+    "hard_negative_lane": true,
+    "promotion_blocked": true,
+    "docker_probe_honest": true,
+    "gate_recorded": true
+  },
+  "report": "research/pg280_ontology_policy_report_v1.json",
+  "dataset": "research/pg280_shared_ontology_dataset_v1.json",
+  "findings": [
+    {
+      "id": "mathematical-non-identifiability",
+      "status": "supported",
+      "evidence": "coarse context conditional entropy=1.0 bits; Bayes error lower bound=0.5.",
+      "implication": "缺失观测时不能用更多 epoch/RL 生成不可见事实；必须 ASK 或保持 unresolved。"
+    },
+    {
+      "id": "final-only-shortcut",
+      "status": "supported",
+      "evidence": "final-only post transition min=1.0，但 pre supervision rows=0。",
+      "implication": "最终分类分数不能作为主动提问/排错能力证据。"
+    },
+    {
+      "id": "process-ask",
+      "status": "supported",
+      "evidence": "process ASK min=1.0，safe unresolved min=1.0。",
+      "implication": "后续训练必须保留 pre-state→question→observation→repair 轨迹。"
+    },
+    {
+      "id": "family-ood",
+      "status": "blocked",
+      "evidence": "PG-280 family-OOD hard-negative 仅作为 evaluation-only，真实 Docker 不可用。",
+      "implication": "Docker 可用后再接真实应用 gold；当前不晋级长期记忆。"
+    }
+  ],
+  "failures": [],
+  "interpretation": "PG-280 的工程/数学审计通过才可进入下一实验；它证明安全 ASK 与 final-only 分类是不同能力，但不证明真实应用漏洞发现。",
+  "audit_sha256": "b3e33432638895ecde8d93cc5466e866c52db55699f5137e6dc5c1085eeba924"
+}

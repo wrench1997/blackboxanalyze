@@ -1,0 +1,61 @@
+{
+  "protocol_id": "pg-pk-121-shape-sanitized-rule-ir-training-v1",
+  "schema_version": "pg121-shape-sanitized-rule-ir-training-protocol-v1",
+  "objective": "在 PG-120 失败诊断后，保持模型容量不变，移除 shape hash shortcut，重新训练并验证跨实现 metadata slot 与未知弃权。",
+  "training_source": "research/pg119_metadata_training_dataset_v1.json",
+  "holdout_sources": ["pg120_cross_implementation_metadata_holdout", "pg117_gamma_double_encoding", "pg114_family_holdout_decoy_replay"],
+  "model_contract": {
+    "implementation": "app/pg121_shape_sanitized_rule_ir_decoder.py",
+    "feature_dim": 48,
+    "hidden_dim": 48,
+    "parameter_count": 4996,
+    "fresh_checkpoint": true,
+    "previous_checkpoint_reuse_forbidden": true,
+    "shape_hash_slots_zeroed": true,
+    "capacity_unchanged": true,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "action_contract": {
+    "holdout_methods": ["GET", "POST"],
+    "fresh_reset_per_action": true,
+    "matched_negative_control_required": true,
+    "target_evidence_sha256_required": true,
+    "bridge_evidence_sha256_required": true
+  },
+  "hard_gate": {
+    "pg114_positive_recall_nonzero": true,
+    "pg114_decoy_false_accept_zero": true,
+    "pg114_unknown_abstain_nonzero": true,
+    "pg120_positive_recall_nonzero": true,
+    "pg120_decoy_false_accept_zero": true,
+    "pg120_unknown_abstain_nonzero": true,
+    "pg120_cross_seed_recall_variance_bounded": true,
+    "all_abstain_is_not_success": true
+  },
+  "observed_result": {
+    "device": "cuda",
+    "dev_accuracy": 0.992424,
+    "pg120_positive_recall": 1.0,
+    "pg120_decoy_false_accept_count": 0,
+    "pg120_unknown_abstain_rate": 1.0,
+    "pg120_cross_seed_positive_recall_variance": 0.0,
+    "capacity_unchanged": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "表示修复已过当前受控 holdout，但仍需更多 family、实现、seed 和 Codex 人工审核。"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "destructive_payloads": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  }
+}

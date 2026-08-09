@@ -1,0 +1,26 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-response-head-v2",
+  "status": "v2-authoritative-rerun-after-implementation-correction",
+  "failed_prior_intervention": "artifacts/neural-juice-loop-12-response-head-20262091/report.json",
+  "base_checkpoint": "artifacts/neural-url-loop-11-url-meta-v2-20261529/tiny_rule_set_gpt.pt",
+  "base_checkpoint_sha256": "37A627806AC5F796E2D90408AD04DCD73F9642178E1B68DB9E32DA20E4F1DE32",
+  "parameter_budget": 908546,
+  "architecture_change": "reuse the existing 128-dimensional URL set head: first 120 slots stay URL features, last 8 slots become HTTP response features; a modality gate zeros the response slots on legacy URL episodes",
+  "frozen_components": ["Transformer base", "first 120 URL set weights"],
+  "trainable_components": ["last 8 response weights only"],
+  "response_features": ["status_2xx", "status_4xx", "status_5xx", "prometheus_media_type", "html_media_type", "large_length", "directory_listing", "metric_samples"],
+  "training_data": "synthetic HTTP surfaces only; no Juice Shop routes, challenge metadata or target observations",
+  "training_seed": 20262097,
+  "epochs": 8,
+  "learning_rate": 0.05,
+  "rehearsal": "old URL feature vectors are evaluated before and after; frozen URL slots are not updated",
+  "implementation_correction": "the first v2 run was invalidated because response weights were applied to nonzero legacy URL features in the last 8 slots; the authoritative rerun zeros those slots for legacy examples",
+  "acceptance": {
+    "parameter_count_unchanged": true,
+    "old_synthetic_regression_delta_at_least": -0.02,
+    "response_validation_accuracy_at_least": 0.90,
+    "same_component_ablation_required": true,
+    "fresh_shadow_environment_required": true,
+    "neural_gain_claimed_only_after_shadow_replay": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "protocol_id": "pg-pk-07-surface-generalization-v1",
+  "objective": "Measure whether a decoder confuses distinct reflection surfaces, while keeping the attribute-specific positive oracle fail-closed.",
+  "target": {
+    "kind": "ephemeral_in_repo_surface_fixture",
+    "base_url": "http://127.0.0.1:8791",
+    "source_code_pinned": true,
+    "external_network": false
+  },
+  "surface_matrix": [
+    {"path": "/attribute", "surface_role": "reflected_attribute", "oracle_signal": "marker_in_attribute", "positive_for_track": true},
+    {"path": "/text", "surface_role": "reflected_text", "oracle_signal": "marker_in_html_text", "positive_for_track": false},
+    {"path": "/json", "surface_role": "json_echo", "oracle_signal": "marker_in_json_value", "positive_for_track": false},
+    {"path": "/header", "surface_role": "header_echo", "oracle_signal": "marker_in_header", "positive_for_track": false},
+    {"path": "/plain", "surface_role": "plain_control", "oracle_signal": "none", "positive_for_track": false}
+  ],
+  "pair_design": {
+    "variants": ["plain", "url_percent"],
+    "same_surface_required": true,
+    "pair_agreement_required": true,
+    "pair_metadata_hidden_from_decoder": true
+  },
+  "decision_layers": {
+    "strict_ood": "unknown target remains abstain",
+    "surface_oracle": "only reflected_attribute with marker_in_attribute can revalidate the xss track",
+    "non_attribute_reflection": "remain negative controls even when another bounded signal is present",
+    "unapproved_oracle": "abstain"
+  },
+  "safety": {
+    "methods": ["GET"],
+    "paths": ["/attribute", "/text", "/json", "/header", "/plain"],
+    "raw_body_stored": false,
+    "credentials": false,
+    "mutations": false,
+    "script_execution": false,
+    "real_exploit_strings": false
+  },
+  "memory_promotion_rule": "research/loop_memory_promotion_rule_v1.json"
+}

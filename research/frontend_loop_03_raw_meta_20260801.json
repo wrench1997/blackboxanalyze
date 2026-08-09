@@ -1,0 +1,522 @@
+{
+  "experiment": "frontend-loop-03-raw-meta",
+  "status": "completed",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 3060",
+  "model": {
+    "type": "causal_transformer_classifier",
+    "parameters": 908546,
+    "hidden": 128,
+    "layers": 4,
+    "heads": 4,
+    "max_length": 640,
+    "semantic_features": false,
+    "compact_semantic_features": false
+  },
+  "data": {
+    "programs": 1800,
+    "train_examples": 3840,
+    "iid_examples": 960,
+    "validation_family_examples": 960,
+    "test_family_examples": 2400,
+    "train_families": [
+      "authorization_or",
+      "numeric_boundary",
+      "substring_origin",
+      "truthiness_gate"
+    ],
+    "validation_families": [
+      "authorization_or",
+      "numeric_boundary",
+      "substring_origin",
+      "truthiness_gate"
+    ],
+    "test_families": [
+      "dom_sink_injection",
+      "postmessage_origin"
+    ],
+    "source_or_rule_ir_visible_to_model": false,
+    "feature_mode": "raw_trace_text",
+    "meta_label_permutation_in_training_only": true
+  },
+  "baselines": {
+    "balanced_majority_accuracy": 0.5
+  },
+  "results": {
+    "iid": {
+      "accuracy": 0.823958,
+      "correct": 791,
+      "total": 960,
+      "by_family": {
+        "substring_origin": 1.0,
+        "numeric_boundary": 0.608333,
+        "truthiness_gate": 0.6875,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000181",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=169:0|input.age=171:1|input.age=338:1|input.age=168:0|input.age=170:1|input.age=167:0<QUERY>input.age=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001231",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=244:1|input.balance=243:1|input.balance=246:0|input.balance=0:1|input.balance=490:0|input.balance=245:0<QUERY>input.balance=247<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001021",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.score=157:0|input.score=158:0|input.score=154:1|input.score=0:1|input.score=155:1|input.score=312:0<QUERY>input.score=156<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000961",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=0:1|input.balance=426:0|input.balance=212:1|input.balance=214:0|input.balance=215:0|input.balance=211:1<QUERY>input.balance=213<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001201",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=0:0|input.age=2:0|input.age=5:1|input.age=8:1|input.age=4:0|input.age=6:1<QUERY>input.age=3<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000758",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.quota=-2,input.role=root:1|input.quota=0,input.role=member:0|input.quota=-2,input.role=guest:1|input.quota=1,input.role=member:1|input.quota=3,input.role=member:1|input.quota=-1,input.role=member:1|input.quota=2,input.role=member:1|input.quota=0,input.role=guest:0<QUERY>input.quota=2,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000451",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.score=211:1|input.score=420:1|input.score=212:1|input.score=210:0|input.score=0:0|input.score=209:0<QUERY>input.score=208<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000578",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.quota=1,input.role=owner:1|input.quota=1,input.role=guest:1|input.quota=0,input.role=member:0|input.quota=1,input.role=member:1|input.quota=20,input.role=member:1|input.quota=0,input.role=guest:0|input.quota=-2,input.role=member:1|input.quota=-2,input.role=owner:1<QUERY>input.quota=0,input.role=owner<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000841",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=440:1|input.balance=222:1|input.balance=219:0|input.balance=221:1|input.balance=218:0|input.balance=220:0<QUERY>input.balance=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000721",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=290:0|input.balance=147:0|input.balance=145:0|input.balance=143:1|input.balance=0:1|input.balance=144:1<QUERY>input.balance=146<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000991",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=0:0|input.balance=56:1|input.balance=55:1|input.balance=52:0|input.balance=108:1|input.balance=53:0<QUERY>input.balance=54<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001741",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.total=159:0|input.total=318:0|input.total=158:1|input.total=0:1|input.total=157:1|input.total=160:0<QUERY>input.total=161<ANSWER>"
+        }
+      ]
+    },
+    "validation_family_holdout": {
+      "accuracy": 0.814583,
+      "correct": 782,
+      "total": 960,
+      "by_family": {
+        "truthiness_gate": 0.666667,
+        "substring_origin": 1.0,
+        "numeric_boundary": 0.591667,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000721",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=143:1|input.balance=290:0|input.balance=147:0|input.balance=0:1|input.balance=145:0|input.balance=144:1<QUERY>input.balance=146<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001298",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.credits=0,input.role=member:0|input.credits=-2,input.role=member:1|input.credits=1,input.role=member:1|input.credits=1,input.role=guest:1|input.credits=2,input.role=owner:1|input.credits=2,input.role=guest:1|input.credits=-1,input.role=guest:1|input.credits=0,input.role=owner:1<QUERY>input.credits=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000511",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.retryCount=0:0|input.retryCount=20:0|input.retryCount=21:0|input.retryCount=42:1|input.retryCount=22:1|input.retryCount=19:0<QUERY>input.retryCount=23<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000901",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=207:1|input.age=210:0|input.age=208:0|input.age=206:1|input.age=0:1|input.age=209:0<QUERY>input.age=416<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001111",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.total=205:1|input.total=204:0|input.total=206:1|input.total=202:0|input.total=203:0|input.total=408:1<QUERY>input.total=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000931",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.score=205:0|input.score=209:1|input.score=208:1|input.score=414:1|input.score=207:0|input.score=0:0<QUERY>input.score=206<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001508",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.flags=-1,input.role=root:1|input.flags=19,input.role=root:1|input.flags=1,input.role=guest:1|input.flags=-2,input.role=guest:1|input.flags=2,input.role=member:1|input.flags=0,input.role=member:0|input.flags=19,input.role=member:1|input.flags=1,input.role=member:1<QUERY>input.flags=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000811",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=5:1|input.age=2:0|input.age=0:0|input.age=3:0|input.age=4:1|input.age=6:1<QUERY>input.age=1<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000121",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.total=194:1|input.total=193:1|input.total=190:0|input.total=0:0|input.total=191:0|input.total=384:1<QUERY>input.total=192<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001351",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=207:1|input.balance=410:1|input.balance=205:0|input.balance=203:0|input.balance=204:0|input.balance=206:1<QUERY>input.balance=0<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000638",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.quota=2,input.role=member:1|input.quota=20,input.role=guest:1|input.quota=2,input.role=guest:1|input.quota=1,input.role=guest:1|input.quota=-1,input.role=member:1|input.quota=-1,input.role=guest:1|input.quota=0,input.role=member:0|input.quota=-1,input.role=root:1<QUERY>input.quota=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001118",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.credits=0,input.role=member:0|input.credits=15,input.role=member:1|input.credits=-1,input.role=admin:1|input.credits=-2,input.role=member:1|input.credits=-2,input.role=guest:1|input.credits=0,input.role=guest:0|input.credits=1,input.role=member:1|input.credits=0,input.role=admin:1<QUERY>input.credits=-1,input.role=guest<ANSWER>"
+        }
+      ]
+    },
+    "test_family_with_memory": {
+      "accuracy": 0.498333,
+      "correct": 1196,
+      "total": 2400,
+      "by_family": {
+        "dom_sink_injection": 0.500833,
+        "postmessage_origin": 0.495833
+      },
+      "failures": [
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001505",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.origin=https://deep.sub.account.internal:1|input.origin=https://account.internal-attacker.test:0|input.origin=http://account.internal:1|input.origin=https://sub.account.internal:1|input.origin=http://localhost:0|input.origin=https://evil.test/account.internal:1|input.origin=https://evil.test:0|input.origin=https://account.internal.evil.test:0<QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000407",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=null:0|input.origin=http://localhost:0|input.origin=https://evilaccount.internal:1|input.origin=https://account.internal:1|input.origin=wss://account.internal:1|input.origin=https://evil.test:0|input.origin=ftp://account.internal:1|input.origin=https://account.internal.evil.test:0<QUERY>input.origin=https://sub.account.internal<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001374",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<img src=x>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<span data-marker='message'>x</span>:1|input.payload=x & y:0|input.payload={{template}}:0|input.payload=<template>fragment</template>:1|input.payload=javascript:alert(1):0|input.payload=hello world:0<QUERY>input.payload=2 < 3 and 5 > 4<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000666",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=</p><section>injected</section><p>:1|input.payload=<b>message</b>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<input value='probe'>:1|input.payload=<img src=x>:1|input.payload=plain message:0|input.payload=angle > only:0|input.payload=x & y:0<QUERY>input.payload=<not-closed<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001692",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=x & y:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=no markup here:0|input.payload=<input value='probe'>:1|input.payload=</p><section>injected</section><p>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=plain notice:0<QUERY>input.payload=<img src=x><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000330",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<b>message</b>:1|input.payload=<input value='probe'>:1|input.payload=<not-closed:0|input.payload=x & y:0|input.payload=angle > only:0|input.payload=<span data-marker='message'>x</span>:1|input.payload=javascript:alert(1):0<QUERY>input.payload={{template}}<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000744",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<not-closed:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<img src=x>:1|input.payload=no markup here:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<span data-marker='profile'>x</span>:1|input.payload=angle > only:0|input.payload=hello world:0<QUERY>input.payload=javascript:alert(1)<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000263",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.origin=https://evil.test/safe.local:1|input.origin=https://not-safe.local:1|input.origin=https://evil.test:0|input.origin=https://safe.local.evil.test:0|input.origin=https://example.test:0|input.origin=http://safe.local:1|input.origin=wss://safe.local:1|input.origin=https://safe.local-attacker.test:0<QUERY>input.origin=http://localhost<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001031",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.origin=https://example.test:0|input.origin=https://account.internal-attacker.test:0|input.origin=https://evil.test:0|input.origin=https://evil.test/account.internal:1|input.origin=http://localhost:0|input.origin=wss://account.internal:1|input.origin=http://account.internal:1|input.origin=ftp://account.internal:1<QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001025",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.origin=wss://trusted.com:1|input.origin=https://trusted.com-attacker.test:0|input.origin=http://localhost:0|input.origin=https://example.test:0|input.origin=chrome-extension://trusted.com:1|input.origin=https://trusted.com:1|input.origin=null:0|input.origin=https://eviltrusted.com:1<QUERY>input.origin=https://trusted.com.evil.test<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001134",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<b>probe</b>:1|input.payload={{template}}:0|input.payload=<a href='/local'>link</a>:1|input.payload=<not-closed:0|input.payload=angle > only:0|input.payload=2 < 3 and 5 > 4:0|input.payload=<input value='probe'>:1|input.payload=<template>fragment</template>:1<QUERY>input.payload=x & y<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000786",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<math><mtext>node</mtext></math>:1|input.payload=2 < 3 and 5 > 4:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<template>fragment</template>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload={{template}}:0|input.payload=x & y:0|input.payload=<span data-marker='notice'>x</span>:1<QUERY>input.payload=plain notice<ANSWER>"
+        }
+      ]
+    },
+    "test_family_without_memory": {
+      "accuracy": 0.3925,
+      "correct": 942,
+      "total": 2400,
+      "by_family": {
+        "dom_sink_injection": 0.285,
+        "postmessage_origin": 0.5
+      },
+      "failures": [
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000407",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=null:0|input.origin=http://localhost:0|input.origin=https://evilaccount.internal:1|input.origin=https://account.internal:1|input.origin=wss://account.internal:1|input.origin=https://evil.test:0|input.origin=ftp://account.internal:1|input.origin=https://account.internal.evil.test:0<QUERY>input.origin=https://sub.account.internal<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000743",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=http://localhost:0|input.origin=ftp://portal.test:1|input.origin=https://example.test:0|input.origin=https://portal.test.evil.test:0|input.origin=chrome-extension://portal.test:1|input.origin=https://evilportal.test:1|input.origin=https://portal.test:1|input.origin=https://portal.test-attacker.test:0<QUERY>input.origin=http://portal.test<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000666",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=</p><section>injected</section><p>:1|input.payload=<b>message</b>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<input value='probe'>:1|input.payload=<img src=x>:1|input.payload=plain message:0|input.payload=angle > only:0|input.payload=x & y:0<QUERY>input.payload=<not-closed<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000330",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=<b>message</b>:1|input.payload=<input value='probe'>:1|input.payload=<not-closed:0|input.payload=x & y:0|input.payload=angle > only:0|input.payload=<span data-marker='message'>x</span>:1|input.payload=javascript:alert(1):0<QUERY>input.payload={{template}}<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001769",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://evilaccount.internal:1|input.origin=wss://account.internal:1|input.origin=https://example.test:0|input.origin=https://account.internal-attacker.test:0|input.origin=https://deep.sub.account.internal:1|input.origin=https://not-account.internal:1|input.origin=http://localhost:0|input.origin=https://evil.test:0<QUERY>input.origin=http://account.internal<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001134",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<b>probe</b>:1|input.payload={{template}}:0|input.payload=<a href='/local'>link</a>:1|input.payload=<not-closed:0|input.payload=angle > only:0|input.payload=2 < 3 and 5 > 4:0|input.payload=<input value='probe'>:1|input.payload=<template>fragment</template>:1<QUERY>input.payload=x & y<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000737",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://not-account.internal:1|input.origin=null:0|input.origin=wss://account.internal:1|input.origin=ftp://account.internal:1|input.origin=https://account.internal-attacker.test:0|input.origin=https://account.internal.evil.test:0|input.origin=https://evil.test:0|input.origin=https://sub.account.internal:1<QUERY>input.origin=https://account.internal<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001709",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://example.test:0|input.origin=http://localhost:0|input.origin=wss://portal.test:1|input.origin=chrome-extension://portal.test:1|input.origin=null:0|input.origin=https://sub.portal.test:1|input.origin=http://portal.test:1|input.origin=https://portal.test-attacker.test:0<QUERY>input.origin=https://portal.test<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000858",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=javascript:alert(1):0|input.payload=<svg><title>x</title></svg>:1|input.payload=no markup here:0|input.payload=</p><section>injected</section><p>:1|input.payload=<not-closed:0|input.payload=<input value='probe'>:1|input.payload=<img src=x>:1|input.payload=plain profile:0<QUERY>input.payload=<a href='/local'>link</a><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001344",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<a href='/local'>link</a>:1|input.payload=<input value='probe'>:1|input.payload=x & y:0|input.payload=<template>fragment</template>:1|input.payload=2 < 3 and 5 > 4:0|input.payload=</p><section>injected</section><p>:1|input.payload=<not-closed:0|input.payload=javascript:alert(1):0<QUERY>input.payload=hello world<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000617",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=http://localhost:0|input.origin=ftp://safe.local:1|input.origin=https://evil.test:0|input.origin=https://deep.sub.safe.local:1|input.origin=https://evil.test/safe.local:1|input.origin=null:0|input.origin=https://example.test:0|input.origin=wss://safe.local:1<QUERY>input.origin=chrome-extension://safe.local<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000456",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=<not-closed:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=javascript:alert(1):0|input.payload=<b>message</b>:1|input.payload=<math><mtext>node</mtext></math>:1|input.payload=angle > only:0|input.payload=hello world:0|input.payload=<img src=x>:1<QUERY>input.payload=<a href='/local'>link</a><ANSWER>"
+        }
+      ]
+    },
+    "counterexample_at_k": {
+      "k": 10,
+      "score": 1.0,
+      "successful_programs": 600,
+      "total_programs": 600,
+      "by_family": {
+        "postmessage_origin": 1.0,
+        "dom_sink_injection": 1.0
+      },
+      "top1": 0.56,
+      "random_top1": 0.53125,
+      "top1_lift": 0.02875,
+      "precision_at_k": 0.544667,
+      "random_precision_at_k": 0.53125,
+      "random_success_at_k": 0.999997,
+      "metric_warning": "Counterexample@K is non-discriminative when the random success baseline is near one.",
+      "policy_visibility": "declared intended output is visible only to the verifier, not to the behavior model"
+    },
+    "memory_delta": 0.105833
+  },
+  "training": {
+    "epochs": 10,
+    "seconds": 75.323,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.719824,
+        "iid_accuracy": 0.507292,
+        "validation_family_accuracy": 0.503125
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.649578,
+        "iid_accuracy": 0.770833,
+        "validation_family_accuracy": 0.755208
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.503571,
+        "iid_accuracy": 0.7375,
+        "validation_family_accuracy": 0.757292
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.407297,
+        "iid_accuracy": 0.785417,
+        "validation_family_accuracy": 0.777083
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.369411,
+        "iid_accuracy": 0.802083,
+        "validation_family_accuracy": 0.802083
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.343332,
+        "iid_accuracy": 0.807292,
+        "validation_family_accuracy": 0.785417
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.309484,
+        "iid_accuracy": 0.817708,
+        "validation_family_accuracy": 0.7875
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.30355,
+        "iid_accuracy": 0.819792,
+        "validation_family_accuracy": 0.803125
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.268491,
+        "iid_accuracy": 0.796875,
+        "validation_family_accuracy": 0.778125
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.244584,
+        "iid_accuracy": 0.823958,
+        "validation_family_accuracy": 0.814583
+      }
+    ]
+  },
+  "research_guardrails": {
+    "family_holdout": true,
+    "black_box_only_input": true,
+    "failure_examples_preserved": true,
+    "claim_scope": "pilot only; no claim of production generalization"
+  }
+}

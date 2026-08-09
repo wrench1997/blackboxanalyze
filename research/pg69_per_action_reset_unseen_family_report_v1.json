@@ -1,0 +1,102 @@
+{
+  "protocol_id": "pg-pk-69-per-action-reset-unseen-family-v1",
+  "schema_version": "sift-pg69-per-action-reset-unseen-family-v1",
+  "status": "completed_evaluation",
+  "source": {
+    "pinned_image": "tavenli/pikachu-labs@sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "docker_case_count": 4,
+    "workflow_case_count": 8,
+    "workflow_source_sha256": "52d0d22bfb4784246f101f5efcc78356da94485885375553da586ef75e707d34",
+    "independent_implementation_count": 2,
+    "docker_errors": [],
+    "workflow_errors": []
+  },
+  "scope": {
+    "case_count": 12,
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "families": [
+      "injection",
+      "url_redirect",
+      "workflow_invariant",
+      "xss"
+    ],
+    "loopback_only": true,
+    "external_network": false,
+    "raw_payloads_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "metrics": {
+    "typed_positive_count": 12,
+    "known_typed_positive_count": 4,
+    "unknown_typed_positive_count": 8,
+    "negative_control_pass_count": 12,
+    "evidence_hash_valid_count": 12,
+    "unique_candidate_target_instance_count": 12,
+    "fresh_reset_per_action": true,
+    "get_post_covered": {
+      "GET": 7,
+      "POST": 5
+    },
+    "unknown_misname_count": 0,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 8,
+    "trace_episode_count": 3,
+    "trace_accepted_episode_count": 3,
+    "training_registry_families": [
+      "access_control",
+      "authentication",
+      "command_injection",
+      "injection",
+      "input_validation",
+      "logic",
+      "ordinary_response",
+      "template_injection",
+      "unknown_surface",
+      "url_redirect",
+      "xss"
+    ],
+    "family_holdout_candidates": [
+      "workflow_invariant"
+    ],
+    "family_holdout_candidate_count": 1,
+    "docker_container_per_case": true
+  },
+  "hard_gate": {
+    "status": "passed",
+    "checks": {
+      "real_docker_cases_completed": true,
+      "per_action_fresh_target": true,
+      "get_post_both_covered": true,
+      "typed_oracle_positive_authority": true,
+      "matched_negative_controls": true,
+      "evidence_hash_per_action": true,
+      "unknown_family_is_out_of_training_registry": true,
+      "unknown_family_strict_abstain": true,
+      "independent_implementations": true,
+      "trace_episodes_accepted": true,
+      "no_raw_persistence": true
+    },
+    "blocking_reasons": [],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "status": "hard_gate_passed_evaluation_only_no_promotion",
+    "evaluation_catalog_generated": true,
+    "training_catalog_generated": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "real_oracle_replay_is evaluation-only; post-training and multi-dataset promotion remain unproven"
+  },
+  "artifacts": {
+    "catalog": "research\\pg69_per_action_reset_unseen_family_catalog_v1.json",
+    "trace": "research\\pg69_per_action_reset_unseen_family_trace_v1.json",
+    "protocol": "research\\pg69_per_action_reset_unseen_family_protocol_v1.json"
+  },
+  "formal_claim": {
+    "allowed": false,
+    "reason": "PG-69 proves reset/unknown-abstain evaluation plumbing, not trained-model capability or broad web generalization"
+  }
+}

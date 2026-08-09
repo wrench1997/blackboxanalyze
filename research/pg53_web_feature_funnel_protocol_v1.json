@@ -1,0 +1,68 @@
+{
+  "protocol_id": "pg-pk-53-web-feature-funnel-v1",
+  "schema_version": "pg53-web-feature-funnel-protocol-v1",
+  "objective": "把网页安全 trace 的可观测信息按漏斗逐层筛选，保留跨实现稳定、低泄漏、低冗余且有留出效用的特征。",
+  "input": {
+    "source_report": "research/pg53_cross_source_typed_replay_report_v1.json",
+    "raw_request_or_response_bodies": false,
+    "authorized_loopback_only": true,
+    "typed_oracle_as_feature": false,
+    "surface_observation_model_eligible": false,
+    "surface_observation_requires_separate_leakage_review": true,
+    "generic_effect_geometry_has_no_field_names": true
+  },
+  "candidate_channels": {
+    "response_shape": true,
+    "paired_differential": true,
+    "surface_observation": "evaluator_only_until_leakage_clearance",
+    "generic_effect_geometry": "bounded_recursive_value_type_counts_without_field_names"
+  },
+  "funnel": [
+    {
+      "stage": "candidate",
+      "rule": "从 method、response shape、control/candidate 差分构造有界候选"
+    },
+    {
+      "stage": "observable_safe",
+      "rule": "删除 URL/token/source/seed/oracle/hash shortcut，仅保留可观测投影"
+    },
+    {
+      "stage": "quality",
+      "rule": "coverage >= 0.95、非 constant、cardinality 有界"
+    },
+    {
+      "stage": "source_leakage",
+      "rule": "source leakage NMI <= 0.60 且 distribution shift <= 0.50"
+    },
+    {
+      "stage": "seed_stability",
+      "rule": "seed stability >= 0.50，或属于预注册 transport variation"
+    },
+    {
+      "stage": "label_utility_audit",
+      "rule": "只用于审计 utility，不进入模型标签/特征串接，NMI >= 0.01"
+    },
+    {
+      "stage": "redundancy_pruned",
+      "rule": "pairwise exact similarity >= 0.98 时只保留效用更高者"
+    }
+  ],
+  "review": {
+    "reviewer_id": "codex-primary-feature-funnel-review-v1",
+    "review_required_before_downstream_ood": true,
+    "review_does_not_promote_training": true,
+    "review_does_not_write_long_term_memory": true,
+    "checks": [
+      "oracle_is_label_not_feature",
+      "source_seed_surface_audit_only",
+      "raw_request_response_forbidden",
+      "accepted_features_have_stats_and_decisions",
+      "at_least_two_sources_and_three_families"
+    ]
+  },
+  "promotion": {
+    "training_eligible": false,
+    "long_term_memory_write": false,
+    "formal_capability_claim": false
+  }
+}

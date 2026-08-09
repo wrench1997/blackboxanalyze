@@ -1,0 +1,532 @@
+{
+  "protocol_id": "sift-pg38-effect-pair-v1",
+  "schema_version": "pg-pk-38-effect-pair-report-v1",
+  "status": "diagnostic_only",
+  "catalog": {
+    "path": "research\\pg37_counterfactual_catalog_v1.json",
+    "sha256": "96d3713b89c31625489ff2a69c93cc54b6ce72bd0261f2dbb6a848e1aa0a272c",
+    "sample_count": 2880,
+    "pair_count": 1440,
+    "typed_positive_pair_count": 288,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "model": {
+    "class": "EffectPairModel",
+    "effect_head_family_agnostic": true,
+    "typed_oracle_consumed_by_model": false,
+    "positive_authority": false,
+    "candidate_control_delta_only_for_effect": true,
+    "raw_hashes_consumed": false
+  },
+  "training": {
+    "pair_count": 128,
+    "positive_count": 32,
+    "negative_count": 96,
+    "epochs": 160,
+    "seed": 20380802,
+    "selection": "minimum supervised plus held-out-seed objective; not accuracy-only",
+    "best_objective": 1.212115,
+    "history_tail": [
+      {
+        "epoch": 80,
+        "family_loss": 0.897973,
+        "effect_loss": 6e-06,
+        "dev_loss": 0.897968,
+        "selection_objective": 1.212268
+      },
+      {
+        "epoch": 100,
+        "family_loss": 0.897899,
+        "effect_loss": 6e-06,
+        "dev_loss": 0.897904,
+        "selection_objective": 1.212172
+      },
+      {
+        "epoch": 120,
+        "family_loss": 0.897923,
+        "effect_loss": 6e-06,
+        "dev_loss": 0.898049,
+        "selection_objective": 1.212246
+      },
+      {
+        "epoch": 140,
+        "family_loss": 0.897864,
+        "effect_loss": 6e-06,
+        "dev_loss": 0.897876,
+        "selection_objective": 1.212126
+      },
+      {
+        "epoch": 160,
+        "family_loss": 0.897856,
+        "effect_loss": 6e-06,
+        "dev_loss": 0.897865,
+        "selection_objective": 1.212115
+      }
+    ],
+    "checkpoint": "artifacts\\pg38-effect-pair\\effect_pair.pt",
+    "checkpoint_sha256": "6f29baeea283ecd75fc61ee6ee45400e96019151666d3e9e731d72642bfde5cd"
+  },
+  "thresholds": {
+    "confidence": 0.6,
+    "effect": 0.6,
+    "novelty": 8.0
+  },
+  "splits": {
+    "train": {
+      "count": 128,
+      "positive_count": 32,
+      "negative_count": 96,
+      "accepted_count": 12,
+      "effect_accepted_count": 32,
+      "false_positive_count": 0,
+      "effect_false_positive_count": 0,
+      "typed_recall": 0.375,
+      "effect_recall_any_family": 1.0,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_precision": 1.0,
+      "ece": 4e-06,
+      "abstain_rate": 0.75,
+      "median_queries": 2.0,
+      "mean_effect_probability": 0.250002,
+      "max_train_distance": 0.006176,
+      "by_family": {
+        "access_control": {
+          "count": 32,
+          "positive_count": 8,
+          "typed_recall": 0.0,
+          "effect_recall": 1.0
+        },
+        "authentication": {
+          "count": 32,
+          "positive_count": 8,
+          "typed_recall": 0.5,
+          "effect_recall": 1.0
+        },
+        "injection": {
+          "count": 32,
+          "positive_count": 8,
+          "typed_recall": 0.0,
+          "effect_recall": 1.0
+        },
+        "xss": {
+          "count": 32,
+          "positive_count": 8,
+          "typed_recall": 1.0,
+          "effect_recall": 1.0
+        }
+      }
+    },
+    "seed_holdout": {
+      "count": 64,
+      "positive_count": 16,
+      "negative_count": 48,
+      "accepted_count": 6,
+      "effect_accepted_count": 16,
+      "false_positive_count": 0,
+      "effect_false_positive_count": 0,
+      "typed_recall": 0.375,
+      "effect_recall_any_family": 1.0,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_precision": 1.0,
+      "ece": 4e-06,
+      "abstain_rate": 0.75,
+      "median_queries": 2.0,
+      "mean_effect_probability": 0.250002,
+      "max_train_distance": 0.006176,
+      "by_family": {
+        "access_control": {
+          "count": 16,
+          "positive_count": 4,
+          "typed_recall": 0.0,
+          "effect_recall": 1.0
+        },
+        "authentication": {
+          "count": 16,
+          "positive_count": 4,
+          "typed_recall": 0.5,
+          "effect_recall": 1.0
+        },
+        "injection": {
+          "count": 16,
+          "positive_count": 4,
+          "typed_recall": 0.0,
+          "effect_recall": 1.0
+        },
+        "xss": {
+          "count": 16,
+          "positive_count": 4,
+          "typed_recall": 1.0,
+          "effect_recall": 1.0
+        }
+      }
+    },
+    "surface_holdout": {
+      "count": 96,
+      "positive_count": 24,
+      "negative_count": 72,
+      "accepted_count": 0,
+      "effect_accepted_count": 0,
+      "false_positive_count": 0,
+      "effect_false_positive_count": 0,
+      "typed_recall": 0.0,
+      "effect_recall_any_family": 0.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_precision": 0.75,
+      "ece": 0.008395,
+      "abstain_rate": 1.0,
+      "median_queries": 2.0,
+      "mean_effect_probability": 0.241611,
+      "max_train_distance": 24494.896484,
+      "by_family": {
+        "access_control": {
+          "count": 24,
+          "positive_count": 6,
+          "typed_recall": 0.0,
+          "effect_recall": 0.0
+        },
+        "authentication": {
+          "count": 24,
+          "positive_count": 6,
+          "typed_recall": 0.0,
+          "effect_recall": 0.0
+        },
+        "injection": {
+          "count": 24,
+          "positive_count": 6,
+          "typed_recall": 0.0,
+          "effect_recall": 0.0
+        },
+        "xss": {
+          "count": 24,
+          "positive_count": 6,
+          "typed_recall": 0.0,
+          "effect_recall": 0.0
+        }
+      }
+    },
+    "family_holdout": {
+      "count": 144,
+      "positive_count": 36,
+      "negative_count": 108,
+      "accepted_count": 0,
+      "effect_accepted_count": 18,
+      "false_positive_count": 0,
+      "effect_false_positive_count": 0,
+      "typed_recall": 0.0,
+      "effect_recall_any_family": 0.5,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_precision": 0.857143,
+      "ece": 0.00403,
+      "abstain_rate": 0.875,
+      "median_queries": 2.0,
+      "mean_effect_probability": 0.245976,
+      "max_train_distance": 24494.896484,
+      "by_family": {
+        "logic": {
+          "count": 72,
+          "positive_count": 18,
+          "typed_recall": 0.0,
+          "effect_recall": 0.666667
+        },
+        "url_redirect": {
+          "count": 72,
+          "positive_count": 18,
+          "typed_recall": 0.0,
+          "effect_recall": 0.333333
+        }
+      }
+    },
+    "ood_source": {
+      "count": 144,
+      "positive_count": 36,
+      "negative_count": 108,
+      "accepted_count": 0,
+      "effect_accepted_count": 18,
+      "false_positive_count": 0,
+      "effect_false_positive_count": 0,
+      "typed_recall": 0.0,
+      "effect_recall_any_family": 0.5,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_precision": 0.857143,
+      "ece": 0.00403,
+      "abstain_rate": 0.875,
+      "median_queries": 2.0,
+      "mean_effect_probability": 0.245976,
+      "max_train_distance": 24494.896484,
+      "by_family": {
+        "command_injection": {
+          "count": 72,
+          "positive_count": 18,
+          "typed_recall": 0.0,
+          "effect_recall": 0.333333
+        },
+        "input_validation": {
+          "count": 72,
+          "positive_count": 18,
+          "typed_recall": 0.0,
+          "effect_recall": 0.666667
+        }
+      }
+    },
+    "source_holdout": {
+      "count": 288,
+      "positive_count": 72,
+      "negative_count": 216,
+      "accepted_count": 18,
+      "effect_accepted_count": 48,
+      "false_positive_count": 0,
+      "effect_false_positive_count": 0,
+      "typed_recall": 0.25,
+      "effect_recall_any_family": 0.666667,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_precision": 0.9,
+      "ece": 0.002801,
+      "abstain_rate": 0.833333,
+      "median_queries": 2.0,
+      "mean_effect_probability": 0.247205,
+      "max_train_distance": 24494.896484,
+      "by_family": {
+        "access_control": {
+          "count": 72,
+          "positive_count": 18,
+          "typed_recall": 0.0,
+          "effect_recall": 0.666667
+        },
+        "authentication": {
+          "count": 72,
+          "positive_count": 18,
+          "typed_recall": 0.333333,
+          "effect_recall": 0.666667
+        },
+        "injection": {
+          "count": 72,
+          "positive_count": 18,
+          "typed_recall": 0.0,
+          "effect_recall": 0.666667
+        },
+        "xss": {
+          "count": 72,
+          "positive_count": 18,
+          "typed_recall": 0.666667,
+          "effect_recall": 0.666667
+        }
+      }
+    },
+    "negative_control": {
+      "count": 288,
+      "positive_count": 0,
+      "negative_count": 288,
+      "accepted_count": 0,
+      "effect_accepted_count": 0,
+      "false_positive_count": 0,
+      "effect_false_positive_count": 0,
+      "typed_recall": 0.0,
+      "effect_recall_any_family": 0.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "effect_false_positive_rate": 0.0,
+      "abstain_precision": 1.0,
+      "ece": 4e-06,
+      "abstain_rate": 1.0,
+      "median_queries": 2.0,
+      "mean_effect_probability": 4e-06,
+      "max_train_distance": 0.000488,
+      "by_family": {
+        "ordinary_response": {
+          "count": 144,
+          "positive_count": 0,
+          "typed_recall": 0.0,
+          "effect_recall": 0.0
+        },
+        "unknown_surface": {
+          "count": 144,
+          "positive_count": 0,
+          "typed_recall": 0.0,
+          "effect_recall": 0.0
+        }
+      }
+    }
+  },
+  "capability_gate": {
+    "schema_version": "sift-model-capability-gate-v1",
+    "claim_id": "pg38-effect-pair",
+    "status": "blocked",
+    "claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "unit_tests_are_not_capability_evidence": true,
+    "reasons": [
+      "abstain_precision_regression",
+      "calibration_regression",
+      "cell_pg38-gated-atlas-dev-s361_abstain_precision_regression",
+      "cell_pg38-gated-atlas-dev-s361_calibration_regression",
+      "cell_pg38-gated-atlas-dev-s367_abstain_precision_regression",
+      "cell_pg38-gated-atlas-dev-s367_calibration_regression",
+      "cell_pg38-gated-atlas-dev-s373_abstain_precision_regression",
+      "cell_pg38-gated-atlas-dev-s373_calibration_regression",
+      "cell_pg38-gated-atlas-family_holdout-s361_abstain_precision_regression",
+      "cell_pg38-gated-atlas-family_holdout-s361_calibration_regression",
+      "cell_pg38-gated-atlas-family_holdout-s361_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-atlas-family_holdout-s361_precision_regression",
+      "cell_pg38-gated-atlas-family_holdout-s367_abstain_precision_regression",
+      "cell_pg38-gated-atlas-family_holdout-s367_calibration_regression",
+      "cell_pg38-gated-atlas-family_holdout-s367_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-atlas-family_holdout-s367_precision_regression",
+      "cell_pg38-gated-atlas-family_holdout-s373_abstain_precision_regression",
+      "cell_pg38-gated-atlas-family_holdout-s373_calibration_regression",
+      "cell_pg38-gated-atlas-family_holdout-s373_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-atlas-family_holdout-s373_precision_regression",
+      "cell_pg38-gated-atlas-negative_control-s361_calibration_regression",
+      "cell_pg38-gated-atlas-negative_control-s361_precision_regression",
+      "cell_pg38-gated-atlas-negative_control-s367_calibration_regression",
+      "cell_pg38-gated-atlas-negative_control-s367_precision_regression",
+      "cell_pg38-gated-atlas-negative_control-s373_calibration_regression",
+      "cell_pg38-gated-atlas-negative_control-s373_precision_regression",
+      "cell_pg38-gated-atlas-ood_source-s361_abstain_precision_regression",
+      "cell_pg38-gated-atlas-ood_source-s361_calibration_regression",
+      "cell_pg38-gated-atlas-ood_source-s361_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-atlas-ood_source-s361_precision_regression",
+      "cell_pg38-gated-atlas-ood_source-s367_abstain_precision_regression",
+      "cell_pg38-gated-atlas-ood_source-s367_calibration_regression",
+      "cell_pg38-gated-atlas-ood_source-s367_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-atlas-ood_source-s367_precision_regression",
+      "cell_pg38-gated-atlas-ood_source-s373_abstain_precision_regression",
+      "cell_pg38-gated-atlas-ood_source-s373_calibration_regression",
+      "cell_pg38-gated-atlas-ood_source-s373_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-atlas-ood_source-s373_precision_regression",
+      "cell_pg38-gated-atlas-train-s361_abstain_precision_regression",
+      "cell_pg38-gated-atlas-train-s361_calibration_regression",
+      "cell_pg38-gated-atlas-train-s367_abstain_precision_regression",
+      "cell_pg38-gated-atlas-train-s367_calibration_regression",
+      "cell_pg38-gated-atlas-train-s373_abstain_precision_regression",
+      "cell_pg38-gated-atlas-train-s373_calibration_regression",
+      "cell_pg38-gated-orbit-dev-s361_abstain_precision_regression",
+      "cell_pg38-gated-orbit-dev-s361_calibration_regression",
+      "cell_pg38-gated-orbit-dev-s367_abstain_precision_regression",
+      "cell_pg38-gated-orbit-dev-s367_calibration_regression",
+      "cell_pg38-gated-orbit-dev-s373_abstain_precision_regression",
+      "cell_pg38-gated-orbit-dev-s373_calibration_regression",
+      "cell_pg38-gated-orbit-family_holdout-s361_abstain_precision_regression",
+      "cell_pg38-gated-orbit-family_holdout-s361_calibration_regression",
+      "cell_pg38-gated-orbit-family_holdout-s361_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-orbit-family_holdout-s361_precision_regression",
+      "cell_pg38-gated-orbit-family_holdout-s367_abstain_precision_regression",
+      "cell_pg38-gated-orbit-family_holdout-s367_calibration_regression",
+      "cell_pg38-gated-orbit-family_holdout-s367_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-orbit-family_holdout-s367_precision_regression",
+      "cell_pg38-gated-orbit-family_holdout-s373_abstain_precision_regression",
+      "cell_pg38-gated-orbit-family_holdout-s373_calibration_regression",
+      "cell_pg38-gated-orbit-family_holdout-s373_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-orbit-family_holdout-s373_precision_regression",
+      "cell_pg38-gated-orbit-negative_control-s361_calibration_regression",
+      "cell_pg38-gated-orbit-negative_control-s361_precision_regression",
+      "cell_pg38-gated-orbit-negative_control-s367_calibration_regression",
+      "cell_pg38-gated-orbit-negative_control-s367_precision_regression",
+      "cell_pg38-gated-orbit-negative_control-s373_calibration_regression",
+      "cell_pg38-gated-orbit-negative_control-s373_precision_regression",
+      "cell_pg38-gated-orbit-ood_source-s361_abstain_precision_regression",
+      "cell_pg38-gated-orbit-ood_source-s361_calibration_regression",
+      "cell_pg38-gated-orbit-ood_source-s361_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-orbit-ood_source-s361_precision_regression",
+      "cell_pg38-gated-orbit-ood_source-s367_abstain_precision_regression",
+      "cell_pg38-gated-orbit-ood_source-s367_calibration_regression",
+      "cell_pg38-gated-orbit-ood_source-s367_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-orbit-ood_source-s367_precision_regression",
+      "cell_pg38-gated-orbit-ood_source-s373_abstain_precision_regression",
+      "cell_pg38-gated-orbit-ood_source-s373_calibration_regression",
+      "cell_pg38-gated-orbit-ood_source-s373_holdout_recall_gain_below_threshold",
+      "cell_pg38-gated-orbit-ood_source-s373_precision_regression",
+      "cell_pg38-gated-orbit-train-s361_abstain_precision_regression",
+      "cell_pg38-gated-orbit-train-s361_calibration_regression",
+      "cell_pg38-gated-orbit-train-s367_abstain_precision_regression",
+      "cell_pg38-gated-orbit-train-s367_calibration_regression",
+      "cell_pg38-gated-orbit-train-s373_abstain_precision_regression",
+      "cell_pg38-gated-orbit-train-s373_calibration_regression",
+      "holdout_recall_gain_below_threshold",
+      "precision_regression",
+      "train_eval_source_id_overlap",
+      "train_eval_source_overlap",
+      "worst_case_abstain_precision_regression",
+      "worst_case_calibration_regression",
+      "worst_case_holdout_recall_gain_below_threshold",
+      "worst_case_precision_regression"
+    ],
+    "requirements": {
+      "min_distinct_dataset_ids": 3,
+      "min_distinct_source_hashes": 2,
+      "min_independent_seeds": 3,
+      "min_target_instances": 3,
+      "min_holdout_runs": 1,
+      "required_roles": [
+        "dev",
+        "family_holdout",
+        "negative_control",
+        "ood_source",
+        "train"
+      ],
+      "min_holdout_recall_gain": 0.01,
+      "max_precision_regression": 0.0,
+      "max_false_positive_rate_regression": 0.0,
+      "max_abstain_precision_regression": 0.0,
+      "max_ece_regression": 0.0,
+      "max_false_positive_count": 0,
+      "require_worst_case_metrics": true,
+      "require_cell_metrics": true
+    },
+    "summary": {
+      "dataset_test_count": 30,
+      "distinct_dataset_count": 30,
+      "distinct_source_hash_count": 2,
+      "independent_seed_count": 3,
+      "target_instance_count": 1440,
+      "holdout_run_count": 6,
+      "roles_observed": [
+        "dev",
+        "family_holdout",
+        "negative_control",
+        "ood_source",
+        "train"
+      ],
+      "false_positive_count": 0
+    },
+    "baseline_metrics": {
+      "abstain_precision": 1.0,
+      "typed_recall": 0.0,
+      "median_queries": 2.0,
+      "ece": 0.0,
+      "false_positive_rate": 0.0,
+      "precision": 1.0
+    },
+    "candidate_metrics": {
+      "abstain_precision": 0.857143,
+      "typed_recall": 0.0,
+      "median_queries": 2.0,
+      "ece": 0.00403,
+      "false_positive_rate": 0.0,
+      "precision": 0.0
+    },
+    "data_tests_are_required_for_improvement_claim": true,
+    "raw_data_retained": false
+  },
+  "promotion": {
+    "status": "quarantined_candidate",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "training_allowed": false,
+  "memory_promotion_allowed": false,
+  "manifest_sha256": "46a4585056e96658756a0b7c2a8ffc50a6eaab5cc194ef3529731b4d556677f3"
+}

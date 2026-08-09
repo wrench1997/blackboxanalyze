@@ -1,0 +1,74 @@
+{
+  "protocol_id": "pg-pk-83-cross-seed-geometry-holdout-v1",
+  "schema_version": "pg83-cross-seed-geometry-holdout-transformer-protocol-v1",
+  "input_contract": {
+    "family_name_in_tokens": false,
+    "source_id_in_tokens": false,
+    "implementation_in_tokens": false,
+    "route_words_in_tokens": false,
+    "raw_probe_in_tokens": false,
+    "raw_response_body_in_tokens": false,
+    "typed_oracle_before_target_marker": false,
+    "projection_schema": "canonical_effect_projection_v2"
+  },
+  "split_contract": {
+    "train_sources": [
+      "pg34/base",
+      "pg35/alpha"
+    ],
+    "dev_sources": [
+      "pg35/beta"
+    ],
+    "holdout_sources": [
+      "pg36/north",
+      "pg36/south"
+    ],
+    "unknown_family_training_forbidden": true
+  },
+  "training_contract": {
+    "pg79_collection_gate_required": true,
+    "unknown_family_training_forbidden": true,
+    "family_and_source_features_forbidden": true,
+    "oracle_after_target_only": true,
+    "raw_persistence_forbidden": true
+  },
+  "required_gates": {
+    "dev_confirm_recall_min": 0.8,
+    "dev_false_accept_zero": true,
+    "source_holdout_confirm_recall_min": 0.8,
+    "source_holdout_false_accept_zero": true,
+    "unknown_strict_abstain": true,
+    "independent_second_implementation_required": true
+  },
+  "run_result": {
+    "capability_gate": {
+      "status": "passed",
+      "checks": {
+        "dev_confirm_recall": true,
+        "dev_false_accept_zero": true,
+        "source_holdout_confirm_recall": true,
+        "source_holdout_false_accept_zero": true,
+        "unknown_strict_abstain": true,
+        "family_source_not_in_tokens": true
+      },
+      "claim_allowed": false
+    },
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "next_experiment": "PG82 independent second implementation and family holdout",
+  "seed_contract": {
+    "train_seeds": [
+      7901,
+      7907
+    ],
+    "dev_seeds": [
+      7911
+    ],
+    "holdout_sources": [
+      "pg36/north",
+      "pg36/south"
+    ],
+    "seed_in_family_source_tokens": false
+  }
+}

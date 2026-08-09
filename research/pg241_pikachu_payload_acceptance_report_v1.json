@@ -1,0 +1,2315 @@
+{
+  "protocol_id": "pg-pk-241-payload-acceptance-v1",
+  "schema_version": "pg241-pikachu-payload-acceptance-report-v1",
+  "status": "completed_local_get_post_ai_reference_payload_acceptance",
+  "device": "cuda",
+  "model": {
+    "variant": "frozen_xxl_field_token_decoder",
+    "base_parameter_count": 101487169,
+    "online_weight_update": false,
+    "ai_selects_abstract_channel": true,
+    "runtime_binder_is_vetted_local_catalog": true
+  },
+  "runtime": {
+    "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+    "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+    "loopback_only": true,
+    "fresh_container_per_episode": true,
+    "no_volume_or_bind_mount": true
+  },
+  "seeds": [
+    24101,
+    24102
+  ],
+  "counts": {
+    "fresh_container_count": 14,
+    "get_episode_count": 10,
+    "post_episode_count": 4,
+    "database_health_gate_count": 14,
+    "ai_send_count": 12,
+    "reference_send_count": 12,
+    "confirmed_positive_count": 12,
+    "reference_positive_count": 12,
+    "model_missed_positive_count": 0,
+    "negative_clean_count": 14,
+    "forbidden_timing_abstain_count": 2,
+    "false_positive_count": 0,
+    "wire_display_count": 52
+  },
+  "results": [
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24101,
+      "target_instance_hash": "8ed175adf62df33c108c2b73b46e15f37e6b8e629f1079b0a6cf1c09f08e5b6f",
+      "route": "/vul/sqli/sqli_id.php",
+      "method": "POST",
+      "fields": [
+        "id",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24101-0",
+        "reset_epoch": "24101-0",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "8ed175adf62df33c108c2b73b46e15f37e6b8e629f1079b0a6cf1c09f08e5b6f",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "ca2288476f1563243b359af50d2ee16ec554e6f60f5ca1231a84237381cb9068",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "c864797b0add7d5e62abd2541df4cce74a49739d1408c05a7ea8f046e3380448",
+        "projection_sha256": "c57b0a893ee2318afed90f374c7cd1266696fc719d5072d0e7ecf622ce531ef3"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "c864797b0add7d5e62abd2541df4cce74a49739d1408c05a7ea8f046e3380448",
+        "projection_sha256": "c57b0a893ee2318afed90f374c7cd1266696fc719d5072d0e7ecf622ce531ef3"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9980748891830444,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.988021731376648,
+          "failure": "no_effect",
+          "failure_confidence": 0.9958992600440979,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "POST",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "f49c0515e936fa22ab5c8b2bd093e5198ad0d715052aab29ab72012134d273e4"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "POST",
+          "path": "/vul/sqli/sqli_id.php",
+          "placement": "form",
+          "field_names": [
+            "id",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "5597dd1f52ca035f7c9eb97a76d866476a32ab9f55fd630a216e897883942fdb"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 7,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "f5d2f10882b516f79b885e75d1acd033de78a89f42006dcec5d98acf7020ee56",
+          "projection_sha256": "6643772219a8f9ca35f4492917f13d43a354fe20fd127854971799b41d95e6d1"
+        },
+        "candidate": {
+          "candidate_id": "b4769ae2e14c69e39cc4",
+          "family": "injection",
+          "method": "POST",
+          "path": "/vul/sqli/sqli_id.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "5320c099366078137ea8a96d09a2b53bab935e6ebea91f0917eca5a35967c1bd",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "POST",
+          "path": "/vul/sqli/sqli_id.php",
+          "placement": "form",
+          "field_names": [
+            "id",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "14b58c77be38a5f078c8afbf31af6912b7a78670b6984ce2b47a54ca2ed9f8b3"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 7,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "f5d2f10882b516f79b885e75d1acd033de78a89f42006dcec5d98acf7020ee56",
+          "projection_sha256": "6643772219a8f9ca35f4492917f13d43a354fe20fd127854971799b41d95e6d1"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "28f340ecf733ea72a6aae4d1fd73a6dd1a734e0b3e0719134594c467edbbee4c",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24101,
+      "target_instance_hash": "9952d102c30f556e51e27b130c7bdd0623496f03f1f401b1fd19728cc3b1693a",
+      "route": "/vul/sqli/sqli_search.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24101-1",
+        "reset_epoch": "24101-1",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "9952d102c30f556e51e27b130c7bdd0623496f03f1f401b1fd19728cc3b1693a",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "d10cf5734a966eb6e4f40a0d886496b91b9bb5c9d642ae18782933a5bcdc43d2",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "3ab9be6eeaee950406e8b4b51567dd24b2d0601ae149ba8f73b5caa1dfe37a2c",
+        "projection_sha256": "fc9143e61bc25486a063ab2b49160345ced9042c87d51a828c00558db157357b"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "3ab9be6eeaee950406e8b4b51567dd24b2d0601ae149ba8f73b5caa1dfe37a2c",
+        "projection_sha256": "fc9143e61bc25486a063ab2b49160345ced9042c87d51a828c00558db157357b"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "19d2b0604c45aa82b3881bb46da33a161bcbb9f19af3a069e4b6d98b4ddb2226"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_search.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "64ce47b05239bb5f9bbcaa64617ff0a1143df48b21eb44b2f7bf924330f58c5c"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 14,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "007a2b51ee7fae615c45bfc0d4316e4d1cdb1530cb86ee7bf920bb7d4a7879d7",
+          "projection_sha256": "0b591299293d580d20601a5a918e06d9a91509e3e68d2ae8df197831cccc7173"
+        },
+        "candidate": {
+          "candidate_id": "cd9d06051c7b92bef811",
+          "family": "injection",
+          "method": "GET",
+          "path": "/vul/sqli/sqli_search.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "a1dd85c0fbded1fc583bd53dbc8fbb2ece556775d272cbbcd96b57643c0d2f83",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_search.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "5ac534399475d071cfdccef01f01677ac079a7aac25209e603880a0404ad6c7c"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 14,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "80335ada5a6fda5329b0b201029b952c6c49df731ded591a81c2cb0a147bf4f5",
+          "projection_sha256": "737892ce0f5ac59ff24163cb18b000068d286726327b77f4815d807e5b0fc3fd"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "0910023760ef72796ad7ec93c6718bb35e42d9574457b2badc7cf3f090c0dfd2",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24101,
+      "target_instance_hash": "a49b7b5a6c64c7388a19d2dfb8f035d4796df3ecd19cd6974ebfc610bdd7f8b7",
+      "route": "/vul/sqli/sqli_str.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24101-2",
+        "reset_epoch": "24101-2",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "a49b7b5a6c64c7388a19d2dfb8f035d4796df3ecd19cd6974ebfc610bdd7f8b7",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "3cdf4030c1fdbe4b2027ce99aa7187e80f364ac7386ed2c7f2880bf1fb2d4cb8",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "d686d719031c130f4dd5373e7672dd7b488cdb8f910d93ccdee4d0796e332b41",
+        "projection_sha256": "3ce6e9ae662c4f036cb79d163c42287792978fdcdf9382d8fa4e1cdfdbdcdeb8"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "d686d719031c130f4dd5373e7672dd7b488cdb8f910d93ccdee4d0796e332b41",
+        "projection_sha256": "3ce6e9ae662c4f036cb79d163c42287792978fdcdf9382d8fa4e1cdfdbdcdeb8"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "fb3936617d80e76e757bd91ce8c6ab43fd1eaf677d08b240c4db1a8519a02637"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_str.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "4f52a050cb2eb0cec759718ebe8d510391eef9161c33878cb82b2dd169e8883e"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "084ae1cd6378fecf4fbdf3f9fa3e38787c4e8cd1351a3a4245b6ec4c01cb1930",
+          "projection_sha256": "f078fb56f91200fadd55334788e21ae828dab643c7dc0a7d0fdd5e48666a5fde"
+        },
+        "candidate": {
+          "candidate_id": "da544529fd390982dcb4",
+          "family": "injection",
+          "method": "GET",
+          "path": "/vul/sqli/sqli_str.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "685b49d43c164265f50290f9fd85c06467c135a770ca33541a6748a08c0f6d9b",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_str.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "e51e4a90011d2d013cf4bd7c7afb5a9de5af5474b445b3d034e42d16ee11c9d5"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "084ae1cd6378fecf4fbdf3f9fa3e38787c4e8cd1351a3a4245b6ec4c01cb1930",
+          "projection_sha256": "f078fb56f91200fadd55334788e21ae828dab643c7dc0a7d0fdd5e48666a5fde"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "02b8f7beab1582a412c298a5fde121956a27d1a2c0af1a575989789edf245a5f",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24101,
+      "target_instance_hash": "0be358d4b3367afc025eca0f836ff6a8b351f01bc1e91fec89b16a8a2bc07875",
+      "route": "/vul/sqli/sqli_x.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24101-3",
+        "reset_epoch": "24101-3",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "0be358d4b3367afc025eca0f836ff6a8b351f01bc1e91fec89b16a8a2bc07875",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "febdf00866822bcf6e6e1a1822bb2b7d7ce0381c793a349a72629fc843bf93a2",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "11b280f5dc20f887504f13a0344795187de0a9e9794864141b5792f3196b1a19",
+        "projection_sha256": "9fea9d32637b038a45c17b284f74c5d7aa0b6e4aebeb0c0e8a5b4a01555082b0"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "11b280f5dc20f887504f13a0344795187de0a9e9794864141b5792f3196b1a19",
+        "projection_sha256": "9fea9d32637b038a45c17b284f74c5d7aa0b6e4aebeb0c0e8a5b4a01555082b0"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "f0694873624d2532720edd0f22d8754a358518f0f0ff0bd2265f3cb4d479965c"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_x.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "8595020d1aa5cf15f362fd5c4ec4c5c633a07eb014bf6997a0585f5fd02b9b56"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "c0c99e67ca6ac8b9a5f2354d82c08652a059f0e33bcac06161237a287259d013",
+          "projection_sha256": "d8ea254fb564ecf12617d76010ce6d3a82e72fb1531b7315a3768d793c2d66ba"
+        },
+        "candidate": {
+          "candidate_id": "83e31ae27e86d884b674",
+          "family": "injection",
+          "method": "GET",
+          "path": "/vul/sqli/sqli_x.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "740107b95b4bbcb98d02aa42cec667464be3e9f1cb7951a6ec0fb89ddc45f146",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_x.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "bd2c3d12f8d7cf8df12067621076ed521a7dd4810ed76d480d64bfe956d8b7c5"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "c0c99e67ca6ac8b9a5f2354d82c08652a059f0e33bcac06161237a287259d013",
+          "projection_sha256": "d8ea254fb564ecf12617d76010ce6d3a82e72fb1531b7315a3768d793c2d66ba"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "3991b471c9112158ff21ae9449fe0084175e687a2973cab4a2ec3dab233e68ea",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24101,
+      "target_instance_hash": "8f22c10efffedf65f659b61b68ff3aef1555c963e236821d382fef1da5904313",
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24101-4",
+        "reset_epoch": "24101-4",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "8f22c10efffedf65f659b61b68ff3aef1555c963e236821d382fef1da5904313",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "5eee1ee3ca0312aac238dd56a24081314e02d9c39f1314e913f70440a60a15cd",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "8bbbccfa18c2e0928bb964257320b4c8e0eafb0860a15a39de217c7958065c8f",
+        "projection_sha256": "16c8daa662602700a720b4a70b661e6ee7bb93fa55c8414a8025ef4e029951ab"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "8bbbccfa18c2e0928bb964257320b4c8e0eafb0860a15a39de217c7958065c8f",
+        "projection_sha256": "16c8daa662602700a720b4a70b661e6ee7bb93fa55c8414a8025ef4e029951ab"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "c5cb8b8166b4cdc74ae27293935facf2695e0fbca0ab081292c0a9bc88d363d5"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_blind_b.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "829ada3bb7ccaef77cb3bac6e6258ce547a0b3e2d50c6f8fece7fa67dd49679a"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 3,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "614c7bd304d868865c11feb6d6a8770cd33db05b3a9013523b1b73fb5341be58",
+          "projection_sha256": "44293cda37cdb4df0408c659a86b068927e456b421e91650cecff3d38678f2d2"
+        },
+        "candidate": {
+          "candidate_id": "63660c7c68ee25e46613",
+          "family": "injection",
+          "method": "GET",
+          "path": "/vul/sqli/sqli_blind_b.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "fd351cfeffceb63d98898a655fa8ec14828bc7b27f0788fd5c80e0dfd52d66ba",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_blind_b.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "66f35688d4cb13bdcc1ea0ab7c3c4f628447419866fc937dd179f6c656014313"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 3,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "52220904b32e106700db4620c643e82b37ef99e8ada424643b085b6d00af303a",
+          "projection_sha256": "b500afcf973ecc409c5971b5820c5561690f175b5bddade1e579e8a5a856d525"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "64cddd37f1d273d4d0d96eb10e489c9f97ac0bf777af535c3bb495753e74b128",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24101,
+      "target_instance_hash": "8b159036b0cee0aa464ca801f69a42faf7e8fc311674eef3e885428b2f3f65a7",
+      "route": "/vul/sqli/sqli_widebyte.php",
+      "method": "POST",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24101-5",
+        "reset_epoch": "24101-5",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "8b159036b0cee0aa464ca801f69a42faf7e8fc311674eef3e885428b2f3f65a7",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "7578eddb5fda2a2279bc5bf72ae24ec1dbbf3c324498ad2c687f6e93687e042b",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "c5121877723c1751188049a7c892a97ad75f9c8d536f2ae014d248206591c558",
+        "projection_sha256": "e2b5b93269521bb02919f7fa6e9a36b19eccc5396b62e6f4b1105247c3981ae9"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "c5121877723c1751188049a7c892a97ad75f9c8d536f2ae014d248206591c558",
+        "projection_sha256": "e2b5b93269521bb02919f7fa6e9a36b19eccc5396b62e6f4b1105247c3981ae9"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9980748891830444,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.988021731376648,
+          "failure": "no_effect",
+          "failure_confidence": 0.9958992600440979,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "POST",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "a4c569fbcce9dc561c7a497328aff04e383d0a33b7f4c1dd15100104f94ef6d7"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "POST",
+          "path": "/vul/sqli/sqli_widebyte.php",
+          "placement": "form",
+          "field_names": [],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "d4a67f1e32bc7a20ef9361088b6f455a33649138e67b8a32ae84b13e7cc3b603"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "ba6a1f521227bf3d5182722cc45ba0183fd994d29f9b027b4729ff59ba392b5c",
+          "projection_sha256": "c349c70862ce7bcfa4450eeaf7b36f9eb9ceae66f8dd19f0cfaa154489743f61"
+        },
+        "candidate": {
+          "candidate_id": "25148a3f227a11dce207",
+          "family": "injection",
+          "method": "POST",
+          "path": "/vul/sqli/sqli_widebyte.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "c8c12d08fe570fe6e0d8139e4ea62288e9f8ff340756733c405b65e581007de6",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "POST",
+          "path": "/vul/sqli/sqli_widebyte.php",
+          "placement": "form",
+          "field_names": [],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "02531439e07f1bbfee9d17137d592a4b74bb98db768b3b347789405082aeeba9"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 3,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "7de1203dd8c466891bde488c813c065c673779112bbccc445cf65e567e606eca",
+          "projection_sha256": "9adeacac85a2f9ca52e01c71fd9b1f643eb12fe11ad4404f37b2b1146c95e50d"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "8695a101ef0000f32506965f214ff9f83899cf909fe8be8ab961b6e7ed1a9ee6",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24101,
+      "target_instance_hash": "e8db5580d676832ed4bfb298d418613ce617c49765241a7c28d43de250fea94d",
+      "route": "/vul/sqli/sqli_blind_t.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24101-6",
+        "reset_epoch": "24101-6",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "e8db5580d676832ed4bfb298d418613ce617c49765241a7c28d43de250fea94d",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "ef907b5f39f77f0e1199ce5f149b919321197ec455551b040c6025ab0e64d310",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "7993469d9e960d4b408ae41083b55b5940a2c28ff1046cda201e69f22092afb7",
+        "projection_sha256": "a52788c7bfd83ba9b20c5b28835e1dfc6c634bd58295cea69dbe555fe92ac39b"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "7993469d9e960d4b408ae41083b55b5940a2c28ff1046cda201e69f22092afb7",
+        "projection_sha256": "a52788c7bfd83ba9b20c5b28835e1dfc6c634bd58295cea69dbe555fe92ac39b"
+      },
+      "ai": {
+        "sent": false,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "2fa5b18b768977b2b39acaf489f7ad1ac916b0210d85c6c54bdc082d013ce8df"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false
+      },
+      "reference": {
+        "sent": false,
+        "raw_payload_stored": false,
+        "raw_response_stored": false
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": false,
+        "confirmed_positive": false,
+        "reasons": [
+          "timing_channel_forbidden"
+        ],
+        "evidence_hash": "4225a117d2e57e889c23972d4f1ef4c969a06a821e78788ca2550b660543c6a0",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "oracle_unavailable",
+      "repair_action": "abstain",
+      "repair_outcome": "abstain_or_retry",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24102,
+      "target_instance_hash": "a0b37a0d266cc0199ed2887bed57d6b4ada3ce7d8c5021e095a7d937f6b34fe8",
+      "route": "/vul/sqli/sqli_id.php",
+      "method": "POST",
+      "fields": [
+        "id",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24102-7",
+        "reset_epoch": "24102-7",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "a0b37a0d266cc0199ed2887bed57d6b4ada3ce7d8c5021e095a7d937f6b34fe8",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "ca2288476f1563243b359af50d2ee16ec554e6f60f5ca1231a84237381cb9068",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "c864797b0add7d5e62abd2541df4cce74a49739d1408c05a7ea8f046e3380448",
+        "projection_sha256": "c57b0a893ee2318afed90f374c7cd1266696fc719d5072d0e7ecf622ce531ef3"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "c864797b0add7d5e62abd2541df4cce74a49739d1408c05a7ea8f046e3380448",
+        "projection_sha256": "c57b0a893ee2318afed90f374c7cd1266696fc719d5072d0e7ecf622ce531ef3"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9980748891830444,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.988021731376648,
+          "failure": "no_effect",
+          "failure_confidence": 0.9958992600440979,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "POST",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "cefe2be60d8bfdf21c6f17a3c99ce20013e7439cb0db11475244ca9b8b2672f0"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "POST",
+          "path": "/vul/sqli/sqli_id.php",
+          "placement": "form",
+          "field_names": [
+            "id",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "5597dd1f52ca035f7c9eb97a76d866476a32ab9f55fd630a216e897883942fdb"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 7,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "f5d2f10882b516f79b885e75d1acd033de78a89f42006dcec5d98acf7020ee56",
+          "projection_sha256": "6643772219a8f9ca35f4492917f13d43a354fe20fd127854971799b41d95e6d1"
+        },
+        "candidate": {
+          "candidate_id": "55b0e34a5c48c2204823",
+          "family": "injection",
+          "method": "POST",
+          "path": "/vul/sqli/sqli_id.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "fef6acefacbde609010ee714d1386870c00331693bd407c277ca040e4d239c7f",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "POST",
+          "path": "/vul/sqli/sqli_id.php",
+          "placement": "form",
+          "field_names": [
+            "id",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "14b58c77be38a5f078c8afbf31af6912b7a78670b6984ce2b47a54ca2ed9f8b3"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 7,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "f5d2f10882b516f79b885e75d1acd033de78a89f42006dcec5d98acf7020ee56",
+          "projection_sha256": "6643772219a8f9ca35f4492917f13d43a354fe20fd127854971799b41d95e6d1"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "1f979052f851eb4c7488a2fdad0a0c03f3a7e1a66aebce08973ef018a5fb9fdf",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24102,
+      "target_instance_hash": "31880580e7828e1f34c5a9eab14fd5369432b1dd1bb8d161f566c4d90b107899",
+      "route": "/vul/sqli/sqli_search.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24102-8",
+        "reset_epoch": "24102-8",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "31880580e7828e1f34c5a9eab14fd5369432b1dd1bb8d161f566c4d90b107899",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "d10cf5734a966eb6e4f40a0d886496b91b9bb5c9d642ae18782933a5bcdc43d2",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "3ab9be6eeaee950406e8b4b51567dd24b2d0601ae149ba8f73b5caa1dfe37a2c",
+        "projection_sha256": "fc9143e61bc25486a063ab2b49160345ced9042c87d51a828c00558db157357b"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "3ab9be6eeaee950406e8b4b51567dd24b2d0601ae149ba8f73b5caa1dfe37a2c",
+        "projection_sha256": "fc9143e61bc25486a063ab2b49160345ced9042c87d51a828c00558db157357b"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "a59f3b7643598994bbb362b4b0ade0419d1437b3d2fcd2874289f54cc1950c0a"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_search.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "64ce47b05239bb5f9bbcaa64617ff0a1143df48b21eb44b2f7bf924330f58c5c"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 14,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "007a2b51ee7fae615c45bfc0d4316e4d1cdb1530cb86ee7bf920bb7d4a7879d7",
+          "projection_sha256": "0b591299293d580d20601a5a918e06d9a91509e3e68d2ae8df197831cccc7173"
+        },
+        "candidate": {
+          "candidate_id": "740124c7dc7878c11a30",
+          "family": "injection",
+          "method": "GET",
+          "path": "/vul/sqli/sqli_search.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "6ba068d4395f13b62520a5fca9f291157a0c3bdde94dadb7274f774dccc1b757",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_search.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "5ac534399475d071cfdccef01f01677ac079a7aac25209e603880a0404ad6c7c"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 14,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "80335ada5a6fda5329b0b201029b952c6c49df731ded591a81c2cb0a147bf4f5",
+          "projection_sha256": "737892ce0f5ac59ff24163cb18b000068d286726327b77f4815d807e5b0fc3fd"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "4c48faf07e9497a4c6cb28fa232dafff12e93a670bd512eb6d73fdbe3c048c17",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24102,
+      "target_instance_hash": "af84d415d4d8b31bb88528065b68008a02e1345ddcbe55239e9d2fa4cf71ef79",
+      "route": "/vul/sqli/sqli_str.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24102-9",
+        "reset_epoch": "24102-9",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "af84d415d4d8b31bb88528065b68008a02e1345ddcbe55239e9d2fa4cf71ef79",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "3cdf4030c1fdbe4b2027ce99aa7187e80f364ac7386ed2c7f2880bf1fb2d4cb8",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "d686d719031c130f4dd5373e7672dd7b488cdb8f910d93ccdee4d0796e332b41",
+        "projection_sha256": "3ce6e9ae662c4f036cb79d163c42287792978fdcdf9382d8fa4e1cdfdbdcdeb8"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "d686d719031c130f4dd5373e7672dd7b488cdb8f910d93ccdee4d0796e332b41",
+        "projection_sha256": "3ce6e9ae662c4f036cb79d163c42287792978fdcdf9382d8fa4e1cdfdbdcdeb8"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "3be2d8d3b7dfe8df2ccfff1cc7cc8fdebb52c1be34b1c8da33a53e21819fae7c"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_str.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "4f52a050cb2eb0cec759718ebe8d510391eef9161c33878cb82b2dd169e8883e"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "084ae1cd6378fecf4fbdf3f9fa3e38787c4e8cd1351a3a4245b6ec4c01cb1930",
+          "projection_sha256": "f078fb56f91200fadd55334788e21ae828dab643c7dc0a7d0fdd5e48666a5fde"
+        },
+        "candidate": {
+          "candidate_id": "58fbd4d294be797bdfe9",
+          "family": "injection",
+          "method": "GET",
+          "path": "/vul/sqli/sqli_str.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "373f33f21db6d58ebd059957f9f5868d9f92204ca56f3a4315d39c9a36f53956",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_str.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "e51e4a90011d2d013cf4bd7c7afb5a9de5af5474b445b3d034e42d16ee11c9d5"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "084ae1cd6378fecf4fbdf3f9fa3e38787c4e8cd1351a3a4245b6ec4c01cb1930",
+          "projection_sha256": "f078fb56f91200fadd55334788e21ae828dab643c7dc0a7d0fdd5e48666a5fde"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "926ba502d756061683293bcb90271a360ef58c45b80e03522f4afd696100b2ba",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24102,
+      "target_instance_hash": "53cd4a4acda6d5d468c24442f4d1160fbbe5636d4d7109b4b871a7ade22bf335",
+      "route": "/vul/sqli/sqli_x.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24102-10",
+        "reset_epoch": "24102-10",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "53cd4a4acda6d5d468c24442f4d1160fbbe5636d4d7109b4b871a7ade22bf335",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "febdf00866822bcf6e6e1a1822bb2b7d7ce0381c793a349a72629fc843bf93a2",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "11b280f5dc20f887504f13a0344795187de0a9e9794864141b5792f3196b1a19",
+        "projection_sha256": "9fea9d32637b038a45c17b284f74c5d7aa0b6e4aebeb0c0e8a5b4a01555082b0"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "11b280f5dc20f887504f13a0344795187de0a9e9794864141b5792f3196b1a19",
+        "projection_sha256": "9fea9d32637b038a45c17b284f74c5d7aa0b6e4aebeb0c0e8a5b4a01555082b0"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "4decb5192952d5bbe02577a02603574429b8dc4fd6e363f287070fdc466f1877"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_x.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "8595020d1aa5cf15f362fd5c4ec4c5c633a07eb014bf6997a0585f5fd02b9b56"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "c0c99e67ca6ac8b9a5f2354d82c08652a059f0e33bcac06161237a287259d013",
+          "projection_sha256": "d8ea254fb564ecf12617d76010ce6d3a82e72fb1531b7315a3768d793c2d66ba"
+        },
+        "candidate": {
+          "candidate_id": "dd934ac8b2cf0ece430c",
+          "family": "injection",
+          "method": "GET",
+          "path": "/vul/sqli/sqli_x.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "d7489c75d13254f9002b42d7d0f3d3b0613dbde35ac5be90fba3c3903e950e87",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_x.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "bd2c3d12f8d7cf8df12067621076ed521a7dd4810ed76d480d64bfe956d8b7c5"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "c0c99e67ca6ac8b9a5f2354d82c08652a059f0e33bcac06161237a287259d013",
+          "projection_sha256": "d8ea254fb564ecf12617d76010ce6d3a82e72fb1531b7315a3768d793c2d66ba"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "c30d9747b6c534c2e06ccee8bad2a2cb4a5e72584562caefee9e17a61345937a",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24102,
+      "target_instance_hash": "b97b4d7dc23f6eae3871effabb663b925d54145af5cf9c23b3cfd886ecd35bf7",
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24102-11",
+        "reset_epoch": "24102-11",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "b97b4d7dc23f6eae3871effabb663b925d54145af5cf9c23b3cfd886ecd35bf7",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "5eee1ee3ca0312aac238dd56a24081314e02d9c39f1314e913f70440a60a15cd",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "8bbbccfa18c2e0928bb964257320b4c8e0eafb0860a15a39de217c7958065c8f",
+        "projection_sha256": "16c8daa662602700a720b4a70b661e6ee7bb93fa55c8414a8025ef4e029951ab"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "8bbbccfa18c2e0928bb964257320b4c8e0eafb0860a15a39de217c7958065c8f",
+        "projection_sha256": "16c8daa662602700a720b4a70b661e6ee7bb93fa55c8414a8025ef4e029951ab"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "2bbd17394be095720eb377c200eee90593d725b66885851606d49bdb1cafcd24"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_blind_b.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "829ada3bb7ccaef77cb3bac6e6258ce547a0b3e2d50c6f8fece7fa67dd49679a"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 3,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "614c7bd304d868865c11feb6d6a8770cd33db05b3a9013523b1b73fb5341be58",
+          "projection_sha256": "44293cda37cdb4df0408c659a86b068927e456b421e91650cecff3d38678f2d2"
+        },
+        "candidate": {
+          "candidate_id": "50705e4270c539a6f00a",
+          "family": "injection",
+          "method": "GET",
+          "path": "/vul/sqli/sqli_blind_b.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "a720488a2643575c4f22ade3c7f5404a925a70a85eb26a834654e19fc68b7e7a",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "GET",
+          "path": "/vul/sqli/sqli_blind_b.php",
+          "placement": "query",
+          "field_names": [
+            "name",
+            "submit"
+          ],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "66f35688d4cb13bdcc1ea0ab7c3c4f628447419866fc937dd179f6c656014313"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 3,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "52220904b32e106700db4620c643e82b37ef99e8ada424643b085b6d00af303a",
+          "projection_sha256": "b500afcf973ecc409c5971b5820c5561690f175b5bddade1e579e8a5a856d525"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "ccdfe172e9d98b08a8d5ace6417cb61f85f4906739877c17be2da2978e593b4a",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24102,
+      "target_instance_hash": "a4d117a80c238cd7678afe6fde0e6973547943455d76176ba34912a528d37a60",
+      "route": "/vul/sqli/sqli_widebyte.php",
+      "method": "POST",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24102-12",
+        "reset_epoch": "24102-12",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "a4d117a80c238cd7678afe6fde0e6973547943455d76176ba34912a528d37a60",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "7578eddb5fda2a2279bc5bf72ae24ec1dbbf3c324498ad2c687f6e93687e042b",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "c5121877723c1751188049a7c892a97ad75f9c8d536f2ae014d248206591c558",
+        "projection_sha256": "e2b5b93269521bb02919f7fa6e9a36b19eccc5396b62e6f4b1105247c3981ae9"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "c5121877723c1751188049a7c892a97ad75f9c8d536f2ae014d248206591c558",
+        "projection_sha256": "e2b5b93269521bb02919f7fa6e9a36b19eccc5396b62e6f4b1105247c3981ae9"
+      },
+      "ai": {
+        "sent": true,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9980748891830444,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.988021731376648,
+          "failure": "no_effect",
+          "failure_confidence": 0.9958992600440979,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "POST",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "eda697bdfbee2edaae8166b27319ade6f815f4677c6631bac5fd1013cbdb18ff"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "POST",
+          "path": "/vul/sqli/sqli_widebyte.php",
+          "placement": "form",
+          "field_names": [],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "d4a67f1e32bc7a20ef9361088b6f455a33649138e67b8a32ae84b13e7cc3b603"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 21,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "ba6a1f521227bf3d5182722cc45ba0183fd994d29f9b027b4729ff59ba392b5c",
+          "projection_sha256": "c349c70862ce7bcfa4450eeaf7b36f9eb9ceae66f8dd19f0cfaa154489743f61"
+        },
+        "candidate": {
+          "candidate_id": "2d03d2769ee0996110d4",
+          "family": "injection",
+          "method": "POST",
+          "path": "/vul/sqli/sqli_widebyte.php",
+          "probe_kind": "sql_channel_class",
+          "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2",
+          "payload_sha256": "1403fdc02063b7bf57db730c791b0bd9a552f1329a1aa70eba41375dcf125019",
+          "expected_keys": [
+            "channel",
+            "requires_recheck"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        }
+      },
+      "reference": {
+        "sent": true,
+        "raw_payload_stored": false,
+        "raw_response_stored": false,
+        "request_anatomy": {
+          "method": "POST",
+          "path": "/vul/sqli/sqli_widebyte.php",
+          "placement": "form",
+          "field_names": [],
+          "content_type": "application/x-www-form-urlencoded",
+          "raw_payload_stored": false,
+          "payload_sha256": "02531439e07f1bbfee9d17137d592a4b74bb98db768b3b347789405082aeeba9"
+        },
+        "response": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker_count": 3,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "location_header_present": false,
+          "body_sha256": "7de1203dd8c466891bde488c813c065c673779112bbccc445cf65e567e606eca",
+          "projection_sha256": "9adeacac85a2f9ca52e01c71fd9b1f643eb12fe11ad4404f37b2b1146c95e50d"
+        }
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": true,
+        "confirmed_positive": true,
+        "reasons": [],
+        "evidence_hash": "a9a69bbe296308be0bedc79fb3b5a291babe243af33671ad07b0f0c457ea9619",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "typed_effect",
+      "repair_action": "abstain",
+      "repair_outcome": "confirmed",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": true,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "schema_version": "pg241-pikachu-payload-acceptance-episode-v1",
+      "source": "pg241_pikachu_source_native",
+      "source_commit": "5e1e8d9d14a3ba61d62f28cf35531c4df4dd24fc",
+      "seed": 24102,
+      "target_instance_hash": "6a35712cd3a838834926f94d806d3c158f849e1c606737e637dca103bfba594f",
+      "route": "/vul/sqli/sqli_blind_t.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "sql",
+      "fresh_reset": true,
+      "reset": {
+        "reset_id": "pg214-reset-24102-13",
+        "reset_epoch": "24102-13",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "6a35712cd3a838834926f94d806d3c158f849e1c606737e637dca103bfba594f",
+        "image": "sift/pikachu-pg240-source-native:5e1e8d9d",
+        "image_id_sha256": "de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "route_source_sha256": "ef907b5f39f77f0e1199ce5f149b919321197ec455551b040c6025ab0e64d310",
+      "baseline": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "7993469d9e960d4b408ae41083b55b5940a2c28ff1046cda201e69f22092afb7",
+        "projection_sha256": "a52788c7bfd83ba9b20c5b28835e1dfc6c634bd58295cea69dbe555fe92ac39b"
+      },
+      "negative": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "body_length_bucket": "4096-65535",
+        "row_marker_count": 0,
+        "result_shape": "record_absent",
+        "sql_error_shape": false,
+        "location_header_present": false,
+        "body_sha256": "7993469d9e960d4b408ae41083b55b5940a2c28ff1046cda201e69f22092afb7",
+        "projection_sha256": "a52788c7bfd83ba9b20c5b28835e1dfc6c634bd58295cea69dbe555fe92ac39b"
+      },
+      "ai": {
+        "sent": false,
+        "model_decision": {
+          "action": "safe_candidate",
+          "action_confidence": 0.9989368319511414,
+          "encoding": "abstract_sql",
+          "encoding_confidence": 0.9791009426116943,
+          "failure": "no_effect",
+          "failure_confidence": 0.995145857334137,
+          "encoding_binding_match": true,
+          "failure_binding_match": true,
+          "effective_action": "safe_candidate",
+          "features": {
+            "method": "GET",
+            "status_class": "2xx",
+            "typed_available": true,
+            "failure_kind": "no_effect",
+            "field_token_dim": 31
+          }
+        },
+        "validation": {
+          "valid": true,
+          "reason": "field_tokens_bound",
+          "network_allowed": true,
+          "binding_sha256": "2481fe7c82a3e92263477a256205e16b805c0d5aa63a9591911ef803209c0d77"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false
+      },
+      "reference": {
+        "sent": false,
+        "raw_payload_stored": false,
+        "raw_response_stored": false
+      },
+      "typed_oracle": {
+        "oracle_id": "pg241-read-only-result-shape-v1",
+        "typed_effect_confirmed": false,
+        "confirmed_positive": false,
+        "reasons": [
+          "timing_channel_forbidden"
+        ],
+        "evidence_hash": "2965917d50262318aa1d961e088bef20123e6414ba95591c404a07e1a62d9f9a",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "failure_kind": "oracle_unavailable",
+      "repair_action": "abstain",
+      "repair_outcome": "abstain_or_retry",
+      "candidate_reference_agreement": true,
+      "negative_clean": true,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    }
+  ],
+  "promotion": {
+    "training_eligible": true,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "honesty": {
+    "payload_text_printed_only_to_ephemeral_stdout": true,
+    "ai_generates_abstract_channel_not_unrestricted_raw_string": true,
+    "result_shape_is_local_typed_oracle": true,
+    "timing_and_state_changing_routes_abstained": true,
+    "general_web_capability_not_established": true
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "database_write": false,
+    "time_delay_used": false,
+    "script_execution": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "report_sha256": "7ea7a5e654eb847b2ed81bd237732f4a4523acfba7f7647090c2e1833ee8c759"
+}

@@ -1,0 +1,150 @@
+{
+  "protocol_id": "sift-pg47-counterfactual-action-replay-v1",
+  "schema_version": "pg-pk-47-counterfactual-action-value-report-v1",
+  "status": "diagnostic_only",
+  "training": {
+    "catalog": "research\\pg40_semantic_router_catalog_v1.json",
+    "pair_count": 80,
+    "positive_count": 32,
+    "implementation": "atlas",
+    "seeds": [
+      361,
+      367
+    ],
+    "oracle_is_target_only": true,
+    "pg42_used_for_training": false,
+    "epochs": 320,
+    "seed": 20470802,
+    "device": "cuda",
+    "best_selection": 0.0,
+    "history_tail": [
+      {
+        "epoch": 60,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      },
+      {
+        "epoch": 120,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      },
+      {
+        "epoch": 180,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      },
+      {
+        "epoch": 240,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      },
+      {
+        "epoch": 300,
+        "train_loss": 0.0,
+        "seed_loss": 0.0,
+        "selection": 0.0
+      }
+    ]
+  },
+  "model": {
+    "class": "ActionValueModel",
+    "input": "invariant delta + action one-hot + bounded belief features",
+    "action_order": [
+      "GET.screen",
+      "POST.screen",
+      "GET.confirm",
+      "POST.confirm"
+    ],
+    "checkpoint": "artifacts\\pg47-counterfactual-action-value\\action_value.pt",
+    "checkpoint_sha256": "3b60f7d0063dea3b96a045559a44ce640b922e2c2dabbb0ce8bed160a538e3d3",
+    "typed_oracle_consumed_by_model": false,
+    "family_consumed_by_model": false
+  },
+  "train_metrics": {
+    "pair_count": 80,
+    "positive_count": 32,
+    "negative_count": 48,
+    "effect_recall": 1.0,
+    "false_positive_rate": 0.0,
+    "mean_probability": 0.4
+  },
+  "seed_holdout_metrics": {
+    "pair_count": 40,
+    "positive_count": 16,
+    "negative_count": 24,
+    "effect_recall": 1.0,
+    "false_positive_rate": 0.0,
+    "mean_probability": 0.4
+  },
+  "pg42_holdout": {
+    "episode_count": 180,
+    "positive_episode_count": 162,
+    "negative_episode_count": 18,
+    "effect_success_rate": 1.0,
+    "known_positive_count": 90,
+    "known_family_recall": 1.0,
+    "unknown_positive_count": 72,
+    "unknown_safe_abstain_count": 72,
+    "unknown_strict_abstain": true,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "mean_queries": 3.1,
+    "median_queries": 3.0,
+    "positive_mean_queries": 3.0,
+    "negative_mean_queries": 4.0,
+    "fixed_probe_baseline_queries": 4.0,
+    "mean_query_reduction_rate": 0.225,
+    "get_post_covered": true,
+    "accepted_trace_episode_count": 180,
+    "belief_update_count": 558
+  },
+  "action_counts": {
+    "GET.screen": 180,
+    "POST.screen": 180,
+    "GET.confirm": 180,
+    "POST.confirm": 18
+  },
+  "method_counts": {
+    "GET": 360,
+    "POST": 198
+  },
+  "positive_semantic_counts": {
+    "markup-context": 18,
+    "operator-context": 18,
+    "auth-boundary": 18,
+    "subject-boundary": 18,
+    "state-boundary": 18,
+    "destination-context": 18,
+    "scalar-boundary": 18,
+    "local-callback": 18,
+    "template-boundary": 18,
+    "ordinary-surface": 0
+  },
+  "pg46_baseline": {
+    "mean_queries": 3.1,
+    "median_queries": 3.0,
+    "effect_success_rate": 1.0,
+    "known_family_recall": 1.0,
+    "negative_false_accept_count": 0
+  },
+  "safe_gate": {
+    "schema_version": "sift-pg47-action-value-gate-v1",
+    "status": "passed",
+    "claim_allowed": true,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "formal_capability_claim_allowed": false,
+  "promotion": {
+    "status": "quarantined_action_value_candidate",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "trace": "research\\pg47_counterfactual_action_trace_v1.json",
+  "manifest_sha256": "71ce55c30ded9aa5f924f0990a92de93809ccb250ccd2edff6d0c2bec57e0e83"
+}

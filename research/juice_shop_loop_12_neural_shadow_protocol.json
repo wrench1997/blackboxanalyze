@@ -1,0 +1,19 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-neural-shadow-v1",
+  "status": "frozen-before-neural-shadow-execution",
+  "checkpoint": "artifacts/neural-juice-loop-12-response-head-v2-20262097-rerun/tiny_rule_set_gpt.pt",
+  "checkpoint_training_report": "artifacts/neural-juice-loop-12-response-head-v2-20262097-rerun/report.json",
+  "shadow_actions": ["/", "/robots.txt", "/.well-known/security.txt", "/sitemap.xml", "/metrics"],
+  "evaluation": "destroy shadow, start fresh target, execute exactly one GET selected from shadow observations",
+  "policies": {
+    "trained_response_head": "score response projection with the trained 8-slot head",
+    "trained_response_head_ablation": "same checkpoint and prompts, response feature slots disabled"
+  },
+  "information_boundary": "no challenge key, solved state, description, solution or catalog enters the shadow prompt",
+  "acceptance": {
+    "old_regression_gate_already_passed": true,
+    "same_component_ablation_required": true,
+    "fresh_environment_required": true,
+    "neural_claim_only_if_trained_policy_succeeds_and_ablation_fails": true
+  }
+}

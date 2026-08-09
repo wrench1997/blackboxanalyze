@@ -1,0 +1,35 @@
+{
+  "protocol_id": "pg-pk-145-local-multisurface-v1",
+  "schema_version": "pg145-local-multisurface-protocol-v1",
+  "objective": "用至少150个本地目标实例生成同一抽象漏洞族的多种网页/脚本表面，并保留 GET/POST、正负 oracle、unknown oracle 与实现留出。",
+  "base_url": "http://127.0.0.1:14500",
+  "target_instance_minimum": 150,
+  "families": [
+    "xss_reflection",
+    "sql_ast_boundary",
+    "xxe_entity_parser"
+  ],
+  "styles": [
+    "govuk_like",
+    "material_like",
+    "primer_like",
+    "dashboard_like"
+  ],
+  "required_gates": {
+    "target_instance_count_ge_150": true,
+    "get_post_balance": true,
+    "positive_and_matched_negative": true,
+    "fresh_reset_per_row": true,
+    "typed_oracle_evidence": true,
+    "implementation_holdout": true,
+    "raw_model_input_absent": true,
+    "waf_training_scope_local_mock_only": true,
+    "external_bypass_payloads_forbidden": true
+  },
+  "promotion": {
+    "training_eligible": false,
+    "memory_promotion_allowed": false,
+    "reason": "multi-surface fixtures require independent replay and model ablation before any training promotion"
+  },
+  "protocol_sha256": "e65f04a68e962ce85a26fa98bb441165290e1715ec302ffe22002b2b6ebd7365"
+}

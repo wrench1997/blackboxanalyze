@@ -1,0 +1,50 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-baseline-protocol-v1",
+  "status": "frozen-before-baseline-execution",
+  "frozen_at_local_date": "2026-08-01",
+  "scope": "pinned local Juice Shop through http://127.0.0.1:3100 only",
+  "action_budget_per_policy": 6,
+  "candidate_generation": {
+    "kind": "fixed generic web-surface vocabulary",
+    "answer_leak_controls": [
+      "no challenge title, key, description, hint, solution or solved state is visible to a policy",
+      "no route was copied from the Juice Shop challenge catalog",
+      "the vocabulary contains only conventional operational, documentation, administration and missing-path probes",
+      "the exact bank is frozen before any policy is executed"
+    ],
+    "actions": [
+      {"method": "GET", "path": "/"},
+      {"method": "GET", "path": "/robots.txt"},
+      {"method": "GET", "path": "/.well-known/security.txt"},
+      {"method": "GET", "path": "/sitemap.xml"},
+      {"method": "GET", "path": "/metrics"},
+      {"method": "GET", "path": "/health"},
+      {"method": "GET", "path": "/status"},
+      {"method": "GET", "path": "/version"},
+      {"method": "GET", "path": "/api-docs"},
+      {"method": "GET", "path": "/swagger.json"},
+      {"method": "GET", "path": "/ftp/"},
+      {"method": "GET", "path": "/backup/"},
+      {"method": "GET", "path": "/logs/"},
+      {"method": "GET", "path": "/admin/"},
+      {"method": "GET", "path": "/debug/"},
+      {"method": "GET", "path": "/actuator"},
+      {"method": "GET", "path": "/graphql"},
+      {"method": "GET", "path": "/does-not-exist-sift-control"}
+    ]
+  },
+  "policies": {
+    "random": "seeded shuffle of the frozen action bank",
+    "frozen_neural_no_memory": "Loop 11 checkpoint scores a native URL query with empty TRACE and RULEMEM",
+    "frozen_neural_synthetic_memory": "the same checkpoint scores the URL query with a fixed pre-Juice-Shop synthetic URL episode in TRACE",
+    "C5_executable_rule": "separate zero-parameter generic surface predicate; reported as hand-coded rule reasoning, never neural learning"
+  },
+  "metrics": {
+    "episode_success": "one or more safe selected Juice Shop challenges transition from unsolved to solved within six actions",
+    "counterexample_top1": "first ranked action is evaluator-confirmed as a locally exposed operational or listing surface",
+    "negative_control_false_positive_rate": "selected explicitly missing-path controls divided by all selected controls",
+    "rule_abstraction": "coverage and exact family/operator match; an unavailable decoder must abstain and receives zero coverage",
+    "probe_cost": "rank of first action causing a selected challenge transition"
+  },
+  "interpretation_guard": "This is an action-grounding viability baseline, not a full 24-challenge solve claim. A zero score can identify an interface mismatch rather than insufficient neural capacity."
+}

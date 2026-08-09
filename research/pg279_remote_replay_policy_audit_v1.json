@@ -1,0 +1,61 @@
+{
+  "audit_id": "pg279-remote-replay-policy-independent-audit-v1",
+  "status": "passed",
+  "audit_checks": {
+    "dataset_hash": true,
+    "dataset_audit_hash": true,
+    "report_hash": true,
+    "trace_hash": true,
+    "protocol_hash": true,
+    "dataset_audit_pass": true,
+    "remote_scope": true,
+    "a800_gpu0_only": true,
+    "report_dataset_binding": true,
+    "trace_protocol_binding": true,
+    "status_namespace": true,
+    "get_post_data": true,
+    "fresh_failure_repair": true,
+    "context_firewall": true,
+    "hypothesis_gate_recorded": true,
+    "operational_gate_pass": true,
+    "retention_canary_pass": true,
+    "promotion_blocked": true
+  },
+  "report": "research/pg279_remote_replay_policy_report_v1.json",
+  "dataset": "research/pg279_remote_replay_dataset_v1.json",
+  "findings": [
+    {
+      "id": "remote-transport-grounding",
+      "status": "supported-in-controlled-replay",
+      "evidence": "PG-279 captured actual remote loopback GET/POST requests with bounded response projections, two fresh replays and paired reference/negative channels.",
+      "implication": "The same record contract can now be connected to an authorized real application when remote Docker is available."
+    },
+    {
+      "id": "failure-repair-signal",
+      "status": "supported-in-controlled-replay",
+      "evidence": "Every row carries an initial failure signature, a repair projection, a typed effect or explicit abstain outcome, and evidence hashes.",
+      "implication": "Keep repair transitions as first-class training data; do not collapse them to final labels."
+    },
+    {
+      "id": "real-application-boundary",
+      "status": "not-established",
+      "evidence": "Remote Docker is unavailable and real_application_gold_rows=0.",
+      "implication": "Do not claim Pikachu or public-target vulnerability discovery; next is PG-280 with an authorized remote application target."
+    },
+    {
+      "id": "forgetting",
+      "status": "frozen-canary-passed",
+      "evidence": "The updated policy was evaluated on the frozen PG-278 implementation holdout and the configured retention minima were checked.",
+      "implication": "Keep the frozen canary in every future remote update; any regression blocks promotion."
+    },
+    {
+      "id": "family-heldout-generalization",
+      "status": "blocked",
+      "evidence": "The family-heldout question metric is retained as a separate scientific gate; current slot vocabulary does not yet support reliable unseen-family question decoding.",
+      "implication": "Add shared, provenance-safe slot ontology fragments and rerun PG-280; do not promote the current family-heldout result."
+    }
+  ],
+  "failures": [],
+  "interpretation": "PG-279 passes the remote controlled replay, record-contract and frozen-retention engineering audit. The family-heldout scientific gate remains explicitly blocked, the study uses non-Docker fixtures with zero real-application gold, and no vulnerability or long-term-memory promotion is authorized.",
+  "audit_sha256": "21e66a5d76e2f695524bf45e5dd9c164bb14664aae45ead0c86b9e3efeea0d51"
+}

@@ -1,0 +1,16 @@
+{
+  "protocol_id": "pg-pk-132-open-source-ir-policy-v1",
+  "proposal_id": "pg132-open-source-ir-proposal-v1",
+  "question": "换用开源 tokenizer 词表和 token embedding 后，Rule IR 动作策略能否在跨种子、跨实现、族外集合上保持安全动作和 unknown abstain？",
+  "prediction": {
+    "pg127_accuracy": ">=0.95",
+    "pg125_family_accuracy": ">=0.95",
+    "pg122_family_accuracy": ">=0.95",
+    "blind_abstain": 1.0,
+    "negative_false_stop": 0,
+    "uniform_token_ablation_changes": true
+  },
+  "intervention": "fresh Transformer consumes only bounded Rule IR pair token IDs, token embedding and four scalar side channels",
+  "failure_rule": "任一 family/seed/ablation 门失败都保留 trace、禁止训练/记忆晋升，先做实验-工程分诊。",
+  "next": "只有在 ablation 与族外门同时通过且人工/Codex 审核后才考虑接入第三实现；若失败，分别诊断词表、embedding、scalar 和 history prefix。"
+}

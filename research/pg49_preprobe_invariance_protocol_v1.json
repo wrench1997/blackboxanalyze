@@ -1,0 +1,43 @@
+{
+  "schema_version": "pg-pk-49-preprobe-invariance-protocol-v1",
+  "protocol_id": "PG-49",
+  "title": "发送前动作价值的响应投影置换不变性",
+  "objective": "在不重新训练、不使用 typed oracle 作为输入的前提下，将 frost 多实现回放中的响应投影、oracle 投影和证据元数据替换为不相关占位值；确认 semantic/channel/action/belief 组成的发送前确认排序保持不变。",
+  "authorization": {
+    "scope": "workspace_local_only",
+    "host": "127.0.0.1",
+    "external_network": false,
+    "read_only": true,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "inputs": {
+    "catalog": "research/pg48_compositional_preprobe_catalog_v1.json",
+    "checkpoint": "artifacts/pg48-compositional-preprobe/preprobe_action_value.pt",
+    "holdout_implementation": "frost",
+    "model_input_contract": ["semantic slot", "channel slot", "action", "belief posterior"],
+    "mutated_fields": ["response_projection", "control.response_projection", "oracle_projection", "evidence"]
+  },
+  "acceptance_gate": {
+    "selection_order_match_required": true,
+    "zero_selection_changes_required": true,
+    "zero_score_delta_required": true,
+    "training_allowed_on_failure": false,
+    "memory_promotion_on_failure": false
+  },
+  "run_result": {
+    "holdout_pair_count": 384,
+    "holdout_episode_count": 48,
+    "selection_order_match_rate": 1.0,
+    "selection_changed_count": 0,
+    "max_score_delta": 0.0,
+    "response_projection_consumed_by_selection": false,
+    "status": "passed_no_response_dependency",
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "status": "run_completed_no_response_dependency"
+}

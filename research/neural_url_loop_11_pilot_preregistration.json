@@ -1,0 +1,40 @@
+{
+  "schema_version": "sift-neural-url-pilot-preregistration-v1",
+  "experiment_id": "neural-url-loop-11-pilot-canonical-meta",
+  "registered_at": "2026-08-01T19:20:00+08:00",
+  "status": "frozen-before-training",
+  "supported_diagnostics": {
+    "field_rewrite_delta_mean": 0.100833,
+    "field_rewrite_stable": false,
+    "primitive_endpoint_accuracy": 1.0,
+    "primitive_renamed_origin_accuracy": 0.434167,
+    "inverted_episode_accuracy": 0.560278,
+    "protocol_novelty_supported": false
+  },
+  "intervention": {
+    "canonical_url_slot": "serialize every parsed URL as url.value=u:scheme|hostname|effective_port|path and omit source field names from the neural prompt",
+    "episode_consistent_label_permutation_training_only": true,
+    "episode_rule_tokens_during_neural_training": false,
+    "rule_memory_gate_during_checkpoint_selection": false,
+    "checkpoint_selection": "neural iid plus neural validation accuracy",
+    "model_parameters": 908546,
+    "epochs": 10,
+    "programs": 2700,
+    "training_seed": 20261231
+  },
+  "holdout": {
+    "target_family": "url_scheme_downgrade",
+    "target_family_training_examples": 0,
+    "training_families": ["numeric_boundary", "truthiness_gate", "substring_origin", "authorization_or", "string_suffix_primitive", "markup_lexeme_primitive", "url_hostname_primitive", "html_entity_decode_primitive", "casefold_primitive", "numeric_coercion_primitive"]
+  },
+  "pilot_decision": {
+    "continue_if_target_neural_min": 0.70,
+    "continue_if_field_name_invariance_gap_max": 0.03,
+    "do_not_claim_confirmation_from_pilot": true,
+    "if_failed": "replace the byte-only decoder with an explicit learned set-comparison head under the same total parameter budget"
+  },
+  "lineage": {
+    "diagnostics": "research/neural_url_loop_11_diagnostics.json",
+    "parent_preregistration": "research/neural_url_loop_11_preregistration.json"
+  }
+}

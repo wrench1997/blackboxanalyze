@@ -1,0 +1,45 @@
+{
+  "protocol_id": "pg-pk-159-family-invariant-adapter-v1",
+  "schema_version": "pg159-family-invariant-adapter-protocol-v1",
+  "objective": "family_invariant_adapter_gradient_reversal_leave_one_family_out",
+  "variants": [
+    {
+      "name": "shared_adapter_256",
+      "held_out_family": null,
+      "bottleneck": 256
+    },
+    {
+      "name": "loo_steady_adapter_256",
+      "held_out_family": "steady",
+      "bottleneck": 256
+    },
+    {
+      "name": "loo_blind_adapter_512",
+      "held_out_family": "blind",
+      "bottleneck": 512
+    },
+    {
+      "name": "loo_scope_adapter_512",
+      "held_out_family": "scope",
+      "bottleneck": 512
+    }
+  ],
+  "family_adversary": {
+    "gradient_reversal_lambda": 0.2,
+    "loss_weight": 0.2,
+    "family_labels_are_not_model_inputs": true
+  },
+  "training": {
+    "lm_weight": 0.5,
+    "surface_anchor_weight": 0.5,
+    "unknown_weight": 0.2,
+    "false_stop_weight": 0.08
+  },
+  "leave_one_family_out": "held-out real family removed from action training and calibration; authorization remains a separate unseen holdout",
+  "threshold_fit": "highest training-available dev coverage with zero dev false_stop",
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  }
+}

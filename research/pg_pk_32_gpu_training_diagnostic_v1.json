@@ -1,0 +1,78 @@
+{
+  "schema_version": "pg-pk-32-gpu-training-diagnostic-v1",
+  "run_id": "pg32-pg03-rule-ir-decoder-gpu-diagnostic",
+  "status": "diagnostic_only",
+  "training_started": true,
+  "training_completed": true,
+  "device": "cuda",
+  "cuda_available": true,
+  "source": {
+    "catalog": "research/payload_replay_catalog_v1.json",
+    "catalog_type": "authorized_in_repo_local_replay",
+    "sample_count": 20,
+    "methods_observed": [
+      "GET"
+    ],
+    "typed_oracle_replay": true,
+    "independent_target_implementation": false
+  },
+  "split_results": [
+    {
+      "split": "source_split_same_family",
+      "total": 10,
+      "exit_found_rate": 0.2,
+      "false_positive_rate": 0.0,
+      "abstain_rate": 0.8,
+      "rule_ir_emission_rate": 0.2
+    },
+    {
+      "split": "family_holdout_structural_transfer",
+      "total": 2,
+      "exit_found_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "abstain_rate": 1.0,
+      "rule_ir_emission_rate": 0.0
+    },
+    {
+      "split": "family_holdout_unseen_surface",
+      "total": 3,
+      "exit_found_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "abstain_rate": 1.0,
+      "rule_ir_emission_rate": 0.0
+    }
+  ],
+  "checkpoints": [
+    {
+      "path": "artifacts\\pg03-rule-ir-decoder\\source_split_same_family\\decoder.pt",
+      "sha256": "59cd89cffeb42fb5b73e2f62eada8171c43db55e46e6addc6a1a0a2b0a818ac5"
+    },
+    {
+      "path": "artifacts\\pg03-rule-ir-decoder\\family_holdout_structural_transfer\\decoder.pt",
+      "sha256": "477a35054208b62f93b757f806e9324642b2cf19bedf545b9c8d3bb39f31f03c"
+    },
+    {
+      "path": "artifacts\\pg03-rule-ir-decoder\\family_holdout_unseen_surface\\decoder.pt",
+      "sha256": "d42b93915dd63414947688bd38b1be74c7987e10296640b05ad5afc7eb2c8b49"
+    }
+  ],
+  "capability_claim_allowed": false,
+  "training_allowed_for_promotion": false,
+  "memory_promotion_allowed": false,
+  "training_candidate": false,
+  "quarantine": {
+    "reason": [
+      "missing_GET_POST_dual_channel_context",
+      "single_in_repo_target_implementation",
+      "no_PG30_capability_evidence_matrix",
+      "族外出口率未达到预注册目标"
+    ],
+    "allowed_use": [
+      "engineering_regression",
+      "failure_analysis",
+      "next_ablation_seed"
+    ]
+  },
+  "interpretation": "本次 GPU 运行证明训练管线可执行，不证明模型获得可迁移漏洞检测能力；不得写入长期记忆或能力数据集。",
+  "trainer_report": "research/pg03_rule_ir_decoder_v1.json"
+}

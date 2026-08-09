@@ -1,0 +1,46 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-final-report-v1",
+  "status": "partial_research_complete_high_variance_remains",
+  "baseline": {
+    "random_episode_success_rate": 1,
+    "frozen_neural_episode_success_rate": 0.5,
+    "frozen_neural_mean_first_success_probe": 6,
+    "C5_episode_success_rate": 1,
+    "C5_first_success_probe": 1,
+    "random_vs_frozen_neural_success_delta": 0.5
+  },
+  "engineering_intervention": {
+    "selected_action_ablation": true,
+    "fresh_environment_confirmation": true,
+    "neural_intervention_gate": false,
+    "full_catalog_generalization": false,
+    "accepted": true
+  },
+  "neural_single_surface": {
+    "response_validation_at_least_90pct": true,
+    "old_regression_within_2pp": true,
+    "same_component_ablation_pass": true,
+    "fresh_environment_pass": true,
+    "single_surface_intervention_accepted": true,
+    "full_loop12_accepted": false
+  },
+  "neural_fresh_seed": {
+    "mean_accuracy": 0.895,
+    "minimum_accuracy": 0.88,
+    "accepted": false
+  },
+  "confirmed_findings": [
+    "the local target reset and internal-only network invariants pass",
+    "the frozen neural classifier lacks HTTP response semantics and ranks generic SPA fallbacks poorly",
+    "a shadow/evaluation split prevents probe-side challenge state from contaminating evaluation",
+    "a parameter-preserving 8-slot response head selected the hidden metrics surface and passed same-component ablation on a fresh target"
+  ],
+  "unresolved_findings": [
+    "fresh synthetic response seeds have a minimum of 88%, so robust response generalization is not confirmed",
+    "only one hidden observability surface has been evaluated in the neural shadow protocol",
+    "the neural head still does not emit canonical Rule IR; family abstraction remains a separate projection",
+    "the full 24-task safe catalog and six remaining hidden families are not yet evaluated"
+  ],
+  "next_target": "register a multi-family shadow matrix with richer compositional response surface generation, preserve the -2pp old-family gate, and add a neural Rule IR decoder only after response-seed stability is restored",
+  "claim_boundary": "local research evidence only; no production vulnerability rate and no authorization to test external systems"
+}

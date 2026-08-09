@@ -1,0 +1,44 @@
+{
+  "schema_version": "sift-preregistered-experiment-v1",
+  "protocol_id": "pg-pk-21-memory-source-integrity-v1",
+  "scope": "offline long-term memory promotion provenance gate",
+  "root_cause_hypotheses": [
+    "dataset_id labels can be duplicated across one fixture source hash and still satisfy min_distinct_datasets",
+    "the same evidence hash can be copied across sampling seeds and still satisfy min_sampling_seeds_per_dataset",
+    "repeated rows can inflate observation and accepted counts without adding independent evidence"
+  ],
+  "pre_fix_negative_control": {
+    "rows": 6,
+    "dataset_labels": 3,
+    "sampling_seeds": 2,
+    "source_hashes": 1,
+    "evidence_hashes": 1,
+    "observed_status": "promote",
+    "required_status": "quarantine"
+  },
+  "interventions": [
+    "Require a non-empty source hash and count distinct source hashes, not only dataset labels.",
+    "Deduplicate evidence hashes for observation, acceptance, and false-positive counts.",
+    "Require distinct evidence manifests across sampling seeds within each dataset and reject evidence reused across source hashes."
+  ],
+  "predictions": {
+    "one_source_three_labels": "quarantine",
+    "missing_source_hash": "quarantine",
+    "repeated_evidence_across_seeds": "quarantine",
+    "three_independent_sources_with_distinct_seed_manifests": "promote",
+    "existing_memory_gate_tests_must_pass": true
+  },
+  "protected_invariants": {
+    "model_or_checkpoint_unchanged": true,
+    "oracle_and_payload_generation_unchanged": true,
+    "episode_support_memory_remains_available_before_promotion": true,
+    "promotion_is_fail_closed": true
+  },
+  "failure_conditions": [
+    "one source with relabeled datasets promotes",
+    "missing source hash promotes",
+    "same seed evidence manifest repeated across seeds promotes",
+    "a valid three-source ledger is quarantined without a provenance reason",
+    "any existing test fails"
+  ]
+}

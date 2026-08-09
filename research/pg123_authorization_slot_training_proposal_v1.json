@@ -1,0 +1,25 @@
+{
+  "protocol_id": "pg-pk-123-authorization-slot-training-v1",
+  "proposal_id": "pg123-authorization-slot-training-proposal-v1",
+  "question": "把 typed authorization transition 作为一个通用语义槽，能否修复 PG-122 召回，同时保持 decoy、未知族和旧族门？",
+  "intervention": "从 PG-121 approved rows 与未见 holdout seed 的 PG-122 train/dev trace fresh 训练 52 维解码器；PG-122 holdout、PG-120、PG-117、PG-114 完全冻结为评估。",
+  "observed_fields": ["method", "placement", "encoding_chain", "status_class", "shape flags", "candidate_signal", "authorization_changed", "generic belief", "BSP bounded projection"],
+  "excluded_fields": ["failure kind", "next action", "family", "typed oracle label", "target id", "evidence hash", "raw probe", "raw response body"],
+  "success_definition": {
+    "pg122_positive_recall_nonzero": true,
+    "pg122_decoy_false_accept_zero": true,
+    "pg122_unknown_abstain_nonzero": true,
+    "old_family_regression_free": true,
+    "authorization_slot_ablation_changes_prediction": true,
+    "all_abstain_not_success": true
+  },
+  "observed_result": {
+    "pg122_positive_recall": 1.0,
+    "pg122_decoy_false_accept_count": 0,
+    "pg122_unknown_abstain_rate": 0.333333,
+    "pg122_slot_ablation_positive_recall": 0.0,
+    "old_family_positive_recall": {"pg120": 1.0, "pg117": 1.0, "pg114": 1.0}
+  },
+  "next_if_pass": "保持 authorization slot；新增第二个独立逻辑族，并对 failure_signature 是否直接进入策略网络做消融。",
+  "next_if_fail": "冻结并保留失败，区分槽表示、未知校准和逐步动作策略三个问题，不扩容、不提升长期记忆。"
+}

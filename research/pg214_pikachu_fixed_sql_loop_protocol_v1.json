@@ -1,0 +1,38 @@
+{
+  "protocol_id": "pg-pk-214-pikachu-fixed-sql-loop-v1",
+  "schema_version": "pg214-pikachu-fixed-sql-loop-protocol-v1",
+  "ai_participates_in_send": true,
+  "independent_reference_sent": true,
+  "evaluator": "response_shape_only; backend connection health is not SQL AST/result evidence",
+  "backend_health_gate": "mysqli root/pikachu connection must succeed before route replay",
+  "backend_failure_is_not_vulnerability": true,
+  "allowed_probe_classes": [
+    "syntax_shape",
+    "encoded_syntax_shape"
+  ],
+  "forbidden_probe_classes": [
+    "time_delay",
+    "local_side_channel",
+    "write",
+    "destructive"
+  ],
+  "fresh_reset_required": true,
+  "fresh_reset_unit": "one disposable no-volume derived-runtime container per route episode",
+  "database_clean_required": true,
+  "database_clean_attestation": [
+    "pinned_derived_image_digest",
+    "fresh_container_recreated",
+    "zero_volume_or_bind_mount",
+    "mysqli_health_gate",
+    "state_change_allowed_false",
+    "baseline_state_fingerprint"
+  ],
+  "docker_restart_allowed": "not used; fresh container is the reset primitive",
+  "matched_negative_control_required": true,
+  "evidence_hash_required": true,
+  "raw_payload_and_response_excluded": true,
+  "training_promotion_allowed": false,
+  "memory_promotion_allowed": false,
+  "vulnerability_claim_allowed": false,
+  "protocol_sha256": "39595645d1f2c9d689c181a95e4c08f26f59c1144ff049ae76c14eda76624409"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-rule-ir-decoder-v1.3",
+  "status": "frozen-before-training",
+  "supersedes": "research/juice_shop_loop_12_rule_ir_decoder_protocol_v1_2.json",
+  "objective": "retain encoding-depth generalization while calibrating Rule IR decoding on one-response shadow surfaces",
+  "curricula": {
+    "encoding_depth": {"pool_examples": 180, "xss_minimum_training_examples": 80},
+    "shadow_surface": {"pool_examples": 420, "minimum_training_examples_per_family": 60, "one_trace_per_example": true}
+  },
+  "input_contract": {
+    "visible_fields": ["input", "context", "state", "history", "output"],
+    "excluded_fields": ["family", "record_id", "intended_output", "is_counterexample", "evaluator_state", "challenge_key", "source_code"],
+    "feature_contract": "256-dimensional anonymous value-shape projection with encoding-depth and response-surface buckets"
+  },
+  "output_contract": {
+    "representation": "RULE_FAMILY_TEMPLATES policy-slot AST",
+    "grammar_validation": "app.rule_ir_decoder.validate_abstract_rule_ir",
+    "evidence_binding": "app.rule_ir_binding.bind_rule_ir_slots; low-confidence decoder output abstains"
+  },
+  "training": {"primary_seed": 20260899, "fresh_holdout_seeds": [20260901, 20260907, 20260911], "device_policy": "cuda when available, otherwise cpu and report reason", "epochs": 40, "batch_size": 256},
+  "acceptance_gates": {"training_validation_accuracy_min": 0.90, "fresh_holdout_min_accuracy": 0.70, "fresh_holdout_seed_count_min": 3, "oracle_leakage": "must remain false", "shadow_binding": "must report decoder confidence and explicit abstention/unbound status"},
+  "safety": {"local_only": true, "no_target_requests_during_training": true, "no_evaluator_endpoints": true, "no_browser_execution": true}
+}

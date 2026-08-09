@@ -1,0 +1,83 @@
+{
+  "model_name": "SIFT-Seed-20M",
+  "status": "recommended_first_model",
+  "purpose": "Learn black-box JavaScript rule induction and counterexample search from automatically verified synthetic curricula.",
+  "architecture": {
+    "family": "gpt2_style_decoder_only",
+    "layers": 8,
+    "hidden_size": 384,
+    "attention_heads": 6,
+    "mlp_ratio": 4,
+    "context_length": 4096,
+    "vocabulary_size": 16000,
+    "estimated_parameters": 20500000,
+    "precision": "bf16_or_fp16",
+    "special_tokens": ["<JS>", "<GAME>", "<TRACE>", "<QUERY>", "<RULE_IR>", "<EVIDENCE>", "<MEMORY_WRITE>", "<MEMORY_READ>"]
+  },
+  "memory_system": {
+    "working_memory": "4096-token current episode context",
+    "episodic_memory": "persistent trace and counterexample store keyed by program, rule family and state signature",
+    "semantic_memory": "versioned Rule IR library with confidence and evidence pointers",
+    "retrieval": "hybrid structured filters plus embedding Top-K",
+    "retrieved_items": 16,
+    "summary_tokens": 64,
+    "policy_training": "reinforcement learning for write, retrieve, consolidate and forget actions",
+    "anti_staleness": "black-box version and fingerprint are mandatory memory keys"
+  },
+  "bootstrap_data": {
+    "human_seed_programs": "20-50 audited templates",
+    "synthetic_program_target": 5000,
+    "traces_per_program": 12,
+    "estimated_verified_episodes": 60000,
+    "estimated_tokens": "15M-30M",
+    "generation": "parameterized program mutation plus executable Rule IR verification",
+    "split_policy": "hold out complete vulnerability families"
+  },
+  "training": [
+    {
+      "stage": "S0",
+      "name": "synthetic warm start",
+      "objective": "causal language modeling over JS, game rules, traces and Rule IR"
+    },
+    {
+      "stage": "S1",
+      "name": "multi-task supervised tuning",
+      "objective": "rule abstraction, behavior prediction, next query and evidence generation"
+    },
+    {
+      "stage": "S2",
+      "name": "active query policy tuning",
+      "objective": "reduce query count while preserving executable counterexample accuracy"
+    },
+    {
+      "stage": "S3",
+      "name": "long-term memory policy tuning",
+      "objective": "maximize future rule-recovery utility while penalizing retrieval tokens, stale memories and irrelevant writes"
+    }
+  ],
+  "scale_gate": {
+    "next_model": "SIFT-MoE-220M",
+    "requirements": [
+      "at least 50M verified episodes or equivalent diversity",
+      "SIFT-Seed saturates family-holdout validation",
+      "MoE routing beats dense baseline in controlled ablation",
+      "compute and storage budgets are documented"
+    ]
+  },
+  "improvement_protocol": {
+    "rules_file": "research/improvement_rules.json",
+    "architecture_is_mutable": true,
+    "required_before_change": [
+      "minimal_reproduction",
+      "root_cause_classification",
+      "counterfactual_ablation",
+      "preregistered_prediction"
+    ],
+    "required_after_change": [
+      "family_holdout_evaluation",
+      "guardrail_check",
+      "keep_or_rollback",
+      "evidence_consolidation"
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-neural-shadow-report-v1",
+  "status": "single_hidden_surface_intervention_confirmed",
+  "scope": "one hidden observability surface under fresh shadow/evaluation environments",
+  "training": {
+    "checkpoint": "artifacts\\neural-juice-loop-12-response-head-v2-20262097-rerun\\tiny_rule_set_gpt.pt",
+    "parameter_count": 908546,
+    "response_validation_accuracy": 0.901667,
+    "worst_old_regression_delta": 0.0,
+    "parameter_budget_pass": true,
+    "old_regression_pass": true
+  },
+  "shadow_comparison": {
+    "trained_policy": {
+      "shadow_probe_count": 5,
+      "selected_action": {
+        "method": "GET",
+        "path": "/metrics"
+      },
+      "selected_model_score": 0.9989901185035706,
+      "episode_success": true,
+      "selected_transitions": [
+        "exposedMetricsChallenge"
+      ]
+    },
+    "same_component_ablation": {
+      "shadow_probe_count": 5,
+      "selected_action": {
+        "method": "GET",
+        "path": "/.well-known/security.txt"
+      },
+      "selected_model_score": 0.723249614238739,
+      "episode_success": false,
+      "selected_transitions": []
+    }
+  },
+  "comparison_to_frozen_neural": {
+    "frozen_neural_no_memory_episode_success": false,
+    "trained_response_head_episode_success": true,
+    "gain_on_tested_surface": 1.0
+  },
+  "diagnosis": {
+    "root_cause": "the frozen classifier lacked HTTP response semantics; adding a gated response feature head repairs action grounding without changing its Transformer base",
+    "rule_ir_output": "still not emitted by the neural head; family inference remains a separate semantic projection",
+    "coverage_limit": "only one hidden observability surface was evaluated; six other hidden families remain untested",
+    "claim_boundary": "not a full-catalog or production vulnerability-detection result"
+  },
+  "acceptance": {
+    "response_validation_at_least_90pct": true,
+    "old_regression_within_2pp": true,
+    "same_component_ablation_pass": true,
+    "fresh_environment_pass": true,
+    "single_surface_intervention_accepted": true,
+    "full_loop12_accepted": false
+  }
+}

@@ -1,0 +1,533 @@
+{
+  "experiment": "frontend-loop-08-raw-gate-seed2",
+  "status": "completed",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 3060",
+  "model": {
+    "type": "causal_transformer_classifier",
+    "parameters": 908546,
+    "hidden": 128,
+    "layers": 4,
+    "heads": 4,
+    "max_length": 640,
+    "semantic_features": false,
+    "compact_semantic_features": false,
+    "routed_semantic_features": false,
+    "episode_rule_features": true,
+    "rule_memory_gate": true
+  },
+  "data": {
+    "programs": 1800,
+    "train_examples": 4320,
+    "iid_examples": 1080,
+    "validation_family_examples": 1080,
+    "test_family_examples": 1800,
+    "train_families": [
+      "authorization_or",
+      "markup_lexeme_primitive",
+      "numeric_boundary",
+      "string_suffix_primitive",
+      "substring_origin",
+      "truthiness_gate"
+    ],
+    "validation_families": [
+      "authorization_or",
+      "markup_lexeme_primitive",
+      "numeric_boundary",
+      "string_suffix_primitive",
+      "substring_origin",
+      "truthiness_gate"
+    ],
+    "test_families": [
+      "dom_sink_injection",
+      "postmessage_origin"
+    ],
+    "source_or_rule_ir_visible_to_model": false,
+    "feature_mode": "raw_trace_text",
+    "meta_label_permutation_in_training_only": false
+  },
+  "baselines": {
+    "balanced_majority_accuracy": 0.5
+  },
+  "results": {
+    "iid": {
+      "accuracy": 0.948148,
+      "correct": 1024,
+      "total": 1080,
+      "by_family": {
+        "numeric_boundary": 0.894444,
+        "truthiness_gate": 0.955556,
+        "string_suffix_primitive": 1.0,
+        "substring_origin": 1.0,
+        "markup_lexeme_primitive": 0.838889,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001281",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=91:1|input.age=180:1|input.age=88:0|input.age=92:1|input.age=0:0|input.age=89:0<RULEMEM>generic=input.age#gt=89|q=1|fit=6/6<QUERY>input.age=90<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001394",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.quota=2,input.role=member:1|input.quota=-1,input.role=member:1|input.quota=2,input.role=guest:1|input.quota=0,input.role=guest:0|input.quota=-2,input.role=member:1|input.quota=1,input.role=guest:1|input.quota=11,input.role=guest:1|input.quota=-1,input.role=guest:1<RULEMEM>generic=(input.quota!=0)or(input.role==member)|q=1|fit=8/8<QUERY>input.quota=0,input.role=member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001754",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.retries=-1,input.role=guest:1|input.retries=1,input.role=guest:1|input.retries=1,input.role=admin:1|input.retries=19,input.role=admin:1|input.retries=-1,input.role=member:1|input.retries=0,input.role=member:0|input.retries=2,input.role=admin:1|input.retries=-1,input.role=admin:1<RULEMEM>generic=(input.retries!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.retries=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000368",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.message=plain sample:0|input.message=<unfinished:0|input.message=<input value='x'>:1|input.message=2 < 3 and 5 > 4:0|input.message=<i>sample</i>:1|input.message=sample:0|input.message=<x-token></x-token>:1|input.message=<b>sample</b>:1<RULEMEM><QUERY>input.message=right > angle<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001768",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=<i>notice</i>:1|input.message=2 < 3 and 5 > 4:0|input.message=<b>notice</b>:1|input.message=notice:0|input.message=<unfinished:0|input.message=<x-token></x-token>:1|input.message=<section>node</section>:1<RULEMEM><QUERY>input.message=plain notice<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001121",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.retryCount=322:0|input.retryCount=163:0|input.retryCount=162:0|input.retryCount=160:1|input.retryCount=0:1|input.retryCount=159:1<RULEMEM>generic=input.retryCount#lt=162|q=1|fit=6/6<QUERY>input.retryCount=161<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000601",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=43:1|input.age=0:1|input.age=46:0|input.age=88:0|input.age=42:1|input.age=45:0<RULEMEM>generic=input.age#lt=45|q=1|fit=6/6<QUERY>input.age=44<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001288",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.message=<img src=x>:1|input.message=<input value='x'>:1|input.message=<unfinished:0|input.message=<b>beta</b>:1|input.message=2 < 3 and 5 > 4:0|input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=beta:0|input.message=<section>node</section>:1<RULEMEM><QUERY>input.message=plain beta<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001241",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.score=204:0|input.score=410:1|input.score=206:1|input.score=207:1|input.score=203:0|input.score=0:0<RULEMEM>generic=input.score#gt=204|q=1|fit=6/6<QUERY>input.score=205<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000561",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=248:0|input.balance=122:1|input.balance=123:1|input.balance=0:1|input.balance=125:0|input.balance=126:0<RULEMEM>generic=input.balance#lt=125|q=1|fit=6/6<QUERY>input.balance=124<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001008",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.message=<input value='x'>:1|input.message=<i>beta</i>:1|input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=<b>beta</b>:1|input.message=right > angle:0|input.message=2 < 3 and 5 > 4:0|input.message=plain beta:0|input.message=<section>node</section>:1<RULEMEM><QUERY>input.message=<img src=x><ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000208",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.message=2 < 3 and 5 > 4:0|input.message=plain alpha:0|input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=<input value='x'>:1|input.message=alpha:0|input.message=<section>node</section>:1|input.message=<x-token></x-token>:1|input.message=<i>alpha</i>:1<RULEMEM><QUERY>input.message=<b>alpha</b><ANSWER>"
+        }
+      ]
+    },
+    "validation_family_holdout": {
+      "accuracy": 0.947222,
+      "correct": 1023,
+      "total": 1080,
+      "by_family": {
+        "substring_origin": 1.0,
+        "authorization_or": 1.0,
+        "truthiness_gate": 0.95,
+        "numeric_boundary": 0.872222,
+        "markup_lexeme_primitive": 0.861111,
+        "string_suffix_primitive": 1.0
+      },
+      "failures": [
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001394",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.quota=1,input.role=member:1|input.quota=-1,input.role=guest:1|input.quota=2,input.role=member:1|input.quota=0,input.role=member:0|input.quota=11,input.role=guest:1|input.quota=2,input.role=guest:1|input.quota=11,input.role=member:1|input.quota=-2,input.role=member:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001241",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.score=0:0|input.score=206:1|input.score=204:0|input.score=207:1|input.score=410:1|input.score=203:0<RULEMEM>generic=input.score#gt=204|q=1|fit=6/6<QUERY>input.score=205<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001081",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.total=0:1|input.total=158:0|input.total=312:0|input.total=157:0|input.total=154:1|input.total=155:1<RULEMEM>generic=input.total#lt=157|q=1|fit=6/6<QUERY>input.total=156<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001728",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.message=<unfinished:0|input.message=plain beta:0|input.message=2 < 3 and 5 > 4:0|input.message=<input value='x'>:1|input.message=<img src=x>:1|input.message=<section>node</section>:1|input.message=right > angle:0|input.message=<b>beta</b>:1<RULEMEM><QUERY>input.message=beta<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001761",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.total=45:0|input.total=0:0|input.total=94:1|input.total=49:1|input.total=48:1|input.total=46:0<RULEMEM>generic=input.total#gt=46|q=1|fit=6/6<QUERY>input.total=47<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000128",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.message=2 < 3 and 5 > 4:0|input.message=<b>beta</b>:1|input.message=<section>node</section>:1|input.message=<unfinished:0|input.message=<i>beta</i>:1|input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=right > angle:0|input.message=<img src=x>:1<RULEMEM><QUERY>input.message=<input value='x'><ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001361",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.balance=41:0|input.balance=38:1|input.balance=78:0|input.balance=40:0|input.balance=0:1|input.balance=37:1<RULEMEM>generic=input.balance#lt=40|q=1|fit=6/6<QUERY>input.balance=39<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0001368",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=2 < 3 and 5 > 4:0|input.message=<i>notice</i>:1|input.message=<img src=x>:1|input.message=plain notice:0|input.message=notice:0|input.message=<x-token></x-token>:1|input.message=<input value='x'>:1<RULEMEM><QUERY>input.message=<unfinished<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001554",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.quota=1,input.role=member:1|input.quota=1,input.role=admin:1|input.quota=-2,input.role=admin:1|input.quota=-1,input.role=guest:1|input.quota=1,input.role=guest:1|input.quota=-1,input.role=member:1|input.quota=0,input.role=member:0|input.quota=2,input.role=member:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "markup_lexeme_primitive",
+          "record_id": "syn-markup_lexeme_primitive-0000488",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.message=&lt;i&gt;encoded&lt;/i&gt;:0|input.message=2 < 3 and 5 > 4:0|input.message=<x-token></x-token>:1|input.message=<unfinished:0|input.message=<section>node</section>:1|input.message=<i>beta</i>:1|input.message=<input value='x'>:1|input.message=plain beta:0<RULEMEM><QUERY>input.message=right > angle<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000841",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.age=0:1|input.age=153:0|input.age=149:1|input.age=150:1|input.age=152:0|input.age=302:0<RULEMEM>generic=input.age#lt=152|q=1|fit=6/6<QUERY>input.age=151<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001561",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.score=8:1|input.score=12:1|input.score=4:0|input.score=5:0|input.score=0:0|input.score=7:1<RULEMEM>generic=input.score#gt=5|q=1|fit=6/6<QUERY>input.score=6<ANSWER>"
+        }
+      ]
+    },
+    "test_family_with_memory": {
+      "accuracy": 0.795556,
+      "correct": 1432,
+      "total": 1800,
+      "by_family": {
+        "postmessage_origin": 1.0,
+        "dom_sink_injection": 0.591111
+      },
+      "failures": [
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000654",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=</p><section>injected</section><p>:1|input.payload=no markup here:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=angle > only:0|input.payload=hello world:0|input.payload=javascript:alert(1):0|input.payload=<svg><title>x</title></svg>:1|input.payload=<input value='probe'>:1<RULEMEM><QUERY>input.payload=&lt;b&gt;encoded&lt;/b&gt;<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001006",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=plain notice:0|input.payload=<b>notice</b>:1|input.payload=hello world:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<img src=x>:1|input.payload=</p><section>injected</section><p>:1|input.payload=angle > only:0|input.payload={{template}}:0<RULEMEM><QUERY>input.payload=<input value='probe'><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001766",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=plain message:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=angle > only:0|input.payload=<input value='probe'>:1|input.payload=<a href='/local'>link</a>:1|input.payload={{template}}:0|input.payload=<svg><title>x</title></svg>:1<RULEMEM><QUERY>input.payload=hello world<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001398",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<a href='/local'>link</a>:1|input.payload=<b>message</b>:1|input.payload=2 < 3 and 5 > 4:0|input.payload=<not-closed:0|input.payload=hello world:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<x-sift-probe></x-sift-probe>:1<RULEMEM><QUERY>input.payload=plain message<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000078",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<span data-marker='message'>x</span>:1|input.payload=2 < 3 and 5 > 4:0|input.payload=<b>message</b>:1|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=</p><section>injected</section><p>:1|input.payload={{template}}:0|input.payload=javascript:alert(1):0|input.payload=<math><mtext>node</mtext></math>:1<RULEMEM><QUERY>input.payload=hello world<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000558",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload={{template}}:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=x & y:0|input.payload=no markup here:0|input.payload=<b>message</b>:1|input.payload=</p><section>injected</section><p>:1|input.payload=<template>fragment</template>:1|input.payload=2 < 3 and 5 > 4:0<RULEMEM><QUERY>input.payload=<img src=x><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001798",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=hello world:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=2 < 3 and 5 > 4:0|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=x & y:0|input.payload=<img src=x>:1|input.payload=<a href='/local'>link</a>:1|input.payload=<b>notice</b>:1<RULEMEM><QUERY>input.payload=angle > only<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001022",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload=<template>fragment</template>:1|input.payload=angle > only:0|input.payload=<a href='/local'>link</a>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=hello world:0|input.payload=<b>notice</b>:1|input.payload=<not-closed:0<RULEMEM><QUERY>input.payload=x & y<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000430",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<input value='probe'>:1|input.payload=<span data-marker='message'>x</span>:1|input.payload=<svg><title>x</title></svg>:1|input.payload=<img src=x>:1|input.payload=hello world:0|input.payload=plain message:0|input.payload=&lt;b&gt;encoded&lt;/b&gt;:0|input.payload={{template}}:0<RULEMEM><QUERY>input.payload=x & y<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001734",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=<svg><title>x</title></svg>:1|input.payload=<input value='probe'>:1|input.payload=<math><mtext>node</mtext></math>:1|input.payload=javascript:alert(1):0|input.payload=no markup here:0|input.payload=2 < 3 and 5 > 4:0|input.payload=<b>notice</b>:1|input.payload=plain notice:0<RULEMEM><QUERY>input.payload=hello world<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000550",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.payload=x & y:0|input.payload=<a href='/local'>link</a>:1|input.payload=<template>fragment</template>:1|input.payload=<b>notice</b>:1|input.payload=2 < 3 and 5 > 4:0|input.payload=angle > only:0|input.payload=javascript:alert(1):0|input.payload=<span data-marker='notice'>x</span>:1<RULEMEM><QUERY>input.payload=hello world<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000958",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=plain notice:0|input.payload=<img src=x>:1|input.payload=<span data-marker='notice'>x</span>:1|input.payload=<a href='/local'>link</a>:1|input.payload=<x-sift-probe></x-sift-probe>:1|input.payload=hello world:0|input.payload={{template}}:0|input.payload=no markup here:0<RULEMEM><QUERY>input.payload=<template>fragment</template><ANSWER>"
+        }
+      ]
+    },
+    "test_family_without_memory": {
+      "accuracy": 0.501111,
+      "correct": 902,
+      "total": 1800,
+      "by_family": {
+        "postmessage_origin": 0.502222,
+        "dom_sink_injection": 0.5
+      },
+      "failures": [
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000333",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://account.internal:1|input.origin=https://evil.test:0|input.origin=chrome-extension://account.internal:1|input.origin=https://account.internal-attacker.test:0|input.origin=https://evilaccount.internal:1|input.origin=wss://account.internal:1|input.origin=null:0|input.origin=http://localhost:0<RULEMEM>input.origin#suffix=account.internal|q=1|fit=8/8<QUERY>input.origin=http://account.internal<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000541",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://example.test:0|input.origin=https://account.internal.evil.test:0|input.origin=ftp://account.internal:1|input.origin=https://evil.test:0|input.origin=https://sub.account.internal:1|input.origin=null:0|input.origin=http://account.internal:1|input.origin=https://account.internal:1<RULEMEM>input.origin#suffix=account.internal|q=1|fit=8/8<QUERY>input.origin=https://deep.sub.account.internal<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000030",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=<input value='probe'>:1|input.payload=plain profile:0|input.payload=<a href='/local'>link</a>:1|input.payload=<img src=x>:1|input.payload=x & y:0|input.payload=hello world:0|input.payload=<not-closed:0|input.payload=<span data-marker='profile'>x</span>:1<RULEMEM><QUERY>input.payload=<template>fragment</template><ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000302",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=</p><section>injected</section><p>:1|input.payload={{template}}:0|input.payload=<template>fragment</template>:1|input.payload=no markup here:0|input.payload=<input value='probe'>:1|input.payload=hello world:0|input.payload=javascript:alert(1):0|input.payload=<svg><title>x</title></svg>:1<RULEMEM><QUERY>input.payload=<span data-marker='notice'>x</span><ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001109",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://account.internal-attacker.test:0|input.origin=https://evilaccount.internal:1|input.origin=https://evil.test/account.internal:1|input.origin=https://deep.sub.account.internal:1|input.origin=wss://account.internal:1|input.origin=https://account.internal.evil.test:0|input.origin=http://localhost:0|input.origin=https://example.test:0<RULEMEM>input.origin#suffix=account.internal|q=1|fit=8/8<QUERY>input.origin=https://not-account.internal<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0001006",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload=plain notice:0|input.payload=<b>notice</b>:1|input.payload=hello world:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=<img src=x>:1|input.payload=</p><section>injected</section><p>:1|input.payload=angle > only:0|input.payload={{template}}:0<RULEMEM><QUERY>input.payload=<input value='probe'><ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000397",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=ftp://safe.local:1|input.origin=https://evil.test/safe.local:1|input.origin=https://safe.local:1|input.origin=http://safe.local:1|input.origin=https://safe.local.evil.test:0|input.origin=https://safe.local-attacker.test:0|input.origin=null:0|input.origin=http://localhost:0<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=https://deep.sub.safe.local<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000269",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=http://safe.local:1|input.origin=https://evilsafe.local:1|input.origin=null:0|input.origin=https://sub.safe.local:1|input.origin=https://evil.test:0|input.origin=wss://safe.local:1|input.origin=https://safe.local.evil.test:0|input.origin=https://example.test:0<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=chrome-extension://safe.local<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000733",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://evil.test/trusted.com:1|input.origin=https://trusted.com-attacker.test:0|input.origin=https://not-trusted.com:1|input.origin=ftp://trusted.com:1|input.origin=wss://trusted.com:1|input.origin=https://example.test:0|input.origin=http://localhost:0|input.origin=https://trusted.com.evil.test:0<RULEMEM>input.origin#suffix=trusted.com|q=1|fit=8/8<QUERY>input.origin=https://deep.sub.trusted.com<ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0001781",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.origin=https://safe.local-attacker.test:0|input.origin=https://safe.local:1|input.origin=http://localhost:0|input.origin=https://deep.sub.safe.local:1|input.origin=https://evil.test:0|input.origin=https://not-safe.local:1|input.origin=ftp://safe.local:1|input.origin=https://safe.local.evil.test:0<RULEMEM>input.origin#suffix=safe.local|q=1|fit=8/8<QUERY>input.origin=https://sub.safe.local<ANSWER>"
+        },
+        {
+          "family": "dom_sink_injection",
+          "record_id": "syn-dom_sink_injection-0000558",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RAW><TRACE>input.payload={{template}}:0|input.payload=<math><mtext>node</mtext></math>:1|input.payload=x & y:0|input.payload=no markup here:0|input.payload=<b>message</b>:1|input.payload=</p><section>injected</section><p>:1|input.payload=<template>fragment</template>:1|input.payload=2 < 3 and 5 > 4:0<RULEMEM><QUERY>input.payload=<img src=x><ANSWER>"
+        },
+        {
+          "family": "postmessage_origin",
+          "record_id": "syn-postmessage_origin-0000789",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RAW><TRACE>input.origin=https://example.test:0|input.origin=https://account.internal:1|input.origin=http://localhost:0|input.origin=null:0|input.origin=https://account.internal.evil.test:0|input.origin=ftp://account.internal:1|input.origin=wss://account.internal:1|input.origin=https://deep.sub.account.internal:1<RULEMEM>input.origin#suffix=account.internal|q=0|fit=8/8<QUERY>input.origin=https://account.internal-attacker.test<ANSWER>"
+        }
+      ]
+    },
+    "counterexample_at_k": {
+      "k": 10,
+      "score": 1.0,
+      "successful_programs": 450,
+      "total_programs": 450,
+      "by_family": {
+        "postmessage_origin": 1.0,
+        "dom_sink_injection": 1.0
+      },
+      "top1": 0.791111,
+      "random_top1": 0.53125,
+      "top1_lift": 0.259861,
+      "precision_at_k": 0.728222,
+      "random_precision_at_k": 0.53125,
+      "random_success_at_k": 0.999997,
+      "metric_warning": "Counterexample@K is non-discriminative when the random success baseline is near one.",
+      "policy_visibility": "declared intended output is visible only to the verifier, not to the behavior model"
+    },
+    "memory_delta": 0.294445
+  },
+  "training": {
+    "epochs": 10,
+    "seconds": 119.569,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.722474,
+        "iid_accuracy": 0.732407,
+        "validation_family_accuracy": 0.725
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.599286,
+        "iid_accuracy": 0.877778,
+        "validation_family_accuracy": 0.862037
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.476572,
+        "iid_accuracy": 0.903704,
+        "validation_family_accuracy": 0.897222
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.440366,
+        "iid_accuracy": 0.911111,
+        "validation_family_accuracy": 0.913889
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.419864,
+        "iid_accuracy": 0.92037,
+        "validation_family_accuracy": 0.922222
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.368735,
+        "iid_accuracy": 0.936111,
+        "validation_family_accuracy": 0.939815
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.296392,
+        "iid_accuracy": 0.940741,
+        "validation_family_accuracy": 0.944444
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.183299,
+        "iid_accuracy": 0.940741,
+        "validation_family_accuracy": 0.949074
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.125692,
+        "iid_accuracy": 0.948148,
+        "validation_family_accuracy": 0.947222
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.090753,
+        "iid_accuracy": 0.942593,
+        "validation_family_accuracy": 0.947222
+      }
+    ]
+  },
+  "research_guardrails": {
+    "family_holdout": true,
+    "black_box_only_input": true,
+    "failure_examples_preserved": true,
+    "claim_scope": "pilot only; no claim of production generalization"
+  }
+}

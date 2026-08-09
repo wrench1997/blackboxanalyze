@@ -1,0 +1,900 @@
+{
+  "schema_version": "sift-neural-url-confirmation-v1",
+  "experiment": "neural-url-loop-11-fresh-confirmation",
+  "status": "failed_confirmation",
+  "scope": "synthetic complete-family holdout; no production detector claim",
+  "model": {
+    "parameters": 908546,
+    "learned_url_set_head_parameters": 128,
+    "target_family_examples_in_training": 0
+  },
+  "aggregate": {
+    "candidate_neural_mean": 0.77,
+    "candidate_neural_min": 0.758333,
+    "frozen_native_neural_mean": 0.608333,
+    "candidate_minus_frozen_min": 0.156666,
+    "set_head_gain_min": 0.176666,
+    "worst_regression_delta": -0.038333,
+    "counterexample_top1_mean": 0.753333,
+    "random_top1_mean": 0.375
+  },
+  "acceptance": {
+    "candidate_each_at_least_70pct": true,
+    "candidate_minus_frozen_each_at_least_10pp": true,
+    "set_head_ablation_each_at_least_10pp": true,
+    "old_regression_each_within_minus_2pp": false,
+    "confirmed": false
+  },
+  "causal_attribution": {
+    "canonical_slot": "removes unstable source-field shortcuts and makes URL component positions invariant",
+    "meta_label_training": "penalizes fixed family-to-label shortcuts and rewards episode binding",
+    "learned_set_head": "provides the missing query-to-labeled-context comparison inductive bias; measured by same-checkpoint ablation",
+    "C5": "reported independently as a zero-parameter executable rule system and excluded from neural scores"
+  },
+  "per_seed": [
+    {
+      "seed": 20261329,
+      "dataset_sha256": "3e312274abf5092e248722f784005f3f8871d2e472d8a15adfe6d09e6244a872",
+      "verified_traces": 30298,
+      "candidate_neural": {
+        "accuracy": 0.758333,
+        "correct": 455,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 0.758333
+        },
+        "failures": [
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001471",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.safe.local|p443|/:0|input.origin=null:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1<RULEMEM><QUERY>url.value=u:ftp|safe.local|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001381",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:http|account.internal|p80|/:1<RULEMEM><QUERY>url.value=u:https|account.internal.evil.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001633",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:http|safe.local|p80|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001687",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1<RULEMEM><QUERY>url.value=u:http|account.internal|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002155",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|safe.local|p443|/:1|input.origin=null:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|sub.safe.local|p443|/:0<RULEMEM><QUERY>url.value=u:ws|safe.local|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001327",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|portal.test|p443|/:1|url.value=u:https|sub.portal.test|p443|/:0<RULEMEM><QUERY>url.value=u:ftp|portal.test|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000949",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:http|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:ftp|portal.test|p21|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|sub.portal.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001039",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:ftp|account.internal|p21|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002191",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|portal.test|p21|/:1|input.origin=null:0|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1<RULEMEM><QUERY>url.value=u:https|portal.test.evil.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001201",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|account.internal|p443|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ws|account.internal|p80|/:1<RULEMEM><QUERY>url.value=u:http|account.internal|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002119",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:http|safe.local|p80|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:ws|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:ftp|safe.local|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000103",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|safe.local|p21|/:1|input.origin=null:0|url.value=u:http|safe.local|p80|/:1|url.value=u:ws|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0<RULEMEM><QUERY>url.value=u:https|safe.local.evil.test|p443|/<ANSWER>"
+          }
+        ]
+      },
+      "same_checkpoint_without_set_head": {
+        "accuracy": 0.581667,
+        "correct": 349,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 0.581667
+        },
+        "failures": [
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001363",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|input.origin=null:0|url.value=u:http|safe.local|p80|/:1<RULEMEM><QUERY>url.value=u:ws|safe.local|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001471",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.safe.local|p443|/:0|input.origin=null:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1<RULEMEM><QUERY>url.value=u:ftp|safe.local|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001381",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:http|account.internal|p80|/:1<RULEMEM><QUERY>url.value=u:https|account.internal.evil.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001633",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:http|safe.local|p80|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001471",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:ws|safe.local|p80|/:1|input.origin=null:0|url.value=u:http|safe.local|p80|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:https|safe.local|p443|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001687",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1<RULEMEM><QUERY>url.value=u:http|account.internal|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002155",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|safe.local|p443|/:1|input.origin=null:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|sub.safe.local|p443|/:0<RULEMEM><QUERY>url.value=u:ws|safe.local|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002587",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|trusted.com|p443|/:1|url.value=u:ws|trusted.com|p80|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:https|trusted.com.evil.test|p443|/:0|input.origin=null:0<RULEMEM><QUERY>url.value=u:http|trusted.com|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000823",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|input.origin=null:0<RULEMEM><QUERY>url.value=u:ws|safe.local|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001327",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|portal.test|p443|/:1|url.value=u:https|sub.portal.test|p443|/:0<RULEMEM><QUERY>url.value=u:ftp|portal.test|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000949",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:http|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:ftp|portal.test|p21|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|sub.portal.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001039",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:ftp|account.internal|p21|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          }
+        ]
+      },
+      "canonical_meta_baseline": {
+        "accuracy": 0.546667,
+        "correct": 328,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 0.546667
+        },
+        "failures": [
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001399",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|trusted.com|p80|/:1|url.value=u:http|trusted.com|p80|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|sub.trusted.com|p443|/:0|input.origin=null:0|url.value=u:https|trusted.com.evil.test|p443|/:0|url.value=u:https|trusted.com|p443|/:1<RULEMEM><QUERY>url.value=u:https|trusted.com|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001363",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|input.origin=null:0|url.value=u:http|safe.local|p80|/:1<RULEMEM><QUERY>url.value=u:ws|safe.local|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001471",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.safe.local|p443|/:0|input.origin=null:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1<RULEMEM><QUERY>url.value=u:ftp|safe.local|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000607",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:http|trusted.com|p80|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0|url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:ws|trusted.com|p80|/:1<RULEMEM><QUERY>url.value=u:https|trusted.com|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001633",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:http|safe.local|p80|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001471",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:ws|safe.local|p80|/:1|input.origin=null:0|url.value=u:http|safe.local|p80|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:https|safe.local|p443|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001345",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.safe.local|p443|/:0|url.value=u:http|safe.local|p80|/:1|url.value=u:ftp|safe.local|p21|/:1|input.origin=null:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001687",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1<RULEMEM><QUERY>url.value=u:http|account.internal|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002155",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|safe.local|p443|/:1|input.origin=null:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|sub.safe.local|p443|/:0<RULEMEM><QUERY>url.value=u:ws|safe.local|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002587",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|trusted.com|p443|/:1|url.value=u:ws|trusted.com|p80|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:https|trusted.com.evil.test|p443|/:0|input.origin=null:0<RULEMEM><QUERY>url.value=u:http|trusted.com|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002515",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|sub.trusted.com|p443|/:0|input.origin=null:0|url.value=u:https|trusted.com.evil.test|p443|/:0|url.value=u:https|trusted.com|p443|/:1|url.value=u:ws|trusted.com|p80|/:1|url.value=u:http|trusted.com|p80|/:1<RULEMEM><QUERY>url.value=u:https|trusted.com|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002227",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ws|account.internal|p80|/:1|input.origin=null:0|url.value=u:https|account.internal|p443|/:1|url.value=u:http|account.internal|p80|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          }
+        ]
+      },
+      "frozen_native_neural": {
+        "accuracy": 0.601667,
+        "correct": 361,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 0.601667
+        },
+        "failures": [
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002353",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|sub.portal.test|/:0|input.origin=u:https|portal.test|/:1|input.origin=u:ws|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=null:0|input.origin=u:ftp|portal.test|/:1|input.origin=u:https|portal.test|/:1<RULEMEM><QUERY>input.origin=u:https|portal.test.evil.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002011",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|safe.local|/:1|input.origin=null:0|input.origin=u:https|safe.local|/:1|input.origin=u:ws|safe.local|/:1|input.origin=u:ftp|safe.local|/:1|input.origin=u:http|safe.local|/:1<RULEMEM><QUERY>input.origin=u:https|sub.safe.local|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001705",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|sub.account.internal|/:0|input.origin=u:http|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal.evil.test|/:0|input.origin=u:ftp|account.internal|/:1|input.origin=u:ws|account.internal|/:1|input.origin=u:https|account.internal|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000643",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:http|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=null:0|input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:https|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=u:ws|portal.test|/:1<RULEMEM><QUERY>input.origin=u:https|sub.portal.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001111",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:ftp|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=null:0|input.origin=u:https|safe.local|/:1|input.origin=u:ws|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:https|safe.local|/:1<RULEMEM><QUERY>input.origin=u:https|sub.safe.local|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002587",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=u:ws|trusted.com|/:1|input.origin=u:ftp|trusted.com|/:1|input.origin=u:https|trusted.com|/:1|input.origin=u:https|sub.trusted.com|/:0|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=null:0<RULEMEM><QUERY>input.origin=u:http|trusted.com|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001093",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|safe.local|/:1|input.origin=null:0|input.origin=u:ws|safe.local|/:1|input.origin=u:https|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:ftp|safe.local|/:1|input.origin=u:https|sub.safe.local|/:0<RULEMEM><QUERY>input.origin=u:https|safe.local.evil.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002515",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=u:ftp|trusted.com|/:1|input.origin=u:https|sub.trusted.com|/:0|input.origin=null:0|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:https|trusted.com|/:1|input.origin=u:ws|trusted.com|/:1|input.origin=u:http|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:https|trusted.com|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000211",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|account.internal|/:1|input.origin=u:https|sub.account.internal|/:0|input.origin=u:ws|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal.evil.test|/:0|input.origin=u:http|account.internal|/:1|input.origin=u:ftp|account.internal|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000913",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:ftp|portal.test|/:1|input.origin=u:https|sub.portal.test|/:0|input.origin=null:0|input.origin=u:ws|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=u:https|portal.test|/:1<RULEMEM><QUERY>input.origin=u:https|portal.test.evil.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002389",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|sub.trusted.com|/:0|input.origin=u:https|trusted.com|/:1|input.origin=u:ftp|trusted.com|/:1|input.origin=u:ws|trusted.com|/:1|input.origin=u:https|trusted.com|/:1|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:http|trusted.com|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000949",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:ws|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:http|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=null:0<RULEMEM><QUERY>input.origin=u:https|sub.portal.test|/<ANSWER>"
+          }
+        ]
+      },
+      "C5_rule_system": {
+        "accuracy": 1.0,
+        "correct": 600,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 1.0
+        },
+        "failures": []
+      },
+      "candidate_minus_frozen": 0.156666,
+      "set_head_gain": 0.176666,
+      "counterexample": {
+        "top1": 0.733333,
+        "random_top1": 0.375,
+        "lift": 0.358333
+      },
+      "regression": {
+        "authorization_or": {
+          "baseline": 1.0,
+          "candidate": 1.0,
+          "delta": 0.0
+        },
+        "numeric_boundary": {
+          "baseline": 0.63,
+          "candidate": 0.661667,
+          "delta": 0.031667
+        },
+        "string_suffix_primitive": {
+          "baseline": 0.521667,
+          "candidate": 0.543333,
+          "delta": 0.021666
+        },
+        "substring_origin": {
+          "baseline": 0.945,
+          "candidate": 0.963333,
+          "delta": 0.018333
+        },
+        "truthiness_gate": {
+          "baseline": 0.535,
+          "candidate": 0.511667,
+          "delta": -0.023333
+        },
+        "url_hostname_primitive": {
+          "baseline": 0.873333,
+          "candidate": 0.896667,
+          "delta": 0.023334
+        }
+      },
+      "worst_regression_delta": -0.023333
+    },
+    {
+      "seed": 20261417,
+      "dataset_sha256": "b5c42e57e51cc19e814eb16c5b0bfe7c36cf8ad1682710be22c1478857fc7c72",
+      "verified_traces": 30300,
+      "candidate_neural": {
+        "accuracy": 0.781667,
+        "correct": 469,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 0.781667
+        },
+        "failures": [
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000769",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1|input.origin=null:0|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:ftp|portal.test|p21|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test|p443|/:1<RULEMEM><QUERY>url.value=u:https|portal.test.evil.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002587",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:ws|account.internal|p80|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:ftp|account.internal|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002389",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:ws|safe.local|p80|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002623",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:ws|trusted.com|p80|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0|input.origin=null:0|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:http|trusted.com|p80|/:1<RULEMEM><QUERY>url.value=u:ftp|trusted.com|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001597",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:https|trusted.com.evil.test|p443|/:0|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:ws|trusted.com|p80|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:http|trusted.com|p80|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000805",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ws|account.internal|p80|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002407",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|input.origin=null:0|url.value=u:ws|account.internal|p80|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002155",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0|url.value=u:http|trusted.com|p80|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:ws|trusted.com|p80|/:1|url.value=u:https|sub.trusted.com|p443|/:0<RULEMEM><QUERY>input.origin=null<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000787",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:https|trusted.com|p443|/:1|url.value=u:http|trusted.com|p80|/:1|input.origin=null:0|url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:ws|trusted.com|p80|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1<RULEMEM><QUERY>url.value=u:https|trusted.com.evil.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001345",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:http|trusted.com|p80|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com|p443|/:1|input.origin=null:0|url.value=u:ws|trusted.com|p80|/:1|url.value=u:https|sub.trusted.com|p443|/:0<RULEMEM><QUERY>url.value=u:ftp|trusted.com|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002677",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:http|trusted.com|p80|/:1|url.value=u:ws|trusted.com|p80|/:1<RULEMEM><QUERY>url.value=u:https|trusted.com.evil.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001651",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|safe.local|p80|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:ftp|safe.local|p21|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          }
+        ]
+      },
+      "same_checkpoint_without_set_head": {
+        "accuracy": 0.603333,
+        "correct": 362,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 0.603333
+        },
+        "failures": [
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002695",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|portal.test.evil.test|p443|/:0|input.origin=null:0|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:ws|portal.test|p80|/:1|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:ftp|portal.test|p21|/:1<RULEMEM><QUERY>url.value=u:http|portal.test|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000769",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1|input.origin=null:0|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:ftp|portal.test|p21|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test|p443|/:1<RULEMEM><QUERY>url.value=u:https|portal.test.evil.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002011",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|safe.local|p80|/:1|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ftp|safe.local|p21|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002587",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:ws|account.internal|p80|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:ftp|account.internal|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001849",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:http|trusted.com|p80|/:1|url.value=u:ws|trusted.com|p80|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|sub.trusted.com|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000373",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:http|account.internal|p80|/:1|input.origin=null:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002371",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|portal.test|p443|/:1|url.value=u:ws|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:http|portal.test|p80|/:1|input.origin=null:0|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:https|portal.test.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:ftp|portal.test|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002389",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:ws|safe.local|p80|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002407",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|sub.account.internal|p443|/:0|input.origin=null:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:http|account.internal|p80|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002623",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:ws|trusted.com|p80|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0|input.origin=null:0|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:http|trusted.com|p80|/:1<RULEMEM><QUERY>url.value=u:ftp|trusted.com|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001597",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:https|trusted.com.evil.test|p443|/:0|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:ws|trusted.com|p80|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:http|trusted.com|p80|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001327",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:http|account.internal|p80|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|account.internal.evil.test|p443|/<ANSWER>"
+          }
+        ]
+      },
+      "canonical_meta_baseline": {
+        "accuracy": 0.52,
+        "correct": 312,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 0.52
+        },
+        "failures": [
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002695",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|portal.test.evil.test|p443|/:0|input.origin=null:0|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:ws|portal.test|p80|/:1|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:ftp|portal.test|p21|/:1<RULEMEM><QUERY>url.value=u:http|portal.test|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002011",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|safe.local|p80|/:1|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ftp|safe.local|p21|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002587",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:ws|account.internal|p80|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:ftp|account.internal|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001705",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|account.internal|p80|/:1|input.origin=null:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|sub.account.internal|p443|/:0<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001975",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ftp|portal.test|p21|/:1|url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|sub.portal.test|p443|/:0|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|portal.test|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001273",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.portal.test|p443|/:0|input.origin=null:0|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|portal.test|p443|/:1|url.value=u:http|portal.test|p80|/:1|url.value=u:ftp|portal.test|p21|/:1|url.value=u:https|portal.test|p443|/:1<RULEMEM><QUERY>url.value=u:ws|portal.test|p80|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000589",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:http|safe.local|p80|/:1|url.value=u:ftp|safe.local|p21|/:1|input.origin=null:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ws|safe.local|p80|/:1<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000373",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:http|account.internal|p80|/:1|input.origin=null:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002623",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:ws|trusted.com|p80|/:1|url.value=u:https|sub.trusted.com|p443|/:0|input.origin=null:0|url.value=u:https|trusted.com|p443|/:1|url.value=u:http|trusted.com|p80|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:ftp|trusted.com|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000031",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:https|portal.test|p443|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1<RULEMEM><QUERY>url.value=u:ftp|portal.test|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002371",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|portal.test|p443|/:1|url.value=u:ws|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|url.value=u:http|portal.test|p80|/:1|input.origin=null:0|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:https|portal.test.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:ftp|portal.test|p21|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000625",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0|input.origin=null:0|url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:https|trusted.com|p443|/:1|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:ws|trusted.com|p80|/:1<RULEMEM><QUERY>url.value=u:http|trusted.com|p80|/<ANSWER>"
+          }
+        ]
+      },
+      "frozen_native_neural": {
+        "accuracy": 0.615,
+        "correct": 369,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 0.615
+        },
+        "failures": [
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000769",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:ws|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=null:0|input.origin=u:https|sub.portal.test|/:0|input.origin=u:ftp|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:https|portal.test|/:1<RULEMEM><QUERY>input.origin=u:https|portal.test.evil.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002011",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=u:ws|safe.local|/:1|input.origin=u:http|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|safe.local|/:1|input.origin=u:https|sub.safe.local|/:0|input.origin=u:ftp|safe.local|/:1|input.origin=null:0<RULEMEM><QUERY>input.origin=u:https|safe.local|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002443",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=u:http|trusted.com|/:1|input.origin=u:https|sub.trusted.com|/:0|input.origin=u:ws|trusted.com|/:1|input.origin=u:https|trusted.com|/:1|input.origin=null:0|input.origin=u:ftp|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:https|trusted.com.evil.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000967",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=u:ws|trusted.com|/:1|input.origin=u:https|trusted.com|/:1|input.origin=u:https|sub.trusted.com|/:0|input.origin=u:http|trusted.com|/:1|input.origin=null:0|input.origin=u:ftp|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:https|trusted.com.evil.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0002317",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:http|account.internal|/:1|input.origin=u:https|sub.account.internal|/:0|input.origin=u:ws|account.internal|/:1|input.origin=null:0|input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:ftp|account.internal|/:1<RULEMEM><QUERY>input.origin=u:https|account.internal.evil.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001489",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|account.internal.evil.test|/:0|input.origin=u:http|account.internal|/:1|input.origin=null:0|input.origin=u:ws|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|account.internal|/:1<RULEMEM><QUERY>input.origin=u:https|sub.account.internal|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001867",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|account.internal.evil.test|/:0|input.origin=u:ws|account.internal|/:1|input.origin=u:http|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=null:0<RULEMEM><QUERY>input.origin=u:https|sub.account.internal|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001111",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=null:0|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:ws|trusted.com|/:1|input.origin=u:ftp|trusted.com|/:1|input.origin=u:http|trusted.com|/:1|input.origin=u:https|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:https|sub.trusted.com|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001957",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=null:0|input.origin=u:ws|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:https|sub.portal.test|/:0<RULEMEM><QUERY>input.origin=u:https|portal.test.evil.test|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000787",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=null:0|input.origin=u:ws|trusted.com|/:1|input.origin=u:https|trusted.com|/:1|input.origin=u:ftp|trusted.com|/:1|input.origin=u:https|trusted.com|/:1|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:http|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:https|sub.trusted.com|/<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0001687",
+            "expected": 0,
+            "predicted": 1,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:https|sub.portal.test|/:0|input.origin=u:https|portal.test|/:1|input.origin=u:ws|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=u:http|portal.test|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+          },
+          {
+            "family": "url_scheme_downgrade",
+            "record_id": "syn-url_scheme_downgrade-0000769",
+            "expected": 1,
+            "predicted": 0,
+            "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:ws|portal.test|/:1|input.origin=null:0|input.origin=u:https|sub.portal.test|/:0|input.origin=u:https|portal.test.evil.test|/:0<RULEMEM><QUERY>input.origin=u:http|portal.test|/<ANSWER>"
+          }
+        ]
+      },
+      "C5_rule_system": {
+        "accuracy": 1.0,
+        "correct": 600,
+        "total": 600,
+        "by_family": {
+          "url_scheme_downgrade": 1.0
+        },
+        "failures": []
+      },
+      "candidate_minus_frozen": 0.166667,
+      "set_head_gain": 0.178334,
+      "counterexample": {
+        "top1": 0.773333,
+        "random_top1": 0.375,
+        "lift": 0.398333
+      },
+      "regression": {
+        "authorization_or": {
+          "baseline": 1.0,
+          "candidate": 1.0,
+          "delta": 0.0
+        },
+        "numeric_boundary": {
+          "baseline": 0.636667,
+          "candidate": 0.66,
+          "delta": 0.023333
+        },
+        "string_suffix_primitive": {
+          "baseline": 0.51,
+          "candidate": 0.555,
+          "delta": 0.045
+        },
+        "substring_origin": {
+          "baseline": 0.955,
+          "candidate": 0.965,
+          "delta": 0.01
+        },
+        "truthiness_gate": {
+          "baseline": 0.54,
+          "candidate": 0.501667,
+          "delta": -0.038333
+        },
+        "url_hostname_primitive": {
+          "baseline": 0.853333,
+          "candidate": 0.881667,
+          "delta": 0.028334
+        }
+      },
+      "worst_regression_delta": -0.038333
+    }
+  ],
+  "lineage": {
+    "preregistration": "research/neural_url_loop_11_confirmation_preregistration.json",
+    "pilot": "research/neural_url_loop_11_set_head_pilot.json"
+  }
+}

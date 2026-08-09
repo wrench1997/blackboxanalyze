@@ -1,0 +1,55 @@
+{
+  "protocol_id": "pg-pk-76-independent-unknown-triplet-v1",
+  "schema_version": "sift-pg76-independent-unknown-triplet-protocol-v1",
+  "target_contract": {
+    "fixture": "app/pg76_unknown_triplet_fixture.py",
+    "loopback_port": 8818,
+    "fresh_target_per_triplet": true,
+    "external_network": false,
+    "state_change_allowed": false
+  },
+  "holdout_contract": {
+    "family": "workflow_invariant",
+    "outside_training_registry": true,
+    "independent_implementation": true,
+    "model_must_not_see_family_or_oracle": true
+  },
+  "triplet_contract": {
+    "neutral_projection": true,
+    "negative_probe_projection": true,
+    "positive_probe_projection": true,
+    "typed_negative_oracles": true,
+    "typed_positive_oracles": true,
+    "raw_persistence_forbidden": true
+  },
+  "required_gates": {
+    "triplet_complete_per_case": true,
+    "typed_positive_per_case": true,
+    "typed_negative_oracle_per_case": true,
+    "fresh_target_per_case": true,
+    "get_post_covered": true,
+    "trace_episodes_accepted": true,
+    "model_unknown_strict_abstain": true,
+    "no_raw_persistence": true
+  },
+  "run_result": {
+    "hard_gate": {
+      "status": "passed",
+      "checks": {
+        "triplet_complete_per_case": true,
+        "typed_positive_per_case": true,
+        "typed_negative_oracle_per_case": true,
+        "fresh_target_per_case": true,
+        "get_post_covered": true,
+        "trace_episodes_accepted": true,
+        "model_unknown_strict_abstain": true,
+        "no_raw_persistence": true
+      },
+      "blocking_reasons": [],
+      "claim_allowed": false
+    },
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "next_experiment": "PG77 cross-implementation known-family triplet replay and candidate family-heldout audit"
+}

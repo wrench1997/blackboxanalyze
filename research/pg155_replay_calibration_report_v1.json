@@ -1,0 +1,410 @@
+{
+  "protocol_id": "pg-pk-155-replay-calibration-v1",
+  "schema_version": "pg155-replay-calibration-report-v1",
+  "status": "completed_pg155_replay_calibration",
+  "device": "cuda",
+  "seed": 15501,
+  "source": {
+    "label_count": 696,
+    "train_count": 216,
+    "dev_count": 216,
+    "holdout_count": 264,
+    "synthetic_train_count": 6400,
+    "synthetic_dev_count": 800,
+    "synthetic_holdout_count": 800,
+    "real_train_count": 216,
+    "real_dev_count": 216,
+    "real_holdout_count": 264,
+    "real_repeated_count": 2133,
+    "action_mix_count": 8533,
+    "lm_replay_count": 1200,
+    "unknown_hint_count": 120,
+    "surface_unknown_count": 6,
+    "language_canary_count": 1210,
+    "real_fraction": 0.25,
+    "balanced_replay_count": 1200,
+    "selective_replay_count": 1200,
+    "selective_source_counts": {
+      "pg149_synthetic": 1200
+    },
+    "selection_used_labels": false
+  },
+  "variants": [
+    {
+      "variant": "lm_anchor_baseline",
+      "mode": "baseline",
+      "trained": false,
+      "train_count": 9733,
+      "replay_count": 0,
+      "selection": {
+        "selection_used_labels": false
+      },
+      "parameter_count": 38059713,
+      "temperature": 1.25,
+      "abstain_threshold": 0.0,
+      "raw_synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.85625,
+        "false_stop_count": 0,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 800,
+        "coverage": 1.0,
+        "selective_accuracy": 0.85625,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 264,
+        "coverage": 1.0,
+        "selective_accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_surface_unknown": {
+        "count": 0,
+        "accepted_count": 0,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 24.03385735,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": 0.0,
+          "relative_perplexity_increase": 0.0,
+          "next_token_accuracy_drop": 0.0,
+          "mean_logit_kl": 3e-08
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [],
+      "elapsed_seconds": 14.339
+    },
+    {
+      "variant": "balanced_replay",
+      "mode": "source_balanced",
+      "trained": true,
+      "train_count": 10933,
+      "replay_count": 1200,
+      "selection": {
+        "source_counts": {
+          "pg149_synthetic": 600,
+          "pg136_real": 600
+        },
+        "selection_used_labels": false
+      },
+      "parameter_count": 38059713,
+      "temperature": 1.2,
+      "abstain_threshold": 0.73,
+      "raw_synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.865,
+        "false_stop_count": 108,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.82954545,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 192,
+        "coverage": 0.72727273,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 72,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_surface_unknown": {
+        "count": 0,
+        "accepted_count": 0,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 55.12805557,
+        "next_token_accuracy": 0.36666667,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.99150902,
+          "perplexity": 2.69529867,
+          "next_token_accuracy": 0.51234493,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.04507801,
+          "relative_perplexity_increase": -0.01644957,
+          "next_token_accuracy_drop": -0.00547859,
+          "mean_logit_kl": 0.03393501
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.5382012,
+          "synthetic_dev": {
+            "count": 1016,
+            "accuracy": 0.87204724,
+            "false_stop_count": 94,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          },
+          "real_dev": {
+            "count": 264,
+            "accuracy": 0.82954545,
+            "false_stop_count": 0,
+            "unknown_count": 66,
+            "unknown_abstain_rate": 1.0
+          }
+        }
+      ],
+      "elapsed_seconds": 99.362
+    },
+    {
+      "variant": "selective_replay",
+      "mode": "selective_uncertainty",
+      "trained": true,
+      "train_count": 10933,
+      "replay_count": 1200,
+      "selection": {
+        "source_counts": {
+          "pg149_synthetic": 1200
+        },
+        "selection_used_labels": false,
+        "score": "1-max_probability + predicted_stop_bonus"
+      },
+      "parameter_count": 38059713,
+      "temperature": 1.1,
+      "abstain_threshold": 0.65,
+      "raw_synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.865,
+        "false_stop_count": 59,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.82954545,
+        "false_stop_count": 6,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "raw_surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 192,
+        "coverage": 0.72727273,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 72,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_surface_unknown": {
+        "count": 0,
+        "accepted_count": 0,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 36.25165558,
+        "next_token_accuracy": 0.4,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.98980844,
+          "perplexity": 2.69071899,
+          "next_token_accuracy": 0.51096925,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.04965769,
+          "relative_perplexity_increase": -0.01812075,
+          "next_token_accuracy_drop": -0.00410291,
+          "mean_logit_kl": 0.032447
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.6233769,
+          "synthetic_dev": {
+            "count": 1016,
+            "accuracy": 0.85728346,
+            "false_stop_count": 51,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          },
+          "real_dev": {
+            "count": 264,
+            "accuracy": 0.82954545,
+            "false_stop_count": 6,
+            "unknown_count": 66,
+            "unknown_abstain_rate": 1.0
+          }
+        }
+      ],
+      "elapsed_seconds": 97.739
+    }
+  ],
+  "objective": "source_balanced_selective_replay_temperature_calibration",
+  "data_policy": {
+    "raw_payloads": false,
+    "raw_responses": false,
+    "external_network_targets": false,
+    "pg146_training_labels_used": false,
+    "calibration_fit_on_holdout": false,
+    "selection_used_labels": false
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  },
+  "report_sha256": "5c85abb1921f25e11242da4703edbe5b7bb66bd8f929c900485d3fd5310ec1d0"
+}

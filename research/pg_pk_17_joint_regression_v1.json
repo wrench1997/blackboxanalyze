@@ -1,0 +1,114 @@
+{
+  "schema_version": "sift-pg-pk-17-joint-regression-report-v1",
+  "protocol_id": "pg-pk-17-joint-regression-v1",
+  "status": "pass",
+  "triage": {
+    "schema_version": "sift-experiment-engineering-triage-v1",
+    "classification": "inconclusive",
+    "experiment_path": {
+      "signals": [],
+      "unregistered_signals": [],
+      "gate_passed": true,
+      "action": "no_scientific_failure_signal"
+    },
+    "engineering_path": {
+      "signals": [],
+      "unregistered_signals": [],
+      "gate_passed": true,
+      "action": "no_engineering_failure_signal"
+    },
+    "evidence": {
+      "missing_artifacts": [],
+      "pg16_pre_fix_sql_candidates": 180,
+      "pg16_post_fix_sql_candidates": 0,
+      "pg16_oracle_pairs": 36,
+      "pg15_source_count": 3,
+      "shared_scaled_ece": 0.03946664787864623,
+      "logic_scaled_ece": 1.641580205102855e-09
+    },
+    "model_change_authorized": false,
+    "infrastructure_scale_authorized": false
+  },
+  "metrics": {
+    "shared_confidence_calibration": {
+      "temperature": 0.25,
+      "raw_ece": 0.4023286505885746,
+      "scaled_ece": 0.03946664787864623,
+      "abstain_threshold": 0.782802,
+      "abstain_coverage": 0.956522,
+      "control_false_accept_rate": 0.0
+    },
+    "logic_confidence_calibration": {
+      "temperature": 0.35,
+      "raw_ece": 0.00023781955242152542,
+      "scaled_ece": 1.641580205102855e-09,
+      "abstain_threshold": 1.0,
+      "abstain_coverage": 1.0
+    },
+    "sql": {
+      "pg09_oracle_pairs": 6,
+      "pg14_oracle_pairs": 45,
+      "pg15_oracle_pairs": 54,
+      "pg15_source_count": 3,
+      "pg15_false_positive_rows": 0
+    },
+    "logic": {
+      "pg10_oracle_pairs": 12,
+      "pg10_counterfactual_model_accepts": 0,
+      "pg16_oracle_pairs": 36,
+      "pg16_counterfactual_model_candidates": 0
+    },
+    "logic_v3": {
+      "oracle_pairs": 36,
+      "source_count": 3,
+      "false_positive_rows": 0,
+      "coverage": {
+        "expected": 36,
+        "accepted": 36,
+        "ratio": 1.0,
+        "passed": true
+      },
+      "promotion": {
+        "access_control": "promote",
+        "logic": "promote"
+      }
+    },
+    "cross_family_guard": {
+      "pre_fix_sql_candidates": 180,
+      "post_fix_sql_candidates": 0,
+      "post_fix_shared_injection_routes": 0
+    }
+  },
+  "required_invariants": {
+    "typed_oracle_positive_authority": true,
+    "shared_router_positive_authority": false,
+    "sql_cross_family_candidate_zero": true,
+    "logic_v2_complete_pair_oracle": true,
+    "logic_v2_counterfactual_candidates_zero": true,
+    "sql_v3_three_source_promotion": true,
+    "logic_v3_three_source_promotion": true,
+    "pre_fix_failure_preserved": true,
+    "confidence_is_route_only": true
+  },
+  "source_reports": [
+    "artifacts\\shared-family-router-pg-pk-11\\report.json",
+    "artifacts\\logic-access-decoder-pg-pk-10\\report.json",
+    "artifacts\\sql-channel-decoder-pg-pk-09\\report.json",
+    "research\\pg_pk_09_sql_differential_v1.json",
+    "research\\pg_pk_10_logic_access_v1.json",
+    "research\\pg_pk_14_sql_v2_active_generalization_v1.json",
+    "research\\pg_pk_15_sql_v3_cross_source_promotion_v1.json",
+    "research\\pg_pk_16_logic_v2_cross_family_guard_v1.json",
+    "research\\pg_pk_16_logic_v2_cross_family_guard_pre_fix_v1.json",
+    "research\\pg_pk_18_logic_v3_cross_source_promotion_v1.json"
+  ],
+  "ledger": {
+    "path": "artifacts\\experiment-ledger-pg-pk-17.jsonl",
+    "record_hash": "8952d3066680c8ac34bc06154dcddbdfab65fe5afbfc340c6096ee77502efc6f",
+    "verification": {
+      "valid": true,
+      "record_count": 3,
+      "head": "8952d3066680c8ac34bc06154dcddbdfab65fe5afbfc340c6096ee77502efc6f"
+    }
+  }
+}

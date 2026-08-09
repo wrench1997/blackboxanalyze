@@ -1,0 +1,46 @@
+{
+  "schema_version": "pg-pk-28-get-post-dual-channel-protocol-v1",
+  "purpose": "Use a fresh local container to compare bounded GET and POST detection surfaces without promoting weak signals.",
+  "scope": {
+    "target": "owasp_vulnerableapp_2_1_44",
+    "loopback": "127.0.0.1:19090",
+    "image_digest": "sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+    "family": "xss",
+    "route_template": "vulnerableapp-xss-html-level1"
+  },
+  "channels": {
+    "required": ["GET", "POST"],
+    "GET": "query parameter carrying an inert per-episode marker",
+    "POST": "application/x-www-form-urlencoded form carrying the same kind of inert marker",
+    "HEAD": "preflight only; never sufficient for this family"
+  },
+  "episode_contract": [
+    "recreate the pinned container before each independent episode",
+    "take an unmarked baseline for both methods",
+    "send only a bounded alphanumeric marker; no script, SQL, command, credential, or state-changing probe",
+    "derive body/header/status projections and allow-listed regex evidence in memory",
+    "discard raw response and marker; retain only hashes and bounded summaries"
+  ],
+  "positive_gate": [
+    "typed DOM or evaluator-authoritative effect",
+    "allow-listed regex evidence matched",
+    "matched same-surface confirmed-negative control",
+    "fresh reset and oracle revalidation",
+    "two independent positive replays per case",
+    "three target instances and three sampling seeds",
+    "canonical SHA-256 evidence valid"
+  ],
+  "failure_policy": {
+    "reflection_status_error_timeout_or_405": "candidate_or_abstain_only",
+    "unsupported_post_surface": "engineering_observation; do not infer a vulnerability",
+    "zero_typed_positives": "preflight_only",
+    "preflight_or_hard_fail": "no_training_dataset_and_no_memory_promotion"
+  },
+  "artifacts": {
+    "catalog": "research/pg_pk_28_get_post_dual_catalog_v1.json",
+    "acceptance": "research/pg_pk_28_get_post_dual_acceptance_v1.json",
+    "hardcore_gate": "research/pg_pk_28_get_post_dual_hardcore_gate_v1.json",
+    "runner": "scripts/run_pg28_get_post_dual_experiment.py"
+  },
+  "training_artifact_generated": false
+}

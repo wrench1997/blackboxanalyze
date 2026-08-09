@@ -1,0 +1,73 @@
+{
+  "protocol_id": "debug",
+  "schema_version": "pg79-fresh-unified-triplet-collector-report-v1",
+  "status": "completed_evaluation",
+  "source": {
+    "collector": "scripts\\run_pg53_cross_source_typed_replay.py",
+    "independent_source_count": 0,
+    "independent_implementation_count": 0,
+    "family_count": 0,
+    "model_retrained": false
+  },
+  "scope": {
+    "loopback_only": true,
+    "external_network": false,
+    "database_write": false,
+    "script_execution": false,
+    "state_mutation": false,
+    "raw_probe_persistence": false,
+    "raw_response_persistence": false
+  },
+  "metrics": {
+    "triplet_case_count": 0,
+    "typed_positive_count": 0,
+    "typed_negative_oracle_count": 0,
+    "unique_target_instance_count": 0,
+    "fresh_reset_per_case": true,
+    "get_post_counts": {},
+    "source_count": 0,
+    "implementation_count": 0,
+    "family_count": 0,
+    "trace_episode_count": 0,
+    "trace_accepted_episode_count": 0,
+    "negative_probe_positive_count": 0,
+    "collection_error_count": 1,
+    "validation_failure_count": 0
+  },
+  "hard_gate": {
+    "status": "blocked",
+    "checks": {
+      "triplet_complete_per_case": false,
+      "typed_positive_per_case": false,
+      "typed_negative_oracle_per_case": true,
+      "negative_probe_strictly_negative": true,
+      "fresh_target_per_case": true,
+      "get_post_covered": false,
+      "multi_source": false,
+      "multi_family": false,
+      "trace_episodes_accepted": true,
+      "no_raw_persistence": true
+    },
+    "blocking_reasons": [
+      "triplet_complete_per_case",
+      "typed_positive_per_case",
+      "get_post_covered",
+      "multi_source",
+      "multi_family"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "catalog_training_eligible": false,
+    "status": "triplet_collection_only",
+    "reason": "collection must be paired with PG-80 model replay and independent source audit before any promotion"
+  },
+  "artifacts": {
+    "catalog": "research\\pg82_debug_catalog2.json",
+    "trace": "research\\pg82_debug_trace2.json",
+    "report": "research\\pg82_debug_report2.json",
+    "protocol": "research\\pg82_debug_protocol2.json"
+  }
+}

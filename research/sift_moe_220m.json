@@ -1,0 +1,91 @@
+{
+  "model_name": "SIFT-MoE-220M",
+  "status": "research_proposal",
+  "purpose": "Recover executable rules and security counterexamples from black-box JavaScript behavior under a limited query budget.",
+  "architecture": {
+    "family": "decoder-only-transformer",
+    "reference": "GPT-2-style pre-norm decoder with sparse MoE blocks",
+    "context_length": 4096,
+    "layers": 16,
+    "hidden_size": 768,
+    "attention_heads": 12,
+    "shared_dense_layers": 12,
+    "moe_layers": [4, 8, 12, 16],
+    "experts_per_moe_layer": 8,
+    "active_experts_per_token": 2,
+    "estimated_total_parameters": 220000000,
+    "estimated_active_parameters": 96000000,
+    "experts": [
+      "js_syntax_and_control_flow",
+      "numeric_boundaries",
+      "coercion_and_truthiness",
+      "strings_regex_and_urls",
+      "state_history_and_replay",
+      "authorization_logic",
+      "counterexample_search",
+      "rule_ir_composition"
+    ],
+    "heads": [
+      "causal_language_model",
+      "behavior_prediction",
+      "next_probe_policy",
+      "vulnerability_verifier"
+    ]
+  },
+  "token_streams": [
+    "<JS> source or AST mutation",
+    "<GAME> semantic rule abstraction",
+    "<TRACE> episode observations",
+    "<QUERY> proposed next experiment",
+    "<RULE_IR> executable hypothesis",
+    "<EVIDENCE> counterexample and limitations"
+  ],
+  "curriculum": [
+    {
+      "stage": "P0",
+      "name": "rule-grounded pretraining",
+      "target_scale": "8B mixed tokens",
+      "objectives": ["causal_lm", "masked_trace_completion", "js_to_rule_ir_denoising"]
+    },
+    {
+      "stage": "P1",
+      "name": "multi-task supervised tuning",
+      "target_scale": "2M generated episodes",
+      "objectives": ["semantic_abstraction", "behavior_prediction", "rule_induction", "vulnerability_explanation"]
+    },
+    {
+      "stage": "P2",
+      "name": "active experiment reinforcement learning",
+      "target_scale": "400K sandbox episodes",
+      "objectives": ["information_gain", "query_efficiency", "minimal_counterexample", "calibrated_abstention"]
+    },
+    {
+      "stage": "P3",
+      "name": "adversarial co-evolution",
+      "target_scale": "120K generator-versus-solver episodes",
+      "objectives": ["novel_bug_generation", "solver_robustness", "family_holdout_generalization"]
+    }
+  ],
+  "active_rl_reward": {
+    "formula": "1.8*dH + 2.4*valid_counterexample + 1.2*rule_fidelity - 0.08*queries - 2.0*false_alarm - 0.6*unreproducible_claim",
+    "notes": "dH is the reduction in posterior hypothesis entropy after an Oracle query. Security claims only receive positive reward when replayable in the executable environment."
+  },
+  "evaluation": {
+    "primary_metrics": [
+      "behavior_agreement_on_family_holdout",
+      "counterexample_at_k",
+      "median_queries_to_identification",
+      "rule_ir_exact_or_behavioral_match",
+      "false_positive_rate",
+      "expected_calibration_error"
+    ],
+    "split_policy": "Split by vulnerability and rule family, never by near-duplicate program instance.",
+    "required_ablations": [
+      "dense_transformer_vs_moe",
+      "random_queries_vs_active_policy",
+      "without_game_abstraction",
+      "without_executable_rule_ir",
+      "without_adversarial_coevolution"
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schema_version": "auto-goal-label-proposal-v1",
+  "proposal_id": "pg96-auto-goal-label-v1",
+  "proposal_inputs": {
+    "row_count": 320,
+    "oracle_visible": false,
+    "family_visible": false,
+    "raw_probe_visible": false,
+    "raw_response_visible": false,
+    "selection_objective": "balanced_support_x_independent_context_stability_x_simplicity"
+  },
+  "goal": {
+    "goal_id": "auto_goal_stable_effect_discovery_v1",
+    "intent": "discover a repeatable bounded observation change with safe probes",
+    "success_predicate": "any_delta_surface",
+    "success_condition": [
+      "candidate-vs-matched-control change is observed",
+      "the change repeats on a second compatible probe",
+      "no matched negative control produces the same success decision",
+      "fresh reset and loopback safety remain true"
+    ],
+    "failure_condition": [
+      "no observation change",
+      "change is unsupported or unstable across contexts",
+      "negative control has a matching success signal"
+    ],
+    "abstain_condition": [
+      "feature family unseen during proposal design",
+      "ambiguous or conflicting repeated observations"
+    ],
+    "budget": {
+      "max_steps": 2,
+      "max_candidate_probes": 2,
+      "requires_fresh_reset": true
+    }
+  },
+  "labels": [
+    {
+      "label_id": "AUTO_LABEL_NO_OBSERVED_CHANGE",
+      "definition": {
+        "predicate": "not_selected_prefix",
+        "prefix": "SURFACE"
+      },
+      "decision": "reject"
+    },
+    {
+      "label_id": "AUTO_LABEL_STABLE_EFFECT_CHANGE",
+      "definition": {
+        "predicate": "selected_prefix",
+        "prefix": "SURFACE"
+      },
+      "decision": "confirm_candidate"
+    },
+    {
+      "label_id": "AUTO_LABEL_UNSUPPORTED_OR_AMBIGUOUS",
+      "definition": {
+        "predicate": "unseen_prefix_or_conflict"
+      },
+      "decision": "abstain"
+    }
+  ],
+  "candidate_predicates": [
+    {
+      "predicate_id": "any_delta_surface",
+      "definition": {
+        "any_delta_prefix": "SURFACE"
+      },
+      "support_count": 64,
+      "support_rate": 0.2,
+      "independent_context_count": 8,
+      "independent_context_rate": 0.25,
+      "unsupervised_score": 0.125553
+    },
+    {
+      "predicate_id": "any_delta_geometry",
+      "definition": {
+        "any_delta_prefix": "GEOMETRY"
+      },
+      "support_count": 64,
+      "support_rate": 0.2,
+      "independent_context_count": 8,
+      "independent_context_rate": 0.25,
+      "unsupervised_score": 0.120321
+    }
+  ],
+  "selected_predicate": {
+    "predicate_id": "any_delta_surface",
+    "definition": {
+      "any_delta_prefix": "SURFACE"
+    },
+    "support_count": 64,
+    "support_rate": 0.2,
+    "independent_context_count": 8,
+    "independent_context_rate": 0.25,
+    "unsupervised_score": 0.125553
+  },
+  "audit": {
+    "label_names_are_semantic_aliases_not_oracle_labels": true,
+    "requires_independent_typed_oracle": true,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "proposal_sha256": "032ab3815a44e3a098f4716b50e61643be80a150222822c4b615e025aa0d46fc"
+}

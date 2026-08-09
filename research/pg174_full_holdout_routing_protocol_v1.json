@@ -1,0 +1,69 @@
+{
+  "protocol_id": "pg-pk-174-full-holdout-routing-v1",
+  "schema_version": "pg174-full-holdout-routing-protocol-v1",
+  "reference_101m": "artifacts\\pg173-matched-budget-capacity-v1\\101m_epoch4.pt",
+  "reference_160m": "artifacts\\pg173-matched-budget-capacity-v1\\160m_epoch4.pt",
+  "source_datasets": [
+    "research\\pg163_large_typed_mix_dataset_v1.json",
+    "research\\pg168_discriminative_slot_dataset_v1.json",
+    "research\\pg170_cross_generator_dataset_v1.json",
+    "research\\pg172_third_generator_dataset_v1.json"
+  ],
+  "rows_per_source": 250,
+  "train_batch_size": 16,
+  "eval_batch_size": 32,
+  "strategies": {
+    "uniform": {
+      "weights": {
+        "pg163_base": 1.0,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "routing": false
+    },
+    "replay_weighted": {
+      "weights": {
+        "pg163_base": 2.0,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "routing": false
+    },
+    "source_routed": {
+      "weights": {
+        "pg163_base": 1.5,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "routing": true
+    }
+  },
+  "full_holdout": {
+    "base_holdout": 1210,
+    "typed_holdout": 203,
+    "pg168_ood": 1000,
+    "pg170_ood": 1000,
+    "pg172_ood": 1000
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "e87454c54ca95d53f872e2a65da1e4fc675d95b8cd67c22141b529f789975c42"
+}

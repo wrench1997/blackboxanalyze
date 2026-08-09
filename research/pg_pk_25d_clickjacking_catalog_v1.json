@@ -1,0 +1,601 @@
+{
+  "schema_version": "sift-cross-lab-safe-catalog-v1",
+  "catalog_id": "pg25d-vulnerableapp-clickjacking-v1",
+  "source": {
+    "schema_version": "sift-cross-lab-safe-source-v1",
+    "target_id": "owasp_vulnerableapp_2_1_44",
+    "app_family": "owasp_vulnerableapp",
+    "source_id": "sasanlabs-vulnerableapp-2.1.44-amd64",
+    "source_type": "authorized_local_container",
+    "origin_ref": "pg_pk_25d_vulnerableapp_deployment_v1",
+    "license": "local-container",
+    "authorization": "workspace_local_only",
+    "loopback_scope": {
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 19090
+    },
+    "container_image_digest": "sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+    "collector_sha256": "c0d6ce34fa26b55d3d4cba4f1d2f5c604f2dff0ca405f655a275a9aee85b0468",
+    "reset_adapter_sha256": "a2df3b48dd80d68cb0adbdefe64dc2b26137282b204ed8a55fe630c3ff884724",
+    "oracle_contract_sha256": "3f13c399cebea2db7d40163529617814f82c44b480e791a0953dcbe4484b69f6",
+    "registry": {
+      "schema_version": "sift-cross-lab-registry-v1",
+      "registered": false,
+      "training_eligible": false,
+      "training_role": "unregistered_evaluation_only"
+    },
+    "read_only": true,
+    "external_network": false,
+    "source_sha256": "c7754b706138d1fcc6974b15725d9fe285da2d50ef4d9c8daf6533ae14fcb5e4"
+  },
+  "samples": [
+    {
+      "decision": {
+        "abstain_reasons": [
+          "source_evaluation_only"
+        ],
+        "evidence_status": "confirmed_negative",
+        "oracle_revalidated": true,
+        "training_action": "abstain"
+      },
+      "evidence": {
+        "decision": {
+          "abstain_reasons": [
+            "source_evaluation_only"
+          ],
+          "evidence_status": "confirmed_negative",
+          "oracle_revalidated": true,
+          "training_action": "abstain"
+        },
+        "evidence_hash": "493b060bc2b71e627a4df8565a72985bc41512e9a2290cbcccb2ae661d0c43de",
+        "evidence_hash_algorithm": "sha256-canonical-json",
+        "negative_control": null,
+        "oracle_projection": {
+          "candidate_signal": false,
+          "confirmed_effect": "none",
+          "family": "clickjacking",
+          "modality": "header_policy",
+          "oracle_contract_sha256": "3f13c399cebea2db7d40163529617814f82c44b480e791a0953dcbe4484b69f6",
+          "oracle_id": "pg25d-clickjacking-header-v1",
+          "positive": false,
+          "positive_authority": true,
+          "projection_sha256": "3bdfd86f87b5565587879ae4cbe2680d335fb2f1ea955a0ee09e66b760d9237e",
+          "safety": {
+            "credentials_accessed": false,
+            "database_write": false,
+            "external_network": false,
+            "persistent_state_mutated": false,
+            "raw_body_stored": false,
+            "script_execution": false
+          },
+          "signals": {
+            "frame_policy": "sameorigin",
+            "protected_policy_observed": true,
+            "regex_evidence": {
+              "capture_groups_stored": false,
+              "evidence_hash": "81bf22d1bcd9be442cd416b59eee0d5cc9959f843a379097ba9811d400673d45",
+              "input_length_bucket": "1-255",
+              "match_count": 1,
+              "matched": true,
+              "pattern_id": "header_xfo_protected",
+              "raw_text_stored": false,
+              "schema_version": "sift-regex-evidence-v1",
+              "span_buckets": [
+                "0-31"
+              ]
+            }
+          }
+        },
+        "payload_manifest": {
+          "encoding_chain": [
+            "identity"
+          ],
+          "encoding_depth": 0,
+          "manifest_id": "pg25d-clickjacking-control",
+          "manifest_sha256": "51245631c64685171cb0831ac2c2c57ae22f20171a2d71da49d0815b30ec0ec0",
+          "marker_sha256": "777eebf89b8d8edc20d9132c5ffba1f3a82942e0f9b9fa8ad4462fb44a901ac5",
+          "max_bytes": 64,
+          "method": "HEAD",
+          "payload_sha256": "f2c113cc937f73fb21afa628900b85519c1e0165b670d3e8cf99d47d170f57aa",
+          "placement": "none",
+          "probe_kind": "header_canary",
+          "probe_ref": "pg25d-clickjacking-header-v1",
+          "route_template_id": "vulnerableapp-clickjacking-level",
+          "safety": {
+            "does_not_execute": true,
+            "no_credential_access": true,
+            "no_database_write": true,
+            "no_external_network": true,
+            "no_script_execution": true
+          }
+        },
+        "reset": {
+          "baseline_projection_sha256": "a36ca64c1d90184d39f8c2c1d2c662e0f8b2a22f243933064d3a28c386bac406",
+          "completed": true,
+          "evaluator_state_hidden": true,
+          "external_network": false,
+          "fresh_target": true,
+          "kind": "stop_remove_recreate",
+          "reset_adapter_sha256": "a2df3b48dd80d68cb0adbdefe64dc2b26137282b204ed8a55fe630c3ff884724",
+          "reset_id": "reset-7bc34df8f960",
+          "reset_sha256": "8e09f44596c3801ea05449e28a8d9337e909e5771755c9646600d0e66aafbe91",
+          "state_change_allowed": false,
+          "state_epoch": "epoch-7bc34df8f960",
+          "target_instance_id": "instance-7bc34df8f960"
+        },
+        "response_projection": {
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "content_type_class": "other",
+          "frame_policy": "sameorigin",
+          "header_names": [
+            "content-type",
+            "x-frame-options"
+          ],
+          "location_origin_changed": false,
+          "marker": {
+            "count": 0,
+            "location": "none",
+            "reflected": false
+          },
+          "projection_sha256": "e80771c7bd88be5c962e5a307aa2e5cc0739bc80587a4521aa1c7cf39fe1ad3b",
+          "semantic_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "shape": {
+            "field_count": 0,
+            "kind": "head",
+            "scalar_count": 0
+          },
+          "state_changed": false,
+          "status_changed": false,
+          "status_class": "2xx",
+          "status_code": 200,
+          "transport_error": false
+        },
+        "rule_ir_binding_sha256": "9fcec5f1bd6b998997f91b3798d810bf603e4ff34ba1be5a49e19101a1f8563c",
+        "safety": {
+          "attack_string_stored": false,
+          "credentials_stored": false,
+          "external_network": false,
+          "local_only": true,
+          "raw_body_stored": false,
+          "read_only": true
+        },
+        "sampling_seed": 25,
+        "schema_version": "sift-cross-lab-safe-evidence-v1",
+        "source": {
+          "source_id": "sasanlabs-vulnerableapp-2.1.44-amd64",
+          "source_sha256": "c7754b706138d1fcc6974b15725d9fe285da2d50ef4d9c8daf6533ae14fcb5e4",
+          "target_id": "owasp_vulnerableapp_2_1_44"
+        }
+      },
+      "negative_control": null,
+      "oracle_projection": {
+        "candidate_signal": false,
+        "confirmed_effect": "none",
+        "family": "clickjacking",
+        "modality": "header_policy",
+        "oracle_contract_sha256": "3f13c399cebea2db7d40163529617814f82c44b480e791a0953dcbe4484b69f6",
+        "oracle_id": "pg25d-clickjacking-header-v1",
+        "positive": false,
+        "positive_authority": true,
+        "projection_sha256": "3bdfd86f87b5565587879ae4cbe2680d335fb2f1ea955a0ee09e66b760d9237e",
+        "safety": {
+          "credentials_accessed": false,
+          "database_write": false,
+          "external_network": false,
+          "persistent_state_mutated": false,
+          "raw_body_stored": false,
+          "script_execution": false
+        },
+        "signals": {
+          "frame_policy": "sameorigin",
+          "protected_policy_observed": true,
+          "regex_evidence": {
+            "capture_groups_stored": false,
+            "evidence_hash": "81bf22d1bcd9be442cd416b59eee0d5cc9959f843a379097ba9811d400673d45",
+            "input_length_bucket": "1-255",
+            "match_count": 1,
+            "matched": true,
+            "pattern_id": "header_xfo_protected",
+            "raw_text_stored": false,
+            "schema_version": "sift-regex-evidence-v1",
+            "span_buckets": [
+              "0-31"
+            ]
+          }
+        }
+      },
+      "payload_manifest": {
+        "encoding_chain": [
+          "identity"
+        ],
+        "encoding_depth": 0,
+        "manifest_id": "pg25d-clickjacking-control",
+        "manifest_sha256": "51245631c64685171cb0831ac2c2c57ae22f20171a2d71da49d0815b30ec0ec0",
+        "marker_sha256": "777eebf89b8d8edc20d9132c5ffba1f3a82942e0f9b9fa8ad4462fb44a901ac5",
+        "max_bytes": 64,
+        "method": "HEAD",
+        "payload_sha256": "f2c113cc937f73fb21afa628900b85519c1e0165b670d3e8cf99d47d170f57aa",
+        "placement": "none",
+        "probe_kind": "header_canary",
+        "probe_ref": "pg25d-clickjacking-header-v1",
+        "route_template_id": "vulnerableapp-clickjacking-level",
+        "safety": {
+          "does_not_execute": true,
+          "no_credential_access": true,
+          "no_database_write": true,
+          "no_external_network": true,
+          "no_script_execution": true
+        }
+      },
+      "reset": {
+        "baseline_projection_sha256": "a36ca64c1d90184d39f8c2c1d2c662e0f8b2a22f243933064d3a28c386bac406",
+        "completed": true,
+        "evaluator_state_hidden": true,
+        "external_network": false,
+        "fresh_target": true,
+        "kind": "stop_remove_recreate",
+        "reset_adapter_sha256": "a2df3b48dd80d68cb0adbdefe64dc2b26137282b204ed8a55fe630c3ff884724",
+        "reset_id": "reset-7bc34df8f960",
+        "reset_sha256": "8e09f44596c3801ea05449e28a8d9337e909e5771755c9646600d0e66aafbe91",
+        "state_change_allowed": false,
+        "state_epoch": "epoch-7bc34df8f960",
+        "target_instance_id": "instance-7bc34df8f960"
+      },
+      "response_projection": {
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "content_type_class": "other",
+        "frame_policy": "sameorigin",
+        "header_names": [
+          "content-type",
+          "x-frame-options"
+        ],
+        "location_origin_changed": false,
+        "marker": {
+          "count": 0,
+          "location": "none",
+          "reflected": false
+        },
+        "projection_sha256": "e80771c7bd88be5c962e5a307aa2e5cc0739bc80587a4521aa1c7cf39fe1ad3b",
+        "semantic_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "shape": {
+          "field_count": 0,
+          "kind": "head",
+          "scalar_count": 0
+        },
+        "state_changed": false,
+        "status_changed": false,
+        "status_class": "2xx",
+        "status_code": 200,
+        "transport_error": false
+      },
+      "rule_ir": {
+        "binding_sha256": "9fcec5f1bd6b998997f91b3798d810bf603e4ff34ba1be5a49e19101a1f8563c",
+        "binding_status": "bound",
+        "bound_slots": [
+          "frame_policy"
+        ],
+        "executable": false,
+        "family_candidate": "clickjacking",
+        "grammar_version": "rule-ir-v1",
+        "operator_set": [
+          "eq"
+        ],
+        "required_slots": [
+          "frame_policy"
+        ],
+        "rule_ir_sha256": "d3a5fc82786b1cd9642d3ebcaf3199ad8310052579649f54b658e2632fef7dc3",
+        "rule_key": "clickjacking.frame-protection",
+        "schema_version": "sift-cross-lab-rule-ir-manifest-v1"
+      },
+      "sample_id": "pg25d-clickjacking-control",
+      "sample_role": "negative_control",
+      "sampling_seed": 25,
+      "schema_version": "sift-cross-lab-safe-sample-v1",
+      "source_id": "sasanlabs-vulnerableapp-2.1.44-amd64",
+      "source_sha256": "c7754b706138d1fcc6974b15725d9fe285da2d50ef4d9c8daf6533ae14fcb5e4",
+      "target_instance_id": "instance-7bc34df8f960"
+    },
+    {
+      "decision": {
+        "abstain_reasons": [
+          "source_evaluation_only"
+        ],
+        "evidence_status": "confirmed_positive",
+        "oracle_revalidated": true,
+        "training_action": "abstain"
+      },
+      "evidence": {
+        "decision": {
+          "abstain_reasons": [
+            "source_evaluation_only"
+          ],
+          "evidence_status": "confirmed_positive",
+          "oracle_revalidated": true,
+          "training_action": "abstain"
+        },
+        "evidence_hash": "8ac48b377d60475547483aac80779f3a1ed89f31d234e5ed82686cb9efbf7f34",
+        "evidence_hash_algorithm": "sha256-canonical-json",
+        "negative_control": {
+          "control_evidence_hash": "493b060bc2b71e627a4df8565a72985bc41512e9a2290cbcccb2ae661d0c43de",
+          "control_sample_id": "pg25d-clickjacking-control",
+          "intervention": "protected-frame-policy-level",
+          "same_source": true,
+          "same_surface": true,
+          "verdict": "confirmed_negative"
+        },
+        "oracle_projection": {
+          "candidate_signal": true,
+          "confirmed_effect": "frame_protection",
+          "family": "clickjacking",
+          "modality": "header_policy",
+          "oracle_contract_sha256": "3f13c399cebea2db7d40163529617814f82c44b480e791a0953dcbe4484b69f6",
+          "oracle_id": "pg25d-clickjacking-header-v1",
+          "positive": true,
+          "positive_authority": true,
+          "projection_sha256": "42bb90efe84e5e75494f424ce8367dbce30034fb0b083c387f5fe26749f6a10c",
+          "safety": {
+            "credentials_accessed": false,
+            "database_write": false,
+            "external_network": false,
+            "persistent_state_mutated": false,
+            "raw_body_stored": false,
+            "script_execution": false
+          },
+          "signals": {
+            "frame_policy": "allowall",
+            "protected_policy_observed": false,
+            "regex_evidence": {
+              "capture_groups_stored": false,
+              "evidence_hash": "96a8103168e3cf175fa102372b6855d591f51ef15d85e462f873e83fd4ab105f",
+              "input_length_bucket": "1-255",
+              "match_count": 1,
+              "matched": true,
+              "pattern_id": "header_xfo_allowall",
+              "raw_text_stored": false,
+              "schema_version": "sift-regex-evidence-v1",
+              "span_buckets": [
+                "0-31"
+              ]
+            }
+          }
+        },
+        "payload_manifest": {
+          "encoding_chain": [
+            "identity"
+          ],
+          "encoding_depth": 0,
+          "manifest_id": "pg25d-clickjacking-candidate",
+          "manifest_sha256": "ad998c939fd6a20f9c9d81400352f47fd0aa5738acb0c90e6b59a9a4f25f3f23",
+          "marker_sha256": "777eebf89b8d8edc20d9132c5ffba1f3a82942e0f9b9fa8ad4462fb44a901ac5",
+          "max_bytes": 64,
+          "method": "HEAD",
+          "payload_sha256": "4008db2f7bc207d0028049bb7cbd223509eedbdfc230088b072faae79b913e18",
+          "placement": "none",
+          "probe_kind": "header_canary",
+          "probe_ref": "pg25d-clickjacking-header-v1",
+          "route_template_id": "vulnerableapp-clickjacking-level",
+          "safety": {
+            "does_not_execute": true,
+            "no_credential_access": true,
+            "no_database_write": true,
+            "no_external_network": true,
+            "no_script_execution": true
+          }
+        },
+        "reset": {
+          "baseline_projection_sha256": "a36ca64c1d90184d39f8c2c1d2c662e0f8b2a22f243933064d3a28c386bac406",
+          "completed": true,
+          "evaluator_state_hidden": true,
+          "external_network": false,
+          "fresh_target": true,
+          "kind": "stop_remove_recreate",
+          "reset_adapter_sha256": "a2df3b48dd80d68cb0adbdefe64dc2b26137282b204ed8a55fe630c3ff884724",
+          "reset_id": "reset-90f5077b1b67",
+          "reset_sha256": "5ec4ee914c5051a976c37d2a54a49d4e01692be4f6c32bd99558ae65f59c0332",
+          "state_change_allowed": false,
+          "state_epoch": "epoch-90f5077b1b67",
+          "target_instance_id": "instance-90f5077b1b67"
+        },
+        "response_projection": {
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "content_type_class": "other",
+          "frame_policy": "allowall",
+          "header_names": [
+            "content-type",
+            "x-frame-options"
+          ],
+          "location_origin_changed": false,
+          "marker": {
+            "count": 0,
+            "location": "none",
+            "reflected": false
+          },
+          "projection_sha256": "b06c50648bdb87b2ebfbea3e56fd7de4ca65d9f319486a8a0bbe027b8294fb0b",
+          "semantic_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "shape": {
+            "field_count": 0,
+            "kind": "head",
+            "scalar_count": 0
+          },
+          "state_changed": false,
+          "status_changed": false,
+          "status_class": "2xx",
+          "status_code": 200,
+          "transport_error": false
+        },
+        "rule_ir_binding_sha256": "5060a2f1d3f7c3ddcbe9b9e8a885cab04341dbf5fd4f6266baa2e198d6cef367",
+        "safety": {
+          "attack_string_stored": false,
+          "credentials_stored": false,
+          "external_network": false,
+          "local_only": true,
+          "raw_body_stored": false,
+          "read_only": true
+        },
+        "sampling_seed": 25,
+        "schema_version": "sift-cross-lab-safe-evidence-v1",
+        "source": {
+          "source_id": "sasanlabs-vulnerableapp-2.1.44-amd64",
+          "source_sha256": "c7754b706138d1fcc6974b15725d9fe285da2d50ef4d9c8daf6533ae14fcb5e4",
+          "target_id": "owasp_vulnerableapp_2_1_44"
+        }
+      },
+      "negative_control": {
+        "control_evidence_hash": "493b060bc2b71e627a4df8565a72985bc41512e9a2290cbcccb2ae661d0c43de",
+        "control_sample_id": "pg25d-clickjacking-control",
+        "intervention": "protected-frame-policy-level",
+        "same_source": true,
+        "same_surface": true,
+        "verdict": "confirmed_negative"
+      },
+      "oracle_projection": {
+        "candidate_signal": true,
+        "confirmed_effect": "frame_protection",
+        "family": "clickjacking",
+        "modality": "header_policy",
+        "oracle_contract_sha256": "3f13c399cebea2db7d40163529617814f82c44b480e791a0953dcbe4484b69f6",
+        "oracle_id": "pg25d-clickjacking-header-v1",
+        "positive": true,
+        "positive_authority": true,
+        "projection_sha256": "42bb90efe84e5e75494f424ce8367dbce30034fb0b083c387f5fe26749f6a10c",
+        "safety": {
+          "credentials_accessed": false,
+          "database_write": false,
+          "external_network": false,
+          "persistent_state_mutated": false,
+          "raw_body_stored": false,
+          "script_execution": false
+        },
+        "signals": {
+          "frame_policy": "allowall",
+          "protected_policy_observed": false,
+          "regex_evidence": {
+            "capture_groups_stored": false,
+            "evidence_hash": "96a8103168e3cf175fa102372b6855d591f51ef15d85e462f873e83fd4ab105f",
+            "input_length_bucket": "1-255",
+            "match_count": 1,
+            "matched": true,
+            "pattern_id": "header_xfo_allowall",
+            "raw_text_stored": false,
+            "schema_version": "sift-regex-evidence-v1",
+            "span_buckets": [
+              "0-31"
+            ]
+          }
+        }
+      },
+      "payload_manifest": {
+        "encoding_chain": [
+          "identity"
+        ],
+        "encoding_depth": 0,
+        "manifest_id": "pg25d-clickjacking-candidate",
+        "manifest_sha256": "ad998c939fd6a20f9c9d81400352f47fd0aa5738acb0c90e6b59a9a4f25f3f23",
+        "marker_sha256": "777eebf89b8d8edc20d9132c5ffba1f3a82942e0f9b9fa8ad4462fb44a901ac5",
+        "max_bytes": 64,
+        "method": "HEAD",
+        "payload_sha256": "4008db2f7bc207d0028049bb7cbd223509eedbdfc230088b072faae79b913e18",
+        "placement": "none",
+        "probe_kind": "header_canary",
+        "probe_ref": "pg25d-clickjacking-header-v1",
+        "route_template_id": "vulnerableapp-clickjacking-level",
+        "safety": {
+          "does_not_execute": true,
+          "no_credential_access": true,
+          "no_database_write": true,
+          "no_external_network": true,
+          "no_script_execution": true
+        }
+      },
+      "reset": {
+        "baseline_projection_sha256": "a36ca64c1d90184d39f8c2c1d2c662e0f8b2a22f243933064d3a28c386bac406",
+        "completed": true,
+        "evaluator_state_hidden": true,
+        "external_network": false,
+        "fresh_target": true,
+        "kind": "stop_remove_recreate",
+        "reset_adapter_sha256": "a2df3b48dd80d68cb0adbdefe64dc2b26137282b204ed8a55fe630c3ff884724",
+        "reset_id": "reset-90f5077b1b67",
+        "reset_sha256": "5ec4ee914c5051a976c37d2a54a49d4e01692be4f6c32bd99558ae65f59c0332",
+        "state_change_allowed": false,
+        "state_epoch": "epoch-90f5077b1b67",
+        "target_instance_id": "instance-90f5077b1b67"
+      },
+      "response_projection": {
+        "body_length_bucket": "0",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "content_type_class": "other",
+        "frame_policy": "allowall",
+        "header_names": [
+          "content-type",
+          "x-frame-options"
+        ],
+        "location_origin_changed": false,
+        "marker": {
+          "count": 0,
+          "location": "none",
+          "reflected": false
+        },
+        "projection_sha256": "b06c50648bdb87b2ebfbea3e56fd7de4ca65d9f319486a8a0bbe027b8294fb0b",
+        "semantic_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "shape": {
+          "field_count": 0,
+          "kind": "head",
+          "scalar_count": 0
+        },
+        "state_changed": false,
+        "status_changed": false,
+        "status_class": "2xx",
+        "status_code": 200,
+        "transport_error": false
+      },
+      "rule_ir": {
+        "binding_sha256": "5060a2f1d3f7c3ddcbe9b9e8a885cab04341dbf5fd4f6266baa2e198d6cef367",
+        "binding_status": "bound",
+        "bound_slots": [
+          "frame_policy"
+        ],
+        "executable": false,
+        "family_candidate": "clickjacking",
+        "grammar_version": "rule-ir-v1",
+        "operator_set": [
+          "eq"
+        ],
+        "required_slots": [
+          "frame_policy"
+        ],
+        "rule_ir_sha256": "d3a5fc82786b1cd9642d3ebcaf3199ad8310052579649f54b658e2632fef7dc3",
+        "rule_key": "clickjacking.frame-protection",
+        "schema_version": "sift-cross-lab-rule-ir-manifest-v1"
+      },
+      "sample_id": "pg25d-clickjacking-candidate",
+      "sample_role": "candidate",
+      "sampling_seed": 25,
+      "schema_version": "sift-cross-lab-safe-sample-v1",
+      "source_id": "sasanlabs-vulnerableapp-2.1.44-amd64",
+      "source_sha256": "c7754b706138d1fcc6974b15725d9fe285da2d50ef4d9c8daf6533ae14fcb5e4",
+      "target_instance_id": "instance-90f5077b1b67"
+    }
+  ],
+  "training_eligible": false,
+  "safety": {
+    "loopback_only": true,
+    "read_only": true,
+    "raw_body_stored": false,
+    "credentials_stored": false,
+    "attack_string_stored": false,
+    "external_network": false
+  },
+  "catalog_sha256": "93811083dd341cebecee2c091c00005becdb81a2a51cf95bc5cba365d18cd9c3",
+  "collection": {
+    "collected_at": "2026-08-02T07:55:26.001562+00:00",
+    "row_count": 2,
+    "oracle_family": "clickjacking",
+    "probe_policy": "HEAD-only response-header projection; no page body or active payload",
+    "training_eligible": false
+  }
+}

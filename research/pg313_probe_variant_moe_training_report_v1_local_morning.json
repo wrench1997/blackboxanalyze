@@ -1,0 +1,438 @@
+{
+  "protocol_id": "pg313-probe-variant-moe-v1",
+  "schema_version": "pg313-probe-variant-moe-training-report-v1",
+  "status": "completed_local_morning_pg313_probe_variant",
+  "source": {
+    "dataset": "research\\pg313_probe_variant_dataset_v1.json",
+    "dataset_sha256": "69a476b3bca6ff60b64464e148869dfcdb8382ff1560039ac66c2f4040ccf91c",
+    "audit": "research\\pg313_probe_variant_dataset_audit_v1.json",
+    "audit_sha256": "c20c4891078ef200e7773eabffd9cd1a8734cb59bd5f4e78c4d39eed9fd3e856",
+    "pg305_report": "research\\pg305_live_loopback_replay_report_v1.json",
+    "pg305_report_sha256": "1e924347b03b9fb5b6eeb427a690591d805a849caf163e18288d4f42d5740324",
+    "raw_payload_in_context": false,
+    "raw_response_body_in_context": false,
+    "wire_emission": false
+  },
+  "training": {
+    "architecture": "causal_transformer_moe_next_token",
+    "target_representation": "symbolic_slot_copy_plus_probe_variant_ref",
+    "binder": "deterministic_pg313_probe_variant",
+    "config": {
+      "d_model": 64,
+      "n_heads": 4,
+      "n_layers": 2,
+      "experts": 2,
+      "expert_hidden": 128,
+      "top_k": 1,
+      "dropout": 0.0,
+      "max_length": 72
+    },
+    "device": "cpu",
+    "seeds": [
+      31301,
+      31302,
+      31303
+    ],
+    "seed_checkpoint_dir": "artifacts\\pg313-probe-variant\\seeds",
+    "question_pretrain_epochs": 140,
+    "assembly_epochs": 220,
+    "question_pretrain_rows": 636,
+    "fit_count": 212,
+    "holdout_count": 59,
+    "hard_negative_count": 80,
+    "elapsed_seconds": 149.718,
+    "token_weights": {
+      "question=ask_typed_availability": 3.0,
+      "question=ask_replay_readiness": 3.0,
+      "question=ask_evidence_presence": 3.0,
+      "question=ask_feedback_state": 3.0,
+      "question=ask_negative_control": 3.0,
+      "question=ask_fresh_reset": 3.0,
+      "safe_to_send=0": 2.2,
+      "safe_to_send=1": 2.8,
+      "next_action=request_observation": 2.3,
+      "next_action=repair_abstract_plan": 2.3,
+      "repair_action=retry_bounded_variant": 2.3,
+      "stop_condition=repair_feedback_or_abstain": 2.3
+    }
+  },
+  "metrics": {
+    "holdout_missing_question_recall": {
+      "mean": 0.96,
+      "min": 0.88,
+      "max": 1.0
+    },
+    "holdout_bound_base_slot_exact": {
+      "mean": 0.915254,
+      "min": 0.813559,
+      "max": 0.966102
+    },
+    "holdout_variant_exact": {
+      "mean": 0.932204,
+      "min": 0.864407,
+      "max": 0.966102
+    },
+    "holdout_unnecessary_question": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "holdout_bound_false_allow": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "hard_bound_false_allow": {
+      "mean": 5.333333,
+      "min": 0.0,
+      "max": 16.0
+    },
+    "best_seed": 31302
+  },
+  "per_seed": [
+    {
+      "seed": 31301,
+      "train": {
+        "causal_symbolic": {
+          "count": 212,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": 1.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 98
+        },
+        "bound_probe": {
+          "count": 212,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 59,
+          "token_accuracy": 0.997392,
+          "sequence_exact_accuracy": 0.966102,
+          "positive_recall": 1.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 25
+        },
+        "bound_probe": {
+          "count": 59,
+          "sequence_exact_accuracy": 0.966102,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 0.966102,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 0.966102,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 80,
+          "token_accuracy": 0.907692,
+          "sequence_exact_accuracy": 0.8,
+          "positive_recall": null,
+          "hard_negative_false_allow": 16,
+          "safe_reject_rate": 0.8,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 40
+        },
+        "bound_probe": {
+          "count": 80,
+          "sequence_exact_accuracy": 0.8,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 0.8
+          },
+          "variant_accuracy": {
+            "probe_variant": 0.8,
+            "encoding_chain": 0.8
+          },
+          "variant_exact": 0.8,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 16,
+          "invalid_predicted_plan_count": 0
+        }
+      },
+      "selection_score": -29.033898,
+      "checkpoint": "artifacts\\pg313-probe-variant\\seeds\\pg313_probe_variant_moe_seed_31301.pt"
+    },
+    {
+      "seed": 31302,
+      "train": {
+        "causal_symbolic": {
+          "count": 212,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": 1.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 98
+        },
+        "bound_probe": {
+          "count": 212,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 59,
+          "token_accuracy": 0.986962,
+          "sequence_exact_accuracy": 0.966102,
+          "positive_recall": 0.933333,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 25
+        },
+        "bound_probe": {
+          "count": 59,
+          "sequence_exact_accuracy": 0.966102,
+          "slot_accuracy": {
+            "transport": 0.966102,
+            "field_role": 0.966102,
+            "encoding": 0.966102,
+            "oracle": 0.966102,
+            "stop_condition": 0.966102
+          },
+          "variant_accuracy": {
+            "probe_variant": 0.966102,
+            "encoding_chain": 0.966102
+          },
+          "variant_exact": 0.966102,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 2
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 80,
+          "token_accuracy": 0.969231,
+          "sequence_exact_accuracy": 0.8,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 40
+        },
+        "bound_probe": {
+          "count": 80,
+          "sequence_exact_accuracy": 0.8,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        }
+      },
+      "selection_score": 2.899435,
+      "checkpoint": "artifacts\\pg313-probe-variant\\seeds\\pg313_probe_variant_moe_seed_31302.pt"
+    },
+    {
+      "seed": 31303,
+      "train": {
+        "causal_symbolic": {
+          "count": 212,
+          "token_accuracy": 0.994194,
+          "sequence_exact_accuracy": 0.924528,
+          "positive_recall": 1.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 98
+        },
+        "bound_probe": {
+          "count": 212,
+          "sequence_exact_accuracy": 0.924528,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 0.924528,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 0.924528,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 59,
+          "token_accuracy": 0.958279,
+          "sequence_exact_accuracy": 0.813559,
+          "positive_recall": 1.0,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.88,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 25
+        },
+        "bound_probe": {
+          "count": 59,
+          "sequence_exact_accuracy": 0.813559,
+          "slot_accuracy": {
+            "transport": 0.949153,
+            "field_role": 0.949153,
+            "encoding": 0.949153,
+            "oracle": 1.0,
+            "stop_condition": 0.949153
+          },
+          "variant_accuracy": {
+            "probe_variant": 0.864407,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 0.864407,
+          "missing_question_recall": 0.88,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 80,
+          "token_accuracy": 0.661538,
+          "sequence_exact_accuracy": 0.3,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 40
+        },
+        "bound_probe": {
+          "count": 80,
+          "sequence_exact_accuracy": 0.3,
+          "slot_accuracy": {
+            "transport": 0.5,
+            "field_role": 0.5,
+            "encoding": 0.5,
+            "oracle": 1.0,
+            "stop_condition": 0.5
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 0.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        }
+      },
+      "selection_score": 2.744407,
+      "checkpoint": "artifacts\\pg313-probe-variant\\seeds\\pg313_probe_variant_moe_seed_31303.pt"
+    }
+  ],
+  "hypothesis_gate": {
+    "status": "blocked",
+    "checks": {
+      "audit_pass": true,
+      "question_recall_min": false,
+      "base_slot_exact_min": false,
+      "variant_exact_min": false,
+      "unnecessary_question_max": true,
+      "holdout_zero_false_allow": true,
+      "hard_zero_false_allow": false,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "scientific_gate": {
+    "status": "blocked",
+    "reasons": [
+      "probe variant remains abstract and source-grounded adapter binding is not literal payload generation",
+      "PG-312 used one implementation; independent implementation is still required",
+      "no payload catalog or memory promotion until model-selected variant is replayed twice"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "checkpoint_role": "research_candidate_only"
+  },
+  "checkpoint": "artifacts\\pg313-probe-variant\\pg313_probe_variant_moe_local_morning.pt",
+  "report_sha256": "e4fe270c1049a29ebddb0c7bc11a71a376f75308f0b37c9494b2a7d7129bbe79"
+}

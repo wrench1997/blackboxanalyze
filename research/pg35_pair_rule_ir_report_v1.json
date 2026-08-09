@@ -1,0 +1,549 @@
+{
+  "protocol_id": "sift-pg35-pair-rule-ir-v1",
+  "schema_version": "pg-pk-35-pair-rule-ir-report-v1",
+  "status": "diagnostic_only",
+  "catalogs": {
+    "pg33": {
+      "path": "research\\pg_pk_33_get_post_typed_replay_catalog_v1.json",
+      "sha256": "8408f1dce954e2e01e36cbd3b017cd27dc51a270bdb9424d63e6c31599a7a656",
+      "utility": {
+        "schema_version": "sift-dataset-utility-audit-v1",
+        "dataset_id": "pg33",
+        "row_count": 84,
+        "runtime_replay": true,
+        "evaluation_only": true,
+        "training_eligible_declared": false,
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "get_post_complete": true,
+        "context_field_counts": {
+          "http_method": 84,
+          "route_template_id": 84,
+          "placement_or_form_schema": 84,
+          "baseline_projection": 84,
+          "probe_projection": 84,
+          "fresh_reset": 84,
+          "typed_oracle_projection": 84,
+          "negative_control_pair": 36,
+          "evidence_sha256": 84
+        },
+        "complete_context_rows": 84,
+        "typed_positive_count": 36,
+        "negative_control_pair_count": 36,
+        "fresh_reset_count": 84,
+        "evidence_hash_count": 84,
+        "utility_class": "replay_training_candidate_pending_capability_gate",
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "blockers": [
+          "dataset_marked_evaluation_only"
+        ]
+      }
+    },
+    "pg34": {
+      "path": "research\\pg34_independent_fixture_catalog_v1.json",
+      "sha256": "1581ecc978371b2eeace480eccfce7f6ec43775f251171ab235b93400502ec23",
+      "utility": {
+        "schema_version": "sift-dataset-utility-audit-v1",
+        "dataset_id": "pg34",
+        "row_count": 108,
+        "runtime_replay": true,
+        "evaluation_only": true,
+        "training_eligible_declared": false,
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "get_post_complete": true,
+        "context_field_counts": {
+          "http_method": 108,
+          "route_template_id": 108,
+          "placement_or_form_schema": 108,
+          "baseline_projection": 108,
+          "probe_projection": 108,
+          "fresh_reset": 108,
+          "typed_oracle_projection": 108,
+          "negative_control_pair": 48,
+          "evidence_sha256": 108
+        },
+        "complete_context_rows": 108,
+        "typed_positive_count": 48,
+        "negative_control_pair_count": 48,
+        "fresh_reset_count": 108,
+        "evidence_hash_count": 108,
+        "utility_class": "replay_training_candidate_pending_capability_gate",
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "blockers": [
+          "dataset_marked_evaluation_only"
+        ]
+      }
+    },
+    "pg35": {
+      "path": "research\\pg35_independent_fixture_catalog_v1.json",
+      "sha256": "487e3e4a90ea663636041a18d7a7a81a6ed8de1ee35d130dca31247e9cc2efd3",
+      "utility": {
+        "schema_version": "sift-dataset-utility-audit-v1",
+        "dataset_id": "pg35",
+        "row_count": 648,
+        "runtime_replay": true,
+        "evaluation_only": true,
+        "training_eligible_declared": false,
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "get_post_complete": true,
+        "context_field_counts": {
+          "http_method": 648,
+          "route_template_id": 648,
+          "placement_or_form_schema": 648,
+          "baseline_projection": 648,
+          "probe_projection": 648,
+          "fresh_reset": 648,
+          "typed_oracle_projection": 648,
+          "negative_control_pair": 288,
+          "evidence_sha256": 648
+        },
+        "complete_context_rows": 648,
+        "typed_positive_count": 288,
+        "negative_control_pair_count": 288,
+        "fresh_reset_count": 648,
+        "evidence_hash_count": 648,
+        "utility_class": "replay_training_candidate_pending_capability_gate",
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "blockers": [
+          "dataset_marked_evaluation_only"
+        ]
+      }
+    }
+  },
+  "model": {
+    "class": "PairRuleIRModel",
+    "families": [
+      "access_control",
+      "authentication",
+      "command_injection",
+      "input_validation",
+      "injection",
+      "logic",
+      "ordinary_response",
+      "url_redirect",
+      "xss"
+    ],
+    "feature_dim": 256,
+    "device": "cuda",
+    "cuda_available": true,
+    "visible_projection_labels": false,
+    "typed_oracle_consumed_by_model": false,
+    "positive_authority": false,
+    "pair_consistency_loss": 0.25
+  },
+  "training": {
+    "train_count": 156,
+    "train_sources": [
+      "PG-33",
+      "PG-34-train-dev",
+      "PG-35-alpha"
+    ],
+    "train_families": [
+      "access_control",
+      "authentication",
+      "injection",
+      "ordinary_response",
+      "xss"
+    ],
+    "seed": 20350802,
+    "epochs": 180,
+    "pair_count": 36,
+    "best_objective": 0.492066,
+    "history_tail": [
+      {
+        "epoch": 100,
+        "supervised_family_loss": 0.174005,
+        "supervised_effect_loss": 0.31806,
+        "pair_loss": 3e-06,
+        "objective": 0.492066
+      },
+      {
+        "epoch": 120,
+        "supervised_family_loss": 0.174334,
+        "supervised_effect_loss": 0.322051,
+        "pair_loss": 8e-06,
+        "objective": 0.496388
+      },
+      {
+        "epoch": 140,
+        "supervised_family_loss": 0.174396,
+        "supervised_effect_loss": 0.321548,
+        "pair_loss": 4e-06,
+        "objective": 0.495946
+      },
+      {
+        "epoch": 160,
+        "supervised_family_loss": 0.175833,
+        "supervised_effect_loss": 0.323329,
+        "pair_loss": 2e-06,
+        "objective": 0.499163
+      },
+      {
+        "epoch": 180,
+        "supervised_family_loss": 0.173819,
+        "supervised_effect_loss": 0.319308,
+        "pair_loss": 6e-06,
+        "objective": 0.493129
+      }
+    ],
+    "checkpoint": "artifacts\\pg35-pair-rule-ir\\pair_rule_ir.pt",
+    "checkpoint_sha256": "64db4a3cb030f5eb37f208a99d26a59a064162d2bc0e52f1d4e14bd06f53be07"
+  },
+  "thresholds": {
+    "confidence": 0.6,
+    "novelty": 8.0
+  },
+  "splits": {
+    "train": {
+      "count": 156,
+      "positive_count": 60,
+      "negative_count": 96,
+      "accepted_count": 24,
+      "false_positive_count": 0,
+      "typed_recall": 0.4,
+      "precision": 1.0,
+      "false_positive_rate": 0.0,
+      "abstain_precision": 0.727273,
+      "ece": 0.765234,
+      "median_queries": 2.0,
+      "abstain_rate": 0.846154,
+      "mean_confidence": 0.9164,
+      "mean_effect_probability": 0.39209,
+      "max_distance": 0.00299,
+      "by_family": {
+        "access_control": {
+          "count": 12,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.076923
+        },
+        "authentication": {
+          "count": 12,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.076923
+        },
+        "injection": {
+          "count": 48,
+          "accepted": 12,
+          "typed_recall": 0.5,
+          "abstain_rate": 0.230769
+        },
+        "ordinary_response": {
+          "count": 36,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.230769
+        },
+        "xss": {
+          "count": 48,
+          "accepted": 12,
+          "typed_recall": 0.5,
+          "abstain_rate": 0.230769
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 36,
+        "agreement_rate": 1.0,
+        "mean_l1": 0.000434
+      }
+    },
+    "dev": {
+      "count": 48,
+      "positive_count": 24,
+      "negative_count": 24,
+      "accepted_count": 0,
+      "false_positive_count": 0,
+      "typed_recall": 0.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "abstain_precision": 0.5,
+      "ece": 0.609058,
+      "median_queries": 2.0,
+      "abstain_rate": 1.0,
+      "mean_confidence": 0.609058,
+      "mean_effect_probability": 0.035102,
+      "max_distance": 10000.001953,
+      "by_family": {
+        "access_control": {
+          "count": 24,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.5
+        },
+        "authentication": {
+          "count": 24,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.5
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 24,
+        "agreement_rate": 1.0,
+        "mean_l1": 0.006874
+      }
+    },
+    "family_holdout": {
+      "count": 48,
+      "positive_count": 24,
+      "negative_count": 24,
+      "accepted_count": 24,
+      "false_positive_count": 12,
+      "typed_recall": 0.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.5,
+      "abstain_precision": 0.5,
+      "ece": 0.668049,
+      "median_queries": 2.0,
+      "abstain_rate": 0.5,
+      "mean_confidence": 0.668049,
+      "mean_effect_probability": 0.511449,
+      "max_distance": 10000.001953,
+      "by_family": {
+        "logic": {
+          "count": 24,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.5
+        },
+        "url_redirect": {
+          "count": 24,
+          "accepted": 24,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.0
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 24,
+        "agreement_rate": 1.0,
+        "mean_l1": 0.019707
+      }
+    },
+    "ood_source": {
+      "count": 48,
+      "positive_count": 24,
+      "negative_count": 24,
+      "accepted_count": 24,
+      "false_positive_count": 12,
+      "typed_recall": 0.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.5,
+      "abstain_precision": 0.5,
+      "ece": 0.633481,
+      "median_queries": 2.0,
+      "abstain_rate": 0.5,
+      "mean_confidence": 0.633481,
+      "mean_effect_probability": 0.878952,
+      "max_distance": 7.145442,
+      "by_family": {
+        "command_injection": {
+          "count": 24,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.5
+        },
+        "input_validation": {
+          "count": 24,
+          "accepted": 24,
+          "typed_recall": 0.0,
+          "abstain_rate": 0.0
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 24,
+        "agreement_rate": 1.0,
+        "mean_l1": 0.024033
+      }
+    },
+    "negative_control": {
+      "count": 48,
+      "positive_count": 0,
+      "negative_count": 48,
+      "accepted_count": 0,
+      "false_positive_count": 0,
+      "typed_recall": 0.0,
+      "precision": 0.0,
+      "false_positive_rate": 0.0,
+      "abstain_precision": 1.0,
+      "ece": 0.991367,
+      "median_queries": 2.0,
+      "abstain_rate": 1.0,
+      "mean_confidence": 0.991367,
+      "mean_effect_probability": 9.5e-05,
+      "max_distance": 0.001794,
+      "by_family": {
+        "ordinary_response": {
+          "count": 48,
+          "accepted": 0,
+          "typed_recall": 0.0,
+          "abstain_rate": 1.0
+        }
+      },
+      "pair_consistency": {
+        "pair_count": 24,
+        "agreement_rate": 1.0,
+        "mean_l1": 0.000168
+      }
+    }
+  },
+  "pair_consistency": {
+    "train": {
+      "pair_count": 36,
+      "agreement_rate": 1.0,
+      "mean_l1": 0.000434
+    },
+    "dev": {
+      "pair_count": 24,
+      "agreement_rate": 1.0,
+      "mean_l1": 0.006874
+    },
+    "family_holdout": {
+      "pair_count": 24,
+      "agreement_rate": 1.0,
+      "mean_l1": 0.019707
+    },
+    "ood_source": {
+      "pair_count": 24,
+      "agreement_rate": 1.0,
+      "mean_l1": 0.024033
+    },
+    "negative_control": {
+      "pair_count": 24,
+      "agreement_rate": 1.0,
+      "mean_l1": 0.000168
+    }
+  },
+  "capability_gate": {
+    "schema_version": "sift-model-capability-gate-v1",
+    "claim_id": "pg35-pair-rule-ir-candidate",
+    "status": "no_proven_gain",
+    "claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "unit_tests_are_not_capability_evidence": true,
+    "reasons": [
+      "calibration_regression",
+      "cell_pg35-gated-cell-dev-alpha-s351_calibration_regression",
+      "cell_pg35-gated-cell-dev-alpha-s351_precision_regression",
+      "cell_pg35-gated-cell-dev-alpha-s357_calibration_regression",
+      "cell_pg35-gated-cell-dev-alpha-s357_precision_regression",
+      "cell_pg35-gated-cell-dev-alpha-s367_calibration_regression",
+      "cell_pg35-gated-cell-dev-alpha-s367_precision_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s351_calibration_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s351_false_positive_rate_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s351_holdout_recall_gain_below_threshold",
+      "cell_pg35-gated-cell-family_holdout-beta-s351_precision_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s357_calibration_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s357_false_positive_rate_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s357_holdout_recall_gain_below_threshold",
+      "cell_pg35-gated-cell-family_holdout-beta-s357_precision_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s367_calibration_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s367_false_positive_rate_regression",
+      "cell_pg35-gated-cell-family_holdout-beta-s367_holdout_recall_gain_below_threshold",
+      "cell_pg35-gated-cell-family_holdout-beta-s367_precision_regression",
+      "cell_pg35-gated-cell-negative_control-beta-gamma-s351_calibration_regression",
+      "cell_pg35-gated-cell-negative_control-beta-gamma-s351_precision_regression",
+      "cell_pg35-gated-cell-negative_control-beta-gamma-s357_calibration_regression",
+      "cell_pg35-gated-cell-negative_control-beta-gamma-s357_precision_regression",
+      "cell_pg35-gated-cell-negative_control-beta-gamma-s367_calibration_regression",
+      "cell_pg35-gated-cell-negative_control-beta-gamma-s367_precision_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s351_calibration_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s351_false_positive_rate_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s351_holdout_recall_gain_below_threshold",
+      "cell_pg35-gated-cell-ood_source-gamma-s351_precision_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s357_calibration_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s357_false_positive_rate_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s357_holdout_recall_gain_below_threshold",
+      "cell_pg35-gated-cell-ood_source-gamma-s357_precision_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s367_calibration_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s367_false_positive_rate_regression",
+      "cell_pg35-gated-cell-ood_source-gamma-s367_holdout_recall_gain_below_threshold",
+      "cell_pg35-gated-cell-ood_source-gamma-s367_precision_regression",
+      "cell_pg35-gated-cell-train-alpha-s351_calibration_regression",
+      "cell_pg35-gated-cell-train-alpha-s357_calibration_regression",
+      "cell_pg35-gated-cell-train-alpha-s367_calibration_regression",
+      "false_positive_ledger_nonzero",
+      "false_positive_rate_regression",
+      "precision_regression",
+      "worst_case_calibration_regression",
+      "worst_case_false_positive_rate_regression",
+      "worst_case_precision_regression"
+    ],
+    "requirements": {
+      "min_distinct_dataset_ids": 3,
+      "min_distinct_source_hashes": 3,
+      "min_independent_seeds": 3,
+      "min_target_instances": 3,
+      "min_holdout_runs": 1,
+      "required_roles": [
+        "dev",
+        "family_holdout",
+        "negative_control",
+        "ood_source",
+        "train"
+      ],
+      "min_holdout_recall_gain": 0.01,
+      "max_precision_regression": 0.0,
+      "max_false_positive_rate_regression": 0.0,
+      "max_abstain_precision_regression": 0.0,
+      "max_ece_regression": 0.0,
+      "max_false_positive_count": 0,
+      "require_worst_case_metrics": true,
+      "require_cell_metrics": true
+    },
+    "summary": {
+      "dataset_test_count": 15,
+      "distinct_dataset_count": 15,
+      "distinct_source_hash_count": 4,
+      "independent_seed_count": 3,
+      "target_instance_count": 144,
+      "holdout_run_count": 3,
+      "roles_observed": [
+        "dev",
+        "family_holdout",
+        "negative_control",
+        "ood_source",
+        "train"
+      ],
+      "false_positive_count": 24
+    },
+    "baseline_metrics": {
+      "median_queries": 2.0,
+      "precision": 1.0,
+      "ece": 0.0,
+      "false_positive_rate": 0.0,
+      "abstain_precision": 0.62069,
+      "typed_recall": 0.0
+    },
+    "candidate_metrics": {
+      "median_queries": 2.0,
+      "precision": 0.333333,
+      "ece": 0.743306,
+      "false_positive_rate": 0.111111,
+      "abstain_precision": 0.695652,
+      "typed_recall": 0.181818
+    },
+    "data_tests_are_required_for_improvement_claim": true,
+    "raw_data_retained": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "quarantined_candidate"
+  },
+  "training_allowed": false,
+  "memory_promotion_allowed": false,
+  "checkpoint_selection": "minimum_supervised_plus_pair_objective"
+}

@@ -1,0 +1,184 @@
+{
+  "schema_version": "pg169-replay-slot-ratio-report-v1",
+  "protocol_id": "pg-pk-169-replay-slot-ratio-v1",
+  "status": "completed_pg169_replay_slot_ratio_ablation",
+  "scope": {
+    "claim": "replay/slot ratio training ablation for abstract Rule-IR tokens",
+    "real_vulnerability_scanner_claim_allowed": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "base_train_count": 9999,
+    "slot_train_count": 8000,
+    "slot_dev_count": 1000,
+    "slot_ood_count": 1000,
+    "projection_overlap_dev_ood": 0
+  },
+  "ratios": {
+    "ratio_1_1": {
+      "old_rows": 8000,
+      "slot_rows": 8000,
+      "old_to_slot": "1:1"
+    },
+    "ratio_1_2": {
+      "old_rows": 4000,
+      "slot_rows": 8000,
+      "old_to_slot": "1:2"
+    },
+    "ratio_1_4": {
+      "old_rows": 2000,
+      "slot_rows": 8000,
+      "old_to_slot": "1:4"
+    }
+  },
+  "baseline": {
+    "base_holdout": {
+      "loss": 0.94460476,
+      "perplexity": 2.5717967,
+      "next_token_accuracy": 0.52225226,
+      "token_count": 82868
+    },
+    "typed_holdout": {
+      "loss": 0.37398688,
+      "perplexity": 1.45351808,
+      "next_token_accuracy": 0.83348866,
+      "token_count": 6438
+    },
+    "slot_dev": {
+      "loss": 5.88070403,
+      "perplexity": 358.06123715,
+      "next_token_accuracy": 0.15008333,
+      "token_count": 24000
+    },
+    "slot_ood": {
+      "loss": 5.97526284,
+      "perplexity": 393.57153495,
+      "next_token_accuracy": 0.14820833,
+      "token_count": 24000
+    }
+  },
+  "variants": {
+    "ratio_1_1": {
+      "strategy": "ratio_1_1",
+      "train_row_count": 16000,
+      "train_loss": 0.87089836,
+      "base_holdout": {
+        "loss": 0.95325096,
+        "perplexity": 2.59412937,
+        "next_token_accuracy": 0.52092484,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.42027476,
+        "perplexity": 1.52237979,
+        "next_token_accuracy": 0.82913948,
+        "token_count": 6438
+      },
+      "slot_dev": {
+        "loss": 0.66155623,
+        "perplexity": 1.93780566,
+        "next_token_accuracy": 0.68358333,
+        "token_count": 24000
+      },
+      "slot_ood": {
+        "loss": 0.83319327,
+        "perplexity": 2.30065363,
+        "next_token_accuracy": 0.67933333,
+        "token_count": 24000
+      },
+      "elapsed_seconds": 224.621,
+      "checkpoint": "artifacts\\pg169-replay-slot-ratio-v1\\ratio_1_1.pt"
+    },
+    "ratio_1_2": {
+      "strategy": "ratio_1_2",
+      "train_row_count": 12000,
+      "train_loss": 0.83753734,
+      "base_holdout": {
+        "loss": 0.95663103,
+        "perplexity": 2.60291254,
+        "next_token_accuracy": 0.52100932,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.47908206,
+        "perplexity": 1.61459162,
+        "next_token_accuracy": 0.8297608,
+        "token_count": 6438
+      },
+      "slot_dev": {
+        "loss": 0.65083682,
+        "perplexity": 1.91714447,
+        "next_token_accuracy": 0.68791667,
+        "token_count": 24000
+      },
+      "slot_ood": {
+        "loss": 0.87412362,
+        "perplexity": 2.3967739,
+        "next_token_accuracy": 0.677,
+        "token_count": 24000
+      },
+      "elapsed_seconds": 158.939,
+      "checkpoint": "artifacts\\pg169-replay-slot-ratio-v1\\ratio_1_2.pt"
+    },
+    "ratio_1_4": {
+      "strategy": "ratio_1_4",
+      "train_row_count": 10000,
+      "train_loss": 0.79421452,
+      "base_holdout": {
+        "loss": 0.97186463,
+        "perplexity": 2.64286784,
+        "next_token_accuracy": 0.51963363,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.48497638,
+        "perplexity": 1.62413665,
+        "next_token_accuracy": 0.8286735,
+        "token_count": 6438
+      },
+      "slot_dev": {
+        "loss": 0.63885355,
+        "perplexity": 1.89430791,
+        "next_token_accuracy": 0.68491667,
+        "token_count": 24000
+      },
+      "slot_ood": {
+        "loss": 0.82453338,
+        "perplexity": 2.28081624,
+        "next_token_accuracy": 0.67829167,
+        "token_count": 24000
+      },
+      "elapsed_seconds": 122.984,
+      "checkpoint": "artifacts\\pg169-replay-slot-ratio-v1\\ratio_1_4.pt"
+    }
+  },
+  "selection": {
+    "objective": "minimize slot_ood perplexity subject to typed_holdout perplexity <= 1.45351808 * 1.10 and base_holdout perplexity <= 2.5717967 * 1.02",
+    "promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "feasible_variants": [
+      "ratio_1_1"
+    ],
+    "selected_variant": "ratio_1_1"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "source": {
+    "runner_sha256": "7ae87807646b3780544c5390d13ecf31b3a4e56b47e3f8e16176da96d9b532be",
+    "checkpoint_sha256": "d88aeeea13e5325e4bd632f0a05289792089ce3a90d78e2e8e21b811e1ee993e",
+    "base_dataset_sha256": "8edda7ad0e9db70ca6fa00f3ee892e77f7fe68ee6dcb909c032e4eaff4453d30",
+    "slot_dataset_sha256": "af5580681b101d275aecdae36a76536fb95dc759f27aba6d019c48420a10e72f"
+  },
+  "report_sha256": "b5f8e9b15de1f4284641735a013c2f3dd54528c3dd2283efc943f332042d5cc8"
+}

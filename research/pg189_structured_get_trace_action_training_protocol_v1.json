@@ -1,0 +1,35 @@
+{
+  "protocol_id": "pg-pk-189-structured-get-trace-action-training-v1",
+  "schema_version": "pg189-structured-get-trace-action-training-protocol-v1",
+  "structured_sources": [
+    "research\\pg185_pikachu_dom_replay_report_v1.json",
+    "research\\pg186_pikachu_dom_capacity_encoding_report_v1.json"
+  ],
+  "holdout_source": "research\\pg187_pikachu_cross_route_holdout_report_v1.json",
+  "route_holdout": [
+    "xss_01_unseen_get",
+    "xss_04_unseen_get"
+  ],
+  "model_variants": [
+    "large",
+    "xxl"
+  ],
+  "model_output_vocabulary": [
+    "baseline",
+    "matched_control",
+    "safe_candidate",
+    "abstain"
+  ],
+  "raw_payload_and_response_excluded": true,
+  "target_route_excluded_from_input": true,
+  "vulnerability_labels_excluded": true,
+  "lm_replay_rows": 2048,
+  "gates": {
+    "holdout_abstain_recall_min": 0.95,
+    "false_candidate_on_abstain_max": 0,
+    "catastrophic_forgetting_blocks_selection": true,
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "df7a782ff6b8491dba12159074bd0749d83fa6de31c22ec2bd0adb35414ec1e5"
+}

@@ -1,0 +1,38 @@
+{
+  "protocol_id": "pg-pk-106-decoy-projection-holdout-v1",
+  "schema_version": "pg106-decoy-projection-protocol-v1",
+  "purpose": "cross-implementation and decoy audit of anonymous input-response projection",
+  "training_contract": {
+    "row_count": 32,
+    "oracle_visible": false,
+    "family_visible": false
+  },
+  "evaluation_contract": {
+    "frozen_sources": [
+      "PG42",
+      "PG76"
+    ],
+    "fresh_sources": [
+      "PG69",
+      "PG106"
+    ],
+    "row_count": 578
+  },
+  "decoy_contract": {
+    "decoy_input_change_expected": true,
+    "typed_positive": false,
+    "must_abstain": true,
+    "false_confirm_allowed": false
+  },
+  "gate": {
+    "known_recall_min": 0.8,
+    "false_accept_count": 0,
+    "unknown_family_strict_abstain": true,
+    "decoy_false_confirm_count": 0,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "passed_cross_implementation_decoy_diagnostic",
+    "blocking_reasons": []
+  }
+}

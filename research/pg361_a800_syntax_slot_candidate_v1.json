@@ -1,0 +1,208 @@
+{
+  "schema_version": "pg360-a800-slotwise-candidate-v1",
+  "status": "slotwise_candidate_only",
+  "gate": {
+    "schema_version": "pg360-a800-slotwise-candidate-v1-gate",
+    "status": "ready",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "dataset_candidate_only": true,
+      "audit_candidate_only": true,
+      "all_slots_present": true,
+      "vocabulary_locked": true,
+      "promotion_closed": true,
+      "hashes_locked": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "candidate_only": true,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "43d3d87628803bfd755e6bba3dca9f290155b7fb234fb2dac422da983892bfe8",
+    "audit": "85490de2c8a9d2e165e32e1f623dd6447623e8add0773c2b527a3d3c04db40b8",
+    "rules": "84c18f0a58d1d69a13aa983ea7a1acad9342efbcbf93f85a7da8e2ea068cdd29",
+    "script": "1a8ded026cb1a3a4fb99c256feef71ae7580909217becfd80894c2b65d7835f6",
+    "model": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      36001,
+      36002,
+      36003
+    ],
+    "epochs": 1,
+    "learning_rate": 0.0002,
+    "batch_size": 256,
+    "target_weight": 8.0,
+    "context_weight": 0.25,
+    "balance_slot_values": false,
+    "sqrt_balance_slot_values": false,
+    "balance_strategy": "empirical",
+    "apply_rule_ir_guard": false,
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 2,
+    "experts": 2,
+    "expert_hidden": 256,
+    "dropout": 0.05,
+    "fit_value_counts": {
+      "36001": {},
+      "36002": {},
+      "36003": {}
+    },
+    "max_length": 612,
+    "source_rows": 2600,
+    "slot_records": 33800,
+    "target_information_in_context": false,
+    "candidate_only": true
+  },
+  "slot_order": [
+    "question",
+    "ask_reason",
+    "next_action",
+    "repair_action",
+    "transport_ref",
+    "field_role_ref",
+    "encoding_ref",
+    "syntax_category_ref",
+    "probe_variant_ref",
+    "safe_to_send",
+    "payload_shape_ref",
+    "oracle_ref",
+    "negative_control_presence_ref"
+  ],
+  "candidates": [
+    {
+      "seed": 36001,
+      "implementation_holdout": {
+        "source_rows": 1400,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.2,
+          "repair_action": 0.6,
+          "transport_ref": 0.5,
+          "field_role_ref": 0.0,
+          "encoding_ref": 0.167857,
+          "syntax_category_ref": 0.162143,
+          "probe_variant_ref": 0.2,
+          "safe_to_send": 0.6,
+          "payload_shape_ref": 0.0,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.0,
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.333333,
+        "positive_recall": 1.0,
+        "negative_false_allow": 560,
+        "negative_total": 560,
+        "baseline_predictive_entropy": 6.705718,
+        "post_predictive_entropy": 6.623509,
+        "relative_entropy_drop": 0.01226
+      }
+    },
+    {
+      "seed": 36002,
+      "implementation_holdout": {
+        "source_rows": 1400,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.4,
+          "repair_action": 0.6,
+          "transport_ref": 0.5,
+          "field_role_ref": 0.125,
+          "encoding_ref": 0.167857,
+          "syntax_category_ref": 0.106429,
+          "probe_variant_ref": 0.217857,
+          "safe_to_send": 0.6,
+          "payload_shape_ref": 0.0,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.0,
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 560,
+        "negative_total": 560,
+        "baseline_predictive_entropy": 6.706085,
+        "post_predictive_entropy": 6.595821,
+        "relative_entropy_drop": 0.016442
+      }
+    },
+    {
+      "seed": 36003,
+      "implementation_holdout": {
+        "source_rows": 1400,
+        "slot_accuracy": {
+          "question": 0.8,
+          "ask_reason": 0.8,
+          "next_action": 0.4,
+          "repair_action": 0.6,
+          "transport_ref": 0.5,
+          "field_role_ref": 0.0,
+          "encoding_ref": 0.167857,
+          "syntax_category_ref": 0.0,
+          "probe_variant_ref": 0.361429,
+          "safe_to_send": 0.6,
+          "payload_shape_ref": 0.0,
+          "oracle_ref": 0.6,
+          "negative_control_presence_ref": 1.0
+        },
+        "rule_ir_assembly_exact": 0.0,
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 1.0,
+        "negative_false_allow": 560,
+        "negative_total": 560,
+        "baseline_predictive_entropy": 6.705673,
+        "post_predictive_entropy": 6.612945,
+        "relative_entropy_drop": 0.013828
+      }
+    }
+  ],
+  "worst_seed": {
+    "max_relative_entropy_drop": 0.016442,
+    "entropy_gate_passed": true,
+    "ask_recall_min": 0.0,
+    "repair_recall_min": 0.0,
+    "abstain_recall_min": 0.0,
+    "positive_action_recall_min": 0.333333,
+    "positive_recall_min": 1.0,
+    "negative_false_allow_max": 560,
+    "rule_ir_assembly_exact_min": 0.0
+  },
+  "scientific_gate": {
+    "status": "blocked_candidate_only",
+    "raw_payload_in_context": false,
+    "typed_live_replay_with_model_selected_wire": false,
+    "independent_implementation": false,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "7fb1470b7ee324b0f70a2c42cbce85d2f78e30c2ecacfedc8f7f0905b0ccfff4"
+}

@@ -1,0 +1,52 @@
+{
+  "protocol_id": "pg-pk-172-third-generator-capacity-v1",
+  "schema_version": "pg172-third-generator-capacity-protocol-v1",
+  "reference_checkpoint": "artifacts\\pg164-xxl-capacity-v1\\xxl_typed_mix.pt",
+  "dataset": "research\\pg172_third_generator_dataset_v1.json",
+  "prior_datasets": [
+    "research\\pg168_discriminative_slot_dataset_v1.json",
+    "research\\pg170_cross_generator_dataset_v1.json"
+  ],
+  "configs": {
+    "capacity_101m_scratch": {
+      "d_model": 1024,
+      "nhead": 16,
+      "layers": 8
+    },
+    "capacity_160m_scratch": {
+      "d_model": 1152,
+      "nhead": 18,
+      "layers": 10
+    }
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 7e-05,
+    "epochs": 1
+  },
+  "capacity_comparison": {
+    "same_training_rows": true,
+    "same_optimizer": true,
+    "same_seed": true,
+    "initialization": "from_scratch_for_both",
+    "causal_capacity_claim_allowed": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "418ef68ba976132952155217b46f74fdb40045921ded8c0fce71a19acb62aa19"
+}

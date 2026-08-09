@@ -1,0 +1,487 @@
+{
+  "experiment": "tiny-rule-gpt-family-holdout-v1",
+  "status": "completed",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 3060",
+  "model": {
+    "type": "causal_transformer_classifier",
+    "parameters": 875778,
+    "hidden": 128,
+    "layers": 4,
+    "heads": 4,
+    "max_length": 384
+  },
+  "data": {
+    "programs": 1200,
+    "train_examples": 1920,
+    "iid_examples": 480,
+    "validation_family_examples": 1200,
+    "test_family_examples": 1200,
+    "train_families": [
+      "numeric_boundary",
+      "truthiness_gate"
+    ],
+    "validation_families": [
+      "substring_origin"
+    ],
+    "test_families": [
+      "authorization_or"
+    ],
+    "source_or_rule_ir_visible_to_model": false
+  },
+  "baselines": {
+    "balanced_majority_accuracy": 0.5375
+  },
+  "results": {
+    "iid": {
+      "accuracy": 0.616667,
+      "correct": 296,
+      "total": 480,
+      "by_family": {
+        "numeric_boundary": 0.616667,
+        "truthiness_gate": 0.616667
+      },
+      "failures": [
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000470",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.quota=2,input.role=member:1|input.quota=10,input.role=owner:1|input.quota=0,input.role=guest:0|input.quota=1,input.role=member:1|input.quota=-2,input.role=member:1|input.quota=2,input.role=guest:1<QUERY>input.quota=0,input.role=member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000070",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.balance=5,input.role=member:1|input.balance=-1,input.role=guest:1|input.balance=2,input.role=admin:1|input.balance=-2,input.role=admin:1|input.balance=-2,input.role=member:1|input.balance=0,input.role=guest:0<QUERY>input.balance=0,input.role=member<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000541",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.balance=340:1|input.balance=172:1|input.balance=171:1|input.balance=170:0|input.balance=0:0|input.balance=168:0<QUERY>input.balance=169<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000261",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.age=116:0|input.age=117:0|input.age=118:0|input.age=0:1|input.age=114:1|input.age=232:0<QUERY>input.age=115<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000081",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.retryCount=171:1|input.retryCount=170:0|input.retryCount=169:0|input.retryCount=172:1|input.retryCount=340:1|input.retryCount=0:0<QUERY>input.retryCount=168<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000241",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.retryCount=161:1|input.retryCount=165:0|input.retryCount=326:0|input.retryCount=164:0|input.retryCount=0:1|input.retryCount=163:0<QUERY>input.retryCount=162<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000170",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.credits=-2,input.role=member:1|input.credits=-1,input.role=root:1|input.credits=2,input.role=root:1|input.credits=-1,input.role=member:1|input.credits=-1,input.role=guest:1|input.credits=0,input.role=guest:0<QUERY>input.credits=0,input.role=member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000570",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.flags=1,input.role=member:1|input.flags=-1,input.role=owner:1|input.flags=-1,input.role=guest:1|input.flags=2,input.role=member:1|input.flags=0,input.role=owner:1|input.flags=3,input.role=guest:1<QUERY>input.flags=0,input.role=guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001121",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.retryCount=23:1|input.retryCount=19:0|input.retryCount=21:0|input.retryCount=20:0|input.retryCount=22:1|input.retryCount=42:1<QUERY>input.retryCount=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001001",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.age=212:0|input.age=210:0|input.age=213:1|input.age=424:1|input.age=211:0|input.age=214:1<QUERY>input.age=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000121",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.retryCount=149:1|input.retryCount=150:1|input.retryCount=147:0|input.retryCount=146:0|input.retryCount=148:0|input.retryCount=296:1<QUERY>input.retryCount=0<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000530",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.retries=0,input.role=member:0|input.retries=2,input.role=member:1|input.retries=11,input.role=guest:1|input.retries=11,input.role=root:1|input.retries=-1,input.role=member:1|input.retries=2,input.role=guest:1<QUERY>input.retries=-2,input.role=root<ANSWER>"
+        }
+      ]
+    },
+    "validation_family_holdout": {
+      "accuracy": 0.8575,
+      "correct": 1029,
+      "total": 1200,
+      "by_family": {
+        "substring_origin": 0.8575
+      },
+      "failures": [
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0001131",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://example.test/home:0|input.url=https://portal.test/home:1|input.url=https://evil.test/portal.test:1|input.url=https://evil.test/?next=portal.test:1<QUERY>input.url=https://portal.test.evil.test/phish<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000307",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://evil.test/trusted.example:1|input.url=https://trusted.example/home:1|input.url=https://evil.test/?next=trusted.example:1|input.url=https://example.test/home:0<QUERY>input.url=https://trusted.example.evil.test/phish<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000759",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://example.test/home:0|input.url=https://account.internal/home:1|input.url=https://evil.test/?next=account.internal:1|input.url=https://account.internal.evil.test/phish:1<QUERY>input.url=https://evil.test/account.internal<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000147",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://example.test/home:0|input.url=https://account.internal/home:1|input.url=https://account.internal.evil.test/phish:1|input.url=https://evil.test/?next=account.internal:1<QUERY>input.url=https://evil.test/account.internal<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000863",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://evil.test/trusted.example:1|input.url=https://example.test/home:0|input.url=https://evil.test/?next=trusted.example:1|input.url=https://trusted.example/home:1<QUERY>input.url=https://trusted.example.evil.test/phish<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000267",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://evil.test/trusted.example:1|input.url=https://evil.test/?next=trusted.example:1|input.url=https://trusted.example.evil.test/phish:1|input.url=https://example.test/home:0<QUERY>input.url=https://trusted.example/home<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000067",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://evil.test/?next=portal.test:1|input.url=https://portal.test.evil.test/phish:1|input.url=https://evil.test/portal.test:1|input.url=https://example.test/home:0<QUERY>input.url=https://portal.test/home<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000299",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://example.test/home:0|input.url=https://evil.test/portal.test:1|input.url=https://evil.test/?next=portal.test:1|input.url=https://portal.test/home:1<QUERY>input.url=https://portal.test.evil.test/phish<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000283",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://evil.test/?next=trusted.example:1|input.url=https://example.test/home:0|input.url=https://trusted.example/home:1|input.url=https://trusted.example.evil.test/phish:1<QUERY>input.url=https://evil.test/trusted.example<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000619",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://safe.local.evil.test/phish:1|input.url=https://evil.test/safe.local:1|input.url=https://example.test/home:0|input.url=https://safe.local/home:1<QUERY>input.url=https://evil.test/?next=safe.local<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000591",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://trusted.example.evil.test/phish:1|input.url=https://evil.test/?next=trusted.example:1|input.url=https://example.test/home:0|input.url=https://trusted.example/home:1<QUERY>input.url=https://evil.test/trusted.example<ANSWER>"
+        },
+        {
+          "family": "substring_origin",
+          "record_id": "syn-substring_origin-0000307",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.url=https://example.test/home:0|input.url=https://evil.test/?next=trusted.example:1|input.url=https://trusted.example/home:1|input.url=https://trusted.example.evil.test/phish:1<QUERY>input.url=https://evil.test/trusted.example<ANSWER>"
+        }
+      ]
+    },
+    "test_family_with_memory": {
+      "accuracy": 0.885833,
+      "correct": 1063,
+      "total": 1200,
+      "by_family": {
+        "authorization_or": 0.885833
+      },
+      "failures": [
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000860",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=true,input.isOwner=false:1<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000320",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=false:0<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000012",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=false:0<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000036",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=true,input.isOwner=false:1<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000288",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=true,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000068",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=true,input.isOwner=false:1<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000960",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=false:0<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000856",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0<QUERY>input.authenticated=true,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000236",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=true,input.isOwner=false:1<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000592",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=true,input.isOwner=false:1<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000772",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=false:0<QUERY>input.authenticated=false,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0001064",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=true,input.isOwner=false<ANSWER>"
+        }
+      ]
+    },
+    "test_family_without_memory": {
+      "accuracy": 0.328333,
+      "correct": 394,
+      "total": 1200,
+      "by_family": {
+        "authorization_or": 0.328333
+      },
+      "failures": [
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0001156",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000256",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=false,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=true,input.isOwner=false:1<QUERY>input.authenticated=true,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000320",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=false:1|input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000288",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=true:1|input.authenticated=true,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000784",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=false:0|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=true,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000488",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=true:1|input.authenticated=false,input.isOwner=false:0<QUERY>input.authenticated=true,input.isOwner=true<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000312",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000432",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=false:1|input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000644",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=true:1|input.authenticated=true,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0001112",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=false:1|input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000292",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=false:1|input.authenticated=true,input.isOwner=true:1|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000864",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE>input.authenticated=true,input.isOwner=true:1|input.authenticated=true,input.isOwner=false:1|input.authenticated=false,input.isOwner=true:1<QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        }
+      ]
+    },
+    "memory_delta": 0.5575
+  },
+  "training": {
+    "epochs": 10,
+    "seconds": 28.722,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.717913,
+        "iid_accuracy": 0.51875,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.698188,
+        "iid_accuracy": 0.48125,
+        "validation_family_accuracy": 0.645
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.689914,
+        "iid_accuracy": 0.597917,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.665221,
+        "iid_accuracy": 0.54375,
+        "validation_family_accuracy": 0.596667
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.640809,
+        "iid_accuracy": 0.614583,
+        "validation_family_accuracy": 0.834167
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.603242,
+        "iid_accuracy": 0.65,
+        "validation_family_accuracy": 0.7925
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.589711,
+        "iid_accuracy": 0.616667,
+        "validation_family_accuracy": 0.8575
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.551108,
+        "iid_accuracy": 0.635417,
+        "validation_family_accuracy": 0.603333
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.542322,
+        "iid_accuracy": 0.65,
+        "validation_family_accuracy": 0.76
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.495665,
+        "iid_accuracy": 0.635417,
+        "validation_family_accuracy": 0.5675
+      }
+    ]
+  },
+  "research_guardrails": {
+    "family_holdout": true,
+    "black_box_only_input": true,
+    "failure_examples_preserved": true,
+    "claim_scope": "pilot only; no claim of production generalization"
+  }
+}

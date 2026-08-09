@@ -1,0 +1,57 @@
+{
+  "protocol_id": "pg277-question-composition-v1",
+  "schema_version": "pg277-question-composition-protocol-v1",
+  "comparators": [
+    "coarse_process_sft",
+    "enriched_final_only_sft",
+    "enriched_process_sft",
+    "conservative_offline_update",
+    "dpo_preference_update"
+  ],
+  "reward": {
+    "question_match": 1.0,
+    "action_match": 1.5,
+    "belief_match": 1.5,
+    "premature_positive": -3.0,
+    "unsupported_positive": -4.0,
+    "missed_positive": -1.5,
+    "safe_abstain": 0.5
+  },
+  "constraints": {
+    "behavior_kl_anchor": true,
+    "supervised_anchor": true,
+    "entropy_bonus": false,
+    "online_requests": false
+  },
+  "split": {
+    "train_count": 40,
+    "holdout_count": 20,
+    "train_variants": [
+      "alpha",
+      "beta"
+    ],
+    "holdout_variant": "gamma",
+    "model_seeds": [
+      27711,
+      27712,
+      27713
+    ],
+    "variant_and_seed_disjoint": true
+  },
+  "checks": {
+    "dataset_collision_detected": true,
+    "enriched_collision_zero": true,
+    "question_holdout_min": true,
+    "positive_recall_min": true,
+    "negative_reject_min": true,
+    "false_positive_zero": true,
+    "counterfactual_flip_min": true,
+    "missing_observation_safe_min": true,
+    "conservative_no_regression": true,
+    "dpo_no_regression": true,
+    "promotion_blocked": true
+  },
+  "report_sha256": "2456e6a19cb8ce25877e29ed6455183fc7976f5d0c0b950c9e69ce302c1a85f6",
+  "next_experiment": "PG-278 real Pikachu SQL/redirect/XSS failure-question transfer with family holdout",
+  "protocol_sha256": "2a924b935b0e0a13cf4680a08d3cc377968ac8c5b92079a28a4497b1792d1ad1"
+}

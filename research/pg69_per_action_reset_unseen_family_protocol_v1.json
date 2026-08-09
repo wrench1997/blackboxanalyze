@@ -1,0 +1,46 @@
+{
+  "protocol_id": "pg-pk-69-per-action-reset-unseen-family-v1",
+  "schema_version": "sift-pg69-per-action-reset-unseen-family-protocol-v1",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "pinned_image": "tavenli/pikachu-labs@sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "external_network": false,
+    "state_change_allowed": false,
+    "workflow_source": "app/pg69_workflow_fixture.py"
+  },
+  "input_contract": {
+    "family_before_action_forbidden": true,
+    "typed_oracle_after_action_only": true,
+    "unknown_family_not_in_decoder_classes": true,
+    "rule_ir_binding_after_typed_exit_only": true,
+    "raw_probe_and_response_persistence_forbidden": true
+  },
+  "required_gates": {
+    "per_action_fresh_reset": true,
+    "get_post_both": true,
+    "matched_negative_control": true,
+    "evidence_hash_per_action": true,
+    "unknown_family_strict_abstain": true,
+    "independent_implementation": true,
+    "trace_episodes_accepted": true
+  },
+  "run_result": {
+    "status": "passed",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "hard_gate_checks": {
+      "real_docker_cases_completed": true,
+      "per_action_fresh_target": true,
+      "get_post_both_covered": true,
+      "typed_oracle_positive_authority": true,
+      "matched_negative_controls": true,
+      "evidence_hash_per_action": true,
+      "unknown_family_is_out_of_training_registry": true,
+      "unknown_family_strict_abstain": true,
+      "independent_implementations": true,
+      "trace_episodes_accepted": true,
+      "no_raw_persistence": true
+    }
+  },
+  "next_experiment": "PG70 train only on pre-registered accepted traces, then rerun unseen family and fresh Docker holdout without label exposure"
+}

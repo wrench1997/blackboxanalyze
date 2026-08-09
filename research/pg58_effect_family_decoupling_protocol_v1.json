@@ -1,0 +1,62 @@
+{
+  "protocol_id": "pg-pk-58-effect-family-decoupling-v1",
+  "schema_version": "pg58-effect-family-decoupling-protocol-v1",
+  "objective": "将是否存在可复现实验效果与具体漏洞族命名分成独立模型和独立门，避免效果头的高置信度被误读为族证据。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false
+  },
+  "input_contract": {
+    "base_representation": "PG-56 prefix ending at ORACLE_TARGET",
+    "family_name_in_input": false,
+    "effect_head_is_separate": true,
+    "effect_head_is_not_family_evidence": true,
+    "unknown_family_excluded_from_family_training": "template_injection",
+    "raw_probe_in_input": false,
+    "raw_response_body_in_input": false
+  },
+  "split_plan": {
+    "family_training": "PG-56 train known families only",
+    "dev": "PG-56 dev, including unknown template_injection rows for gate calibration",
+    "holdout": "PG-54 framed all seeds, including unknown template_injection"
+  },
+  "gates": {
+    "effect_confirmation_required_before_family_name": true,
+    "zero_unknown_misname_required": true,
+    "zero_negative_false_accept_required": true,
+    "zero_known_wrong_family_required": true,
+    "calibration_source_dev_only": true,
+    "known_family_recall_required": true,
+    "all_abstain_is_safety_only_not_capability": true,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "run_result": {
+    "status": "quarantined_family_ood_gate_failed",
+    "device": "cuda",
+    "family_training_rows": 306,
+    "dev_rows": 188,
+    "holdout_rows": 120,
+    "dev_raw_known_family_recall": 0.15,
+    "dev_raw_known_wrong_family_count": 30,
+    "dev_raw_unknown_misname_count": 0,
+    "dev_calibrated_known_family_recall": 0.15,
+    "dev_calibrated_known_wrong_family_count": 0,
+    "dev_calibrated_unknown_misname_count": 0,
+    "holdout_raw_known_family_recall": 0.0,
+    "holdout_raw_unknown_misname_count": 0,
+    "holdout_calibrated_known_family_recall": 0.0,
+    "holdout_calibrated_known_wrong_family_count": 0,
+    "holdout_calibrated_unknown_misname_count": 0,
+    "holdout_calibrated_negative_false_accept_count": 0,
+    "holdout_calibrated_abstain_rate": 1.0,
+    "interpretation": "Family naming remains incapable on the framed holdout; zero errors are achieved only by abstention, so no promotion is allowed.",
+    "report": "research/pg58_effect_family_decoupling_report_v1.json"
+  }
+}

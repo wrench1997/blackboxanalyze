@@ -1,0 +1,14 @@
+{
+  "protocol_id": "pg-pk-129-atomic-token-v1",
+  "proposal_id": "pg129-atomic-token-proposal-v1",
+  "question": "把历史轨迹所有可用字段拆成原子 token 后，token 级权重能否帮助模型稳定拼装下一条探索路径？",
+  "prediction": {
+    "weighted_accuracy": ">=0.95",
+    "weighted_budget_accuracy": ">=0.95",
+    "negative_false_stop_count": 0,
+    "uniform_token_ablation_changes": true
+  },
+  "intervention": "six bounded failure groups become typed/value tokens; a Transformer uses group focus, trajectory weight, current-step marker and token position",
+  "failure_rule": "若 token 化引入表面/标签泄漏或消融不改变行为，保留失败实验并禁止训练和记忆晋升。",
+  "next": "若通过，接入第三独立实现、长于六步的滚动迷宫；若失败，做 token-level contribution 与工程/实验分诊。"
+}

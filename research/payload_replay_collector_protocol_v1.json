@@ -1,0 +1,75 @@
+{
+  "protocol_id": "sift-pg03-local-replay-v1",
+  "version": "1.0",
+  "purpose": "把授权本地靶场的真实只读响应回放成带来源、证据和 Rule IR 的训练样本。",
+  "target_contract": {
+    "base_url": "http://127.0.0.1:3100",
+    "methods": ["GET"],
+    "allow_list": [
+      "/api/health",
+      "/api/maze/labs",
+      "/api/maze/replay/dom",
+      "/api/maze/replay/sql"
+    ],
+    "follow_redirects": false,
+    "fresh_reset_per_sample": true,
+    "transport": "in_process_asgi"
+  },
+  "capture_contract": {
+    "stored": [
+      "status_code",
+      "content_type",
+      "body_length",
+      "body_sha256",
+      "bounded_json_shape",
+      "allowlisted_oracle_projection",
+      "evidence_sha256"
+    ],
+    "not_stored": [
+      "raw_body",
+      "body_preview",
+      "cookies",
+      "credentials",
+      "evaluator_state",
+      "external_network_data"
+    ]
+  },
+  "catalog_contract": {
+    "schema": "sift-authorized-payload-catalog-v1",
+    "sample_fields": [
+      "payload",
+      "probe_artifact",
+      "semantic",
+      "replay",
+      "response_projection",
+      "oracle_projection",
+      "evidence",
+      "rule_ir",
+      "rule_ir_canonical",
+      "rule_ir_complexity"
+    ],
+    "source_scope": "workspace_local_only"
+  },
+  "splits": {
+    "source_split_same_family": "source suffix a trains, suffix b tests",
+    "family_holdout_structural_transfer": "xss/injection/access_control train; url_redirect/logic test",
+    "family_holdout_unseen_surface": "xss/injection train; HTTP-canary families test and should abstain"
+  },
+  "success_definition": {
+    "capture": "HTTP response is 2xx and Rule IR replay equals the recorded result",
+    "generalization": "held-out structural feature is covered by source-grounded memory",
+    "not_evaluator_confirmation": true
+  },
+  "safety": {
+    "local_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_execution": false,
+    "real_sleep_performed": false,
+    "raw_body_stored": false,
+    "public_corpus_ingested": false
+  },
+  "runner": "scripts/run_pg03_local_replay.py",
+  "collector": "app/replay_collector.py",
+  "result": "research/payload_replay_collector_v1.json"
+}

@@ -1,0 +1,68 @@
+{
+  "protocol_id": "pg-pk-259-active-belief-capacity-v1",
+  "schema_version": "pg259-active-belief-capacity-training-protocol-v1",
+  "frozen_legacy_policy": "artifacts\\pg249-pikachu-route-seed-capacity-v1\\frozen_xxl_capacity_hidden4096.pt",
+  "training_sources": [
+    "research\\pg258_unified_rule_ir_capacity_dataset_v1.json",
+    "PG-259 fresh local traces outside route holdout"
+  ],
+  "fresh_route_holdout": [
+    {
+      "source": "pg259_pikachu_boolean_fresh",
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "seed": 25921
+    },
+    {
+      "source": "pg259_pikachu_boolean_fresh",
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "seed": 25922
+    },
+    {
+      "source": "pg259_pikachu_sql_fresh",
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "seed": 25901
+    },
+    {
+      "source": "pg259_pikachu_sql_fresh",
+      "route": "/vul/sqli/sqli_search.php",
+      "seed": 25901
+    },
+    {
+      "source": "pg259_pikachu_sql_fresh",
+      "route": "/vul/sqli/sqli_widebyte.php",
+      "seed": 25901
+    },
+    {
+      "source": "pg259_pikachu_widebyte_fresh",
+      "route": "/vul/sqli/sqli_widebyte.php",
+      "seed": 25932
+    },
+    {
+      "source": "pg259_pikachu_xss_fresh",
+      "route": "/vul/xss/xss_03.php",
+      "seed": 25911
+    },
+    {
+      "source": "pg259_pikachu_xss_fresh",
+      "route": "/vul/xss/xss_dom_x.php",
+      "seed": 25911
+    }
+  ],
+  "implementation_ood": "pg246 VulnerableApp rows, separate score",
+  "capacity_variants": [
+    1024,
+    2048,
+    4096
+  ],
+  "heads": [
+    "next_token",
+    "rule_ir",
+    "family",
+    "belief",
+    "probe"
+  ],
+  "oracle_target_off_input": true,
+  "promotion_blocked": true,
+  "raw_payload_and_response_excluded": true,
+  "protocol_sha256": "f19da5fb7e620b13177f814f486223567b74fd285675034438dc8f21731b250e"
+}

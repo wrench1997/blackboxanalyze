@@ -1,0 +1,3882 @@
+{
+  "protocol_id": "pg-pk-122-failure-guided-authorization-holdout-v1",
+  "schema_version": "pg122-failure-guided-authorization-holdout-report-v1",
+  "status": "completed_pg122_frozen_model_holdout",
+  "scope": {
+    "model": "frozen_pg121_shape_sanitized_rule_ir_decoder",
+    "feature_dim": 48,
+    "device": "cuda",
+    "target_family": "authorization_transition",
+    "real_vulnerability_scanner_claim_allowed": false
+  },
+  "collection": {
+    "target_instances": 9,
+    "episodes": 36,
+    "steps": 144,
+    "get_steps": 72,
+    "post_steps": 72,
+    "seeds": [
+      12201,
+      12203,
+      12205
+    ],
+    "decoy_strengths": [
+      0,
+      1,
+      2
+    ]
+  },
+  "step_metrics": {
+    "count": 144,
+    "accuracy": 0.868056,
+    "macro_f1": 0.57563,
+    "per_class": {
+      "confirmed_positive": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 9,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "confirmed_negative": {
+        "true_positive": 94,
+        "false_positive": 11,
+        "false_negative": 5,
+        "precision": 0.895238,
+        "recall": 0.949495,
+        "f1": 0.921569
+      },
+      "candidate": {
+        "true_positive": 27,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "abstain": {
+        "true_positive": 4,
+        "false_positive": 8,
+        "false_negative": 5,
+        "precision": 0.333333,
+        "recall": 0.444444,
+        "f1": 0.380952
+      }
+    }
+  },
+  "evaluation": {
+    "final_episode_rows": [
+      {
+        "episode_id": "pg122-theta-12201-d0-authorization",
+        "target_seed": 12201,
+        "decoy_strength": 0,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d0-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.993964,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.790213,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998632,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "abstain",
+            "confidence": 0.524833,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d0-decoy",
+        "target_seed": 12201,
+        "decoy_strength": 0,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d0-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995145,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.961286,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998545,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.499826,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d0-steady",
+        "target_seed": 12201,
+        "decoy_strength": 0,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d0-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995145,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.9922,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998682,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998561,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d0-blind",
+        "target_seed": 12201,
+        "decoy_strength": 0,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d0-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.993964,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.790213,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998552,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d0-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "abstain",
+            "confidence": 0.653502,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d0-authorization",
+        "target_seed": 12203,
+        "decoy_strength": 0,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d0-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995562,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.951913,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998621,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.711471,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d0-decoy",
+        "target_seed": 12203,
+        "decoy_strength": 0,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d0-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996161,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.922478,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998401,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.675963,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d0-steady",
+        "target_seed": 12203,
+        "decoy_strength": 0,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d0-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996161,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.99456,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998605,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998546,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d0-blind",
+        "target_seed": 12203,
+        "decoy_strength": 0,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d0-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995562,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.951913,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998545,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d0-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.590885,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d0-authorization",
+        "target_seed": 12205,
+        "decoy_strength": 0,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d0-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.900299,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998573,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.779226,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d0-decoy",
+        "target_seed": 12205,
+        "decoy_strength": 0,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d0-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.835101,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998528,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "abstain",
+            "confidence": 0.817438,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d0-steady",
+        "target_seed": 12205,
+        "decoy_strength": 0,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d0-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995752,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998709,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998379,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d0-blind",
+        "target_seed": 12205,
+        "decoy_strength": 0,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d0-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.900299,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998458,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d0-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.675963,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d1-authorization",
+        "target_seed": 12201,
+        "decoy_strength": 1,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d1-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995562,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.951913,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998621,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.711471,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d1-decoy",
+        "target_seed": 12201,
+        "decoy_strength": 1,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d1-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996161,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.922478,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998401,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.675963,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d1-steady",
+        "target_seed": 12201,
+        "decoy_strength": 1,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d1-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996161,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.99456,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998605,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998546,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d1-blind",
+        "target_seed": 12201,
+        "decoy_strength": 1,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d1-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995562,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.951913,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998545,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d1-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.590885,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d1-authorization",
+        "target_seed": 12203,
+        "decoy_strength": 1,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d1-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.900299,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998573,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.779226,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d1-decoy",
+        "target_seed": 12203,
+        "decoy_strength": 1,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d1-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.835101,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998528,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "abstain",
+            "confidence": 0.817438,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d1-steady",
+        "target_seed": 12203,
+        "decoy_strength": 1,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d1-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995752,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998709,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998379,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d1-blind",
+        "target_seed": 12203,
+        "decoy_strength": 1,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d1-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.900299,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998458,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d1-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.675963,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d1-authorization",
+        "target_seed": 12205,
+        "decoy_strength": 1,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d1-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.992072,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.790213,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998636,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "abstain",
+            "confidence": 0.677498,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d1-decoy",
+        "target_seed": 12205,
+        "decoy_strength": 1,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d1-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.993964,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.790213,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998552,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "abstain",
+            "confidence": 0.653502,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d1-steady",
+        "target_seed": 12205,
+        "decoy_strength": 1,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d1-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.993964,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996004,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998702,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998536,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d1-blind",
+        "target_seed": 12205,
+        "decoy_strength": 1,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d1-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.992072,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.790213,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998545,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d1-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "abstain",
+            "confidence": 0.775889,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d2-authorization",
+        "target_seed": 12201,
+        "decoy_strength": 2,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d2-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.900299,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998573,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.779226,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d2-decoy",
+        "target_seed": 12201,
+        "decoy_strength": 2,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d2-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.835101,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998528,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "abstain",
+            "confidence": 0.817438,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d2-steady",
+        "target_seed": 12201,
+        "decoy_strength": 2,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d2-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995752,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998709,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998379,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12201-d2-blind",
+        "target_seed": 12201,
+        "decoy_strength": 2,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12201-d2-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996374,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.900299,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998458,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12201-d2-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.675963,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d2-authorization",
+        "target_seed": 12203,
+        "decoy_strength": 2,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d2-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.992072,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.790213,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998636,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "abstain",
+            "confidence": 0.677498,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d2-decoy",
+        "target_seed": 12203,
+        "decoy_strength": 2,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d2-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.993964,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.790213,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998552,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "abstain",
+            "confidence": 0.653502,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d2-steady",
+        "target_seed": 12203,
+        "decoy_strength": 2,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d2-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.993964,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996004,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998702,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998536,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12203-d2-blind",
+        "target_seed": 12203,
+        "decoy_strength": 2,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12203-d2-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.992072,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.790213,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998545,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12203-d2-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "abstain",
+            "confidence": 0.775889,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d2-authorization",
+        "target_seed": 12205,
+        "decoy_strength": 2,
+        "surface_kind": "authorization",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d2-authorization-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.994622,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-authorization-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.968208,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-authorization-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998621,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-authorization-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.542914,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "typed_positive",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": true,
+              "next_action": "stop_confirmed_positive",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d2-decoy",
+        "target_seed": 12205,
+        "decoy_strength": 2,
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d2-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995562,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.951913,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998545,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.590885,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "candidate_without_typed_effect",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d2-steady",
+        "target_seed": 12205,
+        "decoy_strength": 2,
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d2-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995562,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.993176,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "probe_candidate_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998682,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998558,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "surface_delta",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": true,
+              "positive_authority": false,
+              "next_action": "abstain_candidate_only",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      },
+      {
+        "episode_id": "pg122-theta-12205-d2-blind",
+        "target_seed": 12205,
+        "decoy_strength": 2,
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg122-theta-12205-d2-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.994622,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.968208,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "GET",
+              "methods_seen": [
+                "GET"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "replay_other_method",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998545,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "no_surface_delta",
+              "failed_gate": "matched_negative_control",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": false,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "repeat_matched_negative_pair",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          },
+          {
+            "step_id": "pg122-theta-12205-d2-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "abstain",
+            "confidence": 0.572599,
+            "failure_signature": {
+              "schema_version": "sift-failure-signature-v1",
+              "kind": "oracle_unavailable",
+              "failed_gate": "typed_effect",
+              "observed_method": "POST",
+              "methods_seen": [
+                "GET",
+                "POST"
+              ],
+              "candidate_signal": true,
+              "typed_available": false,
+              "positive_authority": false,
+              "next_action": "abstain_unknown_oracle",
+              "model_visible": true,
+              "raw_probe_retained": false,
+              "raw_response_retained": false,
+              "memory_promotion_allowed": false
+            }
+          }
+        ]
+      }
+    ],
+    "authorization_positive_recall": 0.0,
+    "decoy_false_accept_count": 0,
+    "steady_confirmed_negative_rate": 1.0,
+    "blind_oracle_abstain_rate": 0.444444,
+    "cross_seed": {
+      "per_seed": {
+        "12201": {
+          "positive_recall": 0.0,
+          "decoy_false_accept_count": 0,
+          "unknown_abstain_rate": 0.333333
+        },
+        "12203": {
+          "positive_recall": 0.0,
+          "decoy_false_accept_count": 0,
+          "unknown_abstain_rate": 0.333333
+        },
+        "12205": {
+          "positive_recall": 0.0,
+          "decoy_false_accept_count": 0,
+          "unknown_abstain_rate": 0.666667
+        }
+      },
+      "positive_recall_variance": 0.0
+    },
+    "failure_signature_counts": {
+      "candidate_without_typed_effect": 18,
+      "no_surface_delta": 90,
+      "oracle_unavailable": 18,
+      "typed_positive": 18
+    },
+    "next_action_counts": {
+      "abstain_candidate_only": 18,
+      "abstain_unknown_oracle": 9,
+      "probe_candidate_other_method": 27,
+      "repeat_matched_negative_pair": 72,
+      "replay_other_method": 9,
+      "stop_confirmed_positive": 9
+    }
+  },
+  "diagnosis": {
+    "observed": "authorization_changed is present in the target projection but omitted from the frozen PG-121 canonical model input; positive authorization transitions were therefore predicted as confirmed_negative, and blind oracle cases also lost abstention.",
+    "failure_guided_trace": "The collector retained bounded failure signatures and selected the next replay/abstention action from them; raw probes and bodies were not retained.",
+    "experiment_vs_engineering": "experiment_representation_gap",
+    "training_allowed": false
+  },
+  "checks": {
+    "frozen_checkpoint": true,
+    "previous_checkpoint_reuse_forbidden_for_training": true,
+    "get_post_balanced": true,
+    "fresh_reset_per_step": true,
+    "evidence_hashes_valid": true,
+    "failure_signature_present_on_all_steps": true,
+    "no_raw_probe_strings": true,
+    "no_raw_response_bodies": true,
+    "positive_recall_nonzero": false,
+    "decoy_false_accept_zero": true,
+    "unknown_abstain_nonzero": true,
+    "all_abstain_not_success": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "holdout_failure_quarantined",
+    "reason": "PG-121 的冻结表示缺少授权状态变化槽；先保留失败并设计 PG-123 表示修复，不把本轮误判写入训练或长期记忆。"
+  },
+  "report_sha256": "99069d6ed8dc5dcf0529ff6ff5f65ea752fa0d126229fb40c641771670f5aa05"
+}

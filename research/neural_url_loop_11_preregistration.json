@@ -1,0 +1,56 @@
+{
+  "schema_version": "sift-neural-url-preregistration-v1",
+  "experiment_id": "neural-url-generalization-loop-11",
+  "registered_at": "2026-08-01T19:05:00+08:00",
+  "status": "frozen-before-diagnostic-results",
+  "goal": "Repair neural URL behavior generalization without target-family training examples, model scaling, or claiming C5 rule-head outputs as neural learning.",
+  "confirmed_parent_result": {
+    "C5_architecture": 1.0,
+    "fresh_cross_product_evaluations": 6,
+    "neural_mean": 0.489444,
+    "claim": "architecture repair confirmed; neural negative transfer remains"
+  },
+  "diagnostic_hypotheses": {
+    "H1_field_path_shortcut": {
+      "test": "rewrite held-out input.origin tokens to the training primitive path input.endpoint without changing values or labels",
+      "support_threshold": "+10pp neural agreement"
+    },
+    "H2_protocol_novelty": {
+      "test": "stratify query accuracy by https/http/ftp/ws/invalid and explicit default port",
+      "support_threshold": "unseen ws or explicit-port strata at least 15pp below seen schemes"
+    },
+    "H3_episode_binding_failure": {
+      "test": "invert every visible episode output and query label while keeping URL values fixed",
+      "support_threshold": "inverted-label accuracy below 65% indicates family/query shortcut rather than trace binding"
+    },
+    "H4_gated_checkpoint_selection": {
+      "test": "compare current gated-selection checkpoint with a fixed-size candidate selected only by neural validation accuracy",
+      "support_threshold": "+5pp held-out neural agreement from neural-only selection"
+    }
+  },
+  "candidate_interventions_if_supported": [
+    "canonicalize every parsed URL field to a source-language-neutral url.value semantic slot while retaining an optional provenance path",
+    "train with episode-consistent label permutation so fixed family mappings cannot minimize loss",
+    "select checkpoints by neural-only validation score; evaluate C5 separately",
+    "add detached scheme/hostname/effective-port primitive programs but no url_scheme_downgrade examples"
+  ],
+  "constraints": {
+    "parameters": 908546,
+    "target_family_examples_in_training": 0,
+    "model_layers_hidden_heads": [4, 128, 4],
+    "old_family_regression_max_absolute": 0.02,
+    "fresh_confirmation_data_seeds_min": 2,
+    "neural_gain_over_frozen_baseline_each_seed_min": 0.10,
+    "C5_scores_reported_separately": true
+  },
+  "decision_policy": {
+    "diagnosis_before_training": true,
+    "pilot": "Run one training seed only after a diagnostic hypothesis is supported.",
+    "confirmation": "Freeze the successful intervention before generating at least two new data seeds.",
+    "failure": "If the fixed-size model still cannot bind URL components from traces, classify an architectural capacity/inductive-bias bottleneck and test a set-comparison head rather than bulk data."
+  },
+  "frozen_artifacts": {
+    "scripts/train_rule_memory_pilot.py": "46FB7019EDDA4F4999C253411CF4DD2F936BD64FFB53E74A5B14D8AC711ED202",
+    "research/url_root_cause_loop_10b_confirmation.json": "F1B223242FB31FBDEC4E93A93F02F64AD7112F9FA9AD69E5FFF9BB03A900D6A9"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": "pg-pk-34-multi-family-blackbox-agent-curriculum-v1",
+  "protocol_id": "PG-34",
+  "title": "授权本地靶场的多漏洞族黑盒测试智能体课程",
+  "objective": "让模型学习安全探测、证据复核、主动选择下一步、Rule IR 抽象和安全 abstain，而不是记忆攻击字符串。",
+  "scope": {
+    "targets": ["127.0.0.1", "localhost", "workspace_authorized_docker_only"],
+    "methods": ["GET", "POST"],
+    "fresh_reset_per_probe": true,
+    "external_network": false,
+    "credentials": false,
+    "state_mutation": false,
+    "raw_probe_or_response_persistence": false,
+    "destructive_actions": false
+  },
+  "vulnerability_families": [
+    "xss",
+    "sql_ast_injection",
+    "authentication_boundary",
+    "authorization_idor",
+    "business_logic_invariant",
+    "open_redirect",
+    "input_validation",
+    "command_injection_canary"
+  ],
+  "episode_contract": {
+    "steps": [
+      "baseline",
+      "safe_get_or_post_probe",
+      "bounded_response_projection",
+      "typed_positive_or_negative_oracle",
+      "belief_update",
+      "negative_control_replay",
+      "active_next_probe_or_abstain",
+      "Rule_IR_slot_binding"
+    ],
+    "required_evidence": [
+      "http_method",
+      "route_template_id",
+      "placement_or_form_schema",
+      "baseline_projection",
+      "response_projection",
+      "typed_oracle_projection",
+      "fresh_reset",
+      "negative_control_pair",
+      "evidence_sha256",
+      "echo_sha256"
+    ],
+    "positive_acceptance": [
+      "typed_effect_confirmed",
+      "positive_authority",
+      "matched_negative_control",
+      "fresh_target",
+      "evidence_hash_revalidated"
+    ]
+  },
+  "experiments": [
+    {
+      "id": "PG34-E01",
+      "name": "探针课程与停止策略",
+      "question": "模型能否先做低风险 GET，再根据投影选择 POST，并在证据不足时停止？",
+      "train": ["xss", "sql_ast_injection"],
+      "holdout": ["business_logic_invariant", "authorization_idor"],
+      "metrics": ["typed_recall", "false_positive_rate", "abstain_precision", "median_queries"]
+    },
+    {
+      "id": "PG34-E02",
+      "name": "同族多编码与多表面配对",
+      "question": "模型能否把编码变体视为同一 Rule IR，而不是记成新漏洞族？",
+      "factors": ["identity", "url_percent", "html_entity", "json_form", "query", "body"],
+      "metrics": ["pair_embedding_distance", "encoding_holdout_accuracy", "unknown_surface_false_route_rate"]
+    },
+    {
+      "id": "PG34-E03",
+      "name": "typed oracle 延迟与证据绑定",
+      "question": "在 oracle 不可见时，模型能否提出候选；oracle 返回后是否只绑定证据而不篡改历史？",
+      "ablations": ["oracle_hidden", "oracle_after_probe", "oracle_leakage_control"],
+      "metrics": ["oracle_revalidation_rate", "unverified_positive_rate", "evidence_hash_integrity"]
+    },
+    {
+      "id": "PG34-E04",
+      "name": "迷宫式多步 belief 与主动探测",
+      "question": "模型能否从错误路径回退、更新 belief，并在查询预算内找到出口？",
+      "factors": ["dead_end", "ambiguous_surface", "delayed_effect", "counterfactual_branch"],
+      "metrics": ["exit_found_rate", "wrong_turn_rate", "median_queries", "belief_calibration"]
+    },
+    {
+      "id": "PG34-E05",
+      "name": "跨漏洞族干扰与负对照",
+      "question": "XSS、SQL、认证/授权、逻辑、重定向和输入校验表面相似时，模型是否会误路由？",
+      "negative_controls": ["reflection_only", "syntax_error_only", "405_only", "timeout_only", "ordinary_200"],
+      "metrics": ["family_holdout_recall", "false_positive_rate", "negative_control_accept_rate"]
+    },
+    {
+      "id": "PG34-E06",
+      "name": "跨种子与长期记忆过滤",
+      "question": "模型能否过滤偶然成功、过期规则和冲突证据，避免污染长期记忆？",
+      "factors": ["three_seeds", "fresh_target", "stale_evidence", "conflicting_oracle"],
+      "metrics": ["cross_seed_stability", "memory_false_promotion_rate", "rollback_recovery"]
+    },
+    {
+      "id": "PG34-E07",
+      "name": "独立实现与 Docker 族外盲测",
+      "question": "规则是否迁移到未见过的实现、路由命名和响应格式？",
+      "requirements": ["independent_target_implementation", "source_hash_disjoint", "target_instance_disjoint", "family_holdout"],
+      "metrics": ["ood_typed_recall", "ood_false_positive_rate", "strict_ood_abstain_rate"]
+    },
+    {
+      "id": "PG34-E08",
+      "name": "架构与训练方法消融",
+      "question": "能力瓶颈来自数据、表示、记忆、优化还是架构？",
+      "variants": ["linear_baseline", "MLP_rule_ir", "recurrent_belief", "small_transformer", "sparse_moe"],
+      "order": ["data_fix", "representation_fix", "curriculum_or_sampling", "loss_or_reward", "memory_policy", "architecture"],
+      "metrics": ["capability_gate_status", "compute", "latency", "worst_case_holdout"]
+    }
+  ],
+  "promotion_gate": {
+    "required_roles": ["train", "dev", "family_holdout", "ood_source", "negative_control"],
+    "minimum_independent_seeds": 3,
+    "minimum_target_instances": 3,
+    "minimum_distinct_source_hashes": 3,
+    "zero_negative_false_accept": true,
+    "typed_oracle_required": true,
+    "capability_gain_over_baseline_required": true,
+    "strict_ood_abstain_on_unknown_surface": true,
+    "training_and_memory_blocked_on_failure": true,
+    "implementation": "app/model_capability_gate.py"
+  },
+  "first_run": {
+    "experiment_id": "PG34-E01",
+    "input_dataset": "research/pg_pk_33_get_post_typed_replay_catalog_v1.json",
+    "next_artifact": "research/pg34_e01_probe_curriculum_manifest_v1.json",
+    "result_artifact": "research/pg34_e01_probe_curriculum_report_v1.json",
+    "status": "completed_diagnostic",
+    "reason": "PG-33 proved real dual-channel replay collection but not family-holdout generalization"
+  },
+  "independent_source_holdout": {
+    "registry_target_id": "pg34_independent_fixture",
+    "catalog": "research/pg34_independent_fixture_catalog_v1.json",
+    "trace": "research/pg34_independent_fixture_trace_v1.json",
+    "diagnostic": "research/pg34_independent_generalization_report_v1.json",
+    "status": "collected_and_evaluated",
+    "weights_updated": false,
+    "capability_claim_allowed": false,
+    "reason": "PG-33 checkpoint produced zero typed recall and 0.90 uncalibrated false-positive rate on this independent implementation"
+  },
+  "surface_discriminator_diagnostic": {
+    "script": "scripts/train_pg34_surface_discriminator.py",
+    "report": "research/pg34_surface_discriminator_report_v1.json",
+    "checkpoint": "artifacts/pg34-surface-discriminator/surface_discriminator.pt",
+    "input_is_bounded_visible_projection": true,
+    "typed_oracle_consumed_by_model": false,
+    "positive_authority": false,
+    "checkpoint_selection": "minimum_train_cross_entropy",
+    "strict_family_holdout_abstain": true,
+    "strict_ood_source_abstain": true,
+    "status": "diagnostic_only",
+    "promotion_allowed": false,
+    "failure_note": "A route-accuracy-only checkpoint criterion preserved a near-uniform initial state despite apparent 1.0 fit accuracy; selection was corrected and covered by regression tests."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "protocol_id": "pg-pk-140-information-complete-catalog-v1",
+  "schema_version": "pg140-information-complete-catalog-protocol-v1",
+  "objective": "将模型最小投影与 evaluator-side provenance/oracle/evidence 目录解耦，并把缺失值显式化。",
+  "local_only": true,
+  "raw_content_storage": false,
+  "required_manifest_fields": [
+    "catalog_schema_version",
+    "row_provenance_manifest_sha256",
+    "tokenizer_schema_version",
+    "tokenizer_config_sha256",
+    "source_implementation_manifest_sha256",
+    "oracle_contract_manifest_sha256",
+    "split_manifest_sha256",
+    "omission_policy"
+  ],
+  "learning_stages": [
+    "schema_repair",
+    "representation_pretrain",
+    "capability_train",
+    "memory_promotion"
+  ],
+  "capability_train_requires_original_missing_zero": true,
+  "memory_promotion_requires_cross_seed_implementation_ood_review": true,
+  "protocol_sha256": "678460c6d5618e089c2d9c32a9c54e813421cf58980e54dc4106d3bc5f4af87a"
+}

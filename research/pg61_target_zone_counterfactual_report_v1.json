@@ -1,0 +1,335 @@
+{
+  "protocol_id": "pg-pk-61-target-zone-counterfactual-v1",
+  "schema_version": "pg61-target-zone-counterfactual-report-v1",
+  "status": "diagnostic_only",
+  "dataset": {
+    "sample_count": 720,
+    "task_count": 360,
+    "path": "research\\pg61_target_zone_counterfactual_catalog_v1.json",
+    "catalog_sha256": "3dfab5ffa66cdccfbba8b784b7ea1aaaa6fa5ff03afb3dd228b89517c771a5e7",
+    "train_task_count": 120,
+    "dev_task_count": 80,
+    "holdout_task_count": 160
+  },
+  "training": {
+    "task_count": 120,
+    "row_count": 240,
+    "positive_rows": 90,
+    "device": "cuda",
+    "epochs": 220,
+    "history_tail": [
+      {
+        "epoch": 40,
+        "train_loss": 5e-06
+      },
+      {
+        "epoch": 80,
+        "train_loss": 1e-06
+      },
+      {
+        "epoch": 120,
+        "train_loss": 1e-06
+      },
+      {
+        "epoch": 160,
+        "train_loss": 1e-06
+      },
+      {
+        "epoch": 200,
+        "train_loss": 1e-06
+      }
+    ],
+    "input_contract": {
+      "model_reads": [
+        "surface_class",
+        "response_shape",
+        "channel_hint",
+        "route_depth",
+        "parameter_count_bucket",
+        "candidate_action"
+      ],
+      "model_must_not_read": [
+        "oracle_projection",
+        "response_projection_after_action",
+        "expected_method",
+        "zone_type",
+        "layout",
+        "task_id",
+        "raw_probe",
+        "raw_response"
+      ]
+    },
+    "checkpoint": "artifacts\\pg61-target-zone-counterfactual\\action_value.pt",
+    "checkpoint_sha256": "d48ec413fd4344153e01e10f527c0588e2064876a0aeb9690d6aec200fcf7f19",
+    "oracle_consumed_by_model": false,
+    "family_consumed_by_model": false
+  },
+  "dev": {
+    "candidate_thresholds": [
+      {
+        "threshold": 0.5,
+        "task_count": 80,
+        "positive_task_count": 60,
+        "negative_control_count": 20,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "known_target_success_rate": 1.0,
+        "unknown_positive_count": 0,
+        "unknown_strict_abstain": true,
+        "unknown_abstain_count": 0,
+        "negative_false_accept_count": 0,
+        "negative_false_accept_rate": 0.0,
+        "selected_action_counts": {
+          "POST": 53,
+          "GET": 27
+        },
+        "selected_action_entropy": 0.922406,
+        "action_sequence_patterns": {
+          "screen_randomized→POST": 53,
+          "screen_randomized→GET": 27
+        },
+        "mean_confidence": 0.749999,
+        "fresh_reset_count": 80,
+        "evidence_hash_count": 80,
+        "raw_probe_stored_count": 0,
+        "raw_response_stored_count": 0
+      },
+      {
+        "threshold": 0.55,
+        "task_count": 80,
+        "positive_task_count": 60,
+        "negative_control_count": 20,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "known_target_success_rate": 1.0,
+        "unknown_positive_count": 0,
+        "unknown_strict_abstain": true,
+        "unknown_abstain_count": 0,
+        "negative_false_accept_count": 0,
+        "negative_false_accept_rate": 0.0,
+        "selected_action_counts": {
+          "POST": 53,
+          "GET": 27
+        },
+        "selected_action_entropy": 0.922406,
+        "action_sequence_patterns": {
+          "screen_randomized→POST": 53,
+          "screen_randomized→GET": 27
+        },
+        "mean_confidence": 0.749999,
+        "fresh_reset_count": 80,
+        "evidence_hash_count": 80,
+        "raw_probe_stored_count": 0,
+        "raw_response_stored_count": 0
+      },
+      {
+        "threshold": 0.6,
+        "task_count": 80,
+        "positive_task_count": 60,
+        "negative_control_count": 20,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "known_target_success_rate": 1.0,
+        "unknown_positive_count": 0,
+        "unknown_strict_abstain": true,
+        "unknown_abstain_count": 0,
+        "negative_false_accept_count": 0,
+        "negative_false_accept_rate": 0.0,
+        "selected_action_counts": {
+          "POST": 53,
+          "GET": 27
+        },
+        "selected_action_entropy": 0.922406,
+        "action_sequence_patterns": {
+          "screen_randomized→POST": 53,
+          "screen_randomized→GET": 27
+        },
+        "mean_confidence": 0.749999,
+        "fresh_reset_count": 80,
+        "evidence_hash_count": 80,
+        "raw_probe_stored_count": 0,
+        "raw_response_stored_count": 0
+      },
+      {
+        "threshold": 0.65,
+        "task_count": 80,
+        "positive_task_count": 60,
+        "negative_control_count": 20,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "known_target_success_rate": 1.0,
+        "unknown_positive_count": 0,
+        "unknown_strict_abstain": true,
+        "unknown_abstain_count": 0,
+        "negative_false_accept_count": 0,
+        "negative_false_accept_rate": 0.0,
+        "selected_action_counts": {
+          "POST": 53,
+          "GET": 27
+        },
+        "selected_action_entropy": 0.922406,
+        "action_sequence_patterns": {
+          "screen_randomized→POST": 53,
+          "screen_randomized→GET": 27
+        },
+        "mean_confidence": 0.749999,
+        "fresh_reset_count": 80,
+        "evidence_hash_count": 80,
+        "raw_probe_stored_count": 0,
+        "raw_response_stored_count": 0
+      },
+      {
+        "threshold": 0.7,
+        "task_count": 80,
+        "positive_task_count": 60,
+        "negative_control_count": 20,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "known_target_success_rate": 1.0,
+        "unknown_positive_count": 0,
+        "unknown_strict_abstain": true,
+        "unknown_abstain_count": 0,
+        "negative_false_accept_count": 0,
+        "negative_false_accept_rate": 0.0,
+        "selected_action_counts": {
+          "POST": 53,
+          "GET": 27
+        },
+        "selected_action_entropy": 0.922406,
+        "action_sequence_patterns": {
+          "screen_randomized→POST": 53,
+          "screen_randomized→GET": 27
+        },
+        "mean_confidence": 0.749999,
+        "fresh_reset_count": 80,
+        "evidence_hash_count": 80,
+        "raw_probe_stored_count": 0,
+        "raw_response_stored_count": 0
+      },
+      {
+        "threshold": 0.75,
+        "task_count": 80,
+        "positive_task_count": 60,
+        "negative_control_count": 20,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "known_target_success_rate": 1.0,
+        "unknown_positive_count": 0,
+        "unknown_strict_abstain": true,
+        "unknown_abstain_count": 0,
+        "negative_false_accept_count": 0,
+        "negative_false_accept_rate": 0.0,
+        "selected_action_counts": {
+          "POST": 53,
+          "GET": 27
+        },
+        "selected_action_entropy": 0.922406,
+        "action_sequence_patterns": {
+          "screen_randomized→POST": 53,
+          "screen_randomized→GET": 27
+        },
+        "mean_confidence": 0.749999,
+        "fresh_reset_count": 80,
+        "evidence_hash_count": 80,
+        "raw_probe_stored_count": 0,
+        "raw_response_stored_count": 0
+      },
+      {
+        "threshold": 0.8,
+        "task_count": 80,
+        "positive_task_count": 60,
+        "negative_control_count": 20,
+        "positive_action_accuracy": 1.0,
+        "target_success_rate": 1.0,
+        "known_target_success_rate": 1.0,
+        "unknown_positive_count": 0,
+        "unknown_strict_abstain": true,
+        "unknown_abstain_count": 0,
+        "negative_false_accept_count": 0,
+        "negative_false_accept_rate": 0.0,
+        "selected_action_counts": {
+          "POST": 53,
+          "GET": 27
+        },
+        "selected_action_entropy": 0.922406,
+        "action_sequence_patterns": {
+          "screen_randomized→POST": 53,
+          "screen_randomized→GET": 27
+        },
+        "mean_confidence": 0.749999,
+        "fresh_reset_count": 80,
+        "evidence_hash_count": 80,
+        "raw_probe_stored_count": 0,
+        "raw_response_stored_count": 0
+      }
+    ],
+    "selected_threshold": 0.5,
+    "task_count": 80,
+    "positive_task_count": 60,
+    "negative_control_count": 20,
+    "positive_action_accuracy": 1.0,
+    "target_success_rate": 1.0,
+    "known_target_success_rate": 1.0,
+    "unknown_positive_count": 0,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 0,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "selected_action_counts": {
+      "POST": 53,
+      "GET": 27
+    },
+    "selected_action_entropy": 0.922406,
+    "action_sequence_patterns": {
+      "screen_randomized→POST": 53,
+      "screen_randomized→GET": 27
+    },
+    "mean_confidence": 0.749999,
+    "fresh_reset_count": 80,
+    "evidence_hash_count": 80,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "holdout": {
+    "task_count": 160,
+    "positive_task_count": 120,
+    "negative_control_count": 40,
+    "positive_action_accuracy": 1.0,
+    "target_success_rate": 1.0,
+    "known_target_success_rate": 1.0,
+    "unknown_positive_count": 24,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 24,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "selected_action_counts": {
+      "POST": 100,
+      "GET": 60
+    },
+    "selected_action_entropy": 0.954434,
+    "action_sequence_patterns": {
+      "screen_randomized→POST": 100,
+      "screen_randomized→GET": 60
+    },
+    "mean_confidence": 0.75,
+    "fresh_reset_count": 160,
+    "evidence_hash_count": 160,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "hard_gate": {
+    "schema_version": "pg61-target-zone-counterfactual-hard-gate-v1",
+    "status": "passed",
+    "claim_allowed": false,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "status": "quarantined_target_zone_candidate",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "interpretation": "PG61 只证明目标区动作选择的受控反事实能力；它不等价于真实站点漏洞发现，也不允许把 fixture 标签写入长期记忆。"
+}

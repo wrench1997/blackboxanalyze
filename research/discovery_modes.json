@@ -1,0 +1,29 @@
+{
+  "schema_version": "sift-discovery-modes-v1",
+  "modes": {
+    "white_box_extraction": {
+      "inputs": ["source", "ast", "bytecode", "public_ir"],
+      "method": "language adapter extracts Common Semantic Rule candidates",
+      "required_validation": ["parser_roundtrip", "static_invariant_check"],
+      "limitation": "runtime configuration, dynamic loading and external state may invalidate static conclusions"
+    },
+    "gray_box_reconciliation": {
+      "inputs": ["static_candidates", "runtime_traces", "partial_state"],
+      "method": "test static candidates, locate conflicts and actively probe missing branches",
+      "required_validation": ["runtime_replay", "static_dynamic_conflict_report"],
+      "limitation": "visible instrumentation may still omit causal state"
+    },
+    "black_box_induction": {
+      "inputs": ["input_output", "episode", "state_if_visible", "timing_if_allowed"],
+      "method": "active hypothesis induction using disagreement, boundaries, state exploration and counterexamples",
+      "required_validation": ["behavioral_holdout", "counterexample_replay", "coverage_scope"],
+      "limitation": "conclusions are bounded by the queried domain and observable context"
+    }
+  },
+  "conflict_policy": {
+    "preserve_both_versions": true,
+    "actual_behavior_authority": "replayable runtime evidence",
+    "never_silently_overwrite": true,
+    "required_keys": ["provenance", "confidence", "evidence_pointers", "oracle_fingerprint", "coverage_scope"]
+  }
+}

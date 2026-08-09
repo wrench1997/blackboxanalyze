@@ -1,0 +1,116 @@
+{
+  "schema_version": "neural-auto-goal-label-decoder-v1",
+  "proposal_id": "pg97-neural-auto-goal-label-v1",
+  "proposal_inputs": {
+    "design_row_count": 320,
+    "oracle_visible": false,
+    "family_visible": false,
+    "raw_probe_visible": false,
+    "raw_response_visible": false,
+    "training_signal": "masked_bounded_delta_token_presence_reconstruction"
+  },
+  "model": {
+    "architecture": "token_presence_autoencoder_plus_two_means_kmeans",
+    "device": "cuda",
+    "epochs": 80,
+    "vocabulary_size": 10,
+    "train_reconstruction_loss": 8.9e-05,
+    "cluster_stats": {
+      "cluster_count": 2,
+      "cluster_row_counts": [
+        256,
+        64
+      ],
+      "cluster_mean_delta_count": [
+        0.0,
+        1.0
+      ],
+      "high_effect_cluster": 1,
+      "degenerate_visible_signal": false
+    },
+    "centroid_prefix_preview": [
+      [
+        -0.131701,
+        -0.167596,
+        6.62341,
+        0.053804,
+        -0.148163,
+        2.445907,
+        -0.160034,
+        7.420187
+      ],
+      [
+        -0.066533,
+        -0.155009,
+        8.601363,
+        -0.044656,
+        -0.166743,
+        10.227342,
+        -0.159628,
+        -0.163752
+      ]
+    ]
+  },
+  "goal": {
+    "goal_id": "neural_auto_goal_stable_effect_discovery_v1",
+    "success_condition": [
+      "model assigns a supported observation pair to the high-change cluster",
+      "the high-change state repeats on a compatible second probe",
+      "a matched negative control does not receive the success decision",
+      "fresh reset, loopback, and evidence hash checks remain valid"
+    ],
+    "failure_condition": [
+      "low-change cluster",
+      "unseen token or conflicting state",
+      "negative-control confirmation"
+    ],
+    "abstain_condition": [
+      "unseen token vocabulary",
+      "ambiguous cluster distance",
+      "unknown-family review gate"
+    ],
+    "budget": {
+      "max_steps": 2,
+      "requires_fresh_reset": true,
+      "requires_get_post_pair": true
+    }
+  },
+  "labels": [
+    {
+      "label_id": "AUTO_MODEL_NO_OBSERVED_CHANGE",
+      "decision": "reject"
+    },
+    {
+      "label_id": "AUTO_MODEL_EFFECT_CHANGE",
+      "decision": "confirm_candidate"
+    },
+    {
+      "label_id": "AUTO_MODEL_UNSUPPORTED_OR_AMBIGUOUS",
+      "decision": "abstain"
+    }
+  ],
+  "selected_cluster": {
+    "high_effect_cluster": 1
+  },
+  "degenerate_visible_signal": false,
+  "audit": {
+    "oracle_is_evaluator_only": true,
+    "family_labels_are_not_model_features": true,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "cross_implementation_eval_source": "pg42",
+  "canonical_delta_projection_schema": "canonical-delta-projection-v1",
+  "predeclared_grammar_vocabulary": [
+    "DELTA_EFFECT_INCREASE",
+    "DELTA_EFFECT_DECREASE",
+    "DELTA_EFFECT_CHANGE",
+    "DELTA_RESPONSE_INCREASE",
+    "DELTA_RESPONSE_DECREASE",
+    "DELTA_RESPONSE_CHANGE",
+    "DELTA_BOUNDARY_INCREASE",
+    "DELTA_BOUNDARY_DECREASE",
+    "DELTA_BOUNDARY_CHANGE"
+  ],
+  "proposal_sha256": "e67baeb16ef04f9c2d087126c1d2ec08bd807329f423cde675155b45e2ca94ec"
+}

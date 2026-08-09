@@ -1,0 +1,302 @@
+{
+  "schema_version": "pg351-a800-ask-oracle-composition-candidate-v1",
+  "status": "target_conditioned_candidate_only",
+  "gate": {
+    "schema_version": "pg351-a800-ask-oracle-composition-candidate-v1",
+    "status": "ready_target_conditioned_candidate",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "dataset_status_candidate_only": true,
+      "audit_status_candidate_only": true,
+      "target_coverage_train": true,
+      "target_coverage_holdout": true,
+      "vocabulary_locked": true,
+      "promotion_closed": true,
+      "data_code_vocab_rules_hashes_locked": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "split_counts": {
+      "train": 1152,
+      "implementation_holdout": 680
+    },
+    "target_coverage": {
+      "train": {
+        "rows": 1152,
+        "questions": {
+          "ask_failure": 128,
+          "ask_typed": 512,
+          "none": 512
+        },
+        "next_actions": {
+          "abstain": 128,
+          "ask_typed": 512,
+          "repair": 128,
+          "replay": 128,
+          "select_probe_variant": 256
+        },
+        "ask_present": true,
+        "repair_present": true,
+        "abstain_present": true,
+        "positive_present": true
+      },
+      "implementation_holdout": {
+        "rows": 680,
+        "questions": {
+          "ask_failure": 24,
+          "ask_typed": 480,
+          "none": 176
+        },
+        "next_actions": {
+          "abstain": 44,
+          "ask_typed": 480,
+          "repair": 24,
+          "replay": 44,
+          "select_probe_variant": 88
+        },
+        "ask_present": true,
+        "repair_present": true,
+        "abstain_present": true,
+        "positive_present": true
+      }
+    },
+    "unknown_token_count": 0,
+    "candidate_only": true,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "4131ff74482b322144053644ba40c2e3f89d28bb096d21c9548f7c09cdad5101",
+    "audit": "4c79912ddde737e315fccd5d1f1f1a32589de63d485c2b597f098013c94114a4",
+    "rules": "59fb249abfe7e4e600def1008e4cc36754879353770362c5b21d312563a84435",
+    "script": "9f83bbc9ab870983d54994ad54b0bbb0c97a0d84dd5919b43faa407f17e043a3",
+    "model": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      35101,
+      35102,
+      35103
+    ],
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "target_weight": 8.0,
+    "context_weight": 0.25,
+    "action_weight_overrides": {
+      "next_action=repair": null,
+      "next_action=abstain": null,
+      "next_action=replay": null,
+      "safe_to_send=0": 3.0,
+      "safe_to_send=1": 24.0
+    },
+    "constrained_rule_ir": false,
+    "balance_actions": false,
+    "fit_action_counts": {
+      "35101": {
+        "abstain": 128,
+        "ask_typed": 512,
+        "repair": 128,
+        "replay": 128,
+        "select_probe_variant": 256
+      },
+      "35102": {
+        "abstain": 128,
+        "ask_typed": 512,
+        "repair": 128,
+        "replay": 128,
+        "select_probe_variant": 256
+      },
+      "35103": {
+        "abstain": 128,
+        "ask_typed": 512,
+        "repair": 128,
+        "replay": 128,
+        "select_probe_variant": 256
+      }
+    },
+    "model_capacity": {
+      "d_model": 128,
+      "n_heads": 4,
+      "n_layers": 2,
+      "experts": 2,
+      "expert_hidden": 256,
+      "max_length": 634
+    },
+    "batch_size": 32,
+    "context_only": false,
+    "target_tokens_read": true,
+    "required_max_length": 634,
+    "candidate_only": true
+  },
+  "target_coverage": {
+    "train": {
+      "rows": 1152,
+      "questions": {
+        "ask_failure": 128,
+        "ask_typed": 512,
+        "none": 512
+      },
+      "next_actions": {
+        "abstain": 128,
+        "ask_typed": 512,
+        "repair": 128,
+        "replay": 128,
+        "select_probe_variant": 256
+      },
+      "ask_present": true,
+      "repair_present": true,
+      "abstain_present": true,
+      "positive_present": true
+    },
+    "implementation_holdout": {
+      "rows": 680,
+      "questions": {
+        "ask_failure": 24,
+        "ask_typed": 480,
+        "none": 176
+      },
+      "next_actions": {
+        "abstain": 44,
+        "ask_typed": 480,
+        "repair": 24,
+        "replay": 44,
+        "select_probe_variant": 88
+      },
+      "ask_present": true,
+      "repair_present": true,
+      "abstain_present": true,
+      "positive_present": true
+    }
+  },
+  "candidates": [
+    {
+      "seed": 35101,
+      "train": {
+        "rows": 1152,
+        "token_accuracy": 0.580566,
+        "sequence_exact_accuracy": 0.444444,
+        "ask_recall": 0.8,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.565104,
+        "positive_recall": 0.21875,
+        "negative_false_allow": 26,
+        "negative_total": 768,
+        "unnecessary_question_rate": 0.0
+      },
+      "implementation_holdout": {
+        "rows": 680,
+        "token_accuracy": 0.745486,
+        "sequence_exact_accuracy": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.272727,
+        "positive_recall": 0.265152,
+        "negative_false_allow": 12,
+        "negative_total": 548,
+        "unnecessary_question_rate": 0.0
+      },
+      "baseline_holdout_predictive_entropy": 6.909324,
+      "post_holdout_predictive_entropy": 6.775111,
+      "relative_entropy_drop": 0.019425
+    },
+    {
+      "seed": 35102,
+      "train": {
+        "rows": 1152,
+        "token_accuracy": 0.618513,
+        "sequence_exact_accuracy": 0.444444,
+        "ask_recall": 0.8,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 0.877604,
+        "negative_false_allow": 210,
+        "negative_total": 768,
+        "unnecessary_question_rate": 0.0
+      },
+      "implementation_holdout": {
+        "rows": 680,
+        "token_accuracy": 0.765856,
+        "sequence_exact_accuracy": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.348485,
+        "positive_recall": 0.113636,
+        "negative_false_allow": 6,
+        "negative_total": 548,
+        "unnecessary_question_rate": 0.0
+      },
+      "baseline_holdout_predictive_entropy": 6.911269,
+      "post_holdout_predictive_entropy": 6.776215,
+      "relative_entropy_drop": 0.019541
+    },
+    {
+      "seed": 35103,
+      "train": {
+        "rows": 1152,
+        "token_accuracy": 0.579729,
+        "sequence_exact_accuracy": 0.444444,
+        "ask_recall": 0.8,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 0.049479,
+        "negative_false_allow": 9,
+        "negative_total": 768,
+        "unnecessary_question_rate": 0.0
+      },
+      "implementation_holdout": {
+        "rows": 680,
+        "token_accuracy": 0.783333,
+        "sequence_exact_accuracy": 0.705882,
+        "ask_recall": 0.952381,
+        "repair_recall": 0.0,
+        "abstain_recall": 0.0,
+        "positive_action_recall": 0.666667,
+        "positive_recall": 0.234848,
+        "negative_false_allow": 0,
+        "negative_total": 548,
+        "unnecessary_question_rate": 0.0
+      },
+      "baseline_holdout_predictive_entropy": 6.909681,
+      "post_holdout_predictive_entropy": 6.797328,
+      "relative_entropy_drop": 0.01626
+    }
+  ],
+  "worst_seed": {
+    "max_relative_entropy_drop": 0.019541,
+    "entropy_gate_passed": true,
+    "negative_false_allow_max": 12,
+    "ask_recall_min": 0.952381,
+    "repair_recall_min": 0.0,
+    "abstain_recall_min": 0.0,
+    "positive_action_recall_min": 0.272727,
+    "positive_recall_min": 0.113636
+  },
+  "scientific_gate": {
+    "status": "blocked_candidate_only",
+    "raw_payload_in_context": false,
+    "typed_live_replay_with_model_selected_wire": false,
+    "independent_implementation": false,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "fecda245eca218c1906756f6b681d135a69870a940ff533a2ca201e54686b3a0"
+}

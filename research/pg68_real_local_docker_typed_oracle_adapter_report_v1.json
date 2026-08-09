@@ -1,0 +1,114 @@
+{
+  "protocol_id": "pg-pk-68-real-local-docker-typed-oracle-adapter-v1",
+  "schema_version": "sift-pg68-real-local-docker-typed-oracle-adapter-v1",
+  "status": "real_local_adapter_audit_completed",
+  "source": {
+    "report": "research\\pg52_authoritative_local_oracle_report_v1.json",
+    "source_status": "real_local_oracle_completed",
+    "image": "tavenli/pikachu-labs@sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "source_instance_count": 2,
+    "independent_source_count": 1,
+    "independent_seed_count": 1,
+    "independent_implementation_count": 1
+  },
+  "scope": {
+    "case_count": 7,
+    "families": [
+      "injection",
+      "url_redirect",
+      "xss"
+    ],
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "modalities": [
+      "browser_dom_execution",
+      "redirect_destination_controlled",
+      "sql_ast_differential"
+    ],
+    "loopback_only": true,
+    "raw_payloads_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "metrics": {
+    "typed_positive_count": 7,
+    "matched_negative_control_count": 7,
+    "negative_control_oracle_false_count": 7,
+    "evidence_hash_valid_count": 7,
+    "get_post_covered": {
+      "GET": 6,
+      "POST": 1
+    },
+    "unique_target_instance_count": 2,
+    "fresh_reset_per_action": false,
+    "training_registry_family_set": [
+      "access_control",
+      "authentication",
+      "command_injection",
+      "injection",
+      "input_validation",
+      "logic",
+      "ordinary_response",
+      "template_injection",
+      "unknown_surface",
+      "url_redirect",
+      "xss"
+    ],
+    "family_holdout_candidate_count": 0,
+    "family_holdout_candidates": [],
+    "oracle_modalities": [
+      "browser_dom_execution",
+      "redirect_destination_controlled",
+      "sql_ast_differential"
+    ],
+    "catalog_sample_count": 7
+  },
+  "oracle_contract": {
+    "browser_execution": true,
+    "browser_offline_response_renderer": true,
+    "static_resource_tags_stripped": true,
+    "controlled_event_dispatch_is_explicit": true,
+    "sql_ast_differential": true,
+    "controlled_redirect": true,
+    "positive_requires_negative_control": true,
+    "positive_requires_fresh_reset": true,
+    "positive_requires_evidence_hash": true
+  },
+  "hard_gate": {
+    "status": "blocked",
+    "checks": {
+      "real_image_pinned": true,
+      "typed_oracle_contract_complete": true,
+      "get_post_both_covered": true,
+      "matched_negative_controls": true,
+      "evidence_hash_per_action": true,
+      "fresh_reset_per_action": false,
+      "family_heldout_replay": false,
+      "independent_source_count": false
+    },
+    "blocking_reasons": [
+      "fresh_reset_per_action",
+      "family_heldout_replay",
+      "independent_source_count"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "status": "quarantined_evaluation_only",
+    "evaluation_catalog_generated": true,
+    "training_catalog_generated": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "fresh_reset_per_action;family_heldout_replay;independent_source_count"
+  },
+  "artifacts": {
+    "catalog": "research\\pg68_real_local_docker_typed_oracle_adapter_catalog_v1.json",
+    "trace": "research\\pg68_real_local_docker_typed_oracle_adapter_trace_v1.json",
+    "protocol": "research\\pg68_real_local_docker_typed_oracle_adapter_protocol_v1.json"
+  },
+  "formal_claim": {
+    "allowed": false,
+    "reason": "one pinned image and no per-action fresh reset or family-heldout evidence"
+  }
+}

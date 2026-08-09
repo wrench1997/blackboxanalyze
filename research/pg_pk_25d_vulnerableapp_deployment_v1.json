@@ -1,0 +1,86 @@
+{
+  "schema_version": "pg-pk-25d-local-lab-deployment-v1",
+  "dataset_id": "pg25d-vulnerableapp-evaluation-only",
+  "status": "running_evaluation_only",
+  "source": {
+    "target_id": "owasp_vulnerableapp_2_1_44",
+    "source_id": "sasanlabs-vulnerableapp-2.1.44-amd64",
+    "source_type": "authorized_local_container",
+    "origin_ref": "https://github.com/SasanLabs/VulnerableApp",
+    "image_ref": "sasanlabs/owasp-vulnerableapp:2.1.44",
+    "image_digest": "sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+    "repo_digest": "sasanlabs/owasp-vulnerableapp@sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+    "architecture": "amd64",
+    "os": "linux",
+    "upstream_license": "Apache-2.0",
+    "license_attestation": "upstream repository metadata; verify again before promotion",
+    "collector_sha256": "c0d6ce34fa26b55d3d4cba4f1d2f5c604f2dff0ca405f655a275a9aee85b0468",
+    "reset_adapter_sha256": "3c98bd8ed605204e37e0a755fd69333cb4ae873cc80ef48ad1a4ca1d5c8e9a59",
+    "oracle_contract_sha256": "3f13c399cebea2db7d40163529617814f82c44b480e791a0953dcbe4484b69f6",
+    "source_attestation_sha256": "4fa98e0c8523fc0ced222f2046d51506a887da1a83a3258841d1a1f7d51bb588"
+  },
+  "deployment": {
+    "container_name": "pg25-vulnerableapp",
+    "container_id": "edccd15e75dbe204e9f89dfa12f8d34ad4839be6050ccd8c21ab98d876065871",
+    "network_name": "pg25-vulnerableapp-hostonly",
+    "network_id": "8952236a44d29eaddcbbd76e3621106035123189cb9658b3e3cde53df7675a9c",
+    "network_internal": false,
+    "network_options": {
+      "com.docker.network.bridge.enable_icc": false,
+      "com.docker.network.bridge.enable_ip_masquerade": false,
+      "com.docker.network.enable_ipv6": false
+    },
+    "container_ip": "172.24.0.2",
+    "subnet": "172.24.0.0/16",
+    "service_context": "/VulnerableApp",
+    "service_port": 9090,
+    "host_binding": "127.0.0.1:19090",
+    "external_network": false,
+    "persistent_volumes": false,
+    "read_only_rootfs": true,
+    "cap_drop": ["ALL"],
+    "no_new_privileges": true,
+    "pids_limit": 256,
+    "memory_limit_bytes": 1073741824,
+    "tmpfs_paths": [
+      "/tmp",
+      "/run",
+      "/app/resources/static/upload",
+      "/contentDispositionUpload"
+    ],
+    "restart_policy": "no"
+  },
+  "health": {
+    "method": "HEAD",
+    "url": "http://127.0.0.1:19090/VulnerableApp/",
+    "status_code": 200,
+    "content_type_class": "text/html",
+    "checked_at": "2026-08-02T07:33:20Z",
+    "raw_response_stored": false
+  },
+  "reset": {
+    "kind": "stop_remove_recreate",
+    "fresh_target": true,
+    "state_is_ephemeral": true,
+    "reset_script": "scripts/reset_pg25d_vulnerableapp.ps1",
+    "reset_adapter_sha256": "3c98bd8ed605204e37e0a755fd69333cb4ae873cc80ef48ad1a4ca1d5c8e9a59",
+    "evaluator_state_hidden": true,
+    "state_change_allowed": false
+  },
+  "training": {
+    "training_eligible": false,
+    "evaluation_only": true,
+    "reason": "new source; no Catalog/oracle samples have been admitted",
+    "memory_promotion": false
+  },
+  "safety": {
+    "local_only": true,
+    "loopback_host_binding": true,
+    "no_external_network": true,
+    "raw_request_stored": false,
+    "raw_response_stored": false,
+    "credentials_stored": false,
+    "attack_payloads_stored": false,
+    "destructive_probes_run": false
+  }
+}

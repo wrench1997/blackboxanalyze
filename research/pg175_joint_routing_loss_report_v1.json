@@ -1,0 +1,285 @@
+{
+  "schema_version": "pg175-joint-routing-loss-report-v1",
+  "protocol_id": "pg-pk-175-joint-routing-loss-v1",
+  "status": "completed_pg175_joint_routing_loss_search",
+  "scope": {
+    "claim": "full-holdout-gated routing/loss search on 160M epoch4",
+    "real_vulnerability_scanner_claim_allowed": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "train_row_count": 1000,
+    "full_eval_counts": {
+      "base_holdout": 1210,
+      "typed_holdout": 203,
+      "pg168_ood": 1000,
+      "pg170_ood": 1000,
+      "pg172_ood": 1000
+    },
+    "source_dataset_sha256": {
+      "pg163_base": "8edda7ad0e9db70ca6fa00f3ee892e77f7fe68ee6dcb909c032e4eaff4453d30",
+      "pg168_slots": "af5580681b101d275aecdae36a76536fb95dc759f27aba6d019c48420a10e72f",
+      "pg170_generator": "dcaa74c1bb40905a471f1712b482ebff40f6d57638e57608394b681279c82681",
+      "pg172_generator": "2bc8ea5e5cbc9b05f14139766bab3171f85bedd39ee8b4b1addaf2643aefd631"
+    }
+  },
+  "baseline": {
+    "base_holdout": {
+      "loss": 1.05524524,
+      "perplexity": 2.87267957,
+      "next_token_accuracy": 0.51182604,
+      "token_count": 82868
+    },
+    "typed_holdout": {
+      "loss": 0.88393242,
+      "perplexity": 2.42039904,
+      "next_token_accuracy": 0.77679404,
+      "token_count": 6438
+    },
+    "pg168_ood": {
+      "loss": 0.86430501,
+      "perplexity": 2.37335605,
+      "next_token_accuracy": 0.67716667,
+      "token_count": 24000
+    },
+    "pg170_ood": {
+      "loss": 0.89379151,
+      "perplexity": 2.44437999,
+      "next_token_accuracy": 0.636625,
+      "token_count": 24000
+    },
+    "pg172_ood": {
+      "loss": 0.89324811,
+      "perplexity": 2.44305209,
+      "next_token_accuracy": 0.59729032,
+      "token_count": 31000
+    }
+  },
+  "baseline_aggregate_ppl": 2.51077335,
+  "variants": {
+    "low_lr_replay": {
+      "strategy": "low_lr_replay",
+      "route_mode": "uniform",
+      "weights": {
+        "pg163_base": 2.0,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "lr": 5e-06,
+      "train_row_count": 1000,
+      "train_loss": 0.87083877,
+      "base_holdout": {
+        "loss": 0.99814025,
+        "perplexity": 2.71323121,
+        "next_token_accuracy": 0.51387749,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.78135067,
+        "perplexity": 2.18442071,
+        "next_token_accuracy": 0.80413172,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 0.87960295,
+        "perplexity": 2.40994265,
+        "next_token_accuracy": 0.67220833,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 0.88478204,
+        "perplexity": 2.42245634,
+        "next_token_accuracy": 0.63725,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.88921747,
+        "perplexity": 2.43322484,
+        "next_token_accuracy": 0.59632258,
+        "token_count": 31000
+      },
+      "elapsed_seconds": 59.255,
+      "checkpoint": "artifacts\\pg175-joint-routing-loss-v1\\low_lr_replay.pt"
+    },
+    "balanced_low_lr": {
+      "strategy": "balanced_low_lr",
+      "route_mode": "uniform",
+      "weights": {
+        "pg163_base": 1.5,
+        "pg168_slots": 1.5,
+        "pg170_generator": 1.5,
+        "pg172_generator": 1.5
+      },
+      "lr": 5e-06,
+      "train_row_count": 1000,
+      "train_loss": 0.83153221,
+      "base_holdout": {
+        "loss": 1.00470763,
+        "perplexity": 2.73110866,
+        "next_token_accuracy": 0.51393783,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.79476781,
+        "perplexity": 2.21392689,
+        "next_token_accuracy": 0.78766698,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 0.87241782,
+        "perplexity": 2.39268896,
+        "next_token_accuracy": 0.67025,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 0.87982252,
+        "perplexity": 2.41047186,
+        "next_token_accuracy": 0.63845833,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.88262885,
+        "perplexity": 2.41724594,
+        "next_token_accuracy": 0.59790323,
+        "token_count": 31000
+      },
+      "elapsed_seconds": 78.003,
+      "checkpoint": "artifacts\\pg175-joint-routing-loss-v1\\balanced_low_lr.pt"
+    },
+    "old_first_weighted": {
+      "strategy": "old_first_weighted",
+      "route_mode": "old_first",
+      "weights": {
+        "pg163_base": 3.0,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "lr": 1e-05,
+      "train_row_count": 1000,
+      "train_loss": 0.85500174,
+      "base_holdout": {
+        "loss": 1.05991473,
+        "perplexity": 2.88612487,
+        "next_token_accuracy": 0.51198291,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.80461853,
+        "perplexity": 2.23584343,
+        "next_token_accuracy": 0.78968624,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 0.97284734,
+        "perplexity": 2.64546628,
+        "next_token_accuracy": 0.63470833,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 0.91220728,
+        "perplexity": 2.48981219,
+        "next_token_accuracy": 0.607875,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.86678176,
+        "perplexity": 2.37924155,
+        "next_token_accuracy": 0.62041935,
+        "token_count": 31000
+      },
+      "elapsed_seconds": 62.905,
+      "checkpoint": "artifacts\\pg175-joint-routing-loss-v1\\old_first_weighted.pt"
+    },
+    "routed_low_lr": {
+      "strategy": "routed_low_lr",
+      "route_mode": "interleave",
+      "weights": {
+        "pg163_base": 1.5,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "lr": 5e-06,
+      "train_row_count": 1000,
+      "train_loss": 0.83329816,
+      "base_holdout": {
+        "loss": 1.03094313,
+        "perplexity": 2.80370885,
+        "next_token_accuracy": 0.51274316,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.81132807,
+        "perplexity": 2.25089535,
+        "next_token_accuracy": 0.79077353,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 0.8537629,
+        "perplexity": 2.34846728,
+        "next_token_accuracy": 0.67791667,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 0.86636967,
+        "perplexity": 2.37826129,
+        "next_token_accuracy": 0.63591667,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.87243276,
+        "perplexity": 2.3927247,
+        "next_token_accuracy": 0.59770968,
+        "token_count": 31000
+      },
+      "elapsed_seconds": 26.516,
+      "checkpoint": "artifacts\\pg175-joint-routing-loss-v1\\routed_low_lr.pt"
+    }
+  },
+  "aggregate_ppl": {
+    "low_lr_replay": 2.43265515,
+    "balanced_low_lr": 2.43308846,
+    "old_first_weighted": 2.52729766,
+    "routed_low_lr": 2.43481149
+  },
+  "split_gate": {
+    "low_lr_replay": false,
+    "balanced_low_lr": false,
+    "old_first_weighted": false,
+    "routed_low_lr": true
+  },
+  "strict_gate": {
+    "low_lr_replay": false,
+    "balanced_low_lr": false,
+    "old_first_weighted": false,
+    "routed_low_lr": true
+  },
+  "selection": {
+    "baseline_hard_gate": true,
+    "per_split_tolerance": 0.005,
+    "selected_variant": "routed_low_lr",
+    "promotion_allowed": true,
+    "vulnerability_claim_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "source": {
+    "runner_sha256": "16e1d15226964629d2abd7e9b5fcabf1b3423836da7cb5a2f496d03abbd07274",
+    "checkpoint_sha256": "9c67021ec66ed1196ec09e4d3eac24c2fffd8ad9e85c3bcfee06d529737e0cb0",
+    "dataset_sha256": "976a810e033770ce211503d39802f81e79cd64d3fbd4f6e83f90d50c8a0dc99a"
+  },
+  "report_sha256": "7f3b111c87cb80169ad8c74a6366f910c8bb369b900fbb9b81cea1efce623b75"
+}

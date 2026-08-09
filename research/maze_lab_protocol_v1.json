@@ -1,0 +1,102 @@
+{
+  "protocol_id": "sift-rule-maze-loop-1",
+  "version": "1.0",
+  "purpose": "把不同漏洞族统一成可复现的黑盒规则迷宫，并区分候选出口、可观察出口与靶场确认出口。",
+  "scope": {
+    "local_only": true,
+    "synthetic_labs": [
+      "maze_truthiness_access",
+      "maze_redirect_origin",
+      "maze_business_boundary",
+      "maze_sequence_replay",
+      "maze_dom_sink",
+      "maze_dom_double_decode",
+      "maze_dom_template_sink",
+      "maze_sql_boundary",
+      "maze_sql_error_channel",
+      "maze_sql_blind_channel",
+      "maze_sql_timing_channel",
+      "maze_sql_local_side_channel"
+    ],
+    "external_network": false,
+    "script_execution": false,
+    "database_connection": false,
+    "evaluator_state_in_policy": false
+  },
+  "maze_model": {
+    "node": "challenge-label-free state_projection(response, browser_state, interpreter_state)",
+    "edge": "sanitized action identity plus from/to state fingerprints",
+    "dead_end": "no new state, failed invariant, escaped text, value-only change, or exhausted frontier",
+    "loop": "edge returns to a state fingerprint already on the current path",
+    "frontier": "unconsumed action from a visible node, prioritized by novelty and information gain",
+    "exit_levels": [
+      {
+        "level": "candidate",
+        "definition": "单次观测满足部分语义信号，但缺少同资源/同轨迹复探或专用 oracle 证据。"
+      },
+      {
+        "level": "observable_success",
+        "definition": "专用语义 oracle 满足且在 fresh/同条件复探中稳定复现。"
+      },
+      {
+        "level": "evaluator_confirmed",
+        "definition": "fresh reset 后，靶场 evaluator 明确记录目标状态由未解变为已解。"
+      }
+    ]
+  },
+  "family_exit_requirements": {
+    "authentication": ["protected_resource_transition", "session_signal"],
+    "access_control": ["protected_resource_transition"],
+    "logic": ["invariant_violation", "state_replay"],
+    "url_redirect": ["location_origin_changed"],
+    "xss": ["browser_sink_observed", "dom_change"],
+    "injection": ["controlled_differential", "interpreter_boundary"],
+    "input_validation": ["controlled_differential", "invariant_violation"],
+    "observability": ["sensitive_surface_visible"],
+    "information_exposure": ["sensitive_surface_visible"],
+    "misconfiguration": ["unsafe_surface_reachable"]
+  },
+  "injection_channel_requirements": {
+    "ast_shape": ["controlled_differential", "interpreter_boundary"],
+    "syntax_error": ["controlled_differential", "syntax_error_observed"],
+    "blind_response": ["controlled_differential", "blind_boolean_differential"],
+    "bounded_timing": ["controlled_differential", "timing_differential", "timeout_observed"],
+    "local_side_channel": ["controlled_differential", "local_callback_observed"]
+  },
+  "metrics": {
+    "candidate_exit_rate": "candidate / all explored trajectories",
+    "observable_exit_repeatability": "stable observable exits / candidate exits",
+    "evaluator_confirmation_rate": "fresh evaluator transitions / observable exits",
+    "dead_end_rate": "marked dead-end nodes / explored nodes",
+    "loop_rate": "loop edges / explored edges",
+    "family_holdout": "exit repeatability on an unseen lab family",
+    "false_positive_guard": "HTTP-only signal must not be reported as browser/interpreter exit",
+    "channel_coverage": "ast_shape, syntax_error, blind_response, row_shape, bounded_timing, and local_side_channel each require a distinct evidence modality"
+  },
+  "run_order": [
+    "reset synthetic/instrumented lab",
+    "record baseline node",
+    "select an unconsumed frontier edge",
+    "record visible transition and semantic evidence",
+    "mark forward, loop, or dead-end",
+    "re-probe the same resource/trajectory",
+    "evaluate family-specific exit predicate",
+    "only evaluator layer may attach evaluator_confirmed"
+  ],
+  "implementation": {
+    "registry": "app/maze_labs.py",
+    "graph": "app/maze_solver.py",
+    "dom_oracle": "app/dom_oracle.py + frontend/lib/dom-oracle.ts",
+    "sql_oracle": "app/sql_ast_oracle.py",
+    "oracle_api": "/api/maze/oracle/{dom,sql}",
+    "detection_payload_protocol": "research/detection_payload_protocol_v1.json",
+    "detection_payload_validator": "app/detection_payload.py",
+    "http_adapter": "app/juice_shop_adapter.py",
+    "protocol_artifact": "research/maze_lab_protocol_v1.json"
+  },
+  "known_limitations": [
+    "DOM sink evidence requires a browser/instrumentation adapter; HTTP reflection remains candidate-only.",
+    "SQL lab is a structural synthetic oracle: error, blind, row-shape, timing, and local-side-channel signals are simulated markers; no database executes, no sleep is performed, and no network callback is emitted.",
+    "The current Juice Shop GET matrix is an evaluator benchmark, not proof that every synthetic family transfers."
+  ]
+}

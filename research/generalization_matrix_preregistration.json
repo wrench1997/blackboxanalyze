@@ -1,0 +1,72 @@
+{
+  "schema_version": "sift-generalization-preregistration-v1",
+  "experiment_id": "generalization-matrix-09",
+  "registered_at": "2026-08-01T17:05:00+08:00",
+  "status": "frozen_before_new-family-results",
+  "research_question": "Does the frozen small SIFT model generalize beyond the two successful frontend families when the held-out shift changes mechanism, composition, runtime semantics, state dependence, or observation quality?",
+  "scientific_rule": "More rows from the same generator do not count as stronger generalization evidence; every evaluation stratum must hold out a complete mechanism or composition family.",
+  "stages": [
+    {
+      "id": "A_frozen_zero_shot",
+      "description": "Evaluate the frozen loop-08 checkpoint without adding training examples, learned parameters, or target-family demonstrations."
+    },
+    {
+      "id": "B_primitive_only_adaptation",
+      "description": "If stage A exposes a mechanism gap, train only detached primitive families; keep all composed vulnerability families fully held out."
+    }
+  ],
+  "generalization_axes": {
+    "runtime_url_semantics": ["url_scheme_downgrade"],
+    "encoding_depth": ["dom_double_decode"],
+    "language_string_semantics": ["unicode_casefold_role"],
+    "coercion_representation": ["numeric_string_coercion"],
+    "compositional_shift": ["compound_origin_role"],
+    "state_and_history_shift": ["state_replay_window"]
+  },
+  "primitive_only_families": [
+    "url_hostname_primitive",
+    "html_entity_decode_primitive",
+    "casefold_primitive",
+    "numeric_coercion_primitive"
+  ],
+  "frozen_checkpoint": {
+    "path": "artifacts/frontend-loop-05-routed-memory-20260801/tiny_rule_gpt.pt",
+    "sha256": "7B85B41770121BE1A894517ADFF416EFE1CCC7BC847E0B55B9460C27936FBE10",
+    "parameters": 908546,
+    "new_family_examples_seen": 0
+  },
+  "data_protocol": {
+    "pilot_seed": 20261001,
+    "confirmation_seeds": [20261001, 20261019, 20261107],
+    "programs": 2700,
+    "traces_per_program": 20,
+    "examples_per_program": 4,
+    "memory_items": 8,
+    "complete_family_holdout": true,
+    "balanced_queries": true,
+    "local_targets_only": true
+  },
+  "model_visibility": {
+    "allowed": ["black_box_input", "black_box_output", "previous_trace_memory", "deterministic_input_semantic_projection"],
+    "forbidden": ["javascript_source", "family_name", "generalization_axis", "rule_ir", "cwe_label", "intended_output", "counterexample_flag"]
+  },
+  "primary_metrics": {
+    "behavior_agreement_by_family": true,
+    "macro_behavior_agreement": true,
+    "counterexample_top1": true,
+    "precision_at_10": true,
+    "memory_delta": true,
+    "stage_B_gain_over_stage_A_min": 0.10,
+    "old_family_regression_max_absolute": 0.02
+  },
+  "decision_policy": {
+    "stage_A": "Treat the result as a diagnostic map, not a pass/fail claim. Classify each failure by representation, memory binding, composition, state, or evaluation.",
+    "stage_B": "Proceed to three-seed confirmation only if primitive-only adaptation improves at least one failed axis by 10 percentage points without target-family leakage or old-family regression over 2 points.",
+    "scaling": "Do not increase model size or bulk data until the mechanism-level ablation identifies a capacity bottleneck."
+  },
+  "frozen_artifacts": {
+    "app/rule_ir.py": "A5A9237260F7997D9CB4D393945290454ED8D0541EA65D499F79F47FB5F884F6",
+    "app/synthetic_curriculum.py": "D72A271EA1B9CCB89651F75A73930D2015C72985F8AA2DB1D488F42D6394A168",
+    "scripts/train_rule_memory_pilot.py": "0F8C2183B461A6661793F61355E9997E5ED11668CE6F5D0D025558FA7C07555E"
+  }
+}

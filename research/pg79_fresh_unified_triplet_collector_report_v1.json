@@ -1,0 +1,79 @@
+{
+  "protocol_id": "pg-pk-79-fresh-unified-triplet-collector-v1",
+  "schema_version": "pg79-fresh-unified-triplet-collector-report-v1",
+  "status": "completed_evaluation",
+  "source": {
+    "collector": "scripts\\run_pg53_cross_source_typed_replay.py",
+    "independent_source_count": 5,
+    "independent_implementation_count": 5,
+    "family_count": 9,
+    "model_retrained": false
+  },
+  "scope": {
+    "loopback_only": true,
+    "external_network": false,
+    "database_write": false,
+    "script_execution": false,
+    "state_mutation": false,
+    "raw_probe_persistence": false,
+    "raw_response_persistence": false
+  },
+  "metrics": {
+    "triplet_case_count": 270,
+    "typed_positive_count": 240,
+    "typed_negative_oracle_count": 540,
+    "unique_target_instance_count": 270,
+    "fresh_reset_per_case": true,
+    "get_post_counts": {
+      "GET": 135,
+      "POST": 135
+    },
+    "source_count": 5,
+    "implementation_count": 5,
+    "family_count": 9,
+    "trace_episode_count": 3,
+    "trace_accepted_episode_count": 3,
+    "negative_probe_positive_count": 0,
+    "collection_error_count": 0,
+    "validation_failure_count": 0
+  },
+  "hard_gate": {
+    "status": "passed",
+    "checks": {
+      "triplet_complete_per_case": true,
+      "typed_positive_per_case": true,
+      "typed_negative_oracle_per_case": true,
+      "negative_probe_strictly_negative": true,
+      "fresh_target_per_case": true,
+      "get_post_covered": true,
+      "multi_source": true,
+      "multi_family": true,
+      "trace_episodes_accepted": true,
+      "no_raw_persistence": true
+    },
+    "blocking_reasons": [],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "catalog_training_eligible": false,
+    "status": "triplet_collection_only",
+    "reason": "collection must be paired with PG-80 model replay and independent source audit before any promotion"
+  },
+  "artifacts": {
+    "catalog": "research\\pg79_fresh_unified_triplet_collector_catalog_v1.json",
+    "trace": "research\\pg79_fresh_unified_triplet_collector_trace_v1.json",
+    "report": "research\\pg79_fresh_unified_triplet_collector_report_v1.json",
+    "protocol": "research\\pg79_fresh_unified_triplet_collector_protocol_v1.json"
+  },
+  "finalization": {
+    "validator_only": true,
+    "network_replay": false,
+    "oracle_values_changed": false,
+    "projection_values_changed": false,
+    "pair_binding_added": true,
+    "evidence_and_echo_recomputed": true,
+    "finalizer": "scripts/finalize_pg79_trace.py"
+  }
+}

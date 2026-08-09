@@ -1,0 +1,56 @@
+{
+  "protocol_id": "pg-pk-66-utility-ranking-v1",
+  "schema_version": "pg66-utility-ranking-protocol-v1",
+  "objective": "用每个候选动作的连续 pre-oracle utility 和 pairwise ranking 训练轨迹策略头，解决 PG65 选择标签噪声。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "fixture_replay_only": true,
+    "state_mutation": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false
+  },
+  "input_contract": {
+    "model_reads": [
+      "pre_oracle_surface_projection",
+      "belief_before",
+      "candidate_action"
+    ],
+    "model_must_not_read": [
+      "evaluator_target",
+      "oracle_projection",
+      "response_projection_after_action",
+      "family_label",
+      "layout_id",
+      "task_id",
+      "raw_probe",
+      "raw_response"
+    ]
+  },
+  "label_contract": {
+    "continuous_utility_is_pre_oracle": true,
+    "pairwise_ranking_loss": true,
+    "selected_action_hard_label_not_used": true,
+    "tie_margin": 0.03
+  },
+  "required_gates": {
+    "dev_only_checkpoint_selection": true,
+    "dev_decisive_ranking_accuracy_min": 0.8,
+    "pg64_holdout_decisive_ranking_accuracy_min": 0.8,
+    "maximum_mean_utility_regret": 0.02,
+    "independent_target_recall_min": 0.8,
+    "independent_negative_false_accept_zero": true,
+    "independent_unknown_strict_abstain": true,
+    "independent_multi_step_rate_min": 0.5,
+    "fresh_reset_per_action": true,
+    "evidence_hash_per_action": true,
+    "typed_oracle_after_action_only": true,
+    "training_promotion_on_fixture": false,
+    "memory_promotion_on_fixture": false
+  },
+  "run_result": {
+    "safety_status": "passed",
+    "capability_status": "passed",
+    "independent_target_recall": 1.0
+  }
+}

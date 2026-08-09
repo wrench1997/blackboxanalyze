@@ -1,0 +1,69 @@
+{
+  "protocol_id": "pg-pk-97-neural-auto-goal-label-v1",
+  "schema_version": "pg97-neural-goal-label-protocol-v1",
+  "purpose": "test a self-supervised neural decoder that invents generic goals/labels without evaluator labels",
+  "input_contract": {
+    "source": "pg94_pg36_surface_trace_v1",
+    "visible": [
+      "GET/POST",
+      "encoding class",
+      "phase",
+      "bounded response difference tokens",
+      "safety flags"
+    ],
+    "forbidden": [
+      "family",
+      "hypothesis",
+      "typed oracle",
+      "decision",
+      "belief",
+      "route identity",
+      "raw probe",
+      "raw response",
+      "hash identifiers"
+    ]
+  },
+  "split_contract": {
+    "design_seeds": [
+      361,
+      367
+    ],
+    "seed_holdout": [
+      373
+    ],
+    "layout_blind_design": "north",
+    "layout_blind_holdout": "south",
+    "layout_blind_is_not_independent_implementation": true,
+    "fresh_target_required": true
+  },
+  "model_contract": {
+    "architecture": "token_presence_autoencoder_plus_two_means_kmeans",
+    "training_signal": "masked_visible_token_reconstruction_only",
+    "typed_oracle_before_decoder_forbidden": true,
+    "family_name_before_decoder_forbidden": true
+  },
+  "oracle_contract": {
+    "typed_oracle_after_proposal": true,
+    "negative_controls_required": true,
+    "evidence_hash_required": true
+  },
+  "ablation_contract": {
+    "shuffled_design_input_required": true,
+    "row_shuffle_is_diagnostic_only": true,
+    "tokenless_signal_ablation_required": true,
+    "tokenless_should_degrade_to_abstain": true
+  },
+  "gate": {
+    "minimum_seed_recall": 0.8,
+    "false_accept_count": 0,
+    "unknown_family_strict_abstain": true,
+    "not_all_abstain": true,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "blocked",
+    "blocking_reasons": [
+      "unknown_family_strict_abstain"
+    ]
+  }
+}

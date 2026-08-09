@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="面向 JavaScript 黑盒规则归纳与漏洞发现的 AI 科研工作台" />
+  <title>SIFT · AI Rule Security Research</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div><strong>SIFT</strong><small>AI RESEARCH LAB</small></div>
+      </div>
+
+      <nav class="nav" aria-label="研究工作区">
+        <p>WORKSPACE</p>
+        <button class="nav-item active" data-view="overview">
+          <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-16v4h6V4h-6Z"/></svg>
+          研究总览
+        </button>
+        <button class="nav-item" data-view="corpus">
+          <svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>
+          缺陷语料库 <span class="nav-count">4</span>
+        </button>
+        <button class="nav-item" data-view="training">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16v10H4zM8 3v4m8-4v4M8 17v4m8-4v4M1 10h3m16 0h3M1 14h3m16 0h3M9 11h6v2H9z"/></svg>
+          模型训练
+        </button>
+        <button class="nav-item" data-view="runs">
+          <svg viewBox="0 0 24 24"><path d="m5 19 4-4 3 2 7-8M15 9h4v4"/></svg>
+          实验运行
+        </button>
+        <button class="nav-item" data-view="hypotheses">
+          <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M8.5 14.5A6 6 0 1 1 16 13c-.8.6-1.3 1.4-1.5 2.5h-5c-.1-.4-.4-.7-1-1Z"/></svg>
+          规则假设
+        </button>
+        <button class="nav-item" data-view="evidence">
+          <svg viewBox="0 0 24 24"><path d="m12 3 8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7l8-4Zm-3 9 2 2 4-5"/></svg>
+          漏洞证据
+        </button>
+      </nav>
+
+      <div class="sidebar-note">
+        <span class="pulse-dot"></span>
+        <div><strong id="api-status">正在连接研究节点</strong><small>LOCAL COMPUTE</small></div>
+      </div>
+      <div class="researcher">
+        <div class="avatar">AI</div>
+        <div><strong>Principal Researcher</strong><small>JS Rule Induction</small></div>
+        <button aria-label="更多设置">···</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <div class="breadcrumbs"><span>PROJECTS</span><b>/</b><span>JS-RULE-SEC</span><b>/</b><strong id="view-breadcrumb">OVERVIEW</strong></div>
+          <h1 id="view-title">黑盒规则归纳与漏洞筛查</h1>
+          <p id="view-subtitle">用可控的 JavaScript 缺陷程序研究大模型的规则抽象、主动实验与反例发现能力。</p>
+        </div>
+        <div class="top-actions">
+          <span class="protocol-tag">PROTOCOL v0.3</span>
+          <button class="icon-button" id="export-report" title="导出当前报告">
+            <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/></svg>
+          </button>
+          <button class="primary-button" id="run-protocol" disabled>
+            <svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></svg>
+            运行研究协议
+          </button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-overview">
+        <div class="metric-grid">
+          <article class="metric-card">
+            <div class="metric-icon cyan"><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg></div>
+            <div><span>当前观测</span><strong id="metric-observations">0</strong><small id="metric-budget">预算 0 / 18 queries</small></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon violet"><svg viewBox="0 0 24 24"><path d="M5 5h14v14H5zM8 9h8M8 13h5"/></svg></div>
+            <div><span>候选假设</span><strong id="metric-candidates">0</strong><small id="metric-accuracy">等待程序归纳</small></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon amber"><svg viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3Zm0 6v5m0 3v1"/></svg></div>
+            <div><span>风险判定</span><strong id="metric-risk">待分析</strong><small id="metric-cwe">—</small></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon green"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm-4-9 3 3 5-6"/></svg></div>
+            <div><span>证据置信度</span><strong id="metric-confidence">—</strong><small id="metric-closure">尚未形成闭环</small></div>
+          </article>
+        </div>
+
+        <div class="overview-grid">
+          <section class="card objective-card">
+            <div class="card-header">
+              <div><span class="kicker">RESEARCH OBJECTIVE</span><h2>实验对象与核心假设</h2></div>
+              <select id="scenario-select" aria-label="选择缺陷语料"></select>
+            </div>
+            <div class="scenario-title-row">
+              <div><span class="severity" id="scenario-severity">—</span><span class="category" id="scenario-category">选择语料</span></div>
+              <span class="mono" id="scenario-cwe">—</span>
+            </div>
+            <h3 id="scenario-name">正在载入实验语料…</h3>
+            <p id="scenario-description" class="lead"></p>
+            <div class="research-question">
+              <span>研究问题</span>
+              <p id="scenario-question">—</p>
+            </div>
+            <div class="hypothesis-row">
+              <div class="hypothesis-mark">H1</div>
+              <div><span>可证伪假设</span><p id="scenario-hypothesis">—</p></div>
+            </div>
+            <div class="tag-row" id="scenario-tags"></div>
+          </section>
+
+          <section class="card run-card">
+            <div class="card-header">
+              <div><span class="kicker">LIVE EXPERIMENT</span><h2>当前实验运行</h2></div>
+              <span class="run-status idle" id="run-status"><i></i> IDLE</span>
+            </div>
+            <div class="run-id"><span>RUN ID</span><code id="metric-session">未建立</code></div>
+            <div class="pipeline" id="pipeline">
+              <div class="pipeline-step" data-step="sample"><i>01</i><div><strong>设计探针</strong><small>边界 + 对抗输入</small></div><span></span></div>
+              <div class="pipeline-step" data-step="induce"><i>02</i><div><strong>归纳规则</strong><small>Beam + MDL</small></div><span></span></div>
+              <div class="pipeline-step" data-step="stress"><i>03</i><div><strong>筛查反例</strong><small>最大候选分歧</small></div><span></span></div>
+              <div class="pipeline-step" data-step="close"><i>04</i><div><strong>评估闭环</strong><small>覆盖 + 证据</small></div><span></span></div>
+            </div>
+            <div class="progress-block">
+              <div><span>协议进度</span><strong id="protocol-progress-label">0 / 4</strong></div>
+              <div class="progress-track"><span id="protocol-progress"></span></div>
+            </div>
+            <p class="run-message" id="run-message">选择语料后运行协议。系统会先生成覆盖边界的初始探针，再由候选分歧驱动后续实验。</p>
+          </section>
+        </div>
+
+        <section class="card sieve-card">
+          <div class="card-header">
+            <div><span class="kicker">AI SIEVE ANALYSIS</span><h2>多层筛米式漏洞分析</h2></div>
+            <div class="legend"><span><i class="dot pass"></i>通过</span><span><i class="dot active"></i>分析中</span><span><i class="dot pending"></i>待验证</span></div>
+          </div>
+          <div class="sieve-flow">
+            <article class="sieve-stage" id="sieve-observe">
+              <div class="stage-top"><span>01</span><i></i></div>
+              <strong>行为观测层</strong><p>从 JS 黑盒收集输入、输出与回合轨迹。</p>
+              <div class="stage-value"><b id="sieve-observation-count">0</b><span>observations</span></div>
+              <div class="mini-bars" id="coverage-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </article>
+            <div class="flow-arrow"><span>筛除不一致</span><svg viewBox="0 0 40 18"><path d="M1 9h34m-6-6 6 6-6 6"/></svg></div>
+            <article class="sieve-stage" id="sieve-induce">
+              <div class="stage-top"><span>02</span><i></i></div>
+              <strong>规则归纳层</strong><p>将行为压缩为可解释的 Rule IR 假设。</p>
+              <div class="stage-value"><b id="sieve-candidate-count">—</b><span>hypotheses</span></div>
+              <div class="candidate-funnel"><span></span><span></span><span></span></div>
+            </article>
+            <div class="flow-arrow"><span>筛除等价</span><svg viewBox="0 0 40 18"><path d="M1 9h34m-6-6 6 6-6 6"/></svg></div>
+            <article class="sieve-stage" id="sieve-stress">
+              <div class="stage-top"><span>03</span><i></i></div>
+              <strong>对抗反例层</strong><p>搜索候选预测分歧最大的输入。</p>
+              <div class="stage-value"><b id="sieve-disagreement">—</b><span>max entropy</span></div>
+              <div class="split-meter"><span></span></div>
+            </article>
+            <div class="flow-arrow"><span>沉淀证据</span><svg viewBox="0 0 40 18"><path d="M1 9h34m-6-6 6 6-6 6"/></svg></div>
+            <article class="sieve-stage final-stage" id="sieve-verdict">
+              <div class="stage-top"><span>04</span><i></i></div>
+              <strong>漏洞证据层</strong><p>综合边界覆盖、反例与闭环稳定性。</p>
+              <div class="stage-value"><b id="sieve-closure">—</b><span>closure score</span></div>
+              <div class="verdict-chip" id="verdict-chip">WAITING FOR EVIDENCE</div>
+            </article>
+          </div>
+        </section>
+
+        <div class="analysis-grid">
+          <section class="card abstraction-card">
+            <div class="card-header">
+              <div><span class="kicker">ABSTRACTION TRACE</span><h2>从缺陷代码到游戏规则</h2></div>
+              <div class="tabs" role="tablist">
+                <button class="tab active" data-tab="source">JS SOURCE</button>
+                <button class="tab" data-tab="game">GAME RULE</button>
+                <button class="tab" data-tab="ir">RULE IR</button>
+              </div>
+            </div>
+            <div class="tab-panel active" id="tab-source">
+              <div class="code-window"><div class="code-toolbar"><span><i></i><i></i><i></i></span><code>target.js</code><b>BLACK BOX</b></div><pre><code id="js-source"></code></pre></div>
+              <div class="intent-diff"><span>EXPECTED INTENT</span><code id="intended-rule">—</code></div>
+            </div>
+            <div class="tab-panel" id="tab-game">
+              <div class="game-rule-block"><span>SEMANTIC ABSTRACTION</span><blockquote id="game-rule">—</blockquote><p>这层不参与执行；它把业务语义转写为模型可讨论、可比较、可生成实验的研究表述。</p></div>
+            </div>
+            <div class="tab-panel" id="tab-ir">
+              <div class="code-window"><div class="code-toolbar"><span><i></i><i></i><i></i></span><code>candidate.rule.json</code><b>EXECUTABLE IR</b></div><pre><code id="rule-ir-preview">等待候选规则…</code></pre></div>
+            </div>
+          </section>
+
+          <section class="card evidence-card">
+            <div class="card-header"><div><span class="kicker">EVIDENCE LEDGER</span><h2>当前证据账本</h2></div><span class="evidence-count" id="evidence-count">0 ITEMS</span></div>
+            <div id="evidence-list" class="evidence-list">
+              <div class="empty-evidence"><svg viewBox="0 0 24 24"><path d="M7 3h10v4h3v14H4V7h3V3Zm2 0v6h6V3M8 14h8M8 17h5"/></svg><strong>尚无实验结论</strong><p>运行研究协议后，这里会记录最小反例、候选分歧与闭环限制。</p></div>
+            </div>
+          </section>
+        </div>
+
+        <section class="card hypothesis-card">
+          <div class="card-header">
+            <div><span class="kicker">HYPOTHESIS RANKING</span><h2>可解释候选规则</h2></div>
+            <div class="compact-controls"><label>DEPTH <input id="max-depth" type="number" value="3" min="1" max="5" /></label><label>BEAM <input id="beam-width" type="number" value="180" min="10" max="500" /></label><label>HISTORY <input id="history-depth" type="number" value="1" min="0" max="3" /></label></div>
+          </div>
+          <div class="table-wrap">
+            <table><thead><tr><th>RANK</th><th>RULE HYPOTHESIS</th><th>FIT</th><th>COMPLEXITY</th><th>MDL SCORE</th><th>STATUS</th></tr></thead><tbody id="candidate-table"><tr><td colspan="6" class="empty-row">等待实验数据</td></tr></tbody></table>
+          </div>
+        </section>
+
+        <details class="card advanced-card">
+          <summary><div><span class="kicker">MANUAL WORKBENCH</span><strong>高级实验控制台</strong></div><span>展开</span></summary>
+          <div class="advanced-grid">
+            <section><h3>单次黑盒探针</h3><div id="field-form" class="field-grid"><p class="muted">请先建立实验。</p></div><div class="button-row"><button id="probe" class="secondary-button" disabled>调用 Oracle</button><button id="manual-true" class="secondary-button" disabled>标注 TRUE</button><button id="manual-false" class="secondary-button" disabled>标注 FALSE</button></div><div id="oracle-result" class="console-message">等待探针。</div></section>
+            <section><h3>闭环参数</h3><div class="field-grid two"><label>枚举上限<input id="closure-max-cases" type="number" value="5000" /></label><label>覆盖阈值<input id="coverage-threshold" type="number" value="0.9" step="0.01" /></label><label>目标模式<select id="goal-mode"><option value="either">goal / output</option><option value="observation_goal">goal only</option><option value="output_true">output only</option></select></label><label>Episode<input id="episode-id" value="default" /></label><label>Step<input id="episode-step" type="number" /></label><label class="check-field"><input id="goal-reached" type="checkbox" />GOAL REACHED</label></div><textarea id="state-after-json" class="hidden" aria-hidden="true"></textarea><div class="button-row"><button id="run-search" class="secondary-button" disabled>重新归纳</button><button id="suggest-query" class="secondary-button" disabled>最大分歧探针</button><button id="run-closure" class="secondary-button" disabled>重新闭环</button></div><div id="suggestion" class="console-message">尚未生成主动查询。</div></section>
+            <section class="full-span"><h3>实验轨迹</h3><div class="table-wrap compact-table"><table><thead><tr><th>#</th><th>EPISODE</th><th>INPUT ENVELOPE</th><th>OUTPUT</th><th>SOURCE</th></tr></thead><tbody id="observation-table"><tr><td colspan="5" class="empty-row">暂无观测</td></tr></tbody></table></div></section>
+          </div>
+        </details>
+
+        <textarea id="custom-json" class="hidden"></textarea><textarea id="import-json" class="hidden"></textarea><textarea id="rule-json" class="hidden"></textarea>
+        <button id="toggle-custom" class="hidden"></button><button id="create-custom" class="hidden"></button><button id="import-observations" class="hidden"></button><button id="validate-rule" class="hidden"></button>
+        <div id="custom-editor" class="hidden"></div><div id="validation-result" class="hidden"></div><div id="closure-summary" class="hidden"></div><div id="closure-proof" class="hidden"></div><pre id="closure-json" class="hidden"></pre>
+        <span id="mode-badge" class="hidden"></span><span id="closure-badge" class="hidden"></span><span id="closure-score" class="hidden"></span><span id="closure-classes" class="hidden"></span><span id="closure-disagreement" class="hidden"></span><span id="closure-coverage" class="hidden"></span>
+      </section>
+
+      <section class="view training-view" id="view-training">
+        <div class="training-hero card">
+          <div>
+            <span class="kicker">SPECIALIZED MODEL PROGRAM</span>
+            <div class="model-title"><h2>SIFT-Seed-20M</h2><span>RECOMMENDED START</span></div>
+            <p>先用小型 GPT-2 式 decoder 验证方法，不盲目堆参数。4K 当前上下文承担工作记忆，外部 Episode 与 Rule IR 存储承担长期记忆；强化学习负责学习何时写入、检索、合并和遗忘。</p>
+          </div>
+          <div class="model-stat-grid">
+            <div><strong>20.5M</strong><span>TOTAL PARAMS</span></div><div><strong>20.5M</strong><span>ACTIVE / TOKEN</span></div><div><strong>DENSE</strong><span>FIRST BASELINE</span></div><div><strong>4K</strong><span>WORKING CONTEXT</span></div>
+          </div>
+        </div>
+
+        <section class="card architecture-card">
+          <div class="card-header"><div><span class="kicker">MODEL ARCHITECTURE</span><h2>小型 GPT-2 主干 + 外部长期记忆</h2></div><span class="architecture-note">8 LAYERS · 6 HEADS · d=384</span></div>
+          <div class="architecture-flow">
+            <div class="arch-node input-node"><span>MULTIMODAL TOKENS</span><strong>&lt;JS&gt; &lt;GAME&gt; &lt;TRACE&gt;</strong><small>&lt;QUERY&gt; &lt;RULE_IR&gt; &lt;EVIDENCE&gt;</small></div>
+            <div class="arch-link"><i></i><b>shared representation</b></div>
+            <div class="arch-node trunk-node"><span>SHARED DECODER</span><strong>8 Dense Blocks</strong><small>causal attention + trace alignment</small></div>
+            <div class="arch-link"><i></i><b>memory policy</b></div>
+            <div class="arch-node moe-node"><span>LONG-TERM MEMORY</span><strong>Episode + Rule IR</strong><small>structured filter + embedding Top-K</small></div>
+            <div class="arch-link"><i></i><b>retrieved facts</b></div>
+            <div class="arch-node output-node"><span>FOUR HEADS</span><strong>Rule · Behavior · Probe</strong><small>+ vulnerability verifier</small></div>
+          </div>
+          <div class="expert-grid">
+            <article><i>01</i><strong>JS 控制流</strong><span>syntax / AST / branches</span></article>
+            <article><i>02</i><strong>数值边界</strong><span>threshold / off-by-one</span></article>
+            <article><i>03</i><strong>类型强制</strong><span>truthiness / coercion</span></article>
+            <article><i>04</i><strong>字符串与 URL</strong><span>regex / substring / host</span></article>
+            <article><i>05</i><strong>Episode 记忆</strong><span>persistent traces / replay</span></article>
+            <article><i>06</i><strong>规则语义记忆</strong><span>versioned Rule IR / evidence</span></article>
+            <article><i>07</i><strong>反例搜索</strong><span>entropy / active query</span></article>
+            <article><i>08</i><strong>Rule IR 组合</strong><span>executable hypothesis</span></article>
+          </div>
+        </section>
+
+        <section class="card memory-experiment-card">
+          <div class="card-header"><div><span class="kicker">LIVE MEMORY ABLATION · 32 EPISODES · DELAY 6</span><h2>长期记忆消融实验</h2></div><span class="architecture-note">REPRODUCED LOCALLY</span></div>
+          <div class="memory-result-grid">
+            <article><div><span>NO MEMORY</span><b>BASELINE</b></div><strong>75.0%</strong><p>只看当前动作，无法区分相同 commit 背后的历史条件。</p><small>0 memory slots · 0.017s</small></article>
+            <article><div><span>RAW CONTEXT</span><b>WORKING MEMORY</b></div><strong>100%</strong><p>保留完整前 6 步能恢复规则，但 token 与计算成本随距离增长。</p><small>6 history slots · 0.644s</small></article>
+            <article class="winner"><div><span>EPISODIC RETRIEVAL</span><b>LONG-TERM MEMORY</b></div><strong>100%</strong><p>只检索“曾验证”这一关键事实，用一个结构化记忆槽恢复同一规则。</p><small>1 memory slot · 0.035s</small></article>
+          </div>
+          <div class="memory-conclusion"><b>结论</b><span>长上下文是工作记忆，不等于长期记忆。持久化检索在本实验中以约 1/6 的可见槽位、约 1/18 的搜索时间达到相同准确率。</span></div>
+        </section>
+
+        <section class="card curriculum-card">
+          <div class="card-header"><div><span class="kicker">TRAINING CURRICULUM</span><h2>四阶段专用训练课程</h2></div><span class="architecture-note">FAMILY-HOLDOUT EVALUATION</span></div>
+          <div class="curriculum-flow">
+            <article><div><span>P0</span><b>15–30M TOKENS</b></div><h3>合成规则预训练</h3><p>5,000 个自动变异 JS 程序、轨迹与 Rule IR；全部由执行器验真，不需要人工逐条编写。</p><ul><li>Causal LM</li><li>轨迹补全</li><li>JS → Rule IR 去噪</li></ul></article>
+            <article><div><span>P1</span><b>60K EPISODES</b></div><h3>多任务监督微调</h3><p>联合训练语义抽象、行为预测、规则归纳、下一探针和证据不足拒答。</p><ul><li>Game abstraction</li><li>Behavior prediction</li><li>Calibrated abstention</li></ul></article>
+            <article><div><span>P2</span><b>20K RUNS</b></div><h3>主动实验强化学习</h3><p>模型在 Oracle 沙箱主动提问，以信息增益、查询效率和可复现反例获得奖励。</p><ul><li>Query policy</li><li>Minimal counterexample</li><li>False-alarm penalty</li></ul></article>
+            <article><div><span>P3</span><b>10K SESSIONS</b></div><h3>长期记忆策略训练</h3><p>跨 Episode 学习写入、检索、合并与遗忘，惩罚无关检索和版本过期记忆。</p><ul><li>Memory write policy</li><li>Future utility reward</li><li>Staleness penalty</li></ul></article>
+          </div>
+        </section>
+
+        <div class="training-bottom-grid">
+          <section class="card reward-card">
+            <div class="card-header"><div><span class="kicker">ACTIVE RL OBJECTIVE</span><h2>奖励只承认可执行证据</h2></div></div>
+            <code>R = 1.8 ΔH + 2.4 valid_counterexample + 1.2 rule_fidelity + 0.8 future_memory_utility<br>− 0.08 queries − 0.03 retrieved_tokens − 1.0 stale_memory − 2.0 false_alarm</code>
+            <div class="reward-legend"><span><i class="positive"></i>假设熵下降</span><span><i class="positive"></i>未来记忆收益</span><span><i class="negative"></i>检索成本</span><span><i class="negative"></i>过期记忆 / 误报</span></div>
+          </section>
+          <section class="card evaluation-card">
+            <div class="card-header"><div><span class="kicker">SCIENTIFIC VALIDITY</span><h2>评估与消融门槛</h2></div></div>
+            <div class="evaluation-list"><div><b>01</b><span>按漏洞族切分，禁止近重复模板泄漏</span></div><div><b>02</b><span>Counterexample@K 与查询中位数并列主指标</span></div><div><b>03</b><span>Dense vs MoE、随机 vs 主动策略必须消融</span></div><div><b>04</b><span>报告误报率、ECE 与证据不足拒答率</span></div></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view placeholder-view" id="view-corpus"><div class="placeholder-card"><span>DEFECT CORPUS</span><h2>缺陷语料库</h2><p>当前语料已聚焦 truthiness、开放重定向、边界漂移与序列重放四类可控 JavaScript 缺陷。</p><button class="primary-button back-overview">返回研究总览</button></div></section>
+      <section class="view placeholder-view" id="view-runs"><div class="placeholder-card"><span>EXPERIMENT RUNS</span><h2>实验运行记录</h2><p>当前原型把单次 Run 保存在内存会话中；后续可接入持久化数据库与跨模型对照实验。</p><button class="primary-button back-overview">返回研究总览</button></div></section>
+      <section class="view placeholder-view" id="view-hypotheses"><div class="placeholder-card"><span>RULE HYPOTHESES</span><h2>规则假设空间</h2><p>候选由 Rule IR 表达，并按拟合率、结构复杂度与 MDL 分数排序。</p><button class="primary-button back-overview">返回研究总览</button></div></section>
+      <section class="view placeholder-view" id="view-evidence"><div class="placeholder-card"><span>VULNERABILITY EVIDENCE</span><h2>漏洞证据仓</h2><p>证据由可复现反例、行为等价类、覆盖率与闭环条件共同组成。</p><button class="primary-button back-overview">返回研究总览</button></div></section>
+    </main>
+  </div>
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

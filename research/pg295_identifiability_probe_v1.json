@@ -1,0 +1,36 @@
+{
+  "schema_version": "pg295-identifiability-probe-v1",
+  "purpose": "证明缺失关键观测时不能从相同可见上下文唯一推出最终 safe_to_send",
+  "context_tokens": [
+    "[BOS]",
+    "phase=diagnose",
+    "method=POST",
+    "typed_available=unknown",
+    "feedback_state=unknown",
+    "replay_ready=unknown",
+    "evidence_present=unknown",
+    "[EOS]"
+  ],
+  "hidden_worlds": [
+    {
+      "world_id": "w0",
+      "hidden_safe_to_send": false,
+      "required_question": "ask_typed_availability"
+    },
+    {
+      "world_id": "w1",
+      "hidden_safe_to_send": true,
+      "required_question": "ask_typed_availability"
+    }
+  ],
+  "identifiability": {
+    "visible_context_same": true,
+    "hidden_target_differs": true,
+    "final_answer_identifiable": false,
+    "question_identifiable": true,
+    "training_eligible": false,
+    "memory_promotion_allowed": false,
+    "wire_emission_allowed": false
+  },
+  "interpretation": "若没有 typed availability/feedback/evidence 等关键观测，任何直接输出 safe_to_send=1 或 0 都是猜测；可泛化的下一 token 应先组装缺口问题，再等待新观测。"
+}

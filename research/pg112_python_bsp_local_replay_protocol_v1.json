@@ -1,0 +1,49 @@
+{
+  "protocol_id": "pg-pk-112-python-bsp-local-replay-v1",
+  "title": "Python BSP v3 本地 typed replay bridge",
+  "authorization": {
+    "scope": "workspace_local_only",
+    "transport": "in_process_asgi_loopback",
+    "external_network": false,
+    "raw_values_persisted": false
+  },
+  "matrix": {
+    "target_instance_seeds": [
+      101,
+      202,
+      303
+    ],
+    "surface_slot_count": 4,
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_reset_per_step": true
+  },
+  "causal_contract": [
+    "target surface slot",
+    "safe abstract probe",
+    "bounded observation diff",
+    "generic belief update",
+    "next action",
+    "typed oracle target-only",
+    "Rule IR/evaluation decision"
+  ],
+  "positive_gate": [
+    "GET/POST repeat",
+    "matched negative control",
+    "fresh reset",
+    "valid evidence SHA-256",
+    "typed oracle after probe"
+  ],
+  "unknown_policy": "withheld typed oracle must abstain even when an anonymous candidate signal exists",
+  "model_contract": {
+    "family_labels": false,
+    "typed_oracle_in_features": false,
+    "raw_request_response": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "cross_implementation_status": "not_claimed; PG-51 Docker remains a separate implementation track",
+  "status": "run_completed_python_local_replay_no_promotion"
+}

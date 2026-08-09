@@ -1,0 +1,83 @@
+{
+  "protocol_id": "pg-pk-127-key-feature-assembly-v1",
+  "schema_version": "pg127-key-feature-assembly-protocol-v1",
+  "objective": "验证从失败签名中动态加权关键特征，能否在新 seed 的六步 shadow→confirm 迷宫中组装下一安全动作。",
+  "training": {
+    "pg125_fresh_train_seeds": [
+      12511,
+      12513,
+      12515
+    ],
+    "pg127_long_train_seeds": [
+      12711,
+      12713,
+      12715
+    ],
+    "pg127_long_dev_seeds": [
+      12712,
+      12714,
+      12716
+    ],
+    "pg127_long_holdout_seeds": [
+      12701,
+      12703,
+      12705
+    ],
+    "holdout_never_in_training": true
+  },
+  "input_contract": {
+    "failure_signature_only": true,
+    "feature_dim": 18,
+    "masked_fields": [
+      "positive_authority",
+      "typed_available",
+      "evidence_hash",
+      "raw_probe",
+      "raw_response",
+      "target_id",
+      "family"
+    ],
+    "key_groups": [
+      "failure_kind",
+      "failed_gate",
+      "candidate_signal",
+      "observed_method",
+      "methods_seen",
+      "probe_budget"
+    ]
+  },
+  "evaluation": {
+    "required_methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_reset_per_action": true,
+    "six_step_long_horizon": true,
+    "positive_and_negative_surfaces": true,
+    "unknown_oracle_abstain": true,
+    "weighted_vs_uniform_ablation": true,
+    "zero_negative_false_stop": true,
+    "gates": {
+      "fresh_checkpoint": true,
+      "same_capacity_ablation": true,
+      "assembly_feature_dim": true,
+      "seed_disjoint": true,
+      "get_post_balanced": true,
+      "holdout_not_training": true,
+      "six_step_replay_accepted": true,
+      "full_accuracy_floor": true,
+      "full_compliance_floor": true,
+      "all_surface_accuracy_floor": true,
+      "budget_accuracy_floor": true,
+      "negative_false_stop_zero": true,
+      "full_non_abstain_nonzero": true,
+      "weighted_ablation_changes_behavior": true,
+      "zero_ablation_changes_behavior": true,
+      "memory_promotion_forbidden": true
+    }
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

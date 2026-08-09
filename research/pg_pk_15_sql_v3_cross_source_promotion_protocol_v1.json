@@ -1,0 +1,140 @@
+{
+  "protocol_id": "pg-pk-15-sql-v3-cross-source-promotion-v1",
+  "surfaces": [
+    "/search?q=...",
+    "renamed_sql_channel_modes",
+    "changed_json_plain_headers"
+  ],
+  "targets": [
+    "alpha:8809",
+    "beta:8810",
+    "gamma:8811"
+  ],
+  "seeds": [
+    20410101,
+    20410107,
+    20410113
+  ],
+  "budget": {
+    "max_requests_per_target_seed": 15,
+    "static_specs_per_target_seed": 15
+  },
+  "positive_gate": {
+    "oracle": "synthetic_sql_ast_differential_v1",
+    "pair": [
+      "plain",
+      "url_percent"
+    ],
+    "source_hash": true,
+    "evidence_hash": true
+  },
+  "active_policy": {
+    "decoder_abstain_fallback": true,
+    "shared_router_positive_authority": false,
+    "oracle_only_positive": true
+  },
+  "promotion": {
+    "local_v3": {
+      "schema_version": "sift-memory-promotion-gate-v1",
+      "rule_key": "injection::synthetic_sql_channel",
+      "status": "quarantine",
+      "promote": false,
+      "reasons": [
+        "insufficient_distinct_datasets"
+      ],
+      "requirements": {
+        "min_distinct_datasets": 3,
+        "min_sampling_seeds_per_dataset": 2,
+        "min_target_instances": 3,
+        "min_observations_per_dataset": 2,
+        "min_accepted_per_dataset": 1,
+        "max_false_positive_rate": 0.0,
+        "require_evidence_hash": true,
+        "require_local_only": true,
+        "require_oracle_revalidation": true
+      },
+      "summary": {
+        "evaluation_count": 126,
+        "distinct_dataset_count": 1,
+        "distinct_target_instance_count": 9,
+        "distinct_evidence_hash_count": 126
+      },
+      "per_dataset": {
+        "sql_differential_fixture_v3": {
+          "observation_count": 126,
+          "sampling_seed_count": 3,
+          "target_instance_count": 9,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 108,
+          "reasons": []
+        }
+      }
+    },
+    "cross_source_v1_v2_v3": {
+      "schema_version": "sift-memory-promotion-gate-v1",
+      "rule_key": "injection::synthetic_sql_channel",
+      "status": "promote",
+      "promote": true,
+      "reasons": [],
+      "requirements": {
+        "min_distinct_datasets": 3,
+        "min_sampling_seeds_per_dataset": 2,
+        "min_target_instances": 3,
+        "min_observations_per_dataset": 2,
+        "min_accepted_per_dataset": 1,
+        "max_false_positive_rate": 0.0,
+        "require_evidence_hash": true,
+        "require_local_only": true,
+        "require_oracle_revalidation": true
+      },
+      "summary": {
+        "evaluation_count": 249,
+        "distinct_dataset_count": 3,
+        "distinct_target_instance_count": 19,
+        "distinct_evidence_hash_count": 249
+      },
+      "per_dataset": {
+        "sql_differential_fixture_v1": {
+          "observation_count": 15,
+          "sampling_seed_count": 2,
+          "target_instance_count": 1,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 12,
+          "reasons": []
+        },
+        "sql_differential_fixture_v2": {
+          "observation_count": 108,
+          "sampling_seed_count": 3,
+          "target_instance_count": 9,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 90,
+          "reasons": []
+        },
+        "sql_differential_fixture_v3": {
+          "observation_count": 126,
+          "sampling_seed_count": 3,
+          "target_instance_count": 9,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "accepted_count": 108,
+          "reasons": []
+        }
+      }
+    }
+  },
+  "preserved_pre_fix_failure": "research\\pg_pk_15_sql_v3_pre_fix_quarantine_v1.json",
+  "safety": {
+    "local_only": true,
+    "read_only_get": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_touched": false,
+    "real_sleep_performed": false,
+    "state_mutated": false,
+    "raw_body_stored": false,
+    "shared_router_positive_authority": false
+  }
+}

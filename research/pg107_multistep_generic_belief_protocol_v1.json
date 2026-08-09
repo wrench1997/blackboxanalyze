@@ -1,0 +1,33 @@
+{
+  "protocol_id": "pg-pk-107-multistep-generic-belief-v1",
+  "schema_version": "pg107-multistep-generic-belief-protocol-v1",
+  "purpose": "family-free multi-step feedback belief and fail-closed scheduling",
+  "posterior_states": [
+    "effect",
+    "input_only",
+    "no_effect",
+    "unknown"
+  ],
+  "input_contract": {
+    "oracle_visible": false,
+    "family_visible": false,
+    "raw_values_visible": false
+  },
+  "action_contract": {
+    "effect_present": "replay_other_method_then_await_typed_oracle",
+    "input_only_anomaly": "repeat_matched_negative_other_method",
+    "no_effect": "probe_other_method_or_abstain",
+    "invalid_binding": "abstain"
+  },
+  "gate": {
+    "multi_step_episode_rate_min": 0.8,
+    "confirmed_positive_without_oracle": 0,
+    "decoy_confirm_count": 0,
+    "family_names_in_posterior": false,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "passed_generic_multistep_belief_diagnostic",
+    "blocking_reasons": []
+  }
+}

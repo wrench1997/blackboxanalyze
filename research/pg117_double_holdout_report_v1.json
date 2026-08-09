@@ -1,0 +1,497 @@
+{
+  "protocol_id": "pg-pk-117-double-implementation-encoding-holdout-v1",
+  "schema_version": "pg117-double-holdout-report-v1",
+  "status": "completed_pg117_double_holdout_evaluation",
+  "scope": {
+    "model": "frozen_pg116_small_rule_ir_decision_mlp",
+    "checkpoint": "artifacts\\pg116-multisource-rule-ir-decoder-v1\\model.pt",
+    "checkpoint_schema": "pg116-small-rule-ir-decoder-v1",
+    "device": "cpu_evaluation",
+    "real_vulnerability_scanner_claim_allowed": false
+  },
+  "collection": {
+    "target_implementation": "pg117_gamma_independent_target",
+    "target_instance_count": 3,
+    "target_seeds": [
+      11701,
+      11703,
+      11705
+    ],
+    "episode_count": 12,
+    "step_count": 48,
+    "get_step_count": 24,
+    "post_step_count": 24,
+    "encoding_chain": [
+      "url_percent",
+      "html_entity"
+    ],
+    "fresh_reset_per_step": true,
+    "evidence_hash_valid": true
+  },
+  "evaluation": {
+    "step_metrics": {
+      "count": 48,
+      "accuracy": 0.895833,
+      "macro_f1": 0.633854,
+      "per_class": {
+        "confirmed_positive": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "confirmed_negative": {
+          "true_positive": 31,
+          "false_positive": 0,
+          "false_negative": 2,
+          "precision": 1.0,
+          "recall": 0.939394,
+          "f1": 0.96875
+        },
+        "candidate": {
+          "true_positive": 9,
+          "false_positive": 2,
+          "false_negative": 0,
+          "precision": 0.818182,
+          "recall": 1.0,
+          "f1": 0.9
+        },
+        "abstain": {
+          "true_positive": 3,
+          "false_positive": 3,
+          "false_negative": 0,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.666667
+        }
+      }
+    },
+    "final_episode_predictions": [
+      {
+        "episode_id": "pg117-gamma-11701-route",
+        "surface_kind": "route",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11701-route-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.679524
+          },
+          {
+            "step_id": "pg117-gamma-11701-route-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.977877
+          },
+          {
+            "step_id": "pg117-gamma-11701-route-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.989155
+          },
+          {
+            "step_id": "pg117-gamma-11701-route-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "abstain",
+            "confidence": 0.820773
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11701-decoy",
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11701-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995326
+          },
+          {
+            "step_id": "pg117-gamma-11701-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.998211
+          },
+          {
+            "step_id": "pg117-gamma-11701-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999805
+          },
+          {
+            "step_id": "pg117-gamma-11701-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996279
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11701-steady",
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11701-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999235
+          },
+          {
+            "step_id": "pg117-gamma-11701-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999169
+          },
+          {
+            "step_id": "pg117-gamma-11701-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999799
+          },
+          {
+            "step_id": "pg117-gamma-11701-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999775
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11701-blind",
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11701-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.98519
+          },
+          {
+            "step_id": "pg117-gamma-11701-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.995855
+          },
+          {
+            "step_id": "pg117-gamma-11701-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998371
+          },
+          {
+            "step_id": "pg117-gamma-11701-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "abstain",
+            "confidence": 0.962499
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11703-route",
+        "surface_kind": "route",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11703-route-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "candidate",
+            "confidence": 0.561873
+          },
+          {
+            "step_id": "pg117-gamma-11703-route-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.974371
+          },
+          {
+            "step_id": "pg117-gamma-11703-route-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.992244
+          },
+          {
+            "step_id": "pg117-gamma-11703-route-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "abstain",
+            "confidence": 0.820773
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11703-decoy",
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11703-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.995727
+          },
+          {
+            "step_id": "pg117-gamma-11703-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.997878
+          },
+          {
+            "step_id": "pg117-gamma-11703-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999808
+          },
+          {
+            "step_id": "pg117-gamma-11703-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.997637
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11703-steady",
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11703-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999258
+          },
+          {
+            "step_id": "pg117-gamma-11703-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999138
+          },
+          {
+            "step_id": "pg117-gamma-11703-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999802
+          },
+          {
+            "step_id": "pg117-gamma-11703-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999777
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11703-blind",
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11703-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.98725
+          },
+          {
+            "step_id": "pg117-gamma-11703-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.995659
+          },
+          {
+            "step_id": "pg117-gamma-11703-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998371
+          },
+          {
+            "step_id": "pg117-gamma-11703-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "abstain",
+            "confidence": 0.958748
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11705-route",
+        "surface_kind": "route",
+        "expected_final_decision": "confirmed_positive",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11705-route-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "candidate",
+            "confidence": 0.503999
+          },
+          {
+            "step_id": "pg117-gamma-11705-route-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.971883
+          },
+          {
+            "step_id": "pg117-gamma-11705-route-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.994213
+          },
+          {
+            "step_id": "pg117-gamma-11705-route-s04",
+            "expected_decision": "confirmed_positive",
+            "predicted_decision": "abstain",
+            "confidence": 0.869749
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11705-decoy",
+        "surface_kind": "decoy",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11705-decoy-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996004
+          },
+          {
+            "step_id": "pg117-gamma-11705-decoy-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.997357
+          },
+          {
+            "step_id": "pg117-gamma-11705-decoy-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.99972
+          },
+          {
+            "step_id": "pg117-gamma-11705-decoy-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.998219
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11705-steady",
+        "surface_kind": "steady",
+        "expected_final_decision": "confirmed_negative",
+        "predicted_final_decision": "confirmed_negative",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11705-steady-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999254
+          },
+          {
+            "step_id": "pg117-gamma-11705-steady-s02",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999229
+          },
+          {
+            "step_id": "pg117-gamma-11705-steady-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999798
+          },
+          {
+            "step_id": "pg117-gamma-11705-steady-s04",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.999787
+          }
+        ]
+      },
+      {
+        "episode_id": "pg117-gamma-11705-blind",
+        "surface_kind": "blind",
+        "expected_final_decision": "abstain",
+        "predicted_final_decision": "abstain",
+        "steps": [
+          {
+            "step_id": "pg117-gamma-11705-blind-s01",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.988033
+          },
+          {
+            "step_id": "pg117-gamma-11705-blind-s02",
+            "expected_decision": "candidate",
+            "predicted_decision": "candidate",
+            "confidence": 0.995268
+          },
+          {
+            "step_id": "pg117-gamma-11705-blind-s03",
+            "expected_decision": "confirmed_negative",
+            "predicted_decision": "confirmed_negative",
+            "confidence": 0.996458
+          },
+          {
+            "step_id": "pg117-gamma-11705-blind-s04",
+            "expected_decision": "abstain",
+            "predicted_decision": "abstain",
+            "confidence": 0.952032
+          }
+        ]
+      }
+    ],
+    "route_positive_recall": 0.0,
+    "decoy_false_accept_count": 0,
+    "steady_confirmed_negative_rate": 1.0,
+    "blind_oracle_abstain_rate": 1.0,
+    "mean_final_confidence": 0.948004
+  },
+  "checks": {
+    "independent_implementation": true,
+    "double_encoding_holdout": true,
+    "get_post_balanced": true,
+    "fresh_reset_per_step": true,
+    "evidence_hashes_valid": true,
+    "model_input_family_free": true,
+    "model_input_oracle_blind": true,
+    "no_raw_probe_strings": true,
+    "no_raw_response_bodies": true,
+    "decoy_false_accept_zero": true,
+    "blind_strict_abstain": true,
+    "positive_recall_nonzero": false,
+    "all_abstain_not_success": false
+  },
+  "diagnosis": {
+    "representation_gap": "location_changed is present in target evidence but is not encoded in PG-115/116 canonical model input",
+    "training_data_added": false,
+    "recommended_repair": "add a family-free transition-delta slot, collect double-encoding train/dev pairs, then replay this frozen gamma holdout"
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "blocked_pg117_holdout_capability_gate",
+    "reason": "PG-117 is a double implementation/encoding holdout; frozen failure must be repaired before any new memory promotion"
+  },
+  "source": {
+    "target": "05de9e70959e62b6e80732bab4be4abb66676b809f622d958a28755a86a026c5",
+    "bridge": "d02775921adfbb0dd23ca1a2c5427953084cb512a30345d1695d2dcbffa9f6db",
+    "runner": "38b8e33347285925083c9f1cf6bb9638664b5cedf1d6e01dcfb4f00aaa15379e",
+    "pg116_checkpoint": "4d6406184e594c10002b5d34fea31a50a02944880c0ac3a895ab7b49a3f43daf",
+    "pg116_report": "d03045b3ba75bb04d1fbe08569a9609dadc16d98b48e2f8f5dbef0b0d6c9368c"
+  },
+  "report_sha256": "174a1b1a7d1992b69cd9242c19b446420d9627dc9950ab3b3a0b36be837cd02c"
+}

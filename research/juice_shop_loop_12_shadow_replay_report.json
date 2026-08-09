@@ -1,0 +1,44 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-shadow-replay-report-v1",
+  "status": "engineering_intervention_confirmed_for_local_action_selection",
+  "source": "research\\juice_shop_loop_12_shadow_replay_runs.json",
+  "scope": "one shadow container plus one fresh evaluation container per policy",
+  "comparison": {
+    "response_projection": {
+      "shadow_probe_count": 5,
+      "evaluation_request_count": 1,
+      "selected_action": {
+        "method": "GET",
+        "path": "/metrics"
+      },
+      "selected_loop12_transitions": [
+        "exposedMetricsChallenge"
+      ],
+      "episode_success": true
+    },
+    "ablation_disabled_projection": {
+      "shadow_probe_count": 5,
+      "evaluation_request_count": 1,
+      "selected_action": {
+        "method": "GET",
+        "path": "/"
+      },
+      "selected_loop12_transitions": [],
+      "episode_success": false
+    }
+  },
+  "diagnosis": {
+    "state_isolation": "pass: shadow transitions were not present in the fresh evaluation container",
+    "response_grounding": "supported: only the response projection selected the Prometheus surface",
+    "rule_abstraction": "observability family was inferred from a target-neutral media type, not challenge metadata",
+    "neural_learning": "not claimed: this is a zero-parameter engineering/control intervention",
+    "cost": "five shadow observations plus one evaluation request per policy; shadow startup is engineering overhead"
+  },
+  "acceptance": {
+    "selected_action_ablation": true,
+    "fresh_environment_confirmation": true,
+    "neural_intervention_gate": false,
+    "full_catalog_generalization": false,
+    "accepted": true
+  }
+}

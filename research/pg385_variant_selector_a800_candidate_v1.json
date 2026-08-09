@@ -1,0 +1,180 @@
+{
+  "schema_version": "pg385-abstract-variant-selector-candidate-v1",
+  "status": "abstract_variant_selector_candidate_only",
+  "dataset": "research/pg385_filter_repair_adversarial_dataset_v1.json",
+  "dataset_sha256": "9441a726a9659386f8c3e8f5d161675a5f5412c17ce4322d8d410d2e11909835",
+  "data": {
+    "train_rows": 80,
+    "holdout_rows": 80,
+    "vocabulary_scope": "train_context_only",
+    "unknown_gaps": {
+      "unknown_context_count": 0,
+      "unknown_context_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "unknown_head_value_count": 0,
+      "unknown_head_values": {},
+      "blocked": false
+    },
+    "target_heads": [
+      "encoding_ref",
+      "probe_variant_ref",
+      "repair_action",
+      "next_action",
+      "question",
+      "safe_to_send"
+    ],
+    "raw_rows_loaded": false
+  },
+  "execution_gate": {
+    "timestamp": "2026-08-09T23:57:52.590739+08:00",
+    "weekend": true,
+    "explicit_remote_flag": true,
+    "cuda_visible_devices": "0",
+    "device": "cuda:0",
+    "passed": true
+  },
+  "training": {
+    "device": "cuda:0",
+    "seeds": [
+      38501,
+      38502,
+      38503
+    ],
+    "epochs": 20,
+    "microbatch": 16,
+    "config": {
+      "d_model": 512,
+      "n_heads": 8,
+      "n_layers": 8,
+      "experts": 8,
+      "expert_hidden": 2048,
+      "top_k": 2,
+      "dropout": 0.05,
+      "max_length": 128,
+      "initializer_range": 0.02
+    },
+    "vocabulary_size": 38,
+    "checkpoint_dir": "artifacts/pg385-variant-selector"
+  },
+  "candidates": [
+    {
+      "seed": 38501,
+      "train": {
+        "rows": 80,
+        "variant_exact": 1.0,
+        "encoding_exact": 1.0,
+        "probe_variant_exact": 1.0,
+        "repair_action_accuracy": 1.0,
+        "next_action_accuracy": 1.0,
+        "ask_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32
+      },
+      "holdout": {
+        "rows": 80,
+        "variant_exact": 1.0,
+        "encoding_exact": 1.0,
+        "probe_variant_exact": 1.0,
+        "repair_action_accuracy": 1.0,
+        "next_action_accuracy": 1.0,
+        "ask_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32
+      },
+      "checkpoint": {
+        "path": "artifacts/pg385-variant-selector/pg385_variant_seed_38501.pt",
+        "sha256": "9b507d0f73bdaad936d1eea5d8c4a1c56d113de218215f0b20c4b9e8d63af8c3"
+      }
+    },
+    {
+      "seed": 38502,
+      "train": {
+        "rows": 80,
+        "variant_exact": 1.0,
+        "encoding_exact": 1.0,
+        "probe_variant_exact": 1.0,
+        "repair_action_accuracy": 1.0,
+        "next_action_accuracy": 1.0,
+        "ask_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32
+      },
+      "holdout": {
+        "rows": 80,
+        "variant_exact": 1.0,
+        "encoding_exact": 1.0,
+        "probe_variant_exact": 1.0,
+        "repair_action_accuracy": 1.0,
+        "next_action_accuracy": 1.0,
+        "ask_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32
+      },
+      "checkpoint": {
+        "path": "artifacts/pg385-variant-selector/pg385_variant_seed_38502.pt",
+        "sha256": "b8de6162ba281c2331f33e104e400c7db748e0b6a32f67b8b948b705d75a73e5"
+      }
+    },
+    {
+      "seed": 38503,
+      "train": {
+        "rows": 80,
+        "variant_exact": 1.0,
+        "encoding_exact": 1.0,
+        "probe_variant_exact": 1.0,
+        "repair_action_accuracy": 1.0,
+        "next_action_accuracy": 1.0,
+        "ask_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32
+      },
+      "holdout": {
+        "rows": 80,
+        "variant_exact": 1.0,
+        "encoding_exact": 1.0,
+        "probe_variant_exact": 1.0,
+        "repair_action_accuracy": 1.0,
+        "next_action_accuracy": 1.0,
+        "ask_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 32
+      },
+      "checkpoint": {
+        "path": "artifacts/pg385-variant-selector/pg385_variant_seed_38503.pt",
+        "sha256": "6d159d79f502c53fe079b59542ffb70ff8705f2c09f5983fc7d462014ff3c6e1"
+      }
+    }
+  ],
+  "worst_seed": {
+    "variant_exact_min": 1.0,
+    "encoding_exact_min": 1.0,
+    "ask_recall_min": 1.0,
+    "positive_recall_min": 1.0,
+    "negative_false_allow_max": 0
+  },
+  "evaluator_binding": {
+    "reviewed_local_canary_last_hop": true,
+    "model_emits_raw_string": false,
+    "model_emits_variant_reference": true,
+    "candidate_wire_replay": false
+  },
+  "scientific_gate": {
+    "variant_gate_passed": true,
+    "ask_gate_passed": true,
+    "negative_gate_passed": true,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "仅证明抽象反馈到受控变体引用的候选能力；具体字符串仍由固定本地 evaluator 最后一跳绑定，不能迁移到任意目标。",
+  "report_sha256": "e4ebec3e02481d2762c0a9da688e521d933ea171feeaf8885b15e4aed9e444cd"
+}

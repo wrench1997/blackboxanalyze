@@ -1,0 +1,43 @@
+{
+  "protocol_id": "pg-pk-326-cross-implementation-forgetting-matrix-v1",
+  "schema_version": "pg326-cross-implementation-forgetting-matrix-protocol-v1",
+  "scope": {
+    "read_only": true,
+    "target_contacted": false,
+    "inputs": [
+      "pg323_vulnerableapp_role_replay_report_v1.json",
+      "pg324_juice_shop_source_heldout_report_v1.json",
+      "pg325_sql_family_holdout_report_v1.json",
+      "pg327b_paired_fresh_replay_report_v1.json",
+      "pg327b_paired_fresh_replay_audit_v1.json"
+    ]
+  },
+  "required_gates": {
+    "independent_implementation_count": true,
+    "family_diversity": true,
+    "worst_seed_typed_effect": true,
+    "worst_seed_variant": true,
+    "worst_seed_ask": true,
+    "worst_seed_repair": true,
+    "negative_zero": true,
+    "uniform_observation_contract": true,
+    "forgetting_pair": true,
+    "raw_payload_training_excluded": true,
+    "promotion_blocked": true
+  },
+  "forbidden": [
+    "docker_start",
+    "public_target",
+    "external_network",
+    "payload_promotion",
+    "memory_promotion"
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "checkpoint_role": "research_candidate_only"
+  },
+  "protocol_sha256": "967aa08932611ab1a788f4c1638e5f47cfbef3eacfba497b17416827dac5016d"
+}

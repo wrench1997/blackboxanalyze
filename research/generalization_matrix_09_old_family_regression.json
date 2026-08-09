@@ -1,0 +1,452 @@
+{
+  "schema_version": "sift-old-family-regression-v1",
+  "experiment": "generalization-matrix-09-old-family-regression",
+  "status": "completed",
+  "seed": 20261001,
+  "data": {
+    "programs": 600,
+    "examples": 2400,
+    "families": [
+      "authorization_or",
+      "numeric_boundary",
+      "substring_origin",
+      "truthiness_gate"
+    ],
+    "identical_prompts": true
+  },
+  "baseline": {
+    "path": "artifacts\\frontend-loop-05-routed-memory-20260801\\tiny_rule_gpt.pt",
+    "sha256": "7b85b41770121be1a894517adff416efe1ccc7bc847e0b55b9460c27936fbe10",
+    "with_rule_head": {
+      "accuracy": 0.955417,
+      "correct": 2293,
+      "total": 2400,
+      "by_family": {
+        "numeric_boundary": 0.891667,
+        "truthiness_gate": 0.93,
+        "substring_origin": 1.0,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000253",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retryCount=0:0|input.retryCount=144:1|input.retryCount=284:1|input.retryCount=141:0|input.retryCount=143:1|input.retryCount=140:0<RULEMEM>generic=input.retryCount#gt=141|q=1|fit=6/6<QUERY>input.retryCount=142<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000956",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=9,input.role=s:member|cf:member:1|input.quota=-2,input.role=s:member|cf:member:1|input.quota=2,input.role=s:admin|cf:admin:1|input.quota=9,input.role=s:admin|cf:admin:1|input.quota=-2,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=-1,input.role=s:admin|cf:admin:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000380",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.credits=0,input.role=s:member|cf:member:0|input.credits=-2,input.role=s:member|cf:member:1|input.credits=-2,input.role=s:guest|cf:guest:1|input.credits=1,input.role=s:admin|cf:admin:1|input.credits=17,input.role=s:admin|cf:admin:1|input.credits=-1,input.role=s:member|cf:member:1|input.credits=-1,input.role=s:admin|cf:admin:1|input.credits=17,input.role=s:member|cf:member:1<RULEMEM>generic=(input.credits!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.credits=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0002630",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retries=-2,input.role=s:admin|cf:admin:1|input.retries=0,input.role=s:member|cf:member:0|input.retries=2,input.role=s:member|cf:member:1|input.retries=2,input.role=s:guest|cf:guest:1|input.retries=12,input.role=s:member|cf:member:1|input.retries=12,input.role=s:admin|cf:admin:1|input.retries=2,input.role=s:admin|cf:admin:1|input.retries=-1,input.role=s:admin|cf:admin:1<RULEMEM>generic=(input.retries!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.retries=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000110",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.retries=-1,input.role=s:guest|cf:guest:1|input.retries=1,input.role=s:member|cf:member:1|input.retries=2,input.role=s:member|cf:member:1|input.retries=18,input.role=s:guest|cf:guest:1|input.retries=18,input.role=s:member|cf:member:1|input.retries=0,input.role=s:member|cf:member:0|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=-2,input.role=s:member|cf:member:1<RULEMEM>generic=input.retries!=0|q=0|fit=8/8<QUERY>input.retries=0,input.role=s:root|cf:root<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001154",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=2,input.role=s:admin|cf:admin:1|input.quota=1,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=19,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=-2,input.role=s:member|cf:member:1|input.quota=2,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:guest|cf:guest:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001297",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=0:0|input.score=147:0|input.score=151:1|input.score=298:1|input.score=148:0|input.score=150:1<RULEMEM>generic=input.score#gt=148|q=1|fit=6/6<QUERY>input.score=149<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001477",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=58:1|input.score=0:0|input.score=55:0|input.score=56:0|input.score=114:1|input.score=59:1<RULEMEM>generic=input.score#gt=56|q=1|fit=6/6<QUERY>input.score=57<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001909",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=0:1|input.age=298:0|input.age=150:0|input.age=148:1|input.age=151:0|input.age=147:1<RULEMEM>generic=input.age#lt=150|q=1|fit=6/6<QUERY>input.age=149<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001963",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.total=0:0|input.total=352:1|input.total=177:1|input.total=178:1|input.total=174:0|input.total=175:0<RULEMEM>generic=input.total#gt=175|q=1|fit=6/6<QUERY>input.total=176<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001261",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retryCount=111:0|input.retryCount=110:0|input.retryCount=224:1|input.retryCount=0:0|input.retryCount=114:1|input.retryCount=113:1<RULEMEM>generic=input.retryCount#gt=111|q=1|fit=6/6<QUERY>input.retryCount=112<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000649",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=156:1|input.age=310:1|input.age=157:1|input.age=153:0|input.age=0:0|input.age=154:0<RULEMEM>generic=input.age#gt=154|q=1|fit=6/6<QUERY>input.age=155<ANSWER>"
+        }
+      ]
+    },
+    "neural_only": {
+      "accuracy": 0.805417,
+      "correct": 1933,
+      "total": 2400,
+      "by_family": {
+        "numeric_boundary": 0.605,
+        "truthiness_gate": 0.616667,
+        "substring_origin": 1.0,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000991",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.age=175:0|input.age=174:0|input.age=172:1|input.age=173:1|input.age=348:0|input.age=176:0<RULEMEM>generic=input.age#lt=174|q=1|fit=6/6<QUERY>input.age=0<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000452",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.credits=1,input.role=s:guest|cf:guest:1|input.credits=0,input.role=s:member|cf:member:0|input.credits=1,input.role=s:member|cf:member:1|input.credits=0,input.role=s:owner|cf:owner:1|input.credits=-1,input.role=s:guest|cf:guest:1|input.credits=-2,input.role=s:member|cf:member:1|input.credits=1,input.role=s:owner|cf:owner:1|input.credits=0,input.role=s:guest|cf:guest:0<RULEMEM>generic=(input.credits!=0)or(input.role==owner)|q=1|fit=8/8<QUERY>input.credits=2,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0002162",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retries=5,input.role=s:member|cf:member:1|input.retries=-1,input.role=s:owner|cf:owner:1|input.retries=1,input.role=s:member|cf:member:1|input.retries=5,input.role=s:owner|cf:owner:1|input.retries=2,input.role=s:guest|cf:guest:1|input.retries=2,input.role=s:owner|cf:owner:1|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=-2,input.role=s:guest|cf:guest:1<RULEMEM>generic=(input.retries!=0)or(input.role==owner)|q=0|fit=8/8<QUERY>input.retries=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001496",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.flags=0,input.role=s:guest|cf:guest:0|input.flags=1,input.role=s:guest|cf:guest:1|input.flags=-1,input.role=s:member|cf:member:1|input.flags=18,input.role=s:member|cf:member:1|input.flags=1,input.role=s:root|cf:root:1|input.flags=-2,input.role=s:member|cf:member:1|input.flags=0,input.role=s:member|cf:member:0|input.flags=2,input.role=s:member|cf:member:1<RULEMEM>generic=(input.flags!=0)or(input.role==root)|q=1|fit=8/8<QUERY>input.flags=-1,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001099",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.total=104:1|input.total=54:1|input.total=52:0|input.total=50:0|input.total=51:0|input.total=53:1<RULEMEM>generic=input.total#gt=52|q=0|fit=6/6<QUERY>input.total=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0002071",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.total=219:0|input.total=217:0|input.total=0:1|input.total=218:0|input.total=216:1|input.total=434:0<RULEMEM>generic=input.total#lt=217|q=1|fit=6/6<QUERY>input.total=215<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001190",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.flags=1,input.role=s:admin|cf:admin:1|input.flags=2,input.role=s:guest|cf:guest:1|input.flags=-1,input.role=s:guest|cf:guest:1|input.flags=-1,input.role=s:admin|cf:admin:1|input.flags=-2,input.role=s:admin|cf:admin:1|input.flags=2,input.role=s:admin|cf:admin:1|input.flags=0,input.role=s:member|cf:member:0|input.flags=0,input.role=s:guest|cf:guest:0<RULEMEM>generic=(input.flags!=0)or(input.role==admin)|q=1|fit=8/8<QUERY>input.flags=-2,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001333",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retryCount=364:1|input.retryCount=181:0|input.retryCount=184:1|input.retryCount=182:0|input.retryCount=183:1|input.retryCount=180:0<RULEMEM>generic=input.retryCount#gt=182|q=0|fit=6/6<QUERY>input.retryCount=0<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000524",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.retries=0,input.role=s:member|cf:member:0|input.retries=-1,input.role=s:member|cf:member:1|input.retries=1,input.role=s:member|cf:member:1|input.retries=10,input.role=s:guest|cf:guest:1|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=1,input.role=s:root|cf:root:1|input.retries=2,input.role=s:guest|cf:guest:1|input.retries=-1,input.role=s:guest|cf:guest:1<RULEMEM>generic=(input.retries!=0)or(input.role==root)|q=1|fit=8/8<QUERY>input.retries=10,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001208",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.balance=0,input.role=s:root|cf:root:1|input.balance=0,input.role=s:guest|cf:guest:0|input.balance=6,input.role=s:guest|cf:guest:1|input.balance=1,input.role=s:guest|cf:guest:1|input.balance=2,input.role=s:member|cf:member:1|input.balance=-2,input.role=s:member|cf:member:1|input.balance=-2,input.role=s:guest|cf:guest:1|input.balance=6,input.role=s:member|cf:member:1<RULEMEM>generic=(input.balance!=0)or(input.role==root)|q=0|fit=8/8<QUERY>input.balance=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001135",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.age=338:0|input.age=169:0|input.age=170:0|input.age=167:1|input.age=168:1|input.age=171:0<RULEMEM>generic=input.age#lt=169|q=1|fit=6/6<QUERY>input.age=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0002215",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=98:1|input.score=97:1|input.score=0:0|input.score=192:1|input.score=95:0|input.score=96:0<RULEMEM>generic=input.score#gt=96|q=0|fit=6/6<QUERY>input.score=94<ANSWER>"
+        }
+      ]
+    }
+  },
+  "candidate": {
+    "path": "artifacts\\generalization-matrix-09-stage-b-stratified-20261001\\tiny_rule_gpt.pt",
+    "sha256": "82d0a6f4931333c2d92e71294c0a0555906f757a11f314bafee5ff007e8569cf",
+    "with_rule_head": {
+      "accuracy": 0.955,
+      "correct": 2292,
+      "total": 2400,
+      "by_family": {
+        "numeric_boundary": 0.89,
+        "truthiness_gate": 0.93,
+        "substring_origin": 1.0,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000253",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retryCount=0:0|input.retryCount=144:1|input.retryCount=284:1|input.retryCount=141:0|input.retryCount=143:1|input.retryCount=140:0<RULEMEM>generic=input.retryCount#gt=141|q=1|fit=6/6<QUERY>input.retryCount=142<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000956",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=9,input.role=s:member|cf:member:1|input.quota=-2,input.role=s:member|cf:member:1|input.quota=2,input.role=s:admin|cf:admin:1|input.quota=9,input.role=s:admin|cf:admin:1|input.quota=-2,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=-1,input.role=s:admin|cf:admin:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000380",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.credits=0,input.role=s:member|cf:member:0|input.credits=-2,input.role=s:member|cf:member:1|input.credits=-2,input.role=s:guest|cf:guest:1|input.credits=1,input.role=s:admin|cf:admin:1|input.credits=17,input.role=s:admin|cf:admin:1|input.credits=-1,input.role=s:member|cf:member:1|input.credits=-1,input.role=s:admin|cf:admin:1|input.credits=17,input.role=s:member|cf:member:1<RULEMEM>generic=(input.credits!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.credits=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0002630",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retries=-2,input.role=s:admin|cf:admin:1|input.retries=0,input.role=s:member|cf:member:0|input.retries=2,input.role=s:member|cf:member:1|input.retries=2,input.role=s:guest|cf:guest:1|input.retries=12,input.role=s:member|cf:member:1|input.retries=12,input.role=s:admin|cf:admin:1|input.retries=2,input.role=s:admin|cf:admin:1|input.retries=-1,input.role=s:admin|cf:admin:1<RULEMEM>generic=(input.retries!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.retries=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000110",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.retries=-1,input.role=s:guest|cf:guest:1|input.retries=1,input.role=s:member|cf:member:1|input.retries=2,input.role=s:member|cf:member:1|input.retries=18,input.role=s:guest|cf:guest:1|input.retries=18,input.role=s:member|cf:member:1|input.retries=0,input.role=s:member|cf:member:0|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=-2,input.role=s:member|cf:member:1<RULEMEM>generic=input.retries!=0|q=0|fit=8/8<QUERY>input.retries=0,input.role=s:root|cf:root<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001154",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=2,input.role=s:admin|cf:admin:1|input.quota=1,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=19,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=-2,input.role=s:member|cf:member:1|input.quota=2,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:guest|cf:guest:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001297",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=0:0|input.score=147:0|input.score=151:1|input.score=298:1|input.score=148:0|input.score=150:1<RULEMEM>generic=input.score#gt=148|q=1|fit=6/6<QUERY>input.score=149<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001477",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=58:1|input.score=0:0|input.score=55:0|input.score=56:0|input.score=114:1|input.score=59:1<RULEMEM>generic=input.score#gt=56|q=1|fit=6/6<QUERY>input.score=57<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001909",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=0:1|input.age=298:0|input.age=150:0|input.age=148:1|input.age=151:0|input.age=147:1<RULEMEM>generic=input.age#lt=150|q=1|fit=6/6<QUERY>input.age=149<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001963",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.total=0:0|input.total=352:1|input.total=177:1|input.total=178:1|input.total=174:0|input.total=175:0<RULEMEM>generic=input.total#gt=175|q=1|fit=6/6<QUERY>input.total=176<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001261",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retryCount=111:0|input.retryCount=110:0|input.retryCount=224:1|input.retryCount=0:0|input.retryCount=114:1|input.retryCount=113:1<RULEMEM>generic=input.retryCount#gt=111|q=1|fit=6/6<QUERY>input.retryCount=112<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000649",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=156:1|input.age=310:1|input.age=157:1|input.age=153:0|input.age=0:0|input.age=154:0<RULEMEM>generic=input.age#gt=154|q=1|fit=6/6<QUERY>input.age=155<ANSWER>"
+        }
+      ]
+    },
+    "neural_only": {
+      "accuracy": 0.882917,
+      "correct": 2119,
+      "total": 2400,
+      "by_family": {
+        "numeric_boundary": 0.773333,
+        "truthiness_gate": 0.758333,
+        "substring_origin": 1.0,
+        "authorization_or": 1.0
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001783",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.age=185:0|input.age=186:1|input.age=0:0|input.age=183:0|input.age=184:0|input.age=370:1<RULEMEM>generic=input.age#gt=185|q=1|fit=6/6<QUERY>input.age=187<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0002162",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retries=5,input.role=s:member|cf:member:1|input.retries=-1,input.role=s:owner|cf:owner:1|input.retries=1,input.role=s:member|cf:member:1|input.retries=5,input.role=s:owner|cf:owner:1|input.retries=2,input.role=s:guest|cf:guest:1|input.retries=2,input.role=s:owner|cf:owner:1|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=-2,input.role=s:guest|cf:guest:1<RULEMEM>generic=(input.retries!=0)or(input.role==owner)|q=0|fit=8/8<QUERY>input.retries=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001730",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retries=0,input.role=s:root|cf:root:1|input.retries=-2,input.role=s:guest|cf:guest:1|input.retries=20,input.role=s:root|cf:root:1|input.retries=1,input.role=s:guest|cf:guest:1|input.retries=-2,input.role=s:root|cf:root:1|input.retries=20,input.role=s:guest|cf:guest:1|input.retries=2,input.role=s:guest|cf:guest:1|input.retries=0,input.role=s:guest|cf:guest:0<RULEMEM>generic=(input.retries!=0)or(input.role==root)|q=0|fit=8/8<QUERY>input.retries=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001496",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.flags=0,input.role=s:guest|cf:guest:0|input.flags=1,input.role=s:guest|cf:guest:1|input.flags=-1,input.role=s:member|cf:member:1|input.flags=18,input.role=s:member|cf:member:1|input.flags=1,input.role=s:root|cf:root:1|input.flags=-2,input.role=s:member|cf:member:1|input.flags=0,input.role=s:member|cf:member:0|input.flags=2,input.role=s:member|cf:member:1<RULEMEM>generic=(input.flags!=0)or(input.role==root)|q=1|fit=8/8<QUERY>input.flags=-1,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001190",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.flags=1,input.role=s:admin|cf:admin:1|input.flags=2,input.role=s:guest|cf:guest:1|input.flags=-1,input.role=s:guest|cf:guest:1|input.flags=-1,input.role=s:admin|cf:admin:1|input.flags=-2,input.role=s:admin|cf:admin:1|input.flags=2,input.role=s:admin|cf:admin:1|input.flags=0,input.role=s:member|cf:member:0|input.flags=0,input.role=s:guest|cf:guest:0<RULEMEM>generic=(input.flags!=0)or(input.role==admin)|q=1|fit=8/8<QUERY>input.flags=-2,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0002432",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.retries=2,input.role=s:root|cf:root:1|input.retries=3,input.role=s:root|cf:root:1|input.retries=0,input.role=s:root|cf:root:1|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=1,input.role=s:member|cf:member:1|input.retries=0,input.role=s:member|cf:member:0|input.retries=-2,input.role=s:member|cf:member:1|input.retries=-1,input.role=s:member|cf:member:1<RULEMEM>generic=(input.retries!=0)or(input.role==root)|q=1|fit=8/8<QUERY>input.retries=3,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0002017",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.score=61:1|input.score=62:0|input.score=60:1|input.score=63:0|input.score=124:0|input.score=64:0<RULEMEM>generic=input.score#lt=62|q=1|fit=6/6<QUERY>input.score=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000253",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retryCount=0:0|input.retryCount=144:1|input.retryCount=284:1|input.retryCount=141:0|input.retryCount=143:1|input.retryCount=140:0<RULEMEM>generic=input.retryCount#gt=141|q=1|fit=6/6<QUERY>input.retryCount=142<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001315",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=233:0|input.score=236:1|input.score=237:1|input.score=234:0|input.score=470:1|input.score=235:0<RULEMEM>generic=input.score#gt=235|q=0|fit=6/6<QUERY>input.score=0<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000956",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=9,input.role=s:member|cf:member:1|input.quota=-2,input.role=s:member|cf:member:1|input.quota=2,input.role=s:admin|cf:admin:1|input.quota=9,input.role=s:admin|cf:admin:1|input.quota=-2,input.role=s:guest|cf:guest:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=-1,input.role=s:admin|cf:admin:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000110",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.retries=-1,input.role=s:guest|cf:guest:1|input.retries=1,input.role=s:member|cf:member:1|input.retries=2,input.role=s:member|cf:member:1|input.retries=18,input.role=s:guest|cf:guest:1|input.retries=18,input.role=s:member|cf:member:1|input.retries=0,input.role=s:member|cf:member:0|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=-2,input.role=s:member|cf:member:1<RULEMEM>generic=input.retries!=0|q=0|fit=8/8<QUERY>input.retries=0,input.role=s:root|cf:root<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001478",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=-2,input.role=s:member|cf:member:1|input.quota=2,input.role=s:owner|cf:owner:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=2,input.role=s:member|cf:member:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=-1,input.role=s:owner|cf:owner:1|input.quota=-1,input.role=s:member|cf:member:1<RULEMEM>generic=(input.quota!=0)or(input.role==owner)|q=1|fit=8/8<QUERY>input.quota=2,input.role=s:guest|cf:guest<ANSWER>"
+        }
+      ]
+    }
+  },
+  "per_family": {
+    "authorization_or": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0,
+      "baseline_neural": 1.0,
+      "candidate_neural": 1.0,
+      "neural_delta": 0.0
+    },
+    "numeric_boundary": {
+      "baseline": 0.891667,
+      "candidate": 0.89,
+      "delta": -0.001667,
+      "baseline_neural": 0.605,
+      "candidate_neural": 0.773333,
+      "neural_delta": 0.168333
+    },
+    "substring_origin": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0,
+      "baseline_neural": 1.0,
+      "candidate_neural": 1.0,
+      "neural_delta": 0.0
+    },
+    "truthiness_gate": {
+      "baseline": 0.93,
+      "candidate": 0.93,
+      "delta": 0.0,
+      "baseline_neural": 0.616667,
+      "candidate_neural": 0.758333,
+      "neural_delta": 0.141666
+    }
+  },
+  "decision": {
+    "max_allowed_regression": 0.02,
+    "worst_family_delta": -0.001667,
+    "passes": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "protocol_id": "pg-pk-06-positive-oracle-revalidation-v1",
+  "objective": "Test positive cross-application Rule IR transfer without weakening the global OOD abstain rule.",
+  "target": {
+    "kind": "ephemeral_in_repo_fixture",
+    "base_url": "http://127.0.0.1:8790",
+    "source_code_pinned": true,
+    "external_network": false
+  },
+  "positive_oracle": {
+    "family": "xss",
+    "name": "inert_marker_in_html_attribute",
+    "requires": ["marker_in_attribute", "fresh_evidence_hash"],
+    "script_execution": false,
+    "evaluator_confirmation": false
+  },
+  "pair_design": {
+    "variants": ["plain", "url_percent"],
+    "same_surface_required": true,
+    "pair_agreement_required": true,
+    "pair_metadata_hidden_from_decoder": true
+  },
+  "decision_layers": {
+    "strict_ood": "unknown target remains abstain",
+    "oracle_revalidation": "may accept only when pinned oracle contract, pair agreement, model family agreement, and evidence hashes all pass",
+    "unapproved_oracle": "abstain"
+  },
+  "safety": {
+    "methods": ["GET"],
+    "paths": ["/reflect", "/plain"],
+    "raw_body_stored": false,
+    "credentials": false,
+    "mutations": false,
+    "real_exploit_strings": false
+  },
+  "loop_memory_promotion_rule": "research/loop_memory_promotion_rule_v1.json"
+}

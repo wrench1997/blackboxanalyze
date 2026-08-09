@@ -1,0 +1,75 @@
+{
+  "protocol_id": "pg-pk-55-invariant-feature-funnel-v1",
+  "schema_version": "pg55-invariant-feature-funnel-protocol-v1",
+  "objective": "训练一个使用跨来源匿名相对 geometry 特征的隔离 Rule IR 候选，同时把 PG-42 framed、seed 419 和 template_injection 留作盲测。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false
+  },
+  "feature_funnel": {
+    "builder": "scripts/build_pg55_invariant_feature_funnel.py",
+    "dataset": "research/pg55_invariant_feature_funnel_dataset_v1.json",
+    "report": "research/pg55_invariant_feature_funnel_report_v1.json",
+    "reviewer_id": "codex-primary-feature-funnel-review-v1",
+    "relative_geometry_features_allowed": true,
+    "oracle_is_label_not_feature": true,
+    "source_seed_surface_audit_only": true,
+    "raw_request_response_forbidden": true,
+    "training_promotion_on_review": false,
+    "memory_promotion_on_review": false
+  },
+  "split_plan": {
+    "training": "PG-53 seeds 5301/5307 + PG-42 ledger/envelope seeds 401/409, known families and ordinary_response",
+    "dev": "PG-53 PG-35 seed 5311 + PG-42 ledger/envelope seed 419, known families and ordinary_response",
+    "holdout": "PG-42 framed all seeds, including template_injection and ordinary_response",
+    "unknown_family": "template_injection is never a model class and must abstain"
+  },
+  "model_contract": {
+    "model": "PG53RuleIRCandidate-compatible nine-class candidate",
+    "typed_oracle_in_features": false,
+    "family_label_in_features": false,
+    "density_gate_calibrated_on": "dev only",
+    "density_gate_holdout_visibility": false
+  },
+  "promotion_gate": {
+    "zero_negative_false_accept": true,
+    "zero_unknown_misname": true,
+    "known_family_recall_required": true,
+    "strict_unknown_abstain_required": true,
+    "training_allowed_before_gate": false,
+    "memory_promotion_allowed_before_gate": false
+  },
+  "run_result": {
+    "status": "completed_diagnostic_gate_failed",
+    "builder": "scripts/build_pg55_invariant_feature_funnel.py",
+    "trainer": "scripts/train_pg55_invariant_rule_ir_candidate.py",
+    "device": "cuda",
+    "split_counts": {
+      "train": 324,
+      "dev": 108,
+      "holdout": 120
+    },
+    "raw_holdout": {
+      "known_family_recall": 0.125,
+      "known_wrong_family_count": 84,
+      "unknown_misname_count": 12,
+      "negative_effect_false_accept_count": 0,
+      "abstain_rate": 0.1
+    },
+    "density_gated_holdout": {
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_misname_count": 0,
+      "negative_effect_false_accept_count": 0,
+      "abstain_rate": 1.0
+    },
+    "interpretation": "The invariant geometry candidate is safe only by abstaining on the framed holdout; it does not demonstrate causal family generalization.",
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

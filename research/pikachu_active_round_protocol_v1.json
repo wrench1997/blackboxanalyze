@@ -1,0 +1,53 @@
+{
+  "protocol_id": "pg-pk-03-active-safe-round-v1",
+  "objective": "Use a bounded screen-then-refine policy to spend probes only on surfaces with observable candidate signals, while preserving loopback-only, read-only, non-exploit replay.",
+  "target_policy": {
+    "base_url": "http://127.0.0.1:8766",
+    "container_image_digest_required": true,
+    "external_network": false,
+    "fresh_target_required": true
+  },
+  "screen": {
+    "unit": "pair_id + surface_role",
+    "variant": "plain",
+    "one_request_per_surface": true
+  },
+  "refine": {
+    "trigger": "bounded projection has a candidate signal and Rule IR gate is true",
+    "selection": "multi-step belief information gain, then deterministic tie-break",
+    "variants": ["url_percent", "html_entity", "double_html_entity"],
+    "pair_agreement_gate": true
+  },
+  "budget": {
+    "max_requests": 12,
+    "expected_static_baseline": 24,
+    "expected_upper_bound_reduction": 0.5
+  },
+  "observables": [
+    "marker_reflected",
+    "marker_in_attribute",
+    "marker_in_script_source",
+    "sql_error_shape",
+    "body_length_delta_abs",
+    "external_redirect",
+    "status_code",
+    "content_type_class"
+  ],
+  "prohibited": [
+    "script_execution",
+    "SQL syntax or time-delay payloads",
+    "RCE",
+    "SSRF",
+    "XXE",
+    "upload",
+    "traversal",
+    "credential or token submission",
+    "raw body or cookie storage"
+  ],
+  "evaluation": {
+    "primary": ["request_budget_respected", "candidate_signal_recall", "false_positive_rate", "abstain_rate"],
+    "secondary": ["belief_entropy_change", "evidence_hash_completeness", "cross_surface_consistency"],
+    "rule": "candidate signal is not vulnerability confirmation; no positive claim without a bounded oracle and fresh replay"
+  },
+  "loop_memory_promotion_rule": "research/loop_memory_promotion_rule_v1.json"
+}

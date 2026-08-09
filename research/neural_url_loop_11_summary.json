@@ -1,0 +1,104 @@
+{
+  "schema_version": "sift-neural-url-loop-summary-v1",
+  "experiment": "neural-url-generalization-loop-11",
+  "status": "confirmed_research_result",
+  "scope": "synthetic complete-family holdout; not a production vulnerability-detector claim",
+  "research_question": "Can a fixed-size neural model learn URL trust semantics from abstract primitives without seeing any url_scheme_downgrade training example?",
+  "model": {
+    "name": "SIFT-0.9M URL Set Head",
+    "parameters": 908546,
+    "learned_set_head_parameters": 128,
+    "target_training_examples": 0,
+    "architecture_change": "canonical URL slots plus a learned query-to-labeled-set comparison head"
+  },
+  "final_confirmation": {
+    "fresh_seeds": [20261603, 20261621],
+    "candidate_neural_mean": 0.884167,
+    "candidate_neural_min": 0.88,
+    "frozen_neural_mean": 0.6325,
+    "minimum_gain_over_frozen": 0.25,
+    "minimum_same_checkpoint_set_head_gain": 0.288333,
+    "worst_old_family_regression": -0.008333,
+    "counterexample_top1_mean": 0.88,
+    "random_top1_mean": 0.375,
+    "all_preregistered_checks_passed": true
+  },
+  "per_seed": [
+    {
+      "seed": 20261603,
+      "dataset_sha256": "443864237401b8cee85c974ed9364a56179102dc0bb413057a0508668518e3ad",
+      "candidate_neural": 0.888333,
+      "same_checkpoint_without_set_head": 0.6,
+      "frozen_neural": 0.638333,
+      "c5_rule_system": 1.0,
+      "counterexample_top1": 0.88,
+      "worst_old_family_regression": -0.008333
+    },
+    {
+      "seed": 20261621,
+      "dataset_sha256": "a9d72a8ab0f09656c0979f5c74bd140002b4ec7c105d7e3afac78c3b0d2507f2",
+      "candidate_neural": 0.88,
+      "same_checkpoint_without_set_head": 0.588333,
+      "frozen_neural": 0.626667,
+      "c5_rule_system": 1.0,
+      "counterexample_top1": 0.88,
+      "worst_old_family_regression": 0.0
+    }
+  ],
+  "causal_chain": [
+    {
+      "stage": "diagnosis",
+      "finding": "The byte Transformer learned field and family shortcuts and did not reliably bind episode labels to URL components."
+    },
+    {
+      "stage": "representation",
+      "finding": "Canonical scheme, hostname, effective-port and path slots removed unstable source-field names."
+    },
+    {
+      "stage": "training",
+      "finding": "URL-primitive-only meta-label permutation penalized fixed family-to-label shortcuts without perturbing unrelated families."
+    },
+    {
+      "stage": "architecture",
+      "finding": "A 128-parameter learned set-comparison head supplied the missing query-to-positive/negative-example comparison bias."
+    },
+    {
+      "stage": "ablation",
+      "finding": "Disabling only the set head in the same checkpoint cost at least 28.83 percentage points on both fresh seeds."
+    }
+  ],
+  "failed_branches": [
+    {
+      "name": "canonical slots plus global meta-label pilot",
+      "outcome": "failed",
+      "reason": "54.33% target accuracy; representation alone did not repair episode binding"
+    },
+    {
+      "name": "global-meta set-head confirmation",
+      "outcome": "rejected",
+      "reason": "strong URL transfer but truthiness_gate regressed by 3.83pp, exceeding the preregistered 2pp limit"
+    },
+    {
+      "name": "selective meta v1",
+      "outcome": "rejected",
+      "reason": "substring_origin regressed by 5.67pp because an unrelated family was still label-permuted"
+    },
+    {
+      "name": "URL meta v2",
+      "outcome": "confirmed",
+      "reason": "restricted meta-labeling to URL primitives and passed two untouched complete-family holdouts"
+    }
+  ],
+  "separation_of_claims": {
+    "neural": "88.42% mean on the unseen URL family; supported by same-checkpoint ablation",
+    "c5": "100% zero-parameter executable rule architecture; reported separately and not counted as neural learning",
+    "engineering": "not yet established; requires broader languages, parsers, noise, real runtimes and operational reliability tests"
+  },
+  "lineage": {
+    "preregistration": "research/neural_url_loop_11_final_confirmation_preregistration.json",
+    "full_confirmation": "research/neural_url_loop_11_final_confirmation.json",
+    "diagnostics": "research/neural_url_loop_11_diagnostics.json",
+    "failed_confirmation": "research/neural_url_loop_11_confirmation_failed_v1.json",
+    "c5_confirmation": "research/url_root_cause_loop_10b_confirmation.json"
+  }
+}

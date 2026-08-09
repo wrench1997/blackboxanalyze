@@ -1,0 +1,60 @@
+{
+  "schema_version": "sift-url-root-cause-preregistration-v1",
+  "experiment_id": "url-root-cause-loop-10",
+  "registered_at": "2026-08-01T18:20:00+08:00",
+  "status": "frozen_before_new-ablation-results",
+  "research_question": "Why did primitive-only adaptation transfer negatively to the fully held-out URL scheme-downgrade family, and can a zero-parameter semantic episode rule repair it without hiding neural negative transfer?",
+  "audit_before_intervention": {
+    "existing_projection": "routed URL text already serializes scheme|hostname|path in one token; explicit port is omitted",
+    "confirmed_gap": "episode Rule Memory induces suffix predicates from raw URL text but cannot induce hostname equality from parsed observations",
+    "prior_three_seed_url_delta_mean": -0.106111,
+    "prior_candidate_neural_range": [0.441667, 0.566667],
+    "interpretation": "representation is partially structured; both rule induction and neural checkpoint behavior must be measured separately"
+  },
+  "conditions": [
+    {"id": "C0_frozen_legacy", "checkpoint": "frozen loop-05", "url_suffix": true, "structured_url_rule": false, "explicit_arbitration": false},
+    {"id": "C1_adapted_legacy", "checkpoint": "matched stage-B seed", "url_suffix": true, "structured_url_rule": false, "explicit_arbitration": false},
+    {"id": "C2_suffix_suppressed", "checkpoint": "matched stage-B seed", "url_suffix": false, "structured_url_rule": false, "explicit_arbitration": false},
+    {"id": "C3_structured_rule_legacy_selection", "checkpoint": "matched stage-B seed", "url_suffix": true, "structured_url_rule": true, "explicit_arbitration": false},
+    {"id": "C4_structured_rule_confidence_arbitration", "checkpoint": "matched stage-B seed", "url_suffix": true, "structured_url_rule": true, "explicit_arbitration": true}
+  ],
+  "hypotheses": {
+    "H1_suffix_is_primary": "C2 minus C1 is at least +10pp on every seed",
+    "H2_structured_rule_repairs_system": "C4 reaches at least 90% on every seed with complete target-family holdout",
+    "H3_arbitration_is_causal": "C4 exceeds C3 by at least +5pp on mean",
+    "H4_neural_negative_transfer_remains": "the neural-with-memory path of adapted checkpoints remains below the frozen path even if C4 repairs the combined system"
+  },
+  "data_protocol": {
+    "seeds": [20261001, 20261019, 20261107],
+    "programs_per_seed": 2700,
+    "traces_per_program": 20,
+    "examples_per_program": 4,
+    "memory_items": 8,
+    "primary_target": "url_scheme_downgrade",
+    "regression_families": ["numeric_boundary", "truthiness_gate", "substring_origin", "authorization_or", "string_suffix_primitive", "url_hostname_primitive"],
+    "target_family_examples_seen_in_training": 0
+  },
+  "metrics": {
+    "behavior_agreement": true,
+    "neural_with_memory": true,
+    "executable_rule_coverage": true,
+    "rule_source_confusion": true,
+    "old_family_regression_max_absolute": 0.02
+  },
+  "decision_policy": {
+    "architecture_fix": "Accept C4 only if all three target scores are at least 90%, all regression families remain within -2pp, and no target-family labels or names enter the rule inducer.",
+    "neural_claim": "Do not describe a C4 gain as neural generalization; report it as zero-parameter architecture/rule-abstraction repair.",
+    "training": "Do not retrain or scale the model in this loop unless the zero-parameter ablation fails.",
+    "next_step_if_repaired": "Create detached scheme, hostname and effective-port primitive families for a later neural distillation loop while retaining the C4 rule path as teacher evidence."
+  },
+  "frozen_artifacts": {
+    "scripts/train_rule_memory_pilot.py": "A1830F83FD3A6A3B1C8565FC9C9CAB6E6E37BDD8782265796CA131B7DBED464D",
+    "research/generalization_matrix_09_summary.json": "46507C5A0E0A1B69C40BDA6237B884BAD23B454AF0BE774149823121C2B07340",
+    "checkpoints": {
+      "frozen_loop_05": "7B85B41770121BE1A894517ADFF416EFE1CCC7BC847E0B55B9460C27936FBE10",
+      "stage_b_20261001": "82D0A6F4931333C2D92E71294C0A0555906F757A11F314BAFEE5FF007E8569CF",
+      "stage_b_20261019": "79000CF387279C482D14EEBD241AD89EBAEA2186523A019BE00B56C47645A090",
+      "stage_b_20261107": "143FC4783C1659B57088BD5941B42F440E26D71820216136F4D20940FD596570"
+    }
+  }
+}

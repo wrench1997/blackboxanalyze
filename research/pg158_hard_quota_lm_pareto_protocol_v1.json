@@ -1,0 +1,38 @@
+{
+  "protocol_id": "pg-pk-158-hard-quota-lm-pareto-v1",
+  "schema_version": "pg158-hard-quota-lm-pareto-protocol-v1",
+  "objective": "hard_negative_quota_x_lm_anchor_weight_pareto_with_unseen_authorization_family",
+  "variants": [
+    "lm_anchor_baseline",
+    "q400_lm025",
+    "q800_lm050",
+    "q1200_lm100"
+  ],
+  "mining_pool": "PG-154 action_train only; dev/holdout labels excluded",
+  "hard_quota_grid": {
+    "per_source": [
+      0,
+      200,
+      400,
+      600
+    ],
+    "total": [
+      0,
+      400,
+      800,
+      1200
+    ]
+  },
+  "lm_weight_grid": [
+    0.25,
+    0.5,
+    1.0
+  ],
+  "unseen_family": "authorization appears only in PG-136 real holdout and is never trained or used for calibration",
+  "threshold_fit": "highest dev coverage with zero dev false_stop",
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  }
+}

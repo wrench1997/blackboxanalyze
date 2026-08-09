@@ -1,0 +1,28 @@
+{
+  "protocol_id": "pg-pk-130-layered-token-ir-v1",
+  "schema_version": "pg130-layered-token-ir-protocol-v1",
+  "objective": "将本地 HTML、GET/POST manifest 和 JavaScript 快照压缩为 source token，再压缩为 Rule IR 和 IR token。",
+  "layers": [
+    "html_get_post_javascript_source_tokens",
+    "family_free_rule_ir_slots",
+    "ir_tokens_with_slot_weights"
+  ],
+  "safety": {
+    "local_only": true,
+    "raw_source_retained": false,
+    "raw_javascript_retained": false,
+    "script_execution": false,
+    "external_network": false,
+    "typed_oracle_authority_in_model_input": false,
+    "memory_promotion_allowed": false
+  },
+  "acceptance": {
+    "fresh_trace_source": "pg127 unseen seed holdout",
+    "required_methods": [
+      "GET",
+      "POST"
+    ],
+    "required_ir_hash": true,
+    "all_steps_validated": true
+  }
+}

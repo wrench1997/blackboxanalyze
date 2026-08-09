@@ -1,0 +1,59 @@
+{
+  "schema_version": "pg-pk-45-leave-one-family-out-protocol-v1",
+  "protocol_id": "PG-45",
+  "title": "leave-one-family-out Rule IR decoder 与安全 abstain",
+  "objective": "在训练中完整移除 injection/SQL-AST 族及其 operator-context semantic binding，再用独立 PG-42 GET/POST 回放检验：保留族能正确命名，被移除族和其他未见语义必须 unknown_surface + abstain。",
+  "held_out_family": {
+    "family": "injection",
+    "semantic_reference": "operator-context",
+    "training_rows_allowed": false,
+    "holdout_labels_allowed_as_features": false
+  },
+  "training_contract": {
+    "catalog": "research/pg40_semantic_router_catalog_v1.json",
+    "implementation": "atlas",
+    "sampling_seeds": [361, 367],
+    "remaining_semantic_references": ["markup-context", "auth-boundary", "subject-boundary", "state-invariant", "url-target", "scalar-boundary", "local-canary", "ordinary-surface"],
+    "model_input": ["PG-43 invariant effect features", "remaining bounded semantic one-hot"],
+    "excluded": ["held_out_family", "operator-context", "typed_oracle", "positive_authority", "evidence_sha256", "raw_probe", "raw_response_body"],
+    "pg42_used_for_training": false,
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "holdout_contract": {
+    "catalog": "research/pg42_independent_semantic_catalog_v1.json",
+    "methods": ["GET", "POST"],
+    "implementations": ["cobalt", "quartz"],
+    "fresh_reset_required": true,
+    "negative_control_required": true,
+    "held_out_family_must_abstain": true
+  },
+  "promotion_gate": {
+    "retained_family_recall_required": true,
+    "held_out_family_zero_misname": true,
+    "unknown_strict_abstain": true,
+    "zero_negative_effect_false_accept": true,
+    "formal_new_family_claim_requires_positive_named_evidence": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "safe_leave_one_out_passed_formal_claim_blocked"
+  },
+  "run_result": {
+    "trainer": "scripts/train_pg45_leave_one_family_out.py",
+    "held_out_family": "injection",
+    "held_out_semantic": "operator-context",
+    "training_pair_count": 128,
+    "seed_holdout_known_family_recall": 1.0,
+    "retained_known_family_recall": 1.0,
+    "held_out_family_effect_recall": 1.0,
+    "held_out_family_named_recall": 0.0,
+    "held_out_family_unknown_misname_count": 0,
+    "held_out_family_unknown_strict_abstain": true,
+    "negative_control_false_positive_rate": 0.0,
+    "safe_leave_one_out_gate_status": "passed",
+    "formal_capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "移除族仍能发现 effect，但不会凭先验命名为 injection；这证明 fail-closed，而不是证明新族学习。"
+  },
+  "status": "run_completed_leave_one_out_safe_abstain_no_promotion"
+}

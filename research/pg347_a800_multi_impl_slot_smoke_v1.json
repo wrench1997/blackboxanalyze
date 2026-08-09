@@ -1,0 +1,276 @@
+{
+  "schema_version": "pg346-a800-structured-target-slot-diagnostic-v1",
+  "status": "structured_target_slot_diagnostic_candidate_only",
+  "gate": {
+    "schema_version": "pg343-a800-target-conditioned-full-axis-diagnostic-v1",
+    "status": "ready_target_conditioned_diagnostic",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "dataset_role_bound": true,
+      "dataset_audit_passed": true,
+      "full_axis_target_coverage": true,
+      "implementation_split_isolated": true,
+      "axis_sequence_entropy": true,
+      "context_vocabulary_locked": true,
+      "promotion_closed": true,
+      "data_code_vocab_rules_hashes_locked": true,
+      "rules_schema_present": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "track": "full_axis_target_conditioned_candidate_only",
+    "target_tokens_read": true,
+    "split_counts": {
+      "train": 27,
+      "implementation_holdout": 12
+    },
+    "target_coverage": {
+      "train": {
+        "rows": 27,
+        "questions": {
+          "ask_failure": 6,
+          "none": 21
+        },
+        "next_actions": {
+          "abstain": 2,
+          "repair": 4,
+          "select_probe_variant": 12,
+          "send_probe": 9
+        },
+        "roles": {
+          "candidate": 7,
+          "negative": 7,
+          "reference": 7,
+          "source_observed": 6
+        },
+        "steps": {
+          "failure": 2,
+          "preflight": 15,
+          "probe_observed": 6,
+          "repair": 4
+        },
+        "ask_present": true,
+        "repair_present": true,
+        "abstain_present": true,
+        "positive_present": true
+      },
+      "implementation_holdout": {
+        "rows": 12,
+        "questions": {
+          "ask_failure": 6,
+          "none": 6
+        },
+        "next_actions": {
+          "abstain": 2,
+          "repair": 4,
+          "select_probe_variant": 6
+        },
+        "roles": {
+          "candidate": 3,
+          "negative": 3,
+          "reference": 3,
+          "source_observed": 3
+        },
+        "steps": {
+          "failure_repair": 2,
+          "negative_review": 1,
+          "preflight": 6,
+          "repair": 3
+        },
+        "ask_present": true,
+        "repair_present": true,
+        "abstain_present": true,
+        "positive_present": true
+      }
+    },
+    "unknown_token_count": 0,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "6a93b82c2bed09c84be55c7e49daf072d1389d3512c1cab80f3a5e25ee7035e6",
+    "audit": "2d5e7c681d8e40bcc81d92bc7d38bf8798be462b1f4a375349d522f2f10b7b5d",
+    "vocabulary": "c31648cb13038e41bc3bd0a7ed5617021ead029e0d362053573c548cec48c1d3",
+    "rules": "0829d983d0a77a1c234b128b44e08aa56263e6b05ffc55d2d603db96b492c3ea",
+    "script": "c911c0b955a088f871d526eb57de40dd0fbaa985696034917b3b9c5b4f43f042",
+    "backbone": "63ddcdc80846e63aa5caf981723660c746011429fc16ef80eb1e03991c649b5b",
+    "structured_decoder": "59b1808408fb8cb630bdfa0aee018c8ebc6ec9450b8ed51f0c193b5be2d3e870"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      34701,
+      34702,
+      34703
+    ],
+    "epochs": 16,
+    "learning_rate": 0.0002,
+    "objective": {
+      "language_model_weight": 0.25,
+      "slot_weight": 1.0
+    },
+    "context_only_slot_inference": true,
+    "target_tokens_used_as_labels_only": true,
+    "required_max_length": 3297,
+    "candidate_only": true
+  },
+  "candidates": [
+    {
+      "seed": 34701,
+      "train": {
+        "rows": 27,
+        "sequence_exact_accuracy": 0.37037,
+        "slot_accuracy": {
+          "question": 1.0,
+          "next_action": 0.925926,
+          "repair_action": 0.888889,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "probe_variant_ref": 0.444444,
+          "safe_to_send": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "variant_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "implementation_holdout": {
+        "rows": 12,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.5,
+          "next_action": 0.0,
+          "repair_action": 0.583333,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "probe_variant_ref": 0.166667,
+          "safe_to_send": 0.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "variant_recall": 1.0,
+        "positive_recall": null,
+        "negative_false_allow": 12
+      },
+      "baseline_holdout_predictive_entropy": 6.378835,
+      "post_holdout_predictive_entropy": 6.369407,
+      "relative_entropy_drop": 0.001478
+    },
+    {
+      "seed": 34702,
+      "train": {
+        "rows": 27,
+        "sequence_exact_accuracy": 0.37037,
+        "slot_accuracy": {
+          "question": 1.0,
+          "next_action": 0.851852,
+          "repair_action": 0.888889,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "probe_variant_ref": 0.444444,
+          "safe_to_send": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 0.5,
+        "variant_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "implementation_holdout": {
+        "rows": 12,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.5,
+          "next_action": 0.0,
+          "repair_action": 0.583333,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "probe_variant_ref": 0.333333,
+          "safe_to_send": 0.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "variant_recall": 1.0,
+        "positive_recall": null,
+        "negative_false_allow": 12
+      },
+      "baseline_holdout_predictive_entropy": 6.381237,
+      "post_holdout_predictive_entropy": 6.36573,
+      "relative_entropy_drop": 0.00243
+    },
+    {
+      "seed": 34703,
+      "train": {
+        "rows": 27,
+        "sequence_exact_accuracy": 0.407407,
+        "slot_accuracy": {
+          "question": 1.0,
+          "next_action": 0.925926,
+          "repair_action": 0.888889,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "probe_variant_ref": 0.407407,
+          "safe_to_send": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "variant_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "implementation_holdout": {
+        "rows": 12,
+        "sequence_exact_accuracy": 0.0,
+        "slot_accuracy": {
+          "question": 0.5,
+          "next_action": 0.0,
+          "repair_action": 0.583333,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "probe_variant_ref": 0.333333,
+          "safe_to_send": 0.0
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "variant_recall": 1.0,
+        "positive_recall": null,
+        "negative_false_allow": 12
+      },
+      "baseline_holdout_predictive_entropy": 6.378666,
+      "post_holdout_predictive_entropy": 6.369986,
+      "relative_entropy_drop": 0.001361
+    }
+  ],
+  "worst_seed": {
+    "max_relative_entropy_drop": 0.00243,
+    "entropy_gate_passed": true,
+    "negative_false_allow_max": 12,
+    "ask_recall_min": 0.0,
+    "repair_recall_min": 0.0,
+    "variant_recall_min": 1.0,
+    "positive_recall_min": 0.0
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "结构化 slot 头只改变目标解码，不压缩七轴上下文；必须同时观察 holdout ASK/repair/negative 与熵门，不能把 train slot accuracy 当作 payload 能力。",
+  "report_sha256": "791adcd38621fe90b912a86957867f4eb5483158f29291c9ff69f212925131bd"
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "pg-pk-46-active-probe-protocol-v1",
+  "protocol_id": "PG-46",
+  "title": "effect-gated active GET/POST probe orchestration",
+  "objective": "让控制器依据 bounded response 差分和 belief posterior 选择下一步 GET/POST 探针，在独立 PG-42 fresh replay 上更少查询找到 confirmed effect；未知语义命中 effect 时必须安全 abstain。",
+  "input_contract": {
+    "catalog": "research/pg42_independent_semantic_catalog_v1.json",
+    "effect_checkpoint": "artifacts/pg43-invariant-effect/invariant_effect.pt",
+    "allowed_features": ["bounded candidate-control invariant delta", "semantic probe_ref", "method", "phase", "belief posterior"],
+    "excluded": ["typed_oracle", "positive", "positive_authority", "family", "evidence_sha256", "raw_probe", "raw_response_body"],
+    "oracle_is_evaluation_only": true,
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "policy_contract": {
+    "action_order": ["GET.screen", "POST.screen", "GET.confirm", "POST.confirm"],
+    "stop_condition": "effect_probability >= 0.60; known semantic may bind family, unknown semantic abstains",
+    "negative_exhaustion": "after all four actions, abstain",
+    "fresh_target_per_sample": true,
+    "both_methods_required": true,
+    "belief_update": "posterior uses model effect probability; typed oracle is never a policy feature"
+  },
+  "evaluation": {
+    "target": "research/pg42_independent_semantic_catalog_v1.json",
+    "episodes": 180,
+    "positive_episodes": 162,
+    "negative_episodes": 18,
+    "fixed_probe_baseline_queries": 4,
+    "required_metrics": ["effect_success", "known_family_recall", "unknown_strict_abstain", "negative_false_accept", "median_queries", "get_post_coverage"]
+  },
+  "promotion_gate": {
+    "zero_negative_effect_false_accept": true,
+    "known_family_recall_required": true,
+    "unknown_strict_abstain": true,
+    "active_trace_validation_required": true,
+    "query_reduction_is_diagnostic_not_sufficient": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "passed_active_safety_gate_diagnostic_only"
+  },
+  "run_result": {
+    "policy": "scripts/run_pg46_active_probe_policy.py",
+    "trace": "research/pg46_active_probe_trace_v1.json",
+    "episode_count": 180,
+    "positive_episode_count": 162,
+    "negative_episode_count": 18,
+    "effect_success_rate": 1.0,
+    "known_family_recall": 1.0,
+    "unknown_positive_count": 72,
+    "unknown_safe_abstain_count": 72,
+    "unknown_strict_abstain": true,
+    "negative_false_accept_count": 0,
+    "mean_queries": 3.1,
+    "median_queries": 3.0,
+    "fixed_probe_baseline_queries": 4.0,
+    "mean_query_reduction_rate": 0.225,
+    "belief_update_count": 558,
+    "get_post_covered": true,
+    "accepted_trace_episode_count": 180,
+    "safe_gate_status": "passed",
+    "formal_capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "主动探测在独立回放上减少查询并保持安全 abstain；query reduction 本身不是正式泛化晋升证据。"
+  },
+  "status": "run_completed_active_safety_gate_passed_no_promotion"
+}

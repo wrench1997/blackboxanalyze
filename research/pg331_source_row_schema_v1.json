@@ -1,0 +1,90 @@
+{
+  "schema_version": "pg331-whole-web-source-row-v1",
+  "purpose": "把授权本地适配器采集的整页结构转换为可审计的七轴 token 记录；不保存原始 payload、响应正文、路由字面量、源码或 evaluator 答案到模型上下文。",
+  "implementation": "app/pg331_source_row.py",
+  "batch_ingest": "scripts/collect_pg331_source_rows.py",
+  "observation_adapter": "app/pg331_loopback_adapter.py",
+  "capture_bridge": "scripts/capture_pg331_loopback_source_row.py",
+  "capture_contract": {
+    "scope": "explicit_loopback_only",
+    "methods": ["GET", "POST"],
+    "post_values": "empty_only",
+    "response_body_persistence": false,
+    "incomplete_sidecars": "emit_ASK_and_block_training"
+  },
+  "required_axes": [
+    "document_structure",
+    "navigation",
+    "request_transport",
+    "response_transport",
+    "javascript_surface",
+    "failure_feedback",
+    "belief_and_replay"
+  ],
+  "field_capture_manifest": {
+    "required": true,
+    "shape": "axis -> every ontology-declared field -> observed|absent|not_observed|unknown",
+    "not_observed_or_unknown": "forces ASK/incomplete and blocks training",
+    "absent": "must mean the adapter actually observed the field is absent",
+    "token_consistency_required": true
+  },
+  "required_sidecars": {
+    "source_meta": [
+      "source_id",
+      "implementation",
+      "collector_id",
+      "authorization_id",
+      "image_digest",
+      "source_digest"
+    ],
+    "reset": [
+      "fresh_reset=true",
+      "reset_id",
+      "target_instance_digest",
+      "network_mode=none|loopback",
+      "external_network=false",
+      "loopback_only=true",
+      "state_clean=true",
+      "database_health_gate (when the target is database-backed)"
+    ],
+    "evaluator": [
+      "typed_available",
+      "negative_control",
+      "reference_present",
+      "candidate_present",
+      "fresh_reset",
+      "evidence_hash",
+      "evaluator_version"
+    ]
+  },
+  "model_context": {
+    "allowed": "ontology enum/bucket/role/shape/digest tokens only",
+    "forbidden": [
+      "raw_payload",
+      "response_body",
+      "family_label",
+      "route_literal",
+      "oracle_answer",
+      "evaluator_answer",
+      "credential",
+      "source_code"
+    ],
+    "sidecars_off_context": true
+  },
+  "training_gate": {
+    "all_required_axis_presence_observed": true,
+    "tokenizer_loss_empty": true,
+    "context_firewall_clean": true,
+    "fresh_reset_and_typed_evaluator_complete": true,
+    "operator_reviewed": true,
+    "hard_negative_false": true,
+    "otherwise": "incomplete_or_ASK_only"
+  },
+  "promotion": {
+    "training_eligible_does_not_imply_memory_promotion": true,
+    "cross_source_review_required": true,
+    "payload_catalog_promotion": false,
+    "vulnerability_claim": false
+  },
+  "status": "implementation_complete_dataset_missing"
+}

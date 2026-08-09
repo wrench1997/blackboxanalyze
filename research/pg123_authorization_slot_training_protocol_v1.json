@@ -1,0 +1,75 @@
+{
+  "protocol_id": "pg-pk-123-authorization-slot-training-v1",
+  "schema_version": "pg123-authorization-slot-training-protocol-v1",
+  "objective": "只根据 PG-122 表示缺口增加一个通用 authorization-transition 槽，fresh 训练并验证跨 seed、跨实现、旧族回归和槽消融。",
+  "training_sources": ["research/pg121_shape_sanitized_training_dataset_v1.json", "PG-122 authorization train seeds 12211/12213/12215"],
+  "holdout_sources": ["PG-122 authorization holdout seeds 12201/12203/12205 with strengths 0/1/2", "PG-120 eta metadata holdout", "PG-117 gamma route holdout", "PG-114 family holdout"],
+  "model_contract": {
+    "implementation": "app/pg123_authorization_rule_ir_decoder.py",
+    "feature_dim": 52,
+    "hidden_dim": 48,
+    "parameter_count": 5188,
+    "fresh_checkpoint": true,
+    "previous_checkpoint_reuse_forbidden": true,
+    "added_slots": ["authorization_changed", "prior_authorization_changed", "authorization_changed_after_method_change", "authorization_changed_with_candidate"],
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "failure_signature_raw_payload_in_model_input": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "action_contract": {
+    "holdout_methods": ["GET", "POST"],
+    "fresh_reset_per_action": true,
+    "matched_negative_control_required": true,
+    "target_evidence_sha256_required": true,
+    "bridge_evidence_sha256_required": true,
+    "failure_signature_required_in_trace": true,
+    "failure_conditioned_next_action": true
+  },
+  "hard_gate": {
+    "pg122_positive_recall_nonzero": true,
+    "pg122_decoy_false_accept_zero": true,
+    "pg122_unknown_abstain_nonzero": true,
+    "pg120_positive_recall_nonzero": true,
+    "pg120_decoy_false_accept_zero": true,
+    "pg120_unknown_abstain_nonzero": true,
+    "pg117_positive_recall_nonzero": true,
+    "pg117_decoy_false_accept_zero": true,
+    "pg117_unknown_abstain_nonzero": true,
+    "pg114_positive_recall_nonzero": true,
+    "pg114_decoy_false_accept_zero": true,
+    "pg114_unknown_abstain_nonzero": true,
+    "authorization_slot_ablation_changes_prediction": true,
+    "all_abstain_is_not_success": true,
+    "memory_promotion_forbidden": true
+  },
+  "observed_result": {
+    "device": "cuda",
+    "feature_dim": 52,
+    "parameter_count": 5188,
+    "train_count": 576,
+    "dev_count": 576,
+    "pg122_positive_recall": 1.0,
+    "pg122_decoy_false_accept_count": 0,
+    "pg122_unknown_abstain_rate": 0.333333,
+    "pg122_slot_ablation_positive_recall": 0.0,
+    "pg120_positive_recall": 1.0,
+    "pg117_positive_recall": 1.0,
+    "pg114_positive_recall": 1.0,
+    "all_gates": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "candidate_holdout_passed_pending_manual_review",
+    "reason": "单一新槽跨当前 holdout 通过，但仍需第二个独立逻辑族和失败条件动作策略的直接模型消融。"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "destructive_payloads": false
+  }
+}

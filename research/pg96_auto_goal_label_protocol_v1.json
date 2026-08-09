@@ -1,0 +1,67 @@
+{
+  "protocol_id": "pg-pk-96-auto-goal-label-design-v1",
+  "schema_version": "pg96-auto-goal-label-protocol-v1",
+  "purpose": "test whether AI-like inductive synthesis can invent useful generic goals/labels from safe observation deltas",
+  "input_contract": {
+    "source": "pg94_pg36_surface_trace_v1",
+    "visible": [
+      "GET/POST",
+      "encoding class",
+      "phase",
+      "bounded response difference tokens",
+      "safety flags"
+    ],
+    "forbidden": [
+      "family",
+      "hypothesis",
+      "typed oracle",
+      "decision",
+      "belief",
+      "route identity",
+      "raw probe",
+      "raw response",
+      "hash identifiers"
+    ]
+  },
+  "split_contract": {
+    "design_seeds": [
+      361,
+      367
+    ],
+    "seed_holdout": [
+      373
+    ],
+    "layout_blind_design": "north",
+    "layout_blind_holdout": "south",
+    "layout_blind_is_not_independent_implementation": true,
+    "fresh_target_required": true
+  },
+  "proposal_contract": {
+    "goal_must_include": [
+      "success_condition",
+      "failure_condition",
+      "abstain_condition",
+      "safety_budget"
+    ],
+    "labels_must_be_bounded": true,
+    "proposal_is_not_a_vulnerability_finding": true
+  },
+  "oracle_contract": {
+    "typed_oracle_after_proposal": true,
+    "negative_controls_required": true,
+    "evidence_hash_required": true
+  },
+  "gate": {
+    "minimum_seed_recall": 0.8,
+    "false_accept_count": 0,
+    "unknown_family_strict_abstain": true,
+    "not_all_abstain": true,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "blocked",
+    "blocking_reasons": [
+      "unknown_family_strict_abstain"
+    ]
+  }
+}

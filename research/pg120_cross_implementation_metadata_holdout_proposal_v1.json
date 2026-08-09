@@ -1,0 +1,14 @@
+{
+  "protocol_id": "pg-pk-120-cross-implementation-metadata-holdout-v1",
+  "proposal_id": "pg120-cross-implementation-metadata-holdout-proposal-v1",
+  "question": "PG-119 学到的是 metadata transition 规则，还是 PG-119 的 shape 表面？",
+  "intervention": "冻结 checkpoint；换路由、payload key、schema 和 shape-v4 独立实现，三 seed、三档阴性对照强度做 GET/POST 复放。",
+  "observed_result": {
+    "metadata_positive_recall": 1.0,
+    "decoy_false_accept_count": 0,
+    "blind_oracle_abstain_rate": 0.0,
+    "shape_hash_ablation_on_same_checkpoint_restores_blind_abstain": true
+  },
+  "next_if_fail": "PG-121 固定 shape hash bucket 为零，保持容量不变，重新训练并复放 PG-120。",
+  "promotion": "evaluation_only_no_training_no_memory"
+}

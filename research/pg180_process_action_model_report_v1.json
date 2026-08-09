@@ -1,0 +1,3610 @@
+{
+  "protocol_id": "pg-pk-180-process-action-model-v1",
+  "schema_version": "pg180-process-action-model-report-v1",
+  "status": "completed_process_policy_diagnostic",
+  "objective": "根据脱敏失败/响应形状 token 预测下一安全抽象动作；不预测漏洞阳性",
+  "source": {
+    "trace": "research\\pg179b_pikachu_iterative_trace_v1.json",
+    "catalog": "research\\pg179b_pikachu_iterative_catalog_v1.json",
+    "trace_sha256": "3d2376b008c7c41e4275dd3aae9ebe192f9837079fb7a3d8840239f78780e84d",
+    "catalog_sha256": "6572ffed280149a85dee1addcb0f90944d39e463421b333776eed38fbc54bc0e",
+    "device": "cuda"
+  },
+  "dataset": {
+    "row_count": 35,
+    "episode_count": 7,
+    "vocabulary_size": 78,
+    "action_vocabulary": [
+      "repeat_matched_negative_pair",
+      "abstain_unknown_oracle",
+      "probe_candidate_other_method"
+    ],
+    "splits": [
+      {
+        "name": "url_holdout",
+        "train_surfaces": [
+          "sqli_delete_post",
+          "sqli_header_post",
+          "sqli_id_post",
+          "sqli_widebyte_post",
+          "xss_stored_post"
+        ],
+        "dev_surfaces": [
+          "xss_blind_post"
+        ],
+        "test_surfaces": [
+          "url_redirect_get"
+        ],
+        "train_count": 25,
+        "dev_count": 5,
+        "test_count": 5
+      },
+      {
+        "name": "xss_holdout",
+        "train_surfaces": [
+          "sqli_delete_post",
+          "sqli_header_post",
+          "sqli_widebyte_post",
+          "url_redirect_get"
+        ],
+        "dev_surfaces": [
+          "sqli_id_post"
+        ],
+        "test_surfaces": [
+          "xss_blind_post",
+          "xss_stored_post"
+        ],
+        "train_count": 20,
+        "dev_count": 5,
+        "test_count": 10
+      },
+      {
+        "name": "injection_holdout",
+        "train_surfaces": [
+          "xss_blind_post",
+          "xss_stored_post"
+        ],
+        "dev_surfaces": [
+          "url_redirect_get"
+        ],
+        "test_surfaces": [
+          "sqli_delete_post",
+          "sqli_header_post",
+          "sqli_id_post",
+          "sqli_widebyte_post"
+        ],
+        "train_count": 10,
+        "dev_count": 5,
+        "test_count": 20
+      }
+    ],
+    "model_input_contract": [
+      "method_token",
+      "placement_token",
+      "encoding_token",
+      "failure_token",
+      "failed_gate_token",
+      "candidate_signal_token",
+      "typed_availability_token",
+      "response_shape_token",
+      "status_chain_length_token",
+      "belief_token",
+      "bounded_budget_token"
+    ],
+    "excluded_from_model_input": [
+      "route_path",
+      "family_label",
+      "raw_probe",
+      "raw_response_body",
+      "oracle_authority",
+      "vulnerability_label"
+    ]
+  },
+  "capacity": {
+    "small": {
+      "parameter_count": 433230,
+      "run_count": 6,
+      "mean_test_safe_accuracy": 0.933333,
+      "min_test_safe_accuracy": 0.8,
+      "mean_test_abstain_recall": 0.833333,
+      "all_safe_action_allowlisted": true,
+      "all_input_contracts_clean": true
+    },
+    "medium": {
+      "parameter_count": 2442574,
+      "run_count": 6,
+      "mean_test_safe_accuracy": 0.933333,
+      "min_test_safe_accuracy": 0.8,
+      "mean_test_abstain_recall": 0.833333,
+      "all_safe_action_allowlisted": true,
+      "all_input_contracts_clean": true
+    },
+    "moe_large": {
+      "parameter_count": 15912026,
+      "run_count": 6,
+      "mean_test_safe_accuracy": 0.933333,
+      "min_test_safe_accuracy": 0.8,
+      "mean_test_abstain_recall": 0.833333,
+      "all_safe_action_allowlisted": true,
+      "all_input_contracts_clean": true
+    }
+  },
+  "capacity_order": [
+    "small",
+    "medium",
+    "moe_large"
+  ],
+  "runs": [
+    {
+      "split": "url_holdout",
+      "variant": "small",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 433230,
+      "train_count": 25,
+      "dev_count": 5,
+      "test_count": 5,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 0.00113197,
+          "dev_loss": 0.00092404
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.00108807,
+          "dev_loss": 0.00086306
+        },
+        {
+          "epoch": 70,
+          "train_loss": 0.00100216,
+          "dev_loss": 0.00080827
+        },
+        {
+          "epoch": 75,
+          "train_loss": 0.00093946,
+          "dev_loss": 0.00075917
+        },
+        {
+          "epoch": 80,
+          "train_loss": 0.00084393,
+          "dev_loss": 0.00071455
+        }
+      ],
+      "train": {
+        "count": 25,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999286
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999285
+      },
+      "test": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999263
+      },
+      "test_details": [
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999356,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999348,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999162,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999255,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999196,
+          "single_channel": true
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\url_holdout\\small_seed18001.pt",
+      "elapsed_seconds": 4.948,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "url_holdout",
+      "variant": "small",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 433230,
+      "train_count": 25,
+      "dev_count": 5,
+      "test_count": 5,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 0.00078409,
+          "dev_loss": 0.00065138
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.00074973,
+          "dev_loss": 0.00061478
+        },
+        {
+          "epoch": 70,
+          "train_loss": 0.00074427,
+          "dev_loss": 0.00058133
+        },
+        {
+          "epoch": 75,
+          "train_loss": 0.0006794,
+          "dev_loss": 0.00055085
+        },
+        {
+          "epoch": 80,
+          "train_loss": 0.00064361,
+          "dev_loss": 0.00052288
+        }
+      ],
+      "train": {
+        "count": 25,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999478
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999477
+      },
+      "test": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.99945
+      },
+      "test_details": [
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999595,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.99949,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999474,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999486,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999206,
+          "single_channel": true
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\url_holdout\\small_seed18002.pt",
+      "elapsed_seconds": 4.335,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "url_holdout",
+      "variant": "medium",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 2442574,
+      "train_count": 25,
+      "dev_count": 5,
+      "test_count": 5,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 6.331e-05,
+          "dev_loss": 5.123e-05
+        },
+        {
+          "epoch": 65,
+          "train_loss": 5.862e-05,
+          "dev_loss": 4.978e-05
+        },
+        {
+          "epoch": 70,
+          "train_loss": 5.574e-05,
+          "dev_loss": 4.845e-05
+        },
+        {
+          "epoch": 75,
+          "train_loss": 5.494e-05,
+          "dev_loss": 4.716e-05
+        },
+        {
+          "epoch": 80,
+          "train_loss": 5.481e-05,
+          "dev_loss": 4.594e-05
+        }
+      ],
+      "train": {
+        "count": 25,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999954
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999954
+      },
+      "test": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999953
+      },
+      "test_details": [
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999961,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.99996,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999967,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999965,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.99991,
+          "single_channel": true
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\url_holdout\\medium_seed18001.pt",
+      "elapsed_seconds": 6.239,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "url_holdout",
+      "variant": "medium",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 2442574,
+      "train_count": 25,
+      "dev_count": 5,
+      "test_count": 5,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 5.357e-05,
+          "dev_loss": 4.48e-05
+        },
+        {
+          "epoch": 65,
+          "train_loss": 5.159e-05,
+          "dev_loss": 4.313e-05
+        },
+        {
+          "epoch": 70,
+          "train_loss": 5.138e-05,
+          "dev_loss": 4.167e-05
+        },
+        {
+          "epoch": 75,
+          "train_loss": 4.716e-05,
+          "dev_loss": 4.027e-05
+        },
+        {
+          "epoch": 80,
+          "train_loss": 4.928e-05,
+          "dev_loss": 3.905e-05
+        }
+      ],
+      "train": {
+        "count": 25,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999961
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999961
+      },
+      "test": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999959
+      },
+      "test_details": [
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999971,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999971,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999971,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999976,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999908,
+          "single_channel": true
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\url_holdout\\medium_seed18002.pt",
+      "elapsed_seconds": 6.367,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "url_holdout",
+      "variant": "moe_large",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 15912026,
+      "train_count": 25,
+      "dev_count": 5,
+      "test_count": 5,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 2.35e-06,
+          "dev_loss": 2.34e-06
+        },
+        {
+          "epoch": 65,
+          "train_loss": 2.32e-06,
+          "dev_loss": 2.31e-06
+        },
+        {
+          "epoch": 70,
+          "train_loss": 2.4e-06,
+          "dev_loss": 2.31e-06
+        },
+        {
+          "epoch": 75,
+          "train_loss": 2.27e-06,
+          "dev_loss": 2.31e-06
+        },
+        {
+          "epoch": 80,
+          "train_loss": 2.29e-06,
+          "dev_loss": 2.29e-06
+        }
+      ],
+      "train": {
+        "count": 25,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999998
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999998
+      },
+      "test": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999998
+      },
+      "test_details": [
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999998,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999998,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999998,
+          "single_channel": true
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\url_holdout\\moe_large_seed18001.pt",
+      "elapsed_seconds": 29.045,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "url_holdout",
+      "variant": "moe_large",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 15912026,
+      "train_count": 25,
+      "dev_count": 5,
+      "test_count": 5,
+      "epochs_ran": 75,
+      "history_tail": [
+        {
+          "epoch": 55,
+          "train_loss": 2.17e-06,
+          "dev_loss": 2.1e-06
+        },
+        {
+          "epoch": 60,
+          "train_loss": 2.09e-06,
+          "dev_loss": 2.1e-06
+        },
+        {
+          "epoch": 65,
+          "train_loss": 2.04e-06,
+          "dev_loss": 2.05e-06
+        },
+        {
+          "epoch": 70,
+          "train_loss": 1.94e-06,
+          "dev_loss": 2.03e-06
+        },
+        {
+          "epoch": 75,
+          "train_loss": 2.08e-06,
+          "dev_loss": 2.03e-06
+        }
+      ],
+      "train": {
+        "count": 25,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 20,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999997
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999997
+      },
+      "test": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999997
+      },
+      "test_details": [
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999999,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999998,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999995,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": true
+        },
+        {
+          "surface": "url_redirect_get",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999997,
+          "single_channel": true
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\url_holdout\\moe_large_seed18002.pt",
+      "elapsed_seconds": 27.446,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "xss_holdout",
+      "variant": "small",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 433230,
+      "train_count": 20,
+      "dev_count": 5,
+      "test_count": 10,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 0.00143081,
+          "dev_loss": 0.00112298
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.00132327,
+          "dev_loss": 0.00104846
+        },
+        {
+          "epoch": 70,
+          "train_loss": 0.00125475,
+          "dev_loss": 0.00098268
+        },
+        {
+          "epoch": 75,
+          "train_loss": 0.00140052,
+          "dev_loss": 0.00092461
+        },
+        {
+          "epoch": 80,
+          "train_loss": 0.00139159,
+          "dev_loss": 0.00087294
+        }
+      ],
+      "train": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999024
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999127
+      },
+      "test": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.999128
+      },
+      "test_details": [
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999206,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999192,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.998995,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999118,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999125,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999206,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999193,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.998997,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999113,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999134,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\xss_holdout\\small_seed18001.pt",
+      "elapsed_seconds": 4.881,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "xss_holdout",
+      "variant": "small",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 433230,
+      "train_count": 20,
+      "dev_count": 5,
+      "test_count": 10,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 0.00111862,
+          "dev_loss": 0.0008205
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.00103465,
+          "dev_loss": 0.00076805
+        },
+        {
+          "epoch": 70,
+          "train_loss": 0.00089202,
+          "dev_loss": 0.00072166
+        },
+        {
+          "epoch": 75,
+          "train_loss": 0.00095716,
+          "dev_loss": 0.00068121
+        },
+        {
+          "epoch": 80,
+          "train_loss": 0.00089336,
+          "dev_loss": 0.00064475
+        }
+      ],
+      "train": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999291
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999356
+      },
+      "test": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.999354
+      },
+      "test_details": [
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999522,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.99941,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999312,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999391,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999143,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999522,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999412,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999293,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.99939,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999149,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\xss_holdout\\small_seed18002.pt",
+      "elapsed_seconds": 4.565,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "xss_holdout",
+      "variant": "medium",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 2442574,
+      "train_count": 20,
+      "dev_count": 5,
+      "test_count": 10,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 0.00011389,
+          "dev_loss": 8.707e-05
+        },
+        {
+          "epoch": 65,
+          "train_loss": 9.999e-05,
+          "dev_loss": 8.301e-05
+        },
+        {
+          "epoch": 70,
+          "train_loss": 9.383e-05,
+          "dev_loss": 7.941e-05
+        },
+        {
+          "epoch": 75,
+          "train_loss": 0.00012809,
+          "dev_loss": 7.61e-05
+        },
+        {
+          "epoch": 80,
+          "train_loss": 0.00012728,
+          "dev_loss": 7.31e-05
+        }
+      ],
+      "train": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999915
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999927
+      },
+      "test": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.999927
+      },
+      "test_details": [
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999937,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999951,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999921,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.99995,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999876,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999937,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999951,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.99992,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999949,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999875,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\xss_holdout\\medium_seed18001.pt",
+      "elapsed_seconds": 6.267,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "xss_holdout",
+      "variant": "medium",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 2442574,
+      "train_count": 20,
+      "dev_count": 5,
+      "test_count": 10,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 0.00011226,
+          "dev_loss": 7.35e-05
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.0001072,
+          "dev_loss": 7.04e-05
+        },
+        {
+          "epoch": 70,
+          "train_loss": 8.521e-05,
+          "dev_loss": 6.764e-05
+        },
+        {
+          "epoch": 75,
+          "train_loss": 8.842e-05,
+          "dev_loss": 6.504e-05
+        },
+        {
+          "epoch": 80,
+          "train_loss": 8.132e-05,
+          "dev_loss": 6.249e-05
+        }
+      ],
+      "train": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.99992
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999937
+      },
+      "test": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.999938
+      },
+      "test_details": [
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999946,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.99996,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999943,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999963,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999875,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999946,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.99996,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999946,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999962,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999877,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\xss_holdout\\medium_seed18002.pt",
+      "elapsed_seconds": 6.255,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "xss_holdout",
+      "variant": "moe_large",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 15912026,
+      "train_count": 20,
+      "dev_count": 5,
+      "test_count": 10,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 5.71e-06,
+          "dev_loss": 3.81e-06
+        },
+        {
+          "epoch": 65,
+          "train_loss": 5.42e-06,
+          "dev_loss": 3.81e-06
+        },
+        {
+          "epoch": 70,
+          "train_loss": 6.4e-06,
+          "dev_loss": 3.79e-06
+        },
+        {
+          "epoch": 75,
+          "train_loss": 1.02e-05,
+          "dev_loss": 3.79e-06
+        },
+        {
+          "epoch": 80,
+          "train_loss": 9.19e-06,
+          "dev_loss": 3.74e-06
+        }
+      ],
+      "train": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999992
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999996
+      },
+      "test": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.999996
+      },
+      "test_details": [
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999995,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999993,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999996,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999995,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999993,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999996,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\xss_holdout\\moe_large_seed18001.pt",
+      "elapsed_seconds": 27.049,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "xss_holdout",
+      "variant": "moe_large",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 15912026,
+      "train_count": 20,
+      "dev_count": 5,
+      "test_count": 10,
+      "epochs_ran": 80,
+      "history_tail": [
+        {
+          "epoch": 60,
+          "train_loss": 5.3e-06,
+          "dev_loss": 5.08e-06
+        },
+        {
+          "epoch": 65,
+          "train_loss": 6.9e-06,
+          "dev_loss": 4.96e-06
+        },
+        {
+          "epoch": 70,
+          "train_loss": 5.04e-06,
+          "dev_loss": 4.84e-06
+        },
+        {
+          "epoch": 75,
+          "train_loss": 6.51e-06,
+          "dev_loss": 4.72e-06
+        },
+        {
+          "epoch": 80,
+          "train_loss": 5.61e-06,
+          "dev_loss": 4.63e-06
+        }
+      ],
+      "train": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 15,
+          "abstain_unknown_oracle": 5
+        },
+        "mean_confidence": 0.999993
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.999995
+      },
+      "test": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.999995
+      },
+      "test_details": [
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999998,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999985,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999998,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_stored_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999996,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999997,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999998,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999985,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.999998,
+          "single_channel": false
+        },
+        {
+          "surface": "xss_blind_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.999996,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\xss_holdout\\moe_large_seed18002.pt",
+      "elapsed_seconds": 27.262,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "injection_holdout",
+      "variant": "small",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 433230,
+      "train_count": 10,
+      "dev_count": 5,
+      "test_count": 20,
+      "epochs_ran": 65,
+      "history_tail": [
+        {
+          "epoch": 45,
+          "train_loss": 0.00211211,
+          "dev_loss": 1.3891027
+        },
+        {
+          "epoch": 50,
+          "train_loss": 0.00183964,
+          "dev_loss": 1.40968835
+        },
+        {
+          "epoch": 55,
+          "train_loss": 0.00185464,
+          "dev_loss": 1.42525685
+        },
+        {
+          "epoch": 60,
+          "train_loss": 0.00162501,
+          "dev_loss": 1.43767774
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.00161097,
+          "dev_loss": 1.44817352
+        }
+      ],
+      "train": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.692101
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.686554
+      },
+      "test": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "mean_confidence": 0.691898
+      },
+      "test_details": [
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.767609,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.763862,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.652911,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.631621,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.642471,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.767609,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.765021,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.652849,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.630015,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.647044,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.767609,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.763862,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.652911,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.631621,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.642471,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.767609,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.763862,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.652911,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.631621,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.642471,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\injection_holdout\\small_seed18001.pt",
+      "elapsed_seconds": 1.865,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "injection_holdout",
+      "variant": "small",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 433230,
+      "train_count": 10,
+      "dev_count": 5,
+      "test_count": 20,
+      "epochs_ran": 70,
+      "history_tail": [
+        {
+          "epoch": 50,
+          "train_loss": 0.00119611,
+          "dev_loss": 1.58817005
+        },
+        {
+          "epoch": 55,
+          "train_loss": 0.00118228,
+          "dev_loss": 1.6020534
+        },
+        {
+          "epoch": 60,
+          "train_loss": 0.00105449,
+          "dev_loss": 1.61259973
+        },
+        {
+          "epoch": 65,
+          "train_loss": 0.00104076,
+          "dev_loss": 1.62099385
+        },
+        {
+          "epoch": 70,
+          "train_loss": 0.00107436,
+          "dev_loss": 1.62814021
+        }
+      ],
+      "train": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.888324
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.88187
+      },
+      "test": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "mean_confidence": 0.888424
+      },
+      "test_details": [
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.969128,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.921205,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.914798,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.877586,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.759904,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.969128,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.921905,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.914091,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.877965,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.757535,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.969128,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.921205,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.914798,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.877586,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.759904,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.969128,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.921205,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.914798,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.877586,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.759904,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\injection_holdout\\small_seed18002.pt",
+      "elapsed_seconds": 2.085,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "injection_holdout",
+      "variant": "medium",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 2442574,
+      "train_count": 10,
+      "dev_count": 5,
+      "test_count": 20,
+      "epochs_ran": 60,
+      "history_tail": [
+        {
+          "epoch": 40,
+          "train_loss": 8.12e-05,
+          "dev_loss": 2.115767
+        },
+        {
+          "epoch": 45,
+          "train_loss": 7.931e-05,
+          "dev_loss": 2.12751341
+        },
+        {
+          "epoch": 50,
+          "train_loss": 7.783e-05,
+          "dev_loss": 2.1355927
+        },
+        {
+          "epoch": 55,
+          "train_loss": 7.599e-05,
+          "dev_loss": 2.14141893
+        },
+        {
+          "epoch": 60,
+          "train_loss": 7.465e-05,
+          "dev_loss": 2.14592838
+        }
+      ],
+      "train": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.601382
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.591524
+      },
+      "test": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "mean_confidence": 0.601772
+      },
+      "test_details": [
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.698022,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.813197,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.50705,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.549389,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.443149,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.698022,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.811753,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.502178,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.546862,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.444202,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.698022,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.813197,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.50705,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.549389,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.443149,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.698022,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.813197,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.50705,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.549389,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.443149,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\injection_holdout\\medium_seed18001.pt",
+      "elapsed_seconds": 2.125,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "injection_holdout",
+      "variant": "medium",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 2442574,
+      "train_count": 10,
+      "dev_count": 5,
+      "test_count": 20,
+      "epochs_ran": 60,
+      "history_tail": [
+        {
+          "epoch": 40,
+          "train_loss": 8.718e-05,
+          "dev_loss": 2.2407732
+        },
+        {
+          "epoch": 45,
+          "train_loss": 7.483e-05,
+          "dev_loss": 2.25077462
+        },
+        {
+          "epoch": 50,
+          "train_loss": 7.908e-05,
+          "dev_loss": 2.25751543
+        },
+        {
+          "epoch": 55,
+          "train_loss": 7.691e-05,
+          "dev_loss": 2.26222324
+        },
+        {
+          "epoch": 60,
+          "train_loss": 7.283e-05,
+          "dev_loss": 2.2657094
+        }
+      ],
+      "train": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.684279
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.672272
+      },
+      "test": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "mean_confidence": 0.683981
+      },
+      "test_details": [
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.728096,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.790132,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.737853,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.555947,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.606387,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.728096,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.795531,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.74091,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.55276,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.607081,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.728096,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.790132,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.737853,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.555947,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.606387,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.728096,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.790132,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.737853,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.555947,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.606387,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\injection_holdout\\medium_seed18002.pt",
+      "elapsed_seconds": 2.153,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "injection_holdout",
+      "variant": "moe_large",
+      "seed": 18001,
+      "device": "cuda",
+      "parameter_count": 15912026,
+      "train_count": 10,
+      "dev_count": 5,
+      "test_count": 20,
+      "epochs_ran": 60,
+      "history_tail": [
+        {
+          "epoch": 40,
+          "train_loss": 3.11e-06,
+          "dev_loss": 2.57921362
+        },
+        {
+          "epoch": 45,
+          "train_loss": 3.08e-06,
+          "dev_loss": 2.58994269
+        },
+        {
+          "epoch": 50,
+          "train_loss": 3.03e-06,
+          "dev_loss": 2.59697771
+        },
+        {
+          "epoch": 55,
+          "train_loss": 2.9e-06,
+          "dev_loss": 2.60176873
+        },
+        {
+          "epoch": 60,
+          "train_loss": 2.84e-06,
+          "dev_loss": 2.60519838
+        }
+      ],
+      "train": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.52773
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.51865
+      },
+      "test": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "mean_confidence": 0.528233
+      },
+      "test_details": [
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.723298,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.475218,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.528863,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.41147,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.504829,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.723298,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.472543,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.525489,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.409139,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.503149,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.723298,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.475218,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.528863,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.41147,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.504829,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.723298,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.475217,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.528863,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.41147,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.504829,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\injection_holdout\\moe_large_seed18001.pt",
+      "elapsed_seconds": 11.805,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    },
+    {
+      "split": "injection_holdout",
+      "variant": "moe_large",
+      "seed": 18002,
+      "device": "cuda",
+      "parameter_count": 15912026,
+      "train_count": 10,
+      "dev_count": 5,
+      "test_count": 20,
+      "epochs_ran": 60,
+      "history_tail": [
+        {
+          "epoch": 40,
+          "train_loss": 2.94e-06,
+          "dev_loss": 2.45202851
+        },
+        {
+          "epoch": 45,
+          "train_loss": 2.78e-06,
+          "dev_loss": 2.46129227
+        },
+        {
+          "epoch": 50,
+          "train_loss": 2.72e-06,
+          "dev_loss": 2.46761465
+        },
+        {
+          "epoch": 55,
+          "train_loss": 2.67e-06,
+          "dev_loss": 2.47219062
+        },
+        {
+          "epoch": 60,
+          "train_loss": 2.61e-06,
+          "dev_loss": 2.4756968
+        }
+      ],
+      "train": {
+        "count": 10,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 8,
+          "abstain_unknown_oracle": 2
+        },
+        "mean_confidence": 0.643784
+      },
+      "dev": {
+        "count": 5,
+        "safe_accuracy": 0.8,
+        "raw_accuracy": 0.8,
+        "abstain_recall": 0.5,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 3,
+          "abstain_unknown_oracle": 2
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 4,
+          "abstain_unknown_oracle": 1
+        },
+        "mean_confidence": 0.638811
+      },
+      "test": {
+        "count": 20,
+        "safe_accuracy": 1.0,
+        "raw_accuracy": 1.0,
+        "abstain_recall": 1.0,
+        "single_channel_probe_block_count": 0,
+        "safe_action_not_allowlisted_count": 0,
+        "target_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "prediction_distribution": {
+          "repeat_matched_negative_pair": 16,
+          "abstain_unknown_oracle": 4
+        },
+        "mean_confidence": 0.643946
+      },
+      "test_details": [
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.684659,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.606805,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.585251,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.637524,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_delete_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.706301,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.684659,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.607072,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.5835,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.634674,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_header_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.707389,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.684659,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.606805,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.585251,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.637524,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_id_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.706301,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.684659,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.606805,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.585251,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "repeat_matched_negative_pair",
+          "raw_action": "repeat_matched_negative_pair",
+          "safe_action": "repeat_matched_negative_pair",
+          "confidence": 0.637524,
+          "single_channel": false
+        },
+        {
+          "surface": "sqli_widebyte_post",
+          "expected_action": "abstain_unknown_oracle",
+          "raw_action": "abstain_unknown_oracle",
+          "safe_action": "abstain_unknown_oracle",
+          "confidence": 0.706301,
+          "single_channel": false
+        }
+      ],
+      "checkpoint": "artifacts\\pg180-process-action-v1\\injection_holdout\\moe_large_seed18002.pt",
+      "elapsed_seconds": 11.836,
+      "raw_input_retained": false,
+      "oracle_in_input": false,
+      "family_in_input": false,
+      "route_in_input": false,
+      "vulnerability_label_in_input": false
+    }
+  ],
+  "selection": {
+    "selected_variant": null,
+    "promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "reason": "process-only labels and no typed vulnerability oracle"
+  },
+  "request_loop": {
+    "model_action_manifest_generation": "diagnostic_only",
+    "network_replay_in_this_run": false,
+    "next_replay_requires_manifest_validator": true,
+    "safe_canary_only": true
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "oracle_in_model_input": false,
+    "family_in_model_input": false,
+    "vulnerability_labels_in_model_input": false,
+    "memory_promotion_allowed": false
+  },
+  "report_sha256": "518e806e49d0a650006a42b84f88a5fc211c4ab9444f1e4869ea81cb2fc67a1a"
+}

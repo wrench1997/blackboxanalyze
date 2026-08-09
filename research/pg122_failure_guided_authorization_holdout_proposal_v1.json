@@ -1,0 +1,23 @@
+{
+  "protocol_id": "pg-pk-122-failure-guided-authorization-holdout-v1",
+  "proposal_id": "pg122-failure-guided-authorization-holdout-proposal-v1",
+  "question": "当候选信号没有 typed effect 或 oracle 不可用时，模型能否读取失败门并逐一复放 GET/POST，而不是把失败直接当作负例？",
+  "intervention": "新增独立 theta 授权/逻辑靶场；冻结 PG-121 解码器；将 bounded failure_signature 与下一安全动作写入 trace，不把原始探针或响应体写入模型输入。",
+  "observed_fields": ["method", "placement", "encoding_chain", "status_class", "shape flags", "candidate_signal", "authorization_changed projection outside current model input", "generic belief", "failure_signature", "next_action"],
+  "excluded_fields": ["raw probe", "raw response body", "credentials", "typed oracle label", "family label", "target id", "evidence hash"],
+  "success_definition": {
+    "authorization_positive_recall_nonzero": true,
+    "blind_unknown_abstain_nonzero": true,
+    "decoy_false_accept_zero": true,
+    "failure_signature_on_every_step": true,
+    "all_abstain_not_success": true
+  },
+  "observed_failure": {
+    "authorization_positive_recall": 0.0,
+    "decoy_false_accept_count": 0,
+    "blind_unknown_abstain_rate": 0.444444,
+    "root_cause": "PG-121 canonical representation omits authorization transition"
+  },
+  "next_if_fail": "Do not add the failed rows to memory; add one typed authorization-transition slot, fresh train, and repeat the same cross-implementation holdout.",
+  "next_if_pass": "Keep the scheduler and run a second independent logic family before any memory promotion."
+}

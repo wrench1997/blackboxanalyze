@@ -1,0 +1,263 @@
+{
+  "protocol_id": "pg-pk-256-pikachu-widebyte-oracle-v1",
+  "schema_version": "pg256-pikachu-widebyte-oracle-report-v1",
+  "status": "completed_failure_guided_widebyte_replay",
+  "runtime_image": "sift/pikachu-fixed@sha256:cca4288b6b701725e7a771f47ce7fcafd6cea9bd7622fa34ef2ed0b440f472c6",
+  "model": {
+    "policy": "payload_learner_ucb_rule_ir_class",
+    "failure_feedback_updates_selection": true,
+    "ai_participated_in_send": true,
+    "oracle_not_model_input": true
+  },
+  "route": {
+    "path": "/vul/sqli/sqli_widebyte.php",
+    "method": "POST",
+    "fields": [
+      "name",
+      "submit"
+    ]
+  },
+  "counts": {
+    "episode_count": 1,
+    "fresh_container_count": 1,
+    "database_health_gate_count": 1,
+    "ai_send_count": 1,
+    "reference_send_count": 1,
+    "typed_effect_confirmed_count": 0,
+    "confirmed_positive_count": 0,
+    "ai_candidate_classes": [
+      "syntax_boundary"
+    ],
+    "false_positive_count": 0,
+    "ephemeral_wire_count": 4
+  },
+  "learner_summary": {
+    "schema_version": "sift-payload-learner-v1",
+    "candidate_count": 2,
+    "attempt_count": 1,
+    "observable_success_count": 0,
+    "observable_success_rate": 0.0,
+    "policy_uses_evaluator": false,
+    "families": [
+      "sql"
+    ]
+  },
+  "episodes": [
+    {
+      "seed": 26232,
+      "route": "/vul/sqli/sqli_widebyte.php",
+      "method": "POST",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "fresh_target": true,
+      "target_instance_hash": "b6b765e4de3472d1c89c2b4452f52085bb314d2d55d1bc7704f107bd3996a953",
+      "reset": {
+        "reset_id": "pg214-reset-26232-0",
+        "reset_epoch": "26232-0",
+        "fresh_target": true,
+        "completed": true,
+        "container_recreated": true,
+        "container_restart_used": false,
+        "container_id_sha256": "b6b765e4de3472d1c89c2b4452f52085bb314d2d55d1bc7704f107bd3996a953",
+        "image": "sift/pikachu-fixed@sha256:cca4288b6b701725e7a771f47ce7fcafd6cea9bd7622fa34ef2ed0b440f472c6",
+        "image_id_sha256": "cca4288b6b701725e7a771f47ce7fcafd6cea9bd7622fa34ef2ed0b440f472c6",
+        "volume_mount_count": 0,
+        "database_health_gate": "mysqli_root_pikachu_ok",
+        "database_clean_contract": "fresh_writable_layer_no_volume_no_stateful_probe",
+        "baseline_from_original_derived_image": true,
+        "state_change_allowed": false,
+        "evaluator_state_hidden": true,
+        "external_network": false
+      },
+      "source_sha256": "c48bfa5c23e4c5075480d9bfe5f43b2b0ccdd1e83111d81f303cdc4e75b89a21",
+      "baseline": {
+        "schema_version": "pg256-pikachu-widebyte-result-oracle-v1",
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker": "your uid:",
+          "row_count_capped": 1,
+          "result_shape": "record_present",
+          "sql_error_shape": false,
+          "body_sha256": "a020f3ee69d8aa28f7dafd321d2a69c1098bd846915aba1e105e7b2e1bf6953a",
+          "label": "baseline-26232",
+          "projection_sha256": "37af2602b4027feb3da1138f675548c98eb87fd2f5e922bad4636d7d132bc388"
+        },
+        "raw_response_retained": false
+      },
+      "negative": {
+        "schema_version": "pg256-pikachu-widebyte-result-oracle-v1",
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "body_length_bucket": "4096-65535",
+          "row_marker": "your uid:",
+          "row_count_capped": 0,
+          "result_shape": "record_absent",
+          "sql_error_shape": false,
+          "body_sha256": "e82e55b4c7877e44c6d8dbc9e5bf8596a99c319abb82b77e9ea17fccd60a6894",
+          "label": "negative-26232",
+          "projection_sha256": "d7b8898a59a845751e67fb151785012d62256cacef8a176f5035205978d4e21e"
+        },
+        "raw_response_retained": false
+      },
+      "ai": {
+        "sent": true,
+        "selected": {
+          "candidate_id": "1af46403ce9c8f58cd86",
+          "family": "sql",
+          "method": "POST",
+          "path": "/vul/sqli/sqli_widebyte.php",
+          "probe_kind": "sql_channel_class",
+          "abstract_class": "syntax_boundary",
+          "payload_sha256": "f93fc9b39039dbf125104e6e02e69d9c1f3500b3aff229bc80291a0618d0e65c",
+          "raw_payload_stored": false
+        },
+        "response": {
+          "schema_version": "pg256-pikachu-widebyte-result-oracle-v1",
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "body_length_bucket": "4096-65535",
+            "row_marker": "your uid:",
+            "row_count_capped": 0,
+            "result_shape": "record_absent",
+            "sql_error_shape": false,
+            "body_sha256": "e82e55b4c7877e44c6d8dbc9e5bf8596a99c319abb82b77e9ea17fccd60a6894",
+            "label": "ai-26232-syntax_boundary",
+            "projection_sha256": "f93d8fa48bda9f79ec78928f5932826d4030a3454d22ddfc397621b21fb86ef5"
+          },
+          "raw_response_retained": false
+        },
+        "feedback": {
+          "step": 1,
+          "candidate_id": "1af46403ce9c8f58cd86",
+          "status": "dead_end",
+          "reward": 0.0,
+          "evaluator_confirmed": false,
+          "policy_uses_evaluator": false,
+          "evidence_hash": "ccc78fdb8f8f4e98f83b46f8953f2325720fca51b494f8ca8f2f63853e1ef5a4"
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false
+      },
+      "reference": {
+        "sent": true,
+        "class": "widebyte_escape_boundary",
+        "response": {
+          "schema_version": "pg256-pikachu-widebyte-result-oracle-v1",
+          "response_projection": {
+            "status_code": 200,
+            "status_class": "2xx",
+            "body_length_bucket": "4096-65535",
+            "row_marker": "your uid:",
+            "row_count_capped": 7,
+            "result_shape": "record_present",
+            "sql_error_shape": false,
+            "body_sha256": "ace60923330588589734aef7361ab916c2580afb10e942b98c83ae0506501152",
+            "label": "reference-26232",
+            "projection_sha256": "42add4218996dc978d2f57887ac6c529260d8251fc75293bde78e49b70de5fa3"
+          },
+          "raw_response_retained": false
+        },
+        "raw_payload_stored": false,
+        "raw_response_stored": false
+      },
+      "typed_oracle": {
+        "schema_version": "pg256-pikachu-widebyte-result-oracle-v1",
+        "route": "/vul/sqli/sqli_widebyte.php",
+        "contract": {
+          "kind": "widebyte_row_count_differential",
+          "row_count_cap": 16,
+          "read_only": true,
+          "vulnerability_claim_allowed": false
+        },
+        "typed_effect_confirmed": false,
+        "confirmed_positive": false,
+        "vulnerability_claim_allowed": false,
+        "reasons": [
+          "candidate_row_count_not_above_baseline",
+          "candidate_reference_row_count_disagreement",
+          "candidate_class_not_widebyte_escape_boundary"
+        ],
+        "evidence": {
+          "schema_version": "pg256-pikachu-widebyte-result-oracle-v1",
+          "route": "/vul/sqli/sqli_widebyte.php",
+          "method": "POST",
+          "source_sha256": "c48bfa5c23e4c5075480d9bfe5f43b2b0ccdd1e83111d81f303cdc4e75b89a21",
+          "baseline_row_count_capped": 1,
+          "candidate_row_count_capped": 0,
+          "reference_row_count_capped": 7,
+          "negative_row_count_capped": 0,
+          "candidate_class": "syntax_boundary",
+          "reference_class": "widebyte_escape_boundary",
+          "candidate_effect": false,
+          "reference_effect": true,
+          "candidate_reference_agreement": false,
+          "fresh_reset": true,
+          "database_write": false,
+          "time_delay_used": false,
+          "external_network": false,
+          "raw_payload_strings_stored": false,
+          "raw_response_bodies_stored": false,
+          "evidence_hash": "2217c2fa061e26ffd0b0770eed6c7a3969ec83f71ba847570aa3bb6ae5cf5e27"
+        },
+        "evidence_hash": "2217c2fa061e26ffd0b0770eed6c7a3969ec83f71ba847570aa3bb6ae5cf5e27",
+        "raw_payload_strings_stored": false,
+        "raw_response_bodies_stored": false
+      },
+      "confirmed_positive": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  ],
+  "ephemeral_wires": [
+    {
+      "label": "baseline-26232",
+      "method": "POST",
+      "path": "/vul/sqli/sqli_widebyte.php",
+      "body_sha256": "d7614b1f731a248c4bd525ee6681c5ec9d280562644ad5b34b4d916a0f47a598"
+    },
+    {
+      "label": "negative-26232",
+      "method": "POST",
+      "path": "/vul/sqli/sqli_widebyte.php",
+      "body_sha256": "c21d38aa2677c34d3e9d068b8dc51672093523f3eba256474d9ed7de8ec5e71d"
+    },
+    {
+      "label": "ai-26232-syntax_boundary",
+      "method": "POST",
+      "path": "/vul/sqli/sqli_widebyte.php",
+      "body_sha256": "6f94681e628a9e0919cb663c4d37f5b1291fedb01e6a96339d118e046bb52bf2"
+    },
+    {
+      "label": "reference-26232",
+      "method": "POST",
+      "path": "/vul/sqli/sqli_widebyte.php",
+      "body_sha256": "a3eac1aaadb56e2d320de38f5f15c4706b3612750a3005fa76bc3906212a6527"
+    }
+  ],
+  "promotion": {
+    "training_eligible": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "fresh_container_per_episode": true,
+    "no_volume_or_bind_mount": true,
+    "database_write": false,
+    "time_delay_used": false,
+    "external_network_target": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "report_sha256": "618fcd21dc7673f5169d89d7871069c18b816df4909adf8109c8ea2206a08eb5"
+}

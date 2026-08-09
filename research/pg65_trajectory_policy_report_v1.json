@@ -1,0 +1,129 @@
+{
+  "protocol_id": "pg-pk-65-trajectory-policy-v1",
+  "schema_version": "pg65-trajectory-policy-report-v1",
+  "status": "diagnostic_only",
+  "training": {
+    "source_trace": "research\\pg64_multistep_belief_regret_trace_v1.json",
+    "train_group_count": 171,
+    "dev_group_count": 174,
+    "holdout_group_count": 337,
+    "epochs": 240,
+    "device": "cuda",
+    "history_tail": [
+      {
+        "epoch": 80,
+        "train_loss": 0.379787,
+        "dev_loss": 0.396831,
+        "dev_accuracy": 0.712644
+      },
+      {
+        "epoch": 120,
+        "train_loss": 0.379784,
+        "dev_loss": 0.39668,
+        "dev_accuracy": 0.712644
+      },
+      {
+        "epoch": 160,
+        "train_loss": 0.379784,
+        "dev_loss": 0.396656,
+        "dev_accuracy": 0.712644
+      },
+      {
+        "epoch": 200,
+        "train_loss": 0.379783,
+        "dev_loss": 0.396671,
+        "dev_accuracy": 0.712644
+      },
+      {
+        "epoch": 240,
+        "train_loss": 0.379783,
+        "dev_loss": 0.396698,
+        "dev_accuracy": 0.712644
+      }
+    ],
+    "checkpoint": "artifacts\\pg65-trajectory-policy\\policy_head.pt",
+    "checkpoint_sha256": "4ba5e5e8e26f7e0244ae25d4bc084bafb24dae70fadc060d9f7908f599394499",
+    "oracle_in_input": false,
+    "family_in_input": false,
+    "target_in_input": false,
+    "raw_request_response_in_input": false
+  },
+  "train_metrics": {
+    "group_count": 171,
+    "accuracy": 0.760234,
+    "loss": 0.379783
+  },
+  "dev_metrics": {
+    "group_count": 174,
+    "accuracy": 0.712644,
+    "loss": 0.396656
+  },
+  "pg64_holdout_policy_metrics": {
+    "group_count": 337,
+    "accuracy": 0.721068,
+    "loss": 0.403089
+  },
+  "independent_noise_holdout": {
+    "episode_count": 144,
+    "positive_episode_count": 96,
+    "negative_control_count": 48,
+    "target_recall": 1.0,
+    "known_target_recall": 1.0,
+    "unknown_positive_count": 14,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 14,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "mean_steps": 2.333333,
+    "median_steps": 2.0,
+    "multi_step_episode_rate": 0.666667,
+    "mean_counterfactual_regret": 0.0,
+    "action_counts": {
+      "POST.confirm": 120,
+      "GET.confirm": 120,
+      "POST.screen": 48,
+      "GET.screen": 48
+    },
+    "fresh_reset_count": 336,
+    "evidence_hash_count": 336,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "independent_source": {
+    "layouts": [
+      "juno",
+      "kestrel"
+    ],
+    "noise_profile": "pg65-shifted-observation-table",
+    "task_count": 144,
+    "model_retrained_on_independent": false
+  },
+  "hard_gate": {
+    "schema_version": "pg65-trajectory-policy-hard-gate-v1",
+    "status": "passed",
+    "claim_allowed": false,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "capability_gate": {
+    "schema_version": "pg65-trajectory-policy-capability-gate-v1",
+    "status": "blocked",
+    "claim_allowed": false,
+    "reasons": [
+      "dev_policy_accuracy_below_0.80",
+      "pg64_holdout_policy_accuracy_below_0.80"
+    ],
+    "minimum_dev_accuracy": 0.8,
+    "minimum_pg64_holdout_accuracy": 0.8,
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "status": "safety_gate_passed_capability_gate_blocked",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "interpretation": "PG65 的独立安全复放通过，但策略头 dev/holdout 选择准确率不足，不能称为可规模化能力；下一轮改用 utility/ranking 目标。"
+}

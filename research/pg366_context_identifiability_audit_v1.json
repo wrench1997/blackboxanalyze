@@ -1,0 +1,72 @@
+{
+  "schema_version": "pg366-context-identifiability-audit-v1",
+  "status": "diagnostic_shortcut_risk",
+  "source_dataset": "research\\pg364_compositional_rule_ir_dataset_v1.json",
+  "source_dataset_sha256": "9eb16a89e7ca813b42f1a473945ea44ff7ac9a39964c23e07e169aa0d58fd618",
+  "counts": {
+    "input_rows": 2600,
+    "valid_rows": 2600,
+    "invalid_rows": 0,
+    "split": {
+      "implementation_holdout": 1000,
+      "train": 1600
+    },
+    "source_meta_present_rows": 0
+  },
+  "entropy": {
+    "exact_context": {
+      "projection": "exact",
+      "group_count": 840,
+      "unique_target_sequence_count": 265,
+      "target_entropy_bits": 8.002816,
+      "conditional_target_entropy_bits": 0.0,
+      "information_gain_bits": 8.002816,
+      "max_group_rows": 12
+    },
+    "presence_only": {
+      "projection": "presence_only",
+      "group_count": 12,
+      "unique_target_sequence_count": 265,
+      "target_entropy_bits": 8.002816,
+      "conditional_target_entropy_bits": 6.671356,
+      "information_gain_bits": 1.331459,
+      "max_group_rows": 1816
+    },
+    "without_chunk_digest": {
+      "projection": "without_chunk_digest",
+      "group_count": 840,
+      "unique_target_sequence_count": 265,
+      "target_entropy_bits": 8.002816,
+      "conditional_target_entropy_bits": 0.0,
+      "information_gain_bits": 8.002816,
+      "max_group_rows": 12
+    },
+    "without_chunk_metadata": {
+      "projection": "without_chunk_metadata",
+      "group_count": 840,
+      "unique_target_sequence_count": 265,
+      "target_entropy_bits": 8.002816,
+      "conditional_target_entropy_bits": 0.0,
+      "information_gain_bits": 8.002816,
+      "max_group_rows": 12
+    }
+  },
+  "shortcut_risk": {
+    "exact_context_unique_ratio": 0.323077,
+    "exact_context_conditional_entropy_zero": true,
+    "interpretation": "full abstract context uniquely determines the synthetic target sequence; this is a data identifiability finding, not proof of generalization",
+    "implementation_provenance_in_rows": false
+  },
+  "predictive_entropy": {
+    "status": "not_run",
+    "must_not_be_inferred_from_context_entropy": true
+  },
+  "failures": [],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "99bcdfa68d0e69ac71a606d1073db5950bb85e07076d509ac3508d614f677b30"
+}

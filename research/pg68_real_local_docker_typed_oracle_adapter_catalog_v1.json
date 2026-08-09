@@ -1,0 +1,1232 @@
+{
+  "schema_version": "sift-authorized-payload-catalog-v1",
+  "catalog_id": "pg68-real-local-docker-evaluation-only",
+  "sources": [
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg68-pikachu-get-typed",
+        "source_type": "authorized_local_container",
+        "origin": "research/pg52_authoritative_local_oracle_report_v1.json",
+        "license": "local_container",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:8767"
+        ],
+        "captured_at": "2026-08-02T21:56:29+00:00",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+        "source_sha256": "b1067fd565b8192dfcb4edcb536e9c1175d80fd8f6e11379b2145225f4f8205d"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg68-xss-reflected-get",
+          "source_id": "pg68-pikachu-get-typed",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/xss/xss_reflected_get.php",
+            "headers": {
+              "accept": "text/html",
+              "x-sift-probe": "pg68-xss-reflected-get-probe"
+            },
+            "marker": "pg68-xss-reflected-get-probe",
+            "probe_kind": "inert_dom_markup",
+            "probe": "dom_event_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_dom_execution",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "f41d02532bfda3f2b2c9adf2ee8029d78c9b7641b28ce91d11382e82e6eaea84"
+          },
+          "probe_artifact": {
+            "original": "dom_event_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "67fdd7833b6a2871ed0cda84899302b1299db47ba28a42b22454a8dcbc6ad6d8"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "xss_reflected_get",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "typed_dom_execution"
+          },
+          "structural_feature": "dom:inert_dom_markup",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg68-pair-xss-reflected-get",
+            "variant": "abstract_class",
+            "surface_role": "xss_reflected_get",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg68-xss-reflected-get"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/xss/xss_reflected_get.php",
+            "params": {
+              "message": "pg68-xss-reflected-get-probe"
+            },
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": false,
+              "kind": "pg52-disposable-container-round",
+              "per_action_required": true,
+              "read_only_round": true,
+              "reset_adapter_sha256": "af873abf70ccfe9876326610b0557d505098c350eefd5e78e98fbb643c982719",
+              "reset_id": "pg68-reset-round-85bc03b220313ea99833efd5",
+              "reset_scope": "transport_container_round",
+              "reuse_detected": true,
+              "state_change_allowed": false,
+              "state_epoch": "85bc03b220313ea9-read-only",
+              "target_instance_id": "85bc03b220313ea99833efd5"
+            },
+            "transport": "docker_loopback"
+          },
+          "response_projection": {
+            "body_length": 33761,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "5475f74e0d11175403571f00e7f05d7f2e0a24981ab2d846c1cabbdef624f021",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 1,
+            "has_location": false,
+            "html_tag_count": 428,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 1,
+            "marker_reflected": true,
+            "projection_sha256": "de0e4f802c746daa0b0adf6c4fc9ed306333c67fc7055035b874afc3b5a2c7f6",
+            "script_count": 16,
+            "semantic_body_sha256": "5475f74e0d11175403571f00e7f05d7f2e0a24981ab2d846c1cabbdef624f021",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "dom_structure",
+            "modality": "browser_dom_execution",
+            "oracle_id": "pg52-browser-reflected_get-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "execution_path": "automatic",
+              "external_request_count": 0,
+              "marker_set_in_page": true,
+              "mode": "reflected_get",
+              "navigation_count": 0,
+              "same_origin": true,
+              "stripped_external_resource_count": 34
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "b83744f4c37eb0443027d20f795d3ea4183ba3b17c54548013239a234edf6cc7",
+            "source_candidate_evidence_sha256": "71e020c5465bfe957e91b78d9a09a171cbd2a01ffe447f0585b58c46b610b3e8",
+            "source_control_evidence_sha256": "f95d6fadbe48fc01741182df8ad260834c41f6be74274e4c77e226190b763f58"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg68-xss-dom-get",
+          "source_id": "pg68-pikachu-get-typed",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/xss/xss_dom.php",
+            "headers": {
+              "accept": "text/html",
+              "x-sift-probe": "pg68-xss-dom-get-probe"
+            },
+            "marker": "pg68-xss-dom-get-probe",
+            "probe_kind": "inert_dom_markup",
+            "probe": "dom_event_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_dom_execution",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "cecdbfefc70f6af2faf16623d19251bd102a53b6e348e3ba8f0c92d310cad8ba"
+          },
+          "probe_artifact": {
+            "original": "dom_event_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "67fdd7833b6a2871ed0cda84899302b1299db47ba28a42b22454a8dcbc6ad6d8"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "xss_dom_source",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "typed_dom_execution"
+          },
+          "structural_feature": "dom:inert_dom_markup",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg68-pair-xss-dom-get",
+            "variant": "abstract_class",
+            "surface_role": "xss_dom_source",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg68-xss-dom-get"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/xss/xss_dom.php",
+            "params": {
+              "text": "pg68-xss-dom-get-probe"
+            },
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": false,
+              "kind": "pg52-disposable-container-round",
+              "per_action_required": true,
+              "read_only_round": true,
+              "reset_adapter_sha256": "af873abf70ccfe9876326610b0557d505098c350eefd5e78e98fbb643c982719",
+              "reset_id": "pg68-reset-round-85bc03b220313ea99833efd5",
+              "reset_scope": "transport_container_round",
+              "reuse_detected": true,
+              "state_change_allowed": false,
+              "state_epoch": "85bc03b220313ea9-read-only",
+              "target_instance_id": "85bc03b220313ea99833efd5"
+            },
+            "transport": "docker_loopback"
+          },
+          "response_projection": {
+            "body_length": 34041,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "fa291cc2d095c7fa38170840ee1b50bd49cee3dc87a4ede8f4763722e268aacf",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 0,
+            "has_location": false,
+            "html_tag_count": 426,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 0,
+            "marker_reflected": false,
+            "projection_sha256": "bb16cd842f37206af8a8921a4f992ca094166804645cf12cbe7a0c68f30da763",
+            "script_count": 17,
+            "semantic_body_sha256": "fa291cc2d095c7fa38170840ee1b50bd49cee3dc87a4ede8f4763722e268aacf",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "dom_structure",
+            "modality": "browser_dom_execution",
+            "oracle_id": "pg52-browser-dom_get-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "execution_path": "controlled_event_dispatch",
+              "external_request_count": 0,
+              "marker_set_in_page": true,
+              "mode": "dom_get",
+              "navigation_count": 0,
+              "same_origin": true,
+              "stripped_external_resource_count": 34
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "3987cfd2e3296a557683741ec009dce15b09e7c0e5596122699ce0930f48a4ba",
+            "source_candidate_evidence_sha256": "e9d3ee97bc1b536212b9ba3b67851001c065fac3999d7367b159a7086f379021",
+            "source_control_evidence_sha256": "02592a57e233e72b126a3f30c2159f674840917e19d1847b1f742527f8890782"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg68-sqli-string-get",
+          "source_id": "pg68-pikachu-get-typed",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_str.php",
+            "headers": {
+              "accept": "text/html",
+              "x-sift-probe": "pg68-sqli-string-get-probe"
+            },
+            "marker": "pg68-sqli-string-get-probe",
+            "probe_kind": "sql_channel_class",
+            "probe": "quoted_value",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_ast_differential",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "3e29b6c4210c4a768599b0bda20eeb21540f34311cac69b53950ffd11e47ad2e"
+          },
+          "probe_artifact": {
+            "original": "quoted_value",
+            "encoding": "abstract_class",
+            "probe_sha256": "428fbccceda10cd58ce5bbc6a8c0cae866ae6a1a06d55a117e5beec0c2c1bd2c"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sqli_str",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "typed_ast_differential"
+          },
+          "structural_feature": "sql:sql_channel_class:quoted_value",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg68-pair-sqli-string-get",
+            "variant": "abstract_class",
+            "surface_role": "sqli_str",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg68-sqli-string-get"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_str.php",
+            "params": {
+              "name": "pg68-sqli-string-get-probe"
+            },
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": false,
+              "kind": "pg52-disposable-container-round",
+              "per_action_required": true,
+              "read_only_round": true,
+              "reset_adapter_sha256": "af873abf70ccfe9876326610b0557d505098c350eefd5e78e98fbb643c982719",
+              "reset_id": "pg68-reset-round-85bc03b220313ea99833efd5",
+              "reset_scope": "transport_container_round",
+              "reuse_detected": true,
+              "state_change_allowed": false,
+              "state_epoch": "85bc03b220313ea9-read-only",
+              "target_instance_id": "85bc03b220313ea99833efd5"
+            },
+            "transport": "docker_loopback"
+          },
+          "response_projection": {
+            "body_length": 34100,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "f4ab21a2a803678df2b7436785a6fb0a0afdf76d7b2ddea56617857e0c42ff42",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 1,
+            "has_location": false,
+            "html_tag_count": 440,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 0,
+            "marker_reflected": false,
+            "projection_sha256": "8f229ce2eaf27a5b8d1241b49a75769dc95ead021ed7593cafaa0fb26c15cee3",
+            "query_seen": true,
+            "result_row_count": 7,
+            "script_count": 16,
+            "semantic_body_sha256": "f4ab21a2a803678df2b7436785a6fb0a0afdf76d7b2ddea56617857e0c42ff42",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "interpreter_boundary",
+            "modality": "sql_ast_differential",
+            "oracle_id": "pg52-sql-ast-differential-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "ast_changed": true,
+              "candidate_ast_sha256": "189e01878cdec0a978c03567114965bbcfce20f062a05155258044fdc06b234e",
+              "candidate_operator_set": [
+                "=",
+                "or"
+              ],
+              "candidate_result_row_count": 7,
+              "control_ast_sha256": "ad99139c4b32e2fb08170dacb5fddfd7d20793278e42d7602e27baa203202055",
+              "control_operator_set": [
+                "="
+              ],
+              "control_result_row_count": 0,
+              "marker_binding": "520f7799d6299fc4ef17b39765085f417a8ecf74979188701e2f3945887478de",
+              "safe_read_only_select": true,
+              "semantic_differential": true
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "18d3a3b70b4d7181bbadc9c2ee49489a5683835e6f6aab45c68b1eb01d207ac9",
+            "source_candidate_evidence_sha256": "d50283479a702a3637e36c38d9e57dd857b2c23d05d79c5b71d086244aae47d1",
+            "source_control_evidence_sha256": "e1556156443403d44bb42419cef201652347caf7695613845c4444e525a86b11"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg68-sqli-search-get",
+          "source_id": "pg68-pikachu-get-typed",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_search.php",
+            "headers": {
+              "accept": "text/html",
+              "x-sift-probe": "pg68-sqli-search-get-probe"
+            },
+            "marker": "pg68-sqli-search-get-probe",
+            "probe_kind": "sql_channel_class",
+            "probe": "operator_like",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_ast_differential",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "9597e6ad9e16a84dcbaa0a08b05515df714df67621da00a2ff49ef8bc4035f46"
+          },
+          "probe_artifact": {
+            "original": "operator_like",
+            "encoding": "abstract_class",
+            "probe_sha256": "a4a755aa417ca69dd553ae5689e0cf457e5d4e4964a2fcb3b5d5d686884e60f2"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sqli_search",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "typed_ast_differential"
+          },
+          "structural_feature": "sql:sql_channel_class:operator_like",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg68-pair-sqli-search-get",
+            "variant": "abstract_class",
+            "surface_role": "sqli_search",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg68-sqli-search-get"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_search.php",
+            "params": {
+              "name": "pg68-sqli-search-get-probe"
+            },
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": false,
+              "kind": "pg52-disposable-container-round",
+              "per_action_required": true,
+              "read_only_round": true,
+              "reset_adapter_sha256": "af873abf70ccfe9876326610b0557d505098c350eefd5e78e98fbb643c982719",
+              "reset_id": "pg68-reset-round-85bc03b220313ea99833efd5",
+              "reset_scope": "transport_container_round",
+              "reuse_detected": true,
+              "state_change_allowed": false,
+              "state_epoch": "85bc03b220313ea9-read-only",
+              "target_instance_id": "85bc03b220313ea99833efd5"
+            },
+            "transport": "docker_loopback"
+          },
+          "response_projection": {
+            "body_length": 34350,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "e9dece9c430a8de44c058bda88b0556cd5fe31a39be544adb42dd50355124e85",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 1,
+            "has_location": false,
+            "html_tag_count": 450,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 1,
+            "marker_reflected": true,
+            "projection_sha256": "a0b831634ffc2460700498028b14c6c3497545b6ea1a998bef1d930a502a285e",
+            "query_seen": true,
+            "result_row_count": 7,
+            "script_count": 16,
+            "semantic_body_sha256": "e9dece9c430a8de44c058bda88b0556cd5fe31a39be544adb42dd50355124e85",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "interpreter_boundary",
+            "modality": "sql_ast_differential",
+            "oracle_id": "pg52-sql-ast-differential-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "ast_changed": true,
+              "candidate_ast_sha256": "a96a0a29d159ce662a8636317f90af9b91b06f24a2ca4b3925d2e80c66061c4e",
+              "candidate_operator_set": [
+                "like",
+                "or"
+              ],
+              "candidate_result_row_count": 7,
+              "control_ast_sha256": "ee7f9f47f786235a22744629b0cf120cf31190f502d11d705010d4ec218de4e3",
+              "control_operator_set": [
+                "like"
+              ],
+              "control_result_row_count": 0,
+              "marker_binding": "3cbc7bddaaab1f1ba691845a01c743b8b2e584a7fee3fb88096cf291342ff626",
+              "safe_read_only_select": true,
+              "semantic_differential": true
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "05edda270729823870a17b91d4c818a45c52f9d2159e4cf8f3e70992bf4c9c6c",
+            "source_candidate_evidence_sha256": "a57f37082ee7aedb61d75169aba8469b9f7fcef300f2194a9d7f470f08592863",
+            "source_control_evidence_sha256": "abcf34a4cd0b9b8ca3cd8ef2d468e112e15ecbf6c603603590a91b2b9e1d6b8f"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg68-sqli-boolean-get",
+          "source_id": "pg68-pikachu-get-typed",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_blind_b.php",
+            "headers": {
+              "accept": "text/html",
+              "x-sift-probe": "pg68-sqli-boolean-get-probe"
+            },
+            "marker": "pg68-sqli-boolean-get-probe",
+            "probe_kind": "sql_channel_class",
+            "probe": "blind_boolean",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_ast_differential",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "8f1fa7d4431e0b8f02f2b5d52b60481bdf7b63894d940be313ddabd0a3c69c1f"
+          },
+          "probe_artifact": {
+            "original": "blind_boolean",
+            "encoding": "abstract_class",
+            "probe_sha256": "328789b18b47407b05ca4fb8663a080a9475cb30b5d67e975743267334764424"
+          },
+          "semantic": {
+            "family": "injection",
+            "surface": "sqli_blind_b",
+            "expected_oracle": "synthetic_sql_ast_differential_v1",
+            "expected_signal": "typed_ast_differential"
+          },
+          "structural_feature": "sql:sql_channel_class:blind_boolean",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg68-pair-sqli-boolean-get",
+            "variant": "abstract_class",
+            "surface_role": "sqli_blind_b",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg68-sqli-boolean-get"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/sqli/sqli_blind_b.php",
+            "params": {
+              "name": "pg68-sqli-boolean-get-probe"
+            },
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": false,
+              "kind": "pg52-disposable-container-round",
+              "per_action_required": true,
+              "read_only_round": true,
+              "reset_adapter_sha256": "af873abf70ccfe9876326610b0557d505098c350eefd5e78e98fbb643c982719",
+              "reset_id": "pg68-reset-round-85bc03b220313ea99833efd5",
+              "reset_scope": "transport_container_round",
+              "reuse_detected": true,
+              "state_change_allowed": false,
+              "state_epoch": "85bc03b220313ea9-read-only",
+              "target_instance_id": "85bc03b220313ea99833efd5"
+            },
+            "transport": "docker_loopback"
+          },
+          "response_projection": {
+            "body_length": 33673,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "5ed162c555e9c5a9429ca066cd2cebe347ff559ee34cec6ba17e8e706d7c6355",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 1,
+            "has_location": false,
+            "html_tag_count": 428,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 0,
+            "marker_reflected": false,
+            "projection_sha256": "a8ee8f4f3f6c24cd6f1a4070a1ac2b23db8a5d5993a6bb257efe801d8169aa79",
+            "query_seen": true,
+            "result_row_count": 1,
+            "script_count": 16,
+            "semantic_body_sha256": "5ed162c555e9c5a9429ca066cd2cebe347ff559ee34cec6ba17e8e706d7c6355",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "interpreter_boundary",
+            "modality": "sql_ast_differential",
+            "oracle_id": "pg52-sql-ast-differential-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "ast_changed": true,
+              "candidate_ast_sha256": "42ececee683acac8efa4b32f2a9ca5b53555f404bd917761b178619882c02a1c",
+              "candidate_operator_set": [
+                "=",
+                "and"
+              ],
+              "candidate_result_row_count": 1,
+              "control_ast_sha256": "ad99139c4b32e2fb08170dacb5fddfd7d20793278e42d7602e27baa203202055",
+              "control_operator_set": [
+                "="
+              ],
+              "control_result_row_count": 0,
+              "marker_binding": "c1e181d81ed1c42d2d9b95852db1379219c2270c74afa2458baee493cdccdf8a",
+              "safe_read_only_select": true,
+              "semantic_differential": true
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "9b1de909563e6cf77f79c6396f2a91a198edc85336871e6333b35d4669054c83",
+            "source_candidate_evidence_sha256": "f1dc1bf245bd25fe1f63c07a72dee6f393fb1c89a82411ea1661e7c3aa7b4f5a",
+            "source_control_evidence_sha256": "868c91778ea6cc239bc15b3420c645b02ad7c3225e2d141ab3405b24a5710ae2"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        },
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg68-url-redirect-get",
+          "source_id": "pg68-pikachu-get-typed",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/urlredirect/urlredirect.php",
+            "headers": {
+              "accept": "text/html",
+              "x-sift-probe": "pg68-url-redirect-get-probe"
+            },
+            "marker": "pg68-url-redirect-get-probe",
+            "probe_kind": "http_canary",
+            "probe": "loopback_destination_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_redirect_destination",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "payload_sha256": "fa1b3ef29a5ceb6ad2542286bef365e32be41cba3fb5eddc7dc79641e888f714"
+          },
+          "probe_artifact": {
+            "original": "loopback_destination_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "7761eea19ea43f3b4f538e0367cfca3549b73f084a343b1c07e70b46f2f02790"
+          },
+          "semantic": {
+            "family": "url_redirect",
+            "surface": "url_redirect",
+            "expected_oracle": "pikachu_bounded_http_projection_v1",
+            "expected_signal": "typed_redirect_destination"
+          },
+          "structural_feature": "surface:http_canary",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg68-pair-url-redirect-get",
+            "variant": "abstract_class",
+            "surface_role": "url_redirect",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg68-url-redirect-get"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8767",
+            "method": "GET",
+            "path": "/vul/urlredirect/urlredirect.php",
+            "params": {
+              "url": "pg68-url-redirect-get-probe"
+            },
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": false,
+              "kind": "pg52-disposable-container-round",
+              "per_action_required": true,
+              "read_only_round": true,
+              "reset_adapter_sha256": "af873abf70ccfe9876326610b0557d505098c350eefd5e78e98fbb643c982719",
+              "reset_id": "pg68-reset-round-85bc03b220313ea99833efd5",
+              "reset_scope": "transport_container_round",
+              "reuse_detected": true,
+              "state_change_allowed": false,
+              "state_epoch": "85bc03b220313ea9-read-only",
+              "target_instance_id": "85bc03b220313ea99833efd5"
+            },
+            "transport": "docker_loopback"
+          },
+          "response_projection": {
+            "body_length": 33771,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 0,
+            "has_location": true,
+            "html_tag_count": 428,
+            "input_count": 0,
+            "location_origin": "loopback",
+            "location_sha256": "84dd3284c38000b4ce6e80fe033e56fc65f4bbcbb44090639decd7410af4efd8",
+            "marker_count": 0,
+            "marker_reflected": false,
+            "projection_sha256": "4a3e09339ce6af5597dbf0bea0cd7f3865fdc61841369146691354c05f7d0337",
+            "script_count": 16,
+            "semantic_body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+            "status_class": "3xx",
+            "status_code": 302
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "redirect_origin",
+            "modality": "redirect_destination_controlled",
+            "oracle_id": "pg52-url-redirect-loopback-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "destination_origin": "loopback",
+              "location_exact": true,
+              "location_present": true,
+              "location_sha256": "84dd3284c38000b4ce6e80fe033e56fc65f4bbcbb44090639decd7410af4efd8",
+              "parsed_scheme_present": true,
+              "status_class": "3xx"
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "4509a752ea04959f2611356073a163bbec6369b37daa96a3851dd145395481d4",
+            "source_candidate_evidence_sha256": "84bf75a7fe1dd7f3986dd7451e93002829b5bf07f006ab698387808dee17337c",
+            "source_control_evidence_sha256": "ee6c05de38bc084e46d4f53a5aa3504bebb4568b58555da006974517d1e15b11"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    },
+    {
+      "provenance": {
+        "schema_version": "sift-authorized-payload-source-v1",
+        "source_id": "pg68-pikachu-post-typed",
+        "source_type": "authorized_local_container",
+        "origin": "research/pg52_authoritative_local_oracle_report_v1.json",
+        "license": "local_container",
+        "authorization": "workspace_local_only",
+        "scope": [
+          "http://127.0.0.1:8768"
+        ],
+        "captured_at": "2026-08-02T21:56:29+00:00",
+        "authorized_for": [
+          "holdout_evaluation",
+          "local_replay",
+          "training"
+        ],
+        "external_network": false,
+        "evaluator_state_visible": false,
+        "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+        "source_sha256": "03630e732261826cabf80e939e384709db1eae03b78ed8c83a195a416ef119bf"
+      },
+      "samples": [
+        {
+          "schema_version": "sift-authorized-payload-sample-v1",
+          "sample_id": "pg68-xss-reflected-post",
+          "source_id": "pg68-pikachu-post-typed",
+          "payload": {
+            "schema_version": "sift-detection-payload-v1",
+            "target": "http://127.0.0.1:8768",
+            "method": "POST",
+            "path": "/vul/xss/xsspost/xss_reflected_post.php",
+            "headers": {
+              "accept": "text/html",
+              "x-sift-probe": "pg68-xss-reflected-post-probe"
+            },
+            "marker": "pg68-xss-reflected-post-probe",
+            "probe_kind": "inert_dom_markup",
+            "probe": "dom_event_class",
+            "expected": {
+              "negative_control": "matched_pair",
+              "signal": "typed_dom_execution",
+              "typed_oracle": true
+            },
+            "safety": {
+              "authorized_scope": "local_only",
+              "non_destructive": true,
+              "no_script_execution": true,
+              "no_database_write": true,
+              "no_credential_access": true,
+              "no_data_exfiltration": true,
+              "no_external_network": true,
+              "does_not_execute": true
+            },
+            "form": {
+              "message": "pg68-xss-reflected-post-probe"
+            },
+            "payload_sha256": "ef3375d86ff02770069b0db74d31f9d6f5020085adcd23bb74b950ffdfa7730f"
+          },
+          "probe_artifact": {
+            "original": "dom_event_class",
+            "encoding": "abstract_class",
+            "probe_sha256": "67fdd7833b6a2871ed0cda84899302b1299db47ba28a42b22454a8dcbc6ad6d8"
+          },
+          "semantic": {
+            "family": "xss",
+            "surface": "xss_reflected_post",
+            "expected_oracle": "controlled_detached_dom_v1",
+            "expected_signal": "typed_dom_execution"
+          },
+          "structural_feature": "dom:inert_dom_markup",
+          "evaluator_state_visible": false,
+          "pair": {
+            "pair_id": "pg68-pair-xss-reflected-post",
+            "variant": "abstract_class",
+            "surface_role": "xss_reflected_post",
+            "encoding_depth": 0
+          },
+          "counterfactual": {
+            "kind": "negative_control",
+            "intervention": "matched_control",
+            "source_sample_id": "pg68-xss-reflected-post"
+          },
+          "replay": {
+            "target": "http://127.0.0.1:8768",
+            "method": "POST",
+            "path": "/vul/xss/xsspost/xss_reflected_post.php",
+            "params": {},
+            "fresh_reset": {
+              "completed": true,
+              "evaluator_state_hidden": true,
+              "external_network": false,
+              "fresh_target": false,
+              "kind": "pg52-disposable-container-round",
+              "per_action_required": true,
+              "read_only_round": true,
+              "reset_adapter_sha256": "af873abf70ccfe9876326610b0557d505098c350eefd5e78e98fbb643c982719",
+              "reset_id": "pg68-reset-round-ddde9195c8a5da36dfb95c19",
+              "reset_scope": "transport_container_round",
+              "reuse_detected": true,
+              "state_change_allowed": false,
+              "state_epoch": "ddde9195c8a5da36-read-only",
+              "target_instance_id": "ddde9195c8a5da36dfb95c19"
+            },
+            "transport": "docker_loopback",
+            "form": {
+              "message": "pg68-xss-reflected-post-probe"
+            }
+          },
+          "response_projection": {
+            "body_length": 34169,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "dd300a4923d6fa82ce51b79706a171cb979c47ec6dc820cb0ce06461fc8cb014",
+            "content_type": "text/html",
+            "external_network": false,
+            "form_count": 1,
+            "has_location": false,
+            "html_tag_count": 431,
+            "input_count": 2,
+            "location_origin": "none",
+            "location_sha256": "",
+            "marker_count": 1,
+            "marker_reflected": true,
+            "projection_sha256": "ac2076630bf65a314137ce0e792f289c71c8a083f935da40f755cb54fa66453a",
+            "script_count": 16,
+            "semantic_body_sha256": "dd300a4923d6fa82ce51b79706a171cb979c47ec6dc820cb0ce06461fc8cb014",
+            "status_class": "2xx",
+            "status_code": 200
+          },
+          "oracle_projection": {
+            "candidate_signal": true,
+            "confirmed_effect": "dom_structure",
+            "modality": "browser_dom_execution",
+            "oracle_id": "pg52-browser-reflected_post-v1",
+            "positive": true,
+            "positive_authority": true,
+            "safety": {
+              "credentials_accessed": false,
+              "database_write": false,
+              "external_network": false,
+              "persistent_state_mutated": false,
+              "raw_body_stored": false
+            },
+            "signals": {
+              "execution_path": "automatic",
+              "external_request_count": 0,
+              "marker_set_in_page": true,
+              "mode": "reflected_post",
+              "navigation_count": 0,
+              "same_origin": true,
+              "stripped_external_resource_count": 34
+            }
+          },
+          "evidence": {
+            "adapter_evidence_sha256": "a3f635550a31a8d74a5cb5b08d6a7c0b3826c32e203e95ca7fda15cff62c6df1",
+            "source_candidate_evidence_sha256": "fbd33ad9769ee9965fdff362b456aedad690642fc438941016cfd0ea34c31edd",
+            "source_control_evidence_sha256": "5361fdd2453fc578ac15d069a77345933abf6770903cd5a029f0ad9f227e6945"
+          },
+          "rule_ir": {
+            "args": [
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              },
+              {
+                "left": {
+                  "op": "field",
+                  "path": "oracle.positive_authority"
+                },
+                "op": "eq",
+                "right": {
+                  "op": "const",
+                  "value": true
+                }
+              }
+            ],
+            "op": "and"
+          },
+          "rule_ir_canonical": "{\"args\":[{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}},{\"left\":{\"op\":\"field\",\"path\":\"oracle.positive_authority\"},\"op\":\"eq\",\"right\":{\"op\":\"const\",\"value\":true}}],\"op\":\"and\"}",
+          "rule_ir_complexity": 7,
+          "rule_ir_result": true
+        }
+      ]
+    }
+  ],
+  "safety": {
+    "local_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_touched": false,
+    "evaluator_state_visible": false,
+    "real_exploit_strings": false
+  },
+  "catalog_sha256": "9f5ac2d36245acfed82f5304a7ec7a668dba0f4341b74d72f958b481770352f4"
+}

@@ -1,0 +1,46 @@
+{
+  "protocol_id": "pg-pk-126-failure-only-policy-v1",
+  "schema_version": "pg126-failure-only-policy-protocol-v1",
+  "objective": "去除表面投影后，验证 failure-only policy 是否跨到 PG-125 scope/tenant 逻辑族。",
+  "feature_dim": 17,
+  "masked_fields": [
+    "positive_authority",
+    "typed_available",
+    "evidence_hash",
+    "raw_probe",
+    "raw_response",
+    "target_id",
+    "family"
+  ],
+  "training_source": "PG-122 train/dev",
+  "holdout_source": "PG-125 scope/tenant",
+  "collection": {
+    "train": 48,
+    "dev": 48,
+    "holdout": 144,
+    "get": 72,
+    "post": 72
+  },
+  "gates": {
+    "fresh_checkpoint": true,
+    "fresh_zero_input_baseline": true,
+    "same_capacity": true,
+    "seed_disjoint": true,
+    "get_post_balanced": true,
+    "pg125_holdout_not_training": true,
+    "failure_only_input": true,
+    "authority_fields_masked": true,
+    "no_raw_probe_strings": true,
+    "no_raw_response_bodies": true,
+    "full_accuracy_floor": true,
+    "full_compliance_floor": true,
+    "all_surface_accuracy_floor": true,
+    "full_non_abstain_nonzero": true,
+    "failure_ablation_changes_behavior": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

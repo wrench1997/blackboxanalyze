@@ -1,0 +1,36 @@
+{
+  "schema_version": "pg113-cross-implementation-replay-proposal-v1",
+  "evaluation_only": true,
+  "training_eligible": false,
+  "reference_implementation": "app.main local ASGI maze (PG-112)",
+  "independent_implementation": "app.pg113_independent_target fresh uvicorn process",
+  "model_input_contract": {
+    "family_names": false,
+    "typed_oracle_labels": false,
+    "raw_probe_values": false,
+    "raw_response_bodies": false,
+    "fields": [
+      "action_manifest",
+      "baseline_projection",
+      "response_projection",
+      "belief_before",
+      "target_instance_slot"
+    ]
+  },
+  "matrix": {
+    "target_seeds": [
+      11301,
+      11302,
+      11303
+    ],
+    "surface_slots": 4,
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_reset_per_action": true
+  },
+  "cross_implementation_comparison": "PG-112 and PG-113 aggregate episode decisions and abstention policy",
+  "replay_package_promotion": false,
+  "bsp_core_schema": "bsp-v3-python-research-core-v1"
+}

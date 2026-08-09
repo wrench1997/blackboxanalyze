@@ -1,0 +1,400 @@
+{
+  "protocol_id": "pg-pk-326-cross-implementation-forgetting-matrix-v1",
+  "schema_version": "pg326-cross-implementation-forgetting-matrix-report-v1",
+  "status": "completed_read_only_matrix_blocked",
+  "runtime": {
+    "target_contacted": false,
+    "docker_started": false,
+    "network": "none_not_used",
+    "source_count": 3
+  },
+  "scope": {
+    "sources": [
+      "pg323",
+      "pg324",
+      "pg325"
+    ],
+    "frozen_checkpoint_family": "PG-323",
+    "paired_forgetting_report": "pg327b_paired_fresh_replay_report_v1.json",
+    "matrix_is_evaluation_only": true
+  },
+  "implementation_digests": [
+    "bkimminich/juice-shop@sha256:28870b9d2bec49e605d6ebbf4b22ed1ec1ca0a72347ef19217bbbb21ea44e3fe",
+    "sasanlabs/owasp-vulnerableapp@sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+    "sift/pikachu-fixed@sha256:cca4288b6b701725e7a771f47ce7fcafd6cea9bd7622fa34ef2ed0b440f472c6"
+  ],
+  "families": [
+    "authentication",
+    "sql",
+    "xss"
+  ],
+  "family_counts": {
+    "xss": 2,
+    "authentication": 1,
+    "sql": 1
+  },
+  "source_rows": [
+    {
+      "id": "pg323",
+      "report": "pg323_vulnerableapp_role_replay_report_v1.json",
+      "implementation_digest": "sasanlabs/owasp-vulnerableapp@sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+      "families": [
+        "xss"
+      ],
+      "source_sha256_count": 6,
+      "seed_count": 3,
+      "route_count": 18,
+      "get_count": 12,
+      "post_count": 6,
+      "typed_effect_rate": 1.0,
+      "variant_exact_rate": 1.0,
+      "ask_recall": 1.0,
+      "repair_rate": 1.0,
+      "failure_action_change_rate": null,
+      "negative_violation_count": 0,
+      "belief_duplicate_evidence_count": 0,
+      "checks": {
+        "fresh_reset": true,
+        "get_post_pair": true,
+        "typed_evidence": true,
+        "context_firewall": true,
+        "role_bound_belief_evidence": null,
+        "failure_action_changed": null,
+        "network_none": true,
+        "external_network_disabled": true,
+        "raw_payload_excluded": true,
+        "raw_response_excluded": true
+      },
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "checkpoint_family": "PG-323 cross-implementation decoy per-seed checkpoints",
+      "raw_material_available": false,
+      "missing_requirements": [
+        "check:failure_action_changed",
+        "check:role_bound_belief_evidence",
+        "failure_action_change_contract"
+      ]
+    },
+    {
+      "id": "pg324",
+      "report": "pg324_juice_shop_source_heldout_report_v1.json",
+      "implementation_digest": "bkimminich/juice-shop@sha256:28870b9d2bec49e605d6ebbf4b22ed1ec1ca0a72347ef19217bbbb21ea44e3fe",
+      "families": [
+        "authentication",
+        "xss"
+      ],
+      "source_sha256_count": 6,
+      "seed_count": 3,
+      "route_count": 18,
+      "get_count": 9,
+      "post_count": 9,
+      "typed_effect_rate": 1.0,
+      "variant_exact_rate": 1.0,
+      "ask_recall": 1.0,
+      "repair_rate": 1.0,
+      "failure_action_change_rate": 1.0,
+      "negative_violation_count": 0,
+      "belief_duplicate_evidence_count": 0,
+      "checks": {
+        "fresh_reset": true,
+        "get_post_pair": true,
+        "typed_evidence": true,
+        "context_firewall": true,
+        "role_bound_belief_evidence": null,
+        "failure_action_changed": true,
+        "network_none": true,
+        "external_network_disabled": true,
+        "raw_payload_excluded": true,
+        "raw_response_excluded": true
+      },
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "checkpoint_family": "PG-323 decoy/ASK anchor frozen per-seed checkpoints",
+      "raw_material_available": false,
+      "missing_requirements": [
+        "check:role_bound_belief_evidence"
+      ]
+    },
+    {
+      "id": "pg325",
+      "report": "pg325_sql_family_holdout_report_v1.json",
+      "implementation_digest": "sift/pikachu-fixed@sha256:cca4288b6b701725e7a771f47ce7fcafd6cea9bd7622fa34ef2ed0b440f472c6",
+      "families": [
+        "sql"
+      ],
+      "source_sha256_count": 3,
+      "seed_count": 3,
+      "route_count": 9,
+      "get_count": 6,
+      "post_count": 3,
+      "typed_effect_rate": 1.0,
+      "variant_exact_rate": 1.0,
+      "ask_recall": 1.0,
+      "repair_rate": 1.0,
+      "failure_action_change_rate": 1.0,
+      "negative_violation_count": 0,
+      "belief_duplicate_evidence_count": 0,
+      "checks": {
+        "fresh_reset": true,
+        "get_post_pair": true,
+        "typed_evidence": true,
+        "context_firewall": true,
+        "role_bound_belief_evidence": true,
+        "failure_action_changed": true,
+        "network_none": true,
+        "external_network_disabled": true,
+        "raw_payload_excluded": true,
+        "raw_response_excluded": true
+      },
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      },
+      "checkpoint_family": "PG-323 decoy/ASK anchor frozen per-seed checkpoints",
+      "raw_material_available": false,
+      "missing_requirements": []
+    }
+  ],
+  "totals": {
+    "seed_count": 9,
+    "route_count": 45,
+    "get_count": 27,
+    "post_count": 18,
+    "positive_typed_effect_count": 18,
+    "positive_route_count": 18,
+    "variant_exact_count": 135,
+    "variant_role_count": 135,
+    "multi_missing_question_rows": 675,
+    "failure_repair_correct_count": 45,
+    "failure_repair_count": 45,
+    "negative_lane_violation_count": 0
+  },
+  "worst_seed_metrics": {
+    "typed_effect_rate_min": 1.0,
+    "variant_exact_rate_min": 1.0,
+    "ask_recall_min": 1.0,
+    "repair_rate_min": 1.0,
+    "failure_action_change_rate_min": 1.0,
+    "negative_violation_max": 0.0
+  },
+  "uniform_checks": {
+    "fresh_reset": true,
+    "get_post_pair": true,
+    "typed_evidence": true,
+    "context_firewall": true,
+    "role_bound_belief_evidence": false,
+    "failure_action_changed": false,
+    "network_none": true,
+    "external_network_disabled": true,
+    "raw_payload_excluded": true,
+    "raw_response_excluded": true
+  },
+  "forgetting": {
+    "status": "completed_paired_fresh_replay",
+    "paired_replay_present": true,
+    "before_checkpoint": {
+      "31901": "91b772448f72e2f2c1f73578dc2988c7c7bb1ef85589122cdbaad74cf2423e6d",
+      "31902": "dc1322448434a585ce2eac87ac71f4ea3ead8f01001f92eeece32b126ca361b2",
+      "31903": "9d17e0c934bcea0383e64bef7602a5e5612ae59b67c9807e80ce241ecaeab036"
+    },
+    "after_checkpoint": {
+      "31901": "5020a7c3a5a48f96ad846e68487d8b0969ec77ba0fc3cd0a38fd1472fd1258d7",
+      "31902": "693ad3e32a3a01dc10abb46d2c6a392de1ad22ad02e4dcee0ffd38223c344e9f",
+      "31903": "140e1ca7b99a8e5a041352f5d10cbe07006d39b4cd8b1512064712d0c442d693"
+    },
+    "same_canary_route_set": true,
+    "paired_report": "pg327b_paired_fresh_replay_report_v1.json",
+    "paired_audit": "pg327b_paired_fresh_replay_audit_v1.json",
+    "paired_report_sha256": "3c00d499725379efb6fbdededb45fb1f616b58569e4e4e326a678e471bdb1bd3",
+    "paired_audit_sha256": "b10a87a2220b195e6d9626dcc97d14197053353911f85e79873c4bd5985a4f27",
+    "pairs": [
+      {
+        "seed": 31901,
+        "same_canary_route_set": true,
+        "before_checkpoint": "artifacts\\pg322-cross-impl-decoy\\seeds\\pg322_cross_impl_decoy_seed_31901.pt",
+        "before_checkpoint_sha256": "91b772448f72e2f2c1f73578dc2988c7c7bb1ef85589122cdbaad74cf2423e6d",
+        "after_checkpoint": "artifacts\\pg327-a800-replay\\seeds\\pg322_cross_impl_decoy_seed_31901.pt",
+        "after_checkpoint_sha256": "5020a7c3a5a48f96ad846e68487d8b0969ec77ba0fc3cd0a38fd1472fd1258d7",
+        "before_metrics": {
+          "route_count": 3,
+          "get_count": 2,
+          "post_count": 1,
+          "typed_effect_count": 3,
+          "positive_route_count": 3,
+          "variant_role_count": 9,
+          "variant_exact_count": 9,
+          "failure_transition_required_count": 3,
+          "failure_action_changed_count": 3,
+          "failure_repair_count": 3,
+          "failure_repair_correct_count": 3,
+          "multi_missing_question_rows": 45,
+          "multi_missing_question_recall": 1.0,
+          "multi_missing_unsafe_allow": 0,
+          "belief_transition_count": 9,
+          "belief_duplicate_evidence_count": 0
+        },
+        "after_metrics": {
+          "route_count": 3,
+          "get_count": 2,
+          "post_count": 1,
+          "typed_effect_count": 3,
+          "positive_route_count": 3,
+          "variant_role_count": 9,
+          "variant_exact_count": 9,
+          "failure_transition_required_count": 3,
+          "failure_action_changed_count": 3,
+          "failure_repair_count": 3,
+          "failure_repair_correct_count": 3,
+          "multi_missing_question_rows": 45,
+          "multi_missing_question_recall": 1.0,
+          "multi_missing_unsafe_allow": 0,
+          "belief_transition_count": 9,
+          "belief_duplicate_evidence_count": 0
+        },
+        "after_not_worse_observed": {
+          "typed_effect_count": true,
+          "variant_exact_count": true,
+          "failure_repair_correct_count": true,
+          "negative_zero": true
+        }
+      },
+      {
+        "seed": 31902,
+        "same_canary_route_set": true,
+        "before_checkpoint": "artifacts\\pg322-cross-impl-decoy\\seeds\\pg322_cross_impl_decoy_seed_31902.pt",
+        "before_checkpoint_sha256": "dc1322448434a585ce2eac87ac71f4ea3ead8f01001f92eeece32b126ca361b2",
+        "after_checkpoint": "artifacts\\pg327-a800-replay\\seeds\\pg322_cross_impl_decoy_seed_31902.pt",
+        "after_checkpoint_sha256": "693ad3e32a3a01dc10abb46d2c6a392de1ad22ad02e4dcee0ffd38223c344e9f",
+        "before_metrics": {
+          "route_count": 3,
+          "get_count": 2,
+          "post_count": 1,
+          "typed_effect_count": 3,
+          "positive_route_count": 3,
+          "variant_role_count": 9,
+          "variant_exact_count": 9,
+          "failure_transition_required_count": 3,
+          "failure_action_changed_count": 3,
+          "failure_repair_count": 3,
+          "failure_repair_correct_count": 3,
+          "multi_missing_question_rows": 45,
+          "multi_missing_question_recall": 1.0,
+          "multi_missing_unsafe_allow": 0,
+          "belief_transition_count": 9,
+          "belief_duplicate_evidence_count": 0
+        },
+        "after_metrics": {
+          "route_count": 3,
+          "get_count": 2,
+          "post_count": 1,
+          "typed_effect_count": 3,
+          "positive_route_count": 3,
+          "variant_role_count": 9,
+          "variant_exact_count": 9,
+          "failure_transition_required_count": 3,
+          "failure_action_changed_count": 3,
+          "failure_repair_count": 3,
+          "failure_repair_correct_count": 3,
+          "multi_missing_question_rows": 45,
+          "multi_missing_question_recall": 1.0,
+          "multi_missing_unsafe_allow": 0,
+          "belief_transition_count": 9,
+          "belief_duplicate_evidence_count": 0
+        },
+        "after_not_worse_observed": {
+          "typed_effect_count": true,
+          "variant_exact_count": true,
+          "failure_repair_correct_count": true,
+          "negative_zero": true
+        }
+      },
+      {
+        "seed": 31903,
+        "same_canary_route_set": true,
+        "before_checkpoint": "artifacts\\pg322-cross-impl-decoy\\seeds\\pg322_cross_impl_decoy_seed_31903.pt",
+        "before_checkpoint_sha256": "9d17e0c934bcea0383e64bef7602a5e5612ae59b67c9807e80ce241ecaeab036",
+        "after_checkpoint": "artifacts\\pg327-a800-replay\\seeds\\pg322_cross_impl_decoy_seed_31903.pt",
+        "after_checkpoint_sha256": "140e1ca7b99a8e5a041352f5d10cbe07006d39b4cd8b1512064712d0c442d693",
+        "before_metrics": {
+          "route_count": 3,
+          "get_count": 2,
+          "post_count": 1,
+          "typed_effect_count": 3,
+          "positive_route_count": 3,
+          "variant_role_count": 9,
+          "variant_exact_count": 9,
+          "failure_transition_required_count": 3,
+          "failure_action_changed_count": 3,
+          "failure_repair_count": 3,
+          "failure_repair_correct_count": 3,
+          "multi_missing_question_rows": 45,
+          "multi_missing_question_recall": 1.0,
+          "multi_missing_unsafe_allow": 0,
+          "belief_transition_count": 9,
+          "belief_duplicate_evidence_count": 0
+        },
+        "after_metrics": {
+          "route_count": 3,
+          "get_count": 2,
+          "post_count": 1,
+          "typed_effect_count": 3,
+          "positive_route_count": 3,
+          "variant_role_count": 9,
+          "variant_exact_count": 9,
+          "failure_transition_required_count": 3,
+          "failure_action_changed_count": 3,
+          "failure_repair_count": 3,
+          "failure_repair_correct_count": 3,
+          "multi_missing_question_rows": 45,
+          "multi_missing_question_recall": 1.0,
+          "multi_missing_unsafe_allow": 0,
+          "belief_transition_count": 9,
+          "belief_duplicate_evidence_count": 0
+        },
+        "after_not_worse_observed": {
+          "typed_effect_count": true,
+          "variant_exact_count": true,
+          "failure_repair_correct_count": true,
+          "negative_zero": true
+        }
+      }
+    ]
+  },
+  "missing_requirements": [
+    "check:failure_action_changed",
+    "check:role_bound_belief_evidence",
+    "failure_action_change_contract"
+  ],
+  "hypothesis_gate": {
+    "status": "blocked",
+    "checks": {
+      "source_reports_complete": false,
+      "independent_implementation_count": true,
+      "family_diversity": true,
+      "worst_seed_typed_effect": true,
+      "worst_seed_variant": true,
+      "worst_seed_ask": true,
+      "worst_seed_repair": true,
+      "negative_zero": true,
+      "uniform_observation_contract": false,
+      "forgetting_pair": true,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "checkpoint_role": "research_candidate_only"
+  },
+  "report_sha256": "d74b2d718f1b2a63b8c6508614672dc28a0243a437cbc43a6e8d59a9a4d99898"
+}

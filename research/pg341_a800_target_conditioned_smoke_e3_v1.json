@@ -1,0 +1,244 @@
+{
+  "schema_version": "pg341-a800-target-conditioned-coarse-diagnostic-v1",
+  "status": "target_conditioned_diagnostic_candidate_only",
+  "gate": {
+    "schema_version": "pg341-a800-target-conditioned-coarse-diagnostic-v1",
+    "status": "ready_target_conditioned_diagnostic",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "coarse_train_rows_valid": true,
+      "coarse_holdout_rows_valid": true,
+      "coarse_target_diagnostic_allowed": true,
+      "coarse_target_coverage": true,
+      "full_axis_gap_not_bypassed": true,
+      "context_vocabulary_locked": true,
+      "promotion_closed": true,
+      "data_code_vocab_rules_hashes_locked": true,
+      "rules_schema_present": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "track": "coarse_process_only",
+    "full_axis_training_allowed": false,
+    "target_tokens_read": true,
+    "split_counts": {
+      "train": 60,
+      "implementation_holdout": 123
+    },
+    "target_coverage": {
+      "train": {
+        "rows": 60,
+        "questions": [
+          "ask_failure",
+          "ask_typed",
+          "none",
+          "review_negative"
+        ],
+        "next_actions": [
+          "abstain",
+          "ask_typed",
+          "assemble_rule_ir",
+          "repair"
+        ],
+        "ask_present": true,
+        "repair_present": true,
+        "abstain_present": true
+      },
+      "implementation_holdout": {
+        "rows": 123,
+        "questions": [
+          "ask_failure",
+          "ask_typed",
+          "none",
+          "review_negative"
+        ],
+        "next_actions": [
+          "abstain",
+          "ask_typed",
+          "assemble_rule_ir",
+          "repair"
+        ],
+        "ask_present": true,
+        "repair_present": true,
+        "abstain_present": true
+      }
+    },
+    "unknown_token_count": 0,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "ac05b76de5faeb1808460d1e5ca911f8f2929f75c48e7b37df90de7b32ed5c94",
+    "audit": "d79509b034f4f9174178fc95c4d38ae3015b29bcbcebf643e075b7101abd0192",
+    "vocabulary": "74ae619d0cd994a2cf96f258bc4c30a28091c6dae5e2e86e8c825abbb838c9c8",
+    "rules": "a91bd8ef0dd1fd2b70eb6ab219842408178b49ceeca110092aff883ab488607e",
+    "script": "27bf739337b6c867f878c445d726f5c88fa2864099c9c6a4739cd26693fab9c0",
+    "model": "f7d9b94d0a6859770c5ff89813d4008716664e4cb3a7294008e68a7a774dccec"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      34101,
+      34102,
+      34103
+    ],
+    "context_only": false,
+    "target_tokens_read": true,
+    "track": "coarse_process_only",
+    "full_axis_training_allowed": false,
+    "learning_rate": 0.0001,
+    "epochs": 32,
+    "target_weight": 5.0,
+    "context_weight": 0.25,
+    "checkpoint_contains_all_seed_states": true
+  },
+  "context_capacity_requirement": {
+    "train_max": 24,
+    "implementation_holdout_max": 25,
+    "required_max_length": 25
+  },
+  "target_coverage": {
+    "train": {
+      "rows": 60,
+      "questions": [
+        "ask_failure",
+        "ask_typed",
+        "none",
+        "review_negative"
+      ],
+      "next_actions": [
+        "abstain",
+        "ask_typed",
+        "assemble_rule_ir",
+        "repair"
+      ],
+      "ask_present": true,
+      "repair_present": true,
+      "abstain_present": true
+    },
+    "implementation_holdout": {
+      "rows": 123,
+      "questions": [
+        "ask_failure",
+        "ask_typed",
+        "none",
+        "review_negative"
+      ],
+      "next_actions": [
+        "abstain",
+        "ask_typed",
+        "assemble_rule_ir",
+        "repair"
+      ],
+      "ask_present": true,
+      "repair_present": true,
+      "abstain_present": true
+    }
+  },
+  "candidates": [
+    {
+      "seed": 34101,
+      "train": {
+        "count": 60,
+        "token_accuracy": 0.797619,
+        "sequence_exact_accuracy": 0.75,
+        "positive_recall": 0.0,
+        "hard_negative_false_allow": 0,
+        "safe_reject_rate": 1.0,
+        "missing_question_recall": 0.901961,
+        "unnecessary_question_rate": 0.333333,
+        "missing_question_count": 51
+      },
+      "implementation_holdout": {
+        "count": 123,
+        "token_accuracy": 0.775463,
+        "sequence_exact_accuracy": 0.731707,
+        "positive_recall": 0.0,
+        "hard_negative_false_allow": 0,
+        "safe_reject_rate": 1.0,
+        "missing_question_recall": 0.884615,
+        "unnecessary_question_rate": 0.368421,
+        "missing_question_count": 104
+      },
+      "target_weight": 5.0,
+      "context_weight": 0.25,
+      "forgetting": "not_applicable_no_prior_target_conditioned_candidate"
+    },
+    {
+      "seed": 34102,
+      "train": {
+        "count": 60,
+        "token_accuracy": 0.75,
+        "sequence_exact_accuracy": 0.75,
+        "positive_recall": 0.0,
+        "hard_negative_false_allow": 0,
+        "safe_reject_rate": 1.0,
+        "missing_question_recall": 0.882353,
+        "unnecessary_question_rate": 0.0,
+        "missing_question_count": 51
+      },
+      "implementation_holdout": {
+        "count": 123,
+        "token_accuracy": 0.729167,
+        "sequence_exact_accuracy": 0.731707,
+        "positive_recall": 0.0,
+        "hard_negative_false_allow": 0,
+        "safe_reject_rate": 1.0,
+        "missing_question_recall": 0.865385,
+        "unnecessary_question_rate": 0.0,
+        "missing_question_count": 104
+      },
+      "target_weight": 5.0,
+      "context_weight": 0.25,
+      "forgetting": "not_applicable_no_prior_target_conditioned_candidate"
+    },
+    {
+      "seed": 34103,
+      "train": {
+        "count": 60,
+        "token_accuracy": 0.761905,
+        "sequence_exact_accuracy": 0.75,
+        "positive_recall": 0.0,
+        "hard_negative_false_allow": 0,
+        "safe_reject_rate": 1.0,
+        "missing_question_recall": 0.882353,
+        "unnecessary_question_rate": 0.0,
+        "missing_question_count": 51
+      },
+      "implementation_holdout": {
+        "count": 123,
+        "token_accuracy": 0.740741,
+        "sequence_exact_accuracy": 0.731707,
+        "positive_recall": 0.0,
+        "hard_negative_false_allow": 0,
+        "safe_reject_rate": 1.0,
+        "missing_question_recall": 0.865385,
+        "unnecessary_question_rate": 0.0,
+        "missing_question_count": 104
+      },
+      "target_weight": 5.0,
+      "context_weight": 0.25,
+      "forgetting": "not_applicable_no_prior_target_conditioned_candidate"
+    }
+  ],
+  "full_axis_target_gap": {
+    "status": "blocked",
+    "reason": "full_axis_train_has_no_ask_repair_negative_targets",
+    "training_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "0ec570ed67de6cee4c63589d92f4a56ab31c36551ae9a86ebba776a24d6199de"
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "pg348-payload-shape-ontology-v1",
+  "status": "abstract_only_evaluator_binding_required",
+  "purpose": "Represent source-grounded probe shape without storing or teaching raw payload strings.",
+  "source_basis": [
+    {
+      "source_id": "owasp-wstg-input-validation-xss",
+      "url": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/01-Testing_for_Reflected_Cross_Site_Scripting",
+      "scope": "context-sensitive encoding and reflected-input testing guidance",
+      "replay_scope": "authorized local disposable targets only"
+    },
+    {
+      "source_id": "portswigger-xss-contexts",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/contexts",
+      "scope": "HTML, attribute, JavaScript and DOM context distinctions",
+      "replay_scope": "authorized local disposable targets only"
+    }
+  ],
+  "raw_strings_stored": false,
+  "raw_strings_in_model_context": false,
+  "evaluator_binding": "payload_shape_ref is resolved only by a reviewed loopback adapter and typed oracle.",
+  "slot": {
+    "name": "payload_shape_ref",
+    "allowed_tokens": [
+      "none",
+      "unknown",
+      "html_text_marker",
+      "html_attribute_marker",
+      "html_dom_marker",
+      "html_fragment_marker",
+      "html_form_marker",
+      "json_string_marker",
+      "path_segment_marker",
+      "query_marker",
+      "fragment_marker",
+      "script_context_marker",
+      "style_context_marker",
+      "xml_text_marker",
+      "xml_attribute_marker",
+      "sql_string_marker",
+      "sql_numeric_marker",
+      "header_marker",
+      "state_transition_marker"
+    ],
+    "dimensions": [
+      "surface_context",
+      "delimiter_boundary",
+      "encoding_chain",
+      "transport_placement",
+      "non_destructive_oracle_shape",
+      "fresh_reset_state_scope"
+    ],
+    "raw_payload_field": "evaluator_only_not_serialized"
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-response-intervention-v1",
+  "status": "v2-corrected-before-authoritative-rerun",
+  "scope": "pinned local Juice Shop only",
+  "total_request_budget": 6,
+  "probe_phase": [
+    {"method": "HEAD", "path": "/"},
+    {"method": "HEAD", "path": "/robots.txt"},
+    {"method": "HEAD", "path": "/.well-known/security.txt"},
+    {"method": "HEAD", "path": "/sitemap.xml"},
+    {"method": "HEAD", "path": "/metrics"}
+  ],
+  "decision_phase": {
+    "method": "GET",
+    "choice": "select the path with the highest response-semantic score from the five HEAD observations",
+    "ties": "stable path order",
+    "disabled_component_ablation": "always select the first probe path"
+  },
+  "response_projection": {
+    "features": [
+      "status class",
+      "content type class",
+      "content length bucket",
+      "presence of content length",
+      "body length observed by HEAD",
+      "Prometheus text media-type indicator"
+    ],
+    "forbidden_inputs": ["challenge key", "challenge description", "solution", "solved state", "route token or path name"],
+    "rule": "a successful response with the generic Prometheus text media type is an operational text-surface candidate; HTML directory-size outlier is a separate listing candidate"
+  },
+  "acceptance": {
+    "descriptive_goal": "show that response grounding fixes the observed interface failure",
+    "neural_intervention_gate": "not claimed; this is a zero-parameter engineering/control intervention",
+    "same_component_ablation_required": true,
+    "fresh_environment_required": true,
+    "v1_failure": "HEAD /metrics changed evaluator state and the coarse text-length feature ranked security.txt as metrics; authoritative rerun uses per-step state accounting and the corrected media-type feature",
+    "evaluation_correction": "only the 24 challenges in catalog v3 count toward Loop 12 success; all evaluator transitions remain diagnostic"
+  }
+}

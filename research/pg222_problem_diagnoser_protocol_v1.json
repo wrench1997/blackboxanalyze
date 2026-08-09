@@ -1,0 +1,30 @@
+{
+  "protocol_id": "pg-pk-222-problem-diagnoser-v1",
+  "schema_version": "pg222-problem-diagnoser-protocol-v1",
+  "objective": "detect process/environment/model errors before they become training or memory claims",
+  "diagnosis_names": [
+    "environment_failure",
+    "binding_failure",
+    "oracle_unavailable",
+    "candidate_no_effect",
+    "reference_disagreement",
+    "result_mismatch",
+    "model_decision_error",
+    "confirmed_local_effect",
+    "inconclusive"
+  ],
+  "target_fields_not_features": [
+    "diagnosis",
+    "typed_effect_target",
+    "result_fixture_target",
+    "outcome_label"
+  ],
+  "counterfactuals_marked": true,
+  "seed_and_route_holdout": true,
+  "positive_guard": "fresh reset + health + binding + reference + negative + typed/result/boolean evidence",
+  "fail_closed": true,
+  "raw_payload_and_response_excluded": true,
+  "memory_promotion_allowed": false,
+  "vulnerability_claim_allowed": false,
+  "protocol_sha256": "e536d33f30bd0c2c6014a708650b5222232138dd99112f8708d31fd9feb6422b"
+}

@@ -1,0 +1,56 @@
+{
+  "protocol_id": "pg-pk-173-matched-budget-capacity-v1",
+  "schema_version": "pg173-matched-budget-capacity-protocol-v1",
+  "reference_checkpoint": "artifacts\\pg164-xxl-capacity-v1\\xxl_typed_mix.pt",
+  "dataset": "research\\pg173_matched_budget_dataset_v1.json",
+  "rows_per_source_per_epoch": 250,
+  "epochs": [
+    1,
+    2,
+    4
+  ],
+  "configs": {
+    "101m": {
+      "d_model": 1024,
+      "nhead": 16,
+      "layers": 8
+    },
+    "160m": {
+      "d_model": 1152,
+      "nhead": 18,
+      "layers": 10
+    }
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 7e-05,
+    "weight_decay": 0.01,
+    "batch_size": 16
+  },
+  "evaluation_rows_per_split": 128,
+  "comparison_contract": {
+    "same_epoch_plans": true,
+    "same_token_budget_per_epoch": true,
+    "same_optimizer": true,
+    "same_seed": true,
+    "from_scratch": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "ac938341d15be131db87f09c67f2a0bbeb3763c0ab07b4b22da66b215e30e59d"
+}

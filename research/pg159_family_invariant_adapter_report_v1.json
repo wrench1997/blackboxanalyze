@@ -1,0 +1,1229 @@
+{
+  "protocol_id": "pg-pk-159-family-invariant-adapter-v1",
+  "schema_version": "pg159-family-invariant-adapter-report-v1",
+  "status": "completed_pg159_family_invariant_adapter",
+  "device": "cuda",
+  "seed": 15901,
+  "source": {
+    "label_count": 696,
+    "train_count": 216,
+    "dev_count": 216,
+    "holdout_count": 264,
+    "synthetic_train_count": 6400,
+    "synthetic_dev_count": 800,
+    "synthetic_holdout_count": 800,
+    "real_train_count": 216,
+    "real_dev_count": 216,
+    "real_holdout_count": 264,
+    "real_repeated_count": 2133,
+    "action_mix_count": 8533,
+    "lm_replay_count": 1200,
+    "unknown_hint_count": 120,
+    "surface_unknown_count": 6,
+    "language_canary_count": 1210,
+    "real_fraction": 0.25,
+    "balanced_replay_count": 1200,
+    "balanced_synthetic_count": 600,
+    "balanced_real_count": 600,
+    "surface_anchor_count": 600,
+    "surface_anchor_source": "pg147_training_eligible_abstract_surface_proxy",
+    "pg145_training_eligible": false,
+    "pg146_training_labels_used": false,
+    "held_out_family": null,
+    "family_names_in_adversary": [
+      "blind",
+      "decoy",
+      "latch",
+      "procedural_causal_family",
+      "resource",
+      "scope",
+      "steady"
+    ],
+    "family_count": 7,
+    "unseen_authorization_count": 12,
+    "variant_count": 4,
+    "variant_specs": [
+      {
+        "name": "shared_adapter_256",
+        "held_out_family": null,
+        "bottleneck": 256
+      },
+      {
+        "name": "loo_steady_adapter_256",
+        "held_out_family": "steady",
+        "bottleneck": 256
+      },
+      {
+        "name": "loo_blind_adapter_512",
+        "held_out_family": "blind",
+        "bottleneck": 512
+      },
+      {
+        "name": "loo_scope_adapter_512",
+        "held_out_family": "scope",
+        "bottleneck": 512
+      }
+    ],
+    "family_labels_as_inputs": false,
+    "family_labels_for_adversary_only": true
+  },
+  "variants": [
+    {
+      "variant": "shared_adapter_256",
+      "held_out_family": null,
+      "bottleneck": 256,
+      "train_count": 11653,
+      "parameter_count": 38328264,
+      "known_family_count": 7,
+      "temperature": 0.8,
+      "abstain_threshold": 0.82,
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.865,
+        "false_stop_count": 108,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 264,
+        "accuracy": 0.86363636,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 264,
+        "accepted_count": 192,
+        "coverage": 0.72727273,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 72,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 6,
+        "coverage": 0.5,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 6,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "family_holdout_metrics": {
+        "authorization": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accuracy": 0.66666667,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_holdout_calibrated": {
+        "authorization": {
+          "count": 12,
+          "accepted_count": 6,
+          "coverage": 0.5,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 6,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accepted_count": 42,
+          "coverage": 0.63636364,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 24,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accepted_count": 24,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accepted_count": 6,
+          "coverage": 0.33333333,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accepted_count": 6,
+          "coverage": 0.5,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 6,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accepted_count": 42,
+          "coverage": 0.63636364,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 24,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_adversary_on_real_holdout": {
+        "count": 252,
+        "accuracy": 0.0,
+        "family_count": 7
+      },
+      "surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 8.85841751,
+        "next_token_accuracy": 0.63333333,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.95449609,
+          "perplexity": 2.59736141,
+          "next_token_accuracy": 0.52039388,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.14301527,
+          "relative_perplexity_increase": -0.05218818,
+          "next_token_accuracy_drop": -0.01352754,
+          "mean_logit_kl": 0.0442156
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 2.70371748,
+          "action_loss": 0.50247726,
+          "lm_loss": 0.71844487,
+          "surface_lm_loss": 0.79549875,
+          "family_adversarial_loss": 7.07845408,
+          "false_stop_loss": 0.11962359,
+          "unknown_loss": 0.0400842,
+          "dev": {
+            "count": 1016,
+            "accuracy": 0.88090551,
+            "false_stop_count": 94,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          },
+          "family_adversary_dev": {
+            "count": 1016,
+            "accuracy": 0.0,
+            "family_count": 7
+          }
+        }
+      ],
+      "elapsed_seconds": 93.046,
+      "data_stats": {
+        "label_count": 696,
+        "train_count": 216,
+        "dev_count": 216,
+        "holdout_count": 264,
+        "synthetic_train_count": 6400,
+        "synthetic_dev_count": 800,
+        "synthetic_holdout_count": 800,
+        "real_train_count": 216,
+        "real_dev_count": 216,
+        "real_holdout_count": 264,
+        "real_repeated_count": 2133,
+        "action_mix_count": 8533,
+        "lm_replay_count": 1200,
+        "unknown_hint_count": 120,
+        "surface_unknown_count": 6,
+        "language_canary_count": 1210,
+        "real_fraction": 0.25,
+        "balanced_replay_count": 1200,
+        "balanced_synthetic_count": 600,
+        "balanced_real_count": 600,
+        "surface_anchor_count": 600,
+        "surface_anchor_source": "pg147_training_eligible_abstract_surface_proxy",
+        "pg145_training_eligible": false,
+        "pg146_training_labels_used": false,
+        "held_out_family": null,
+        "family_names_in_adversary": [
+          "blind",
+          "decoy",
+          "latch",
+          "procedural_causal_family",
+          "resource",
+          "scope",
+          "steady"
+        ],
+        "family_count": 7,
+        "unseen_authorization_count": 12
+      }
+    },
+    {
+      "variant": "loo_steady_adapter_256",
+      "held_out_family": "steady",
+      "bottleneck": 256,
+      "train_count": 10971,
+      "parameter_count": 38327751,
+      "known_family_count": 6,
+      "temperature": 0.95,
+      "abstain_threshold": 0.79,
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.865,
+        "false_stop_count": 108,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 198,
+        "accuracy": 0.84848485,
+        "false_stop_count": 6,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 3,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 580,
+        "coverage": 0.725,
+        "selective_accuracy": 0.99482759,
+        "false_stop_count": 3,
+        "abstain_count": 220,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 198,
+        "accepted_count": 162,
+        "coverage": 0.81818182,
+        "selective_accuracy": 0.96296296,
+        "false_stop_count": 0,
+        "abstain_count": 36,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 6,
+        "coverage": 0.5,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 6,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "family_holdout_metrics": {
+        "authorization": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 3,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accuracy": 0.77272727,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accuracy": 0.5,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 3,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_holdout_calibrated": {
+        "authorization": {
+          "count": 12,
+          "accepted_count": 6,
+          "coverage": 0.5,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 6,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accepted_count": 54,
+          "coverage": 0.81818182,
+          "selective_accuracy": 0.88888889,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accepted_count": 24,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accepted_count": 6,
+          "coverage": 0.33333333,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accepted_count": 6,
+          "coverage": 0.5,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 6,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_adversary_on_real_holdout": {
+        "count": 186,
+        "accuracy": 0.06451613,
+        "family_count": 6
+      },
+      "surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 8.43667221,
+        "next_token_accuracy": 0.7,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.9566586,
+          "perplexity": 2.60298432,
+          "next_token_accuracy": 0.51998359,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.13739236,
+          "relative_perplexity_increase": -0.0501363,
+          "next_token_accuracy_drop": -0.01311725,
+          "mean_logit_kl": 0.04257188
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 2.90316562,
+          "action_loss": 0.49406689,
+          "lm_loss": 0.76534435,
+          "surface_lm_loss": 0.79595045,
+          "family_adversarial_loss": 7.99407064,
+          "false_stop_loss": 0.12964975,
+          "unknown_loss": 0.04282142,
+          "dev": {
+            "count": 962,
+            "accuracy": 0.87733888,
+            "false_stop_count": 97,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          },
+          "family_adversary_dev": {
+            "count": 962,
+            "accuracy": 0.01247401,
+            "family_count": 6
+          }
+        }
+      ],
+      "elapsed_seconds": 89.958,
+      "data_stats": {
+        "label_count": 696,
+        "train_count": 216,
+        "dev_count": 216,
+        "holdout_count": 264,
+        "synthetic_train_count": 6400,
+        "synthetic_dev_count": 800,
+        "synthetic_holdout_count": 800,
+        "real_train_count": 216,
+        "real_dev_count": 216,
+        "real_holdout_count": 264,
+        "real_repeated_count": 2133,
+        "action_mix_count": 8533,
+        "lm_replay_count": 1200,
+        "unknown_hint_count": 120,
+        "surface_unknown_count": 6,
+        "language_canary_count": 1210,
+        "real_fraction": 0.25,
+        "balanced_replay_count": 1200,
+        "balanced_synthetic_count": 600,
+        "balanced_real_count": 600,
+        "surface_anchor_count": 600,
+        "surface_anchor_source": "pg147_training_eligible_abstract_surface_proxy",
+        "pg145_training_eligible": false,
+        "pg146_training_labels_used": false,
+        "held_out_family": "steady",
+        "family_names_in_adversary": [
+          "blind",
+          "decoy",
+          "latch",
+          "procedural_causal_family",
+          "resource",
+          "scope"
+        ],
+        "family_count": 6,
+        "unseen_authorization_count": 12
+      }
+    },
+    {
+      "variant": "loo_blind_adapter_512",
+      "held_out_family": "blind",
+      "bottleneck": 512,
+      "train_count": 10967,
+      "parameter_count": 38590151,
+      "known_family_count": 6,
+      "temperature": 0.8,
+      "abstain_threshold": 0.61,
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.87875,
+        "false_stop_count": 75,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 198,
+        "accuracy": 0.81818182,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.75,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 198,
+        "accepted_count": 162,
+        "coverage": 0.81818182,
+        "selective_accuracy": 0.88888889,
+        "false_stop_count": 0,
+        "abstain_count": 36,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 12,
+        "coverage": 1.0,
+        "selective_accuracy": 0.75,
+        "false_stop_count": 0,
+        "abstain_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "family_holdout_metrics": {
+        "authorization": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accuracy": 0.66666667,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accuracy": 0.75,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_holdout_calibrated": {
+        "authorization": {
+          "count": 12,
+          "accepted_count": 12,
+          "coverage": 1.0,
+          "selective_accuracy": 0.75,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accepted_count": 54,
+          "coverage": 0.81818182,
+          "selective_accuracy": 0.88888889,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accepted_count": 24,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accepted_count": 6,
+          "coverage": 0.33333333,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "scope": {
+          "count": 12,
+          "accepted_count": 12,
+          "coverage": 1.0,
+          "selective_accuracy": 0.75,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accepted_count": 54,
+          "coverage": 0.81818182,
+          "selective_accuracy": 0.88888889,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_adversary_on_real_holdout": {
+        "count": 186,
+        "accuracy": 0.09677419,
+        "family_count": 6
+      },
+      "surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 0.0
+      },
+      "surface_lm": {
+        "perplexity": 10.03343201,
+        "next_token_accuracy": 0.6,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.95511574,
+          "perplexity": 2.59897136,
+          "next_token_accuracy": 0.52295216,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.14140532,
+          "relative_perplexity_increase": -0.05160069,
+          "next_token_accuracy_drop": -0.01608582,
+          "mean_logit_kl": 0.04577654
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 2.7662515,
+          "action_loss": 0.48440402,
+          "lm_loss": 0.76510631,
+          "surface_lm_loss": 0.78984143,
+          "family_adversarial_loss": 7.34452219,
+          "false_stop_loss": 0.12706364,
+          "unknown_loss": 0.0739225,
+          "dev": {
+            "count": 962,
+            "accuracy": 0.86902287,
+            "false_stop_count": 69,
+            "unknown_count": 125,
+            "unknown_abstain_rate": 1.0
+          },
+          "family_adversary_dev": {
+            "count": 962,
+            "accuracy": 0.01871102,
+            "family_count": 6
+          }
+        }
+      ],
+      "elapsed_seconds": 196.753,
+      "data_stats": {
+        "label_count": 696,
+        "train_count": 216,
+        "dev_count": 216,
+        "holdout_count": 264,
+        "synthetic_train_count": 6400,
+        "synthetic_dev_count": 800,
+        "synthetic_holdout_count": 800,
+        "real_train_count": 216,
+        "real_dev_count": 216,
+        "real_holdout_count": 264,
+        "real_repeated_count": 2133,
+        "action_mix_count": 8533,
+        "lm_replay_count": 1200,
+        "unknown_hint_count": 120,
+        "surface_unknown_count": 6,
+        "language_canary_count": 1210,
+        "real_fraction": 0.25,
+        "balanced_replay_count": 1200,
+        "balanced_synthetic_count": 600,
+        "balanced_real_count": 600,
+        "surface_anchor_count": 600,
+        "surface_anchor_source": "pg147_training_eligible_abstract_surface_proxy",
+        "pg145_training_eligible": false,
+        "pg146_training_labels_used": false,
+        "held_out_family": "blind",
+        "family_names_in_adversary": [
+          "decoy",
+          "latch",
+          "procedural_causal_family",
+          "resource",
+          "scope",
+          "steady"
+        ],
+        "family_count": 6,
+        "unseen_authorization_count": 12
+      }
+    },
+    {
+      "variant": "loo_scope_adapter_512",
+      "held_out_family": "scope",
+      "bottleneck": 512,
+      "train_count": 11502,
+      "parameter_count": 38590151,
+      "known_family_count": 6,
+      "temperature": 1.0,
+      "abstain_threshold": 0.78,
+      "synthetic_holdout": {
+        "count": 800,
+        "accuracy": 0.865,
+        "false_stop_count": 108,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "real_pg136_holdout": {
+        "count": 252,
+        "accuracy": 0.85714286,
+        "false_stop_count": 0,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "unseen_authorization_family_holdout": {
+        "count": 12,
+        "accuracy": 0.5,
+        "false_stop_count": 0,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_synthetic_holdout": {
+        "count": 800,
+        "accepted_count": 577,
+        "coverage": 0.72125,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 223,
+        "unknown_count": 133,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_real_pg136_holdout": {
+        "count": 252,
+        "accepted_count": 186,
+        "coverage": 0.73809524,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 66,
+        "unknown_count": 66,
+        "unknown_abstain_rate": 1.0
+      },
+      "calibrated_unseen_authorization_family_holdout": {
+        "count": 12,
+        "accepted_count": 6,
+        "coverage": 0.5,
+        "selective_accuracy": 1.0,
+        "false_stop_count": 0,
+        "abstain_count": 6,
+        "unknown_count": 0,
+        "unknown_abstain_rate": 1.0
+      },
+      "family_holdout_metrics": {
+        "authorization": {
+          "count": 12,
+          "accuracy": 0.5,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accuracy": 1.0,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accuracy": 0.66666667,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accuracy": 0.81818182,
+          "false_stop_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_holdout_calibrated": {
+        "authorization": {
+          "count": 12,
+          "accepted_count": 6,
+          "coverage": 0.5,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 6,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "blind": {
+          "count": 66,
+          "accepted_count": 66,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 66,
+          "unknown_abstain_rate": 1.0
+        },
+        "decoy": {
+          "count": 66,
+          "accepted_count": 42,
+          "coverage": 0.63636364,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 24,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "latch": {
+          "count": 24,
+          "accepted_count": 24,
+          "coverage": 1.0,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 0,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "resource": {
+          "count": 18,
+          "accepted_count": 6,
+          "coverage": 0.33333333,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 12,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        },
+        "steady": {
+          "count": 66,
+          "accepted_count": 42,
+          "coverage": 0.63636364,
+          "selective_accuracy": 1.0,
+          "false_stop_count": 0,
+          "abstain_count": 24,
+          "unknown_count": 0,
+          "unknown_abstain_rate": 1.0
+        }
+      },
+      "family_adversary_on_real_holdout": {
+        "count": 240,
+        "accuracy": 0.0,
+        "family_count": 6
+      },
+      "surface_unknown": {
+        "count": 0,
+        "accuracy": 0.0,
+        "false_stop_count": 0,
+        "unknown_count": 6,
+        "unknown_abstain_rate": 1.0
+      },
+      "surface_lm": {
+        "perplexity": 7.36449957,
+        "next_token_accuracy": 0.6,
+        "token_count": 60
+      },
+      "language_canary": {
+        "canary_count": 1210,
+        "before": {
+          "loss": 1.00809538,
+          "perplexity": 2.74037668,
+          "next_token_accuracy": 0.50686634,
+          "token_count": 82868
+        },
+        "after": {
+          "loss": 0.95889199,
+          "perplexity": 2.60880428,
+          "next_token_accuracy": 0.51765458,
+          "token_count": 82868
+        },
+        "delta": {
+          "perplexity": -0.1315724,
+          "relative_perplexity_increase": -0.04801252,
+          "next_token_accuracy_drop": -0.01078824,
+          "mean_logit_kl": 0.04814133
+        },
+        "thresholds": {
+          "max_relative_perplexity_increase": 0.2,
+          "max_next_token_accuracy_drop": 0.05,
+          "max_mean_logit_kl": 0.1
+        },
+        "exceeded": {
+          "relative_perplexity_increase": false,
+          "next_token_accuracy_drop": false,
+          "mean_logit_kl": false
+        },
+        "catastrophic_forgetting_detected": false,
+        "canary_labels_or_oracle_used": false,
+        "raw_request_response_used": false
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 2.52798725,
+          "action_loss": 0.4933076,
+          "lm_loss": 0.72907109,
+          "surface_lm_loss": 0.7814146,
+          "family_adversarial_loss": 6.2494555,
+          "false_stop_loss": 0.11620209,
+          "unknown_loss": 0.04721193,
+          "dev": {
+            "count": 1004,
+            "accuracy": 0.88247012,
+            "false_stop_count": 94,
+            "unknown_count": 179,
+            "unknown_abstain_rate": 1.0
+          },
+          "family_adversary_dev": {
+            "count": 1004,
+            "accuracy": 0.0,
+            "family_count": 6
+          }
+        }
+      ],
+      "elapsed_seconds": 148.673,
+      "data_stats": {
+        "label_count": 696,
+        "train_count": 216,
+        "dev_count": 216,
+        "holdout_count": 264,
+        "synthetic_train_count": 6400,
+        "synthetic_dev_count": 800,
+        "synthetic_holdout_count": 800,
+        "real_train_count": 216,
+        "real_dev_count": 216,
+        "real_holdout_count": 264,
+        "real_repeated_count": 2133,
+        "action_mix_count": 8533,
+        "lm_replay_count": 1200,
+        "unknown_hint_count": 120,
+        "surface_unknown_count": 6,
+        "language_canary_count": 1210,
+        "real_fraction": 0.25,
+        "balanced_replay_count": 1200,
+        "balanced_synthetic_count": 600,
+        "balanced_real_count": 600,
+        "surface_anchor_count": 600,
+        "surface_anchor_source": "pg147_training_eligible_abstract_surface_proxy",
+        "pg145_training_eligible": false,
+        "pg146_training_labels_used": false,
+        "held_out_family": "scope",
+        "family_names_in_adversary": [
+          "blind",
+          "decoy",
+          "latch",
+          "procedural_causal_family",
+          "resource",
+          "steady"
+        ],
+        "family_count": 6,
+        "unseen_authorization_count": 12
+      }
+    }
+  ],
+  "objective": "family_invariant_adapter_gradient_reversal_leave_one_family_out",
+  "data_policy": {
+    "raw_payloads": false,
+    "raw_responses": false,
+    "external_network_targets": false,
+    "pg145_training_eligible": false,
+    "pg146_training_labels_used": false,
+    "family_labels_as_model_inputs": false,
+    "family_labels_for_adversary_only": true,
+    "unseen_authorization_family_training_used": false,
+    "calibration_fit_on_holdout": false,
+    "holdout_labels_in_training": false
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  },
+  "report_sha256": "d4c62bb5727968c6b4ee31fe6472f33f5f77829ae29d44e0a52d0f23a882bb09"
+}

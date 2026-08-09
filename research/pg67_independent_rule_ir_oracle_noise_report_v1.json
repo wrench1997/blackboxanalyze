@@ -1,0 +1,69 @@
+{
+  "protocol_id": "pg-pk-67-independent-rule-ir-oracle-noise-v1",
+  "schema_version": "pg67-independent-rule-ir-oracle-noise-report-v1",
+  "status": "diagnostic_only",
+  "source": {
+    "implementation": "pg67-independent-rule-ir-v1",
+    "layouts": [
+      "lumen",
+      "mosaic"
+    ],
+    "model_checkpoint": "artifacts\\pg66-utility-ranking\\ranking_head.pt",
+    "model_retrained_on_pg67": false,
+    "family_in_pre_oracle_input": false
+  },
+  "metrics": {
+    "episode_count": 192,
+    "positive_episode_count": 128,
+    "known_positive_count": 109,
+    "unknown_positive_count": 19,
+    "negative_control_count": 64,
+    "effect_recall": 1.0,
+    "known_family_recall": 0.844037,
+    "unknown_misname_count": 0,
+    "unknown_strict_abstain": true,
+    "negative_false_accept_count": 0,
+    "oracle_quality_counts": {
+      "ambiguous": 20,
+      "exact": 100,
+      "contradictory": 8
+    },
+    "oracle_ambiguous_known_count": 10,
+    "oracle_contradictory_known_count": 7,
+    "rule_ir_bound_count": 92,
+    "rule_ir_abstain_count": 36,
+    "mean_steps": 2.333333,
+    "action_counts": {
+      "POST.confirm": 192,
+      "GET.confirm": 128,
+      "GET.screen": 64,
+      "POST.screen": 64
+    },
+    "fresh_reset_count": 448,
+    "evidence_hash_count": 448,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "oracle_noise_contract": {
+    "exact": true,
+    "ambiguous": true,
+    "contradictory": true,
+    "unknown_family": "template",
+    "contradictory_signal_must_abstain": true
+  },
+  "hard_gate": {
+    "schema_version": "pg67-independent-rule-ir-oracle-noise-hard-gate-v1",
+    "status": "passed",
+    "claim_allowed": false,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "status": "quarantined_independent_rule_ir_oracle_noise",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "interpretation": "PG67 证明的是动作确认后 Rule IR 绑定在可控 oracle 噪声下的拒绝/弃权边界，不是 pre-oracle 漏洞族发现证明。"
+}

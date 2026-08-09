@@ -1,0 +1,151 @@
+{
+  "schema_version": "pg166-surface-replay-adaptation-report-v1",
+  "protocol_id": "pg-pk-166-surface-replay-adaptation-v1",
+  "status": "completed_pg166_surface_replay_adaptation",
+  "scope": {
+    "claim": "replay/forgetting training diagnostic for abstract Rule-IR tokens",
+    "real_vulnerability_scanner_claim_allowed": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "base_train_count": 9999,
+    "surface_row_count": 28,
+    "replay_train_count": 10027,
+    "base_holdout_count": 1210,
+    "typed_holdout_count": 203
+  },
+  "baseline": {
+    "base_holdout": {
+      "loss": 0.94460476,
+      "perplexity": 2.5717967,
+      "next_token_accuracy": 0.52225226,
+      "token_count": 82868
+    },
+    "typed_holdout": {
+      "loss": 0.37398688,
+      "perplexity": 1.45351808,
+      "next_token_accuracy": 0.83348866,
+      "token_count": 6438
+    },
+    "surface": {
+      "loss": 7.4101081,
+      "perplexity": 1652.6049766,
+      "next_token_accuracy": 0.09090909,
+      "token_count": 616
+    }
+  },
+  "variants": {
+    "replay_anchored": {
+      "strategy": "replay_anchored",
+      "train_row_count": 10027,
+      "lr": 2e-05,
+      "epochs": 1,
+      "base_holdout": {
+        "loss": 0.93851584,
+        "perplexity": 2.55618482,
+        "next_token_accuracy": 0.5241589,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.36356209,
+        "perplexity": 1.43844417,
+        "next_token_accuracy": 0.84374029,
+        "token_count": 6438
+      },
+      "surface_rows": {
+        "loss": 0.4479188,
+        "perplexity": 1.56505161,
+        "next_token_accuracy": 0.93181818,
+        "token_count": 616
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.92297274,
+          "base_holdout": {
+            "loss": 0.93851584,
+            "perplexity": 2.55618482,
+            "next_token_accuracy": 0.5241589,
+            "token_count": 82868
+          },
+          "typed_holdout": {
+            "loss": 0.36356209,
+            "perplexity": 1.43844417,
+            "next_token_accuracy": 0.84374029,
+            "token_count": 6438
+          }
+        }
+      ],
+      "elapsed_seconds": 133.799,
+      "checkpoint": "artifacts\\pg166-surface-replay-adaptation-v1\\replay_anchored.pt"
+    },
+    "surface_only": {
+      "strategy": "surface_only",
+      "train_row_count": 28,
+      "lr": 0.0001,
+      "epochs": 1,
+      "base_holdout": {
+        "loss": 0.97416241,
+        "perplexity": 2.64894756,
+        "next_token_accuracy": 0.52217985,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.53865331,
+        "perplexity": 1.71369749,
+        "next_token_accuracy": 0.78704567,
+        "token_count": 6438
+      },
+      "surface_rows": {
+        "loss": 1.13499591,
+        "perplexity": 3.11116081,
+        "next_token_accuracy": 0.77272727,
+        "token_count": 616
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 5.44709933,
+          "base_holdout": {
+            "loss": 0.97416241,
+            "perplexity": 2.64894756,
+            "next_token_accuracy": 0.52217985,
+            "token_count": 82868
+          },
+          "typed_holdout": {
+            "loss": 0.53865331,
+            "perplexity": 1.71369749,
+            "next_token_accuracy": 0.78704567,
+            "token_count": 6438
+          }
+        }
+      ],
+      "elapsed_seconds": 12.699,
+      "checkpoint": "artifacts\\pg166-surface-replay-adaptation-v1\\surface_only.pt"
+    }
+  },
+  "interpretation": {
+    "replay_anchor_expected_to_preserve_base": true,
+    "surface_only_expected_to_forget_base": true,
+    "vulnerability_claim_allowed": false,
+    "promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "attestation_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "source": {
+    "runner_sha256": "d6ac82c5dab7c7162808e11d28fa71d82ed5c78fee1e3fe6a986b0e7ad8e7ff6",
+    "checkpoint_sha256": "d88aeeea13e5325e4bd632f0a05289792089ce3a90d78e2e8e21b811e1ee993e",
+    "dataset_sha256": "8edda7ad0e9db70ca6fa00f3ee892e77f7fe68ee6dcb909c032e4eaff4453d30",
+    "surface_dataset_sha256": "150331205696bead9428d6e771c84a46948bd581902724734950ddc3abbe67bb"
+  },
+  "report_sha256": "2228be4a5c6e55edaa8162fb7284792b2b83cb297cd3a1509e2553b865cbf6d2"
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": "pg-pk-48-compositional-preprobe-protocol-v1",
+  "protocol_id": "PG-48",
+  "title": "组合 semantic/channel slot 的发送前主动策略",
+  "objective": "在方法敏感的独立 loopback 靶场上，训练 action-value head 只使用发送前的组合语义槽、动作和 belief，学习选择 GET/POST confirm；不读取未发送响应，未知族仍安全 abstain。",
+  "authorization": {
+    "scope": "workspace_local_only",
+    "host": "127.0.0.1",
+    "external_network": false,
+    "read_only": true,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "target": {
+    "fixture": "app/pg48_compositional_preprobe_fixture.py",
+    "training_implementation": "ember",
+    "holdout_implementation": "frost",
+    "surface_variants": ["plain", "wrapped"],
+    "methods": ["GET", "POST"],
+    "phases": ["screen", "confirm", "error", "timeout"],
+    "sampling_seeds": [401, 409, 419],
+    "families": ["xss", "injection", "authentication", "access_control", "logic", "url_redirect", "template_injection", "ordinary_response"]
+  },
+  "slot_contract": {
+    "semantic_slot": "language-neutral context reference without family name",
+    "channel_slot": "query-channel or form-channel, stored in probe manifest before request",
+    "model_input": ["semantic slot one-hot", "channel slot one-hot", "action one-hot", "belief posterior"],
+    "excluded": ["typed_oracle", "positive", "family", "response_projection", "raw_probe", "raw_response_body", "evidence_sha256"],
+    "oracle_is_target_only": true,
+    "holdout_labels_not_features": true
+  },
+  "split_plan": {
+    "train": "ember, seeds 401/409, all non-template semantic slots",
+    "seed_holdout": "ember, seed 419",
+    "implementation_holdout": "frost, all slots",
+    "family_holdout": "template-boundary semantic slot",
+    "negative_control": "ordinary-surface"
+  },
+  "promotion_gate": {
+    "preprobe_no_response_feature": true,
+    "get_post_coverage_required": true,
+    "known_family_recall_required": true,
+    "unknown_strict_abstain": true,
+    "zero_negative_effect_false_accept": true,
+    "fresh_reset_and_trace_validation_required": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "passed_safety_gate_no_promotion"
+  },
+  "run_result": {
+    "catalog_rows": 1536,
+    "catalog_typed_positive_count": 84,
+    "catalog_negative_count": 1452,
+    "catalog_source_count": 2,
+    "catalog_fresh_reset_count": 1536,
+    "catalog_episode_count": 96,
+    "catalog_accepted_episode_count": 96,
+    "train_pair_count": 112,
+    "seed_holdout_pair_count": 56,
+    "frost_holdout_episode_count": 48,
+    "frost_effect_success_rate": 1.0,
+    "frost_known_family_recall": 1.0,
+    "frost_unknown_strict_abstain": true,
+    "frost_negative_false_accept_count": 0,
+    "frost_mean_queries": 3.125,
+    "frost_get_post_covered": true,
+    "frost_accepted_trace_episode_count": 48,
+    "safe_gate_status": "passed",
+    "formal_capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "status": "run_completed_preprobe_safety_gate_passed_no_promotion"
+}

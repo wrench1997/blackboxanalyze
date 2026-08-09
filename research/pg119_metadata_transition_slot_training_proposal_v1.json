@@ -1,0 +1,58 @@
+{
+  "protocol_id": "pg-pk-119-metadata-transition-slot-training-v1",
+  "proposal_id": "pg119-metadata-transition-slot-training-proposal-v1",
+  "question": "新的 metadata_changed/transition_delta slot 是否让模型在第三编码顺序和未见 seed 上发现正例，并在清除该 slot 后失去该能力？",
+  "intervention": "新建 48 维、4996 参数的 fresh decoder；训练 PG116 identity、PG118 location delta 与 PG119 metadata triple-encoding；PG119 holdout seeds、PG117 gamma、PG114 全部盲测。",
+  "observed_fields": [
+    "method",
+    "placement",
+    "encoding_chain",
+    "status_class",
+    "shape_class",
+    "candidate_signal",
+    "location_changed",
+    "metadata_changed",
+    "transition_delta",
+    "generic_belief",
+    "BSP bounded projection"
+  ],
+  "excluded_fields": [
+    "raw probe",
+    "raw response body",
+    "family",
+    "typed oracle",
+    "target instance id",
+    "route id",
+    "evaluator evidence hash"
+  ],
+  "maze_distance_definition": {
+    "primary": "remaining typed-acceptance gates",
+    "secondary": ["normalized belief entropy", "false-accept risk", "bounded action cost"],
+    "not_a_single_truth_score": true,
+    "display_scalar_is_non_authoritative": true
+  },
+  "success_definition": {
+    "all_known_holdout_positive_recall_nonzero": true,
+    "all_decoy_false_accept_zero": true,
+    "all_unknown_abstain_nonzero": true,
+    "full_recall_above_metadata_slot_ablation": true,
+    "all_abstain_not_success": true
+  },
+  "observed_result": {
+    "device": "cuda",
+    "feature_dim": 48,
+    "parameter_count": 4996,
+    "dev_accuracy": 0.998106,
+    "pg114_confirm_recall": 1.0,
+    "pg117_route_positive_recall": 1.0,
+    "pg119_metadata_positive_recall": 1.0,
+    "pg119_metadata_slot_ablation_recall": 0.0,
+    "pg117_cross_seed_positive_recall_variance": 0.0,
+    "pg119_cross_seed_positive_recall_variance": 0.0,
+    "pg119_decoy_false_accept_count": 0,
+    "pg119_unknown_abstain_rate": 1.0,
+    "metadata_slot_prediction_changed": true
+  },
+  "next_if_pass": "PG120 做同一 metadata slot 的跨实现 holdout、seed 方差和负对照强度扫描，并尝试在不增加容量的条件下复用 slot。",
+  "next_if_fail": "冻结 PG119，不写入长期记忆；按逐步混淆矩阵和消融结果修正表示或 oracle，禁止以全 abstain 或扩大模型掩盖失败。"
+}

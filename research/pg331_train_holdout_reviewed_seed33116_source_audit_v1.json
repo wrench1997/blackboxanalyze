@@ -1,0 +1,177 @@
+{
+  "protocol_id": "pg-pk-331a-source-row-audit-v1",
+  "schema_version": "pg331a-source-row-audit-v1",
+  "status": "blocked",
+  "dataset": "research\\pg331_train_holdout_reviewed_seed33116_v1.json",
+  "record_count": 27,
+  "training_eligible_count": 6,
+  "split_counts": {
+    "train": 9,
+    "implementation_holdout": 18
+  },
+  "unique_sequence_count": 22,
+  "unique_sequence_ratio": 0.814815,
+  "axis_presence_counts": {
+    "belief_replay_presence:observed": 27,
+    "document_presence:observed": 27,
+    "failure_feedback_presence:observed": 27,
+    "javascript_presence:observed": 27,
+    "navigation_presence:observed": 27,
+    "request_transport_presence:observed": 27,
+    "response_transport_presence:observed": 27
+  },
+  "axis_quality": {
+    "belief_replay_presence": {
+      "entropy": {
+        "status": "measured",
+        "bits": 2.20947,
+        "unique": 10,
+        "count": 210
+      },
+      "field_ablation": {
+        "eligible_rows": 6,
+        "observable_delta_rows": 6,
+        "observable_delta_rate": 1.0,
+        "removed_token_count": 210,
+        "status": "measured"
+      },
+      "status": "measured"
+    },
+    "document_presence": {
+      "entropy": {
+        "status": "measured",
+        "bits": 3.618483,
+        "unique": 49,
+        "count": 14886
+      },
+      "field_ablation": {
+        "eligible_rows": 6,
+        "observable_delta_rows": 6,
+        "observable_delta_rate": 1.0,
+        "removed_token_count": 14886,
+        "status": "measured"
+      },
+      "status": "measured"
+    },
+    "failure_feedback_presence": {
+      "entropy": {
+        "status": "measured",
+        "bits": 2.524544,
+        "unique": 10,
+        "count": 162
+      },
+      "field_ablation": {
+        "eligible_rows": 6,
+        "observable_delta_rows": 6,
+        "observable_delta_rate": 1.0,
+        "removed_token_count": 162,
+        "status": "measured"
+      },
+      "status": "measured"
+    },
+    "javascript_presence": {
+      "entropy": {
+        "status": "measured",
+        "bits": 3.158527,
+        "unique": 12,
+        "count": 204
+      },
+      "field_ablation": {
+        "eligible_rows": 6,
+        "observable_delta_rows": 6,
+        "observable_delta_rate": 1.0,
+        "removed_token_count": 204,
+        "status": "measured"
+      },
+      "status": "measured"
+    },
+    "navigation_presence": {
+      "entropy": {
+        "status": "measured",
+        "bits": 2.549275,
+        "unique": 12,
+        "count": 3054
+      },
+      "field_ablation": {
+        "eligible_rows": 6,
+        "observable_delta_rows": 6,
+        "observable_delta_rate": 1.0,
+        "removed_token_count": 3054,
+        "status": "measured"
+      },
+      "status": "measured"
+    },
+    "request_transport_presence": {
+      "entropy": {
+        "status": "measured",
+        "bits": 4.001261,
+        "unique": 24,
+        "count": 276
+      },
+      "field_ablation": {
+        "eligible_rows": 6,
+        "observable_delta_rows": 6,
+        "observable_delta_rate": 1.0,
+        "removed_token_count": 276,
+        "status": "measured"
+      },
+      "status": "measured"
+    },
+    "response_transport_presence": {
+      "entropy": {
+        "status": "measured",
+        "bits": 3.438722,
+        "unique": 13,
+        "count": 144
+      },
+      "field_ablation": {
+        "eligible_rows": 6,
+        "observable_delta_rows": 6,
+        "observable_delta_rate": 1.0,
+        "removed_token_count": 144,
+        "status": "measured"
+      },
+      "status": "measured"
+    }
+  },
+  "validation_counts": {
+    "valid": 21,
+    "invalid": 6,
+    "evaluator_missing:typed_available": 6,
+    "field_not_ready:belief_and_replay.belief_posterior_bucket": 6,
+    "field_not_ready:belief_and_replay.evidence_hash_present": 6,
+    "field_not_ready:belief_and_replay.evidence_present": 6,
+    "field_not_ready:belief_and_replay.replay_ready": 6
+  },
+  "context_target_alignment": {
+    "aligned_training_rows": 6,
+    "total_training_rows": 6,
+    "rate": 1.0
+  },
+  "context_firewall": {
+    "forbidden_token_count": 0
+  },
+  "split_isolation": {
+    "source_cross_split_groups": {},
+    "implementation_cross_split_groups": {},
+    "family_cross_split_groups": {},
+    "status": "clean"
+  },
+  "failures": [
+    "invalid_row:pg331js:33113:juice-login-post-unsupported:candidate",
+    "invalid_row:pg331js:33113:juice-login-post-unsupported:negative",
+    "invalid_row:pg331js:33113:juice-login-post-unsupported:reference",
+    "invalid_row:pg331js:33114:juice-login-post-unsupported:candidate",
+    "invalid_row:pg331js:33114:juice-login-post-unsupported:negative",
+    "invalid_row:pg331js:33114:juice-login-post-unsupported:reference"
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "independent_implementation_gate_required": true
+  },
+  "interpretation": "PG-331A 只审计整页 token/source-row 完整性；blocked 表示必须 ASK/补采，不表示漏洞阴性。",
+  "audit_sha256": "9f6ea98f83f75f4a606938df7e5e0c173a09d55799db5738d9a844c1cf56a6f6"
+}

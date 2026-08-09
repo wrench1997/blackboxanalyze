@@ -1,0 +1,36 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-rule-ir-decoder-v1.2",
+  "status": "frozen-before-training",
+  "supersedes": "research/juice_shop_loop_12_rule_ir_decoder_protocol_v1_1.json",
+  "objective": "decode visible traces into abstract Rule IR while matching the single-response shadow surface contract",
+  "families": ["access_control", "authentication", "input_validation", "injection", "observability", "url_redirect", "xss"],
+  "curricula": {
+    "encoding_depth": {"examples": 180, "forms": ["raw_markup", "single_entity", "double_entity", "triple_entity", "plain_text"]},
+    "shadow_surface": {"examples": 420, "forms": ["action.path", "status_code", "content_type", "body_shape", "body_length"], "one_trace_per_example": true}
+  },
+  "input_contract": {
+    "visible_fields": ["input", "context", "state", "history", "output"],
+    "excluded_fields": ["family", "record_id", "intended_output", "is_counterexample", "evaluator_state", "challenge_key", "source_code"],
+    "feature_contract": "256-dimensional anonymous value-shape projection with response status/surface buckets"
+  },
+  "output_contract": {
+    "representation": "RULE_FAMILY_TEMPLATES policy-slot AST",
+    "grammar_validation": "app.rule_ir_decoder.validate_abstract_rule_ir",
+    "evidence_binding": "app.rule_ir_binding.bind_rule_ir_slots; low-confidence decoder output abstains"
+  },
+  "training": {
+    "primary_seed": 20260879,
+    "fresh_holdout_seeds": [20260883, 20260889, 20260893],
+    "device_policy": "cuda when available, otherwise cpu and report reason",
+    "epochs": 40,
+    "batch_size": 256
+  },
+  "acceptance_gates": {
+    "training_validation_accuracy_min": 0.90,
+    "fresh_holdout_min_accuracy": 0.70,
+    "fresh_holdout_seed_count_min": 3,
+    "oracle_leakage": "must remain false",
+    "shadow_binding": "must report decoder confidence and explicit abstention/unbound status"
+  },
+  "safety": {"local_only": true, "no_target_requests_during_training": true, "no_evaluator_endpoints": true, "no_browser_execution": true}
+}

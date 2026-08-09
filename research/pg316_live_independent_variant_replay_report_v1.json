@@ -1,0 +1,228 @@
+{
+  "protocol_id": "pg-pk-316-live-independent-variant-v1",
+  "schema_version": "pg316-live-independent-variant-replay-report-v1",
+  "status": "completed_real_local_docker_pg316_live_replay",
+  "runtime": {
+    "execution_window": "Asia/Shanghai 08:00-18:00",
+    "explicit_flag": "PG316_LOCAL_DOCKER_EVAL=1",
+    "device": "cpu_inference_only",
+    "image": "sift/pikachu-pg240-source-native@sha256:de3227c1f56969be94521bc4bb48814b5dd1f511a1e368c688933812eaafe973",
+    "network": "none",
+    "seed": 31601,
+    "route_ids": [
+      "sql-string-get",
+      "sql-numeric-post"
+    ]
+  },
+  "model": {
+    "checkpoint": "artifacts\\pg316-failure-repair\\pg316_failure_repair_moe_local_morning.pt",
+    "architecture": "causal_transformer_moe_next_token",
+    "symbolic_checkpoint": true,
+    "wire_generation": "source_grounded_binding_after_model_variant_guard",
+    "raw_payload_in_context": false,
+    "oracle_target_in_context": false
+  },
+  "preflight_identifiability": {
+    "count": 12,
+    "question_recall": 1.0,
+    "unsafe_allow": 0,
+    "rows": [
+      {
+        "route_id": "sql-string-get",
+        "missing": "typed_available",
+        "question_expected": "ask_typed_availability",
+        "question_actual": "ask_typed_availability",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "replay_ready",
+        "question_expected": "ask_replay_readiness",
+        "question_actual": "ask_replay_readiness",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "evidence_present",
+        "question_expected": "ask_evidence_presence",
+        "question_actual": "ask_evidence_presence",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "feedback_state",
+        "question_expected": "ask_feedback_state",
+        "question_actual": "ask_feedback_state",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "negative_control",
+        "question_expected": "ask_negative_control",
+        "question_actual": "ask_negative_control",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-string-get",
+        "missing": "fresh_reset",
+        "question_expected": "ask_fresh_reset",
+        "question_actual": "ask_fresh_reset",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "typed_available",
+        "question_expected": "ask_typed_availability",
+        "question_actual": "ask_typed_availability",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "replay_ready",
+        "question_expected": "ask_replay_readiness",
+        "question_actual": "ask_replay_readiness",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "evidence_present",
+        "question_expected": "ask_evidence_presence",
+        "question_actual": "ask_evidence_presence",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "feedback_state",
+        "question_expected": "ask_feedback_state",
+        "question_actual": "ask_feedback_state",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "negative_control",
+        "question_expected": "ask_negative_control",
+        "question_actual": "ask_negative_control",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "missing": "fresh_reset",
+        "question_expected": "ask_fresh_reset",
+        "question_actual": "ask_fresh_reset",
+        "question_correct": true,
+        "safe_expected": false,
+        "safe_actual": false
+      }
+    ]
+  },
+  "failure_repair": {
+    "rows": [
+      {
+        "route_id": "sql-string-get",
+        "history_action": "candidate_failed",
+        "failure_class": "effect_not_confirmed",
+        "expected": {
+          "safe_to_send": false,
+          "variant": "none",
+          "next_action": "repair_abstract_plan",
+          "repair_action": "retry_bounded_variant"
+        },
+        "actual": {
+          "safe_to_send": false,
+          "variant": "none",
+          "next_action": "repair_abstract_plan",
+          "repair_action": "retry_bounded_variant"
+        },
+        "abstain_or_repair_correct": true,
+        "raw_payload_in_context": false
+      },
+      {
+        "route_id": "sql-numeric-post",
+        "history_action": "candidate_failed",
+        "failure_class": "effect_not_confirmed",
+        "expected": {
+          "safe_to_send": false,
+          "variant": "none",
+          "next_action": "repair_abstract_plan",
+          "repair_action": "retry_bounded_variant"
+        },
+        "actual": {
+          "safe_to_send": false,
+          "variant": "none",
+          "next_action": "repair_abstract_plan",
+          "repair_action": "retry_bounded_variant"
+        },
+        "abstain_or_repair_correct": true,
+        "raw_payload_in_context": false
+      }
+    ],
+    "correct": 2,
+    "count": 2,
+    "rate": 1.0
+  },
+  "counts": {
+    "route_count": 2,
+    "get_count": 1,
+    "post_count": 1,
+    "variant_role_count": 6,
+    "variant_exact_count": 6,
+    "model_variant_send_count": 6,
+    "model_typed_effect_count": 2,
+    "negative_lane_violation_count": 0,
+    "fresh_reset_count": 2,
+    "typed_evidence_hash_count": 2,
+    "elapsed_seconds": 33.625
+  },
+  "hypothesis_gate": {
+    "status": "blocked",
+    "checks": {
+      "question_recall": true,
+      "variant_exact": true,
+      "repair_exact": true,
+      "negative_zero": true,
+      "typed_all_routes": true,
+      "fresh_get_post_pair": true,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "scientific_gate": {
+    "status": "blocked",
+    "reasons": [
+      "PG-316 offline question worst seed remains 88%",
+      "single PG-316 seed live replay and SQL row-shape only",
+      "source-grounded adapter is not literal payload generation",
+      "promotion disabled"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "1abc78db04ee5b7c2d89c5cef35ab4de939e3d075ce47c6bda1a6746924d3db2"
+}

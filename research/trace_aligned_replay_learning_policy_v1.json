@@ -1,0 +1,87 @@
+{
+  "schema_version": "sift-trace-aligned-replay-learning-policy-v1",
+  "policy_id": "trace-aligned-replay-learning-v1",
+  "purpose": "让模型在授权本地靶场的每个安全探测步骤中同步观察、更新 belief 并生成可审计数据，但禁止未经验证的结果直接训练或晋升长期记忆",
+  "scope": {
+    "targets": ["127.0.0.1", "localhost"],
+    "methods": ["GET", "POST"],
+    "fresh_reset_per_episode": true,
+    "external_network": false,
+    "credentials": false,
+    "destructive_actions": false
+  },
+  "step_contract": {
+    "required_fields": [
+      "episode_id",
+      "step_id",
+      "parent_step_id",
+      "sampling_seed",
+      "target_instance_id",
+      "hypothesis",
+      "belief_before",
+      "action_manifest",
+      "baseline_projection",
+      "response_projection",
+      "oracle_projection",
+      "belief_after",
+      "decision",
+      "next_action",
+      "echo",
+      "evidence_sha256"
+    ],
+    "action_manifest_required": [
+      "method",
+      "route_template_id",
+      "placement",
+      "encoding_chain",
+      "probe_ref",
+      "probe_sha256",
+      "safety"
+    ],
+    "context_required": [
+      "http_method",
+      "route_template_id",
+      "placement_or_form_schema",
+      "baseline_projection",
+      "probe_projection",
+      "fresh_reset",
+      "typed_oracle_projection"
+    ],
+    "echo_definition": "echo.sha256 必须覆盖 action_manifest、baseline_projection、response_projection、oracle_projection、belief_before、belief_after、decision 和 next_action 的 canonical JSON",
+    "raw_probe_or_body_storage": false,
+    "model_sees_evaluator_label_before_action": false
+  },
+  "online_learning": {
+    "episode_local_belief_update": true,
+    "shadow_trace_buffer_write": true,
+    "weight_update_during_episode": false,
+    "long_term_memory_write_during_episode": false,
+    "unverified_label_feedback_to_policy": false,
+    "failed_or_unresolved_steps": "diagnostic_quarantine"
+  },
+  "dataset_stages": {
+    "trace_only": "动作和响应投影已回显，但 oracle 尚未完成；只能做过程审计",
+    "accepted_evaluation": "oracle、fresh reset、阴性配对和证据哈希完整；可用于评估/回归",
+    "training_candidate": "accepted_evaluation 通过跨目标复放、来源/族外隔离和能力门后才可进入训练候选",
+    "memory_candidate": "仅 Rule IR 与证据引用可申请长期记忆；不得保存原始 probe/body"
+  },
+  "promotion_requirements": [
+    "fresh_reset_completed",
+    "GET_and_POST_context_present",
+    "typed_oracle_revalidated",
+    "matched_negative_control",
+    "evidence_sha256_verified",
+    "cross_target_replay_passed",
+    "no_false_positive",
+    "model_capability_gate_passed"
+  ],
+  "failure_actions": {
+    "missing_echo": "drop_dataset_row_and_block_promotion",
+    "weak_signal_only": "candidate_or_abstain",
+    "oracle_missing": "trace_only",
+    "fresh_reset_missing": "block_episode",
+    "cross_split_overlap": "quarantine_and_replay",
+    "capability_gain_missing": "block_training_and_memory_promotion"
+  },
+  "implementation": "app/trace_aligned_dataset.py"
+}

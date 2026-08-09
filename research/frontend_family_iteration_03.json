@@ -1,0 +1,42 @@
+{
+  "schema_version": "sift-experiment-iteration-v1",
+  "parent_experiment": "frontend-structured-semantics-loop-01",
+  "iteration": 3,
+  "registered_before_iteration_03_results": true,
+  "observed_failure": {
+    "compact_postmessage_origin": 0.5,
+    "compact_dom_sink_injection": 0.5,
+    "compact_memory_delta": 0.225417,
+    "interpretation": "Memory changes predictions but does not recover held-out behavior. The learner uses family-level shortcuts instead of performing episode-level induction."
+  },
+  "root_cause_hypothesis": {
+    "layer": "loss_reward_or_optimization",
+    "claim": "Fixed family mappings let the classifier minimize loss while ignoring the trace-to-label relation.",
+    "counterfactual_test": "Randomly invert all visible trace outputs and query labels for half of training programs. The hidden permutation is consistent inside an episode and unavailable outside its trace."
+  },
+  "minimal_change": {
+    "name": "episode-consistent meta label permutation",
+    "training_only": true,
+    "model_change": false,
+    "program_count_change": false,
+    "holdout_change": false,
+    "test_label_change": false,
+    "reason": "A query-only family shortcut becomes insufficient; successful prediction requires using the episode memory."
+  },
+  "fair_ablation": [
+    "raw trace plus meta-label training",
+    "compact semantic trace plus identical meta-label training"
+  ],
+  "unchanged_primary_success_criteria": {
+    "postmessage_origin_behavior_agreement_min": 0.85,
+    "dom_sink_injection_behavior_agreement_min": 0.85,
+    "counterexample_at_10_min": 0.8,
+    "old_family_regression_max_absolute": 0.02,
+    "required_independent_seeds": 3
+  },
+  "added_diagnostic_metrics": {
+    "counterexample_top1_lift_over_random_min": 0.15,
+    "reason": "Counterexample@10 has an approximately 1.0 random-success baseline on the current candidate domains and is retained but not treated as sufficient evidence."
+  },
+  "decision": "Run both raw-meta and compact-meta on seed 20260801. Continue other seeds only if at least one treatment exceeds chance on both held-out families without violating regression guardrails."
+}

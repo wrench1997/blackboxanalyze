@@ -1,0 +1,135 @@
+{
+  "protocol_id": "pg-pk-58-effect-family-decoupling-v1",
+  "schema_version": "pg58-effect-family-decoupling-report-v1",
+  "device": "cuda",
+  "split_counts": {
+    "train": 306,
+    "dev": 188,
+    "holdout": 120
+  },
+  "training_contract": {
+    "family_head_train_known_families_only": true,
+    "unknown_family_excluded_from_training": "template_injection",
+    "family_name_in_input": false,
+    "effect_head_separate": true,
+    "effect_head_is_not_family_evidence": true
+  },
+  "metrics": {
+    "dev_raw": {
+      "count": 188,
+      "emitted_family_count": 54,
+      "known_positive_count": 160,
+      "known_family_hits": 24,
+      "known_family_recall": 0.15,
+      "known_wrong_family_count": 30,
+      "unknown_family_count": 8,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.712766
+    },
+    "holdout_raw": {
+      "count": 120,
+      "emitted_family_count": 0,
+      "known_positive_count": 96,
+      "known_family_hits": 0,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_family_count": 12,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 1.0
+    },
+    "dev_calibrated": {
+      "count": 188,
+      "emitted_family_count": 24,
+      "known_positive_count": 160,
+      "known_family_hits": 24,
+      "known_family_recall": 0.15,
+      "known_wrong_family_count": 0,
+      "unknown_family_count": 8,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.87234
+    },
+    "holdout_calibrated": {
+      "count": 120,
+      "emitted_family_count": 0,
+      "known_positive_count": 96,
+      "known_family_hits": 0,
+      "known_family_recall": 0.0,
+      "known_wrong_family_count": 0,
+      "unknown_family_count": 12,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 1.0
+    }
+  },
+  "thresholds": {
+    "raw": {
+      "effect_threshold": 0.5,
+      "family_threshold": 0.5,
+      "margin_threshold": 0.05
+    },
+    "calibrated": {
+      "effect_threshold": 0.9569817185401917,
+      "family_threshold": 0.6100801825523376,
+      "margin_threshold": 0.4036306142807007
+    },
+    "calibration_source": "PG-58 dev only",
+    "calibration_metrics": {
+      "count": 188,
+      "emitted_family_count": 24,
+      "known_positive_count": 160,
+      "known_family_hits": 24,
+      "known_family_recall": 0.15,
+      "known_wrong_family_count": 0,
+      "unknown_family_count": 8,
+      "unknown_misname_count": 0,
+      "unknown_strict_abstain": true,
+      "negative_false_accept_count": 0,
+      "abstain_rate": 0.87234
+    }
+  },
+  "checkpoint": "artifacts\\pg58-effect-family-decoupling\\family_head.pt",
+  "checkpoint_sha256": "57ee6f55f0a6e80520d17799c074a257097cacbc386e45293dbad82dfb69e895",
+  "trace": "research\\pg58_effect_family_decoupling_trace_v1.json",
+  "history_tail": [
+    {
+      "epoch": 76,
+      "train_loss": 1.311831,
+      "dev_family_loss": 1.997885
+    },
+    {
+      "epoch": 77,
+      "train_loss": 1.306962,
+      "dev_family_loss": 1.98874
+    },
+    {
+      "epoch": 78,
+      "train_loss": 1.302349,
+      "dev_family_loss": 2.050163
+    },
+    {
+      "epoch": 79,
+      "train_loss": 1.313175,
+      "dev_family_loss": 2.092588
+    },
+    {
+      "epoch": 80,
+      "train_loss": 1.323948,
+      "dev_family_loss": 2.095147
+    }
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false,
+    "status": "quarantined_until_family_ood_gate",
+    "reason": "Effect confirmation and family naming are scored separately; framed holdout must pass unknown abstain and known-family recall gates before any promotion."
+  },
+  "report_sha256": "8dcc2924c4f20b8353c5555b397ea81e5dd32340da5b9a65c35e88abf1fffec6"
+}

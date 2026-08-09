@@ -1,0 +1,461 @@
+{
+  "schema_version": "sift-generalization-matrix-result-v2",
+  "experiment": "generalization-matrix-09-stage-A-current-representation",
+  "status": "completed",
+  "seed": 20261001,
+  "device": "cuda",
+  "checkpoint": {
+    "path": "artifacts\\frontend-loop-05-routed-memory-20260801\\tiny_rule_gpt.pt",
+    "sha256": "7b85b41770121be1a894517adff416efe1ccc7bc847e0b55b9460c27936fbe10",
+    "parameters": 908546
+  },
+  "lineage": {
+    "preregistration": "research/generalization_matrix_preregistration.json",
+    "preregistration_sha256": "faf6184e1887157c23ea49df1cb71dff7d6154ef3dc0318340524c110515c6d9",
+    "dataset_manifest": "artifacts\\generalization-matrix-09-seed-20261001\\manifest.json",
+    "dataset_sha256": "dba26a94a60c25fa74483667c954b4832f3d61c96aed7a784cee6ee5a9e825b5"
+  },
+  "guardrails": {
+    "target_family_examples_in_training": 0,
+    "checkpoint_frozen_before_family_creation": true,
+    "source_family_rule_ir_cwe_and_intended_output_hidden": true,
+    "new_learned_parameters": 0
+  },
+  "data": {
+    "programs": 2700,
+    "target_programs": 900,
+    "target_examples": 3600,
+    "families": [
+      "compound_origin_role",
+      "dom_double_decode",
+      "numeric_string_coercion",
+      "state_replay_window",
+      "unicode_casefold_role",
+      "url_scheme_downgrade"
+    ]
+  },
+  "results": {
+    "with_executable_memory": {
+      "accuracy": 0.655,
+      "correct": 2358,
+      "total": 3600,
+      "by_family": {
+        "dom_double_decode": 0.5,
+        "unicode_casefold_role": 0.775,
+        "numeric_string_coercion": 0.488333,
+        "compound_origin_role": 0.618333,
+        "state_replay_window": 1.0,
+        "url_scheme_downgrade": 0.548333
+      },
+      "failures": [
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002336",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d00l4:0|input.payload=m:0000d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0001d00l1<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002444",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l1:0|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1<RULEMEM><QUERY>input.payload=m:0000d00l3<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000412",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s: 9 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:9.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:10|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:09|canon:0|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:9|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002030",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d01l3:1|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0|input.payload=m:0000d00l3:0|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001114",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:036|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:37|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:36|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:36e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1<RULEMEM><QUERY>input.amount=s:36.0|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001184",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l1:0|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l4:0|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000896",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l4:0|input.payload=m:0001d11l3:1|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l1:0|input.payload=m:0000d00l2:0<RULEMEM><QUERY>input.payload=m:0001d00l1<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000808",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:029|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:30|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:29e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:29.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s: 29 |canon:0|ws:1|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:29|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002119",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test.evil.test|/:0|input.origin=u:ws|portal.test|/:1|input.origin=u:ftp|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:http|portal.test|/:1|input.origin=null:0|input.origin=u:https|sub.portal.test|/:0<RULEMEM>input.origin#suffix=portal.test|q=0|fit=6/7<QUERY>input.origin=u:https|portal.test|/<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001564",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:05|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:6|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:5.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s: 5 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:5e0|canon:0|ws:0|hex:0|exp:1:1<RULEMEM><QUERY>input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000628",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:36|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:36e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:37|canon:1|ws:0|hex:0|exp:0:0|input.amount=s: 36 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:36.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1|input.amount=s:036|canon:0|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000337",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|safe.local|/:1|input.origin=u:ftp|safe.local|/:1|input.origin=null:0|input.origin=u:https|safe.local|/:1|input.origin=u:https|safe.local|/:1|input.origin=u:https|safe.local.evil.test|/:0|input.origin=u:https|sub.safe.local|/:0<RULEMEM><QUERY>input.origin=u:ws|safe.local|/<ANSWER>"
+        }
+      ]
+    },
+    "neural_with_memory": {
+      "accuracy": 0.525278,
+      "correct": 1891,
+      "total": 3600,
+      "by_family": {
+        "dom_double_decode": 0.5,
+        "unicode_casefold_role": 0.565,
+        "numeric_string_coercion": 0.488333,
+        "compound_origin_role": 0.458333,
+        "state_replay_window": 0.508333,
+        "url_scheme_downgrade": 0.631667
+      },
+      "failures": [
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002336",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d00l4:0|input.payload=m:0000d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0001d00l1<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002444",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l1:0|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1<RULEMEM><QUERY>input.payload=m:0000d00l3<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000412",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s: 9 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:9.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:10|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:09|canon:0|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:9|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002030",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d01l3:1|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0|input.payload=m:0000d00l3:0|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0001385",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:root|cf:root:0|input.origin=u:https|portal.test|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:guest|cf:guest:0|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilporta"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001114",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:036|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:37|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:36|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:36e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1<RULEMEM><QUERY>input.amount=s:36.0|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001184",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l1:0|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l4:0|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000896",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l4:0|input.payload=m:0001d11l3:1|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l1:0|input.payload=m:0000d00l2:0<RULEMEM><QUERY>input.payload=m:0001d00l1<ANSWER>"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0000378",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=s:n39-c|cf:n39-c,prev1.input.token=s:n94-a|cf:n94-a:0|input.token=s:n60-d|cf:n60-d,prev1.input.token=s:n60-d|cf:n60-d:1|input.token=s:n39-c|cf:n39-c,prev1.input.token=s:n63-b|cf:n63-b:0|input.token=s:n63-b|cf:n63-b,prev1.input.token=s:n63-b|cf:n63-b:1|input.token=s:n63-b|cf:n63-b,prev1.input.token=s:n60-d|cf:n60-d:0|input.token=s:n39-c|cf:n39-c,prev1.input.token=s:n39-c|cf:n39-c:1|input.token=s:n39-c|cf:n39-c,prev1.input.token=s:n60-d|cf:n60-d:0|input.token=s:n94-a|cf:n94-a,prev1.input.token=s:n39-c|cf:n39-c:0<RULEMEM>generic=input.token#eq_prev1|q=1|fit=8/8<QUERY>inpu"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0001602",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=s:n58-b|cf:n58-b,prev1.input.token=s:n49-d|cf:n49-d:0|input.token=s:n49-d|cf:n49-d,prev1.input.token=s:n49-d|cf:n49-d:1|input.token=s:n38-c|cf:n38-c,prev1.input.token=s:n49-d|cf:n49-d:0|input.token=s:n49-d|cf:n49-d,prev1.input.token=s:n96-a|cf:n96-a:0|input.token=s:n96-a|cf:n96-a,prev1.input.token=s:n58-b|cf:n58-b:0|input.token=s:n38-c|cf:n38-c,prev1.input.token=s:n38-c|cf:n38-c:1|input.token=s:n96-a|cf:n96-a,prev1.input.token=s:n38-c|cf:n38-c:0|input.token=s:n96-a|cf:n96-a,prev1.input.token=s:n96-a|cf:n96-a:1<RULEMEM>generic=input.token#eq_prev1|q=1|fit=8/8<QUERY>inpu"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000808",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:029|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:30|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:29e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:29.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s: 29 |canon:0|ws:1|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:29|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0002339",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|evilaccount.internal|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:https|account.internal|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:https|evilaccount.internal|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:http|account.internal|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:https|evilaccount.internal|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|account.internal|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:http|account.internal|/,input.quota=-1,input.role=s:m"
+        }
+      ]
+    },
+    "without_memory": {
+      "accuracy": 0.4825,
+      "correct": 1737,
+      "total": 3600,
+      "by_family": {
+        "dom_double_decode": 0.318333,
+        "unicode_casefold_role": 0.52,
+        "numeric_string_coercion": 0.561667,
+        "compound_origin_role": 0.475,
+        "state_replay_window": 0.52,
+        "url_scheme_downgrade": 0.5
+      },
+      "failures": [
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002336",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d00l4:0|input.payload=m:0000d00l1:0|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0001d00l1<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0001743",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=s:ROOT|cf:root:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=0,input.role=s: root|cf: root:0|input.quota=-1,input.role=s: root|cf: root:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=1,input.role=s:Root|cf:root:1|input.quota=1,input.role=s:guest|cf:guest:1|input.quota=-1,input.role=s:member|cf:member:1<RULEMEM>generic=(input.quota!=0)or(input.role==Root)|q=1|fit=8/8<QUERY>input.quota=-1,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002444",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l1:0|input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1<RULEMEM><QUERY>input.payload=m:0000d00l3<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000412",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s: 9 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:9.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:10|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:09|canon:0|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:9|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0002085",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s: operator|cf: operator:0|input.quota=-1,input.role=s:operator|cf:operator:1|input.quota=1,input.role=s: operator|cf: operator:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=1,input.role=s:member|cf:member:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=-1,input.role=s: operator|cf: operator:1|input.quota=-1,input.role=s:OPERATOR|cf:operator:1<RULEMEM>generic=(input.quota!=0)or(input.role==operator)|q=1|fit=8/8<QUERY>input.quota=1,input.role=s:Operator|cf:operator<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0002030",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d01l3:1|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0|input.payload=m:0000d00l3:0|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0<RULEMEM><QUERY>input.payload=m:0000d00l1<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0001385",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|portal.test|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:root|cf:root:0|input.origin=u:https|portal.test|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:https|evilportal.test|/,input.quota=-1,input.role=s:guest|cf:guest:1|input.origin=u:https|evil.test|/,input.quota=0,input.role=s:guest|cf:guest:0|input.origin=u:http|portal.test|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|evilporta"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001184",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l1:0|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l4:0|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0<RULEMEM><QUERY>input.payload=m:0000d00l2<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001006",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=s:8|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:08|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:8e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:9|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s: 8 |canon:0|ws:1|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000896",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l4:0|input.payload=m:0001d11l3:1|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1|input.payload=m:0000d00l1:0|input.payload=m:0000d00l2:0<RULEMEM><QUERY>input.payload=m:0001d00l1<ANSWER>"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0000378",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=s:n39-c|cf:n39-c,prev1.input.token=s:n94-a|cf:n94-a:0|input.token=s:n60-d|cf:n60-d,prev1.input.token=s:n60-d|cf:n60-d:1|input.token=s:n39-c|cf:n39-c,prev1.input.token=s:n63-b|cf:n63-b:0|input.token=s:n63-b|cf:n63-b,prev1.input.token=s:n63-b|cf:n63-b:1|input.token=s:n63-b|cf:n63-b,prev1.input.token=s:n60-d|cf:n60-d:0|input.token=s:n39-c|cf:n39-c,prev1.input.token=s:n39-c|cf:n39-c:1|input.token=s:n39-c|cf:n39-c,prev1.input.token=s:n60-d|cf:n60-d:0|input.token=s:n94-a|cf:n94-a,prev1.input.token=s:n39-c|cf:n39-c:0<RULEMEM>generic=input.token#eq_prev1|q=1|fit=8/8<QUERY>inpu"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000609",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:Admin|cf:admin:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:ADMIN|cf:admin:1|input.quota=1,input.role=s:admin|cf:admin:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=0,input.role=s: admin|cf: admin:0|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=-1,input.role=s:member|cf:member:1<RULEMEM>generic=(input.quota!=0)or(input.role==Admin)|q=1|fit=8/8<QUERY>input.quota=-1,input.role=s:ADMIN|cf:admin<ANSWER>"
+        }
+      ]
+    },
+    "executable_gate_delta": 0.129722,
+    "memory_delta": 0.1725,
+    "counterexample_at_10": {
+      "k": 10,
+      "score": 1.0,
+      "successful_programs": 900,
+      "total_programs": 900,
+      "by_family": {
+        "url_scheme_downgrade": 1.0,
+        "dom_double_decode": 1.0,
+        "unicode_casefold_role": 1.0,
+        "numeric_string_coercion": 1.0,
+        "compound_origin_role": 1.0,
+        "state_replay_window": 1.0
+      },
+      "top1": 0.751111,
+      "random_top1": 0.646651,
+      "top1_lift": 0.10446,
+      "precision_at_k": 0.696484,
+      "random_precision_at_k": 0.646651,
+      "random_success_at_k": 1.0,
+      "metric_warning": "Counterexample@K is non-discriminative when the random success baseline is near one.",
+      "policy_visibility": "declared intended output is visible only to the verifier, not to the behavior model"
+    },
+    "per_axis": {
+      "compositional_shift": {
+        "family": "compound_origin_role",
+        "behavior_agreement": 0.618333,
+        "neural_with_memory": 0.458333,
+        "without_memory": 0.475,
+        "executable_gate_delta": 0.16,
+        "memory_delta": 0.143333,
+        "executable_memory_coverage": 0.826667,
+        "counterexample_top1": null
+      },
+      "encoding_depth": {
+        "family": "dom_double_decode",
+        "behavior_agreement": 0.5,
+        "neural_with_memory": 0.5,
+        "without_memory": 0.318333,
+        "executable_gate_delta": 0.0,
+        "memory_delta": 0.181667,
+        "executable_memory_coverage": 0.0,
+        "counterexample_top1": null
+      },
+      "coercion_representation": {
+        "family": "numeric_string_coercion",
+        "behavior_agreement": 0.488333,
+        "neural_with_memory": 0.488333,
+        "without_memory": 0.561667,
+        "executable_gate_delta": 0.0,
+        "memory_delta": -0.073334,
+        "executable_memory_coverage": 0.0,
+        "counterexample_top1": null
+      },
+      "state_and_history_shift": {
+        "family": "state_replay_window",
+        "behavior_agreement": 1.0,
+        "neural_with_memory": 0.508333,
+        "without_memory": 0.52,
+        "executable_gate_delta": 0.491667,
+        "memory_delta": 0.48,
+        "executable_memory_coverage": 1.0,
+        "counterexample_top1": null
+      },
+      "language_string_semantics": {
+        "family": "unicode_casefold_role",
+        "behavior_agreement": 0.775,
+        "neural_with_memory": 0.565,
+        "without_memory": 0.52,
+        "executable_gate_delta": 0.21,
+        "memory_delta": 0.255,
+        "executable_memory_coverage": 0.723333,
+        "counterexample_top1": null
+      },
+      "runtime_url_semantics": {
+        "family": "url_scheme_downgrade",
+        "behavior_agreement": 0.548333,
+        "neural_with_memory": 0.631667,
+        "without_memory": 0.5,
+        "executable_gate_delta": -0.083334,
+        "memory_delta": 0.048333,
+        "executable_memory_coverage": 0.101667,
+        "counterexample_top1": null
+      }
+    }
+  },
+  "diagnostic": [
+    {
+      "axis": "compositional_shift",
+      "family": "compound_origin_role",
+      "classification": "decoder or composition gap despite available episode memory",
+      "score": 0.618333
+    },
+    {
+      "axis": "encoding_depth",
+      "family": "dom_double_decode",
+      "classification": "primitive/representation gap: no executable episode rule was induced",
+      "score": 0.5
+    },
+    {
+      "axis": "coercion_representation",
+      "family": "numeric_string_coercion",
+      "classification": "primitive/representation gap: no executable episode rule was induced",
+      "score": 0.488333
+    },
+    {
+      "axis": "state_and_history_shift",
+      "family": "state_replay_window",
+      "classification": "no blocking gap in frozen zero-shot pilot",
+      "score": 1.0
+    },
+    {
+      "axis": "language_string_semantics",
+      "family": "unicode_casefold_role",
+      "classification": "no blocking gap in frozen zero-shot pilot",
+      "score": 0.775
+    },
+    {
+      "axis": "runtime_url_semantics",
+      "family": "url_scheme_downgrade",
+      "classification": "decoder or composition gap despite available episode memory",
+      "score": 0.548333
+    }
+  ],
+  "decision": "Use this map to select primitive-only stage-B adaptations; do not scale model size."
+}

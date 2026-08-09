@@ -1,0 +1,62 @@
+{
+  "protocol_id": "pg-pk-01-staged-local-probe-v1",
+  "schema_version": "sift-pikachu-staged-probe-protocol-v1",
+  "objective": "Teach a bounded agent to inventory, send an inert canary, update belief from a response projection, refine one candidate at a time, and abstain when an oracle is unsafe or insufficient.",
+  "target": {
+    "base_url": "http://127.0.0.1:8766",
+    "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "external_network": false,
+    "cookies": false,
+    "credentials": false
+  },
+  "stages": [
+    {
+      "id": "inventory",
+      "action": "GET without query parameters",
+      "stored": "status, content type, body length, SHA-256"
+    },
+    {
+      "id": "safe_canary",
+      "action": "GET with an inert identifier or abstract channel class",
+      "gate": "bounded marker/error/shape projection"
+    },
+    {
+      "id": "gated_refinement",
+      "action": "one encoded or abstract safe variant only when the previous projection is suspicious",
+      "oracle": "pikachu_bounded_http_projection_v1"
+    },
+    {
+      "id": "abstain",
+      "action": "record an explicit unsupported-oracle reason and do not send a payload"
+    }
+  ],
+  "allowed_probe_kinds": [
+    "http_canary",
+    "inert_dom_markup",
+    "encoded_dom_markup",
+    "sql_channel_class"
+  ],
+  "never_execute": [
+    "script execution",
+    "SQL syntax/operator/comment/time-delay strings",
+    "RCE or shell commands",
+    "SSRF/external callbacks",
+    "XXE entity resolution",
+    "file inclusion/traversal",
+    "file upload/write",
+    "credential or token probes"
+  ],
+  "success_definition": {
+    "candidate_signal": "response projection satisfies a Rule IR predicate",
+    "vulnerability_confirmation": "never inferred from a canary; requires a separate authorized oracle",
+    "model_failure": "false positive or unsafe generation",
+    "safe_failure": "abstain on novelty, insufficient evidence, or unsupported oracle"
+  },
+  "artifacts": [
+    "research/pikachu_payload_catalog_v1.json",
+    "research/pikachu_staged_probe_v1.json",
+    "research/pikachu_staged_probe_v1.md",
+    "research/pikachu_rule_ir_decoder_v1.json",
+    "artifacts/pg-pk-01-rule-decoder/decoder.pt"
+  ]
+}

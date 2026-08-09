@@ -1,0 +1,26 @@
+{
+  "protocol_id": "pg-pk-155-replay-calibration-v1",
+  "schema_version": "pg155-replay-calibration-protocol-v1",
+  "objective": "source_balanced_selective_replay_temperature_calibration",
+  "variants": [
+    "lm_anchor_baseline",
+    "balanced_replay",
+    "selective_replay"
+  ],
+  "temperature_grid": [
+    0.5,
+    0.55,
+    "...",
+    3.0
+  ],
+  "threshold_fit": "highest dev coverage with zero dev false_stop",
+  "selection": {
+    "source_balanced": "600 synthetic + 600 real",
+    "selective": "low confidence plus predicted stop, no labels"
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  }
+}

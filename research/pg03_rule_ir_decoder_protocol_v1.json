@@ -1,0 +1,78 @@
+{
+  "protocol_id": "sift-pg03-rule-ir-decoder-v1",
+  "version": "1.0",
+  "purpose": "用 PG-03 本地回放 Catalog 训练小型 Rule IR 家族解码器，并在来源、漏洞族和可观测表面隔离的测试集上测出口、误报和 abstain。",
+  "input_contract": {
+    "catalog": "research/payload_replay_catalog_v1.json",
+    "visible_projection": [
+      "HTTP method/path",
+      "probe kind and opaque probe",
+      "status code",
+      "content type",
+      "redacted JSON shape (type/length/key count only)",
+      "allowlisted oracle key shape",
+      "bounded response body length"
+    ],
+    "excluded_from_features": [
+      "family",
+      "source_id",
+      "semantic",
+      "evaluator output",
+      "oracle values",
+      "Rule IR expression",
+      "raw body",
+      "credentials and cookies"
+    ],
+    "feature_encoder": "source-language-neutral trace_feature_vector",
+    "feature_dim": 256
+  },
+  "model": {
+    "class": "CatalogRuleIRDecoder",
+    "architecture": "MLP(256 -> 96 -> 96) + LayerNorm/GELU/Dropout + 5-way classifier",
+    "families": ["access_control", "injection", "logic", "url_redirect", "xss"],
+    "grammar_constrained_output": true,
+    "rule_ir_templates": "app/catalog_rule_decoder.py"
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "epochs": 160,
+    "seed": 20260873,
+    "device": "cuda when available, otherwise cpu",
+    "public_corpus_ingested": false
+  },
+  "decision_policy": {
+    "confidence_floor": 0.25,
+    "top2_margin_floor": 0.08,
+    "novelty_gate": "nearest normalized training trace distance",
+    "novelty_gate_action": "force abstain",
+    "rule_ir_emission": "only after all gates pass and grammar validation succeeds"
+  },
+  "splits": {
+    "source_split_same_family": "source suffix a trains, suffix b tests",
+    "family_holdout_structural_transfer": "xss/injection/access_control train; url_redirect/logic test on the same generic registry surface",
+    "family_holdout_unseen_surface": "xss/injection train; access_control/logic/url_redirect test on an unseen HTTP-canary surface"
+  },
+  "target_scope": {
+    "base_url": "http://127.0.0.1:3100",
+    "independent_target_implementation": false,
+    "holdout_kind": "source, family and observable-surface isolation inside the in-repo local adapter",
+    "not_claimed": "third-party or separately implemented target generalization"
+  },
+  "metrics": {
+    "exit_found": "predicted family equals the local maze semantic family and a grammar-valid Rule IR is emitted; this is not evaluator confirmation",
+    "false_positive": "a non-abstained predicted family differs from the local maze semantic family",
+    "abstain": "no family/Rule IR is emitted because confidence, margin, or novelty gate fails",
+    "rule_ir_emission": "fraction of test rows with a Rule IR candidate"
+  },
+  "safety": {
+    "local_only": true,
+    "external_network": false,
+    "read_only_get_probes_only": true,
+    "fresh_reset_per_sample": true,
+    "raw_body_stored": false,
+    "evaluator_confirmation_count": 0
+  },
+  "runner": "scripts/train_pg03_rule_ir_decoder.py",
+  "decoder": "app/catalog_rule_decoder.py",
+  "result": "research/pg03_rule_ir_decoder_v1.json"
+}

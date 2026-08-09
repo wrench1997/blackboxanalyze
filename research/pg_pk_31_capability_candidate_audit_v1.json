@@ -1,0 +1,39 @@
+{
+  "schema_version": "pg-pk-31-capability-candidate-audit-v1",
+  "purpose": "Audit existing experiment reports before making a model capability or training-promotion claim.",
+  "scope": "offline_read_only",
+  "inputs": {
+    "accepted_evidence_location": [
+      "capability_evidence",
+      "model_capability_evidence",
+      "capability_gate_input",
+      "top_level_complete_pg30_evidence"
+    ],
+    "ordinary_holdout_or_accuracy_fields_are_not_evidence": true,
+    "multiple_reports_are_not_merged": true
+  },
+  "required_independent_dataset_evidence": {
+    "roles": ["train", "dev", "family_holdout", "ood_source", "negative_control"],
+    "minimum_distinct_dataset_ids": 3,
+    "minimum_distinct_source_hashes": 3,
+    "minimum_independent_sampling_seeds": 3,
+    "minimum_target_instances": 3,
+    "baseline_and_candidate_metrics": true,
+    "typed_oracle_and_lineage_attestations": true
+  },
+  "fail_closed_states": {
+    "missing_explicit_evidence": "blocked",
+    "missing_dataset_tests": "blocked",
+    "structural_evidence_error": "blocked",
+    "insufficient_metric_gain": "no_proven_gain"
+  },
+  "side_effects": {
+    "network_requests": false,
+    "trainer_invoked": false,
+    "checkpoint_written": false,
+    "training_dataset_generated": false,
+    "memory_write_attempted": false
+  },
+  "implementation": "app/capability_candidate_audit.py",
+  "cli": "scripts/audit_capability_candidate.py"
+}

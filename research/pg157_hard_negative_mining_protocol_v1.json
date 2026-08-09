@@ -1,0 +1,28 @@
+{
+  "protocol_id": "pg-pk-157-hard-negative-mining-v1",
+  "schema_version": "pg157-hard-negative-mining-protocol-v1",
+  "objective": "source_family_balanced_hard_negative_mining_focal_vs_contrastive",
+  "variants": [
+    "lm_anchor_baseline",
+    "focal_hard_mining",
+    "contrastive_hard_mining"
+  ],
+  "mining_pool": "PG-154 action_train only; dev/holdout labels excluded",
+  "source_family_balance": {
+    "per_source_budget": 400,
+    "score": "1-max_probability + 0.75*label_disagreement + 0.75*false_stop"
+  },
+  "loss": {
+    "focal_gamma": 2.0,
+    "contrastive_margin": 0.25,
+    "lm_anchor": 0.5,
+    "surface_anchor_lm": 0.5,
+    "unknown_abstention": 0.2
+  },
+  "threshold_fit": "highest dev coverage with zero dev false_stop",
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  }
+}

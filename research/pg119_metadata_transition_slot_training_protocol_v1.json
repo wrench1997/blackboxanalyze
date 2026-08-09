@@ -1,0 +1,97 @@
+{
+  "protocol_id": "pg-pk-119-metadata-transition-slot-training-v1",
+  "schema_version": "pg119-metadata-transition-slot-training-protocol-v1",
+  "objective": "在第三种编码顺序和新的 metadata-transition 表面族上验证 Rule IR slot 是否真正提供跨 seed 泛化，而不是记忆表面名称。",
+  "sources": {
+    "training": [
+      "pg116_identity",
+      "pg118_delta_double_encoding",
+      "pg119_metadata_triple_encoding"
+    ],
+    "holdout": [
+      "pg119_metadata_seed_holdout",
+      "pg117_gamma_double_encoding",
+      "pg114_family_holdout_decoy_replay"
+    ]
+  },
+  "encoding_split": {
+    "metadata_train_dev_chain": ["unicode_escape", "html_entity", "url_percent"],
+    "pg117_gamma_chain": ["url_percent", "html_entity"],
+    "metadata_holdout_seeds_excluded_from_training": true,
+    "gamma_rows_excluded_from_training": true
+  },
+  "action_contract": {
+    "methods": ["GET", "POST"],
+    "sequence": ["control_get", "candidate_get", "control_post", "candidate_post"],
+    "fresh_reset_per_action": true,
+    "matched_negative_control_required": true,
+    "target_evidence_sha256_required": true,
+    "bridge_evidence_sha256_required": true,
+    "rule_ir_slot_binding_after_typed_oracle": true
+  },
+  "model_contract": {
+    "implementation": "app/pg119_metadata_rule_ir_decoder.py",
+    "feature_dim": 48,
+    "hidden_dim": 48,
+    "parameter_count": 4996,
+    "decision_set": ["confirmed_positive", "confirmed_negative", "candidate", "abstain"],
+    "transition_slots": [
+      "current_location_changed",
+      "prior_location_changed",
+      "location_changed_and_method_changed",
+      "location_changed_and_candidate_signal",
+      "current_metadata_changed",
+      "prior_metadata_changed",
+      "metadata_changed_and_method_changed",
+      "metadata_changed_and_candidate_signal"
+    ],
+    "previous_checkpoint_reuse_forbidden": true,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "ablation": {
+    "ablate": "zero only the four metadata slots in the fixed fresh checkpoint",
+    "full_recall_must_exceed_ablation": true,
+    "prediction_change_must_be_observed": true
+  },
+  "maze_distance": {
+    "implementation": "app/maze_distance.py",
+    "axes": ["unmet_acceptance_gates", "posterior_uncertainty", "false_accept_risk", "action_cost"],
+    "scalar_display_value": "ordering_only",
+    "model_input_allowed": false,
+    "confirmation_allowed": false,
+    "missing_gate_is_unmet": true
+  },
+  "hard_gate": {
+    "pg114_positive_recall_nonzero": true,
+    "pg114_decoy_false_accept_zero": true,
+    "pg114_unknown_abstain_nonzero": true,
+    "pg117_positive_recall_nonzero": true,
+    "pg117_decoy_false_accept_zero": true,
+    "pg117_unknown_abstain_nonzero": true,
+    "pg117_cross_seed_recall_variance_bounded": true,
+    "pg119_positive_recall_nonzero": true,
+    "pg119_decoy_false_accept_zero": true,
+    "pg119_unknown_abstain_nonzero": true,
+    "pg119_cross_seed_recall_variance_bounded": true,
+    "metadata_slot_ablation_changes_prediction": true,
+    "all_abstain_is_not_success": true,
+    "step_macro_f1_reported": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "slot 消融和三种编码顺序的受控结果仍需更多实现、family、seed 及人工审核；本轮不提升长期记忆。"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "destructive_payloads": false,
+    "real_sleep_performed": false
+  }
+}

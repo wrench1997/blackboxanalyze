@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "D:\workspace\blackboxanalyze\scripts\run_pg377_webgoat_source_rows_live.py", line 617, in <module>
+    summary = {"status": result["report"]["status"], "counts": result["report"].get("counts", {}), "report_sha256": result["report"].get("report_sha256", ""), "artifacts": paths}
+  File "D:\workspace\blackboxanalyze\scripts\run_pg377_webgoat_source_rows_live.py", line 609, in main
+    parser.add_argument("--live", action="store_true", help="opt into disposable local WebGoat capture")
+  File "D:\workspace\blackboxanalyze\scripts\run_pg377_webgoat_source_rows_live.py", line 519, in collect_pg377_webgoat_source_rows
+    role_rows: dict[str, dict[str, Any]] = {}
+  File "D:\workspace\blackboxanalyze\scripts\run_pg377_webgoat_source_rows_live.py", line 359, in _materialize_role
+    row = capture_pg377_webgoat_source_row(
+  File "D:\workspace\blackboxanalyze\app\pg377_webgoat_source_row_adapter.py", line 382, in capture_pg377_webgoat_source_row
+    target = _target_projection(method=method, role=role, sidecar=evaluator_sidecar, reset=reset, field_capture_manifest=field_manifest, observation=observation)
+  File "D:\workspace\blackboxanalyze\app\pg377_webgoat_source_row_adapter.py", line 268, in _target_projection
+    reset_info = _reset_projection(reset)
+  File "D:\workspace\blackboxanalyze\app\pg377_webgoat_source_row_adapter.py", line 160, in _reset_projection
+    raise ValueError(f"PG-377 reset contains unsupported fields: {', '.join(unknown)}")
+ValueError: PG-377 reset contains unsupported fields: attestation, readiness_status_class

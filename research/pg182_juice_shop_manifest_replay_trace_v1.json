@@ -1,0 +1,660 @@
+{
+  "schema_version": "pg182-juice-shop-manifest-replay-trace-v1",
+  "evaluation_only": true,
+  "training_eligible": false,
+  "replay": {
+    "checkpoint": "artifacts\\pg181-manifest-decoder-v1\\url_holdout\\moe_large_seed18101.pt",
+    "variant": "moe_large",
+    "target": "juice_shop",
+    "target_route": "/rest/products/search",
+    "parameter_name": "q",
+    "fresh_container_id_hash": "7713e3280a5ecf2ebdeb6c3f5b51d8bb0e8b8bbe0204101f7f728dbc8c516e5e",
+    "step_count": 5,
+    "sent_count": 5,
+    "candidate_sent_count": 2,
+    "controller_abstain_count": 0,
+    "typed_positive_count": 0,
+    "vulnerability_claim_allowed": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "steps": [
+      {
+        "step_index": 1,
+        "model_action": "baseline",
+        "confidence": 0.999994,
+        "controller_decision": "send_safe_baseline",
+        "action_manifest": {
+          "method": "GET",
+          "placement": "none",
+          "encoding_chain": [
+            "identity"
+          ],
+          "probe_ref": "pg179b-safe-logic-canary-negative_control",
+          "probe_sha256": "f46716e2b782adc3af04ff86fd259918611afa8eea8e84f081acd4f470c8ccdc",
+          "field_names": [],
+          "safety": {
+            "no_external_network": true,
+            "does_not_execute": true,
+            "no_database_write": true,
+            "no_credential_access": true
+          }
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "4096-65535",
+          "body_sha256": "fffbad25c04e5a90ba60cf66cde4bc7be323d15d94c95e72d2c22babe630ed45",
+          "semantic_body_sha256": "fffbad25c04e5a90ba60cf66cde4bc7be323d15d94c95e72d2c22babe630ed45",
+          "shape": {
+            "kind": "other",
+            "field_count": 21,
+            "scalar_count": 0
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": false,
+            "location": "none",
+            "count": 0
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "47afc630a997604a018cfe7b471b160437e655c05be84e9f60791a8f141e233d",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false,
+          "redirect_hop_count": 0,
+          "status_chain_sha256": "7b8657166c9779293aa10507ab571628d8a7f3243d6154a7ec05f6f3eac943a7"
+        },
+        "oracle_projection": {
+          "oracle_id": "pg179b-logic-surface-signal-v1",
+          "oracle_contract_sha256": "958fb7485dd0145e2fabae80a1eb0601e281479593ef33370af5ca9dec3b168f",
+          "family": "logic",
+          "modality": "negative_control",
+          "candidate_signal": false,
+          "positive": false,
+          "positive_authority": false,
+          "confirmed_effect": "none",
+          "signals": {
+            "method": "GET",
+            "marker_reflected": false,
+            "sql_error_shape": false,
+            "redirect_present": false,
+            "external_redirect": false,
+            "status_changed": false,
+            "status_chain_sha256": "7b8657166c9779293aa10507ab571628d8a7f3243d6154a7ec05f6f3eac943a7"
+          },
+          "safety": {
+            "external_network": false,
+            "script_execution": false,
+            "database_write": false,
+            "persistent_state_mutated": false,
+            "credentials_accessed": false,
+            "raw_body_stored": false
+          }
+        },
+        "failure_signature": {
+          "schema_version": "sift-failure-signature-v1",
+          "kind": "no_surface_delta",
+          "failed_gate": "matched_negative_control",
+          "observed_method": "GET",
+          "methods_seen": [
+            "GET"
+          ],
+          "candidate_signal": false,
+          "typed_available": false,
+          "positive_authority": false,
+          "probe_round": 1,
+          "remaining_probe_budget": 4,
+          "key_feature_weights": {
+            "failure_kind": 0.086957,
+            "failed_gate": 0.217391,
+            "candidate_signal": 0.086957,
+            "observed_method": 0.156522,
+            "methods_seen": 0.191304,
+            "probe_budget": 0.26087
+          },
+          "key_features_ranked": [
+            "probe_budget",
+            "failed_gate",
+            "methods_seen",
+            "observed_method",
+            "candidate_signal",
+            "failure_kind"
+          ],
+          "next_action": "repeat_matched_negative_pair",
+          "model_visible": true,
+          "raw_probe_retained": false,
+          "raw_response_retained": false,
+          "memory_promotion_allowed": false
+        },
+        "belief_after": {
+          "no_observed_effect": 0.6,
+          "unknown_surface": 0.4
+        },
+        "decision": "abstain",
+        "online_weight_update": false,
+        "long_term_memory_write": false
+      },
+      {
+        "step_index": 2,
+        "model_action": "matched_control",
+        "confidence": 0.999992,
+        "controller_decision": "send_safe_canary",
+        "action_manifest": {
+          "method": "GET",
+          "placement": "query",
+          "encoding_chain": [
+            "identity"
+          ],
+          "probe_ref": "pg179b-safe-logic-canary-control",
+          "probe_sha256": "ea9d8b8e887d89c7e92ac6cc7bf782d9ec9e782563b3ac40cce6aa6a55a494ee",
+          "field_names": [
+            "q"
+          ],
+          "safety": {
+            "no_external_network": true,
+            "does_not_execute": true,
+            "no_database_write": true,
+            "no_credential_access": true
+          }
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "1-255",
+          "body_sha256": "20bc1392a17b383b46fffc33c8e796755452883bfcfc2d33c90342ea70227639",
+          "semantic_body_sha256": "20bc1392a17b383b46fffc33c8e796755452883bfcfc2d33c90342ea70227639",
+          "shape": {
+            "kind": "other",
+            "field_count": 0,
+            "scalar_count": 0
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": false,
+            "location": "none",
+            "count": 0
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "7cdc9ef4ecddafe6c1eb94870902737815814a5a2eee0e8cf51cee1cac7fd496",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false,
+          "redirect_hop_count": 0,
+          "status_chain_sha256": "32f8689a9d949961c32222f7b5bac4813e4a9602bd0f2227569eaf5025ab04e6"
+        },
+        "oracle_projection": {
+          "oracle_id": "pg179b-logic-surface-signal-v1",
+          "oracle_contract_sha256": "958fb7485dd0145e2fabae80a1eb0601e281479593ef33370af5ca9dec3b168f",
+          "family": "logic",
+          "modality": "negative_control",
+          "candidate_signal": false,
+          "positive": false,
+          "positive_authority": false,
+          "confirmed_effect": "none",
+          "signals": {
+            "method": "GET",
+            "marker_reflected": false,
+            "sql_error_shape": false,
+            "redirect_present": false,
+            "external_redirect": false,
+            "status_changed": false,
+            "status_chain_sha256": "32f8689a9d949961c32222f7b5bac4813e4a9602bd0f2227569eaf5025ab04e6"
+          },
+          "safety": {
+            "external_network": false,
+            "script_execution": false,
+            "database_write": false,
+            "persistent_state_mutated": false,
+            "credentials_accessed": false,
+            "raw_body_stored": false
+          }
+        },
+        "failure_signature": {
+          "schema_version": "sift-failure-signature-v1",
+          "kind": "no_surface_delta",
+          "failed_gate": "matched_negative_control",
+          "observed_method": "GET",
+          "methods_seen": [
+            "GET"
+          ],
+          "candidate_signal": false,
+          "typed_available": false,
+          "positive_authority": false,
+          "probe_round": 2,
+          "remaining_probe_budget": 3,
+          "key_feature_weights": {
+            "failure_kind": 0.090909,
+            "failed_gate": 0.227273,
+            "candidate_signal": 0.090909,
+            "observed_method": 0.163636,
+            "methods_seen": 0.2,
+            "probe_budget": 0.227273
+          },
+          "key_features_ranked": [
+            "failed_gate",
+            "probe_budget",
+            "methods_seen",
+            "observed_method",
+            "candidate_signal",
+            "failure_kind"
+          ],
+          "next_action": "repeat_matched_negative_pair",
+          "model_visible": true,
+          "raw_probe_retained": false,
+          "raw_response_retained": false,
+          "memory_promotion_allowed": false
+        },
+        "belief_after": {
+          "no_surface_delta": 0.65,
+          "unknown_surface": 0.35
+        },
+        "decision": "abstain",
+        "online_weight_update": false,
+        "long_term_memory_write": false
+      },
+      {
+        "step_index": 3,
+        "model_action": "safe_candidate",
+        "confidence": 0.999992,
+        "controller_decision": "send_safe_canary",
+        "action_manifest": {
+          "method": "GET",
+          "placement": "query",
+          "encoding_chain": [
+            "identity"
+          ],
+          "probe_ref": "pg179b-safe-logic-canary-candidate",
+          "probe_sha256": "d91ff43a482460ba324e99b768a41e3897c154d35c912ae6d4ea4c6e93938cd7",
+          "field_names": [
+            "q"
+          ],
+          "safety": {
+            "no_external_network": true,
+            "does_not_execute": true,
+            "no_database_write": true,
+            "no_credential_access": true
+          }
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "1-255",
+          "body_sha256": "20bc1392a17b383b46fffc33c8e796755452883bfcfc2d33c90342ea70227639",
+          "semantic_body_sha256": "20bc1392a17b383b46fffc33c8e796755452883bfcfc2d33c90342ea70227639",
+          "shape": {
+            "kind": "other",
+            "field_count": 0,
+            "scalar_count": 0
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": false,
+            "location": "none",
+            "count": 0
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "7cdc9ef4ecddafe6c1eb94870902737815814a5a2eee0e8cf51cee1cac7fd496",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false,
+          "redirect_hop_count": 0,
+          "status_chain_sha256": "32f8689a9d949961c32222f7b5bac4813e4a9602bd0f2227569eaf5025ab04e6"
+        },
+        "oracle_projection": {
+          "oracle_id": "pg179b-logic-surface-signal-v1",
+          "oracle_contract_sha256": "958fb7485dd0145e2fabae80a1eb0601e281479593ef33370af5ca9dec3b168f",
+          "family": "logic",
+          "modality": "negative_control",
+          "candidate_signal": false,
+          "positive": false,
+          "positive_authority": false,
+          "confirmed_effect": "none",
+          "signals": {
+            "method": "GET",
+            "marker_reflected": false,
+            "sql_error_shape": false,
+            "redirect_present": false,
+            "external_redirect": false,
+            "status_changed": false,
+            "status_chain_sha256": "32f8689a9d949961c32222f7b5bac4813e4a9602bd0f2227569eaf5025ab04e6"
+          },
+          "safety": {
+            "external_network": false,
+            "script_execution": false,
+            "database_write": false,
+            "persistent_state_mutated": false,
+            "credentials_accessed": false,
+            "raw_body_stored": false
+          }
+        },
+        "failure_signature": {
+          "schema_version": "sift-failure-signature-v1",
+          "kind": "oracle_unavailable",
+          "failed_gate": "typed_effect",
+          "observed_method": "GET",
+          "methods_seen": [
+            "GET"
+          ],
+          "candidate_signal": false,
+          "typed_available": false,
+          "positive_authority": false,
+          "probe_round": 3,
+          "remaining_probe_budget": 2,
+          "key_feature_weights": {
+            "failure_kind": 0.104167,
+            "failed_gate": 0.270833,
+            "candidate_signal": 0.125,
+            "observed_method": 0.104167,
+            "methods_seen": 0.1875,
+            "probe_budget": 0.208333
+          },
+          "key_features_ranked": [
+            "failed_gate",
+            "probe_budget",
+            "methods_seen",
+            "candidate_signal",
+            "failure_kind",
+            "observed_method"
+          ],
+          "next_action": "replay_other_method",
+          "model_visible": true,
+          "raw_probe_retained": false,
+          "raw_response_retained": false,
+          "memory_promotion_allowed": false
+        },
+        "belief_after": {
+          "no_observed_effect": 0.6,
+          "unknown_surface": 0.4
+        },
+        "decision": "abstain",
+        "online_weight_update": false,
+        "long_term_memory_write": false
+      },
+      {
+        "step_index": 4,
+        "model_action": "matched_control",
+        "confidence": 0.999993,
+        "controller_decision": "send_safe_canary",
+        "action_manifest": {
+          "method": "GET",
+          "placement": "query",
+          "encoding_chain": [
+            "identity"
+          ],
+          "probe_ref": "pg179b-safe-logic-canary-control",
+          "probe_sha256": "ea9d8b8e887d89c7e92ac6cc7bf782d9ec9e782563b3ac40cce6aa6a55a494ee",
+          "field_names": [
+            "q"
+          ],
+          "safety": {
+            "no_external_network": true,
+            "does_not_execute": true,
+            "no_database_write": true,
+            "no_credential_access": true
+          }
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "1-255",
+          "body_sha256": "20bc1392a17b383b46fffc33c8e796755452883bfcfc2d33c90342ea70227639",
+          "semantic_body_sha256": "20bc1392a17b383b46fffc33c8e796755452883bfcfc2d33c90342ea70227639",
+          "shape": {
+            "kind": "other",
+            "field_count": 0,
+            "scalar_count": 0
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": false,
+            "location": "none",
+            "count": 0
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "7cdc9ef4ecddafe6c1eb94870902737815814a5a2eee0e8cf51cee1cac7fd496",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false,
+          "redirect_hop_count": 0,
+          "status_chain_sha256": "32f8689a9d949961c32222f7b5bac4813e4a9602bd0f2227569eaf5025ab04e6"
+        },
+        "oracle_projection": {
+          "oracle_id": "pg179b-logic-surface-signal-v1",
+          "oracle_contract_sha256": "958fb7485dd0145e2fabae80a1eb0601e281479593ef33370af5ca9dec3b168f",
+          "family": "logic",
+          "modality": "negative_control",
+          "candidate_signal": false,
+          "positive": false,
+          "positive_authority": false,
+          "confirmed_effect": "none",
+          "signals": {
+            "method": "GET",
+            "marker_reflected": false,
+            "sql_error_shape": false,
+            "redirect_present": false,
+            "external_redirect": false,
+            "status_changed": false,
+            "status_chain_sha256": "32f8689a9d949961c32222f7b5bac4813e4a9602bd0f2227569eaf5025ab04e6"
+          },
+          "safety": {
+            "external_network": false,
+            "script_execution": false,
+            "database_write": false,
+            "persistent_state_mutated": false,
+            "credentials_accessed": false,
+            "raw_body_stored": false
+          }
+        },
+        "failure_signature": {
+          "schema_version": "sift-failure-signature-v1",
+          "kind": "no_surface_delta",
+          "failed_gate": "matched_negative_control",
+          "observed_method": "GET",
+          "methods_seen": [
+            "GET"
+          ],
+          "candidate_signal": false,
+          "typed_available": false,
+          "positive_authority": false,
+          "probe_round": 4,
+          "remaining_probe_budget": 1,
+          "key_feature_weights": {
+            "failure_kind": 0.1,
+            "failed_gate": 0.25,
+            "candidate_signal": 0.1,
+            "observed_method": 0.18,
+            "methods_seen": 0.22,
+            "probe_budget": 0.15
+          },
+          "key_features_ranked": [
+            "failed_gate",
+            "methods_seen",
+            "observed_method",
+            "probe_budget",
+            "candidate_signal",
+            "failure_kind"
+          ],
+          "next_action": "repeat_matched_negative_pair",
+          "model_visible": true,
+          "raw_probe_retained": false,
+          "raw_response_retained": false,
+          "memory_promotion_allowed": false
+        },
+        "belief_after": {
+          "no_surface_delta": 0.65,
+          "unknown_surface": 0.35
+        },
+        "decision": "abstain",
+        "online_weight_update": false,
+        "long_term_memory_write": false
+      },
+      {
+        "step_index": 5,
+        "model_action": "safe_candidate",
+        "confidence": 0.999993,
+        "controller_decision": "send_safe_canary",
+        "action_manifest": {
+          "method": "GET",
+          "placement": "query",
+          "encoding_chain": [
+            "identity"
+          ],
+          "probe_ref": "pg179b-safe-logic-canary-candidate",
+          "probe_sha256": "d91ff43a482460ba324e99b768a41e3897c154d35c912ae6d4ea4c6e93938cd7",
+          "field_names": [
+            "q"
+          ],
+          "safety": {
+            "no_external_network": true,
+            "does_not_execute": true,
+            "no_database_write": true,
+            "no_credential_access": true
+          }
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "1-255",
+          "body_sha256": "20bc1392a17b383b46fffc33c8e796755452883bfcfc2d33c90342ea70227639",
+          "semantic_body_sha256": "20bc1392a17b383b46fffc33c8e796755452883bfcfc2d33c90342ea70227639",
+          "shape": {
+            "kind": "other",
+            "field_count": 0,
+            "scalar_count": 0
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": false,
+            "location": "none",
+            "count": 0
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "7cdc9ef4ecddafe6c1eb94870902737815814a5a2eee0e8cf51cee1cac7fd496",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false,
+          "redirect_hop_count": 0,
+          "status_chain_sha256": "32f8689a9d949961c32222f7b5bac4813e4a9602bd0f2227569eaf5025ab04e6"
+        },
+        "oracle_projection": {
+          "oracle_id": "pg179b-logic-surface-signal-v1",
+          "oracle_contract_sha256": "958fb7485dd0145e2fabae80a1eb0601e281479593ef33370af5ca9dec3b168f",
+          "family": "logic",
+          "modality": "negative_control",
+          "candidate_signal": false,
+          "positive": false,
+          "positive_authority": false,
+          "confirmed_effect": "none",
+          "signals": {
+            "method": "GET",
+            "marker_reflected": false,
+            "sql_error_shape": false,
+            "redirect_present": false,
+            "external_redirect": false,
+            "status_changed": false,
+            "status_chain_sha256": "32f8689a9d949961c32222f7b5bac4813e4a9602bd0f2227569eaf5025ab04e6"
+          },
+          "safety": {
+            "external_network": false,
+            "script_execution": false,
+            "database_write": false,
+            "persistent_state_mutated": false,
+            "credentials_accessed": false,
+            "raw_body_stored": false
+          }
+        },
+        "failure_signature": {
+          "schema_version": "sift-failure-signature-v1",
+          "kind": "oracle_unavailable",
+          "failed_gate": "typed_effect",
+          "observed_method": "GET",
+          "methods_seen": [
+            "GET"
+          ],
+          "candidate_signal": false,
+          "typed_available": false,
+          "positive_authority": false,
+          "probe_round": 5,
+          "remaining_probe_budget": 0,
+          "key_feature_weights": {
+            "failure_kind": 0.116279,
+            "failed_gate": 0.302326,
+            "candidate_signal": 0.139535,
+            "observed_method": 0.116279,
+            "methods_seen": 0.209302,
+            "probe_budget": 0.116279
+          },
+          "key_features_ranked": [
+            "failed_gate",
+            "methods_seen",
+            "candidate_signal",
+            "failure_kind",
+            "observed_method",
+            "probe_budget"
+          ],
+          "next_action": "abstain_budget_exhausted",
+          "model_visible": true,
+          "raw_probe_retained": false,
+          "raw_response_retained": false,
+          "memory_promotion_allowed": false
+        },
+        "belief_after": {
+          "no_observed_effect": 0.6,
+          "unknown_surface": 0.4
+        },
+        "decision": "abstain",
+        "online_weight_update": false,
+        "long_term_memory_write": false
+      }
+    ]
+  },
+  "raw_probe_strings_stored": false,
+  "raw_response_bodies_stored": false,
+  "online_weight_update": false,
+  "long_term_memory_write": false
+}

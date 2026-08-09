@@ -1,0 +1,565 @@
+{
+  "experiment": "generalization-matrix-09-stage-B-stratified-primitive-only",
+  "status": "completed",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 3060",
+  "model": {
+    "type": "causal_transformer_classifier",
+    "parameters": 908546,
+    "hidden": 128,
+    "layers": 4,
+    "heads": 4,
+    "max_length": 640,
+    "semantic_features": false,
+    "compact_semantic_features": false,
+    "routed_semantic_features": true,
+    "episode_rule_features": true,
+    "rule_memory_gate": true
+  },
+  "data": {
+    "programs": 2700,
+    "train_examples": 4800,
+    "iid_examples": 1200,
+    "validation_family_examples": 1200,
+    "test_family_examples": 3600,
+    "train_families": [
+      "authorization_or",
+      "casefold_primitive",
+      "html_entity_decode_primitive",
+      "markup_lexeme_primitive",
+      "numeric_boundary",
+      "numeric_coercion_primitive",
+      "string_suffix_primitive",
+      "substring_origin",
+      "truthiness_gate",
+      "url_hostname_primitive"
+    ],
+    "validation_families": [
+      "authorization_or",
+      "casefold_primitive",
+      "html_entity_decode_primitive",
+      "markup_lexeme_primitive",
+      "numeric_boundary",
+      "numeric_coercion_primitive",
+      "string_suffix_primitive",
+      "substring_origin",
+      "truthiness_gate",
+      "url_hostname_primitive"
+    ],
+    "test_families": [
+      "compound_origin_role",
+      "dom_double_decode",
+      "numeric_string_coercion",
+      "state_replay_window",
+      "unicode_casefold_role",
+      "url_scheme_downgrade"
+    ],
+    "source_or_rule_ir_visible_to_model": false,
+    "feature_mode": "routed_semantic_projection",
+    "meta_label_permutation_in_training_only": false
+  },
+  "baselines": {
+    "balanced_majority_accuracy": 0.5
+  },
+  "results": {
+    "iid": {
+      "accuracy": 0.8925,
+      "correct": 1071,
+      "total": 1200,
+      "by_family": {
+        "substring_origin": 1.0,
+        "casefold_primitive": 0.9,
+        "string_suffix_primitive": 1.0,
+        "markup_lexeme_primitive": 1.0,
+        "numeric_coercion_primitive": 0.825,
+        "url_hostname_primitive": 0.683333,
+        "html_entity_decode_primitive": 0.708333,
+        "authorization_or": 1.0,
+        "truthiness_gate": 0.95,
+        "numeric_boundary": 0.858333
+      },
+      "failures": [
+        {
+          "family": "url_hostname_primitive",
+          "record_id": "syn-url_hostname_primitive-0000009",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:ftp|safe.local|/:1|input.endpoint=u:http|safe.local|/:1|input.endpoint=null:0|input.endpoint=u:https|safe.local.evil.test|/:0|input.endpoint=u:https|sub.safe.local|/:0<RULEMEM>input.endpoint#suffix=tp://safe.local|q=0|fit=5/5<QUERY>input.endpoint=u:https|safe.local|/<ANSWER>"
+        },
+        {
+          "family": "numeric_coercion_primitive",
+          "record_id": "syn-numeric_coercion_primitive-0000192",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s: 11 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:12|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:11.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:11e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0<RULEMEM><QUERY>input.amount=s:011|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "numeric_coercion_primitive",
+          "record_id": "syn-numeric_coercion_primitive-0000282",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:037|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:37.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:37e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1|input.amount=s:38|canon:1|ws:0|hex:0|exp:0:0<RULEMEM><QUERY>input.amount=s:37|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "numeric_coercion_primitive",
+          "record_id": "syn-numeric_coercion_primitive-0001092",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:6|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:6e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:6.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s: 6 |canon:0|ws:1|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:7|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "html_entity_decode_primitive",
+          "record_id": "syn-html_entity_decode_primitive-0002440",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.encoded=m:0001d00l1:0|input.encoded=m:0000d00l0:0|input.encoded=m:0001d11l3:1|input.encoded=m:0000d01l5:0|input.encoded=m:0000d00l1:0<RULEMEM>input.encoded#suffix=&lt;b&gt;probe&lt;/b&gt;|q=0|fit=5/5<QUERY>input.encoded=m:1110d11l1<ANSWER>"
+        },
+        {
+          "family": "html_entity_decode_primitive",
+          "record_id": "syn-html_entity_decode_primitive-0000640",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.encoded=m:0001d00l1:0|input.encoded=m:0000d01l5:0|input.encoded=m:0000d00l1:0|input.encoded=m:0000d00l0:0|input.encoded=m:0001d11l3:1<RULEMEM>input.encoded#suffix=&lt;b&gt;profile&lt;/b&gt;|q=0|fit=5/5<QUERY>input.encoded=m:1110d11l1<ANSWER>"
+        },
+        {
+          "family": "url_hostname_primitive",
+          "record_id": "syn-url_hostname_primitive-0001179",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:ftp|account.internal|/:1|input.endpoint=u:https|account.internal.evil.test|/:0|input.endpoint=null:0|input.endpoint=u:http|account.internal|/:1|input.endpoint=u:https|account.internal|/:1<RULEMEM>input.endpoint#suffix=account.internal|q=1|fit=5/5<QUERY>input.endpoint=u:https|sub.account.internal|/<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001802",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:member|cf:member:0|input.quota=-1,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=-1,input.role=s:admin|cf:admin:1|input.quota=2,input.role=s:guest|cf:guest:1|input.quota=-2,input.role=s:member|cf:member:1|input.quota=-2,input.role=s:guest|cf:guest:1|input.quota=1,input.role=s:admin|cf:admin:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "url_hostname_primitive",
+          "record_id": "syn-url_hostname_primitive-0001089",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:ftp|account.internal|/:1|input.endpoint=u:https|account.internal.evil.test|/:0|input.endpoint=null:0|input.endpoint=u:https|sub.account.internal|/:0|input.endpoint=u:http|account.internal|/:1<RULEMEM>input.endpoint#suffix=tp://account.internal|q=0|fit=5/5<QUERY>input.endpoint=u:https|account.internal|/<ANSWER>"
+        },
+        {
+          "family": "casefold_primitive",
+          "record_id": "syn-casefold_primitive-0001271",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=s:owner |cf:owner :0|input.token=s:Owner|cf:owner:1|input.token=s: owner|cf: owner:0|input.token=s:owner|cf:owner:1|input.token=s:member|cf:member:0|input.token=s:guest|cf:guest:0<RULEMEM>input.token#suffix=wner|q=0|fit=5/6<QUERY>input.token=s:OWNER|cf:owner<ANSWER>"
+        },
+        {
+          "family": "numeric_coercion_primitive",
+          "record_id": "syn-numeric_coercion_primitive-0001182",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s: 27 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:027|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:27.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:28|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1<RULEMEM><QUERY>input.amount=s:27|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "numeric_coercion_primitive",
+          "record_id": "syn-numeric_coercion_primitive-0000732",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s: 9 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:10|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:9|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s:9e0|canon:0|ws:0|hex:0|exp:1:1<RULEMEM><QUERY>input.amount=s:9.0|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        }
+      ]
+    },
+    "validation_family_holdout": {
+      "accuracy": 0.898333,
+      "correct": 1078,
+      "total": 1200,
+      "by_family": {
+        "numeric_boundary": 0.891667,
+        "url_hostname_primitive": 0.708333,
+        "authorization_or": 1.0,
+        "truthiness_gate": 0.933333,
+        "casefold_primitive": 0.925,
+        "substring_origin": 1.0,
+        "numeric_coercion_primitive": 0.775,
+        "markup_lexeme_primitive": 1.0,
+        "string_suffix_primitive": 1.0,
+        "html_entity_decode_primitive": 0.75
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0002071",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.total=216:1|input.total=218:0|input.total=219:0|input.total=434:0|input.total=215:1|input.total=0:1<RULEMEM>generic=input.total#lt=218|q=1|fit=6/6<QUERY>input.total=217<ANSWER>"
+        },
+        {
+          "family": "url_hostname_primitive",
+          "record_id": "syn-url_hostname_primitive-0001719",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:ftp|portal.test|/:1|input.endpoint=null:0|input.endpoint=u:http|portal.test|/:1|input.endpoint=u:https|sub.portal.test|/:0|input.endpoint=u:https|portal.test.evil.test|/:0<RULEMEM>input.endpoint#suffix=tp://portal.test|q=0|fit=5/5<QUERY>input.endpoint=u:https|portal.test|/<ANSWER>"
+        },
+        {
+          "family": "html_entity_decode_primitive",
+          "record_id": "syn-html_entity_decode_primitive-0000550",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.encoded=m:0000d01l5:0|input.encoded=m:0001d11l3:1|input.encoded=m:0000d00l1:0|input.encoded=m:0001d00l1:0|input.encoded=m:0000d00l0:0<RULEMEM>input.encoded#suffix=&lt;b&gt;profile&lt;/b&gt;|q=0|fit=5/5<QUERY>input.encoded=m:1110d11l1<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000182",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=s:admin|cf:admin:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:guest|cf:guest:1|input.quota=-2,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:guest|cf:guest:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=1,input.role=s:member|cf:member:1|input.quota=20,input.role=s:member|cf:member:1<RULEMEM>generic=(input.quota!=0)or(input.role==guest)|q=1|fit=8/8<QUERY>input.quota=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0002431",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=104:0|input.age=0:1|input.age=100:1|input.age=103:0|input.age=204:0|input.age=101:1<RULEMEM>generic=input.age#lt=103|q=1|fit=6/6<QUERY>input.age=102<ANSWER>"
+        },
+        {
+          "family": "numeric_coercion_primitive",
+          "record_id": "syn-numeric_coercion_primitive-0001632",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:26e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s: 26 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:026|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:1|input.amount=s:27|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:26.0|canon:0|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:26|canon:1|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0002161",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=27:0|input.score=30:1|input.score=29:1|input.score=0:0|input.score=26:0|input.score=56:1<RULEMEM>generic=input.score#gt=27|q=1|fit=6/6<QUERY>input.score=28<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000631",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=59:1|input.score=0:1|input.score=60:1|input.score=122:0|input.score=62:0|input.score=63:0<RULEMEM>generic=input.score#lt=62|q=1|fit=6/6<QUERY>input.score=61<ANSWER>"
+        },
+        {
+          "family": "casefold_primitive",
+          "record_id": "syn-casefold_primitive-0002261",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.token=s:admin |cf:admin :0|input.token=s: admin|cf: admin:0|input.token=s:admin|cf:admin:1|input.token=s:member|cf:member:0|input.token=s:guest|cf:guest:0|input.token=s:Admin|cf:admin:1<RULEMEM>input.token#suffix=dmin|q=0|fit=5/6<QUERY>input.token=s:ADMIN|cf:admin<ANSWER>"
+        },
+        {
+          "family": "url_hostname_primitive",
+          "record_id": "syn-url_hostname_primitive-0001449",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:ftp|account.internal|/:1|input.endpoint=null:0|input.endpoint=u:https|account.internal.evil.test|/:0|input.endpoint=u:http|account.internal|/:1|input.endpoint=u:https|sub.account.internal|/:0<RULEMEM>input.endpoint#suffix=tp://account.internal|q=0|fit=5/5<QUERY>input.endpoint=u:https|account.internal|/<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0002251",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.age=131:0|input.age=134:1|input.age=264:1|input.age=0:0|input.age=133:1|input.age=130:0<RULEMEM>generic=input.age#gt=131|q=1|fit=6/6<QUERY>input.age=132<ANSWER>"
+        },
+        {
+          "family": "url_hostname_primitive",
+          "record_id": "syn-url_hostname_primitive-0002439",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.endpoint=u:ftp|trusted.com|/:1|input.endpoint=u:https|trusted.com|/:1|input.endpoint=null:0|input.endpoint=u:http|trusted.com|/:1|input.endpoint=u:https|trusted.com.evil.test|/:0<RULEMEM>input.endpoint#suffix=trusted.com|q=1|fit=5/5<QUERY>input.endpoint=u:https|sub.trusted.com|/<ANSWER>"
+        }
+      ]
+    },
+    "test_family_with_memory": {
+      "accuracy": 0.706389,
+      "correct": 2543,
+      "total": 3600,
+      "by_family": {
+        "compound_origin_role": 0.61,
+        "unicode_casefold_role": 0.781667,
+        "url_scheme_downgrade": 0.415,
+        "dom_double_decode": 0.651667,
+        "numeric_string_coercion": 0.78,
+        "state_replay_window": 1.0
+      },
+      "failures": [
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001399",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=null:0|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:https|sub.trusted.com|/:0|input.origin=u:http|trusted.com|/:1|input.origin=u:ftp|trusted.com|/:1|input.origin=u:ws|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:https|trusted.com|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000247",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|input.origin=u:http|account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:ws|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal.evil.test|/:0<RULEMEM><QUERY>input.origin=u:https|sub.account.internal|/<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000701",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|account.internal|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:owner|cf:owner:1|input.origin=u:http|account.internal|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|evilaccount.internal|/,input.quota=0,input.role=s:owner|cf:owner:1|input.origin=u:https|evil.test|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:https|evil.test|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|account.internal|/,input.quota=1,input.role=s:member|cf:member:1|input.origin"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000860",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0001d00l1:0|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0000d00l1:0|input.payload=m:0001d11l3:1|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l3<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0001383",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=1,input.role=s:owner|cf:owner:1|input.quota=0,input.role=s:OWNER|cf:owner:1|input.quota=0,input.role=s: owner|cf: owner:0|input.quota=0,input.role=s:Owner|cf:owner:1|input.quota=1,input.role=s:Owner|cf:owner:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=0,input.role=s:member|cf:member:0|input.quota=1,input.role=s:OWNER|cf:owner:1<RULEMEM><QUERY>input.quota=0,input.role=s:owner|cf:owner<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000535",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=u:https|sub.trusted.com|/:0|input.origin=u:ws|trusted.com|/:1|input.origin=u:http|trusted.com|/:1|input.origin=u:ftp|trusted.com|/:1|input.origin=null:0|input.origin=u:https|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:https|trusted.com.evil.test|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002623",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:http|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=u:https|sub.portal.test|/:0|input.origin=u:ftp|portal.test|/:1|input.origin=u:https|portal.test|/:1|input.origin=null:0|input.origin=u:ws|portal.test|/:1<RULEMEM><QUERY>input.origin=u:https|portal.test.evil.test|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002299",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=u:https|sub.trusted.com|/:0|input.origin=u:https|trusted.com|/:1|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=null:0|input.origin=u:http|trusted.com|/:1|input.origin=u:ws|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:ftp|trusted.com|/<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001778",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d00l3:0|input.payload=m:0000d00l1:0|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1<RULEMEM><QUERY>input.payload=m:0001d00l1<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001580",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l2:0|input.payload=m:0000d00l1:0|input.payload=m:1110d11l2:1|input.payload=m:0000d01l3:1|input.payload=m:0001d11l3:1|input.payload=m:0001d00l1:0<RULEMEM><QUERY>input.payload=m:0000d00l4<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0001941",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:member|cf:member:0|input.quota=0,input.role=s:ROOT|cf:root:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=1,input.role=s:root|cf:root:1|input.quota=0,input.role=s:Root|cf:root:1|input.quota=-1,input.role=s:ROOT|cf:root:1|input.quota=-1,input.role=s: root|cf: root:1|input.quota=1,input.role=s:guest|cf:guest:1<RULEMEM><QUERY>input.quota=0,input.role=s: root|cf: root<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001417",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=u:https|trusted.com.evil.test|/:0|input.origin=u:https|trusted.com|/:1|input.origin=u:ws|trusted.com|/:1|input.origin=u:http|trusted.com|/:1|input.origin=u:https|sub.trusted.com|/:0|input.origin=u:ftp|trusted.com|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        }
+      ]
+    },
+    "test_family_without_memory": {
+      "accuracy": 0.506667,
+      "correct": 1824,
+      "total": 3600,
+      "by_family": {
+        "compound_origin_role": 0.53,
+        "unicode_casefold_role": 0.453333,
+        "url_scheme_downgrade": 0.506667,
+        "dom_double_decode": 0.5,
+        "numeric_string_coercion": 0.533333,
+        "state_replay_window": 0.516667
+      },
+      "failures": [
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0002157",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:Root|cf:root:1|input.quota=0,input.role=s:root|cf:root:1|input.quota=1,input.role=s:Root|cf:root:1|input.quota=-1,input.role=s:root|cf:root:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=-1,input.role=s:Root|cf:root:1|input.quota=1,input.role=s: root|cf: root:1|input.quota=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.quota=0,input.role=s: root|cf: root<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000247",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|input.origin=u:http|account.internal|/:1|input.origin=u:ftp|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:ws|account.internal|/:1|input.origin=u:https|account.internal|/:1|input.origin=u:https|account.internal.evil.test|/:0<RULEMEM><QUERY>input.origin=u:https|sub.account.internal|/<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000701",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|account.internal|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:https|evil.test|/,input.quota=-1,input.role=s:owner|cf:owner:1|input.origin=u:http|account.internal|/,input.quota=0,input.role=s:guest|cf:guest:1|input.origin=u:https|evilaccount.internal|/,input.quota=0,input.role=s:owner|cf:owner:1|input.origin=u:https|evil.test|/,input.quota=1,input.role=s:owner|cf:owner:1|input.origin=u:https|evil.test|/,input.quota=1,input.role=s:guest|cf:guest:1|input.origin=u:https|account.internal|/,input.quota=1,input.role=s:member|cf:member:1|input.origin"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0000860",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0001d00l1:0|input.payload=m:1110d11l2:1|input.payload=m:0000d00l2:0|input.payload=m:0000d00l1:0|input.payload=m:0001d11l3:1|input.payload=m:0000d01l3:1<RULEMEM><QUERY>input.payload=m:0000d00l3<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0001978",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:31e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:031|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:31|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:32|canon:1|ws:0|hex:0|exp:0:0|input.amount=s: 31 |canon:0|ws:1|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0<ANSWER>"
+        },
+        {
+          "family": "state_replay_window",
+          "record_id": "syn-state_replay_window-0001674",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.token=s:n98-d|cf:n98-d,prev1.input.token=s:n28-b|cf:n28-b:0|input.token=s:n17-a|cf:n17-a,prev1.input.token=s:n98-d|cf:n98-d:0|input.token=s:n28-b|cf:n28-b,prev1.input.token=s:n98-d|cf:n98-d:0|input.token=s:n28-b|cf:n28-b,prev1.input.token=s:n28-b|cf:n28-b:1|input.token=s:n98-d|cf:n98-d,prev1.input.token=s:n17-c|cf:n17-c:0|input.token=s:n98-d|cf:n98-d,prev1.input.token=s:n98-d|cf:n98-d:1|input.token=s:n17-a|cf:n17-a,prev1.input.token=s:n17-a|cf:n17-a:1|input.token=s:n17-c|cf:n17-c,prev1.input.token=s:n17-c|cf:n17-c:1<RULEMEM>generic=input.token#eq_prev1|q=0|fit=8/8<QUERY>inpu"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000535",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|trusted.com|/:1|input.origin=u:https|sub.trusted.com|/:0|input.origin=u:ws|trusted.com|/:1|input.origin=u:http|trusted.com|/:1|input.origin=u:ftp|trusted.com|/:1|input.origin=null:0|input.origin=u:https|trusted.com|/:1<RULEMEM><QUERY>input.origin=u:https|trusted.com.evil.test|/<ANSWER>"
+        },
+        {
+          "family": "numeric_string_coercion",
+          "record_id": "syn-numeric_string_coercion-0000556",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.amount=s:14e0|canon:0|ws:0|hex:0|exp:1:1|input.amount=s:14.0|canon:0|ws:0|hex:0|exp:0:1|input.amount=s:Infinity|canon:0|ws:0|hex:0|exp:0:0|input.amount=s:0x10|canon:0|ws:0|hex:1|exp:0:0|input.amount=s: 14 |canon:0|ws:1|hex:0|exp:0:1|input.amount=s:14|canon:1|ws:0|hex:0|exp:0:1|input.amount=s:15|canon:1|ws:0|hex:0|exp:0:0|input.amount=s:|canon:0|ws:0|hex:0|exp:0:1<RULEMEM><QUERY>input.amount=s:NaN|canon:0|ws:0|hex:0|exp:0<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0000051",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s: owner|cf: owner:0|input.quota=1,input.role=s:owner|cf:owner:1|input.quota=-1,input.role=s:owner|cf:owner:1|input.quota=1,input.role=s:member|cf:member:1|input.quota=1,input.role=s:OWNER|cf:owner:1|input.quota=0,input.role=s:owner|cf:owner:1|input.quota=0,input.role=s:member|cf:member:0|input.quota=-1,input.role=s:Owner|cf:owner:1<RULEMEM>generic=(input.quota!=0)or(input.role==owner)|q=0|fit=8/8<QUERY>input.quota=0,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "unicode_casefold_role",
+          "record_id": "syn-unicode_casefold_role-0001707",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.quota=-1,input.role=s:member|cf:member:1|input.quota=0,input.role=s:Owner|cf:owner:1|input.quota=0,input.role=s:OWNER|cf:owner:1|input.quota=1,input.role=s:owner|cf:owner:1|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=-1,input.role=s:OWNER|cf:owner:1|input.quota=-1,input.role=s:owner|cf:owner:1|input.quota=0,input.role=s: owner|cf: owner:0<RULEMEM><QUERY>input.quota=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "dom_double_decode",
+          "record_id": "syn-dom_double_decode-0001778",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.payload=m:0000d00l2:0|input.payload=m:0001d11l3:1|input.payload=m:0000d00l3:0|input.payload=m:0000d00l1:0|input.payload=m:0000d01l3:1|input.payload=m:1110d11l2:1<RULEMEM><QUERY>input.payload=m:0001d00l1<ANSWER>"
+        },
+        {
+          "family": "compound_origin_role",
+          "record_id": "syn-compound_origin_role-0000179",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.origin=u:https|eviltrusted.com|/,input.quota=1,input.role=s:root|cf:root:1|input.origin=u:https|trusted.com|/,input.quota=1,input.role=s:member|cf:member:1|input.origin=u:https|eviltrusted.com|/,input.quota=0,input.role=s:member|cf:member:1|input.origin=u:http|trusted.com|/,input.quota=1,input.role=s:root|cf:root:1|input.origin=u:https|trusted.com|/,input.quota=1,input.role=s:root|cf:root:1|input.origin=u:https|eviltrusted.com|/,input.quota=-1,input.role=s:member|cf:member:1|input.origin=u:https|trusted.com|/,input.quota=-1,input.role=s:root|cf:root:1|input.origin=u:https|ev"
+        }
+      ]
+    },
+    "counterexample_at_k": {
+      "k": 10,
+      "score": 1.0,
+      "successful_programs": 900,
+      "total_programs": 900,
+      "by_family": {
+        "url_scheme_downgrade": 1.0,
+        "dom_double_decode": 1.0,
+        "unicode_casefold_role": 1.0,
+        "numeric_string_coercion": 1.0,
+        "compound_origin_role": 1.0,
+        "state_replay_window": 1.0
+      },
+      "top1": 0.784444,
+      "random_top1": 0.646651,
+      "top1_lift": 0.137794,
+      "precision_at_k": 0.693484,
+      "random_precision_at_k": 0.646651,
+      "random_success_at_k": 1.0,
+      "metric_warning": "Counterexample@K is non-discriminative when the random success baseline is near one.",
+      "policy_visibility": "declared intended output is visible only to the verifier, not to the behavior model"
+    },
+    "memory_delta": 0.199722
+  },
+  "training": {
+    "epochs": 10,
+    "seconds": 173.162,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.658567,
+        "iid_accuracy": 0.746667,
+        "validation_family_accuracy": 0.7575
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.487929,
+        "iid_accuracy": 0.851667,
+        "validation_family_accuracy": 0.8525
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.307969,
+        "iid_accuracy": 0.881667,
+        "validation_family_accuracy": 0.884167
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.26067,
+        "iid_accuracy": 0.881667,
+        "validation_family_accuracy": 0.883333
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.242851,
+        "iid_accuracy": 0.883333,
+        "validation_family_accuracy": 0.890833
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.217329,
+        "iid_accuracy": 0.880833,
+        "validation_family_accuracy": 0.879167
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.191602,
+        "iid_accuracy": 0.8875,
+        "validation_family_accuracy": 0.899167
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.154817,
+        "iid_accuracy": 0.8925,
+        "validation_family_accuracy": 0.895
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.133546,
+        "iid_accuracy": 0.8925,
+        "validation_family_accuracy": 0.898333
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.101004,
+        "iid_accuracy": 0.893333,
+        "validation_family_accuracy": 0.895833
+      }
+    ]
+  },
+  "research_guardrails": {
+    "family_holdout": true,
+    "black_box_only_input": true,
+    "failure_examples_preserved": true,
+    "claim_scope": "pilot only; no claim of production generalization"
+  }
+}

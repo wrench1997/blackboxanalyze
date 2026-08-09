@@ -1,0 +1,43 @@
+{
+  "protocol_id": "pg-pk-02-pair-invariance-training-v1",
+  "schema_version": "sift-pikachu-pair-invariance-protocol-v1",
+  "objective": "Make the Rule IR decoder invariant to safe encoding changes and transfer across previously held-out local surface roles without learning route/family token shortcuts.",
+  "target": {
+    "base_url": "http://127.0.0.1:8766",
+    "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false
+  },
+  "pair_design": {
+    "families": ["xss", "injection"],
+    "surface_roles": ["reflected_get", "dom_value_source", "sqli_str", "sqli_search", "sqli_blind_boolean", "sqli_blind_time"],
+    "encoding_variants": ["plain", "url_percent", "html_entity", "double_html_entity"],
+    "marker_family_neutral": true,
+    "pair_id_hidden_from_decoder": true
+  },
+  "training": {
+    "losses": ["weighted cross entropy", "same-pair embedding cosine consistency"],
+    "baseline": "same architecture with pair consistency weight zero",
+    "encoding_holdout": "train plain+url_percent; test html_entity+double_html_entity",
+    "surface_holdout": "train reflected_get+sqli_str+sqli_search; test dom_value_source+sqli_blind_boolean+sqli_blind_time",
+    "joint_holdout": "encoding and surface held out together"
+  },
+  "feature_policy": {
+    "visible": ["method", "neutral route shape", "probe modality", "inert probe representation", "encoding descriptor", "status/content type/body length", "bounded projection counts"],
+    "excluded": ["raw body", "cookies", "credentials", "source code", "evaluator state", "pair id", "family label", "surface role", "raw route tokens"],
+    "audit": "nearest-neighbor ablation for encoding, probe, response-only, and oracle-shape removal"
+  },
+  "success_definition": {
+    "primary": "higher same-pair embedding cosine without increasing false positives",
+    "secondary": "stable candidate family across held-out encoding variants",
+    "safety": "abstain remains allowed; no exploit payload generation"
+  },
+  "artifacts": [
+    "research/pikachu_paired_catalog_v1.json",
+    "research/pikachu_pair_invariance_v1.json",
+    "research/pikachu_pair_invariance_training_v1.json",
+    "research/pikachu_pair_invariance_training_v1.md",
+    "artifacts/pg-pk-02-pair-invariance"
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "schema_version": "pg-pk-31-capability-dataset-evidence-audit-v1",
+  "audit_id": "pg31-offline-capability-evidence-audit",
+  "purpose": "Offline audit of existing dataset and research artifacts before any new training or memory promotion.",
+  "scope": {
+    "network_execution": false,
+    "container_execution": false,
+    "training_artifact_generated": false,
+    "memory_promotion_attempted": false,
+    "raw_data_read": false,
+    "raw_data_retained": false,
+    "method": "JSON schema, lineage, split, seed, family, negative-control and oracle-field inspection"
+  },
+  "decision": {
+    "status": "blocked",
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "No existing artifact satisfies the complete PG-30 train/dev/family-holdout/OOD/negative-control evidence contract."
+  },
+  "files_audited": [
+    {
+      "path": "research/pg_pk_23_multitask_v2.json",
+      "sha256": "ac4063608f3efe1fe7a8824e89019c5a72d7202d41bddb98294cb47588d5d8fb",
+      "observations": {
+        "evaluation_count": 15,
+        "seeds": [20260802, 20260803, 20260804],
+        "source_holdout_test_count": 24,
+        "source_holdout_recall_by_seed": [0.5, 0.0, 0.5],
+        "encoding_holdout_false_positive_rate": 0.076923,
+        "joint_holdout_false_positive_rate": 0.047619,
+        "prediction_rows": 627,
+        "unique_sample_ids_in_prediction_rows": 114,
+        "source_sha256_present_in_prediction_rows": false,
+        "target_instance_id_present_in_prediction_rows": false
+      },
+      "classification": "diagnostic_only"
+    },
+    {
+      "path": "research/pg_pk_24_cross_lab_registry_v1.json",
+      "sha256": "6ff1fd9a85811aa9e1978dc3bb73d33344ddf4f76101377f68166073e780b1a3",
+      "observations": {
+        "registered_targets": 6,
+        "training_eligible_targets": 1,
+        "evaluation_only_targets": 5,
+        "training_eligible_target": "pikachu"
+      },
+      "classification": "insufficient_independent_training_sources"
+    },
+    {
+      "path": "research/payload_source_holdout_v1.json",
+      "sha256": "fc92ee3c678eb97fcc8bca8a2cf7dea9620171cbc142133d35a2de0688ce9f04",
+      "observations": {
+        "seeds": [20260841, 20260847, 20260853, 20260859, 20260861],
+        "catalog_sample_count": 24,
+        "authorization_guard_rejected": true,
+        "authorization_error": "payload source provenance hash mismatch",
+        "evaluator_confirmation_rate": 0.0
+      },
+      "classification": "quarantine_until_provenance_repaired"
+    },
+    {
+      "path": "research/payload_replay_collector_v1.json",
+      "sha256": "9aa301374240c749ae6579bec6d85e88379fcb66e097609e3b754364ef9adce4",
+      "observations": {
+        "sample_count": 20,
+        "source_count": 10,
+        "allowed_methods": ["GET"],
+        "rule_ir_replay_consistency": 1.0,
+        "evaluator_confirmation_count": 0,
+        "interpretation": "replay consistency, not typed vulnerability detection"
+      },
+      "classification": "transport_replay_only"
+    },
+    {
+      "path": "research/pg_pk_28_get_post_dual_catalog_v1.json",
+      "sha256": "c4c66878e21dc7c99dc0b148b83a13d67299a561a84ac1e7654333b8b678cf2d",
+      "observations": {
+        "sample_count": 12,
+        "seeds": [101, 202, 303],
+        "target_instances": 3,
+        "source_hashes": 1,
+        "typed_positive_count": 0,
+        "training_eligible": false,
+        "sample_roles": ["candidate", "negative_control"]
+      },
+      "classification": "preflight_only"
+    },
+    {
+      "path": "research/pg_pk_29_idor_get_post_dual_catalog_v1.json",
+      "sha256": "ecb5944a2a979a392ea7b49b690acc9a68b35e96990c93bce32799ca353ec528",
+      "observations": {
+        "sample_count": 12,
+        "seeds": [401, 502, 603],
+        "target_instances": 3,
+        "source_hashes": 1,
+        "typed_positive_count": 0,
+        "training_eligible": false,
+        "sample_roles": ["candidate", "negative_control"]
+      },
+      "classification": "preflight_only"
+    },
+    {
+      "path": "research/pikachu_multidataset_memory_filter_v1.json",
+      "sha256": "0810f7b0ad31a0f3e77eb6790619cc504474480f27eb983fc9f047408b8b05c7",
+      "observations": {
+        "dataset_count": 3,
+        "seeds_per_target": 2,
+        "target_count": 3,
+        "fresh_target_values": [false, true, true],
+        "legacy_xss_promotion": true
+      },
+      "classification": "legacy_promotion_not_pg30_evidence"
+    },
+    {
+      "path": "research/generalization_matrix_09_summary.json",
+      "sha256": "46507c5a0e0a1b69c40bda6237b884bad23b454af0be774149823121c2b07340",
+      "observations": {
+        "seeds": [20261001, 20261019, 20261107],
+        "families": 18,
+        "target_families": 6,
+        "complete_target_family_holdout": true,
+        "status": "three_seed_partial_success_with_blocking_url_failure",
+        "scope": "synthetic local targets only; no production vulnerability detection claim"
+      },
+      "classification": "synthetic_generalization_diagnostic"
+    },
+    {
+      "path": "research/maze_lab_holdout_v1.json",
+      "sha256": "ae9962c9e76080ce22f29a79ba433fc05ba9cac71d657d0db6027b74c0ee33f0",
+      "observations": {
+        "training_families": ["access_control", "logic", "url_redirect"],
+        "holdout_families": ["injection", "xss"],
+        "holdout_lab_count": 8,
+        "holdout_observable_success": 8,
+        "holdout_evaluator_confirmed": 0
+      },
+      "classification": "observable_without_typed_positive_authority"
+    }
+  ],
+  "findings": [
+    {
+      "id": "PG31-F001",
+      "severity": "blocker",
+      "title": "No complete PG-30 role matrix",
+      "evidence": "The audited reports do not provide one lineage-bound evidence object containing train, dev, family_holdout, ood_source and negative_control rows with independently verifiable metrics."
+    },
+    {
+      "id": "PG31-F002",
+      "severity": "blocker",
+      "title": "Current capability gate does not detect sample/target/family split leakage",
+      "evidence": "app/model_capability_gate.py checks source_hash overlap only. It has no sample_id, probe_hash, dataset_manifest_hash, source_id or family field, so repeated samples or target instances can appear in multiple roles while the gate still evaluates them."
+    },
+    {
+      "id": "PG31-F003",
+      "severity": "blocker",
+      "title": "Source lineage is not independently verifiable",
+      "evidence": "PG-23 prediction rows have no source_sha256 or target_instance_id; the payload source holdout explicitly rejects its provenance hash."
+    },
+    {
+      "id": "PG31-F004",
+      "severity": "blocker",
+      "title": "Typed positive oracle evidence is absent or zero",
+      "evidence": "PG-28 and PG-29 have zero typed positives; the payload replay and maze reports have zero evaluator confirmations; PG-23 includes safe-canary diagnostics and non-zero held-out false-positive rates."
+    },
+    {
+      "id": "PG31-F005",
+      "severity": "blocker",
+      "title": "Repeated seeds are not independent datasets",
+      "evidence": "PG-23 repeats the same sample IDs across 15 evaluations (627 rows but only 114 unique IDs). Seed changes alone do not establish new target/source cohorts."
+    },
+    {
+      "id": "PG31-F006",
+      "severity": "blocker",
+      "title": "Aggregate metrics can hide cell regressions",
+      "evidence": "The gate consumes one baseline_metrics/candidate_metrics object and does not require per-role, per-family and per-seed denominators or worst-cell constraints."
+    },
+    {
+      "id": "PG31-F007",
+      "severity": "warning",
+      "title": "Safe dual-channel catalogs are useful negatives but not training positives",
+      "evidence": "PG-28/PG-29 contain fresh reset, GET/POST and negative controls, but remain evaluation-only with no typed positive authority."
+    }
+  ],
+  "required_repairs_before_data_collection": [
+    "Add sample_id, family, source_id, dataset_manifest_sha256, split_manifest_sha256, probe_sha256, target_instance_id, oracle_contract_sha256 and checkpoint_sha256 to every gate row.",
+    "Reject any sample/probe/evidence/target overlap between train, dev, family_holdout, OOD and negative-control roles according to the frozen split policy.",
+    "Require per-role/per-family/per-seed metric cells with denominators, positive and negative counts, and worst-cell regression limits.",
+    "Require an attested typed positive oracle on held-out targets; reflection, HTTP status, replay consistency, timing or observable success alone are not positives.",
+    "Require every training/evaluation target to be fresh and require seed changes to alter a manifest selection/order hash.",
+    "Re-run the gate only on a newly collected, lineage-repaired dataset; keep all audited artifacts diagnostic or quarantined."
+  ],
+  "next_action": "Collect a fresh multi-source dataset after the repairs; do not train or promote memory from any artifact listed above."
+}

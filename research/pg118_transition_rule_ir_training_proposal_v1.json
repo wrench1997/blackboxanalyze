@@ -1,0 +1,48 @@
+{
+  "protocol_id": "pg-pk-118-transition-rule-ir-training-v1",
+  "proposal_id": "pg118-transition-rule-ir-training-proposal-v1",
+  "question": "把 response_projection.location_changed 与 transition_delta 作为族无关 slot 后，模型能否在另一实现和相反双编码顺序上恢复正例，同时保持 decoy 拒绝和未知 abstain？",
+  "intervention": "新建 44 维、4804 参数的 fresh decoder；用 PG116 identity 与 6 个 PG118 delta target（24 episode、96 step、GET/POST 各 48）训练，PG117 gamma 双编码顺序完全排除并作为盲测。",
+  "observed_fields": [
+    "method",
+    "placement",
+    "encoding_chain",
+    "status_class",
+    "shape_class",
+    "candidate_signal",
+    "location_changed",
+    "transition_delta",
+    "generic_belief",
+    "BSP bounded projection"
+  ],
+  "excluded_fields": [
+    "raw probe",
+    "raw response body",
+    "family",
+    "typed oracle",
+    "target instance id",
+    "route id",
+    "evaluator evidence hash"
+  ],
+  "success_definition": {
+    "pg114_confirm_recall_nonzero": true,
+    "pg114_decoy_false_accept_zero": true,
+    "pg114_unknown_abstain_nonzero": true,
+    "pg117_route_positive_recall_nonzero": true,
+    "pg117_decoy_false_accept_zero": true,
+    "pg117_unknown_abstain_nonzero": true,
+    "all_abstain_not_success": true
+  },
+  "observed_result": {
+    "pg114_confirm_recall": 1.0,
+    "pg114_decoy_false_accept_count": 0,
+    "pg114_unknown_abstain_rate": 1.0,
+    "pg117_route_positive_recall": 1.0,
+    "pg117_decoy_false_accept_count": 0,
+    "pg117_unknown_abstain_rate": 1.0,
+    "pg117_step_accuracy": 0.958333,
+    "dev_accuracy": 1.0
+  },
+  "next_if_pass": "PG119 增加第三种编码顺序和新 family 的 transition 反事实配对，并做跨 seed 方差与 unknown surface 误报压力测试。",
+  "next_if_fail": "冻结 checkpoint，按混淆矩阵定位 slot 或 typed oracle 缺口；禁止用扩大容量或写入长期记忆掩盖失败。"
+}

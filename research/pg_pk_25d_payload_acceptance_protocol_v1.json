@@ -1,0 +1,37 @@
+{
+  "protocol_id": "pg-pk-25d-payload-acceptance-v1",
+  "schema_version": "pg-pk-25d-payload-acceptance-v1",
+  "purpose": "Separate typed target-oracle success from weak black-box signals.",
+  "positive_acceptance": {
+    "oracle_positive": true,
+    "positive_authority": true,
+    "typed_confirmed_effect": true,
+    "oracle_revalidated": true,
+    "weak_modalities_rejected": [
+      "reflection",
+      "syntax_error",
+      "bounded_timing",
+      "status_change",
+      "transport_error"
+    ],
+    "matched_negative_control_required": true,
+    "fresh_reset_required": true,
+    "evidence_hash_required": true
+  },
+  "non_success_signals": [
+    "marker_reflection",
+    "error_page",
+    "status_code_change",
+    "latency_or_timeout",
+    "transport_error",
+    "unbound_rule_ir_slot",
+    "missing_oracle"
+  ],
+  "promotion": {
+    "evaluation_only_source": "abstain",
+    "raw_request_or_response_storage": false,
+    "training_promotion_requires_separate_source_and_target_split": true,
+    "long_term_memory_promotion": false
+  },
+  "current_pg25d_expectation": "The initial health/canary catalog is preflight-only; it must not contain accepted positives."
+}

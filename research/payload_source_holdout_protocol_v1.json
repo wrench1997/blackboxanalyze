@@ -1,0 +1,81 @@
+{
+  "protocol_id": "sift-payload-source-holdout-v1",
+  "version": "1.0",
+  "purpose": "验证带来源/授权证明的 safe payload catalog 能否支持换来源迁移、族外结构迁移，并在无训练证据时 fail-closed。",
+  "catalog_contract": {
+    "schema": "sift-authorized-payload-catalog-v1",
+    "required_source_fields": [
+      "source_id",
+      "source_type",
+      "origin",
+      "license",
+      "authorization",
+      "scope",
+      "captured_at",
+      "authorized_for",
+      "source_sha256"
+    ],
+    "required_sample_fields": [
+      "sample_id",
+      "payload",
+      "probe_artifact.original",
+      "probe_artifact.encoding",
+      "probe_artifact.probe_sha256",
+      "semantic.expected_oracle",
+      "semantic.expected_signal"
+    ],
+    "authorization": "workspace_local_only",
+    "scope": ["http://127.0.0.1:3100"],
+    "source_ids_opaque": true,
+    "probe_markers_opaque": true
+  },
+  "policy_input": {
+    "visible": [
+      "validated_detection_payload",
+      "opaque_source_attestation",
+      "structural_feature_key"
+    ],
+    "hidden": [
+      "semantic.family",
+      "semantic.surface",
+      "target_sample_id",
+      "evaluator_state"
+    ]
+  },
+  "splits": {
+    "source_split_same_family": "train source suffix a, test source suffix b for xss/injection; generic HTTP distractor is unsupported",
+    "family_holdout_structural_transfer": "train only authorized access-control HTTP grammar; test unseen logic and redirect families",
+    "family_holdout_unseen_surface": "train xss/injection without HTTP grammar; test access-control and logic and require abstention"
+  },
+  "strategies": {
+    "source_grounded": "learn successful structural feature keys only from validated authorized samples; abstain when none are supported",
+    "random_authorized": "uniformly choose from the same validated candidate pool"
+  },
+  "design": {
+    "seeds": [20260841, 20260847, 20260853, 20260859, 20260861],
+    "source_count": 10,
+    "sample_count": 24,
+    "evaluator_confirmation_expected": 0,
+    "tampered_attestation_case": true
+  },
+  "metrics": {
+    "exact_success_rate": "selected sample equals the evaluator-side target and local oracle signal is present",
+    "structural_transfer_rate": "selected structural feature equals target feature; not an evaluator confirmation",
+    "abstention_rate": "no candidate selected because no authorized training feature supports the pool",
+    "unsupported_selection_rate": "selected feature was absent from the grounded training evidence",
+    "authorization_valid_rate": "selected candidate passed source attestation and local scope validation",
+    "evaluator_confirmation_rate": "fixed at zero"
+  },
+  "safety": {
+    "local_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_execution": false,
+    "real_sleep_performed": false,
+    "public_payload_corpus_ingested": false,
+    "real_exploit_strings": false
+  },
+  "runner": "scripts/run_payload_source_holdout.py",
+  "catalog_builder": "scripts/build_payload_source_catalog.py",
+  "result": "research/payload_source_holdout_v1.json"
+}

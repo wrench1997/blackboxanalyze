@@ -1,0 +1,90 @@
+{
+  "schema_version": "pg367-a800-process-candidate-v1",
+  "status": "blocked_candidate_only",
+  "locks": {
+    "dataset": "42ad8504a2beac696f430b7089fca489f2fba1a47a2786dd044ef9a5b4c39211",
+    "audit": "e85d23f89042de1757b8a778e9e674a121d72a88ed10e00eff7b5dcbf7d9b5c0",
+    "rules": "3a97c9a0aaaf81ce5e0f9bcb4598dec7d859a9676bb3e74a5229e022f4ffccd4",
+    "runner": "3bcd22866886e8e6ce549f7e70ba8ba105cf330cab65f429afe7c38c4a30c1ca",
+    "model": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      36701,
+      36702,
+      36703
+    ],
+    "epochs": 4,
+    "learning_rate": 0.0001,
+    "batch_size": 16,
+    "context_only_raw_free": true,
+    "target_tokens_used_as_labels_only": true,
+    "required_context_window": 44
+  },
+  "checks": {
+    "cuda": true,
+    "one_visible_gpu": true,
+    "gpu0": true,
+    "a800": true,
+    "weekend": true,
+    "raw_free": true,
+    "diagnostic_only": true
+  },
+  "counts": {
+    "train_rows": 224,
+    "implementation_holdout_rows": 128,
+    "vocabulary_size": 97
+  },
+  "candidates": [
+    {
+      "seed": 36701,
+      "holdout": {
+        "sequence_exact": 0.0,
+        "rows": 128,
+        "unknown_token_count": 448
+      },
+      "holdout_predictive_entropy_nats": 4.492735,
+      "entropy_token_count": 5504
+    },
+    {
+      "seed": 36702,
+      "holdout": {
+        "sequence_exact": 0.0,
+        "rows": 128,
+        "unknown_token_count": 448
+      },
+      "holdout_predictive_entropy_nats": 4.485178,
+      "entropy_token_count": 5504
+    },
+    {
+      "seed": 36703,
+      "holdout": {
+        "sequence_exact": 0.0,
+        "rows": 128,
+        "unknown_token_count": 448
+      },
+      "holdout_predictive_entropy_nats": 4.494875,
+      "entropy_token_count": 5504
+    }
+  ],
+  "worst_seed": {
+    "sequence_exact_min": 0.0,
+    "negative_oracle_metrics": "not_run_evaluator_sidecar_only",
+    "fresh_replay": "not_run"
+  },
+  "scientific_gate": {
+    "single_synthetic_implementation": true,
+    "typed_live_replay_with_model_selected_wire": false,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "A800 只完成抽象 WAF 过程 next-token candidate smoke；无 typed evaluator/跨实现/负对照能力证明，不能声称会生成任意原始 payload。",
+  "report_sha256": "726a0e55b143a4d216000856612a8fa4a51930b85e09f36bc14d02e6fa76d1ce"
+}

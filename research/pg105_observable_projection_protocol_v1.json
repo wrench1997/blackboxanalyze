@@ -1,0 +1,44 @@
+{
+  "protocol_id": "pg-pk-105-observable-projection-v1",
+  "schema_version": "pg105-observable-projection-protocol-v1",
+  "purpose": "make input/response opacity observable without leaking typed oracle semantics",
+  "training_contract": {
+    "source": "PG101 train",
+    "row_count": 32,
+    "oracle_visible": false,
+    "family_visible": false
+  },
+  "evaluation_contract": {
+    "frozen_sources": [
+      "PG42",
+      "PG35",
+      "PG76"
+    ],
+    "fresh_source": "PG69 amber/violet",
+    "row_count": 562
+  },
+  "causal_extension_contract": {
+    "schema_version": "bounded-causal-projection-v1",
+    "visible": [
+      "bounded_input_shape_delta",
+      "input_changed_response_unchanged",
+      "relation_code"
+    ],
+    "raw_field_names_persisted": false,
+    "raw_values_persisted": false,
+    "input_change_is_not_effect_atom": true,
+    "opaque_positive_action": "abstain_or_await_typed_oracle"
+  },
+  "gate": {
+    "known_recall_min": 0.8,
+    "known_label_consistency_min": 0.95,
+    "false_accept_count": 0,
+    "unknown_family_strict_abstain": true,
+    "negative_anomaly_count": 0,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "passed_observable_projection_diagnostic",
+    "blocking_reasons": []
+  }
+}

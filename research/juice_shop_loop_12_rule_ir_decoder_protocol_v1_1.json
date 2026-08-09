@@ -1,0 +1,47 @@
+{
+  "schema_version": "sift-juice-shop-loop-12-rule-ir-decoder-v1.1",
+  "status": "frozen-before-training",
+  "supersedes": "research/juice_shop_loop_12_rule_ir_decoder_protocol_v1.json",
+  "objective": "decode visible black-box traces into language-neutral Rule IR after adding explicit mixed encoding-depth curriculum",
+  "families": ["access_control", "authentication", "input_validation", "injection", "observability", "url_redirect", "xss"],
+  "input_contract": {
+    "visible_fields": ["input", "context", "state", "history", "output"],
+    "anonymous_field_hash_buckets": 32,
+    "encoding_depth_features": ["html_tag_after_0_to_3_unescape_passes", "nested_entity_markers", "percent_double_encoding", "tag_appears_after_second_decode"],
+    "excluded_fields": ["family", "record_id", "intended_output", "is_counterexample", "evaluator_state", "challenge_key", "source_code"],
+    "source_language": "language-neutral value-shape projection"
+  },
+  "training": {
+    "model": "256-feature MLP encoder + 7-way constrained template head",
+    "encoding_depth_curriculum_examples": 180,
+    "encoding_depth_forms": ["raw_markup", "single_entity", "double_entity", "triple_entity", "plain_text"],
+    "device_policy": "cuda when available, otherwise cpu and report reason",
+    "primary_seed": 20260859,
+    "fresh_holdout_seeds": [20260861, 20260867, 20260871],
+    "optimizer": "AdamW",
+    "epochs": 40,
+    "batch_size": 256
+  },
+  "output_contract": {
+    "representation": "RULE_FAMILY_TEMPLATES policy-slot AST",
+    "grammar_validation": "app.rule_ir_decoder.validate_abstract_rule_ir",
+    "binding": "app.rule_ir_binding.bind_rule_ir_slots binds only shadow-visible evidence and keeps unavailable trusted-policy slots unbound"
+  },
+  "generalization": {
+    "holdout_families": ["url_scheme_downgrade", "dom_double_decode", "unicode_casefold_role", "numeric_string_coercion", "compound_origin_role", "state_replay_window"],
+    "metric": "exact abstract-template match plus confidence-gated coverage"
+  },
+  "acceptance_gates": {
+    "grammar_valid_for_all_templates": true,
+    "training_validation_accuracy_min": 0.90,
+    "fresh_holdout_min_accuracy": 0.70,
+    "fresh_holdout_seed_count_min": 3,
+    "oracle_leakage": "must remain false"
+  },
+  "safety": {
+    "local_only": true,
+    "no_target_requests_during_training": true,
+    "no_evaluator_endpoints": true,
+    "no_browser_execution": true
+  }
+}

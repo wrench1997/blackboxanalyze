@@ -1,0 +1,582 @@
+{
+  "schema_version": "sift-neural-url-meta-v2-pilot-v1",
+  "experiment": "neural-url-loop-11-url-meta-v2-pilot",
+  "status": "completed",
+  "device": "cuda",
+  "model": {
+    "parameters": 908546,
+    "base_positions": 639,
+    "set_head_parameters": 128,
+    "hidden": 128,
+    "layers": 4,
+    "heads": 4
+  },
+  "data": {
+    "programs": 2700,
+    "train_examples": 4800,
+    "validation_examples": 1200,
+    "target_examples": 600,
+    "target_family_examples_in_training": 0,
+    "meta_label_families": [
+      "string_suffix_primitive",
+      "url_hostname_primitive"
+    ]
+  },
+  "results": {
+    "target_neural": {
+      "accuracy": 0.891667,
+      "correct": 535,
+      "total": 600,
+      "by_family": {
+        "url_scheme_downgrade": 0.891667
+      },
+      "failures": [
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002407",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|account.internal|p443|/:1|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:ftp|account.internal|p21|/:1<RULEMEM><QUERY>url.value=u:http|account.internal|p80|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001579",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:ftp|account.internal|p21|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002515",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|account.internal|p443|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:ws|account.internal|p80|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001147",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|safe.local|p443|/:1|url.value=u:http|safe.local|p80|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:ftp|safe.local|p21|/:1|input.origin=null:0|url.value=u:https|safe.local.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000913",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002191",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001759",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:ws|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ftp|safe.local|p21|/:1|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|safe.local|p443|/:1<RULEMEM><QUERY>input.origin=null<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000823",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:http|safe.local|p80|/:1|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ws|safe.local|p80|/:1|input.origin=null:0|url.value=u:https|safe.local.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002155",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:ws|account.internal|p80|/:1|url.value=u:ftp|account.internal|p21|/:1<RULEMEM><QUERY>url.value=u:http|account.internal|p80|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001183",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:ftp|account.internal|p21|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000175",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:ftp|portal.test|p21|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|portal.test|p443|/:1<RULEMEM><QUERY>url.value=u:https|portal.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002605",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|input.origin=null:0|url.value=u:ws|account.internal|p80|/:1<RULEMEM><QUERY>url.value=u:http|account.internal|p80|/<ANSWER>"
+        }
+      ]
+    },
+    "target_same_checkpoint_without_set_head": {
+      "accuracy": 0.598333,
+      "correct": 359,
+      "total": 600,
+      "by_family": {
+        "url_scheme_downgrade": 0.598333
+      },
+      "failures": [
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000859",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:ws|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal|p443|/:1|input.origin=null:0<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000175",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|portal.test|p443|/:1|input.origin=null:0|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:ws|portal.test|p80|/:1|url.value=u:ftp|portal.test|p21|/:1|url.value=u:https|portal.test|p443|/:1<RULEMEM><QUERY>url.value=u:http|portal.test|p80|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002407",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|account.internal|p443|/:1|url.value=u:ws|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:ftp|account.internal|p21|/:1<RULEMEM><QUERY>url.value=u:http|account.internal|p80|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002533",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|sub.trusted.com|p443|/:0|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:ws|trusted.com|p80|/:1|url.value=u:https|trusted.com.evil.test|p443|/:0|url.value=u:http|trusted.com|p80|/:1<RULEMEM><QUERY>url.value=u:https|trusted.com|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000427",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|safe.local|p443|/:1|url.value=u:ftp|safe.local|p21|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:https|safe.local.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:ws|safe.local|p80|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001021",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|portal.test|p443|/:1|url.value=u:ws|portal.test|p80|/:1|url.value=u:http|portal.test|p80|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|sub.portal.test|p443|/:0|input.origin=null:0|url.value=u:ftp|portal.test|p21|/:1<RULEMEM><QUERY>url.value=u:https|portal.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001579",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|input.origin=null:0|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ws|account.internal|p80|/:1|url.value=u:ftp|account.internal|p21|/:1<RULEMEM><QUERY>url.value=u:https|account.internal|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001669",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:ws|portal.test|p80|/:1|url.value=u:https|portal.test|p443|/:1|input.origin=null:0|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:http|portal.test|p80|/:1|url.value=u:ftp|portal.test|p21|/:1<RULEMEM><QUERY>url.value=u:https|portal.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000247",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|safe.local|p443|/:1|url.value=u:https|safe.local|p443|/:1|url.value=u:ws|safe.local|p80|/:1|input.origin=null:0|url.value=u:https|safe.local.evil.test|p443|/:0|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ftp|safe.local|p21|/:1<RULEMEM><QUERY>url.value=u:http|safe.local|p80|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0002515",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.origin=null:0|url.value=u:https|account.internal|p443|/:1|url.value=u:https|sub.account.internal|p443|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|account.internal|p443|/:1|url.value=u:http|account.internal|p80|/:1|url.value=u:https|account.internal.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:ws|account.internal|p80|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0001147",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|safe.local|p443|/:1|url.value=u:http|safe.local|p80|/:1|url.value=u:https|sub.safe.local|p443|/:0|url.value=u:ws|safe.local|p80|/:1|url.value=u:ftp|safe.local|p21|/:1|input.origin=null:0|url.value=u:https|safe.local.evil.test|p443|/:0<RULEMEM><QUERY>url.value=u:https|safe.local|p443|/<ANSWER>"
+        },
+        {
+          "family": "url_scheme_downgrade",
+          "record_id": "syn-url_scheme_downgrade-0000229",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|sub.portal.test|p443|/:0|url.value=u:ws|portal.test|p80|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|portal.test|p443|/:1|url.value=u:ftp|portal.test|p21|/:1|input.origin=null:0|url.value=u:http|portal.test|p80|/:1<RULEMEM><QUERY>url.value=u:https|portal.test|p443|/<ANSWER>"
+        }
+      ]
+    },
+    "set_head_ablation_gain": 0.293334,
+    "regression": {
+      "accuracy": 0.799444,
+      "correct": 2878,
+      "total": 3600,
+      "by_family": {
+        "url_hostname_primitive": 0.91,
+        "truthiness_gate": 0.668333,
+        "authorization_or": 1.0,
+        "string_suffix_primitive": 0.545,
+        "substring_origin": 1.0,
+        "numeric_boundary": 0.673333
+      },
+      "failures": [
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000079",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:http|account.internal|p80|/:1|input.endpoint=null:0|url.value=u:https|account.internal-extra.test|p443|/:0|url.value=u:https|example.test|p443|/:0|url.value=u:http|localhost|p80|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:wss|account.internal|p443|/:1|url.value=u:https|other.test|p443|/account.internal:1<RULEMEM><QUERY>url.value=u:https|account.internal.other.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000565",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|example.test|p443|/:0|url.value=u:https|account.internal-extra.test|p443|/:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:1|url.value=u:http|localhost|p80|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|prefixaccount.internal|p443|/:1|input.endpoint=null:0<RULEMEM><QUERY>url.value=u:https|other.test|p443|/account.internal<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001946",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:member|cf:member:0|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=-2,input.role=s:member|cf:member:1|input.quota=0,input.role=s:root|cf:root:1|input.quota=19,input.role=s:guest|cf:guest:1|input.quota=19,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=-2,input.role=s:guest|cf:guest:1<RULEMEM><QUERY>input.quota=1,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000205",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:http|trusted.com|p80|/:1|url.value=u:https|other.test|p443|/trusted.com:1|url.value=u:https|trusted.com.other.test|p443|/:0|url.value=u:https|example.test|p443|/:0|input.endpoint=null:0|url.value=u:http|localhost|p80|/:0<RULEMEM><QUERY>url.value=u:https|sub.trusted.com|p443|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000763",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:https|account.internal.other.test|p443|/:0|url.value=u:http|localhost|p80|/:0|url.value=u:https|account.internal|p443|/:1|input.endpoint=null:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|other.test|p443|/account.internal:1|url.value=u:wss|account.internal|p443|/:1|url.value=u:https|account.internal-extra.test|p443|/:0<RULEMEM><QUERY>url.value=u:https|example.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0002527",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.endpoint=null:0|url.value=u:https|account.internal.other.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:ftp|account.internal|p21|/:1|url.value=u:http|localhost|p80|/:0|url.value=u:https|sub.account.internal|p443|/:1|url.value=u:wss|account.internal|p443|/:1|url.value=u:https|account.internal-extra.test|p443|/:0<RULEMEM><QUERY>url.value=u:https|example.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0001861",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.other.test|p443|/:0|url.value=u:http|localhost|p80|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|other.test|p443|/safe.local:1|url.value=u:wss|safe.local|p443|/:1|url.value=u:https|safe.local-extra.test|p443|/:0|url.value=u:https|example.test|p443|/:0<RULEMEM><QUERY>input.endpoint=null<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0002234",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.flags=2,input.role=s:guest|cf:guest:1|input.flags=5,input.role=s:guest|cf:guest:1|input.flags=-2,input.role=s:guest|cf:guest:1|input.flags=1,input.role=s:guest|cf:guest:1|input.flags=-1,input.role=s:admin|cf:admin:1|input.flags=0,input.role=s:member|cf:member:0|input.flags=-2,input.role=s:admin|cf:admin:1|input.flags=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.flags=1,input.role=s:admin|cf:admin<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000362",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retries=1,input.role=s:member|cf:member:1|input.retries=6,input.role=s:member|cf:member:1|input.retries=-1,input.role=s:member|cf:member:1|input.retries=2,input.role=s:root|cf:root:1|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=6,input.role=s:guest|cf:guest:1|input.retries=6,input.role=s:root|cf:root:1|input.retries=2,input.role=s:guest|cf:guest:1<RULEMEM><QUERY>input.retries=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000187",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:https|account.internal-extra.test|p443|/:0|input.endpoint=null:0|url.value=u:https|prefixaccount.internal|p443|/:1|url.value=u:https|account.internal.other.test|p443|/:0|url.value=u:wss|account.internal|p443|/:1|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|other.test|p443|/account.internal:1|url.value=u:https|example.test|p443|/:0<RULEMEM><QUERY>url.value=u:http|localhost|p80|/<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000307",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.score=60:1|input.score=58:0|input.score=57:0|input.score=59:1|input.score=116:1|input.score=0:0<RULEMEM><QUERY>input.score=56<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0002545",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|other.test|p443|/trusted.com:1|url.value=u:http|localhost|p80|/:0|url.value=u:wss|trusted.com|p443|/:1|input.endpoint=null:0|url.value=u:https|example.test|p443|/:0|url.value=u:https|trusted.com-extra.test|p443|/:0|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1<RULEMEM><QUERY>url.value=u:https|sub.trusted.com|p443|/<ANSWER>"
+        }
+      ]
+    },
+    "regression_without_head": {
+      "accuracy": 0.7575,
+      "correct": 2727,
+      "total": 3600,
+      "by_family": {
+        "url_hostname_primitive": 0.736667,
+        "truthiness_gate": 0.668333,
+        "authorization_or": 1.0,
+        "string_suffix_primitive": 0.466667,
+        "substring_origin": 1.0,
+        "numeric_boundary": 0.673333
+      },
+      "failures": [
+        {
+          "family": "url_hostname_primitive",
+          "record_id": "syn-url_hostname_primitive-0000495",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|sub.portal.test|p443|/:0|url.value=u:https|portal.test|p443|/:1|input.endpoint=null:0|url.value=u:ftp|portal.test|p21|/:1<RULEMEM><QUERY>url.value=u:http|portal.test|p80|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000079",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:http|account.internal|p80|/:1|input.endpoint=null:0|url.value=u:https|account.internal-extra.test|p443|/:0|url.value=u:https|example.test|p443|/:0|url.value=u:http|localhost|p80|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:wss|account.internal|p443|/:1|url.value=u:https|other.test|p443|/account.internal:1<RULEMEM><QUERY>url.value=u:https|account.internal.other.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000565",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|example.test|p443|/:0|url.value=u:https|account.internal-extra.test|p443|/:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|sub.account.internal|p443|/:1|url.value=u:http|localhost|p80|/:0|url.value=u:ftp|account.internal|p21|/:1|url.value=u:https|prefixaccount.internal|p443|/:1|input.endpoint=null:0<RULEMEM><QUERY>url.value=u:https|other.test|p443|/account.internal<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0001946",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.quota=0,input.role=s:member|cf:member:0|input.quota=0,input.role=s:guest|cf:guest:0|input.quota=-2,input.role=s:member|cf:member:1|input.quota=0,input.role=s:root|cf:root:1|input.quota=19,input.role=s:guest|cf:guest:1|input.quota=19,input.role=s:member|cf:member:1|input.quota=-1,input.role=s:member|cf:member:1|input.quota=-2,input.role=s:guest|cf:guest:1<RULEMEM><QUERY>input.quota=1,input.role=s:guest|cf:guest<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000205",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|trusted.com|p443|/:1|url.value=u:http|trusted.com|p80|/:1|url.value=u:https|other.test|p443|/trusted.com:1|url.value=u:https|trusted.com.other.test|p443|/:0|url.value=u:https|example.test|p443|/:0|input.endpoint=null:0|url.value=u:http|localhost|p80|/:0<RULEMEM><QUERY>url.value=u:https|sub.trusted.com|p443|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0000763",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:https|account.internal.other.test|p443|/:0|url.value=u:http|localhost|p80|/:0|url.value=u:https|account.internal|p443|/:1|input.endpoint=null:0|url.value=u:http|account.internal|p80|/:1|url.value=u:https|other.test|p443|/account.internal:1|url.value=u:wss|account.internal|p443|/:1|url.value=u:https|account.internal-extra.test|p443|/:0<RULEMEM><QUERY>url.value=u:https|example.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0002527",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.endpoint=null:0|url.value=u:https|account.internal.other.test|p443|/:0|url.value=u:https|account.internal|p443|/:1|url.value=u:ftp|account.internal|p21|/:1|url.value=u:http|localhost|p80|/:0|url.value=u:https|sub.account.internal|p443|/:1|url.value=u:wss|account.internal|p443|/:1|url.value=u:https|account.internal-extra.test|p443|/:0<RULEMEM><QUERY>url.value=u:https|example.test|p443|/<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0001861",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>url.value=u:http|safe.local|p80|/:1|url.value=u:https|safe.local.other.test|p443|/:0|url.value=u:http|localhost|p80|/:0|url.value=u:https|safe.local|p443|/:1|url.value=u:https|other.test|p443|/safe.local:1|url.value=u:wss|safe.local|p443|/:1|url.value=u:https|safe.local-extra.test|p443|/:0|url.value=u:https|example.test|p443|/:0<RULEMEM><QUERY>input.endpoint=null<ANSWER>"
+        },
+        {
+          "family": "url_hostname_primitive",
+          "record_id": "syn-url_hostname_primitive-0000297",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|portal.test|p443|/:1|url.value=u:http|portal.test|p80|/:1|url.value=u:https|portal.test.evil.test|p443|/:0|url.value=u:https|sub.portal.test|p443|/:0|input.endpoint=null:0<RULEMEM><QUERY>url.value=u:ftp|portal.test|p21|/<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0002234",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>input.flags=2,input.role=s:guest|cf:guest:1|input.flags=5,input.role=s:guest|cf:guest:1|input.flags=-2,input.role=s:guest|cf:guest:1|input.flags=1,input.role=s:guest|cf:guest:1|input.flags=-1,input.role=s:admin|cf:admin:1|input.flags=0,input.role=s:member|cf:member:0|input.flags=-2,input.role=s:admin|cf:admin:1|input.flags=0,input.role=s:guest|cf:guest:0<RULEMEM><QUERY>input.flags=1,input.role=s:admin|cf:admin<ANSWER>"
+        },
+        {
+          "family": "truthiness_gate",
+          "record_id": "syn-truthiness_gate-0000362",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<RSEM><TRACE>input.retries=1,input.role=s:member|cf:member:1|input.retries=6,input.role=s:member|cf:member:1|input.retries=-1,input.role=s:member|cf:member:1|input.retries=2,input.role=s:root|cf:root:1|input.retries=0,input.role=s:guest|cf:guest:0|input.retries=6,input.role=s:guest|cf:guest:1|input.retries=6,input.role=s:root|cf:root:1|input.retries=2,input.role=s:guest|cf:guest:1<RULEMEM><QUERY>input.retries=0,input.role=s:member|cf:member<ANSWER>"
+        },
+        {
+          "family": "string_suffix_primitive",
+          "record_id": "syn-string_suffix_primitive-0002671",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<RSEM><TRACE>url.value=u:https|trusted.com|p443|/:1|url.value=u:https|trusted.com-extra.test|p443|/:0|input.endpoint=null:0|url.value=u:https|example.test|p443|/:0|url.value=u:http|localhost|p80|/:0|url.value=u:ftp|trusted.com|p21|/:1|url.value=u:https|other.test|p443|/trusted.com:1|url.value=u:http|trusted.com|p80|/:1<RULEMEM><QUERY>url.value=u:wss|trusted.com|p443|/<ANSWER>"
+        }
+      ]
+    },
+    "regression_comparison": {
+      "authorization_or": {
+        "canonical_meta_baseline": 1.0,
+        "set_head_candidate": 1.0,
+        "delta": 0.0
+      },
+      "numeric_boundary": {
+        "canonical_meta_baseline": 0.628333,
+        "set_head_candidate": 0.673333,
+        "delta": 0.045
+      },
+      "string_suffix_primitive": {
+        "canonical_meta_baseline": 0.523333,
+        "set_head_candidate": 0.545,
+        "delta": 0.021667
+      },
+      "substring_origin": {
+        "canonical_meta_baseline": 0.938333,
+        "set_head_candidate": 1.0,
+        "delta": 0.061667
+      },
+      "truthiness_gate": {
+        "canonical_meta_baseline": 0.54,
+        "set_head_candidate": 0.668333,
+        "delta": 0.128333
+      },
+      "url_hostname_primitive": {
+        "canonical_meta_baseline": 0.845,
+        "set_head_candidate": 0.91,
+        "delta": 0.065
+      }
+    },
+    "worst_regression_delta": 0.0
+  },
+  "interpretability": {
+    "strongest_learned_weights": [
+      {
+        "feature": "positive_any_conjunction_mask_1010",
+        "weight": 0.135015
+      },
+      {
+        "feature": "positive_any_exact_mask_1010",
+        "weight": 0.133977
+      },
+      {
+        "feature": "negative_any_conjunction_mask_1010",
+        "weight": -0.132408
+      },
+      {
+        "feature": "negative_any_exact_mask_1010",
+        "weight": -0.13154
+      },
+      {
+        "feature": "negative_mean_conjunction_mask_1010",
+        "weight": -0.130799
+      },
+      {
+        "feature": "positive_mean_conjunction_mask_1010",
+        "weight": 0.130764
+      },
+      {
+        "feature": "negative_mean_exact_mask_1010",
+        "weight": -0.130383
+      },
+      {
+        "feature": "positive_mean_exact_mask_1010",
+        "weight": 0.12961
+      },
+      {
+        "feature": "negative_mean_conjunction_mask_0010",
+        "weight": -0.124322
+      },
+      {
+        "feature": "negative_mean_exact_mask_1000",
+        "weight": 0.122199
+      },
+      {
+        "feature": "positive_mean_conjunction_mask_0010",
+        "weight": 0.121335
+      },
+      {
+        "feature": "positive_mean_exact_mask_1000",
+        "weight": -0.118362
+      },
+      {
+        "feature": "negative_any_conjunction_mask_0010",
+        "weight": -0.107716
+      },
+      {
+        "feature": "positive_any_exact_mask_0010",
+        "weight": -0.10495
+      },
+      {
+        "feature": "positive_any_conjunction_mask_0010",
+        "weight": 0.104913
+      },
+      {
+        "feature": "positive_mean_exact_mask_0010",
+        "weight": -0.10467
+      }
+    ]
+  },
+  "training": {
+    "seed": 20261529,
+    "epochs": 10,
+    "seconds": 118.962,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.723128,
+        "validation_accuracy": 0.529167
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.570769,
+        "validation_accuracy": 0.730833
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.371078,
+        "validation_accuracy": 0.831667
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.299451,
+        "validation_accuracy": 0.8525
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.272424,
+        "validation_accuracy": 0.8675
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.23941,
+        "validation_accuracy": 0.87
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.215348,
+        "validation_accuracy": 0.860833
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.184892,
+        "validation_accuracy": 0.869167
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.164254,
+        "validation_accuracy": 0.855
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.142053,
+        "validation_accuracy": 0.841667
+      }
+    ]
+  },
+  "decision": {
+    "pilot_target_passes": true,
+    "head_ablation_passes": true,
+    "old_regression_passes": true,
+    "ready_for_fresh_confirmation": true
+  },
+  "lineage": {
+    "preregistration": "research/neural_url_loop_11_url_meta_v2_preregistration.json",
+    "parent_pilot": "research/neural_url_loop_11_selective_meta_pilot.json"
+  }
+}

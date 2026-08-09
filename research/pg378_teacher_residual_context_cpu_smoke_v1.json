@@ -1,0 +1,121 @@
+{
+  "schema_version": "pg378-teacher-residual-context-candidate-v1",
+  "status": "residual_entropy_preserved_candidate_only",
+  "gate": {
+    "dataset_candidate": true,
+    "audit_passed_candidate": true,
+    "train_only_vocabulary": true,
+    "holdout_not_optimized": true,
+    "target_tokens_read": false,
+    "teacher_is_trained": true,
+    "function_preserving_residual": true,
+    "entropy_threshold": 0.25,
+    "worst_entropy_relative_abs_delta": 6.9e-05,
+    "entropy_gate_passed": true,
+    "training_allowed": true
+  },
+  "data": {
+    "train_rows": 2,
+    "holdout_rows": 2,
+    "source_train_count": 1208,
+    "source_holdout_count": 572,
+    "train_context_vocab_size": 738,
+    "vocabulary_size": 740,
+    "vocabulary_scope": "train_context_only",
+    "required_context_window": 499
+  },
+  "training": {
+    "device": "cpu",
+    "seeds": [
+      37801
+    ],
+    "epochs": 1,
+    "batch_size": 2,
+    "learning_rate": 0.0001,
+    "temperature": 2.0,
+    "residual_scale": 0.1,
+    "kl_weight": 1.0,
+    "entropy_weight": 0.25,
+    "context_only": true,
+    "target_tokens_read": false,
+    "capability_training": false,
+    "holdout_used_for_optimization": false,
+    "config": {
+      "d_model": 32,
+      "n_heads": 4,
+      "n_layers": 1,
+      "experts": 2,
+      "expert_hidden": 64,
+      "top_k": 2,
+      "dropout": 0.05,
+      "max_length": 768,
+      "initializer_range": 0.02
+    },
+    "teacher": {
+      "checkpoint_sha256": "6c7c54056d6a0d4ba1fcef9a4e8fd281d79bc1e798e41730f4eaae107eadaecc",
+      "seed": 37521,
+      "config": {
+        "d_model": 384,
+        "n_heads": 4,
+        "n_layers": 6,
+        "experts": 4,
+        "expert_hidden": 1024,
+        "top_k": 2,
+        "dropout": 0.05,
+        "max_length": 606,
+        "initializer_range": 0.02
+      },
+      "target_tokens_read": false,
+      "legacy_context_contract": true
+    }
+  },
+  "execution": {
+    "optimizer_started": true,
+    "gpu_touched": false,
+    "docker_started": false,
+    "network_used": false,
+    "checkpoint_written": false
+  },
+  "candidates": [
+    {
+      "seed": 37801,
+      "teacher_holdout": {
+        "rows": 2,
+        "next_token_count": 774,
+        "mean_next_token_loss": 0.485339,
+        "mean_predictive_entropy_nats": 0.755152,
+        "token_accuracy": 0.918605,
+        "teacher_kl": null,
+        "entropy_gap_abs": null
+      },
+      "student_residual_holdout": {
+        "rows": 2,
+        "next_token_count": 774,
+        "mean_next_token_loss": 0.485417,
+        "mean_predictive_entropy_nats": 0.7551,
+        "token_accuracy": 0.918605,
+        "teacher_kl": 9e-06,
+        "entropy_relative_delta": 0.003175
+      },
+      "entropy_relative_delta_vs_teacher": -6.9e-05,
+      "checkpoint": {
+        "path": null,
+        "sha256": null
+      }
+    }
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "d07317377f9c76155a2992f4c6ca7f6686640ed8063678be2ff03f2b90ad1deb",
+  "locks": {
+    "dataset_sha256": "3c40f0841ab1d8f6d22030f3ca3400b68f158175ea5a7c9267af6fa544210c72",
+    "audit_sha256": "b5c8c9333c2dc09e33461824de0ab5b1ee0aca39742564658850b59e53edc5b6",
+    "rules_sha256": "7c65ba31c55741748f2edcf0a7efa167ee8ad6203df28280c8a0e8878099bfbd",
+    "runner_sha256": "a12dded68e238014482960909449d69f5ee5a19687884d4d5ea5813d779331cc",
+    "teacher_checkpoint_sha256": "6c7c54056d6a0d4ba1fcef9a4e8fd281d79bc1e798e41730f4eaae107eadaecc"
+  }
+}

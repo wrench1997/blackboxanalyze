@@ -1,0 +1,46 @@
+{
+  "schema_version": "pg-pk-34-e01-probe-curriculum-manifest-v1",
+  "protocol_id": "sift-pg34-e01-probe-curriculum-v1",
+  "input_catalog": "research/pg_pk_33_get_post_typed_replay_catalog_v1.json",
+  "input_trace": "research/pg_pk_33_trace_dataset_v1.json",
+  "policy_variants": [
+    {
+      "id": "fixed_get_post",
+      "description": "每个 episode 固定执行 GET control/candidate，再执行 POST control/candidate"
+    },
+    {
+      "id": "active_stop",
+      "description": "按无标签探针优先级选择方法；每一步完成后才允许 typed positive + matched negative control 停止"
+    }
+  ],
+  "visible_fields": [
+    "method",
+    "placement",
+    "route_shape",
+    "probe_kind",
+    "encoding_depth",
+    "response_shape"
+  ],
+  "hidden_until_after_probe": [
+    "family",
+    "typed_oracle_projection",
+    "positive_authority",
+    "negative_control",
+    "evidence_sha256"
+  ],
+  "safety": {
+    "new_network_requests": false,
+    "loopback_source_only": true,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "training_candidate": false,
+    "memory_promotion_allowed": false
+  },
+  "expected_success_criteria": {
+    "active_stop_no_false_positive": true,
+    "active_stop_recall_not_below_fixed": true,
+    "query_budget_reduction_required": true,
+    "independent_target_claim": false
+  },
+  "result_artifact": "research/pg34_e01_probe_curriculum_report_v1.json"
+}

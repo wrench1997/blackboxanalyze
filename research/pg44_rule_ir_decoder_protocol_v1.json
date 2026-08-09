@@ -1,0 +1,54 @@
+{
+  "schema_version": "pg-pk-44-rule-ir-decoder-protocol-v1",
+  "protocol_id": "PG-44",
+  "title": "effect-gated semantic Rule IR family decoder",
+  "objective": "在 PG-43 invariant effect gate 之上训练一个小型 Rule IR family decoder：只从 language-neutral semantic ref 与 bounded shape features 学习已知族绑定；未见语义不强行命名，统一 unknown_surface + abstain。",
+  "training_source": {
+    "catalog": "research/pg40_semantic_router_catalog_v1.json",
+    "implementation": "atlas",
+    "sampling_seeds": [361, 367],
+    "semantic_ontology": ["markup-context", "operator-context", "auth-boundary", "subject-boundary", "state-invariant", "url-target", "scalar-boundary", "local-canary", "ordinary-surface"],
+    "semantic_reference_contains_family_name": false,
+    "semantic_reference_contains_raw_probe": false,
+    "typed_oracle_is_target_only": true
+  },
+  "holdout": {
+    "catalog": "research/pg42_independent_semantic_catalog_v1.json",
+    "implementations": ["cobalt", "quartz"],
+    "new_semantic_refs": ["state-boundary", "destination-context", "local-callback", "template-boundary"],
+    "strict_family_ood": "template-boundary must remain unknown_surface; no forced template_injection name"
+  },
+  "model_input_contract": {
+    "effect_gate": "frozen PG-43 sign-binned shape delta head",
+    "decoder_input": ["sign-binned shape delta and change bits", "bounded semantic reference one-hot"],
+    "typed_oracle_is_target_only": true,
+    "excluded": ["family", "positive", "positive_authority", "evidence_sha256", "source_id", "target_instance_id", "raw_probe", "raw_response_body"],
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "promotion_gate": {
+    "zero_negative_effect_false_accept": true,
+    "known_family_recall_required": true,
+    "zero_unknown_misname": true,
+    "unknown_strict_abstain": true,
+    "strict_family_ood_claim_requires_independent_family_decoder_evidence": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "known_ontology_passed_unknown_abstain_formal_claim_blocked"
+  },
+  "run_result": {
+    "trainer": "scripts/train_pg44_rule_ir_decoder.py",
+    "training_pair_count": 144,
+    "pg40_seed_holdout_typed_recall": 1.0,
+    "pg42_independent_known_family_recall": 1.0,
+    "pg42_independent_unknown_effect_recall": 1.0,
+    "pg42_independent_negative_false_positive_rate": 0.0,
+    "pg42_independent_unknown_misname_count": 0,
+    "pg42_independent_unknown_strict_abstain": true,
+    "strict_new_family_named_recall": 0.0,
+    "formal_capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "已知 ontology 的 Rule IR family binding 可跨实现迁移；template-boundary 未见时正确 abstain，不能宣称已学会新族命名。"
+  },
+  "status": "run_completed_known_binding_passed_unknown_abstain_no_promotion"
+}

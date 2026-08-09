@@ -1,0 +1,602 @@
+{
+  "schema_version": "pg381-abstract-composition-candidate-v1",
+  "status": "abstract_composition_candidate_only",
+  "dataset": "research/pg384_binding_abstract_adversarial_dataset_v1.json",
+  "dataset_sha256": "2ccbb12bc738ded3bcf0e6632fae509f290160df5b23a45606f6706f8e65ab72",
+  "dataset_internal_sha256": "bf000165d7498dde348db97452aa62a597cc54990860916754532e047e67e1fd",
+  "data": {
+    "train_rows": 3168,
+    "implementation_holdout_rows": 3168,
+    "vocabulary_scope": "declared_abstract_ontology",
+    "vocabulary_size": 183,
+    "target_slots": 13,
+    "required_context_window": 34
+  },
+  "execution_gate": {
+    "timestamp": "2026-08-09T20:29:37.329125+08:00",
+    "weekend": true,
+    "allowed_time_window": true,
+    "explicit_remote_flag": true,
+    "cuda_visible_devices": "0",
+    "device": "cuda:0",
+    "passed": true
+  },
+  "training": {
+    "device": "cuda:0",
+    "seeds": [
+      38101,
+      38102,
+      38103
+    ],
+    "pretrain_epochs": 2,
+    "posttrain_epochs": 4,
+    "microbatch": 16,
+    "grad_accum": 4,
+    "config": {
+      "d_model": 512,
+      "n_heads": 8,
+      "n_layers": 8,
+      "experts": 8,
+      "expert_hidden": 2048,
+      "top_k": 2,
+      "dropout": 0.05,
+      "max_length": 128,
+      "initializer_range": 0.02
+    },
+    "slot_decoder_layers": 2,
+    "slot_decoder_heads": 8,
+    "lr_pretrain": 0.0001,
+    "lr_posttrain": 2.5e-05,
+    "kl_weight": 0.05,
+    "loss_weights": {
+      "next_token": 0.4,
+      "composition": 2.0,
+      "slot_aux": 0.25,
+      "ask": 1.0,
+      "repair": 1.5,
+      "negative": 2.0,
+      "balance": 0.01
+    },
+    "target_tokens_read_for_evaluator": false,
+    "raw_rows_loaded": false
+  },
+  "candidates": [
+    {
+      "seed": 38101,
+      "baseline": {
+        "rows": 3168,
+        "next_token_sequence_exact": 0.995265,
+        "sequence_exact": 0.0,
+        "slot_composition_exact": 0.0,
+        "slot_accuracy": 0.248227,
+        "per_slot": {
+          "question": {
+            "correct": 288,
+            "total": 3168,
+            "accuracy": 0.090909
+          },
+          "ask_reason": {
+            "correct": 2088,
+            "total": 3168,
+            "accuracy": 0.659091
+          },
+          "next_action": {
+            "correct": 648,
+            "total": 3168,
+            "accuracy": 0.204545
+          },
+          "repair_action": {
+            "correct": 246,
+            "total": 3168,
+            "accuracy": 0.077652
+          },
+          "transport_ref": {
+            "correct": 1584,
+            "total": 3168,
+            "accuracy": 0.5
+          },
+          "field_role_ref": {
+            "correct": 132,
+            "total": 3168,
+            "accuracy": 0.041667
+          },
+          "encoding_ref": {
+            "correct": 227,
+            "total": 3168,
+            "accuracy": 0.071654
+          },
+          "syntax_category_ref": {
+            "correct": 1077,
+            "total": 3168,
+            "accuracy": 0.339962
+          },
+          "probe_variant_ref": {
+            "correct": 822,
+            "total": 3168,
+            "accuracy": 0.25947
+          },
+          "safe_to_send": {
+            "correct": 1210,
+            "total": 3168,
+            "accuracy": 0.381944
+          },
+          "payload_shape_ref": {
+            "correct": 317,
+            "total": 3168,
+            "accuracy": 0.100063
+          },
+          "oracle_ref": {
+            "correct": 792,
+            "total": 3168,
+            "accuracy": 0.25
+          },
+          "negative_control_presence_ref": {
+            "correct": 792,
+            "total": 3168,
+            "accuracy": 0.25
+          }
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 0.0,
+        "positive_recall": 0.870098,
+        "negative_false_allow": 1516,
+        "negative_total": 1944,
+        "predictive_entropy": 0.06289
+      },
+      "post": {
+        "rows": 3168,
+        "next_token_sequence_exact": 1.0,
+        "sequence_exact": 1.0,
+        "slot_composition_exact": 1.0,
+        "slot_accuracy": 1.0,
+        "per_slot": {
+          "question": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "ask_reason": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "next_action": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "repair_action": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "transport_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "field_role_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "encoding_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "syntax_category_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "probe_variant_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "safe_to_send": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "payload_shape_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "oracle_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "negative_control_presence_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          }
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 1944,
+        "predictive_entropy": 0.189939
+      },
+      "entropy_relative_drop": -2.020178,
+      "checkpoint": {
+        "path": "artifacts/pg384-binding-composition-a800/pg375_seed_38101.pt",
+        "sha256": "8fa769c3dbc91c1a803733ac56e038847e29f5477655c7e6d5077cb7ab879b4d"
+      }
+    },
+    {
+      "seed": 38102,
+      "baseline": {
+        "rows": 3168,
+        "next_token_sequence_exact": 0.99274,
+        "sequence_exact": 0.0,
+        "slot_composition_exact": 0.0,
+        "slot_accuracy": 0.184368,
+        "per_slot": {
+          "question": {
+            "correct": 288,
+            "total": 3168,
+            "accuracy": 0.090909
+          },
+          "ask_reason": {
+            "correct": 288,
+            "total": 3168,
+            "accuracy": 0.090909
+          },
+          "next_action": {
+            "correct": 290,
+            "total": 3168,
+            "accuracy": 0.09154
+          },
+          "repair_action": {
+            "correct": 432,
+            "total": 3168,
+            "accuracy": 0.136364
+          },
+          "transport_ref": {
+            "correct": 1584,
+            "total": 3168,
+            "accuracy": 0.5
+          },
+          "field_role_ref": {
+            "correct": 96,
+            "total": 3168,
+            "accuracy": 0.030303
+          },
+          "encoding_ref": {
+            "correct": 397,
+            "total": 3168,
+            "accuracy": 0.125316
+          },
+          "syntax_category_ref": {
+            "correct": 384,
+            "total": 3168,
+            "accuracy": 0.121212
+          },
+          "probe_variant_ref": {
+            "correct": 557,
+            "total": 3168,
+            "accuracy": 0.175821
+          },
+          "safe_to_send": {
+            "correct": 1697,
+            "total": 3168,
+            "accuracy": 0.535669
+          },
+          "payload_shape_ref": {
+            "correct": 228,
+            "total": 3168,
+            "accuracy": 0.07197
+          },
+          "oracle_ref": {
+            "correct": 155,
+            "total": 3168,
+            "accuracy": 0.048927
+          },
+          "negative_control_presence_ref": {
+            "correct": 1197,
+            "total": 3168,
+            "accuracy": 0.377841
+          }
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 0.900794,
+        "positive_recall": 0.989379,
+        "negative_false_allow": 1938,
+        "negative_total": 1944,
+        "predictive_entropy": 0.0782
+      },
+      "post": {
+        "rows": 3168,
+        "next_token_sequence_exact": 1.0,
+        "sequence_exact": 1.0,
+        "slot_composition_exact": 1.0,
+        "slot_accuracy": 1.0,
+        "per_slot": {
+          "question": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "ask_reason": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "next_action": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "repair_action": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "transport_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "field_role_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "encoding_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "syntax_category_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "probe_variant_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "safe_to_send": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "payload_shape_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "oracle_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "negative_control_presence_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          }
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 1944,
+        "predictive_entropy": 0.206216
+      },
+      "entropy_relative_drop": -1.637033,
+      "checkpoint": {
+        "path": "artifacts/pg384-binding-composition-a800/pg375_seed_38102.pt",
+        "sha256": "2cd524dbd9243e8cd63e5a7c8b28c325cd1781a54ad338e8b743f68f05d95ad3"
+      }
+    },
+    {
+      "seed": 38103,
+      "baseline": {
+        "rows": 3168,
+        "next_token_sequence_exact": 0.99274,
+        "sequence_exact": 0.0,
+        "slot_composition_exact": 0.0,
+        "slot_accuracy": 0.226981,
+        "per_slot": {
+          "question": {
+            "correct": 857,
+            "total": 3168,
+            "accuracy": 0.270518
+          },
+          "ask_reason": {
+            "correct": 327,
+            "total": 3168,
+            "accuracy": 0.10322
+          },
+          "next_action": {
+            "correct": 936,
+            "total": 3168,
+            "accuracy": 0.295455
+          },
+          "repair_action": {
+            "correct": 432,
+            "total": 3168,
+            "accuracy": 0.136364
+          },
+          "transport_ref": {
+            "correct": 1584,
+            "total": 3168,
+            "accuracy": 0.5
+          },
+          "field_role_ref": {
+            "correct": 390,
+            "total": 3168,
+            "accuracy": 0.123106
+          },
+          "encoding_ref": {
+            "correct": 379,
+            "total": 3168,
+            "accuracy": 0.119634
+          },
+          "syntax_category_ref": {
+            "correct": 223,
+            "total": 3168,
+            "accuracy": 0.070391
+          },
+          "probe_variant_ref": {
+            "correct": 746,
+            "total": 3168,
+            "accuracy": 0.23548
+          },
+          "safe_to_send": {
+            "correct": 1944,
+            "total": 3168,
+            "accuracy": 0.613636
+          },
+          "payload_shape_ref": {
+            "correct": 228,
+            "total": 3168,
+            "accuracy": 0.07197
+          },
+          "oracle_ref": {
+            "correct": 335,
+            "total": 3168,
+            "accuracy": 0.105745
+          },
+          "negative_control_presence_ref": {
+            "correct": 967,
+            "total": 3168,
+            "accuracy": 0.30524
+          }
+        },
+        "ask_recall": 0.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 1944,
+        "negative_total": 1944,
+        "predictive_entropy": 0.068597
+      },
+      "post": {
+        "rows": 3168,
+        "next_token_sequence_exact": 0.998422,
+        "sequence_exact": 1.0,
+        "slot_composition_exact": 1.0,
+        "slot_accuracy": 1.0,
+        "per_slot": {
+          "question": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "ask_reason": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "next_action": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "repair_action": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "transport_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "field_role_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "encoding_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "syntax_category_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "probe_variant_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "safe_to_send": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "payload_shape_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "oracle_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          },
+          "negative_control_presence_ref": {
+            "correct": 3168,
+            "total": 3168,
+            "accuracy": 1.0
+          }
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0,
+        "negative_total": 1944,
+        "predictive_entropy": 0.19607
+      },
+      "entropy_relative_drop": -1.858288,
+      "checkpoint": {
+        "path": "artifacts/pg384-binding-composition-a800/pg375_seed_38103.pt",
+        "sha256": "3b98fb0a5199f48e4d359e1075a0caf7c69624ef164e58fe3a25fee727704492"
+      }
+    }
+  ],
+  "worst_seed": {
+    "sequence_exact_min": 1.0,
+    "slot_composition_exact_min": 1.0,
+    "slot_accuracy_min": 1.0,
+    "ask_recall_min": 1.0,
+    "repair_recall_min": 1.0,
+    "positive_recall_min": 1.0,
+    "negative_false_allow_max": 0,
+    "entropy_relative_drop_max": -1.637033
+  },
+  "scientific_gate": {
+    "abstract_reasoning_only": true,
+    "typed_live_replay_with_model_selected_wire": false,
+    "model_selected_wire_replay": false,
+    "claim_allowed": false,
+    "later_layer_entropy": "diagnostic_only"
+  },
+  "safety": {
+    "raw_payload_in_context": false,
+    "raw_response_in_context": false,
+    "evaluator_answer_in_context": false,
+    "concrete_wire": "evaluator_template_only",
+    "external_network": false,
+    "persistent_state_write": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "PG-381 只验证 13-slot Rule-IR 抽象组合、ASK/repair/negative；不生成任意原始攻击字节，不代表漏洞能力。",
+  "report_sha256": "ddee9b3b8715735272cff259b942551d587efec23421a35020c2e6f86fc336cc"
+}

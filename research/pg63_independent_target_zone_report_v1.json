@@ -1,0 +1,98 @@
+{
+  "protocol_id": "pg-pk-63-independent-target-zone-v1",
+  "schema_version": "pg63-independent-target-zone-report-v1",
+  "status": "diagnostic_only",
+  "source": {
+    "implementation": "independent_surface_adapter_v1",
+    "layouts": [
+      "helios",
+      "iris"
+    ],
+    "task_count": 192,
+    "seed_formula": "base + serial*19 + layout_offset",
+    "pg61_model_retrained": false,
+    "pg61_task_generator_imported": false
+  },
+  "input_contract": {
+    "pre_oracle_surface_only": true,
+    "typed_oracle_after_action_only": true,
+    "family_not_in_features": true,
+    "expected_method_not_in_features": true,
+    "raw_probe_response_not_stored": true,
+    "canonical_mapping": {
+      "raw_channel": {
+        "read_path": "query_lane",
+        "write_path": "form_lane",
+        "silent_path": "neutral_lane"
+      },
+      "raw_surface": {
+        "grid_panel": "collection",
+        "detail_panel": "record",
+        "finder_panel": "search"
+      },
+      "raw_shape": {
+        "flat": "compact",
+        "map": "object",
+        "jump": "redirect"
+      }
+    }
+  },
+  "canonicalized_holdout": {
+    "task_count": 192,
+    "positive_task_count": 144,
+    "negative_control_count": 48,
+    "positive_action_accuracy": 1.0,
+    "target_success_rate": 1.0,
+    "known_target_success_rate": 1.0,
+    "unknown_positive_count": 16,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 16,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "selected_action_counts": {
+      "POST": 120,
+      "GET": 72
+    },
+    "selected_action_entropy": 0.954434,
+    "fresh_reset_count": 192,
+    "evidence_hash_count": 192,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "raw_shift_fail_closed": {
+    "task_count": 192,
+    "positive_task_count": 144,
+    "negative_control_count": 48,
+    "positive_action_accuracy": 0.5,
+    "target_success_rate": 0.0,
+    "known_target_success_rate": 0.0,
+    "unknown_positive_count": 16,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 16,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "selected_action_counts": {
+      "POST": 192
+    },
+    "selected_action_entropy": 0.0,
+    "fresh_reset_count": 192,
+    "evidence_hash_count": 192,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "hard_gate": {
+    "schema_version": "pg63-independent-target-zone-hard-gate-v1",
+    "status": "passed",
+    "claim_allowed": false,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "status": "quarantined_independent_replay",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "interpretation": "只有独立实现经过 canonical Rule-IR 表面映射后才允许比较动作能力；未映射原始表面必须 fail-closed，不能把原始字符串相似性当作泛化。"
+}

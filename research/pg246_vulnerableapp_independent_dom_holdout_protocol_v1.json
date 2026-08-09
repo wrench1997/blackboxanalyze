@@ -1,0 +1,42 @@
+{
+  "protocol_id": "pg-pk-246-vulnerableapp-independent-dom-holdout-v1",
+  "schema_version": "pg246-vulnerableapp-independent-dom-holdout-protocol-v1",
+  "target_image_digest": "sha256:7bc084dac341f089c6e788d2369a27f599c902d742c5e113d7bb50661cd92406",
+  "source_implementation": "owasp-vulnerableapp-java-spring",
+  "independent_from_pikachu": true,
+  "independent_generator": "pg246-vulnerableapp-dom-surface-generator-v1",
+  "ai_selects_abstract_dom_channel": true,
+  "typed_oracle": "controlled_browser_body_dataset_pg246_marker",
+  "required_cases": [
+    "vapp_html_level1_get",
+    "vapp_html_level4_secure_get",
+    "vapp_img_level1_get",
+    "vapp_img_level6_secure_get",
+    "vapp_html_level1_post_405",
+    "vapp_img_level1_post_405"
+  ],
+  "required_seeds": [
+    24601,
+    24602,
+    24603
+  ],
+  "fresh_reset_before_initial_and_replay": true,
+  "matched_negative_and_counterfactual_required": true,
+  "get_post_context_required": true,
+  "unsupported_post_is_abstain_not_positive": true,
+  "model_environment_attribution_required": true,
+  "route_and_implementation_holdout_required": true,
+  "canary_replay_required": true,
+  "external_network_forbidden": true,
+  "database_write_forbidden": true,
+  "raw_payload_and_response_excluded": true,
+  "promotion_blocked_until_capacity_and_forgetting_canary": true,
+  "lane_reclassification_audit": {
+    "performed": true,
+    "script": "scripts/reclassify_pg246_lane.py",
+    "network_replay_performed": false,
+    "oracle_evidence_changed": false,
+    "training_rows_recomputed_after_repair": true
+  },
+  "protocol_sha256": "58389934eeeb593bd6de678edf1f794eac5e8e97cbbae0eb16f93910e788a995"
+}

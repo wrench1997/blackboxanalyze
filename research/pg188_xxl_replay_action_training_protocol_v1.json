@@ -1,0 +1,36 @@
+{
+  "protocol_id": "pg-pk-188-xxl-replay-action-training-v1",
+  "schema_version": "pg188-xxl-replay-action-training-protocol-v1",
+  "parameter_target": 101380329,
+  "variants": [
+    "frozen_xxl_head",
+    "replay_xxl_low_lr",
+    "replay_xxl_strong"
+  ],
+  "body_init": "artifacts\\pg164-xxl-capacity-v1\\xxl_typed_mix.pt",
+  "action_input_contract": [
+    "abstract process tokens only"
+  ],
+  "excluded_from_input": [
+    "raw_payload",
+    "raw_response",
+    "route",
+    "family",
+    "oracle_authority",
+    "vulnerability_label"
+  ],
+  "lm_replay_rows": 4096,
+  "forgetting_gate": {
+    "max_relative_perplexity_increase": 0.2,
+    "max_next_token_accuracy_drop": 0.05,
+    "catastrophic_forgetting_blocks_selection": true
+  },
+  "selection_gate": {
+    "unknown_abstain_rate_min": 0.95,
+    "false_stop_count_max": 0,
+    "target_trace_training_forbidden": true,
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "34c3456d0e515c0dbbc35f463e0898513b2d50118a899356047081a64fd55d07"
+}

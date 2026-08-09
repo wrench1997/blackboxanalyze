@@ -1,0 +1,52 @@
+{
+  "protocol_id": "pg-pk-151-moe-capacity-v1",
+  "schema_version": "pg151-moe-capacity-protocol-v1",
+  "objective": "large_model_capacity_and_sparse_routing_comparison_with_seeded_data_augmentation",
+  "data_policy": {
+    "seeded_rule_ir_augmentation": true,
+    "raw_payloads": false,
+    "raw_responses": false,
+    "holdout_untouched": true,
+    "labels_in_next_token_input": false
+  },
+  "variants": {
+    "moe_large_4e": {
+      "d_model": 512,
+      "nhead": 8,
+      "layers": 4,
+      "n_experts": 4,
+      "expert_ff": 2048,
+      "batch_size": 32,
+      "epochs": 3,
+      "lr": 0.00015,
+      "aux_weight": 0.01
+    },
+    "moe_xl_4e": {
+      "d_model": 768,
+      "nhead": 12,
+      "layers": 6,
+      "n_experts": 4,
+      "expert_ff": 3072,
+      "batch_size": 16,
+      "epochs": 2,
+      "lr": 0.0001,
+      "aux_weight": 0.01
+    },
+    "moe_xl_8e": {
+      "d_model": 768,
+      "nhead": 12,
+      "layers": 6,
+      "n_experts": 8,
+      "expert_ff": 2048,
+      "batch_size": 16,
+      "epochs": 2,
+      "lr": 0.0001,
+      "aux_weight": 0.01
+    }
+  },
+  "promotion": {
+    "capability_claim_allowed": false,
+    "training_artifact_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false
+  }
+}

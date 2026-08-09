@@ -1,0 +1,47 @@
+{
+  "schema_version": "pg-pk-36-formal-rule-ir-triage-v1",
+  "protocol_id": "PG-36",
+  "status": "experiment_problem_no_model_change",
+  "classification": "experiment_problem",
+  "triage": {
+    "schema_version": "sift-experiment-engineering-triage-v1",
+    "classification": "experiment_problem",
+    "experiment_path": {
+      "signals": [
+        "failure_reproduces_at_small_scale",
+        "family_holdout_regression",
+        "seed_or_split_sensitive"
+      ],
+      "unregistered_signals": [],
+      "gate_passed": false,
+      "action": "repair_data_oracle_objective_or_model_only"
+    },
+    "engineering_path": {
+      "signals": [],
+      "unregistered_signals": [],
+      "gate_passed": true,
+      "action": "no_engineering_failure_signal"
+    },
+    "evidence": {
+      "formal_report_sha256": "4229344181d67267f8e40d755f9405d26739a27a96436fe5926ee0f4446ddd22",
+      "full_regression": "266 passed",
+      "family_holdout_typed_recall": 0.0,
+      "ood_source_typed_recall": 0.0,
+      "source_holdout_typed_recall": 0.5,
+      "unknown_false_positive_rate": 0.0,
+      "capability_gate_status": "blocked"
+    },
+    "model_change_authorized": true,
+    "infrastructure_scale_authorized": false
+  },
+  "decision": {
+    "model_change_authorized_by_triage": false,
+    "checkpoint_promotion": false,
+    "memory_promotion": false,
+    "infrastructure_scale": false,
+    "next_experiment": "PG-37 representation-gap ablation with paired response-shape counterfactuals",
+    "reason": "family-general detection fails while local regression and lineage checks pass; do not mask the failure with more compute"
+  },
+  "raw_data_retained": false,
+  "local_only": true
+}

@@ -1,0 +1,48 @@
+{
+  "protocol_id": "pg-pk-196-redirect-post-failure-decoder-v1",
+  "schema_version": "pg196-redirect-post-failure-decoder-protocol-v1",
+  "model_variant": "xxl",
+  "action_names": [
+    "baseline",
+    "matched_control",
+    "safe_candidate",
+    "abstain"
+  ],
+  "failure_kinds": [
+    "no_effect",
+    "status_changed",
+    "redirect_chain",
+    "post_validation"
+  ],
+  "decoder_holdout": "POST + redirect_hops>0 and POST post_validation rows excluded from training",
+  "pikachu_routes": {
+    "redirect": "/vul/urlredirect/urlredirect.php",
+    "post": "/vul/xss/xsspost/post_login.php"
+  },
+  "methods": [
+    "GET",
+    "POST"
+  ],
+  "fresh_container_per_seed": true,
+  "complete_redirect_chain_required": true,
+  "redirect_destination": "http://127.0.0.1:8767/pg196-sink",
+  "post_observed_fields": [
+    "password",
+    "submit",
+    "username"
+  ],
+  "post_replayed_fields": [
+    "submit",
+    "username"
+  ],
+  "post_unknown_oracle_action": "abstain",
+  "negative_control_required": true,
+  "evidence_hash_required": true,
+  "raw_decoder_action_is_non_authoritative": true,
+  "guarded_action_required_before_send": true,
+  "raw_payload_and_response_excluded": true,
+  "training_promotion_allowed": false,
+  "memory_promotion_allowed": false,
+  "vulnerability_claim_allowed": false,
+  "protocol_sha256": "31d8f610f879dc466007c6fe083c780ab8ff5ac2ea920943040d10c36ae1a786"
+}

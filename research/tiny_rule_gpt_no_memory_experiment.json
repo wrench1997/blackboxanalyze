@@ -1,0 +1,402 @@
+{
+  "experiment": "tiny-rule-gpt-family-holdout-v1",
+  "status": "completed",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 3060",
+  "model": {
+    "type": "causal_transformer_classifier",
+    "parameters": 875778,
+    "hidden": 128,
+    "layers": 4,
+    "heads": 4,
+    "max_length": 384
+  },
+  "data": {
+    "programs": 1200,
+    "train_examples": 1920,
+    "iid_examples": 480,
+    "validation_family_examples": 1200,
+    "test_family_examples": 1200,
+    "train_families": [
+      "numeric_boundary",
+      "truthiness_gate"
+    ],
+    "validation_families": [
+      "substring_origin"
+    ],
+    "test_families": [
+      "authorization_or"
+    ],
+    "source_or_rule_ir_visible_to_model": false
+  },
+  "baselines": {
+    "balanced_majority_accuracy": 0.5375
+  },
+  "results": {
+    "iid": {
+      "accuracy": 0.75,
+      "correct": 360,
+      "total": 480,
+      "by_family": {
+        "truthiness_gate": 1.0,
+        "numeric_boundary": 0.5
+      },
+      "failures": [
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000981",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.total=22<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000921",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.score=4<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000221",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.score=73<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001041",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.retryCount=0<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000121",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.retryCount=296<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000481",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.age=422<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001081",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.score=366<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001161",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.balance=160<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000661",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.balance=225<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000081",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.retryCount=340<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0001001",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.age=213<ANSWER>"
+        },
+        {
+          "family": "numeric_boundary",
+          "record_id": "syn-numeric_boundary-0000861",
+          "expected": 1,
+          "predicted": 0,
+          "prompt": "<TRACE><QUERY>input.total=91<ANSWER>"
+        }
+      ]
+    },
+    "validation_family_holdout": {
+      "accuracy": 1.0,
+      "correct": 1200,
+      "total": 1200,
+      "by_family": {
+        "substring_origin": 1.0
+      },
+      "failures": []
+    },
+    "test_family_with_memory": {
+      "accuracy": 0.5,
+      "correct": 600,
+      "total": 1200,
+      "by_family": {
+        "authorization_or": 0.5
+      },
+      "failures": [
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000144",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000012",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000480",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000924",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000744",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000216",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000440",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000868",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000996",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000120",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000828",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000076",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        }
+      ]
+    },
+    "test_family_without_memory": {
+      "accuracy": 0.5,
+      "correct": 600,
+      "total": 1200,
+      "by_family": {
+        "authorization_or": 0.5
+      },
+      "failures": [
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000144",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000012",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000480",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000924",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000744",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000216",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000440",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000868",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000996",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000120",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000828",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        },
+        {
+          "family": "authorization_or",
+          "record_id": "syn-authorization_or-0000076",
+          "expected": 0,
+          "predicted": 1,
+          "prompt": "<TRACE><QUERY>input.authenticated=false,input.isOwner=false<ANSWER>"
+        }
+      ]
+    },
+    "memory_delta": 0.0
+  },
+  "training": {
+    "epochs": 10,
+    "seconds": 11.71,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.670161,
+        "iid_accuracy": 0.591667,
+        "validation_family_accuracy": 0.8675
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.485573,
+        "iid_accuracy": 0.754167,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.380708,
+        "iid_accuracy": 0.760417,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.358449,
+        "iid_accuracy": 0.760417,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.352013,
+        "iid_accuracy": 0.760417,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.347529,
+        "iid_accuracy": 0.779167,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.352145,
+        "iid_accuracy": 0.75,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.347767,
+        "iid_accuracy": 0.78125,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.349662,
+        "iid_accuracy": 0.760417,
+        "validation_family_accuracy": 0.5
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.343396,
+        "iid_accuracy": 0.75,
+        "validation_family_accuracy": 1.0
+      }
+    ]
+  },
+  "research_guardrails": {
+    "family_holdout": true,
+    "black_box_only_input": true,
+    "failure_examples_preserved": true,
+    "claim_scope": "pilot only; no claim of production generalization"
+  }
+}

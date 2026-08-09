@@ -1,0 +1,203 @@
+{
+  "schema_version": "pg388-logic-taxonomy-audit-v1",
+  "status": "passed_candidate_coverage_all_anchors",
+  "case_count": 66,
+  "core_case_count": 56,
+  "supplemental_case_count": 10,
+  "case_ref_sha256": "55da4f67e63dd801aa8e020ba70ced7331a3f23fd56dd9bde715056879ac07c1",
+  "categories": {
+    "installation": {
+      "covered_case_refs": [
+        "install_reentry_gate",
+        "install_artifact_exposure",
+        "update_authorization_gate"
+      ],
+      "covered_count": 3,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [],
+      "unresolved_next_cases": []
+    },
+    "transaction": {
+      "covered_case_refs": [
+        "purchase_price_binding",
+        "purchase_status_transition",
+        "purchase_quantity_floor",
+        "purchase_amount_floor",
+        "purchase_concurrency_lock",
+        "nonce_replay"
+      ],
+      "covered_count": 6,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [],
+      "unresolved_next_cases": []
+    },
+    "risk_control": {
+      "covered_case_refs": [
+        "coupon_reuse_boundary",
+        "cashout_balance_binding",
+        "rate_limit_scope"
+      ],
+      "covered_count": 3,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [],
+      "unresolved_next_cases": []
+    },
+    "account_registration_password": {
+      "covered_case_refs": [
+        "registration_overwrite",
+        "registration_enumeration",
+        "password_storage_contract",
+        "password_strength_contract"
+      ],
+      "covered_count": 4,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [],
+      "unresolved_next_cases": []
+    },
+    "identity_normalization_cookie_login": {
+      "covered_case_refs": [
+        "identity_canonicalization",
+        "phone_canonicalization",
+        "cookie_integrity",
+        "login_rate_limit",
+        "lock_unlock_contract"
+      ],
+      "covered_count": 5,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [],
+      "unresolved_next_cases": []
+    },
+    "password_recovery_change_appeal_update": {
+      "covered_case_refs": [
+        "password_reset_subject_binding",
+        "password_reset_expiry",
+        "password_reset_response_secrecy",
+        "password_reset_host_binding",
+        "change_password_old_secret",
+        "appeal_identity_binding",
+        "update_field_allowlist",
+        "update_authorization_gate"
+      ],
+      "covered_count": 8,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [],
+      "unresolved_next_cases": []
+    },
+    "information_query_authorization": {
+      "covered_case_refs": [
+        "query_object_scope",
+        "query_identifier_entropy",
+        "unauthorized_static_resource",
+        "vertical_role_scope",
+        "cross_role_scope"
+      ],
+      "covered_count": 5,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [],
+      "unresolved_next_cases": []
+    },
+    "two_factor": {
+      "covered_case_refs": [
+        "two_factor_reset_binding",
+        "two_factor_attempt_budget"
+      ],
+      "covered_count": 2,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [
+        "oauth_second_factor",
+        "activation_link_second_factor",
+        "csrf_disable_second_factor"
+      ],
+      "unresolved_next_cases": []
+    },
+    "captcha": {
+      "covered_case_refs": [
+        "captcha_reuse",
+        "captcha_expiry",
+        "captcha_attempt_limit"
+      ],
+      "covered_count": 3,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [
+        "captcha_predictability",
+        "captcha_response_exposure",
+        "captcha_client_validation",
+        "captcha_delivery_abuse"
+      ],
+      "unresolved_next_cases": []
+    },
+    "session_randomness_other": {
+      "covered_case_refs": [
+        "session_fixation_boundary",
+        "session_scope_boundary",
+        "session_storage_boundary",
+        "random_seed_quality",
+        "crypto_mode_binding",
+        "execution_order",
+        "sensitive_projection"
+      ],
+      "covered_count": 7,
+      "missing_anchor_case_refs": [],
+      "candidate_only_case_refs": [
+        "session_guessing",
+        "session_forgery",
+        "session_leakage"
+      ],
+      "unresolved_next_cases": []
+    }
+  },
+  "missing_anchor_count": 0,
+  "diagnostic_gap_count": 0,
+  "diagnostic_gaps": [],
+  "candidate_only_count": 10,
+  "candidate_only_contracts": [
+    {
+      "category": "two_factor",
+      "case_ref": "oauth_second_factor"
+    },
+    {
+      "category": "two_factor",
+      "case_ref": "activation_link_second_factor"
+    },
+    {
+      "category": "two_factor",
+      "case_ref": "csrf_disable_second_factor"
+    },
+    {
+      "category": "captcha",
+      "case_ref": "captcha_predictability"
+    },
+    {
+      "category": "captcha",
+      "case_ref": "captcha_response_exposure"
+    },
+    {
+      "category": "captcha",
+      "case_ref": "captcha_client_validation"
+    },
+    {
+      "category": "captcha",
+      "case_ref": "captcha_delivery_abuse"
+    },
+    {
+      "category": "session_randomness_other",
+      "case_ref": "session_guessing"
+    },
+    {
+      "category": "session_randomness_other",
+      "case_ref": "session_forgery"
+    },
+    {
+      "category": "session_randomness_other",
+      "case_ref": "session_leakage"
+    }
+  ],
+  "training_eligible": 0,
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "coverage inventory only; supplemental contracts are candidate-only and still require fresh typed evidence before training or promotion",
+  "audit_sha256": "ba10ad6706b7cbc

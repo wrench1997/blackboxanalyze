@@ -1,0 +1,4841 @@
+{
+  "schema_version": "pg205-field-token-training-and-replay-trace-v1",
+  "evaluation_only": true,
+  "training": {
+    "train_rows": 75,
+    "base_rows": 15,
+    "augmentation_rows": 60,
+    "replay_rows": 15,
+    "holdout_rows": 42,
+    "variants": [
+      {
+        "variant": "standard",
+        "hidden_dim": 96,
+        "parameter_count": 101535727,
+        "warm_start": {
+          "source": "pg203_token_aware_adapter",
+          "copied_keys": [
+            "context_projection.0.weight",
+            "context_projection.0.bias",
+            "feature_projection.0.weight",
+            "feature_projection.0.bias",
+            "token_projection.0.weight",
+            "token_projection.0.bias",
+            "action_head.weight",
+            "action_head.bias",
+            "encoding_head.weight",
+            "encoding_head.bias",
+            "failure_head.weight",
+            "failure_head.bias",
+            "shared.0.bias",
+            "shared.2.weight",
+            "shared.2.bias",
+            "shared.0.weight_padded"
+          ],
+          "field_projection_initialized": true
+        },
+        "training": {
+          "schema_version": "pg205-field-aware-grounding-adapter-v1",
+          "train_rows": 75,
+          "holdout_rows": 42,
+          "epochs": 60,
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 3.14215112,
+              "holdout": {
+                "count": 42,
+                "action_accuracy": 0.71428573,
+                "candidate_recall": 0.6,
+                "abstain_recall": 1.0,
+                "unsafe_allow_count": 0,
+                "encoding_accuracy": 0.85714287,
+                "failure_accuracy": 1.0
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.00320786,
+              "holdout": {
+                "count": 42,
+                "action_accuracy": 1.0,
+                "candidate_recall": 1.0,
+                "abstain_recall": 1.0,
+                "unsafe_allow_count": 0,
+                "encoding_accuracy": 1.0,
+                "failure_accuracy": 1.0
+              }
+            },
+            {
+              "epoch": 40,
+              "loss": 0.0001984,
+              "holdout": {
+                "count": 42,
+                "action_accuracy": 1.0,
+                "candidate_recall": 1.0,
+                "abstain_recall": 1.0,
+                "unsafe_allow_count": 0,
+                "encoding_accuracy": 1.0,
+                "failure_accuracy": 1.0
+              }
+            },
+            {
+              "epoch": 60,
+              "loss": 9.508e-05,
+              "holdout": {
+                "count": 42,
+                "action_accuracy": 1.0,
+                "candidate_recall": 1.0,
+                "abstain_recall": 1.0,
+                "unsafe_allow_count": 0,
+                "encoding_accuracy": 1.0,
+                "failure_accuracy": 1.0
+              }
+            }
+          ],
+          "train": {
+            "count": 75,
+            "action_accuracy": 1.0,
+            "candidate_recall": 1.0,
+            "abstain_recall": 1.0,
+            "unsafe_allow_count": 0,
+            "encoding_accuracy": 1.0,
+            "failure_accuracy": 1.0
+          },
+          "holdout": {
+            "count": 42,
+            "action_accuracy": 1.0,
+            "candidate_recall": 1.0,
+            "abstain_recall": 1.0,
+            "unsafe_allow_count": 0,
+            "encoding_accuracy": 1.0,
+            "failure_accuracy": 1.0
+          }
+        },
+        "replay": {
+          "count": 15,
+          "action_accuracy": 1.0,
+          "candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 1.0,
+          "failure_accuracy": 1.0
+        },
+        "score": 3.0,
+        "catastrophic_forgetting_detected": false
+      },
+      {
+        "variant": "wide",
+        "hidden_dim": 192,
+        "parameter_count": 101549647,
+        "warm_start": {
+          "source": "fresh_wide_adapter",
+          "copied_keys": [],
+          "field_projection_initialized": true
+        },
+        "training": {
+          "schema_version": "pg205-field-aware-grounding-adapter-v1",
+          "train_rows": 75,
+          "holdout_rows": 42,
+          "epochs": 60,
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 3.2540071,
+              "holdout": {
+                "count": 42,
+                "action_accuracy": 0.5,
+                "candidate_recall": 0.7,
+                "abstain_recall": 0.0,
+                "unsafe_allow_count": 9,
+                "encoding_accuracy": 0.0,
+                "failure_accuracy": 0.42857143
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.00472044,
+              "holdout": {
+                "count": 42,
+                "action_accuracy": 1.0,
+                "candidate_recall": 1.0,
+                "abstain_recall": 1.0,
+                "unsafe_allow_count": 0,
+                "encoding_accuracy": 0.0,
+                "failure_accuracy": 0.42857143
+              }
+            },
+            {
+              "epoch": 40,
+              "loss": 0.00024514,
+              "holdout": {
+                "count": 42,
+                "action_accuracy": 1.0,
+                "candidate_recall": 1.0,
+                "abstain_recall": 1.0,
+                "unsafe_allow_count": 0,
+                "encoding_accuracy": 0.0,
+                "failure_accuracy": 0.42857143
+              }
+            },
+            {
+              "epoch": 60,
+              "loss": 0.00013277,
+              "holdout": {
+                "count": 42,
+                "action_accuracy": 1.0,
+                "candidate_recall": 1.0,
+                "abstain_recall": 1.0,
+                "unsafe_allow_count": 0,
+                "encoding_accuracy": 0.0,
+                "failure_accuracy": 0.42857143
+              }
+            }
+          ],
+          "train": {
+            "count": 75,
+            "action_accuracy": 1.0,
+            "candidate_recall": 1.0,
+            "abstain_recall": 1.0,
+            "unsafe_allow_count": 0,
+            "encoding_accuracy": 1.0,
+            "failure_accuracy": 1.0
+          },
+          "holdout": {
+            "count": 42,
+            "action_accuracy": 1.0,
+            "candidate_recall": 1.0,
+            "abstain_recall": 1.0,
+            "unsafe_allow_count": 0,
+            "encoding_accuracy": 0.0,
+            "failure_accuracy": 0.42857143
+          }
+        },
+        "replay": {
+          "count": 15,
+          "action_accuracy": 1.0,
+          "candidate_recall": 1.0,
+          "abstain_recall": 1.0,
+          "unsafe_allow_count": 0,
+          "encoding_accuracy": 1.0,
+          "failure_accuracy": 1.0
+        },
+        "score": 1.42857143,
+        "catastrophic_forgetting_detected": false
+      }
+    ],
+    "selected_variant": "standard",
+    "selected_parameter_count": 101535727,
+    "selected_score": 3.0
+  },
+  "targets": [
+    {
+      "seed": 20501,
+      "target_instance_hash": "6e6ecbd3a68ddb34567f9e43677edd0fc77db8c4e9cfd69e5b57a38b24df58f1",
+      "fresh_container": true,
+      "image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe"
+    },
+    {
+      "seed": 20502,
+      "target_instance_hash": "c48e26a0baa524205d4ab17ddf944b25e14acc3f0ed5bc230747da77bae07130",
+      "fresh_container": true,
+      "image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe"
+    }
+  ],
+  "route_runs": [
+    {
+      "seed": 20501,
+      "surface": "pg205_get_xss_multi",
+      "path": "/vul/xss/xss_03.php",
+      "method": "GET",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "family": "xss",
+      "crawl_source_sha256": "ac0adf4c8b7a13b15a5152ee05348f5152d496cee6c5118ad517e5f21a6d9a80",
+      "target_instance_hash": "6e6ecbd3a68ddb34567f9e43677edd0fc77db8c4e9cfd69e5b57a38b24df58f1",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "21b7a4f3fa19f1ec6bf663063f19da223d6f6801e9420924b6367a4dc6d7130f",
+        "semantic_body_sha256": "21b7a4f3fa19f1ec6bf663063f19da223d6f6801e9420924b6367a4dc6d7130f",
+        "shape": {
+          "kind": "other",
+          "field_count": 426,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "9a9ce7c3e42e20272177862764b60e7e57581694b912a0a07df6b878990406e6",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "semantic_body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ed82bd9d397106602bd123960b729b715614f7ef44ac5a3ab56e404dd08ef1af",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "field_token_binding_sha256": "b1d86dc473d73fd1bb58d16e0756aa16f1aafdb25eaf537630f350175dc4a11e",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "b1d86dc473d73fd1bb58d16e0756aa16f1aafdb25eaf537630f350175dc4a11e"
+      },
+      "model_decision": {
+        "action": "safe_candidate",
+        "action_confidence": 0.9999101161956787,
+        "encoding": "dom_markup",
+        "encoding_confidence": 0.9999868869781494,
+        "failure": "no_effect",
+        "failure_confidence": 0.9999831914901733,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "safe_candidate",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": true,
+          "failure_kind": "no_effect",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": true,
+      "candidate_result": {
+        "schema_version": "sift-pg198-payload-grounding-v1",
+        "candidate": {
+          "candidate_id": "4b407b2a3abab9258e73",
+          "family": "xss",
+          "method": "GET",
+          "path": "/vul/xss/xss_03.php",
+          "probe_kind": "inert_dom_markup",
+          "probe_sha256": "ed0884b64a25a499fa118686b4b188e27d13a3718e5e17f98ff7631d91a1397f",
+          "payload_sha256": "9a06704593a7c744e4ddb186c7d9dac94e4081d7e35f846708b18c8baee3c6f3",
+          "expected_keys": [
+            "browser_sink_observed",
+            "dom_change"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        },
+        "binding": {
+          "method": "GET",
+          "path": "/vul/xss/xss_03.php",
+          "placement": "query",
+          "field_names": [
+            "message",
+            "submit"
+          ],
+          "field_count": 2,
+          "values_sha256": "0ba5d718e0c7109035f837b3ce5b92f05b910004022e0043bc9422a4ae87b680",
+          "runtime_only": true,
+          "binding_sha256": "1e774aa0b7988d02162e6aa585a47a933d8a6a9c2fe57dc26ac93e76d1db248d"
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "4096-65535",
+          "body_sha256": "43c5176b39380582f8a54d481e6a4a67ff40d62561c68374af25cd55abf68465",
+          "semantic_body_sha256": "43c5176b39380582f8a54d481e6a4a67ff40d62561c68374af25cd55abf68465",
+          "shape": {
+            "kind": "other",
+            "field_count": 427,
+            "scalar_count": 1
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": true,
+            "location": "html_text",
+            "count": 2
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "568e254b36d696c705ba3dfff107424a3cfc156bf4a91dfa48410e1f45d24c4b",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false
+        },
+        "oracle": {
+          "typed_available": true,
+          "browser_effect": false,
+          "alternate_effect": true,
+          "dual_agreement": false,
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "browser_evidence_hash": "d9694c5390db66807ca38ada6a639511f8266e5e8693eb45acc01b3ad51fc806",
+          "alternate_evidence_hash": "4e6a091ed97fd5f00a527ef8ee075809e0a37a050d953813e1fda0e769e43c4c"
+        },
+        "signal": {
+          "marker_reflected": true,
+          "marker_in_script_source": false,
+          "marker_in_attribute": true,
+          "sql_error_shape": false,
+          "redirect_present": false,
+          "external_redirect": false,
+          "status_changed": false,
+          "candidate_signal": true
+        },
+        "evidence": {
+          "candidate_sha256": "fa0c48873504345a3c839c7737d1b438bae01a14388cf9361999cbd4404f201e",
+          "payload_sha256": "9a06704593a7c744e4ddb186c7d9dac94e4081d7e35f846708b18c8baee3c6f3",
+          "binding_sha256": "1e774aa0b7988d02162e6aa585a47a933d8a6a9c2fe57dc26ac93e76d1db248d",
+          "projection_sha256": "568e254b36d696c705ba3dfff107424a3cfc156bf4a91dfa48410e1f45d24c4b",
+          "oracle_sha256": "5d2737099220b55de07cdee233ccfef24c028028d1a8aa8941240ffb53983479",
+          "evidence_sha256": "c0135ceb957d30358eda15c76dbe3ee12e554a2cb0af7829f70ad5d0f3c230b1"
+        },
+        "raw_probe_stored": false,
+        "raw_response_stored": false
+      },
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20501,
+      "surface": "pg205_get_redirect",
+      "path": "/vul/urlredirect/urlredirect.php",
+      "method": "GET",
+      "fields": [
+        "url"
+      ],
+      "family": "url_redirect",
+      "crawl_source_sha256": "a6ecf699f785d64ecf0ad0026934ff000c122dfc4eae2c48b05ede04923fffbd",
+      "target_instance_hash": "6e6ecbd3a68ddb34567f9e43677edd0fc77db8c4e9cfd69e5b57a38b24df58f1",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+        "semantic_body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+        "shape": {
+          "kind": "other",
+          "field_count": 428,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "0052cc935aebf0ab7190470a085200dc3f71da14456b93479582ac5b913ffdc9",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 0,
+        "status_chain_sha256": "24dc8a9184a759f11232bc0de952fd9c3953c45eb182d3eeed0cf8c0ba55c6b7"
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "field_token_binding_sha256": "1be9bd1827c0d99876e106359907246d5a44470f17637318432d731cbb01448c",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "1be9bd1827c0d99876e106359907246d5a44470f17637318432d731cbb01448c"
+      },
+      "model_decision": {
+        "action": "abstain",
+        "action_confidence": 0.916883647441864,
+        "encoding": "identity",
+        "encoding_confidence": 0.7720504403114319,
+        "failure": "redirect_shape",
+        "failure_confidence": 0.8202954530715942,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "abstain",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": true,
+          "failure_kind": "redirect_chain",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20501,
+      "surface": "pg205_get_sql_multi",
+      "path": "/vul/sqli/sqli_search.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "injection",
+      "crawl_source_sha256": "6b4e456fccb8095d9ae2c292615ce0ae1d8dad7404efac12d85b2e52fd577469",
+      "target_instance_hash": "6e6ecbd3a68ddb34567f9e43677edd0fc77db8c4e9cfd69e5b57a38b24df58f1",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "field_token_binding_sha256": "dd3556f038cf999272cd31de8b939e42761bbd083db945dc150c0a0bab3eac49",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "dd3556f038cf999272cd31de8b939e42761bbd083db945dc150c0a0bab3eac49"
+      },
+      "model_decision": {
+        "action": "abstain",
+        "action_confidence": 0.9975587129592896,
+        "encoding": "abstract_sql",
+        "encoding_confidence": 0.9881392121315002,
+        "failure": "no_effect",
+        "failure_confidence": 0.9934988021850586,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "abstain",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": false,
+          "failure_kind": "no_effect",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20501,
+      "surface": "pg205_post_xss_multi",
+      "path": "/vul/xss/xssblind/xss_blind.php",
+      "method": "POST",
+      "fields": [
+        "content",
+        "name",
+        "submit"
+      ],
+      "family": "xss",
+      "crawl_source_sha256": "fa5a1740c6f8e191236519771dec0bbfadc2e7322f7473049ee5f45435c09247",
+      "target_instance_hash": "6e6ecbd3a68ddb34567f9e43677edd0fc77db8c4e9cfd69e5b57a38b24df58f1",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "field_token_binding_sha256": "d347256c649ce61d10dad43bc8c99ce9c51771027f4eb13f6a3f98f8f67c3aad",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "d347256c649ce61d10dad43bc8c99ce9c51771027f4eb13f6a3f98f8f67c3aad"
+      },
+      "model_decision": {
+        "action": "abstain",
+        "action_confidence": 0.999334990978241,
+        "encoding": "dom_markup",
+        "encoding_confidence": 0.9998855590820312,
+        "failure": "no_effect",
+        "failure_confidence": 0.9974193572998047,
+        "encoding_binding_match": true,
+        "failure_binding_match": false,
+        "effective_action": "abstain",
+        "features": {
+          "method": "POST",
+          "status_class": "2xx",
+          "typed_available": false,
+          "failure_kind": "post_validation",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20501,
+      "surface": "pg205_post_sql_multi",
+      "path": "/vul/sqli/sqli_id.php",
+      "method": "POST",
+      "fields": [
+        "id",
+        "submit"
+      ],
+      "family": "injection",
+      "crawl_source_sha256": "cf75dbe52fc52f1c07434f324e2ae76979c44909273a09784020b5970882f666",
+      "target_instance_hash": "6e6ecbd3a68ddb34567f9e43677edd0fc77db8c4e9cfd69e5b57a38b24df58f1",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "field_token_binding_sha256": "fd5544ccf859c6ba5756ab0d47132738aeceda6050103685622e73988e0f3cf2",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "fd5544ccf859c6ba5756ab0d47132738aeceda6050103685622e73988e0f3cf2"
+      },
+      "model_decision": {
+        "action": "abstain",
+        "action_confidence": 0.9854846596717834,
+        "encoding": "abstract_sql",
+        "encoding_confidence": 0.9940568208694458,
+        "failure": "no_effect",
+        "failure_confidence": 0.7565708160400391,
+        "encoding_binding_match": true,
+        "failure_binding_match": false,
+        "effective_action": "abstain",
+        "features": {
+          "method": "POST",
+          "status_class": "2xx",
+          "typed_available": false,
+          "failure_kind": "post_validation",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20502,
+      "surface": "pg205_get_xss_multi",
+      "path": "/vul/xss/xss_03.php",
+      "method": "GET",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "family": "xss",
+      "crawl_source_sha256": "ac0adf4c8b7a13b15a5152ee05348f5152d496cee6c5118ad517e5f21a6d9a80",
+      "target_instance_hash": "c48e26a0baa524205d4ab17ddf944b25e14acc3f0ed5bc230747da77bae07130",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "21b7a4f3fa19f1ec6bf663063f19da223d6f6801e9420924b6367a4dc6d7130f",
+        "semantic_body_sha256": "21b7a4f3fa19f1ec6bf663063f19da223d6f6801e9420924b6367a4dc6d7130f",
+        "shape": {
+          "kind": "other",
+          "field_count": 426,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "9a9ce7c3e42e20272177862764b60e7e57581694b912a0a07df6b878990406e6",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "semantic_body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "e91750d84938650d6fbc76e471769a5c40b16f51e483c325610acc11ba7f7aa5",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "field_token_binding_sha256": "055ce12176aa6960dde086cfd858aef207a9a0042aa8feaf1bf221ec94d30165",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "055ce12176aa6960dde086cfd858aef207a9a0042aa8feaf1bf221ec94d30165"
+      },
+      "model_decision": {
+        "action": "safe_candidate",
+        "action_confidence": 0.9999101161956787,
+        "encoding": "dom_markup",
+        "encoding_confidence": 0.9999868869781494,
+        "failure": "no_effect",
+        "failure_confidence": 0.9999831914901733,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "safe_candidate",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": true,
+          "failure_kind": "no_effect",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": true,
+      "candidate_result": {
+        "schema_version": "sift-pg198-payload-grounding-v1",
+        "candidate": {
+          "candidate_id": "d59af23775b5a1c0c597",
+          "family": "xss",
+          "method": "GET",
+          "path": "/vul/xss/xss_03.php",
+          "probe_kind": "inert_dom_markup",
+          "probe_sha256": "664d1c8db98b769ce168b1515b59e446178acd446bc756833d3a8f13f591e830",
+          "payload_sha256": "3dbdd70b05d768f2cabc2415643a324cb71150064e29bd87cb7e4fa6ee08dcbb",
+          "expected_keys": [
+            "browser_sink_observed",
+            "dom_change"
+          ],
+          "candidate_index": 0,
+          "family_hidden_from_policy": true
+        },
+        "binding": {
+          "method": "GET",
+          "path": "/vul/xss/xss_03.php",
+          "placement": "query",
+          "field_names": [
+            "message",
+            "submit"
+          ],
+          "field_count": 2,
+          "values_sha256": "3c893a8d7546e90e2fed2506a79d449fdbdd514d16ecb7d22e6cba042e6acca5",
+          "runtime_only": true,
+          "binding_sha256": "e1d9817cb9f13c0511f4cb7c500720343296c1ecb567cc2e82296e04a4f11675"
+        },
+        "response_projection": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "content_type_class": "other",
+          "body_length_bucket": "4096-65535",
+          "body_sha256": "9fe038d671955cbe60e3aec7ba2f1a4c1439190fe54389df1c050c55e45ba47d",
+          "semantic_body_sha256": "9fe038d671955cbe60e3aec7ba2f1a4c1439190fe54389df1c050c55e45ba47d",
+          "shape": {
+            "kind": "other",
+            "field_count": 427,
+            "scalar_count": 1
+          },
+          "header_names": [
+            "content-type"
+          ],
+          "marker": {
+            "reflected": true,
+            "location": "html_text",
+            "count": 2
+          },
+          "frame_policy": "unknown",
+          "transport_error": false,
+          "status_changed": false,
+          "state_changed": false,
+          "location_origin_changed": false,
+          "projection_sha256": "b45d6b00ca7a8220bf8de717b18196f5476d25761451dae1a05964be25b9afdb",
+          "status_chain": [
+            200
+          ],
+          "redirect_chain": [],
+          "redirect_external_blocked": false
+        },
+        "oracle": {
+          "typed_available": true,
+          "browser_effect": false,
+          "alternate_effect": true,
+          "dual_agreement": false,
+          "confirmed_positive": false,
+          "vulnerability_claim_allowed": false,
+          "browser_evidence_hash": "d9694c5390db66807ca38ada6a639511f8266e5e8693eb45acc01b3ad51fc806",
+          "alternate_evidence_hash": "4e6a091ed97fd5f00a527ef8ee075809e0a37a050d953813e1fda0e769e43c4c"
+        },
+        "signal": {
+          "marker_reflected": true,
+          "marker_in_script_source": false,
+          "marker_in_attribute": true,
+          "sql_error_shape": false,
+          "redirect_present": false,
+          "external_redirect": false,
+          "status_changed": false,
+          "candidate_signal": true
+        },
+        "evidence": {
+          "candidate_sha256": "130e23063bc75c15aca05028229b571682d17be13f1ff9ef1909973c9ef008fe",
+          "payload_sha256": "3dbdd70b05d768f2cabc2415643a324cb71150064e29bd87cb7e4fa6ee08dcbb",
+          "binding_sha256": "e1d9817cb9f13c0511f4cb7c500720343296c1ecb567cc2e82296e04a4f11675",
+          "projection_sha256": "b45d6b00ca7a8220bf8de717b18196f5476d25761451dae1a05964be25b9afdb",
+          "oracle_sha256": "5d2737099220b55de07cdee233ccfef24c028028d1a8aa8941240ffb53983479",
+          "evidence_sha256": "b9c1bf28ba95505cc32aef10840e44f0b956dd2a9d9578daf1b2e2c13471811b"
+        },
+        "raw_probe_stored": false,
+        "raw_response_stored": false
+      },
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20502,
+      "surface": "pg205_get_redirect",
+      "path": "/vul/urlredirect/urlredirect.php",
+      "method": "GET",
+      "fields": [
+        "url"
+      ],
+      "family": "url_redirect",
+      "crawl_source_sha256": "a6ecf699f785d64ecf0ad0026934ff000c122dfc4eae2c48b05ede04923fffbd",
+      "target_instance_hash": "c48e26a0baa524205d4ab17ddf944b25e14acc3f0ed5bc230747da77bae07130",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+        "semantic_body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+        "shape": {
+          "kind": "other",
+          "field_count": 428,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "0052cc935aebf0ab7190470a085200dc3f71da14456b93479582ac5b913ffdc9",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 0,
+        "status_chain_sha256": "24dc8a9184a759f11232bc0de952fd9c3953c45eb182d3eeed0cf8c0ba55c6b7"
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "field_token_binding_sha256": "7c0fae8f116c2c80ddb4c8f9907227c626b73fac5ce720e9bf299730463a2a7c",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "7c0fae8f116c2c80ddb4c8f9907227c626b73fac5ce720e9bf299730463a2a7c"
+      },
+      "model_decision": {
+        "action": "abstain",
+        "action_confidence": 0.916883647441864,
+        "encoding": "identity",
+        "encoding_confidence": 0.7720504403114319,
+        "failure": "redirect_shape",
+        "failure_confidence": 0.8202954530715942,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "abstain",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": true,
+          "failure_kind": "redirect_chain",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20502,
+      "surface": "pg205_get_sql_multi",
+      "path": "/vul/sqli/sqli_search.php",
+      "method": "GET",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "family": "injection",
+      "crawl_source_sha256": "6b4e456fccb8095d9ae2c292615ce0ae1d8dad7404efac12d85b2e52fd577469",
+      "target_instance_hash": "c48e26a0baa524205d4ab17ddf944b25e14acc3f0ed5bc230747da77bae07130",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "field_token_binding_sha256": "ac70e6bcc23c90f9510768747599b001e1e9e2cf715ee0d2d2219d89f2f3e3c2",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "ac70e6bcc23c90f9510768747599b001e1e9e2cf715ee0d2d2219d89f2f3e3c2"
+      },
+      "model_decision": {
+        "action": "abstain",
+        "action_confidence": 0.9975587129592896,
+        "encoding": "abstract_sql",
+        "encoding_confidence": 0.9881392121315002,
+        "failure": "no_effect",
+        "failure_confidence": 0.9934988021850586,
+        "encoding_binding_match": true,
+        "failure_binding_match": true,
+        "effective_action": "abstain",
+        "features": {
+          "method": "GET",
+          "status_class": "2xx",
+          "typed_available": false,
+          "failure_kind": "no_effect",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20502,
+      "surface": "pg205_post_xss_multi",
+      "path": "/vul/xss/xssblind/xss_blind.php",
+      "method": "POST",
+      "fields": [
+        "content",
+        "name",
+        "submit"
+      ],
+      "family": "xss",
+      "crawl_source_sha256": "fa5a1740c6f8e191236519771dec0bbfadc2e7322f7473049ee5f45435c09247",
+      "target_instance_hash": "c48e26a0baa524205d4ab17ddf944b25e14acc3f0ed5bc230747da77bae07130",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "field_token_binding_sha256": "e3ea69fd085a091abddb05cb2ca2f39ab6269ca7f326f1ad419483ffe341a859",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "e3ea69fd085a091abddb05cb2ca2f39ab6269ca7f326f1ad419483ffe341a859"
+      },
+      "model_decision": {
+        "action": "abstain",
+        "action_confidence": 0.999334990978241,
+        "encoding": "dom_markup",
+        "encoding_confidence": 0.9998855590820312,
+        "failure": "no_effect",
+        "failure_confidence": 0.9974193572998047,
+        "encoding_binding_match": true,
+        "failure_binding_match": false,
+        "effective_action": "abstain",
+        "features": {
+          "method": "POST",
+          "status_class": "2xx",
+          "typed_available": false,
+          "failure_kind": "post_validation",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    {
+      "seed": 20502,
+      "surface": "pg205_post_sql_multi",
+      "path": "/vul/sqli/sqli_id.php",
+      "method": "POST",
+      "fields": [
+        "id",
+        "submit"
+      ],
+      "family": "injection",
+      "crawl_source_sha256": "cf75dbe52fc52f1c07434f324e2ae76979c44909273a09784020b5970882f666",
+      "target_instance_hash": "c48e26a0baa524205d4ab17ddf944b25e14acc3f0ed5bc230747da77bae07130",
+      "baseline_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "control_projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "field_token_binding_sha256": "61e1e519120b130c9a5d4721385cb532c8bddfa3c3772bd3d91dc68d0c79001c",
+      "field_token_dim": 31,
+      "token_validation": {
+        "valid": true,
+        "reason": "field_tokens_bound",
+        "network_allowed": true,
+        "binding_sha256": "61e1e519120b130c9a5d4721385cb532c8bddfa3c3772bd3d91dc68d0c79001c"
+      },
+      "model_decision": {
+        "action": "abstain",
+        "action_confidence": 0.9854846596717834,
+        "encoding": "abstract_sql",
+        "encoding_confidence": 0.9940568208694458,
+        "failure": "no_effect",
+        "failure_confidence": 0.7565708160400391,
+        "encoding_binding_match": true,
+        "failure_binding_match": false,
+        "effective_action": "abstain",
+        "features": {
+          "method": "POST",
+          "status_class": "2xx",
+          "typed_available": false,
+          "failure_kind": "post_validation",
+          "field_token_dim": 31
+        }
+      },
+      "candidate_sent": false,
+      "candidate_result": null,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "training_eligible": false,
+      "memory_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  ],
+  "fault_runs": [
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "semantic_body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ed82bd9d397106602bd123960b729b715614f7ef44ac5a3ab56e404dd08ef1af",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "b123caeb51c225370f6a212d5effce2f82b0691df93edfad86fc2ab0c9b6a132",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_03.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "ed82bd9d397106602bd123960b729b715614f7ef44ac5a3ab56e404dd08ef1af",
+        "redirect_hop_count": 0,
+        "typed_available": true,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "field_token_sha256": "fe70b28d5631491de7e79edfc08163cebef7fd118aecf85ee78052e415588c68",
+        "binding_sha256": "b1d86dc473d73fd1bb58d16e0756aa16f1aafdb25eaf537630f350175dc4a11e"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "semantic_body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ed82bd9d397106602bd123960b729b715614f7ef44ac5a3ab56e404dd08ef1af",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "b123caeb51c225370f6a212d5effce2f82b0691df93edfad86fc2ab0c9b6a132",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_03.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "ed82bd9d397106602bd123960b729b715614f7ef44ac5a3ab56e404dd08ef1af",
+        "redirect_hop_count": 0,
+        "typed_available": true,
+        "field_tokens": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "field_token_sha256": "fe70b28d5631491de7e79edfc08163cebef7fd118aecf85ee78052e415588c68",
+        "binding_sha256": "b1d86dc473d73fd1bb58d16e0756aa16f1aafdb25eaf537630f350175dc4a11e"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "semantic_body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ed82bd9d397106602bd123960b729b715614f7ef44ac5a3ab56e404dd08ef1af",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "b123caeb51c225370f6a212d5effce2f82b0691df93edfad86fc2ab0c9b6a132",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_03.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "ed82bd9d397106602bd123960b729b715614f7ef44ac5a3ab56e404dd08ef1af",
+        "redirect_hop_count": 0,
+        "typed_available": true,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "field_token_sha256": "fe70b28d5631491de7e79edfc08163cebef7fd118aecf85ee78052e415588c68",
+        "binding_sha256": "b1d86dc473d73fd1bb58d16e0756aa16f1aafdb25eaf537630f350175dc4a11e"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "semantic_body_sha256": "4e4e3d2f68d73a911651ff325d04a28cb340bbebef38992f5792d6af8e76f701",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ed82bd9d397106602bd123960b729b715614f7ef44ac5a3ab56e404dd08ef1af",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "d435f624eb557e21cecf351c1f746631feb586a8f20df4f9abcab350c9e7db13",
+        "route_method": "GET",
+        "route_path": "/vul/urlredirect/urlredirect.php",
+        "route_fields": [
+          "url"
+        ],
+        "encoding_name": "identity",
+        "failure_name": "redirect_shape",
+        "response_projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "redirect_hop_count": 1,
+        "typed_available": true,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "field_token_sha256": "27d376f5efa11fadca085aaa21a58bcc0dc62ba0fe8894c5a36c06c2d7ddb136",
+        "binding_sha256": "1be9bd1827c0d99876e106359907246d5a44470f17637318432d731cbb01448c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "d435f624eb557e21cecf351c1f746631feb586a8f20df4f9abcab350c9e7db13",
+        "route_method": "GET",
+        "route_path": "/vul/urlredirect/urlredirect.php",
+        "route_fields": [
+          "url"
+        ],
+        "encoding_name": "identity",
+        "failure_name": "redirect_shape",
+        "response_projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "redirect_hop_count": 1,
+        "typed_available": true,
+        "field_tokens": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "field_token_sha256": "27d376f5efa11fadca085aaa21a58bcc0dc62ba0fe8894c5a36c06c2d7ddb136",
+        "binding_sha256": "1be9bd1827c0d99876e106359907246d5a44470f17637318432d731cbb01448c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "d435f624eb557e21cecf351c1f746631feb586a8f20df4f9abcab350c9e7db13",
+        "route_method": "GET",
+        "route_path": "/vul/urlredirect/urlredirect.php",
+        "route_fields": [
+          "url"
+        ],
+        "encoding_name": "identity",
+        "failure_name": "redirect_shape",
+        "response_projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "redirect_hop_count": 1,
+        "typed_available": true,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "field_token_sha256": "27d376f5efa11fadca085aaa21a58bcc0dc62ba0fe8894c5a36c06c2d7ddb136",
+        "binding_sha256": "1be9bd1827c0d99876e106359907246d5a44470f17637318432d731cbb01448c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "936aec061ef42fa3c8726735510bf05f1f4571ef69adf25bbfe84f35bf64920b",
+        "route_method": "GET",
+        "route_path": "/vul/sqli/sqli_search.php",
+        "route_fields": [
+          "name",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "fc98b35605b77ba9ea2ff5ab4617865663d0e4cc80b03f96756a4d20fb7c5d1d",
+        "binding_sha256": "dd3556f038cf999272cd31de8b939e42761bbd083db945dc150c0a0bab3eac49"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "936aec061ef42fa3c8726735510bf05f1f4571ef69adf25bbfe84f35bf64920b",
+        "route_method": "GET",
+        "route_path": "/vul/sqli/sqli_search.php",
+        "route_fields": [
+          "name",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "fc98b35605b77ba9ea2ff5ab4617865663d0e4cc80b03f96756a4d20fb7c5d1d",
+        "binding_sha256": "dd3556f038cf999272cd31de8b939e42761bbd083db945dc150c0a0bab3eac49"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "936aec061ef42fa3c8726735510bf05f1f4571ef69adf25bbfe84f35bf64920b",
+        "route_method": "GET",
+        "route_path": "/vul/sqli/sqli_search.php",
+        "route_fields": [
+          "name",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "fc98b35605b77ba9ea2ff5ab4617865663d0e4cc80b03f96756a4d20fb7c5d1d",
+        "binding_sha256": "dd3556f038cf999272cd31de8b939e42761bbd083db945dc150c0a0bab3eac49"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "0ed58420028cdb5caa910f08895b51bcacb5167722525e18abcbe0cac27320ca",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xssblind/xss_blind.php",
+        "route_fields": [
+          "content",
+          "name",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "ef4e94bca3100583b1d3f013013e1a90a3ca78701267d21a050b44446e8a81c9",
+        "binding_sha256": "d347256c649ce61d10dad43bc8c99ce9c51771027f4eb13f6a3f98f8f67c3aad"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "0ed58420028cdb5caa910f08895b51bcacb5167722525e18abcbe0cac27320ca",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xssblind/xss_blind.php",
+        "route_fields": [
+          "content",
+          "name",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "ef4e94bca3100583b1d3f013013e1a90a3ca78701267d21a050b44446e8a81c9",
+        "binding_sha256": "d347256c649ce61d10dad43bc8c99ce9c51771027f4eb13f6a3f98f8f67c3aad"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "0ed58420028cdb5caa910f08895b51bcacb5167722525e18abcbe0cac27320ca",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xssblind/xss_blind.php",
+        "route_fields": [
+          "content",
+          "name",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "ef4e94bca3100583b1d3f013013e1a90a3ca78701267d21a050b44446e8a81c9",
+        "binding_sha256": "d347256c649ce61d10dad43bc8c99ce9c51771027f4eb13f6a3f98f8f67c3aad"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "6389b0759b5e3403fa2fbde7ac2e29932b69153fbcdfae799954672919014e04",
+        "route_method": "POST",
+        "route_path": "/vul/sqli/sqli_id.php",
+        "route_fields": [
+          "id",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "7b3cd0e00a15010fb79cc6e0388f943f97c5e364addf0cf21e91a37ed51c5a40",
+        "binding_sha256": "fd5544ccf859c6ba5756ab0d47132738aeceda6050103685622e73988e0f3cf2"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "6389b0759b5e3403fa2fbde7ac2e29932b69153fbcdfae799954672919014e04",
+        "route_method": "POST",
+        "route_path": "/vul/sqli/sqli_id.php",
+        "route_fields": [
+          "id",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "7b3cd0e00a15010fb79cc6e0388f943f97c5e364addf0cf21e91a37ed51c5a40",
+        "binding_sha256": "fd5544ccf859c6ba5756ab0d47132738aeceda6050103685622e73988e0f3cf2"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "6389b0759b5e3403fa2fbde7ac2e29932b69153fbcdfae799954672919014e04",
+        "route_method": "POST",
+        "route_path": "/vul/sqli/sqli_id.php",
+        "route_fields": [
+          "id",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "7b3cd0e00a15010fb79cc6e0388f943f97c5e364addf0cf21e91a37ed51c5a40",
+        "binding_sha256": "fd5544ccf859c6ba5756ab0d47132738aeceda6050103685622e73988e0f3cf2"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "semantic_body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "e91750d84938650d6fbc76e471769a5c40b16f51e483c325610acc11ba7f7aa5",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "cd5f375559d4fdcd7316f401d76875a02bc100d02fde17c145a170dae33bfb99",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_03.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "e91750d84938650d6fbc76e471769a5c40b16f51e483c325610acc11ba7f7aa5",
+        "redirect_hop_count": 0,
+        "typed_available": true,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "field_token_sha256": "fe70b28d5631491de7e79edfc08163cebef7fd118aecf85ee78052e415588c68",
+        "binding_sha256": "055ce12176aa6960dde086cfd858aef207a9a0042aa8feaf1bf221ec94d30165"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "semantic_body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "e91750d84938650d6fbc76e471769a5c40b16f51e483c325610acc11ba7f7aa5",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "cd5f375559d4fdcd7316f401d76875a02bc100d02fde17c145a170dae33bfb99",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_03.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "e91750d84938650d6fbc76e471769a5c40b16f51e483c325610acc11ba7f7aa5",
+        "redirect_hop_count": 0,
+        "typed_available": true,
+        "field_tokens": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "field_token_sha256": "fe70b28d5631491de7e79edfc08163cebef7fd118aecf85ee78052e415588c68",
+        "binding_sha256": "055ce12176aa6960dde086cfd858aef207a9a0042aa8feaf1bf221ec94d30165"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "semantic_body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "e91750d84938650d6fbc76e471769a5c40b16f51e483c325610acc11ba7f7aa5",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "cd5f375559d4fdcd7316f401d76875a02bc100d02fde17c145a170dae33bfb99",
+        "route_method": "GET",
+        "route_path": "/vul/xss/xss_03.php",
+        "route_fields": [
+          "message",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "e91750d84938650d6fbc76e471769a5c40b16f51e483c325610acc11ba7f7aa5",
+        "redirect_hop_count": 0,
+        "typed_available": true,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "field_token_sha256": "fe70b28d5631491de7e79edfc08163cebef7fd118aecf85ee78052e415588c68",
+        "binding_sha256": "055ce12176aa6960dde086cfd858aef207a9a0042aa8feaf1bf221ec94d30165"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "semantic_body_sha256": "80fe58a6b2c4d054db00007fcf10e994fe765896403edb6d0486835e0b016974",
+        "shape": {
+          "kind": "other",
+          "field_count": 427,
+          "scalar_count": 1
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": true,
+          "location": "html_text",
+          "count": 1
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "e91750d84938650d6fbc76e471769a5c40b16f51e483c325610acc11ba7f7aa5",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "e413788ca209ec873c0529105ac7bbf415aa367482423ae882ebe1243c85573b",
+        "route_method": "GET",
+        "route_path": "/vul/urlredirect/urlredirect.php",
+        "route_fields": [
+          "url"
+        ],
+        "encoding_name": "identity",
+        "failure_name": "redirect_shape",
+        "response_projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "redirect_hop_count": 1,
+        "typed_available": true,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "field_token_sha256": "27d376f5efa11fadca085aaa21a58bcc0dc62ba0fe8894c5a36c06c2d7ddb136",
+        "binding_sha256": "7c0fae8f116c2c80ddb4c8f9907227c626b73fac5ce720e9bf299730463a2a7c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "e413788ca209ec873c0529105ac7bbf415aa367482423ae882ebe1243c85573b",
+        "route_method": "GET",
+        "route_path": "/vul/urlredirect/urlredirect.php",
+        "route_fields": [
+          "url"
+        ],
+        "encoding_name": "identity",
+        "failure_name": "redirect_shape",
+        "response_projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "redirect_hop_count": 1,
+        "typed_available": true,
+        "field_tokens": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "field_token_sha256": "27d376f5efa11fadca085aaa21a58bcc0dc62ba0fe8894c5a36c06c2d7ddb136",
+        "binding_sha256": "7c0fae8f116c2c80ddb4c8f9907227c626b73fac5ce720e9bf299730463a2a7c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "e413788ca209ec873c0529105ac7bbf415aa367482423ae882ebe1243c85573b",
+        "route_method": "GET",
+        "route_path": "/vul/urlredirect/urlredirect.php",
+        "route_fields": [
+          "url"
+        ],
+        "encoding_name": "identity",
+        "failure_name": "redirect_shape",
+        "response_projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "redirect_hop_count": 1,
+        "typed_available": true,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "field_token_sha256": "27d376f5efa11fadca085aaa21a58bcc0dc62ba0fe8894c5a36c06c2d7ddb136",
+        "binding_sha256": "7c0fae8f116c2c80ddb4c8f9907227c626b73fac5ce720e9bf299730463a2a7c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "semantic_body_sha256": "a8fbedd1765de79db0743904a46e954d7b6474f750229fcc9ca5fa69ecae7735",
+        "shape": {
+          "kind": "other",
+          "field_count": 454,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "cabba51aaa511f5acdc07915daf76d7c47299b1e5f4ce54d5884cebacf306920",
+        "status_chain": [
+          302,
+          200
+        ],
+        "redirect_chain": [
+          {
+            "path_shape": {
+              "segment_count": 0,
+              "has_extension": false
+            },
+            "query_keys": [
+              "pg205"
+            ]
+          }
+        ],
+        "redirect_external_blocked": false,
+        "redirect_hop_count": 1,
+        "status_chain_sha256": "09a4d909adc1a6d4139899f1f6e3fe22fd0be9844bb49e1d9527833715b58d8b"
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "e786ef4b00f7a79914ce27e9ecb250c501fba88075c5ee8415657bfc2f57f0b5",
+        "route_method": "GET",
+        "route_path": "/vul/sqli/sqli_search.php",
+        "route_fields": [
+          "name",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "fc98b35605b77ba9ea2ff5ab4617865663d0e4cc80b03f96756a4d20fb7c5d1d",
+        "binding_sha256": "ac70e6bcc23c90f9510768747599b001e1e9e2cf715ee0d2d2219d89f2f3e3c2"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "e786ef4b00f7a79914ce27e9ecb250c501fba88075c5ee8415657bfc2f57f0b5",
+        "route_method": "GET",
+        "route_path": "/vul/sqli/sqli_search.php",
+        "route_fields": [
+          "name",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "fc98b35605b77ba9ea2ff5ab4617865663d0e4cc80b03f96756a4d20fb7c5d1d",
+        "binding_sha256": "ac70e6bcc23c90f9510768747599b001e1e9e2cf715ee0d2d2219d89f2f3e3c2"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "e786ef4b00f7a79914ce27e9ecb250c501fba88075c5ee8415657bfc2f57f0b5",
+        "route_method": "GET",
+        "route_path": "/vul/sqli/sqli_search.php",
+        "route_fields": [
+          "name",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "no_effect",
+        "response_projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "fc98b35605b77ba9ea2ff5ab4617865663d0e4cc80b03f96756a4d20fb7c5d1d",
+        "binding_sha256": "ac70e6bcc23c90f9510768747599b001e1e9e2cf715ee0d2d2219d89f2f3e3c2"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "semantic_body_sha256": "aaeee21d669b0a80288545242053f5f52642f7cf04d79a7031a0379a9ba74204",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "fa6ded71c8ae12028a8cc1d4eb61477057b5bbeb02bf444fd09af19293e91af2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "5ea18e3a60dfefa828b254f2deebcb86d25506fb03b8e37902ede0eb060dc4cd",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xssblind/xss_blind.php",
+        "route_fields": [
+          "content",
+          "name",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "ef4e94bca3100583b1d3f013013e1a90a3ca78701267d21a050b44446e8a81c9",
+        "binding_sha256": "e3ea69fd085a091abddb05cb2ca2f39ab6269ca7f326f1ad419483ffe341a859"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "5ea18e3a60dfefa828b254f2deebcb86d25506fb03b8e37902ede0eb060dc4cd",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xssblind/xss_blind.php",
+        "route_fields": [
+          "content",
+          "name",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "ef4e94bca3100583b1d3f013013e1a90a3ca78701267d21a050b44446e8a81c9",
+        "binding_sha256": "e3ea69fd085a091abddb05cb2ca2f39ab6269ca7f326f1ad419483ffe341a859"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "5ea18e3a60dfefa828b254f2deebcb86d25506fb03b8e37902ede0eb060dc4cd",
+        "route_method": "POST",
+        "route_path": "/vul/xss/xssblind/xss_blind.php",
+        "route_fields": [
+          "content",
+          "name",
+          "submit"
+        ],
+        "encoding_name": "dom_markup",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "ef4e94bca3100583b1d3f013013e1a90a3ca78701267d21a050b44446e8a81c9",
+        "binding_sha256": "e3ea69fd085a091abddb05cb2ca2f39ab6269ca7f326f1ad419483ffe341a859"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "semantic_body_sha256": "d95fbd13d4fd129b509fc2806ea919ce42b71393585a60f6110a05291ff5288f",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "82d81d63fb91de96b32f75d357270c4a29e458c475ed0ae745ba7ce588beba77",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "missing_field_tokens",
+      "packet": null,
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "missing_field_token_packet",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_dimension_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "c6b09a5e05d1147961068fee884c377d02b1d5ae3ee7adabacb24556d403cd2c",
+        "route_method": "POST",
+        "route_path": "/vul/sqli/sqli_id.php",
+        "route_fields": [
+          "id",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "7b3cd0e00a15010fb79cc6e0388f943f97c5e364addf0cf21e91a37ed51c5a40",
+        "binding_sha256": "61e1e519120b130c9a5d4721385cb532c8bddfa3c3772bd3d91dc68d0c79001c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "field_token_value_mismatch",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "c6b09a5e05d1147961068fee884c377d02b1d5ae3ee7adabacb24556d403cd2c",
+        "route_method": "POST",
+        "route_path": "/vul/sqli/sqli_id.php",
+        "route_fields": [
+          "id",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "7b3cd0e00a15010fb79cc6e0388f943f97c5e364addf0cf21e91a37ed51c5a40",
+        "binding_sha256": "61e1e519120b130c9a5d4721385cb532c8bddfa3c3772bd3d91dc68d0c79001c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_token_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    },
+    {
+      "case": "response_projection_stale",
+      "packet": {
+        "schema_version": "pg205-field-token-binding-v1",
+        "field_token_schema": "pg205-request-response-token-v1",
+        "runtime_binding_sha256": "c6b09a5e05d1147961068fee884c377d02b1d5ae3ee7adabacb24556d403cd2c",
+        "route_method": "POST",
+        "route_path": "/vul/sqli/sqli_id.php",
+        "route_fields": [
+          "id",
+          "submit"
+        ],
+        "encoding_name": "abstract_sql",
+        "failure_name": "validation_shape",
+        "response_projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "redirect_hop_count": 0,
+        "typed_available": false,
+        "field_tokens": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "field_token_sha256": "7b3cd0e00a15010fb79cc6e0388f943f97c5e364addf0cf21e91a37ed51c5a40",
+        "binding_sha256": "61e1e519120b130c9a5d4721385cb532c8bddfa3c3772bd3d91dc68d0c79001c"
+      },
+      "projection": {
+        "status_code": 200,
+        "status_class": "3xx",
+        "content_type_class": "other",
+        "body_length_bucket": "4096-65535",
+        "body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "semantic_body_sha256": "1b3ba7ac79ef4df2372fbffd53baab4333c3b770c5cb46b1d23f098dead7d731",
+        "shape": {
+          "kind": "other",
+          "field_count": 394,
+          "scalar_count": 0
+        },
+        "header_names": [
+          "content-type"
+        ],
+        "marker": {
+          "reflected": false,
+          "location": "none",
+          "count": 0
+        },
+        "frame_policy": "unknown",
+        "transport_error": false,
+        "status_changed": false,
+        "state_changed": false,
+        "location_origin_changed": false,
+        "projection_sha256": "ec154b1aa23ea9adf5d944028f2d82a9eaa7eb6beb095600a399f0b0b28064a2",
+        "status_chain": [
+          200
+        ],
+        "redirect_chain": [],
+        "redirect_external_blocked": false
+      },
+      "validation": {
+        "valid": false,
+        "reason": "field_binding_hash_mismatch",
+        "network_allowed": false
+      },
+      "network_allowed": false
+    }
+  ],
+  "training_eligible": false,
+  "memory_promotion_allowed": false,
+  "raw_payload_strings_stored": false,
+  "raw_response_bodies_stored": false
+}

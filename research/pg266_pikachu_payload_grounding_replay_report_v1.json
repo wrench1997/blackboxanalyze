@@ -1,0 +1,310 @@
+{
+  "protocol_id": "pg-pk-266-pikachu-payload-grounding-replay-v1",
+  "schema_version": "pg266-pikachu-payload-grounding-replay-report-v1",
+  "status": "completed_local_payload_grounding_replay",
+  "runtime_image": "sift/pikachu-fixed@sha256:cca4288b6b701725e7a771f47ce7fcafd6cea9bd7622fa34ef2ed0b440f472c6",
+  "seed": 26601,
+  "routes": [
+    {
+      "id": "sql-string-get",
+      "family": "sql",
+      "rule_ir": "sql_string_boolean",
+      "method": "GET",
+      "path": "/vul/sqli/sqli_str.php",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "value_field": "name",
+      "submit": "submit",
+      "oracle": "row_shape"
+    },
+    {
+      "id": "sql-blind-boolean-get",
+      "family": "sql",
+      "rule_ir": "sql_boolean_blind",
+      "method": "GET",
+      "path": "/vul/sqli/sqli_blind_b.php",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "value_field": "name",
+      "submit": "submit",
+      "oracle": "row_shape"
+    },
+    {
+      "id": "sql-numeric-post",
+      "family": "sql",
+      "rule_ir": "sql_numeric_boolean",
+      "method": "POST",
+      "path": "/vul/sqli/sqli_id.php",
+      "fields": [
+        "id",
+        "submit"
+      ],
+      "value_field": "id",
+      "submit": "submit",
+      "oracle": "row_shape"
+    },
+    {
+      "id": "sql-search-get",
+      "family": "sql",
+      "rule_ir": "sql_like_boolean",
+      "method": "GET",
+      "path": "/vul/sqli/sqli_search.php",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "value_field": "name",
+      "submit": "submit",
+      "oracle": "row_shape"
+    },
+    {
+      "id": "sql-widebyte-post",
+      "family": "sql",
+      "rule_ir": "sql_widebyte_boundary",
+      "method": "POST",
+      "path": "/vul/sqli/sqli_widebyte.php",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "value_field": "name",
+      "submit": "submit",
+      "oracle": "syntax_or_row_shape"
+    },
+    {
+      "id": "xss-filter-get",
+      "family": "xss",
+      "rule_ir": "xss_html_event_sink",
+      "method": "GET",
+      "path": "/vul/xss/xss_01.php",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "value_field": "message",
+      "submit": "submit",
+      "oracle": "dom_execution"
+    },
+    {
+      "id": "xss-reflected-get",
+      "family": "xss",
+      "rule_ir": "xss_html_event_sink",
+      "method": "GET",
+      "path": "/vul/xss/xss_reflected_get.php",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "value_field": "message",
+      "submit": "submit",
+      "oracle": "dom_execution"
+    },
+    {
+      "id": "xss-href-get",
+      "family": "xss",
+      "rule_ir": "xss_javascript_href",
+      "method": "GET",
+      "path": "/vul/xss/xss_03.php",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "value_field": "message",
+      "submit": "submit",
+      "oracle": "dom_execution_after_click"
+    },
+    {
+      "id": "xss-js-output-get",
+      "family": "xss",
+      "rule_ir": "xss_js_string_sink",
+      "method": "GET",
+      "path": "/vul/xss/xss_04.php",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "value_field": "message",
+      "submit": "submit",
+      "oracle": "dom_execution"
+    },
+    {
+      "id": "xss-dom-get",
+      "family": "xss",
+      "rule_ir": "xss_dom_innerhtml",
+      "method": "GET",
+      "path": "/vul/xss/xss_dom_x.php",
+      "fields": [
+        "text"
+      ],
+      "value_field": "text",
+      "submit": null,
+      "oracle": "dom_execution_after_click"
+    },
+    {
+      "id": "xss-stored-post",
+      "family": "xss",
+      "rule_ir": "xss_stored_html_sink",
+      "method": "POST",
+      "path": "/vul/xss/xss_stored.php",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "value_field": "message",
+      "submit": "submit",
+      "oracle": "stored_dom_execution",
+      "stateful": true
+    },
+    {
+      "id": "redirect-get",
+      "family": "url_redirect",
+      "rule_ir": "redirect_location_sink",
+      "method": "GET",
+      "path": "/vul/urlredirect/urlredirect.php",
+      "fields": [
+        "url"
+      ],
+      "value_field": "url",
+      "submit": null,
+      "oracle": "location_change"
+    }
+  ],
+  "counts": {
+    "route_count": 12,
+    "get_count": 9,
+    "post_count": 3,
+    "sql_count": 5,
+    "xss_count": 6,
+    "redirect_count": 1,
+    "ai_send_count": 12,
+    "reference_send_count": 12,
+    "negative_send_count": 12,
+    "confirmed_positive_count": 9,
+    "false_positive_count": 0,
+    "abstain_count": 3,
+    "fresh_reset_count": 12,
+    "elapsed_seconds": 160.906
+  },
+  "model_context": {
+    "base_candidate": "PG-265",
+    "pg265_report_sha256": "15ab9f02bcfdded6f5599f6cbb962f628130ef73b35608382a9c8dc7d946d420",
+    "pg265_artifact_sha256": "4521f5caf998f445510650d6842c48dfcac497e0e1443e8a49411fd672a88016",
+    "role": "Rule-IR grounded candidate selector; exact payload remains source-catalog grounded"
+  },
+  "policy": {
+    "id": "grounded_rule_ir_ucb_v1",
+    "attempts": 12,
+    "feedback": [
+      {
+        "step": 1,
+        "candidate_id": "pg266-sql-string-get-candidate-121d6b348c29",
+        "outcome_class": "confirmed_local_sql_row_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "3a369083b9169ddb6e4d5dd8f3ec374230232257458e7012e2c92804fc043aa3"
+      },
+      {
+        "step": 2,
+        "candidate_id": "pg266-sql-blind-boolean-get-candidate-9e3161eaf06e",
+        "outcome_class": "sql_abstain",
+        "confirmed_positive": false,
+        "evidence_hash": "2cb8707720beebd6a33aa2cdf0f46cd7ad46e3e8343817b74cf38719d1e7921d"
+      },
+      {
+        "step": 3,
+        "candidate_id": "pg266-sql-numeric-post-candidate-edd2b7df15ec",
+        "outcome_class": "confirmed_local_sql_row_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "0a29ab3fa4dbd482858b88dcbd144e1e6b0d3300ad9688aede8870182118db55"
+      },
+      {
+        "step": 4,
+        "candidate_id": "pg266-sql-search-get-candidate-b25449bf2306",
+        "outcome_class": "confirmed_local_sql_row_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "d365533921bcb517f34b6a7dcaf833b7af5cc77746eef77f500aa0f9632fa42f"
+      },
+      {
+        "step": 5,
+        "candidate_id": "pg266-sql-widebyte-post-candidate-84e4343632da",
+        "outcome_class": "sql_abstain",
+        "confirmed_positive": false,
+        "evidence_hash": "c2a30439613cf057e1089d5e59be84d0af0f83446eafdcab214a4985fa36ec3e"
+      },
+      {
+        "step": 6,
+        "candidate_id": "pg266-xss-filter-get-candidate-496409230d08",
+        "outcome_class": "confirmed_local_xss_dom_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "5b2f8640e9d63a2f2be740df89053a09546609e9554e4e7349c3fbcc1a660ffd"
+      },
+      {
+        "step": 7,
+        "candidate_id": "pg266-xss-reflected-get-candidate-506507984240",
+        "outcome_class": "confirmed_local_xss_dom_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "ee425448e514dac26ba890be21fcbfec62481847760328ab6bbe60fedf2efdda"
+      },
+      {
+        "step": 8,
+        "candidate_id": "pg266-xss-href-get-candidate-8342678d4165",
+        "outcome_class": "xss_abstain",
+        "confirmed_positive": false,
+        "evidence_hash": "e9e605f46745fdd27b36d7633e1dd35f73f2c3fdf3380d6e6a131dcaafd56d9c"
+      },
+      {
+        "step": 9,
+        "candidate_id": "pg266-xss-js-output-get-candidate-bcd9db171f98",
+        "outcome_class": "confirmed_local_xss_dom_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "ba9592f39396875a116cdfe6fddb8536b02fb951a50c57b748691d0e234fb53d"
+      },
+      {
+        "step": 10,
+        "candidate_id": "pg266-xss-dom-get-candidate-ab821dbdbb42",
+        "outcome_class": "confirmed_local_xss_dom_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "aac0ee36f8cbe682a0f86de3ba6d61018c71c886418ac65f556f5057c5460631"
+      },
+      {
+        "step": 11,
+        "candidate_id": "pg266-xss-stored-post-candidate-adb77f98eb50",
+        "outcome_class": "confirmed_local_xss_dom_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "a4896fd82135a7747b0d36259b9d56755222af11169ef1f3497e6409e2556ad3"
+      },
+      {
+        "step": 12,
+        "candidate_id": "pg266-redirect-get-candidate-8b5c7791aabb",
+        "outcome_class": "confirmed_local_redirect_effect",
+        "confirmed_positive": true,
+        "evidence_hash": "896049732384f8c6e366eea85d9efdf9ab070be765093bf6c00db121dc1e73b2"
+      }
+    ]
+  },
+  "promotion": {
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "human_review_required": true
+  },
+  "safety": {
+    "loopback_only": true,
+    "fresh_container_per_route": true,
+    "no_volume_or_bind_mount": true,
+    "database_health_gate_required": true,
+    "xss_browser_oracle_local_only": true,
+    "sql_time_delay": false,
+    "sql_write": false,
+    "external_callback": false,
+    "raw_payloads_human_catalog_only": true,
+    "raw_response_bodies_stored": false,
+    "source_hash_required": true,
+    "evidence_hash_required": true
+  },
+  "report_sha256": "04ca1ab43081bc25ba1d03009900d4c849f7938f8f4bd0af6ae21790a24c3a1a"
+}

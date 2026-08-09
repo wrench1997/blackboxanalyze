@@ -1,0 +1,72 @@
+{
+  "protocol_id": "pg-pk-60-pre-oracle-probe-policy-audit-v1",
+  "schema_version": "pg60-pre-oracle-probe-policy-audit-report-v1",
+  "status": "diagnostic_only",
+  "inputs": {
+    "pg47_report": "research\\pg47_counterfactual_action_value_report_v1.json",
+    "pg47_trace": "research\\pg47_counterfactual_action_trace_v1.json",
+    "pg42_catalog": "research\\pg42_independent_semantic_catalog_v1.json",
+    "model_input_contract": {
+      "state_features_function_present": true,
+      "invariant_function_present": true,
+      "state_features_reads_evaluator_fields": false,
+      "invariant_reads_evaluator_fields": false,
+      "report_declares_typed_oracle_consumed_by_model": false,
+      "report_declares_family_consumed_by_model": false
+    }
+  },
+  "metrics": {
+    "episode_count": 180,
+    "step_count": 558,
+    "action_sequence_pattern_count": 2,
+    "action_sequence_patterns": {
+      "GET→POST→GET": 162,
+      "GET→POST→GET→POST": 18
+    },
+    "first_action_counts": {
+      "GET": 180
+    },
+    "confirmation_action_counts": {
+      "GET.confirm": 162
+    },
+    "method_counts": {
+      "GET": 360,
+      "POST": 198
+    },
+    "confirmation_action_entropy": 0.0,
+    "paired_get_post_group_count": 180,
+    "get_post_coverage": true,
+    "fresh_reset_count": 558,
+    "evaluation_oracle_fields_present": 558,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "hard_gate": {
+    "schema_version": "pg60-pre-oracle-probe-policy-hard-gate-v1",
+    "status": "blocked",
+    "claim_allowed": false,
+    "reasons": [
+      "confirmation_action_is_fixed_order_confounded",
+      "no_state_dependent_confirmation_action_diversity"
+    ],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "interpretation": "PG-47's safety and query reduction metrics are not a proof of active policy learning when confirmation action entropy is zero; collect counterfactual targets where the best GET/POST action varies under the same abstract state.",
+  "required_next_dataset": {
+    "same_abstract_state_with_different_best_method": true,
+    "randomized_action_order": true,
+    "matched_get_post_negative_controls": true,
+    "typed_oracle_after_action_only": true,
+    "fresh_reset_per_action": true,
+    "evidence_hash_per_action": true,
+    "no_raw_probe_or_response_retention": true
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false,
+    "status": "blocked_fixed_action_order"
+  },
+  "report_sha256": "4575aa7f986c7c8d67872d67c90314524b4a28ca810e33d3eb46cb40da29c4b7"
+}

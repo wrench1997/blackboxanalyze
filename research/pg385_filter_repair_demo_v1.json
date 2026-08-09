@@ -1,0 +1,188 @@
+{
+  "schema_version": "pg385-filter-repair-demo-v1",
+  "status": "completed_filter_repair_loopback_only",
+  "fixture": {
+    "loopback_only": true,
+    "external_network": false,
+    "non_destructive": true,
+    "raw_response_stored": false,
+    "stateful_business_write": false
+  },
+  "steps": [
+    {
+      "step": "baseline_send",
+      "rule_ir": {
+        "transport_ref": "get_query",
+        "field_role_ref": "query_term",
+        "encoding_ref": "identity",
+        "payload_shape_ref": "query_marker",
+        "syntax_category_ref": "delimiter_boundary",
+        "probe_variant_ref": "source_attested_candidate",
+        "oracle_ref": "response_shape",
+        "safe_to_send": "1"
+      },
+      "wire_generated": true,
+      "wire_sha256": "4f8061326ac7feb10f64819b02f57eb6cd94ea7d35318fd50a267832125b7403",
+      "response": {
+        "status_class": "4xx",
+        "response_shape": "bounded_json_projection",
+        "filter_state": "filtered",
+        "filter_class": "encoding_filter",
+        "failure_shape": "raw_delimiter_blocked",
+        "effect_class": "none",
+        "typed_effect_confirmed": false,
+        "encoding_acceptance": "encoded_variant_required",
+        "external_network": false,
+        "raw_response_stored": false,
+        "response_evidence_sha256": "0e6e154f0a8f3814a78a15bd6730f6effdf3fa47b3746fa9de9250dc6d4d7986",
+        "wire_sha256": "4f8061326ac7feb10f64819b02f57eb6cd94ea7d35318fd50a267832125b7403",
+        "raw_wire_stored": false,
+        "raw_value_stored": false,
+        "evaluator_only": true
+      }
+    },
+    {
+      "step": "model_reads_sanitized_filter_feedback",
+      "observation": {
+        "method": "GET",
+        "surface_context": "query",
+        "parameter_role": "query_term",
+        "filter_feedback": {
+          "state": "filtered",
+          "filter_class": "encoding_filter",
+          "encoding_observed": "identity"
+        },
+        "response_shape": "bounded_json_projection"
+      },
+      "rule_ir": {
+        "question": "none",
+        "ask_reason": "none",
+        "next_action": "repair",
+        "repair_action": "encoding",
+        "transport_ref": "get_query",
+        "field_role_ref": "query_term",
+        "encoding_ref": "double_layer_order_sensitive",
+        "syntax_category_ref": "structured_value",
+        "probe_variant_ref": "one_variable_repair",
+        "safe_to_send": "False",
+        "payload_shape_ref": "query_marker",
+        "oracle_ref": "response_shape"
+      },
+      "model_safe_to_send": false,
+      "action_changed": true
+    },
+    {
+      "step": "evaluator_binds_and_replays_one_variable_encoding_repair",
+      "rule_ir": {
+        "question": "none",
+        "ask_reason": "none",
+        "next_action": "repair",
+        "repair_action": "encoding",
+        "transport_ref": "get_query",
+        "field_role_ref": "query_term",
+        "encoding_ref": "double_layer_order_sensitive",
+        "syntax_category_ref": "structured_value",
+        "probe_variant_ref": "runtime_canary",
+        "payload_shape_ref": "query_marker",
+        "oracle_ref": "response_shape",
+        "safe_to_send": "1"
+      },
+      "wire_generated": true,
+      "roles": {
+        "candidate": {
+          "status_class": "2xx",
+          "response_shape": "bounded_json_projection",
+          "filter_state": "typed_effect",
+          "filter_class": "none",
+          "failure_shape": "none",
+          "effect_class": "bounded_marker_reflection",
+          "typed_effect_confirmed": true,
+          "encoding_acceptance": "encoded_variant",
+          "external_network": false,
+          "raw_response_stored": false,
+          "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932",
+          "wire_sha256": "d5450b90782809899e16233493664555cc202db86843177d0178b1bae6c5cae3",
+          "raw_wire_stored": false,
+          "raw_value_stored": false,
+          "evaluator_only": true
+        },
+        "reference": {
+          "status_class": "2xx",
+          "response_shape": "bounded_json_projection",
+          "filter_state": "typed_effect",
+          "filter_class": "none",
+          "failure_shape": "none",
+          "effect_class": "bounded_marker_reflection",
+          "typed_effect_confirmed": true,
+          "encoding_acceptance": "encoded_variant",
+          "external_network": false,
+          "raw_response_stored": false,
+          "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932",
+          "wire_sha256": "a49988c5da93fed889d032f33c1230fd89bd36f0466965b40f36a1df245fb001",
+          "raw_wire_stored": false,
+          "raw_value_stored": false,
+          "evaluator_only": true
+        },
+        "negative": {
+          "status_class": "2xx",
+          "response_shape": "bounded_json_projection",
+          "filter_state": "no_effect",
+          "filter_class": "matched_negative",
+          "failure_shape": "negative_control",
+          "effect_class": "none",
+          "typed_effect_confirmed": false,
+          "encoding_acceptance": "encoded_variant",
+          "external_network": false,
+          "raw_response_stored": false,
+          "response_evidence_sha256": "ad28b07b5988766cd03fa3dd3e76c8c54aa0deff3a998cd4329467d8fa5dd43b",
+          "wire_sha256": "cd4d06aef12f05b8ac786379f06dd1493c312f9277c9686742f593a74131ca96",
+          "raw_wire_stored": false,
+          "raw_value_stored": false,
+          "evaluator_only": true
+        },
+        "replay": {
+          "status_class": "2xx",
+          "response_shape": "bounded_json_projection",
+          "filter_state": "typed_effect",
+          "filter_class": "none",
+          "failure_shape": "none",
+          "effect_class": "bounded_marker_reflection",
+          "typed_effect_confirmed": true,
+          "encoding_acceptance": "encoded_variant",
+          "external_network": false,
+          "raw_response_stored": false,
+          "response_evidence_sha256": "45f24ce3b5e9071ae71df5726a3807876db4da8b72b0f51fea894d120a836932",
+          "wire_sha256": "d3d2036a3ee6f42b74e11530d69af36fa75b760add03fa994afce5ede5d71e77",
+          "raw_wire_stored": false,
+          "raw_value_stored": false,
+          "evaluator_only": true
+        }
+      },
+      "negative_control_clean": true,
+      "replay_consistent": true
+    }
+  ],
+  "counts": {
+    "baseline_filtered": 1,
+    "model_repair_selected": 1,
+    "action_changed": 1,
+    "candidate_typed": 1,
+    "reference_typed": 1,
+    "negative_violation": 0,
+    "replay_typed": 1
+  },
+  "model_boundary": {
+    "model_outputs_abstract_rule_ir": true,
+    "model_raw_value": false,
+    "model_wire": false,
+    "evaluator_last_hop_canary_binding": true,
+    "raw_response_in_context": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "03e84db31bf5b026ee61540df1aaa5e37ceecbd6b59723d359cbf698d91ddba7"
+}

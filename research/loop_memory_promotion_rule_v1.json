@@ -1,0 +1,122 @@
+{
+  "schema_version": "sift-loop-memory-promotion-rule-v1",
+  "rule_id": "loop-memory-cross-dataset-filter-v1",
+  "purpose": "Prevent a long-term Rule Memory item from being promoted because of a single target, single dataset, or accidental sampling artifact.",
+  "scope": "all local research loops that write persistent Rule IR or payload memory",
+  "promotion_requirements": {
+    "minimum_distinct_datasets": 3,
+    "minimum_distinct_source_hashes": 3,
+    "minimum_sampling_seeds_per_dataset": 2,
+    "minimum_distinct_target_instances": 3,
+    "minimum_observations_per_dataset": 2,
+    "minimum_accepted_evidence_per_dataset": 1,
+    "maximum_false_positive_rate_per_dataset": 0.0,
+    "evidence_hash_required": true,
+    "source_hash_required": true,
+    "independent_seed_evidence_manifest_required": true,
+    "duplicate_evidence_does_not_increase_observation_count": true,
+    "evidence_hash_cannot_span_multiple_source_hashes": true,
+    "oracle_revalidation_required_for_accepted_rows": true,
+    "typed_boundary_oracle_required_for_logic_access": true,
+    "plain_url_percent_pair_required_for_logic_access": true,
+    "counterfactual_replay_required": true,
+    "state_mutation_forbidden": true,
+    "loopback_or_authorized_local_only": true,
+    "same_rule_key_required": true
+  },
+  "procedure": [
+    "Freeze the candidate Rule IR key before evaluation.",
+    "Replay the candidate on at least three authorized datasets/target instances.",
+    "Use at least two independent sampling seeds per dataset.",
+    "For logic/access candidates, replay typed authorization, invariant, or history-binding oracles together with semantically close normal-200/403 and bound-state counterfactuals.",
+    "Require a plain/url-percent pair to produce the same typed oracle signal before any positive row is eligible for promotion.",
+    "Record only bounded outcome summaries, sampling seed, target instance attestation, oracle revalidation flag, and evidence hash in the promotion ledger.",
+    "Compute false positives separately for every dataset; one false positive quarantines the candidate.",
+    "Promote only when every requirement passes; otherwise keep the item episode-local and force abstain for durable retrieval."
+  ],
+  "visibility_boundary": {
+    "model_may_see": ["structural Rule IR key", "bounded probe/response projection", "confidence and abstain state"],
+    "model_may_not_see": ["dataset labels", "target family labels", "evaluator state", "promotion verdict during probe selection"]
+  },
+  "failure_actions": {
+    "insufficient_coverage": "quarantine",
+    "false_positive": "quarantine_and_replay",
+    "missing_evidence_hash": "reject",
+    "missing_source_hash": "reject",
+    "repeated_seed_evidence": "quarantine_and_replay",
+    "missing_oracle_revalidation": "quarantine",
+    "target_or_scope_mismatch": "reject",
+    "disagreement_across_variants": "abstain"
+  },
+  "shared_router_policy": {
+    "router_is_diagnostic_only": true,
+    "family_specific_oracle_required_for_positive_memory": true,
+    "canonicalize_encoding_before_embedding": true,
+    "unknown_surface_must_abstain_or_route_to_control": true,
+    "ood_dimension_whitelist_required": true,
+    "surface_specific_ood_dimensions_forbidden": true,
+    "abstain_may_fallback_to_authorized_family_oracle": true,
+    "router_and_fallback_recall_reported_separately": true,
+    "same_source_hash_variants_count_as_one_dataset": true
+  },
+  "cross_source_promotion_policy": {
+    "minimum_distinct_source_hashes": 3,
+    "source_hash_must_be_recorded_per_dataset": true,
+    "target_variant_and_seed_stability_does_not_replace_source_diversity": true,
+    "router_gated_and_fallback_oracle_paths_must_be_reported": true,
+    "failure_action": "quarantine_and_fresh_reset_replay",
+    "implementation": "scripts/run_pg_pk_13_cross_source_promotion.py"
+  },
+  "shared_router_calibration_policy": {
+    "temperature_scaling_on_frozen_calibration_split": true,
+    "calibrated_confidence_is_route_only": true,
+    "minimum_precision": 0.99,
+    "minimum_coverage": 0.50,
+    "maximum_control_false_accept_rate": 0.05,
+    "fallback_oracle_must_remain_available_after_abstain": true,
+    "implementation": "scripts/train_shared_family_router.py + app/shared_router_bridge.py"
+  },
+  "sql_cross_source_counterfactual_policy": {
+    "new_source_positive_channels_holdout": true,
+    "negative_only_augmentation": true,
+    "old_source_replay_required": true,
+    "false_positive_ledger_required": true,
+    "minimum_distinct_source_hashes_for_promotion": 3,
+    "failure_action": "quarantine_and_replay",
+    "implementation": "scripts/run_pg_pk_15_sql_v3_cross_source_promotion.py"
+  },
+  "cross_family_surface_guard_policy": {
+    "logic_access_rows_are_sql_family_negative": true,
+    "surface_and_query_vocabulary_holdout_required": true,
+    "typed_oracle_positive_authority_only": true,
+    "shared_router_positive_authority": false,
+    "pre_fix_ledger_and_old_sql_replay_required": true,
+    "sql_cross_family_candidate_max": 0,
+    "failure_action": "quarantine_and_cross_family_negative_replay",
+    "implementation": "scripts/run_pg_pk_16_logic_v2_cross_family_guard.py"
+  },
+  "logic_access_cross_source_promotion_policy": {
+    "minimum_distinct_source_hashes": 3,
+    "positive_pair_coverage_required_per_source": 1.0,
+    "typed_oracles": ["synthetic_authorization_boundary_v1", "synthetic_business_invariant_v1", "synthetic_history_binding_v1"],
+    "plain_url_percent_pair_required": true,
+    "false_positive_ledger_max": 0,
+    "failure_action": "quarantine_and_fresh_reset_replay",
+    "implementation": "scripts/run_pg_pk_18_logic_v3_cross_source_promotion.py"
+  },
+  "experiment_ledger_policy": {
+    "hash_chain_required": true,
+    "workspace_scoped": true,
+    "raw_body_and_credentials_forbidden": true,
+    "verify_before_memory_promotion": true,
+    "implementation": "app/experiment_ledger.py"
+  },
+  "unified_runner_policy": {
+    "provenance_summary_required": true,
+    "failed_rule_replay_queue_required": true,
+    "memory_write_blocked_while_replay_queue_nonempty": true,
+    "implementation": "app/promotion_runner.py"
+  },
+  "implementation": "app/memory_promotion_gate.py + app/shared_family_representation.py",
+  "test": "tests/test_memory_promotion_gate.py"
+}

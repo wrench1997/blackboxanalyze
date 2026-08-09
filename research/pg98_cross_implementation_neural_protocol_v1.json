@@ -1,0 +1,54 @@
+{
+  "protocol_id": "pg-pk-98-cross-implementation-neural-proposal-v1",
+  "schema_version": "pg98-cross-implementation-neural-protocol-v1",
+  "purpose": "frozen neural automatic goal/label proposal on a fresh independent implementation",
+  "training_contract": {
+    "source": "pg94",
+    "seeds": [
+      361,
+      367
+    ],
+    "pg42_excluded": true,
+    "typed_oracle_visible": false
+  },
+  "evaluation_contract": {
+    "source": "pg42",
+    "implementations": [
+      "cobalt",
+      "quartz"
+    ],
+    "seeds": [
+      401,
+      409,
+      419
+    ],
+    "families_hidden_to_model": true
+  },
+  "canonical_delta_projection": {
+    "schema": "canonical-delta-projection-v1",
+    "field_names_discarded": true,
+    "marker_and_oracle_discarded": true
+  },
+  "safety_contract": {
+    "loopback_only": true,
+    "get_post_required": true,
+    "fresh_reset_required": true,
+    "negative_control_required": true,
+    "evidence_sha256_required": true
+  },
+  "gate": {
+    "minimum_cross_implementation_recall": 0.8,
+    "minimum_seed_recall": 0.75,
+    "minimum_implementation_recall": 0.75,
+    "false_accept_count": 0,
+    "unknown_family_strict_abstain": true,
+    "not_all_abstain": true,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "blocked",
+    "blocking_reasons": [
+      "unknown_family_strict_abstain"
+    ]
+  }
+}

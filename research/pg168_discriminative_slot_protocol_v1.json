@@ -1,0 +1,42 @@
+{
+  "protocol_id": "pg-pk-168-discriminative-slot-v1",
+  "schema_version": "pg168-discriminative-slot-protocol-v1",
+  "base_checkpoint": "artifacts\\pg164-xxl-capacity-v1\\xxl_typed_mix.pt",
+  "dataset": "research\\pg168_discriminative_slot_dataset_v1.json",
+  "model_parameter_count": 101380329,
+  "strategies": {
+    "replay_only": {
+      "rows": 9999,
+      "lr": 2e-05,
+      "epochs": 1
+    },
+    "slot_augmented": {
+      "rows": 17999,
+      "lr": 2e-05,
+      "epochs": 1
+    }
+  },
+  "ood_gate": {
+    "requires_projection_overlap_zero": true,
+    "observed_projection_overlap": 0,
+    "claim_allowed": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "e8c965bdfd7222865ff842a7370e684ba7ec565f974ba39648b69bc32bd20195"
+}

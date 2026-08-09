@@ -1,0 +1,66 @@
+{
+  "protocol_id": "pg-pk-116-multisource-trace-training-v1",
+  "schema_version": "pg116-multisource-trace-training-protocol-v1",
+  "objective": "用两个授权本地目标 profile 的真实 GET/POST/fresh-reset 轨迹训练同一个小型 Rule IR 决策解码器",
+  "sources": [
+    {
+      "source_id": "alpha",
+      "implementation": "app/pg116_multisource_training_target.py:create_target_app(alpha)",
+      "surface_set": ["policy", "decoy", "neutral", "opaque"]
+    },
+    {
+      "source_id": "beta",
+      "implementation": "app/pg116_multisource_training_target.py:create_target_app(beta)",
+      "surface_set": ["boundary", "layout", "steady", "blind"]
+    }
+  ],
+  "transport": "in_process_loopback_asgi_get_post",
+  "train_seeds": {
+    "alpha": [11601, 11603, 11605],
+    "beta": [11611, 11613, 11615]
+  },
+  "dev_seeds": {
+    "alpha": [11602, 11604, 11606],
+    "beta": [11612, 11614, 11616]
+  },
+  "action_contract": {
+    "methods": ["GET", "POST"],
+    "sequence": ["control_get", "candidate_get", "control_post", "candidate_post"],
+    "fresh_reset_per_action": true,
+    "matched_negative_control_required": true,
+    "target_evidence_sha256_required": true,
+    "bridge_evidence_sha256_required": true
+  },
+  "model_contract": {
+    "implementation": "app/pg115_small_rule_ir_decoder.py",
+    "feature_dim": 40,
+    "hidden_dim": 48,
+    "decision_set": ["confirmed_positive", "confirmed_negative", "candidate", "abstain"],
+    "previous_checkpoint_reuse_forbidden": true,
+    "pg114_excluded_from_training": true,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "hard_gate": {
+    "positive_recall_nonzero": true,
+    "decoy_false_accept_zero": true,
+    "unknown_abstain_nonzero": true,
+    "all_abstain_is_not_success": true,
+    "step_macro_f1_reported": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "reason": "two profiles and one blind holdout are a training improvement, not a broad scanner certification"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "real_sleep_performed": false
+  }
+}

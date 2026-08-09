@@ -1,0 +1,91 @@
+{
+  "schema_version": "pg-pk-42-independent-semantic-ood-protocol-v1",
+  "protocol_id": "PG-42",
+  "title": "独立实现与新语义族的 GET/POST typed replay 泛化",
+  "objective": "在不复用 PG-37/40 HTTP 实现的 loopback 靶场上，采集多目标、多种子、双通道 candidate/control trace，检验 effect head 能否跨响应投影迁移，并要求新语义族安全 unknown 路由。",
+  "authorization": {
+    "scope": "workspace_local_only",
+    "host": "127.0.0.1",
+    "external_network": false,
+    "read_only": true,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "target": {
+    "fixture": "app/pg42_independent_semantic_fixture.py",
+    "implementations": ["cobalt", "quartz"],
+    "surface_count": 10,
+    "surface_variants": ["ledger", "envelope", "framed"],
+    "families": ["xss", "injection", "authentication", "access_control", "logic", "url_redirect", "input_validation", "command_injection", "template_injection", "ordinary_response"],
+    "phases": ["screen", "confirm", "error", "timeout"],
+    "methods": ["GET", "POST"],
+    "sampling_seeds": [401, 409, 419]
+  },
+  "sample_contract": {
+    "planned_rows": 2880,
+    "planned_typed_positive_rows": 324,
+    "planned_negative_control_rows": 2556,
+    "planned_candidate_control_pairs": 1440,
+    "fresh_reset_per_sample": true,
+    "typed_oracle_is_evaluation_only": true,
+    "model_excludes": ["family", "positive", "positive_authority", "evidence_sha256", "source_id", "target_instance_id", "raw_probe", "raw_response_body"],
+    "trace_requires": ["GET", "POST", "candidate", "control", "belief_before", "belief_after", "fresh_reset", "evidence_sha256"]
+  },
+  "split_plan": {
+    "train": "cobalt, seeds 401/409, ledger+envelope, known semantic references",
+    "seed_holdout": "cobalt, seed 419, ledger+envelope",
+    "surface_holdout": "cobalt, framed variant",
+    "implementation_holdout": "quartz, all variants",
+    "new_family_holdout": "template-boundary semantic family",
+    "negative_control": "ordinary-surface negatives across methods and variants",
+    "strict_family_claim": "blocked unless new-family typed recall and unknown abstain pass on independent implementation"
+  },
+  "promotion_gate": {
+    "zero_negative_effect_false_accept": true,
+    "zero_unknown_misname": true,
+    "known_effect_recall_required": true,
+    "new_family_must_not_be_forced_into_known_family": true,
+    "all_get_post_and_fresh_replay_required": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "blocked_independent_implementation_effect_recall"
+  },
+  "collection_result": {
+    "catalog": "research/pg42_independent_semantic_catalog_v1.json",
+    "trace": "research/pg42_independent_semantic_trace_v1.json",
+    "sample_count": 2880,
+    "candidate_control_pair_count": 1440,
+    "typed_positive_count": 324,
+    "negative_control_count": 2556,
+    "fresh_reset_count": 2880,
+    "source_count": 2,
+    "target_instance_count": 2880,
+    "trace_episode_count": 60,
+    "accepted_evaluation_episode_count": 54,
+    "get_post_covered": true,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "run_result": {
+    "script": "scripts/run_pg42_independent_ood_evaluation.py",
+    "train_effect_recall": 1.0,
+    "dev_effect_recall": 0.4,
+    "independent_implementation_effect_recall": 0.666667,
+    "new_family_effect_recall": 0.666667,
+    "negative_effect_false_accept_count": 0,
+    "known_family_recall": 0.666667,
+    "unknown_effect_recall": 0.666667,
+    "unknown_misname_count": 0,
+    "unknown_not_abstain_count": 0,
+    "unknown_strict_abstain": true,
+    "safe_routing_gate_status": "blocked",
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "failure_classification": "experiment_representation_and_cross_implementation_generalization",
+    "interpretation": "独立响应投影导致 effect recall 下降；负例安全性保持，但不能声称族外泛化。"
+  },
+  "status": "run_completed_independent_generalization_gate_failed_no_promotion"
+}

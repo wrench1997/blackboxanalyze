@@ -1,0 +1,63 @@
+{
+  "protocol_id": "pg-pk-252-causal-probe-gate-capacity-training-v1",
+  "schema_version": "pg252-probe-gate-capacity-training-protocol-v1",
+  "capacity_variants": [
+    1024,
+    2048,
+    4096
+  ],
+  "train_steps": 120,
+  "seed_holdout": [
+    23702,
+    23632
+  ],
+  "extended_source_holdout_substrings": [],
+  "extended_source_holdout_pairs": [
+    [
+      "pg242_pikachu_source_native",
+      [
+        24202
+      ]
+    ],
+    [
+      "pg244_pikachu_sql_repair",
+      [
+        24402
+      ]
+    ],
+    [
+      "pg244_pikachu_xss_repair",
+      [
+        24402
+      ]
+    ]
+  ],
+  "excluded_source_substrings": [
+    "pg246_vulnerableapp_source_independent"
+  ],
+  "holdout_must_contain_positive_and_abstain": true,
+  "typed_positive_contract": [
+    "fresh_reset",
+    "candidate_reference_agreement",
+    "negative_clean",
+    "typed_effect",
+    "result_fixture"
+  ],
+  "false_send_is_hard_failure": true,
+  "next_token_loss_not_promotion_gate": true,
+  "frozen_body_required": true,
+  "promotion_blocked": true,
+  "raw_payload_and_response_excluded": true,
+  "protocol_sha256": "7a1b7db29f0c728420ee05292c4792cfb0089437301526428135e2c41e9fe0e1",
+  "probe_gate_schema": "pg252-causal-probe-gate-record-v1",
+  "probe_target": "send only when observable fresh-reset + field + binding + typed-oracle conditions hold",
+  "eventual_effect_judged_out_of_band": true,
+  "pika_holdout": [
+    "pg242_pikachu_source_native:24202",
+    "pg244_pikachu_sql_repair:24402",
+    "pg244_pikachu_xss_repair:24402"
+  ],
+  "implementation_ood": "pg246_vulnerableapp_source_independent:all_seeds",
+  "causal_classification_position": "oracle_available immediately before phase=diagnose",
+  "post_result_canary_required": true
+}

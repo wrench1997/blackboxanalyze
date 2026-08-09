@@ -1,0 +1,259 @@
+{
+  "schema_version": "pg174-full-holdout-routing-report-v1",
+  "protocol_id": "pg-pk-174-full-holdout-routing-v1",
+  "status": "completed_pg174_full_holdout_routing",
+  "scope": {
+    "claim": "full holdout loss weighting and source routing diagnostic on PG173 160M epoch4",
+    "real_vulnerability_scanner_claim_allowed": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "train_row_count": 1000,
+    "source_rows_per_sample": 250,
+    "full_eval_counts": {
+      "base_holdout": 1210,
+      "typed_holdout": 203,
+      "pg168_ood": 1000,
+      "pg170_ood": 1000,
+      "pg172_ood": 1000
+    },
+    "source_dataset_sha256": {
+      "pg163_base": "8edda7ad0e9db70ca6fa00f3ee892e77f7fe68ee6dcb909c032e4eaff4453d30",
+      "pg168_slots": "af5580681b101d275aecdae36a76536fb95dc759f27aba6d019c48420a10e72f",
+      "pg170_generator": "dcaa74c1bb40905a471f1712b482ebff40f6d57638e57608394b681279c82681",
+      "pg172_generator": "2bc8ea5e5cbc9b05f14139766bab3171f85bedd39ee8b4b1addaf2643aefd631"
+    }
+  },
+  "baseline": {
+    "101m_epoch4": {
+      "base_holdout": {
+        "loss": 1.05004273,
+        "perplexity": 2.85777322,
+        "next_token_accuracy": 0.51221219,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.90984055,
+        "perplexity": 2.48392643,
+        "next_token_accuracy": 0.76995961,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 0.88664116,
+        "perplexity": 2.42696417,
+        "next_token_accuracy": 0.67670833,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 0.91067872,
+        "perplexity": 2.48600927,
+        "next_token_accuracy": 0.634125,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.90381177,
+        "perplexity": 2.46899643,
+        "next_token_accuracy": 0.59890323,
+        "token_count": 31000
+      }
+    },
+    "160m_epoch4": {
+      "base_holdout": {
+        "loss": 1.05524524,
+        "perplexity": 2.87267957,
+        "next_token_accuracy": 0.51182604,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.88393242,
+        "perplexity": 2.42039904,
+        "next_token_accuracy": 0.77679404,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 0.86430501,
+        "perplexity": 2.37335605,
+        "next_token_accuracy": 0.67716667,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 0.89379151,
+        "perplexity": 2.44437999,
+        "next_token_accuracy": 0.636625,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.89324811,
+        "perplexity": 2.44305209,
+        "next_token_accuracy": 0.59729032,
+        "token_count": 31000
+      }
+    }
+  },
+  "variants": {
+    "uniform": {
+      "strategy": "uniform",
+      "weights": {
+        "pg163_base": 1.0,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "train_row_count": 1000,
+      "train_loss": 0.8660663,
+      "base_holdout": {
+        "loss": 1.10812319,
+        "perplexity": 3.02866882,
+        "next_token_accuracy": 0.51036588,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.90117925,
+        "perplexity": 2.46250531,
+        "next_token_accuracy": 0.7480584,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 1.14318389,
+        "perplexity": 3.13673951,
+        "next_token_accuracy": 0.593,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 1.05548472,
+        "perplexity": 2.87336759,
+        "next_token_accuracy": 0.61108333,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.88165429,
+        "perplexity": 2.41489134,
+        "next_token_accuracy": 0.62858065,
+        "token_count": 31000
+      },
+      "elapsed_seconds": 40.894,
+      "checkpoint": "artifacts\\pg174-full-holdout-routing-v1\\uniform.pt"
+    },
+    "replay_weighted": {
+      "strategy": "replay_weighted",
+      "weights": {
+        "pg163_base": 2.0,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "train_row_count": 1000,
+      "train_loss": 0.86665294,
+      "base_holdout": {
+        "loss": 1.10815177,
+        "perplexity": 3.02875537,
+        "next_token_accuracy": 0.51094512,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.90017755,
+        "perplexity": 2.46003985,
+        "next_token_accuracy": 0.74790308,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 1.14245822,
+        "perplexity": 3.13446412,
+        "next_token_accuracy": 0.59320833,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 1.05493899,
+        "perplexity": 2.87179993,
+        "next_token_accuracy": 0.61120833,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.88148506,
+        "perplexity": 2.41448269,
+        "next_token_accuracy": 0.62864516,
+        "token_count": 31000
+      },
+      "elapsed_seconds": 22.82,
+      "checkpoint": "artifacts\\pg174-full-holdout-routing-v1\\replay_weighted.pt"
+    },
+    "source_routed": {
+      "strategy": "source_routed",
+      "weights": {
+        "pg163_base": 1.5,
+        "pg168_slots": 1.0,
+        "pg170_generator": 1.0,
+        "pg172_generator": 1.0
+      },
+      "train_row_count": 1000,
+      "train_loss": 0.83340613,
+      "base_holdout": {
+        "loss": 1.07567456,
+        "perplexity": 2.93197003,
+        "next_token_accuracy": 0.51280349,
+        "token_count": 82868
+      },
+      "typed_holdout": {
+        "loss": 0.871065,
+        "perplexity": 2.38945427,
+        "next_token_accuracy": 0.74743709,
+        "token_count": 6438
+      },
+      "pg168_ood": {
+        "loss": 0.87042683,
+        "perplexity": 2.38792987,
+        "next_token_accuracy": 0.67566667,
+        "token_count": 24000
+      },
+      "pg170_ood": {
+        "loss": 0.90030176,
+        "perplexity": 2.46034543,
+        "next_token_accuracy": 0.63604167,
+        "token_count": 24000
+      },
+      "pg172_ood": {
+        "loss": 0.89110792,
+        "perplexity": 2.43782907,
+        "next_token_accuracy": 0.59819355,
+        "token_count": 31000
+      },
+      "elapsed_seconds": 23.179,
+      "checkpoint": "artifacts\\pg174-full-holdout-routing-v1\\source_routed.pt"
+    }
+  },
+  "selection": {
+    "promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "full_holdout_used": true,
+    "objective": "minimize base+typed+three_ood aggregate without trading away any split",
+    "aggregate_ppl": {
+      "uniform": 2.78323451,
+      "replay_weighted": 2.78190839,
+      "source_routed": 2.52150573
+    },
+    "baseline_101m_aggregate_ppl": 2.5447339,
+    "baseline_160m_aggregate_ppl": 2.51077335,
+    "best_variant": "source_routed",
+    "best_variant_beats_160m_baseline": false,
+    "selected_variant": null
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "credential_access": false,
+    "raw_payloads_in_model": false,
+    "raw_responses_in_model": false,
+    "vulnerability_labels_in_model": false,
+    "oracle_labels_in_model": false,
+    "family_labels_in_model": false,
+    "memory_promotion_allowed": false
+  },
+  "source": {
+    "runner_sha256": "097dcccca3f7cd01c16f6f16d1a74531a6af64c2e4f2e19be61627f15f575a24",
+    "reference_101m_sha256": "6d21786ce55582f986e7c06d49541697097c25b994f0e4312f7a717e9e9b61a4",
+    "reference_160m_sha256": "9c67021ec66ed1196ec09e4d3eac24c2fffd8ad9e85c3bcfee06d529737e0cb0"
+  },
+  "report_sha256": "bad170178917fb1ab527aafc3fe9a901880a4f2517f4289801bf92c791f82ae4"
+}

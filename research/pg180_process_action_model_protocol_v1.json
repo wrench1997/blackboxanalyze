@@ -1,0 +1,86 @@
+{
+  "protocol_id": "pg-pk-180-process-action-model-v1",
+  "schema_version": "pg180-process-action-model-protocol-v1",
+  "source_trace": "research\\pg179b_pikachu_iterative_trace_v1.json",
+  "splits": [
+    {
+      "name": "url_holdout",
+      "test": [
+        "url_redirect_get"
+      ],
+      "dev": [
+        "xss_blind_post"
+      ]
+    },
+    {
+      "name": "xss_holdout",
+      "test": [
+        "xss_stored_post",
+        "xss_blind_post"
+      ],
+      "dev": [
+        "sqli_id_post"
+      ]
+    },
+    {
+      "name": "injection_holdout",
+      "test": [
+        "sqli_delete_post",
+        "sqli_header_post",
+        "sqli_id_post",
+        "sqli_widebyte_post"
+      ],
+      "dev": [
+        "url_redirect_get"
+      ]
+    }
+  ],
+  "seeds": [
+    18001,
+    18002
+  ],
+  "variants": {
+    "small": {
+      "kind": "causal",
+      "d_model": 128,
+      "nhead": 4,
+      "layers": 2,
+      "max_len": 128
+    },
+    "medium": {
+      "kind": "causal",
+      "d_model": 256,
+      "nhead": 8,
+      "layers": 3,
+      "max_len": 128
+    },
+    "moe_large": {
+      "kind": "moe",
+      "d_model": 512,
+      "nhead": 8,
+      "layers": 3,
+      "n_experts": 4,
+      "expert_ff": 1024,
+      "max_len": 128
+    }
+  },
+  "epochs": 80,
+  "patience": 12,
+  "action_vocabulary": [
+    "repeat_matched_negative_pair",
+    "abstain_unknown_oracle",
+    "probe_candidate_other_method"
+  ],
+  "required_gates": {
+    "leave_surface_out": true,
+    "family_and_route_excluded_from_input": true,
+    "raw_probe_and_response_excluded": true,
+    "typed_positive_excluded": true,
+    "single_channel_probe_must_be_blocked": true,
+    "safe_action_allowlist": true,
+    "capacity_comparison_requires_multiple_seeds": true,
+    "promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "656bbd4a6401ef7cfa1bde6149042fa2a9e08af8d085184171dcc48ae34710e8"
+}

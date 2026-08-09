@@ -1,0 +1,65 @@
+{
+  "protocol_id": "pg-pk-57-rule-ir-oracle-posttraining-v1",
+  "schema_version": "pg57-rule-ir-posttraining-protocol-v1",
+  "objective": "在 PG-56 因果 Transformer 的 ORACLE_TARGET 前缀上训练独立 Rule IR 头，并把 typed-oracle 结果严格作为目标而不是输入。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false
+  },
+  "input_contract": {
+    "prefix_ends_at": "ORACLE_TARGET",
+    "oracle_is_target_only": true,
+    "family_name_in_input": false,
+    "unknown_family_class": false,
+    "raw_probe_in_input": false,
+    "raw_response_body_in_input": false
+  },
+  "split_plan": {
+    "training": "PG-56 train 322",
+    "dev": "PG-56 dev 188",
+    "holdout": "PG-56 PG-54 framed 120"
+  },
+  "model": {
+    "base": "artifacts/pg56-causal-trace-transformer/model.pt",
+    "head": "scripts/train_pg57_rule_ir_posttrainer.py",
+    "checkpoint": "artifacts/pg57-rule-ir-posttrainer/rule_ir_head.pt",
+    "effect_classes": ["abstain", "confirmed", "rejected"],
+    "transport_classes": ["GET", "POST"],
+    "family_classifier": false
+  },
+  "gates": {
+    "threshold_calibrated_on_dev_only": true,
+    "zero_dev_unknown_confirmed_attempts_required": true,
+    "zero_dev_negative_false_accepts_required": true,
+    "zero_holdout_unknown_confirmed_attempts_required": true,
+    "zero_holdout_negative_false_accepts_required": true,
+    "all_abstain_is_safety_only_not_capability": true,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "run_result": {
+    "status": "quarantined_safety_gate_passed_capability_gate_failed",
+    "device": "cuda",
+    "dev_raw_confirmed_recall": 1.0,
+    "dev_raw_unknown_confirmed_attempts": 8,
+    "dev_raw_negative_false_accept_count": 12,
+    "dev_calibrated_confirmed_recall": 0.035714,
+    "dev_calibrated_unknown_confirmed_attempts": 0,
+    "dev_calibrated_negative_false_accept_count": 0,
+    "holdout_raw_confirmed_recall": 1.0,
+    "holdout_raw_unknown_confirmed_attempts": 12,
+    "holdout_raw_negative_false_accept_count": 0,
+    "holdout_calibrated_confirmed_recall": 0.0,
+    "holdout_calibrated_unknown_confirmed_attempts": 0,
+    "holdout_calibrated_negative_false_accept_count": 0,
+    "holdout_calibrated_abstain_rate": 1.0,
+    "interpretation": "Typed-oracle posttraining learns the effect target, but the dev-only safety threshold collapses on the framed holdout; this is safe abstention, not generalization.",
+    "report": "research/pg57_rule_ir_posttraining_report_v1.json"
+  }
+}

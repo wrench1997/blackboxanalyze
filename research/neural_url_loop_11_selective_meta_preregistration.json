@@ -1,0 +1,41 @@
+{
+  "schema_version": "sift-selective-meta-preregistration-v1",
+  "experiment_id": "neural-url-loop-11-selective-meta-pilot",
+  "registered_at": "2026-08-01T20:10:00+08:00",
+  "status": "frozen-before-retraining",
+  "trigger": {
+    "fresh_candidate_neural_min": 0.758333,
+    "fresh_gain_over_frozen_min": 0.156666,
+    "fresh_set_head_gain_min": 0.176666,
+    "blocking_regression_family": "truthiness_gate",
+    "blocking_regression": -0.038333,
+    "causal_observation": "URL set features are identically zero on truthiness_gate; regression originates in globally applied meta-label permutation"
+  },
+  "single_change": {
+    "previous": "episode-consistent label permutation on all ten training families",
+    "candidate": "episode-consistent label permutation only on substring_origin, string_suffix_primitive and url_hostname_primitive",
+    "unchanged_non_url_families": "train with original labels",
+    "reason": "force URL episode binding without erasing stable non-URL mappings"
+  },
+  "fixed": {
+    "parameters": 908546,
+    "architecture": "639-position byte Transformer plus 128-weight learned URL set head",
+    "programs": 2700,
+    "epochs": 10,
+    "training_seed": 20261503,
+    "target_family_training_examples": 0,
+    "canonical_url_slots": true,
+    "checkpoint_selection": "neural validation only"
+  },
+  "pilot_acceptance": {
+    "url_target_min": 0.70,
+    "set_head_ablation_gain_min": 0.10,
+    "truthiness_delta_vs_canonical_baseline_min": -0.02,
+    "all_old_family_delta_min": -0.02,
+    "fresh_confirmation_required_after_pilot": true
+  },
+  "lineage": {
+    "failed_confirmation": "research/neural_url_loop_11_confirmation.json",
+    "previous_pilot": "research/neural_url_loop_11_set_head_pilot.json"
+  }
+}

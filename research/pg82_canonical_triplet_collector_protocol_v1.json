@@ -1,0 +1,65 @@
+{
+  "protocol_id": "pg-pk-82-canonical-triplet-collector-v2",
+  "schema_version": "pg82-canonical-triplet-collector-protocol-v1",
+  "source_contract": {
+    "collector": "scripts\\run_pg53_cross_source_typed_replay.py",
+    "loopback_only": true,
+    "fresh_target_per_case": true,
+    "independent_source_count_min": 5,
+    "independent_family_count_min": 8,
+    "get_post_required": true
+  },
+  "triplet_contract": {
+    "neutral_projection": true,
+    "negative_probe_projection": true,
+    "positive_probe_projection": true,
+    "neutral_oracle": true,
+    "negative_oracle": true,
+    "positive_oracle": true,
+    "fresh_reset": true,
+    "evidence_hash": true,
+    "raw_persistence_forbidden": true
+  },
+  "required_gates": {
+    "triplet_complete_per_case": true,
+    "typed_positive_per_case": true,
+    "typed_negative_oracle_per_case": true,
+    "negative_probe_strictly_negative": true,
+    "fresh_target_per_case": true,
+    "get_post_covered": true,
+    "multi_source": true,
+    "multi_family": true,
+    "trace_episodes_accepted": true,
+    "no_raw_persistence": true
+  },
+  "run_result": {
+    "hard_gate": {
+      "status": "passed",
+      "checks": {
+        "triplet_complete_per_case": true,
+        "typed_positive_per_case": true,
+        "typed_negative_oracle_per_case": true,
+        "negative_probe_strictly_negative": true,
+        "fresh_target_per_case": true,
+        "get_post_covered": true,
+        "multi_source": true,
+        "multi_family": true,
+        "trace_episodes_accepted": true,
+        "no_raw_persistence": true,
+        "negative_probe_requested_false": true
+      },
+      "blocking_reasons": [],
+      "claim_allowed": false
+    },
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "next_experiment": "PG82 source-isolated Trace Transformer with geometry tokens",
+  "projection_contract": {
+    "schema": "canonical_effect_projection_v2",
+    "surface_observation": "bounded_label_free",
+    "generic_effect_geometry": "recursive_type_counts_only",
+    "raw_body_forbidden": true,
+    "matched_negative_probe_positive_requested": false
+  }
+}

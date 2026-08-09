@@ -1,0 +1,79 @@
+{
+  "audit_id": "pg277-counterfactual-question-dataset-audit-v1",
+  "status": "passed",
+  "audit_checks": {
+    "dataset_hash": true,
+    "fixture_hash": true,
+    "split_counts": true,
+    "split_disjoint": true,
+    "positive_support": true,
+    "matched_shape_conflicts_exist": true,
+    "enriched_conflicts_resolved": true,
+    "coarse_quarantined": true,
+    "context_firewall": true,
+    "question_state_present": true,
+    "evidence_complete": true,
+    "raw_off": true,
+    "promotion_blocked": true
+  },
+  "counts": {
+    "train": 40,
+    "holdout": 20
+  },
+  "coarse_collision": {
+    "group_count": 10,
+    "conflict_group_count": 4,
+    "conflicting_record_count": 36,
+    "conflicts": [
+      {
+        "projection_sha256": "8e84c4f3d3e326313e31e692caa0659ab7d7f28c8012437a330c0779830b113b",
+        "count": 6,
+        "positive_count": 2,
+        "modes": [
+          "absent_decoy",
+          "attr_decoy",
+          "attr_sink"
+        ]
+      },
+      {
+        "projection_sha256": "5ea240104891079b93186b224105b7f9c26f801cae27170d752346372f3ae3b7",
+        "count": 6,
+        "positive_count": 2,
+        "modes": [
+          "absent_decoy",
+          "attr_decoy",
+          "attr_sink"
+        ]
+      },
+      {
+        "projection_sha256": "ad6cb6167324171608148c6ae8b03e40564df677055ac9b6efc76065529b99f7",
+        "count": 12,
+        "positive_count": 4,
+        "modes": [
+          "absent_decoy",
+          "attr_decoy",
+          "attr_sink"
+        ]
+      },
+      {
+        "projection_sha256": "2ade68a0769fc8945ab0f8a40e981edb77147519af192d1d303c8c8c41eab1ba",
+        "count": 12,
+        "positive_count": 4,
+        "modes": [
+          "absent_decoy",
+          "attr_decoy",
+          "attr_sink"
+        ]
+      }
+    ]
+  },
+  "enriched_collision": {
+    "group_count": 18,
+    "conflict_group_count": 0,
+    "conflicting_record_count": 0,
+    "conflicts": []
+  },
+  "failures": [],
+  "interpretation": "Coarse shape tokens are provably insufficient because identical projections map to conflicting labels. Marker-channel observation resolves the collision and is eligible for the model ablation; coarse records remain diagnostic-only.",
+  "audit_sha256": "7c3abb319e95b3d6e197a66c813d652c237180c837ee03d795c74c7942bc4f48"
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "pg-pk-51-pikachu-docker-dual-channel-protocol-v1",
+  "protocol_id": "PG-51",
+  "title": "授权 Pikachu Docker GET/POST 来源隔离与安全 abstain",
+  "objective": "在固定 SHA-256 的本地 Pikachu Docker 实例上，对 allow-listed XSS/SQL/redirect 表面分别发送无害 GET 与 POST canary；只保存结构投影和证据哈希；没有浏览器执行、SQL AST 或外部重定向权威 oracle 时强制 abstain。",
+  "authorization": {
+    "scope": "workspace_authorized_docker_only",
+    "image": "tavenli/pikachu-labs@sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "loopback_ports": [8767, 8768],
+    "external_network": false,
+    "read_only": true,
+    "script_execution": false,
+    "database_write": false,
+    "credentials_accessed": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "target_contract": {
+    "paths": [
+      "/vul/xss/xss_reflected_get.php",
+      "/vul/xss/xss_dom.php",
+      "/vul/sqli/sqli_str.php",
+      "/vul/sqli/sqli_search.php",
+      "/vul/sqli/sqli_blind_b.php",
+      "/vul/sqli/sqli_blind_t.php",
+      "/vul/urlredirect/urlredirect.php"
+    ],
+    "methods": ["GET", "POST"],
+    "probe_policy": "bounded alphanumeric marker only; no markup execution, SQL syntax, delay, redirect, upload, credential or state-changing input",
+    "fresh_reset_scope": "one disposable container per method round; each row carries target instance and reset epoch"
+  },
+  "oracle_contract": {
+    "allowed_signal": "bounded marker/source reflection projection",
+    "execution_oracle_available": false,
+    "sql_ast_oracle_available": false,
+    "external_redirect_oracle_available": false,
+    "surface_signal_is_not_vulnerability_confirmation": true,
+    "vulnerability_claim_requires_authoritative_typed_oracle": true
+  },
+  "model_contract": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "raw_probe_or_response_features": false,
+    "required_decision_without_authoritative_oracle": "abstain"
+  },
+  "run_result": {
+    "row_count": 28,
+    "typed_positive_count": 0,
+    "negative_count": 28,
+    "fresh_reset_count": 28,
+    "source_count": 1,
+    "target_instance_count": 2,
+    "episode_count": 7,
+    "accepted_episode_count": 7,
+    "get_post_covered": true,
+    "abstain_step_count": 14,
+    "vulnerability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "status": "run_completed_real_docker_shadow_abstain_no_promotion"
+}

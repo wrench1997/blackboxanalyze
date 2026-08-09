@@ -1,0 +1,111 @@
+{
+  "schema_version": "pg376-highcap-context-pretrain-v1",
+  "status": "context_pretrain_candidate_only",
+  "gate": {
+    "checks": {
+      "dataset_status_candidate": true,
+      "representation_pretrain_candidate_allowed": true,
+      "capability_training_closed": true,
+      "audit_passed_candidate_audit": true,
+      "train_context_rows_valid": true,
+      "holdout_context_rows_valid": true,
+      "holdout_vocabulary_closed": true,
+      "active_overlap_zero": true,
+      "audit_unknown_context_zero": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "holdout_used_for_optimization": false,
+    "target_tokens_read": false
+  },
+  "data": {
+    "train_rows": 1208,
+    "implementation_holdout_rows": 572,
+    "source_train_count": 1208,
+    "source_holdout_count": 572,
+    "train_context_vocab_size": 738,
+    "vocabulary_size": 740,
+    "vocabulary_scope": "train_context_only",
+    "holdout_unknown_context_count": 0,
+    "active_context_overlap_count": 0
+  },
+  "training": {
+    "device": "cpu",
+    "seeds": [
+      37601
+    ],
+    "epochs": 1,
+    "batch_size": 2,
+    "learning_rate": 0.0001,
+    "context_only": true,
+    "target_tokens_read": false,
+    "holdout_used_for_optimization": false,
+    "capability_training": false,
+    "config": {
+      "d_model": 32,
+      "n_heads": 4,
+      "n_layers": 1,
+      "experts": 2,
+      "expert_hidden": 64,
+      "top_k": 2,
+      "dropout": 0.05,
+      "max_length": 768,
+      "initializer_range": 0.02
+    },
+    "required_context_window": 606,
+    "optimized_train_rows": 2,
+    "evaluated_holdout_rows": 2
+  },
+  "locks": {
+    "dataset_sha256": "3c40f0841ab1d8f6d22030f3ca3400b68f158175ea5a7c9267af6fa544210c72",
+    "audit_sha256": "b5c8c9333c2dc09e33461824de0ab5b1ee0aca39742564658850b59e53edc5b6",
+    "rules_sha256": "1d26b8a3b1ecd47f65fa08275ea03a731507a1f9f4840a21ff6872bbfed287b9",
+    "runner_sha256": "6b645a20b55324fcdd1567e2eaa80033ae93ae448f94ed355fd2cc36a3a9d5f3",
+    "model_sha256": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8"
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "execution": {
+    "optimizer_started": true,
+    "gpu_touched": false,
+    "docker_started": false,
+    "network_used": false,
+    "checkpoint_written": false
+  },
+  "candidates": [
+    {
+      "seed": 37601,
+      "baseline_holdout": {
+        "rows": 2,
+        "next_token_count": 774,
+        "mean_next_token_loss": 6.597437,
+        "mean_predictive_entropy_nats": 6.600046,
+        "token_accuracy": 0.0
+      },
+      "train": {
+        "rows": 2,
+        "next_token_count": 996,
+        "mean_next_token_loss": 6.591366,
+        "mean_predictive_entropy_nats": 6.599971,
+        "token_accuracy": 0.002008
+      },
+      "implementation_holdout": {
+        "rows": 2,
+        "next_token_count": 774,
+        "mean_next_token_loss": 6.593515,
+        "mean_predictive_entropy_nats": 6.600045,
+        "token_accuracy": 0.0
+      },
+      "holdout_predictive_entropy_relative_drop": 0.0,
+      "checkpoint": {
+        "path": null,
+        "sha256": null
+      }
+    }
+  ],
+  "report_sha256": "db8c5448724365186cf6aec2a56377b11a6f14b39985ace805eb33cce97a421e"
+}

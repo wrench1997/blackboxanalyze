@@ -1,0 +1,156 @@
+{
+  "protocol_id": "pg-pk-319-family-holdout-checkpoint-eval-v1",
+  "schema_version": "pg319-family-holdout-checkpoint-evaluation-v1",
+  "status": "completed_frozen_family_holdout_evaluation",
+  "source": {
+    "trace": "research\\pg318_family_holdout_trace_v1.json",
+    "trace_sha256": "3a4ac97242d599c35b827e99cdb2333509a2325de43e5cd3843821295b1d47c8",
+    "checkpoint_dir": "artifacts\\pg319-cross-impl\\seeds"
+  },
+  "counts": {
+    "seed_count": 3,
+    "episode_rows": 72,
+    "multi_missing_rows": 270,
+    "total_rows": 342
+  },
+  "metrics": {
+    "family_question_recall": {
+      "mean": 0.844444,
+      "min": 0.733333,
+      "max": 0.933333
+    },
+    "family_variant_exact": {
+      "mean": 0.929824,
+      "min": 0.842105,
+      "max": 1.0
+    },
+    "family_false_allow": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "sequence_exact": {
+      "mean": 0.824562,
+      "min": 0.789474,
+      "max": 0.894737
+    },
+    "repair_exact": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 31901,
+      "checkpoint": "artifacts\\pg319-cross-impl\\seeds\\pg319_cross_impl_moe_seed_31901.pt",
+      "bound_probe": {
+        "count": 342,
+        "sequence_exact_accuracy": 0.894737,
+        "slot_accuracy": {
+          "transport": 1.0,
+          "field_role": 1.0,
+          "encoding": 1.0,
+          "oracle": 1.0,
+          "stop_condition": 1.0
+        },
+        "variant_accuracy": {
+          "probe_variant": 0.947368,
+          "encoding_chain": 1.0
+        },
+        "variant_exact": 0.947368,
+        "missing_question_recall": 0.933333,
+        "unnecessary_question_rate": 0.0,
+        "hard_negative_false_allow": 0,
+        "invalid_predicted_plan_count": 0
+      },
+      "repair": {
+        "count": 18,
+        "repair_exact": 1.0,
+        "safe_allow": 0,
+        "variant_non_none": 0
+      },
+      "predictions_training_ineligible": true
+    },
+    {
+      "seed": 31902,
+      "checkpoint": "artifacts\\pg319-cross-impl\\seeds\\pg319_cross_impl_moe_seed_31902.pt",
+      "bound_probe": {
+        "count": 342,
+        "sequence_exact_accuracy": 0.789474,
+        "slot_accuracy": {
+          "transport": 1.0,
+          "field_role": 1.0,
+          "encoding": 1.0,
+          "oracle": 1.0,
+          "stop_condition": 1.0
+        },
+        "variant_accuracy": {
+          "probe_variant": 1.0,
+          "encoding_chain": 1.0
+        },
+        "variant_exact": 1.0,
+        "missing_question_recall": 0.733333,
+        "unnecessary_question_rate": 0.0,
+        "hard_negative_false_allow": 0,
+        "invalid_predicted_plan_count": 0
+      },
+      "repair": {
+        "count": 18,
+        "repair_exact": 1.0,
+        "safe_allow": 0,
+        "variant_non_none": 0
+      },
+      "predictions_training_ineligible": true
+    },
+    {
+      "seed": 31903,
+      "checkpoint": "artifacts\\pg319-cross-impl\\seeds\\pg319_cross_impl_moe_seed_31903.pt",
+      "bound_probe": {
+        "count": 342,
+        "sequence_exact_accuracy": 0.789474,
+        "slot_accuracy": {
+          "transport": 0.947368,
+          "field_role": 0.947368,
+          "encoding": 0.947368,
+          "oracle": 0.947368,
+          "stop_condition": 0.947368
+        },
+        "variant_accuracy": {
+          "probe_variant": 0.842105,
+          "encoding_chain": 0.947368
+        },
+        "variant_exact": 0.842105,
+        "missing_question_recall": 0.866667,
+        "unnecessary_question_rate": 0.0,
+        "hard_negative_false_allow": 0,
+        "invalid_predicted_plan_count": 18
+      },
+      "repair": {
+        "count": 18,
+        "repair_exact": 1.0,
+        "safe_allow": 0,
+        "variant_non_none": 0
+      },
+      "predictions_training_ineligible": true
+    }
+  ],
+  "hypothesis_gate": {
+    "status": "blocked",
+    "checks": {
+      "question_min": false,
+      "variant_min": false,
+      "zero_false_allow": true,
+      "repair_min": true,
+      "all_rows_training_ineligible": true,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "e3383dde22520eb4dbd594aba81b685ff01628b2fd59c26bee1032bc40bab1d4"
+}

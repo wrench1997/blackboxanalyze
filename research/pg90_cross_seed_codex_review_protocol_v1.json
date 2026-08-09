@@ -1,0 +1,33 @@
+{
+  "protocol_id": "pg-pk-90-cross-seed-codex-review-v1",
+  "schema_version": "pg90-cross-seed-codex-review-protocol-v1",
+  "required_checks": [
+    "pg88_collection_passed",
+    "pg88_four_seed_fresh_targets",
+    "pg88_get_post_and_negative_oracles",
+    "pg89_frozen_replay_passed",
+    "pg89_recall_and_seed_stability",
+    "pg89_false_accept_zero",
+    "pg89_unknown_token_zero",
+    "pg89_correct_abstain_present",
+    "pg82_pg83_prior_gates_preserved",
+    "failed_cross_dataset_controls_preserved",
+    "pg87_memory_production_blocked",
+    "raw_and_memory_free",
+    "full_regression"
+  ],
+  "memory_write": false,
+  "checkpoint_mutation": false,
+  "run_result": {
+    "controlled_offline_training_scale_allowed": true,
+    "new_samples_must_remain_evaluation_gated": true,
+    "formal_model_promotion_allowed": false,
+    "long_term_memory_promotion_allowed": false,
+    "production_web_vulnerability_detector_claim_allowed": false,
+    "checkpoint_mutation_by_review": false,
+    "memory_write_by_review": false,
+    "reason": "PG89 passes four unseen seeds with zero false accepts and zero unknown tokens, but the collector still reuses one implementation and the prior PG84/PG85 transfer failures remain; independent implementation, larger family diversity and explicit human approval are still required.",
+    "status": "passed_for_controlled_offline_scale"
+  },
+  "next_experiment": "PG91 independent implementation or second local vulnerable target family"
+}

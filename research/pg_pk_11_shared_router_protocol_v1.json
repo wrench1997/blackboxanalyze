@@ -1,0 +1,73 @@
+{
+  "protocol_id": "pg-pk-11-shared-anonymous-family-router-v1",
+  "schema_version": "sift-pg-pk-11-shared-router-protocol-v1",
+  "feature_contract": {
+    "oracle_fields_consumed": false,
+    "semantic_labels_consumed": false,
+    "raw_body_consumed": false,
+    "route_tokens_consumed": false,
+    "decoded_query_geometry_only": true,
+    "ood_zero_variance_dimensions_masked": true,
+    "ood_surface_specific_dimensions_excluded": true,
+    "ood_invariant_feature_indices": [
+      0,
+      7,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      33,
+      34,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      105,
+      109,
+      112,
+      127
+    ],
+    "counterfactual_plain_control_routes_to_control": true,
+    "temperature_fitted_on_fresh_holdout": true,
+    "calibrated_confidence_is_route_only": true
+  },
+  "training_targets": [
+    "surface_fixture",
+    "sql_fixture",
+    "logic_access_alpha",
+    "logic_access_beta"
+  ],
+  "fresh_target": [
+    "logic_access_gamma",
+    "cross_app_positive_surface"
+  ],
+  "positive_gate": "family_specific_typed_oracle_only",
+  "confidence_calibration": {
+    "temperature": 0.25,
+    "nll_before": 0.6213794258247859,
+    "nll_after": 0.1246814861564435,
+    "raw_ece": 0.4023286505885746,
+    "scaled_ece": 0.03946664787864623,
+    "abstain_threshold": 0.782802,
+    "abstain_precision": 1.0,
+    "abstain_coverage": 0.956522,
+    "control_false_accept_rate": 0.0,
+    "calibration_sample_count": 23,
+    "calibration_source": "fresh_logic_gamma_plus_cross_app_positive_surface"
+  },
+  "acceptance": {
+    "minimum_holdout_accuracy": 0.9,
+    "maximum_holdout_control_false_accept_rate": 0.05,
+    "minimum_holdout_positive_recall": 0.9,
+    "maximum_pair_mean_l2": 1.5,
+    "passed": true,
+    "confidence_calibration_passed": true,
+    "minimum_fresh_joint_surface_accuracy": 0.9,
+    "fresh_joint_surface_passed": true
+  }
+}

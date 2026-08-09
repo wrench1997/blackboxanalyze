@@ -1,0 +1,41 @@
+{
+  "protocol_id": "pg-pk-113-cross-implementation-replay-v1",
+  "title": "PG-113 独立实现跨实现回放",
+  "authorization": {
+    "scope": "workspace_local_only",
+    "transport": "fresh_loopback_uvicorn_process",
+    "external_network": false,
+    "raw_values_persisted": false
+  },
+  "matrix": {
+    "target_seeds": [
+      11301,
+      11302,
+      11303
+    ],
+    "surface_slot_count": 4,
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "fresh_reset_per_action": true
+  },
+  "positive_gate": [
+    "GET/POST repeat",
+    "matched negative control",
+    "fresh reset",
+    "target evidence SHA-256",
+    "bridge evidence SHA-256",
+    "typed oracle after probe"
+  ],
+  "unknown_policy": "independent target without typed evaluator must abstain",
+  "implementation_boundary": "target app and oracle contract are separate from PG-112 app.main",
+  "model_contract": {
+    "family_labels": false,
+    "typed_oracle_in_features": false,
+    "raw_request_response": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "status": "run_completed_cross_implementation_no_promotion"
+}

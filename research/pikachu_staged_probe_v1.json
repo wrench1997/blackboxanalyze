@@ -1,0 +1,1291 @@
+{
+  "protocol_id": "pg-pk-01-staged-local-probe-v1",
+  "schema_version": "sift-pikachu-staged-probe-report-v1",
+  "target": {
+    "base_url": "http://127.0.0.1:8766",
+    "container_image_digest": "sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "scope": "loopback_only",
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "fresh_reset_per_probe": false
+  },
+  "method": {
+    "stage_0": "read-only inventory",
+    "stage_1": "inert canary",
+    "stage_2": "one-at-a-time refinement gated by visible projection",
+    "abstention": "explicit for hazardous or unsupported oracle families",
+    "belief_update": "MultiStepBelief from label-free bounded projection"
+  },
+  "inventory": [
+    {
+      "stage": "inventory",
+      "path": "/",
+      "status_code": 200,
+      "content_type": "text/html;charset=utf-8",
+      "body_length": 35392,
+      "body_sha256": "452d4ef9fe99872f5c0c9040914db39663874a1e02b3aeea325c45ba92ada10e",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": null
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/dir/dir_list.php",
+      "status_code": 200,
+      "content_type": "text/html",
+      "body_length": 33730,
+      "body_sha256": "7f644ed4874d409f24b926947e664e0745192a79a98e284975b75fb0eb3cc8cd",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": "read-only page observed, but no approved directory-traversal oracle is enabled"
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/fileinclude/fi_local.php",
+      "status_code": 200,
+      "content_type": "text/html",
+      "body_length": 34041,
+      "body_sha256": "2bd3ca5c81f8edb9311e6c5136103bfdbed146179e6f94debc3f3f986ee69cae",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": "would exercise file disclosure/path resolution; no file oracle is enabled"
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/infoleak/findabc.php",
+      "status_code": 200,
+      "content_type": "text/html;charset=utf-8",
+      "body_length": 34516,
+      "body_sha256": "c4f433cea3345833d7af3a8bb8ba6cd39030b3118e6084effc40aeb1edd112f5",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": "form contains credential-like fields; credential probes are prohibited"
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/rce/rce_ping.php",
+      "status_code": 200,
+      "content_type": "text/html",
+      "body_length": 33635,
+      "body_sha256": "f09f215ec34d19ba2d8759f1517b0d738235640d4b5297d36a63eda795667319",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": "command execution is disabled in the safe track"
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/sqli/sqli_blind_b.php",
+      "status_code": 200,
+      "content_type": "text/html;charset=utf-8",
+      "body_length": 33603,
+      "body_sha256": "724a78dafa1fbe8ea481a615fe6ded97792daf08c35a08d4d4fba71fd256b2c3",
+      "executed": true,
+      "next_action": "safe_canary",
+      "abstain_reason": null
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/sqli/sqli_blind_t.php",
+      "status_code": 200,
+      "content_type": "text/html;charset=utf-8",
+      "body_length": 33602,
+      "body_sha256": "3c1b5166dfe2267840778270c2a34c3331540af237a881ba66c47afe47d7653d",
+      "executed": true,
+      "next_action": "safe_canary",
+      "abstain_reason": null
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/sqli/sqli_search.php",
+      "status_code": 200,
+      "content_type": "text/html;charset=utf-8",
+      "body_length": 33673,
+      "body_sha256": "e1270dbc282f16d6b6800ca772b15b3335a9b64501f6b87e816aa9ffbc580e04",
+      "executed": true,
+      "next_action": "safe_canary",
+      "abstain_reason": null
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/sqli/sqli_str.php",
+      "status_code": 200,
+      "content_type": "text/html;charset=utf-8",
+      "body_length": 33606,
+      "body_sha256": "2a865d76b0557cded08a04f697cb6a025caf4300200dad1761e9e556d458e4ac",
+      "executed": true,
+      "next_action": "safe_canary",
+      "abstain_reason": null
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/ssrf/ssrf_curl.php",
+      "status_code": 200,
+      "content_type": "text/html",
+      "body_length": 33355,
+      "body_sha256": "1e385d1809fe8961820eef9eb63a6f4bfc72f44440a4a4d7882ddb2592c9508c",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": "would require a callback or non-loopback request; external network is prohibited"
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/unsafeupload/upload.php",
+      "status_code": 200,
+      "content_type": "text/html",
+      "body_length": 34593,
+      "body_sha256": "6603d833cac9ec3082631a4bb162babe1917b078e939de7ae1bea806e2a62d96",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": "file upload/write is disabled in the safe track"
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/urlredirect/urlredirect.php",
+      "status_code": 200,
+      "content_type": "text/html",
+      "body_length": 33771,
+      "body_sha256": "e5b0d9aaba3fa7fc5132ea925609a839d2ea56490e264093de657ba0a923b045",
+      "executed": true,
+      "next_action": "safe_canary",
+      "abstain_reason": null
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/xss/xss_dom.php",
+      "status_code": 200,
+      "content_type": "text/html;charset=utf-8",
+      "body_length": 34041,
+      "body_sha256": "fa291cc2d095c7fa38170840ee1b50bd49cee3dc87a4ede8f4763722e268aacf",
+      "executed": true,
+      "next_action": "safe_canary",
+      "abstain_reason": null
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/xss/xss_reflected_get.php",
+      "status_code": 200,
+      "content_type": "text/html",
+      "body_length": 33659,
+      "body_sha256": "1f76cf85c1b8499a7e0059e7bd6baba7a416841d76f86668f84438fc4c811eba",
+      "executed": true,
+      "next_action": "safe_canary",
+      "abstain_reason": null
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/xss/xss_stored.php",
+      "status_code": 200,
+      "content_type": "text/html;charset=utf-8",
+      "body_length": 33852,
+      "body_sha256": "83673d1bb52ba0b089d119836a7e812f330c2132269d3a262d4c892e1c31f101",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": "requires POST and a database write; no state-mutating probe in the safe track"
+    },
+    {
+      "stage": "inventory",
+      "path": "/vul/xxe/xxe_1.php",
+      "status_code": 200,
+      "content_type": "text/html",
+      "body_length": 33519,
+      "body_sha256": "c09fddb36112068adf599693a3a563599732571dd13cad895cdfdfb9d7c7350a",
+      "executed": true,
+      "next_action": "abstain",
+      "abstain_reason": "XML entity resolution is disabled in the safe track"
+    }
+  ],
+  "matrix": [
+    {
+      "stage": "stage_1_safe_canary",
+      "sample_id": "pikachu-local-pg03-xss-reflected-get-safe-canary-664c5750bbf9",
+      "lab_id": "xss-reflected-get-safe-canary",
+      "family": "xss",
+      "surface": "xss_reflected_get",
+      "path": "/vul/xss/xss_reflected_get.php",
+      "probe_kind": "http_canary",
+      "candidate_status": "suspicious_surface_signal",
+      "signals": [
+        "marker_reflected"
+      ],
+      "rule_ir_result": true,
+      "next_action": "one_at_a_time_refinement",
+      "evidence_hash": "beba419e85ce51ce40eb220c4ea7f5268149828a464b96fc97800ecdfacbbcbd",
+      "belief_step": {
+        "step": 1,
+        "action_path": "/vul/xss/xss_reflected_get.php",
+        "prior": {
+          "access_control": 0.14285714285714285,
+          "authentication": 0.14285714285714285,
+          "input_validation": 0.14285714285714285,
+          "injection": 0.14285714285714285,
+          "observability": 0.14285714285714285,
+          "url_redirect": 0.14285714285714285,
+          "xss": 0.14285714285714285
+        },
+        "likelihood": {
+          "access_control": 0.09302325256895631,
+          "authentication": 1.162790657111954e-08,
+          "input_validation": 1.162790657111954e-08,
+          "injection": 0.09302325256895631,
+          "observability": 1.162790657111954e-08,
+          "url_redirect": 0.09302325256895631,
+          "xss": 0.7209302074094114
+        },
+        "posterior": {
+          "access_control": 0.1538179808002737,
+          "authentication": 0.11443737399499258,
+          "input_validation": 0.11443737399499258,
+          "injection": 0.1538179808002737,
+          "observability": 0.11443737399499258,
+          "url_redirect": 0.1538179808002737,
+          "xss": 0.19523393561420116
+        },
+        "entropy_before": 1.94591,
+        "entropy_after": 1.926968,
+        "entropy_change": 0.018942,
+        "information_gain": 0.262152,
+        "evidence_hash": "beba419e85ce51ce40eb220c4ea7f5268149828a464b96fc97800ecdfacbbcbd"
+      },
+      "payload_is_exploit": false,
+      "evaluator_confirmation": false
+    },
+    {
+      "stage": "stage_1_safe_canary",
+      "sample_id": "pikachu-local-pg03-xss-dom-safe-canary-d5a908a49202",
+      "lab_id": "xss-dom-safe-canary",
+      "family": "xss",
+      "surface": "xss_dom_value_source",
+      "path": "/vul/xss/xss_dom.php",
+      "probe_kind": "inert_dom_markup",
+      "candidate_status": "clean_observation",
+      "signals": [],
+      "rule_ir_result": false,
+      "next_action": "abstain_or_collect_more_benign_evidence",
+      "evidence_hash": "17b806a24d87b46e4ed1cb9a787c60441dec5179e01a2c13edd0180597640f34",
+      "belief_step": {
+        "step": 2,
+        "action_path": "/vul/xss/xss_dom.php",
+        "prior": {
+          "access_control": 0.1538179808002737,
+          "authentication": 0.11443737399499258,
+          "input_validation": 0.11443737399499258,
+          "injection": 0.1538179808002737,
+          "observability": 0.11443737399499258,
+          "url_redirect": 0.1538179808002737,
+          "xss": 0.19523393561420116
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.17295020928986835,
+          "authentication": 0.09168879966312823,
+          "input_validation": 0.09168879966312823,
+          "injection": 0.17295020928986835,
+          "observability": 0.09168879966312823,
+          "url_redirect": 0.17295020928986835,
+          "xss": 0.20608297314101032
+        },
+        "entropy_before": 1.926968,
+        "entropy_after": 1.893188,
+        "entropy_change": 0.033779,
+        "information_gain": 0.138019,
+        "evidence_hash": "17b806a24d87b46e4ed1cb9a787c60441dec5179e01a2c13edd0180597640f34"
+      },
+      "payload_is_exploit": false,
+      "evaluator_confirmation": false
+    },
+    {
+      "stage": "stage_1_safe_canary",
+      "sample_id": "pikachu-local-pg03-urlredirect-safe-baseline-515a31eb4908",
+      "lab_id": "urlredirect-safe-baseline",
+      "family": "url_redirect",
+      "surface": "url_redirect_response",
+      "path": "/vul/urlredirect/urlredirect.php",
+      "probe_kind": "http_canary",
+      "candidate_status": "clean_observation",
+      "signals": [],
+      "rule_ir_result": false,
+      "next_action": "abstain_or_collect_more_benign_evidence",
+      "evidence_hash": "0c650f19c0f4c44ebb965d5d2dedf18c0dab74e01cd730a5e2c7d9fa7a87999c",
+      "belief_step": {
+        "step": 3,
+        "action_path": "/vul/urlredirect/urlredirect.php",
+        "prior": {
+          "access_control": 0.17295020928986835,
+          "authentication": 0.09168879966312823,
+          "input_validation": 0.09168879966312823,
+          "injection": 0.17295020928986835,
+          "observability": 0.09168879966312823,
+          "url_redirect": 0.17295020928986835,
+          "xss": 0.20608297314101032
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.18825599208154406,
+          "authentication": 0.07348994019763676,
+          "input_validation": 0.07348994019763676,
+          "injection": 0.18825599208154406,
+          "observability": 0.07348994019763676,
+          "url_redirect": 0.18825599208154406,
+          "xss": 0.21476220316245764
+        },
+        "entropy_before": 1.893188,
+        "entropy_after": 1.849048,
+        "entropy_change": 0.04414,
+        "information_gain": 0.106976,
+        "evidence_hash": "0c650f19c0f4c44ebb965d5d2dedf18c0dab74e01cd730a5e2c7d9fa7a87999c"
+      },
+      "payload_is_exploit": false,
+      "evaluator_confirmation": false
+    },
+    {
+      "stage": "stage_1_safe_canary",
+      "sample_id": "pikachu-local-pg03-sql-sqli_str-safe-canary-341c6e0618af",
+      "lab_id": "sql-sqli_str-safe-canary",
+      "family": "injection",
+      "surface": "sqli_str",
+      "path": "/vul/sqli/sqli_str.php",
+      "probe_kind": "sql_channel_class",
+      "candidate_status": "clean_observation",
+      "signals": [],
+      "rule_ir_result": false,
+      "next_action": "abstain_or_collect_more_benign_evidence",
+      "evidence_hash": "7c68003a76a7622245de4e7423402313b92b42bc291220376aafded91f3526cf",
+      "belief_step": {
+        "step": 4,
+        "action_path": "/vul/sqli/sqli_str.php",
+        "prior": {
+          "access_control": 0.18825599208154406,
+          "authentication": 0.07348994019763676,
+          "input_validation": 0.07348994019763676,
+          "injection": 0.18825599208154406,
+          "observability": 0.07348994019763676,
+          "url_redirect": 0.18825599208154406,
+          "xss": 0.21476220316245764
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.20050061831488464,
+          "authentication": 0.05893085262524358,
+          "input_validation": 0.05893085262524358,
+          "injection": 0.20050061831488464,
+          "observability": 0.05893085262524358,
+          "url_redirect": 0.20050061831488464,
+          "xss": 0.2217055871796155
+        },
+        "entropy_before": 1.849048,
+        "entropy_after": 1.801123,
+        "entropy_change": 0.047925,
+        "information_gain": 0.083623,
+        "evidence_hash": "7c68003a76a7622245de4e7423402313b92b42bc291220376aafded91f3526cf"
+      },
+      "payload_is_exploit": false,
+      "evaluator_confirmation": false
+    },
+    {
+      "stage": "stage_1_safe_canary",
+      "sample_id": "pikachu-local-pg03-sql-sqli_search-safe-canary-56dff8de390a",
+      "lab_id": "sql-sqli_search-safe-canary",
+      "family": "injection",
+      "surface": "sqli_search",
+      "path": "/vul/sqli/sqli_search.php",
+      "probe_kind": "sql_channel_class",
+      "candidate_status": "clean_observation",
+      "signals": [],
+      "rule_ir_result": false,
+      "next_action": "abstain_or_collect_more_benign_evidence",
+      "evidence_hash": "6cef99c92b0fb0a3689ad064f2d15901906e8980b5e83dbaa1e64310c01def68",
+      "belief_step": {
+        "step": 5,
+        "action_path": "/vul/sqli/sqli_search.php",
+        "prior": {
+          "access_control": 0.20050061831488464,
+          "authentication": 0.05893085262524358,
+          "input_validation": 0.05893085262524358,
+          "injection": 0.20050061831488464,
+          "observability": 0.05893085262524358,
+          "url_redirect": 0.20050061831488464,
+          "xss": 0.2217055871796155
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.21029631930155704,
+          "authentication": 0.04728358256732902,
+          "input_validation": 0.04728358256732902,
+          "injection": 0.21029631930155704,
+          "observability": 0.04728358256732902,
+          "url_redirect": 0.21029631930155704,
+          "xss": 0.22726029439334172
+        },
+        "entropy_before": 1.801123,
+        "entropy_after": 1.753299,
+        "entropy_change": 0.047825,
+        "information_gain": 0.065783,
+        "evidence_hash": "6cef99c92b0fb0a3689ad064f2d15901906e8980b5e83dbaa1e64310c01def68"
+      },
+      "payload_is_exploit": false,
+      "evaluator_confirmation": false
+    },
+    {
+      "stage": "stage_1_safe_canary",
+      "sample_id": "pikachu-local-pg03-sql-sqli_blind_boolean-safe-canary-6b7751bede75",
+      "lab_id": "sql-sqli_blind_boolean-safe-canary",
+      "family": "injection",
+      "surface": "sqli_blind_boolean",
+      "path": "/vul/sqli/sqli_blind_b.php",
+      "probe_kind": "sql_channel_class",
+      "candidate_status": "clean_observation",
+      "signals": [],
+      "rule_ir_result": false,
+      "next_action": "abstain_or_collect_more_benign_evidence",
+      "evidence_hash": "59e7653b885c30ab4df6ad5fec70ffa533e4b726c2b2032c8fa7432c8ecee2f0",
+      "belief_step": {
+        "step": 6,
+        "action_path": "/vul/sqli/sqli_blind_b.php",
+        "prior": {
+          "access_control": 0.21029631930155704,
+          "authentication": 0.04728358256732902,
+          "input_validation": 0.04728358256732902,
+          "injection": 0.21029631930155704,
+          "observability": 0.04728358256732902,
+          "url_redirect": 0.21029631930155704,
+          "xss": 0.22726029439334172
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.21813288009089501,
+          "authentication": 0.03796576652099739,
+          "input_validation": 0.03796576652099739,
+          "injection": 0.21813288009089501,
+          "observability": 0.03796576652099739,
+          "url_redirect": 0.21813288009089501,
+          "xss": 0.23170406016432277
+        },
+        "entropy_before": 1.753299,
+        "entropy_after": 1.707806,
+        "entropy_change": 0.045493,
+        "information_gain": 0.052004,
+        "evidence_hash": "59e7653b885c30ab4df6ad5fec70ffa533e4b726c2b2032c8fa7432c8ecee2f0"
+      },
+      "payload_is_exploit": false,
+      "evaluator_confirmation": false
+    },
+    {
+      "stage": "stage_1_safe_canary",
+      "sample_id": "pikachu-local-pg03-sql-sqli_blind_time-safe-canary-52b80d35229a",
+      "lab_id": "sql-sqli_blind_time-safe-canary",
+      "family": "injection",
+      "surface": "sqli_blind_time",
+      "path": "/vul/sqli/sqli_blind_t.php",
+      "probe_kind": "sql_channel_class",
+      "candidate_status": "clean_observation",
+      "signals": [],
+      "rule_ir_result": false,
+      "next_action": "abstain_or_collect_more_benign_evidence",
+      "evidence_hash": "e068c5ae7310d0664ccb0c898c290d26b744c9fe4ab34fe78028727f562864b3",
+      "belief_step": {
+        "step": 7,
+        "action_path": "/vul/sqli/sqli_blind_t.php",
+        "prior": {
+          "access_control": 0.21813288009089501,
+          "authentication": 0.03796576652099739,
+          "input_validation": 0.03796576652099739,
+          "injection": 0.21813288009089501,
+          "observability": 0.03796576652099739,
+          "url_redirect": 0.21813288009089501,
+          "xss": 0.23170406016432277
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.2244021287223654,
+          "authentication": 0.03051151368393208,
+          "input_validation": 0.03051151368393208,
+          "injection": 0.2244021287223654,
+          "observability": 0.03051151368393208,
+          "url_redirect": 0.2244021287223654,
+          "xss": 0.23525907278110758
+        },
+        "entropy_before": 1.707806,
+        "entropy_after": 1.665842,
+        "entropy_change": 0.041964,
+        "information_gain": 0.041276,
+        "evidence_hash": "e068c5ae7310d0664ccb0c898c290d26b744c9fe4ab34fe78028727f562864b3"
+      },
+      "payload_is_exploit": false,
+      "evaluator_confirmation": false
+    },
+    {
+      "stage": "stage_2_gated_refinement",
+      "sample_id": "pikachu-local-container-pg-pk-01-xss-reflected-get-safe-canary-refinement-01-7cc9a768616c",
+      "lab_id": "xss-reflected-get-safe-canary-refinement-01",
+      "family": "xss",
+      "surface": "xss_reflected_get_encoded_variant",
+      "path": "/vul/xss/xss_reflected_get.php",
+      "probe_kind": "encoded_dom_markup",
+      "candidate_status": "suspicious_surface_signal",
+      "signals": [
+        "marker_reflected",
+        "marker_in_attribute"
+      ],
+      "rule_ir_result": true,
+      "next_action": "one_at_a_time_refinement",
+      "evidence_hash": "2cf10005d06092763dd2685caff9fb996629f451468ff13a684759dc4e6f0289",
+      "belief_step": {
+        "step": 8,
+        "action_path": "/vul/xss/xss_reflected_get.php",
+        "prior": {
+          "access_control": 0.2244021287223654,
+          "authentication": 0.03051151368393208,
+          "input_validation": 0.03051151368393208,
+          "injection": 0.2244021287223654,
+          "observability": 0.03051151368393208,
+          "url_redirect": 0.2244021287223654,
+          "xss": 0.23525907278110758
+        },
+        "likelihood": {
+          "access_control": 0.09302325256895631,
+          "authentication": 1.162790657111954e-08,
+          "input_validation": 1.162790657111954e-08,
+          "injection": 0.09302325256895631,
+          "observability": 1.162790657111954e-08,
+          "url_redirect": 0.09302325256895631,
+          "xss": 0.7209302074094114
+        },
+        "posterior": {
+          "access_control": 0.21905396949245176,
+          "authentication": 0.024560870656423962,
+          "input_validation": 0.024560870656423962,
+          "injection": 0.21905396949245176,
+          "observability": 0.024560870656423962,
+          "url_redirect": 0.21905396949245176,
+          "xss": 0.26915547955337293
+        },
+        "entropy_before": 1.665842,
+        "entropy_after": 1.624229,
+        "entropy_change": 0.041614,
+        "information_gain": 0.138399,
+        "evidence_hash": "2cf10005d06092763dd2685caff9fb996629f451468ff13a684759dc4e6f0289"
+      },
+      "payload_is_exploit": false,
+      "evaluator_confirmation": false
+    }
+  ],
+  "abstentions": [
+    {
+      "stage": "stage_2_abstain",
+      "path": "/vul/dir/dir_list.php",
+      "executed": false,
+      "reason": "read-only page observed, but no approved directory-traversal oracle is enabled",
+      "next_action": "requires_separate_authorized_oracle_and_reset_protocol"
+    },
+    {
+      "stage": "stage_2_abstain",
+      "path": "/vul/fileinclude/fi_local.php",
+      "executed": false,
+      "reason": "would exercise file disclosure/path resolution; no file oracle is enabled",
+      "next_action": "requires_separate_authorized_oracle_and_reset_protocol"
+    },
+    {
+      "stage": "stage_2_abstain",
+      "path": "/vul/infoleak/findabc.php",
+      "executed": false,
+      "reason": "form contains credential-like fields; credential probes are prohibited",
+      "next_action": "requires_separate_authorized_oracle_and_reset_protocol"
+    },
+    {
+      "stage": "stage_2_abstain",
+      "path": "/vul/rce/rce_ping.php",
+      "executed": false,
+      "reason": "command execution is disabled in the safe track",
+      "next_action": "requires_separate_authorized_oracle_and_reset_protocol"
+    },
+    {
+      "stage": "stage_2_abstain",
+      "path": "/vul/ssrf/ssrf_curl.php",
+      "executed": false,
+      "reason": "would require a callback or non-loopback request; external network is prohibited",
+      "next_action": "requires_separate_authorized_oracle_and_reset_protocol"
+    },
+    {
+      "stage": "stage_2_abstain",
+      "path": "/vul/unsafeupload/upload.php",
+      "executed": false,
+      "reason": "file upload/write is disabled in the safe track",
+      "next_action": "requires_separate_authorized_oracle_and_reset_protocol"
+    },
+    {
+      "stage": "stage_2_abstain",
+      "path": "/vul/xss/xss_stored.php",
+      "executed": false,
+      "reason": "requires POST and a database write; no state-mutating probe in the safe track",
+      "next_action": "requires_separate_authorized_oracle_and_reset_protocol"
+    },
+    {
+      "stage": "stage_2_abstain",
+      "path": "/vul/xxe/xxe_1.php",
+      "executed": false,
+      "reason": "XML entity resolution is disabled in the safe track",
+      "next_action": "requires_separate_authorized_oracle_and_reset_protocol"
+    }
+  ],
+  "belief": {
+    "posterior": {
+      "access_control": 0.21905396949245176,
+      "authentication": 0.024560870656423962,
+      "input_validation": 0.024560870656423962,
+      "injection": 0.21905396949245176,
+      "observability": 0.024560870656423962,
+      "url_redirect": 0.21905396949245176,
+      "xss": 0.26915547955337293
+    },
+    "entropy": 1.624229,
+    "steps": [
+      {
+        "step": 1,
+        "action_path": "/vul/xss/xss_reflected_get.php",
+        "prior": {
+          "access_control": 0.14285714285714285,
+          "authentication": 0.14285714285714285,
+          "input_validation": 0.14285714285714285,
+          "injection": 0.14285714285714285,
+          "observability": 0.14285714285714285,
+          "url_redirect": 0.14285714285714285,
+          "xss": 0.14285714285714285
+        },
+        "likelihood": {
+          "access_control": 0.09302325256895631,
+          "authentication": 1.162790657111954e-08,
+          "input_validation": 1.162790657111954e-08,
+          "injection": 0.09302325256895631,
+          "observability": 1.162790657111954e-08,
+          "url_redirect": 0.09302325256895631,
+          "xss": 0.7209302074094114
+        },
+        "posterior": {
+          "access_control": 0.1538179808002737,
+          "authentication": 0.11443737399499258,
+          "input_validation": 0.11443737399499258,
+          "injection": 0.1538179808002737,
+          "observability": 0.11443737399499258,
+          "url_redirect": 0.1538179808002737,
+          "xss": 0.19523393561420116
+        },
+        "entropy_before": 1.94591,
+        "entropy_after": 1.926968,
+        "entropy_change": 0.018942,
+        "information_gain": 0.262152,
+        "evidence_hash": "beba419e85ce51ce40eb220c4ea7f5268149828a464b96fc97800ecdfacbbcbd"
+      },
+      {
+        "step": 2,
+        "action_path": "/vul/xss/xss_dom.php",
+        "prior": {
+          "access_control": 0.1538179808002737,
+          "authentication": 0.11443737399499258,
+          "input_validation": 0.11443737399499258,
+          "injection": 0.1538179808002737,
+          "observability": 0.11443737399499258,
+          "url_redirect": 0.1538179808002737,
+          "xss": 0.19523393561420116
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.17295020928986835,
+          "authentication": 0.09168879966312823,
+          "input_validation": 0.09168879966312823,
+          "injection": 0.17295020928986835,
+          "observability": 0.09168879966312823,
+          "url_redirect": 0.17295020928986835,
+          "xss": 0.20608297314101032
+        },
+        "entropy_before": 1.926968,
+        "entropy_after": 1.893188,
+        "entropy_change": 0.033779,
+        "information_gain": 0.138019,
+        "evidence_hash": "17b806a24d87b46e4ed1cb9a787c60441dec5179e01a2c13edd0180597640f34"
+      },
+      {
+        "step": 3,
+        "action_path": "/vul/urlredirect/urlredirect.php",
+        "prior": {
+          "access_control": 0.17295020928986835,
+          "authentication": 0.09168879966312823,
+          "input_validation": 0.09168879966312823,
+          "injection": 0.17295020928986835,
+          "observability": 0.09168879966312823,
+          "url_redirect": 0.17295020928986835,
+          "xss": 0.20608297314101032
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.18825599208154406,
+          "authentication": 0.07348994019763676,
+          "input_validation": 0.07348994019763676,
+          "injection": 0.18825599208154406,
+          "observability": 0.07348994019763676,
+          "url_redirect": 0.18825599208154406,
+          "xss": 0.21476220316245764
+        },
+        "entropy_before": 1.893188,
+        "entropy_after": 1.849048,
+        "entropy_change": 0.04414,
+        "information_gain": 0.106976,
+        "evidence_hash": "0c650f19c0f4c44ebb965d5d2dedf18c0dab74e01cd730a5e2c7d9fa7a87999c"
+      },
+      {
+        "step": 4,
+        "action_path": "/vul/sqli/sqli_str.php",
+        "prior": {
+          "access_control": 0.18825599208154406,
+          "authentication": 0.07348994019763676,
+          "input_validation": 0.07348994019763676,
+          "injection": 0.18825599208154406,
+          "observability": 0.07348994019763676,
+          "url_redirect": 0.18825599208154406,
+          "xss": 0.21476220316245764
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.20050061831488464,
+          "authentication": 0.05893085262524358,
+          "input_validation": 0.05893085262524358,
+          "injection": 0.20050061831488464,
+          "observability": 0.05893085262524358,
+          "url_redirect": 0.20050061831488464,
+          "xss": 0.2217055871796155
+        },
+        "entropy_before": 1.849048,
+        "entropy_after": 1.801123,
+        "entropy_change": 0.047925,
+        "information_gain": 0.083623,
+        "evidence_hash": "7c68003a76a7622245de4e7423402313b92b42bc291220376aafded91f3526cf"
+      },
+      {
+        "step": 5,
+        "action_path": "/vul/sqli/sqli_search.php",
+        "prior": {
+          "access_control": 0.20050061831488464,
+          "authentication": 0.05893085262524358,
+          "input_validation": 0.05893085262524358,
+          "injection": 0.20050061831488464,
+          "observability": 0.05893085262524358,
+          "url_redirect": 0.20050061831488464,
+          "xss": 0.2217055871796155
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.21029631930155704,
+          "authentication": 0.04728358256732902,
+          "input_validation": 0.04728358256732902,
+          "injection": 0.21029631930155704,
+          "observability": 0.04728358256732902,
+          "url_redirect": 0.21029631930155704,
+          "xss": 0.22726029439334172
+        },
+        "entropy_before": 1.801123,
+        "entropy_after": 1.753299,
+        "entropy_change": 0.047825,
+        "information_gain": 0.065783,
+        "evidence_hash": "6cef99c92b0fb0a3689ad064f2d15901906e8980b5e83dbaa1e64310c01def68"
+      },
+      {
+        "step": 6,
+        "action_path": "/vul/sqli/sqli_blind_b.php",
+        "prior": {
+          "access_control": 0.21029631930155704,
+          "authentication": 0.04728358256732902,
+          "input_validation": 0.04728358256732902,
+          "injection": 0.21029631930155704,
+          "observability": 0.04728358256732902,
+          "url_redirect": 0.21029631930155704,
+          "xss": 0.22726029439334172
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.21813288009089501,
+          "authentication": 0.03796576652099739,
+          "input_validation": 0.03796576652099739,
+          "injection": 0.21813288009089501,
+          "observability": 0.03796576652099739,
+          "url_redirect": 0.21813288009089501,
+          "xss": 0.23170406016432277
+        },
+        "entropy_before": 1.753299,
+        "entropy_after": 1.707806,
+        "entropy_change": 0.045493,
+        "information_gain": 0.052004,
+        "evidence_hash": "59e7653b885c30ab4df6ad5fec70ffa533e4b726c2b2032c8fa7432c8ecee2f0"
+      },
+      {
+        "step": 7,
+        "action_path": "/vul/sqli/sqli_blind_t.php",
+        "prior": {
+          "access_control": 0.21813288009089501,
+          "authentication": 0.03796576652099739,
+          "input_validation": 0.03796576652099739,
+          "injection": 0.21813288009089501,
+          "observability": 0.03796576652099739,
+          "url_redirect": 0.21813288009089501,
+          "xss": 0.23170406016432277
+        },
+        "likelihood": {
+          "access_control": 0.24999999062500033,
+          "authentication": 1.2499999531250016e-08,
+          "input_validation": 1.2499999531250016e-08,
+          "injection": 0.24999999062500033,
+          "observability": 1.2499999531250016e-08,
+          "url_redirect": 0.24999999062500033,
+          "xss": 0.24999999062500033
+        },
+        "posterior": {
+          "access_control": 0.2244021287223654,
+          "authentication": 0.03051151368393208,
+          "input_validation": 0.03051151368393208,
+          "injection": 0.2244021287223654,
+          "observability": 0.03051151368393208,
+          "url_redirect": 0.2244021287223654,
+          "xss": 0.23525907278110758
+        },
+        "entropy_before": 1.707806,
+        "entropy_after": 1.665842,
+        "entropy_change": 0.041964,
+        "information_gain": 0.041276,
+        "evidence_hash": "e068c5ae7310d0664ccb0c898c290d26b744c9fe4ab34fe78028727f562864b3"
+      },
+      {
+        "step": 8,
+        "action_path": "/vul/xss/xss_reflected_get.php",
+        "prior": {
+          "access_control": 0.2244021287223654,
+          "authentication": 0.03051151368393208,
+          "input_validation": 0.03051151368393208,
+          "injection": 0.2244021287223654,
+          "observability": 0.03051151368393208,
+          "url_redirect": 0.2244021287223654,
+          "xss": 0.23525907278110758
+        },
+        "likelihood": {
+          "access_control": 0.09302325256895631,
+          "authentication": 1.162790657111954e-08,
+          "input_validation": 1.162790657111954e-08,
+          "injection": 0.09302325256895631,
+          "observability": 1.162790657111954e-08,
+          "url_redirect": 0.09302325256895631,
+          "xss": 0.7209302074094114
+        },
+        "posterior": {
+          "access_control": 0.21905396949245176,
+          "authentication": 0.024560870656423962,
+          "input_validation": 0.024560870656423962,
+          "injection": 0.21905396949245176,
+          "observability": 0.024560870656423962,
+          "url_redirect": 0.21905396949245176,
+          "xss": 0.26915547955337293
+        },
+        "entropy_before": 1.665842,
+        "entropy_after": 1.624229,
+        "entropy_change": 0.041614,
+        "information_gain": 0.138399,
+        "evidence_hash": "2cf10005d06092763dd2685caff9fb996629f451468ff13a684759dc4e6f0289"
+      }
+    ]
+  },
+  "belief_steps": [
+    {
+      "step": 1,
+      "action_path": "/vul/xss/xss_reflected_get.php",
+      "prior": {
+        "access_control": 0.14285714285714285,
+        "authentication": 0.14285714285714285,
+        "input_validation": 0.14285714285714285,
+        "injection": 0.14285714285714285,
+        "observability": 0.14285714285714285,
+        "url_redirect": 0.14285714285714285,
+        "xss": 0.14285714285714285
+      },
+      "likelihood": {
+        "access_control": 0.09302325256895631,
+        "authentication": 1.162790657111954e-08,
+        "input_validation": 1.162790657111954e-08,
+        "injection": 0.09302325256895631,
+        "observability": 1.162790657111954e-08,
+        "url_redirect": 0.09302325256895631,
+        "xss": 0.7209302074094114
+      },
+      "posterior": {
+        "access_control": 0.1538179808002737,
+        "authentication": 0.11443737399499258,
+        "input_validation": 0.11443737399499258,
+        "injection": 0.1538179808002737,
+        "observability": 0.11443737399499258,
+        "url_redirect": 0.1538179808002737,
+        "xss": 0.19523393561420116
+      },
+      "entropy_before": 1.94591,
+      "entropy_after": 1.926968,
+      "entropy_change": 0.018942,
+      "information_gain": 0.262152,
+      "evidence_hash": "beba419e85ce51ce40eb220c4ea7f5268149828a464b96fc97800ecdfacbbcbd"
+    },
+    {
+      "step": 2,
+      "action_path": "/vul/xss/xss_dom.php",
+      "prior": {
+        "access_control": 0.1538179808002737,
+        "authentication": 0.11443737399499258,
+        "input_validation": 0.11443737399499258,
+        "injection": 0.1538179808002737,
+        "observability": 0.11443737399499258,
+        "url_redirect": 0.1538179808002737,
+        "xss": 0.19523393561420116
+      },
+      "likelihood": {
+        "access_control": 0.24999999062500033,
+        "authentication": 1.2499999531250016e-08,
+        "input_validation": 1.2499999531250016e-08,
+        "injection": 0.24999999062500033,
+        "observability": 1.2499999531250016e-08,
+        "url_redirect": 0.24999999062500033,
+        "xss": 0.24999999062500033
+      },
+      "posterior": {
+        "access_control": 0.17295020928986835,
+        "authentication": 0.09168879966312823,
+        "input_validation": 0.09168879966312823,
+        "injection": 0.17295020928986835,
+        "observability": 0.09168879966312823,
+        "url_redirect": 0.17295020928986835,
+        "xss": 0.20608297314101032
+      },
+      "entropy_before": 1.926968,
+      "entropy_after": 1.893188,
+      "entropy_change": 0.033779,
+      "information_gain": 0.138019,
+      "evidence_hash": "17b806a24d87b46e4ed1cb9a787c60441dec5179e01a2c13edd0180597640f34"
+    },
+    {
+      "step": 3,
+      "action_path": "/vul/urlredirect/urlredirect.php",
+      "prior": {
+        "access_control": 0.17295020928986835,
+        "authentication": 0.09168879966312823,
+        "input_validation": 0.09168879966312823,
+        "injection": 0.17295020928986835,
+        "observability": 0.09168879966312823,
+        "url_redirect": 0.17295020928986835,
+        "xss": 0.20608297314101032
+      },
+      "likelihood": {
+        "access_control": 0.24999999062500033,
+        "authentication": 1.2499999531250016e-08,
+        "input_validation": 1.2499999531250016e-08,
+        "injection": 0.24999999062500033,
+        "observability": 1.2499999531250016e-08,
+        "url_redirect": 0.24999999062500033,
+        "xss": 0.24999999062500033
+      },
+      "posterior": {
+        "access_control": 0.18825599208154406,
+        "authentication": 0.07348994019763676,
+        "input_validation": 0.07348994019763676,
+        "injection": 0.18825599208154406,
+        "observability": 0.07348994019763676,
+        "url_redirect": 0.18825599208154406,
+        "xss": 0.21476220316245764
+      },
+      "entropy_before": 1.893188,
+      "entropy_after": 1.849048,
+      "entropy_change": 0.04414,
+      "information_gain": 0.106976,
+      "evidence_hash": "0c650f19c0f4c44ebb965d5d2dedf18c0dab74e01cd730a5e2c7d9fa7a87999c"
+    },
+    {
+      "step": 4,
+      "action_path": "/vul/sqli/sqli_str.php",
+      "prior": {
+        "access_control": 0.18825599208154406,
+        "authentication": 0.07348994019763676,
+        "input_validation": 0.07348994019763676,
+        "injection": 0.18825599208154406,
+        "observability": 0.07348994019763676,
+        "url_redirect": 0.18825599208154406,
+        "xss": 0.21476220316245764
+      },
+      "likelihood": {
+        "access_control": 0.24999999062500033,
+        "authentication": 1.2499999531250016e-08,
+        "input_validation": 1.2499999531250016e-08,
+        "injection": 0.24999999062500033,
+        "observability": 1.2499999531250016e-08,
+        "url_redirect": 0.24999999062500033,
+        "xss": 0.24999999062500033
+      },
+      "posterior": {
+        "access_control": 0.20050061831488464,
+        "authentication": 0.05893085262524358,
+        "input_validation": 0.05893085262524358,
+        "injection": 0.20050061831488464,
+        "observability": 0.05893085262524358,
+        "url_redirect": 0.20050061831488464,
+        "xss": 0.2217055871796155
+      },
+      "entropy_before": 1.849048,
+      "entropy_after": 1.801123,
+      "entropy_change": 0.047925,
+      "information_gain": 0.083623,
+      "evidence_hash": "7c68003a76a7622245de4e7423402313b92b42bc291220376aafded91f3526cf"
+    },
+    {
+      "step": 5,
+      "action_path": "/vul/sqli/sqli_search.php",
+      "prior": {
+        "access_control": 0.20050061831488464,
+        "authentication": 0.05893085262524358,
+        "input_validation": 0.05893085262524358,
+        "injection": 0.20050061831488464,
+        "observability": 0.05893085262524358,
+        "url_redirect": 0.20050061831488464,
+        "xss": 0.2217055871796155
+      },
+      "likelihood": {
+        "access_control": 0.24999999062500033,
+        "authentication": 1.2499999531250016e-08,
+        "input_validation": 1.2499999531250016e-08,
+        "injection": 0.24999999062500033,
+        "observability": 1.2499999531250016e-08,
+        "url_redirect": 0.24999999062500033,
+        "xss": 0.24999999062500033
+      },
+      "posterior": {
+        "access_control": 0.21029631930155704,
+        "authentication": 0.04728358256732902,
+        "input_validation": 0.04728358256732902,
+        "injection": 0.21029631930155704,
+        "observability": 0.04728358256732902,
+        "url_redirect": 0.21029631930155704,
+        "xss": 0.22726029439334172
+      },
+      "entropy_before": 1.801123,
+      "entropy_after": 1.753299,
+      "entropy_change": 0.047825,
+      "information_gain": 0.065783,
+      "evidence_hash": "6cef99c92b0fb0a3689ad064f2d15901906e8980b5e83dbaa1e64310c01def68"
+    },
+    {
+      "step": 6,
+      "action_path": "/vul/sqli/sqli_blind_b.php",
+      "prior": {
+        "access_control": 0.21029631930155704,
+        "authentication": 0.04728358256732902,
+        "input_validation": 0.04728358256732902,
+        "injection": 0.21029631930155704,
+        "observability": 0.04728358256732902,
+        "url_redirect": 0.21029631930155704,
+        "xss": 0.22726029439334172
+      },
+      "likelihood": {
+        "access_control": 0.24999999062500033,
+        "authentication": 1.2499999531250016e-08,
+        "input_validation": 1.2499999531250016e-08,
+        "injection": 0.24999999062500033,
+        "observability": 1.2499999531250016e-08,
+        "url_redirect": 0.24999999062500033,
+        "xss": 0.24999999062500033
+      },
+      "posterior": {
+        "access_control": 0.21813288009089501,
+        "authentication": 0.03796576652099739,
+        "input_validation": 0.03796576652099739,
+        "injection": 0.21813288009089501,
+        "observability": 0.03796576652099739,
+        "url_redirect": 0.21813288009089501,
+        "xss": 0.23170406016432277
+      },
+      "entropy_before": 1.753299,
+      "entropy_after": 1.707806,
+      "entropy_change": 0.045493,
+      "information_gain": 0.052004,
+      "evidence_hash": "59e7653b885c30ab4df6ad5fec70ffa533e4b726c2b2032c8fa7432c8ecee2f0"
+    },
+    {
+      "step": 7,
+      "action_path": "/vul/sqli/sqli_blind_t.php",
+      "prior": {
+        "access_control": 0.21813288009089501,
+        "authentication": 0.03796576652099739,
+        "input_validation": 0.03796576652099739,
+        "injection": 0.21813288009089501,
+        "observability": 0.03796576652099739,
+        "url_redirect": 0.21813288009089501,
+        "xss": 0.23170406016432277
+      },
+      "likelihood": {
+        "access_control": 0.24999999062500033,
+        "authentication": 1.2499999531250016e-08,
+        "input_validation": 1.2499999531250016e-08,
+        "injection": 0.24999999062500033,
+        "observability": 1.2499999531250016e-08,
+        "url_redirect": 0.24999999062500033,
+        "xss": 0.24999999062500033
+      },
+      "posterior": {
+        "access_control": 0.2244021287223654,
+        "authentication": 0.03051151368393208,
+        "input_validation": 0.03051151368393208,
+        "injection": 0.2244021287223654,
+        "observability": 0.03051151368393208,
+        "url_redirect": 0.2244021287223654,
+        "xss": 0.23525907278110758
+      },
+      "entropy_before": 1.707806,
+      "entropy_after": 1.665842,
+      "entropy_change": 0.041964,
+      "information_gain": 0.041276,
+      "evidence_hash": "e068c5ae7310d0664ccb0c898c290d26b744c9fe4ab34fe78028727f562864b3"
+    },
+    {
+      "step": 8,
+      "action_path": "/vul/xss/xss_reflected_get.php",
+      "prior": {
+        "access_control": 0.2244021287223654,
+        "authentication": 0.03051151368393208,
+        "input_validation": 0.03051151368393208,
+        "injection": 0.2244021287223654,
+        "observability": 0.03051151368393208,
+        "url_redirect": 0.2244021287223654,
+        "xss": 0.23525907278110758
+      },
+      "likelihood": {
+        "access_control": 0.09302325256895631,
+        "authentication": 1.162790657111954e-08,
+        "input_validation": 1.162790657111954e-08,
+        "injection": 0.09302325256895631,
+        "observability": 1.162790657111954e-08,
+        "url_redirect": 0.09302325256895631,
+        "xss": 0.7209302074094114
+      },
+      "posterior": {
+        "access_control": 0.21905396949245176,
+        "authentication": 0.024560870656423962,
+        "input_validation": 0.024560870656423962,
+        "injection": 0.21905396949245176,
+        "observability": 0.024560870656423962,
+        "url_redirect": 0.21905396949245176,
+        "xss": 0.26915547955337293
+      },
+      "entropy_before": 1.665842,
+      "entropy_after": 1.624229,
+      "entropy_change": 0.041614,
+      "information_gain": 0.138399,
+      "evidence_hash": "2cf10005d06092763dd2685caff9fb996629f451468ff13a684759dc4e6f0289"
+    }
+  ],
+  "capture": {
+    "stage1_count": 7,
+    "stage2_count": 1,
+    "suspicious_count": 1,
+    "abstain_count": 8,
+    "catalog_sample_count": 8,
+    "all_samples_local": true,
+    "all_samples_non_exploit": true
+  },
+  "catalog": {
+    "path": "research\\pikachu_payload_catalog_v1.json",
+    "catalog_sha256": "a03f321e22891e27a8ea8cbe3652ea8ce79efaad85b6c4e91faf84f3c3194b48",
+    "source_count": 1,
+    "sample_count": 8
+  },
+  "evaluator_confirmation_count": 0,
+  "public_corpus_ingested": false,
+  "report_path": "research\\pikachu_staged_probe_v1.json",
+  "protocol_path": "research\\pikachu_staged_probe_protocol_v1.json",
+  "collector_schema": "sift-pikachu-replay-collector-v1"
+}

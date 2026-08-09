@@ -1,0 +1,17 @@
+{
+  "protocol_id": "pg-pk-134-independent-token-gru-v1",
+  "proposal_id": "pg134-independent-token-gru-proposal-v1",
+  "question": "PG-133 的历史/双层 token 结果能否由不复用其 tokenizer、embedding、Transformer 的独立 hash+GRU 实现复现？",
+  "prediction": {
+    "pg133_accuracy": ">=0.90",
+    "counterfactual_label_conflicts": ">=3",
+    "counterfactual_prediction_separation": 1.0,
+    "current_only_accuracy": "<=0.75",
+    "unknown_blind_abstain": 1.0,
+    "negative_false_stop": 0,
+    "weight_logit_sensitivity": ">0.001"
+  },
+  "intervention": "fresh target replay；独立 bounded source/Rule-IR converter；full、source-only、ir-only、availability-only、weight-only、no-weight、zero 在同一容量上复放。",
+  "failure_rule": "任一 fresh reset、GET/POST、负对照、unknown abstain、跨族、历史配对、证据哈希或独立实现门失败，保留 evaluation-only，禁止训练/长期记忆晋升。",
+  "next": "第三独立实现通过后，进行人工/Codex 审核和第四种实现或跨语言 parser 复核；仍不生成攻击 payload。"
+}

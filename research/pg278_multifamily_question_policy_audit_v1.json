@@ -1,0 +1,61 @@
+{
+  "audit_id": "pg278-multifamily-question-policy-independent-audit-v1",
+  "status": "passed",
+  "audit_checks": {
+    "dataset_hash": true,
+    "dataset_audit_hash": true,
+    "report_hash": true,
+    "trace_hash": true,
+    "protocol_hash": true,
+    "protocol_report_binding": true,
+    "a800_gpu0_only": true,
+    "source_binding": true,
+    "split_contract": true,
+    "context_firewall": true,
+    "evaluation_only": true,
+    "coarse_collision_proven": true,
+    "enriched_collision_resolved": true,
+    "post_observation_collision_resolved": true,
+    "dataset_audit_pass": true,
+    "all_variants": true,
+    "process_transfer_minima": true,
+    "final_only_failure_exposed": true,
+    "coarse_failure_exposed": true,
+    "conservative_no_regression": true,
+    "dpo_failure_visible": true,
+    "family_question_gate_visible": true,
+    "hypothesis_gate_pass": true,
+    "promotion_blocked": true
+  },
+  "report": "research/pg278_multifamily_question_policy_report_v1.json",
+  "dataset": "research/pg278_multifamily_question_dataset_v1.json",
+  "findings": [
+    {
+      "id": "missing-observation-is-learnable-only-after-enrichment",
+      "status": "supported-in-controlled-four-family-fixture",
+      "evidence": "Enriched process SFT cleared implementation, paired-counterfactual and missing-safe minima; coarse projection still contains intentional collisions.",
+      "implication": "Collect the missing abstract request/observation condition before increasing model size or RL steps."
+    },
+    {
+      "id": "final-only-is-not-a-debugging-policy",
+      "status": "falsified",
+      "evidence": "Final-only SFT reaches post classification but ask_rate and missing-safe rate are zero.",
+      "implication": "Persist pre-state, question, returned observation, failure, next action and belief transition."
+    },
+    {
+      "id": "family-abstract-transfer-is-not-slot-decoding",
+      "status": "bounded",
+      "evidence": "Family-held-out pre-question gate passes while family post metrics remain weak; the shared question role transfers, exact family slot binding does not.",
+      "implication": "Do not report this fixture as vulnerability discovery; PG-279 must add real local replay records and source-held-out retention."
+    },
+    {
+      "id": "dpo-can-hide-missing-safety-regression",
+      "status": "falsified",
+      "evidence": "DPO preserves headline transition metrics but its missing-observation safe minimum is zero.",
+      "implication": "Keep conservative/SFT anchors and gate on per-seed safety minima, not mean reward."
+    }
+  ],
+  "failures": [],
+  "interpretation": "PG-278 passes independent integrity and controlled process-supervision gates on four synthetic loopback families. It proves that enriched observation fields are necessary for this experiment and exposes final-only/DPO failure modes. It does not authorize training or memory promotion and does not establish real-target vulnerability capability.",
+  "audit_sha256": "086e6af1013ad1f57f81b4e9e173775cb507018e3365ce03fa86e59df8334713"
+}

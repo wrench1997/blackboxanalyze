@@ -1,0 +1,680 @@
+{
+  "schema_version": "pg146-public-lab-replay-v1-catalog",
+  "protocol_id": "pg-pk-146-public-lab-replay-v1",
+  "evaluation_only": true,
+  "targets": [
+    {
+      "target_id": "pg146_webgoat_login_surface",
+      "lab": "webgoat",
+      "container": "sift-pg146-webgoat",
+      "image_digest": "webgoat/webgoat@sha256:3101bd9e7bcfe122d7ef91e690ef3720de36cc4e86b3d06763a1ddf2e2751a4b",
+      "base_url": "http://127.0.0.1:31450",
+      "row_count": 2,
+      "get_count": 1,
+      "post_count": 1,
+      "fresh_reset_count": 2,
+      "ready_count": 2,
+      "unknown_oracle_count": 2
+    },
+    {
+      "target_id": "pg146_dvwa_login_surface",
+      "lab": "dvwa",
+      "container": "sift-pg146-dvwa",
+      "image_digest": "vulnerables/web-dvwa@sha256:dae203fe11646a86937bf04db0079adef295f426da68a92b40e3b181f337daa7",
+      "base_url": "http://127.0.0.1:31452",
+      "row_count": 2,
+      "get_count": 1,
+      "post_count": 1,
+      "fresh_reset_count": 2,
+      "ready_count": 1,
+      "unknown_oracle_count": 2
+    },
+    {
+      "target_id": "pg146_juice_shop_login_surface",
+      "lab": "juice_shop",
+      "container": "sift-pg146-juice",
+      "image_digest": "bkimminich/juice-shop@sha256:28870b9d2bec49e605d6ebbf4b22ed1ec1ca0a72347ef19217bbbb21ea44e3fe",
+      "base_url": "http://127.0.0.1:31453",
+      "row_count": 2,
+      "get_count": 1,
+      "post_count": 1,
+      "fresh_reset_count": 2,
+      "ready_count": 1,
+      "unknown_oracle_count": 2
+    }
+  ],
+  "rows": [
+    {
+      "row_id": "pg146_webgoat_login_surface::GET",
+      "target_id": "pg146_webgoat_login_surface",
+      "lab": "webgoat",
+      "method": "GET",
+      "route_class": "login_surface",
+      "fresh_reset": true,
+      "readiness": {
+        "ready": true,
+        "elapsed_ms": 34682.44,
+        "probe": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "headers_present": [
+            "content-type"
+          ],
+          "location_origin": "none",
+          "truncated": false,
+          "elapsed_ms": 493.172,
+          "transport_error": false,
+          "projection": {
+            "body_length": 1929,
+            "body_length_bucket": "256-4095",
+            "body_sha256": "61153914d077b9f99ead10a536133564d2988ad5f6eaa74ad2300867dc2249dd",
+            "semantic_body_sha256": "cafa3a95436a658e2f46d1e798960e3dbc15def47e18d5a3db804d9ba290540c",
+            "content_type_class": "text/html",
+            "html_shape": {
+              "tag_count": 31,
+              "form_count": 1,
+              "input_count": 2,
+              "script_count": 0,
+              "link_count": 5,
+              "attribute_count": 46,
+              "text_length_bucket": "256-4095",
+              "title_present": true
+            }
+          }
+        }
+      },
+      "response": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "headers_present": [
+          "content-type"
+        ],
+        "location_origin": "none",
+        "truncated": false,
+        "elapsed_ms": 13.207,
+        "transport_error": false,
+        "projection": {
+          "body_length": 1929,
+          "body_length_bucket": "256-4095",
+          "body_sha256": "61153914d077b9f99ead10a536133564d2988ad5f6eaa74ad2300867dc2249dd",
+          "semantic_body_sha256": "cafa3a95436a658e2f46d1e798960e3dbc15def47e18d5a3db804d9ba290540c",
+          "content_type_class": "text/html",
+          "html_shape": {
+            "tag_count": 31,
+            "form_count": 1,
+            "input_count": 2,
+            "script_count": 0,
+            "link_count": 5,
+            "attribute_count": 46,
+            "text_length_bucket": "256-4095",
+            "title_present": true
+          }
+        }
+      },
+      "failure_signature": {
+        "status_class": "2xx",
+        "transport_error": false,
+        "location_origin": "none",
+        "content_type_class": "text/html",
+        "body_length_bucket": "256-4095",
+        "html_tag_count": 31,
+        "form_count": 1,
+        "input_count": 2,
+        "script_count": 0
+      },
+      "oracle": {
+        "availability": "unknown_oracle",
+        "typed_effect": "not_observed",
+        "confirmed_positive": false,
+        "matched_negative": false
+      },
+      "evidence_hash": "e583cf0462a018ec9d616f912e6b644f0d28eb50b8e1d44b1e6981bbfc4dac62",
+      "model_projection": {
+        "tokens": [
+          "[BOS]",
+          "[STEP]",
+          "transport.method=GET",
+          "transport.channel=loopback",
+          "surface.route_class=login_surface",
+          "obs.status_class=2xx",
+          "obs.content_type=text/html",
+          "obs.body_length=256-4095",
+          "obs.failure.transport=false",
+          "obs.oracle=unknown_oracle",
+          "[EOS]"
+        ],
+        "raw_request_body_in_model": false,
+        "raw_response_body_in_model": false,
+        "target_identity_in_model": false,
+        "oracle_authority_in_model": false
+      }
+    },
+    {
+      "row_id": "pg146_webgoat_login_surface::POST",
+      "target_id": "pg146_webgoat_login_surface",
+      "lab": "webgoat",
+      "method": "POST",
+      "route_class": "login_surface",
+      "fresh_reset": true,
+      "readiness": {
+        "ready": true,
+        "elapsed_ms": 15469.197,
+        "probe": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "headers_present": [
+            "content-type"
+          ],
+          "location_origin": "none",
+          "truncated": false,
+          "elapsed_ms": 394.624,
+          "transport_error": false,
+          "projection": {
+            "body_length": 1929,
+            "body_length_bucket": "256-4095",
+            "body_sha256": "61153914d077b9f99ead10a536133564d2988ad5f6eaa74ad2300867dc2249dd",
+            "semantic_body_sha256": "cafa3a95436a658e2f46d1e798960e3dbc15def47e18d5a3db804d9ba290540c",
+            "content_type_class": "text/html",
+            "html_shape": {
+              "tag_count": 31,
+              "form_count": 1,
+              "input_count": 2,
+              "script_count": 0,
+              "link_count": 5,
+              "attribute_count": 46,
+              "text_length_bucket": "256-4095",
+              "title_present": true
+            }
+          }
+        }
+      },
+      "response": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "headers_present": [
+          "content-type"
+        ],
+        "location_origin": "none",
+        "truncated": false,
+        "elapsed_ms": 396.351,
+        "transport_error": false,
+        "projection": {
+          "body_length": 2007,
+          "body_length_bucket": "256-4095",
+          "body_sha256": "ee154e6377c8b6afe1f461caab44a8ca9e358e134d94d5484a2f08a6f6a5868d",
+          "semantic_body_sha256": "7d9673de871b885479c0b89c35dceccfaba143c864fbb14ec9b7860216bffbc3",
+          "content_type_class": "text/html",
+          "html_shape": {
+            "tag_count": 33,
+            "form_count": 1,
+            "input_count": 2,
+            "script_count": 0,
+            "link_count": 5,
+            "attribute_count": 46,
+            "text_length_bucket": "256-4095",
+            "title_present": true
+          }
+        }
+      },
+      "failure_signature": {
+        "status_class": "2xx",
+        "transport_error": false,
+        "location_origin": "none",
+        "content_type_class": "text/html",
+        "body_length_bucket": "256-4095",
+        "html_tag_count": 33,
+        "form_count": 1,
+        "input_count": 2,
+        "script_count": 0
+      },
+      "oracle": {
+        "availability": "unknown_oracle",
+        "typed_effect": "not_observed",
+        "confirmed_positive": false,
+        "matched_negative": false
+      },
+      "evidence_hash": "813543a8c469cab9df3b527b545816e28b8b83f3d61e0283ece20b4425734a96",
+      "model_projection": {
+        "tokens": [
+          "[BOS]",
+          "[STEP]",
+          "transport.method=POST",
+          "transport.channel=loopback",
+          "surface.route_class=login_surface",
+          "obs.status_class=2xx",
+          "obs.content_type=text/html",
+          "obs.body_length=256-4095",
+          "obs.failure.transport=false",
+          "obs.oracle=unknown_oracle",
+          "[EOS]"
+        ],
+        "raw_request_body_in_model": false,
+        "raw_response_body_in_model": false,
+        "target_identity_in_model": false,
+        "oracle_authority_in_model": false
+      }
+    },
+    {
+      "row_id": "pg146_dvwa_login_surface::GET",
+      "target_id": "pg146_dvwa_login_surface",
+      "lab": "dvwa",
+      "method": "GET",
+      "route_class": "login_surface",
+      "fresh_reset": true,
+      "readiness": {
+        "ready": false,
+        "elapsed_ms": 90783.83,
+        "probe": {
+          "status_code": null,
+          "status_class": "transport_error",
+          "headers_present": [],
+          "location_origin": "none",
+          "truncated": false,
+          "elapsed_ms": 10.366,
+          "transport_error": true,
+          "transport_error_type": "RemoteDisconnected",
+          "projection": {
+            "body_length": 0,
+            "body_length_bucket": "0",
+            "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "semantic_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "content_type_class": "unknown",
+            "html_shape": {
+              "tag_count": 0,
+              "form_count": 0,
+              "input_count": 0,
+              "script_count": 0,
+              "link_count": 0,
+              "attribute_count": 0,
+              "text_length_bucket": "0",
+              "title_present": false
+            }
+          }
+        }
+      },
+      "response": {
+        "status_code": null,
+        "status_class": "transport_error",
+        "headers_present": [],
+        "location_origin": "none",
+        "truncated": false,
+        "elapsed_ms": 10.902,
+        "transport_error": true,
+        "transport_error_type": "RemoteDisconnected",
+        "projection": {
+          "body_length": 0,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "semantic_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "content_type_class": "unknown",
+          "html_shape": {
+            "tag_count": 0,
+            "form_count": 0,
+            "input_count": 0,
+            "script_count": 0,
+            "link_count": 0,
+            "attribute_count": 0,
+            "text_length_bucket": "0",
+            "title_present": false
+          }
+        }
+      },
+      "failure_signature": {
+        "status_class": "transport_error",
+        "transport_error": true,
+        "location_origin": "none",
+        "content_type_class": "unknown",
+        "body_length_bucket": "0",
+        "html_tag_count": 0,
+        "form_count": 0,
+        "input_count": 0,
+        "script_count": 0
+      },
+      "oracle": {
+        "availability": "unknown_oracle",
+        "typed_effect": "not_observed",
+        "confirmed_positive": false,
+        "matched_negative": false
+      },
+      "evidence_hash": "7bcc5c044c54bce797afdcc6967b457a8a305a20fbb6ab5847e6c15f715e530e",
+      "model_projection": {
+        "tokens": [
+          "[BOS]",
+          "[STEP]",
+          "transport.method=GET",
+          "transport.channel=loopback",
+          "surface.route_class=login_surface",
+          "obs.status_class=transport_error",
+          "obs.content_type=unknown",
+          "obs.body_length=0",
+          "obs.failure.transport=true",
+          "obs.oracle=unknown_oracle",
+          "[EOS]"
+        ],
+        "raw_request_body_in_model": false,
+        "raw_response_body_in_model": false,
+        "target_identity_in_model": false,
+        "oracle_authority_in_model": false
+      }
+    },
+    {
+      "row_id": "pg146_dvwa_login_surface::POST",
+      "target_id": "pg146_dvwa_login_surface",
+      "lab": "dvwa",
+      "method": "POST",
+      "route_class": "login_surface",
+      "fresh_reset": true,
+      "readiness": {
+        "ready": true,
+        "elapsed_ms": 3074.892,
+        "probe": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "headers_present": [
+            "content-type",
+            "set-cookie"
+          ],
+          "location_origin": "none",
+          "truncated": false,
+          "elapsed_ms": 552.788,
+          "transport_error": false,
+          "projection": {
+            "body_length": 1523,
+            "body_length_bucket": "256-4095",
+            "body_sha256": "478249135484eea0c79263719e6aa001ed1b921f393e18cf182f0e0da8b5501e",
+            "semantic_body_sha256": "e9f1695c1c36f12796af4df37a5765cc779bec26d94186551752b9a0b828771d",
+            "content_type_class": "text/html",
+            "html_shape": {
+              "tag_count": 37,
+              "form_count": 1,
+              "input_count": 4,
+              "script_count": 0,
+              "link_count": 1,
+              "attribute_count": 33,
+              "text_length_bucket": "256-4095",
+              "title_present": true
+            }
+          }
+        }
+      },
+      "response": {
+        "status_code": 200,
+        "status_class": "2xx",
+        "headers_present": [
+          "content-type",
+          "set-cookie"
+        ],
+        "location_origin": "none",
+        "truncated": false,
+        "elapsed_ms": 5.778,
+        "transport_error": false,
+        "projection": {
+          "body_length": 1523,
+          "body_length_bucket": "256-4095",
+          "body_sha256": "4eb1c421812acc1d8b6c98a99c2bfeba28fe5f8088bbe0b0e062962d1f5355f3",
+          "semantic_body_sha256": "cb80239f527158dbdd4c65b1ce9199630e012a5b0f3cec59d9fb85c18e0a4378",
+          "content_type_class": "text/html",
+          "html_shape": {
+            "tag_count": 37,
+            "form_count": 1,
+            "input_count": 4,
+            "script_count": 0,
+            "link_count": 1,
+            "attribute_count": 33,
+            "text_length_bucket": "256-4095",
+            "title_present": true
+          }
+        }
+      },
+      "failure_signature": {
+        "status_class": "2xx",
+        "transport_error": false,
+        "location_origin": "none",
+        "content_type_class": "text/html",
+        "body_length_bucket": "256-4095",
+        "html_tag_count": 37,
+        "form_count": 1,
+        "input_count": 4,
+        "script_count": 0
+      },
+      "oracle": {
+        "availability": "unknown_oracle",
+        "typed_effect": "not_observed",
+        "confirmed_positive": false,
+        "matched_negative": false
+      },
+      "evidence_hash": "33e917658407b28e4689a9f71c875aaa87835d47721c364087518669fd38664c",
+      "model_projection": {
+        "tokens": [
+          "[BOS]",
+          "[STEP]",
+          "transport.method=POST",
+          "transport.channel=loopback",
+          "surface.route_class=login_surface",
+          "obs.status_class=2xx",
+          "obs.content_type=text/html",
+          "obs.body_length=256-4095",
+          "obs.failure.transport=false",
+          "obs.oracle=unknown_oracle",
+          "[EOS]"
+        ],
+        "raw_request_body_in_model": false,
+        "raw_response_body_in_model": false,
+        "target_identity_in_model": false,
+        "oracle_authority_in_model": false
+      }
+    },
+    {
+      "row_id": "pg146_juice_shop_login_surface::GET",
+      "target_id": "pg146_juice_shop_login_surface",
+      "lab": "juice_shop",
+      "method": "GET",
+      "route_class": "login_surface",
+      "fresh_reset": true,
+      "readiness": {
+        "ready": false,
+        "elapsed_ms": 90741.05,
+        "probe": {
+          "status_code": null,
+          "status_class": "transport_error",
+          "headers_present": [],
+          "location_origin": "none",
+          "truncated": false,
+          "elapsed_ms": 11.12,
+          "transport_error": true,
+          "transport_error_type": "RemoteDisconnected",
+          "projection": {
+            "body_length": 0,
+            "body_length_bucket": "0",
+            "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "semantic_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "content_type_class": "unknown",
+            "html_shape": {
+              "tag_count": 0,
+              "form_count": 0,
+              "input_count": 0,
+              "script_count": 0,
+              "link_count": 0,
+              "attribute_count": 0,
+              "text_length_bucket": "0",
+              "title_present": false
+            }
+          }
+        }
+      },
+      "response": {
+        "status_code": null,
+        "status_class": "transport_error",
+        "headers_present": [],
+        "location_origin": "none",
+        "truncated": false,
+        "elapsed_ms": 10.2,
+        "transport_error": true,
+        "transport_error_type": "RemoteDisconnected",
+        "projection": {
+          "body_length": 0,
+          "body_length_bucket": "0",
+          "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "semantic_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "content_type_class": "unknown",
+          "html_shape": {
+            "tag_count": 0,
+            "form_count": 0,
+            "input_count": 0,
+            "script_count": 0,
+            "link_count": 0,
+            "attribute_count": 0,
+            "text_length_bucket": "0",
+            "title_present": false
+          }
+        }
+      },
+      "failure_signature": {
+        "status_class": "transport_error",
+        "transport_error": true,
+        "location_origin": "none",
+        "content_type_class": "unknown",
+        "body_length_bucket": "0",
+        "html_tag_count": 0,
+        "form_count": 0,
+        "input_count": 0,
+        "script_count": 0
+      },
+      "oracle": {
+        "availability": "unknown_oracle",
+        "typed_effect": "not_observed",
+        "confirmed_positive": false,
+        "matched_negative": false
+      },
+      "evidence_hash": "9ccb7df6bb99b7951ad7d9c1898f1bec8da5ca260a42b91ca1d2fe9b4ee48a06",
+      "model_projection": {
+        "tokens": [
+          "[BOS]",
+          "[STEP]",
+          "transport.method=GET",
+          "transport.channel=loopback",
+          "surface.route_class=login_surface",
+          "obs.status_class=transport_error",
+          "obs.content_type=unknown",
+          "obs.body_length=0",
+          "obs.failure.transport=true",
+          "obs.oracle=unknown_oracle",
+          "[EOS]"
+        ],
+        "raw_request_body_in_model": false,
+        "raw_response_body_in_model": false,
+        "target_identity_in_model": false,
+        "oracle_authority_in_model": false
+      }
+    },
+    {
+      "row_id": "pg146_juice_shop_login_surface::POST",
+      "target_id": "pg146_juice_shop_login_surface",
+      "lab": "juice_shop",
+      "method": "POST",
+      "route_class": "login_surface",
+      "fresh_reset": true,
+      "readiness": {
+        "ready": true,
+        "elapsed_ms": 88689.002,
+        "probe": {
+          "status_code": 200,
+          "status_class": "2xx",
+          "headers_present": [
+            "content-type"
+          ],
+          "location_origin": "none",
+          "truncated": false,
+          "elapsed_ms": 20.288,
+          "transport_error": false,
+          "projection": {
+            "body_length": 9903,
+            "body_length_bucket": "4096-65535",
+            "body_sha256": "9893b61734b4a11bb9b81c6feb2c97d0cc6aaa59190f8ec885a6e86c25661cef",
+            "semantic_body_sha256": "011961c9b0811c0a3932f465a8ea8c586b85d4651436520b31862db7e08f1395",
+            "content_type_class": "text/html",
+            "html_shape": {
+              "tag_count": 30,
+              "form_count": 0,
+              "input_count": 0,
+              "script_count": 4,
+              "link_count": 15,
+              "attribute_count": 49,
+              "text_length_bucket": "4096-65535",
+              "title_present": true
+            }
+          }
+        }
+      },
+      "response": {
+        "status_code": 401,
+        "status_class": "4xx",
+        "headers_present": [
+          "content-type"
+        ],
+        "location_origin": "none",
+        "truncated": false,
+        "elapsed_ms": 106.45,
+        "transport_error": false,
+        "projection": {
+          "body_length": 26,
+          "body_length_bucket": "1-255",
+          "body_sha256": "db2a02d8daccaff693da676ed8fb8f44aaf21e58bdb455638a78ac37e44669c6",
+          "semantic_body_sha256": "db2a02d8daccaff693da676ed8fb8f44aaf21e58bdb455638a78ac37e44669c6",
+          "content_type_class": "text/html",
+          "html_shape": {
+            "tag_count": 0,
+            "form_count": 0,
+            "input_count": 0,
+            "script_count": 0,
+            "link_count": 0,
+            "attribute_count": 0,
+            "text_length_bucket": "1-255",
+            "title_present": false
+          }
+        }
+      },
+      "failure_signature": {
+        "status_class": "4xx",
+        "transport_error": false,
+        "location_origin": "none",
+        "content_type_class": "text/html",
+        "body_length_bucket": "1-255",
+        "html_tag_count": 0,
+        "form_count": 0,
+        "input_count": 0,
+        "script_count": 0
+      },
+      "oracle": {
+        "availability": "unknown_oracle",
+        "typed_effect": "not_observed",
+        "confirmed_positive": false,
+        "matched_negative": false
+      },
+      "evidence_hash": "08065de9d88b56b1eb61e480930960e709f5abe7febc303a19a97ddbd7384519",
+      "model_projection": {
+        "tokens": [
+          "[BOS]",
+          "[STEP]",
+          "transport.method=POST",
+          "transport.channel=loopback",
+          "surface.route_class=login_surface",
+          "obs.status_class=4xx",
+          "obs.content_type=text/html",
+          "obs.body_length=1-255",
+          "obs.failure.transport=false",
+          "obs.oracle=unknown_oracle",
+          "[EOS]"
+        ],
+        "raw_request_body_in_model": false,
+        "raw_response_body_in_model": false,
+        "target_identity_in_model": false,
+        "oracle_authority_in_model": false
+      }
+    }
+  ],
+  "raw_request_bodies_stored": false,
+  "raw_response_bodies_stored": false,
+  "external_network": false,
+  "catalog_sha256": "9e9213cdd092ba89a4239e8d1d6d5eadae1d377aa87c4781d9385a83811cb393"
+}

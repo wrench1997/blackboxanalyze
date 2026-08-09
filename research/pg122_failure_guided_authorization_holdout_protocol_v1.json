@@ -1,0 +1,66 @@
+{
+  "protocol_id": "pg-pk-122-failure-guided-authorization-holdout-v1",
+  "schema_version": "pg122-failure-guided-authorization-holdout-protocol-v1",
+  "objective": "在独立实现的授权/逻辑状态变化族上，检验冻结 PG-121 是否能依据失败信息逐步换通道排查，并在证据不足时正确 abstain。",
+  "scope": {
+    "target": "app/pg122_logic_authorization_target.py",
+    "bridge": "app/pg122_logic_authorization_replay.py",
+    "scheduler": "app/failure_guided_scheduler.py",
+    "runner": "scripts/run_pg122_logic_authorization_holdout.py",
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "destructive_payloads": false
+  },
+  "model_contract": {
+    "frozen_checkpoint": "artifacts/pg121-shape-sanitized-rule-ir-decoder-v1/model.pt",
+    "feature_dim": 48,
+    "weights_frozen": true,
+    "authorization_transition_in_input": false,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "sequential_probe_contract": {
+    "methods": ["GET", "POST"],
+    "fresh_reset_per_action": true,
+    "matched_negative_control_required": true,
+    "target_evidence_sha256_required": true,
+    "bridge_evidence_sha256_required": true,
+    "failure_signature_required": true,
+    "next_action_allow_list": ["repeat_matched_negative_pair", "probe_candidate_other_method", "replay_other_method", "abstain_candidate_only", "abstain_unknown_oracle", "stop_confirmed_positive", "abstain_budget_exhausted"],
+    "raw_probe_or_response_retention": false
+  },
+  "collection": {
+    "target_instances": 9,
+    "seeds": [12201, 12203, 12205],
+    "decoy_strengths": [0, 1, 2],
+    "surfaces": ["authorization", "decoy", "steady", "blind"],
+    "episodes_per_target": 4,
+    "steps_per_episode": 4,
+    "encoding_chain": ["html_entity", "url_percent", "unicode_escape"]
+  },
+  "hard_gate": {
+    "authorization_positive_recall_nonzero": true,
+    "decoy_false_accept_zero": true,
+    "blind_unknown_abstain_nonzero": true,
+    "get_post_balanced": true,
+    "failure_signature_on_every_step": true,
+    "all_abstain_is_not_success": true,
+    "memory_promotion_forbidden": true
+  },
+  "observed_result": {
+    "authorization_positive_recall": 0.0,
+    "decoy_false_accept_count": 0,
+    "blind_unknown_abstain_rate": 0.444444,
+    "diagnosis": "representation_gap"
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "blocked_holdout_failure_preserved",
+    "next": "PG123 authorization-transition slot"
+  }
+}

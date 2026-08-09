@@ -1,0 +1,85 @@
+{
+  "protocol_id": "pg-pk-331-legacy-web-manifest-audit-v1",
+  "schema_version": "pg331-legacy-web-manifest-audit-v1",
+  "status": "diagnostic_only_blocked",
+  "input": {
+    "path": "research\\pg179_pikachu_browser_crawl_manifest_v1.json",
+    "manifest_sha256": "3bd7135bed5bf5ebbb7f1eda9e9abc248024d8b9f644fa44e021ede53ce2e049",
+    "raw_values_read": true,
+    "raw_values_persisted": false
+  },
+  "coverage": {
+    "page_count": 63,
+    "route_count": 73,
+    "request_response_row_count": 112,
+    "script_catalog_count": 13,
+    "declared_stats": {
+      "get_query_surface_count": 5,
+      "get_form_surface_count": 18,
+      "post_form_surface_count": 21,
+      "incomplete_surface_count": 112
+    }
+  },
+  "axes": {
+    "document_structure": {
+      "status": "observed",
+      "page_count": 63,
+      "loaded_count": 63
+    },
+    "navigation": {
+      "status": "observed",
+      "page_count_with_link_counts": 63,
+      "route_count": 73
+    },
+    "request_transport": {
+      "status": "partial",
+      "surface_count": 112,
+      "method_counts": {
+        "GET": 73,
+        "POST": 21
+      },
+      "post_response_observed": false
+    },
+    "response_transport": {
+      "status": "partial",
+      "baseline_projection_count": 63,
+      "redirect_chain_count": 63,
+      "parameterized_response_observed_count": 0,
+      "baseline_only_count": 112
+    },
+    "javascript_surface": {
+      "status": "partial",
+      "script_catalog_count": 13,
+      "ast_or_sink_observed": false
+    },
+    "failure_feedback": {
+      "status": "not_observed",
+      "reason": "crawl_recorded_no_failure_or_repair_transition"
+    },
+    "belief_and_replay": {
+      "status": "not_observed",
+      "reason": "no_belief_or_typed_evaluator_sidecar"
+    }
+  },
+  "route_quality_counts": {
+    "incomplete_missing_request_parameter_context": 29,
+    "incomplete_parameterized_response_not_observed": 23,
+    "incomplete_post_response_not_observed": 21
+  },
+  "missing_observations": [
+    "parameterized_get_response",
+    "parameterized_post_response",
+    "failure_feedback",
+    "belief_and_replay",
+    "typed_evaluator",
+    "fresh_reset_attestation"
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "历史 DOM-only 清单可用于词表覆盖诊断；baseline GET 之外的字段必须保持 partial/not_observed，不能用默认值补齐，也不能进入训练或长期记忆。",
+  "audit_sha256": "c24856e7f2f39837cea06cec0143780feabb350daeee001fb0afe90d571afa07"
+}

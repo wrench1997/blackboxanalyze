@@ -1,0 +1,55 @@
+{
+  "protocol_id": "pg-pk-65-trajectory-policy-v1",
+  "schema_version": "pg65-trajectory-policy-protocol-v1",
+  "objective": "用 PG64 轨迹训练 pre-oracle trajectory policy head，在独立布局/观察噪声上验证多步动作泛化。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "fixture_replay_only": true,
+    "state_mutation": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false
+  },
+  "splits": {
+    "train": "PG64 train episodes",
+    "dev": "PG64 dev episodes",
+    "holdout": "PG64 holdout + PG65 independent noise/layout"
+  },
+  "input_contract": {
+    "model_reads": [
+      "pre_oracle_surface_projection",
+      "belief_before",
+      "candidate_action"
+    ],
+    "model_must_not_read": [
+      "evaluator_target",
+      "oracle_projection",
+      "response_projection_after_action",
+      "family_label",
+      "layout_id",
+      "task_id",
+      "raw_probe",
+      "raw_response"
+    ]
+  },
+  "required_gates": {
+    "dev_only_checkpoint_selection": true,
+    "dev_policy_accuracy_min": 0.8,
+    "pg64_holdout_policy_accuracy_min": 0.8,
+    "independent_target_recall_min": 0.8,
+    "independent_negative_false_accept_zero": true,
+    "independent_unknown_strict_abstain": true,
+    "independent_multi_step_rate_min": 0.5,
+    "fresh_reset_per_action": true,
+    "evidence_hash_per_action": true,
+    "typed_oracle_after_action_only": true,
+    "training_promotion_on_fixture": false,
+    "memory_promotion_on_fixture": false
+  },
+  "run_result": {
+    "safety_status": "passed",
+    "capability_status": "blocked",
+    "independent_target_recall": 1.0,
+    "independent_negative_false_accept_count": 0
+  }
+}

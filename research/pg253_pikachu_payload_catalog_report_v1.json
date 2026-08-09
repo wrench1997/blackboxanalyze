@@ -1,0 +1,340 @@
+{
+  "protocol_id": "pg-pk-253-pikachu-payload-catalog-v1",
+  "schema_version": "pg253-pikachu-payload-catalog-report-v1",
+  "status": "completed_route_level_payload_catalog_from_audited_replays",
+  "source_reports": [
+    "research\\pg217_pikachu_typed_sql_oracle_report_v1.json",
+    "research\\pg221_pikachu_boolean_blind_oracle_report_v1.json",
+    "research\\pg250_pikachu_pg249_payload_replay_report_v1.json"
+  ],
+  "route_count": 15,
+  "family_counts": {
+    "logic": 1,
+    "sql": 7,
+    "url_redirect": 1,
+    "xss": 6
+  },
+  "entries": [
+    {
+      "route": "/vul/dir/dir_list.php",
+      "method": "GET",
+      "family": "logic",
+      "fields": [
+        "title"
+      ],
+      "typed_oracle": "unknown_surface",
+      "probe_class": "abstain_untyped_surface",
+      "wire_template": null,
+      "reason": "not_in_active_payload_lane_oracle_not_typed",
+      "ai_send_count": 0,
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/sqli/sqli_blind_b.php",
+      "method": "GET",
+      "family": "sql",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "typed_oracle": "unknown_sql_backend",
+      "probe_class": "blind_boolean",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/sqli/sqli_blind_b.php?name=<RUNTIME_BOOLEAN_TRUE_OR_FALSE>&submit=submit",
+      "ai_send_count": 2,
+      "reference_send_count": 2,
+      "typed_effect_confirmed_count": 2,
+      "seed_count": 2,
+      "oracle_reasons": [
+        "boolean_blind_response_hidden",
+        "candidate_negative_differential_missing",
+        "candidate_sql_error_shape_missing"
+      ],
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false,
+      "boolean_effect_confirmed_count": 2,
+      "boolean_branch": {
+        "true": "kobe' AND '1'='1",
+        "false": "kobe' AND '1'='2"
+      },
+      "boolean_raw_persistence": false
+    },
+    {
+      "route": "/vul/sqli/sqli_blind_t.php",
+      "method": "GET",
+      "family": "sql",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "typed_oracle": "unknown_sql_backend",
+      "probe_class": "syntax_shape",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/sqli/sqli_blind_t.php?name=<RUNTIME_MARKER>'&submit=submit",
+      "ai_send_count": 2,
+      "reference_send_count": 2,
+      "typed_effect_confirmed_count": 0,
+      "seed_count": 2,
+      "oracle_reasons": [
+        "candidate_negative_differential_missing",
+        "candidate_sql_error_shape_missing",
+        "timing_channel_forbidden"
+      ],
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/sqli/sqli_id.php",
+      "method": "POST",
+      "family": "sql",
+      "fields": [
+        "id",
+        "submit"
+      ],
+      "typed_oracle": "unknown_sql_backend",
+      "probe_class": "syntax_shape",
+      "wire_template": "POST <LOOPBACK_ORIGIN>/vul/sqli/sqli_id.php\\nContent-Type: application/x-www-form-urlencoded\\n\\nid=<RUNTIME_NUMERIC_SYNTAX_CANARY>'&submit=submit",
+      "ai_send_count": 2,
+      "reference_send_count": 2,
+      "typed_effect_confirmed_count": 2,
+      "seed_count": 2,
+      "oracle_reasons": [],
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/sqli/sqli_search.php",
+      "method": "GET",
+      "family": "sql",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "typed_oracle": "unknown_sql_backend",
+      "probe_class": "syntax_shape",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/sqli/sqli_search.php?name=<RUNTIME_MARKER>'&submit=submit",
+      "ai_send_count": 2,
+      "reference_send_count": 2,
+      "typed_effect_confirmed_count": 2,
+      "seed_count": 2,
+      "oracle_reasons": [],
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/sqli/sqli_str.php",
+      "method": "GET",
+      "family": "sql",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "typed_oracle": "unknown_sql_backend",
+      "probe_class": "syntax_shape",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/sqli/sqli_str.php?name=<RUNTIME_MARKER>'&submit=submit",
+      "ai_send_count": 2,
+      "reference_send_count": 2,
+      "typed_effect_confirmed_count": 2,
+      "seed_count": 2,
+      "oracle_reasons": [],
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/sqli/sqli_widebyte.php",
+      "method": "POST",
+      "family": "sql",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "typed_oracle": "unknown_sql_backend",
+      "probe_class": "syntax_shape",
+      "wire_template": "POST <LOOPBACK_ORIGIN>/vul/sqli/sqli_widebyte.php\\nContent-Type: application/x-www-form-urlencoded\\n\\nname=<RUNTIME_MARKER>'&submit=submit",
+      "ai_send_count": 2,
+      "reference_send_count": 2,
+      "typed_effect_confirmed_count": 0,
+      "seed_count": 2,
+      "oracle_reasons": [
+        "candidate_negative_differential_missing",
+        "candidate_sql_error_shape_missing",
+        "escape_boundary_not_confirmed_by_syntax_probe"
+      ],
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/sqli/sqli_x.php",
+      "method": "GET",
+      "family": "sql",
+      "fields": [
+        "name",
+        "submit"
+      ],
+      "typed_oracle": "unknown_sql_backend",
+      "probe_class": "syntax_shape",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/sqli/sqli_x.php?name=<RUNTIME_MARKER>'&submit=submit",
+      "ai_send_count": 2,
+      "reference_send_count": 2,
+      "typed_effect_confirmed_count": 2,
+      "seed_count": 2,
+      "oracle_reasons": [],
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/urlredirect/urlredirect.php",
+      "method": "GET",
+      "family": "url_redirect",
+      "fields": [
+        "url"
+      ],
+      "typed_oracle": "same_origin_redirect",
+      "probe_class": "abstain_untyped_surface",
+      "wire_template": null,
+      "reason": "not_in_active_payload_lane_oracle_not_typed",
+      "ai_send_count": 0,
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/xss/xss_01.php",
+      "method": "GET",
+      "family": "xss",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "typed_oracle": "dom_nojs_dual",
+      "probe_class": "inert_dom_markup",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/xss/xss_01.php?message=<URLENCODED_INERT_DOM_MARKUP_CANARY>&submit=submit",
+      "ai_send_count": 2,
+      "fresh_replay_count": 2,
+      "confirmed_surface_effect_count": 2,
+      "seed_count": 2,
+      "reference_effect_count": 0,
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/xss/xss_02.php",
+      "method": "GET",
+      "family": "xss",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "typed_oracle": "dom_nojs_dual",
+      "probe_class": "inert_dom_markup",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/xss/xss_02.php?message=<URLENCODED_INERT_DOM_MARKUP_CANARY>&submit=submit",
+      "ai_send_count": 2,
+      "fresh_replay_count": 2,
+      "confirmed_surface_effect_count": 0,
+      "seed_count": 2,
+      "reference_effect_count": 0,
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/xss/xss_03.php",
+      "method": "GET",
+      "family": "xss",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "typed_oracle": "dom_nojs_dual",
+      "probe_class": "inert_dom_markup",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/xss/xss_03.php?message=<URLENCODED_INERT_DOM_MARKUP_CANARY>&submit=submit",
+      "ai_send_count": 2,
+      "fresh_replay_count": 2,
+      "confirmed_surface_effect_count": 0,
+      "seed_count": 2,
+      "reference_effect_count": 0,
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/xss/xss_04.php",
+      "method": "GET",
+      "family": "xss",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "typed_oracle": "dom_nojs_dual",
+      "probe_class": "inert_dom_markup",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/xss/xss_04.php?message=<URLENCODED_INERT_DOM_MARKUP_CANARY>&submit=submit",
+      "ai_send_count": 2,
+      "fresh_replay_count": 2,
+      "confirmed_surface_effect_count": 2,
+      "seed_count": 2,
+      "reference_effect_count": 2,
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/xss/xss_dom_x.php",
+      "method": "GET",
+      "family": "xss",
+      "fields": [
+        "text"
+      ],
+      "typed_oracle": "dom_nojs_dual",
+      "probe_class": "inert_dom_markup",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/xss/xss_dom_x.php?text=<URLENCODED_INERT_DOM_MARKUP_CANARY>",
+      "ai_send_count": 2,
+      "fresh_replay_count": 2,
+      "confirmed_surface_effect_count": 2,
+      "seed_count": 2,
+      "reference_effect_count": 2,
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    },
+    {
+      "route": "/vul/xss/xss_reflected_get.php",
+      "method": "GET",
+      "family": "xss",
+      "fields": [
+        "message",
+        "submit"
+      ],
+      "typed_oracle": "dom_nojs_dual",
+      "probe_class": "inert_dom_markup",
+      "wire_template": "GET <LOOPBACK_ORIGIN>/vul/xss/xss_reflected_get.php?message=<URLENCODED_INERT_DOM_MARKUP_CANARY>&submit=submit",
+      "ai_send_count": 2,
+      "fresh_replay_count": 2,
+      "confirmed_surface_effect_count": 2,
+      "seed_count": 2,
+      "reference_effect_count": 0,
+      "training_eligible": false,
+      "raw_payload_strings_stored": false,
+      "raw_response_bodies_stored": false
+    }
+  ],
+  "authority": {
+    "ai_participated_in_send": true,
+    "reference_sent_independently": true,
+    "fresh_local_replay": true,
+    "typed_oracle_required_for_positive": true,
+    "sql_ast_observed": false,
+    "raw_payload_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "training_eligible": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "121a1a29326918d8713e0f23f918662a23eec8849308a677646d9440899a0a68"
+}

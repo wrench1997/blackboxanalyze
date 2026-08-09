@@ -1,0 +1,104 @@
+{
+  "protocol_id": "sift-pg03-local-replay-v1",
+  "schema_version": "sift-pg03-local-replay-report-v1",
+  "collector": {
+    "schema_version": "sift-local-replay-collector-v1",
+    "base_url": "http://127.0.0.1:3100",
+    "transport": "in_process_asgi",
+    "fresh_reset_per_sample": true,
+    "allowed_methods": [
+      "GET"
+    ],
+    "raw_body_stored": false,
+    "credentials_stored": false,
+    "external_network": false,
+    "script_execution": false,
+    "database_touched": false,
+    "real_sleep_performed": false
+  },
+  "catalog": {
+    "path": "research\\payload_replay_catalog_v1.json",
+    "catalog_sha256": "c76cf1fa1aa123d1641e34775ba6aea25c480545afe90a6233e888033210e537",
+    "source_count": 10,
+    "sample_count": 20
+  },
+  "capture": {
+    "sample_count": 20,
+    "source_count": 10,
+    "consistency": {
+      "rule_ir_replay_consistency": 1.0,
+      "response_status_counts": {
+        "200": 20
+      },
+      "all_rule_ir_consistent": true
+    }
+  },
+  "splits": {
+    "source_split_same_family": {
+      "split": "source_split_same_family",
+      "train_sample_count": 10,
+      "test_sample_count": 10,
+      "supported_features": [
+        "dom:encoded_dom_markup",
+        "dom:inert_dom_markup",
+        "sql:sql_channel_class:blind_boolean",
+        "sql:sql_channel_class:local_side_channel",
+        "sql:sql_channel_class:operator_like",
+        "sql:sql_channel_class:syntax_error",
+        "sql:sql_channel_class:time_delay",
+        "surface:http_canary"
+      ],
+      "test_feature_coverage": 1.0,
+      "fail_closed_abstention_rate": 0.0,
+      "memory_checkpoint_sha256": "99848945064f35e30def256c33dc7de1271d99a5a51fb67b1e43955e5cea7742",
+      "checkpoint_sha256": "99848945064f35e30def256c33dc7de1271d99a5a51fb67b1e43955e5cea7742"
+    },
+    "family_holdout_structural_transfer": {
+      "split": "family_holdout_structural_transfer",
+      "train_sample_count": 8,
+      "test_sample_count": 2,
+      "supported_features": [
+        "dom:encoded_dom_markup",
+        "dom:inert_dom_markup",
+        "sql:sql_channel_class:blind_boolean",
+        "sql:sql_channel_class:local_side_channel",
+        "sql:sql_channel_class:operator_like",
+        "sql:sql_channel_class:syntax_error",
+        "sql:sql_channel_class:time_delay",
+        "surface:http_canary"
+      ],
+      "test_feature_coverage": 1.0,
+      "fail_closed_abstention_rate": 0.0,
+      "memory_checkpoint_sha256": "3ab1e371494a4ce76e4be4c72d88d00d793240ec144f3ffa63b46b4cc8ed0a85",
+      "checkpoint_sha256": "3ab1e371494a4ce76e4be4c72d88d00d793240ec144f3ffa63b46b4cc8ed0a85"
+    },
+    "family_holdout_unseen_surface": {
+      "split": "family_holdout_unseen_surface",
+      "train_sample_count": 7,
+      "test_sample_count": 3,
+      "supported_features": [
+        "dom:encoded_dom_markup",
+        "dom:inert_dom_markup",
+        "sql:sql_channel_class:blind_boolean",
+        "sql:sql_channel_class:local_side_channel",
+        "sql:sql_channel_class:operator_like",
+        "sql:sql_channel_class:syntax_error",
+        "sql:sql_channel_class:time_delay"
+      ],
+      "test_feature_coverage": 0.0,
+      "fail_closed_abstention_rate": 1.0,
+      "memory_checkpoint_sha256": "89ce7746e4d8093713536bdc8b63a18b155de48e9f79d933b457b3926ae3c7e4",
+      "checkpoint_sha256": "89ce7746e4d8093713536bdc8b63a18b155de48e9f79d933b457b3926ae3c7e4"
+    }
+  },
+  "checkpoints": [
+    "artifacts\\payload-grounding\\sift-pg03-local-replay-v1\\source_split_same_family.json",
+    "artifacts\\payload-grounding\\sift-pg03-local-replay-v1\\family_holdout_structural_transfer.json",
+    "artifacts\\payload-grounding\\sift-pg03-local-replay-v1\\family_holdout_unseen_surface.json"
+  ],
+  "spec_count": 20,
+  "evaluator_confirmation_count": 0,
+  "public_corpus_ingested": false,
+  "report_path": "research\\payload_replay_collector_v1.json",
+  "protocol_path": "research/payload_replay_collector_protocol_v1.json"
+}

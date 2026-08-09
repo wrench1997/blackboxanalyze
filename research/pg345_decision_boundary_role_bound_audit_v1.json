@@ -1,0 +1,132 @@
+{
+  "schema_version": "pg343-full-axis-target-conditioned-audit-v1",
+  "status": "diagnostic_passed_not_training_eligible",
+  "purpose": "audit full-axis target-conditioned composition before any SFT/RL or A800 run",
+  "sources": [
+    {
+      "name": "pg345_decision_boundary_role_bound_dataset_v1.json",
+      "file_sha256": "66d5cfc083c8852c86f98248ca15b3b2ee5a937b27e4ee1a7e8e76a7fc888a08",
+      "dataset_sha256": "16c8edee9fe02216e693326c2b9a9caa122bdcea3214e7a407563aaa40e671de"
+    }
+  ],
+  "counts": {
+    "input_rows": 30,
+    "unique_context_target_rows": 30,
+    "unique_contexts": 30,
+    "ambiguous_contexts": 0,
+    "context_split_leaks": 0,
+    "source_record_split_leaks": 0,
+    "implementation_split_leaks": 0,
+    "train_rows": 21,
+    "implementation_holdout_rows": 9
+  },
+  "target_counts": {
+    "implementation_holdout:negative_abstain": 1,
+    "implementation_holdout:positive_probe": 6,
+    "implementation_holdout:repair": 2,
+    "train:negative_abstain": 2,
+    "train:positive_probe": 15,
+    "train:repair": 4,
+    "train:question_ask": 6,
+    "implementation_holdout:question_ask": 3
+  },
+  "implementation_counts": {
+    "implementation_holdout:9ae6a3c02cf053298249f15c8c6ba023f926b254f1d8fae9cfe5710e949b8c36": 9,
+    "train:8fd17d70f910c4e0f96f2ebd26fa2892ae5f7c751400b5ac141f8a16dbd444c6": 9,
+    "train:a60f75b1234fdb2bf422725a4968e919d0abceca421bf19cb83caf29a5447232": 12
+  },
+  "axis_presence_entropy": {
+    "document_structure": {
+      "entropy_bits": -0.0,
+      "unique_values": 1
+    },
+    "navigation": {
+      "entropy_bits": -0.0,
+      "unique_values": 1
+    },
+    "request_transport": {
+      "entropy_bits": -0.0,
+      "unique_values": 1
+    },
+    "response_transport": {
+      "entropy_bits": -0.0,
+      "unique_values": 1
+    },
+    "javascript_surface": {
+      "entropy_bits": -0.0,
+      "unique_values": 1
+    },
+    "failure_feedback": {
+      "entropy_bits": -0.0,
+      "unique_values": 1
+    },
+    "belief_and_replay": {
+      "entropy_bits": -0.0,
+      "unique_values": 1
+    }
+  },
+  "axis_token_sequence_entropy": {
+    "document_structure": {
+      "records": 30,
+      "unique_sequences": 22,
+      "entropy_bits": 4.373557
+    },
+    "navigation": {
+      "records": 30,
+      "unique_sequences": 13,
+      "entropy_bits": 3.072906
+    },
+    "request_transport": {
+      "records": 30,
+      "unique_sequences": 10,
+      "entropy_bits": 3.080424
+    },
+    "response_transport": {
+      "records": 30,
+      "unique_sequences": 3,
+      "entropy_bits": 1.370951
+    },
+    "javascript_surface": {
+      "records": 30,
+      "unique_sequences": 9,
+      "entropy_bits": 2.53075
+    },
+    "failure_feedback": {
+      "records": 30,
+      "unique_sequences": 13,
+      "entropy_bits": 3.489246
+    },
+    "belief_and_replay": {
+      "records": 30,
+      "unique_sequences": 18,
+      "entropy_bits": 4.056565
+    }
+  },
+  "ambiguity_hashes": [],
+  "required_target_families": [
+    "ask",
+    "negative_abstain",
+    "positive_probe",
+    "repair"
+  ],
+  "train_target_families": [
+    "negative_abstain",
+    "positive_probe",
+    "repair"
+  ],
+  "holdout_target_families": [
+    "negative_abstain",
+    "positive_probe",
+    "repair"
+  ],
+  "rejection_reason_counts": {},
+  "failures": [],
+  "next_required_observation": "role_step_abstract_token_in_context",
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "audit_sha256": "c2e258bd3ddb555fe9a659677f1e8597c89347bfc7899dfc44f9e9be11ee2152"
+}

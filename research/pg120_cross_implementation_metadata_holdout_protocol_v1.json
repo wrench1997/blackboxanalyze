@@ -1,0 +1,62 @@
+{
+  "protocol_id": "pg-pk-120-cross-implementation-metadata-holdout-v1",
+  "schema_version": "pg120-cross-implementation-metadata-holdout-protocol-v1",
+  "objective": "用冻结 PG-119 decoder 在独立 eta 实现、三个 seed 和三档 matched decoy 强度上检验 metadata slot 的跨实现泛化与未知弃权。",
+  "model_contract": {
+    "checkpoint": "artifacts/pg119-metadata-rule-ir-decoder-v1/model.pt",
+    "weights_frozen": true,
+    "training_rows_added": false,
+    "online_weight_update": false,
+    "memory_write": false
+  },
+  "target_contract": {
+    "implementation": "app/pg120_eta_metadata_target.py",
+    "bridge": "app/pg120_cross_impl_replay.py",
+    "route_schema_is_distinct_from_pg119": true,
+    "generic_projection_preserved": ["metadata_changed", "transition_delta", "candidate_signal"],
+    "seeds": [12001, 12003, 12005],
+    "decoy_strengths": [0, 1, 2],
+    "encoding_chain": ["url_percent", "unicode_escape", "html_entity"]
+  },
+  "action_contract": {
+    "methods": ["GET", "POST"],
+    "sequence": ["control_get", "candidate_get", "control_post", "candidate_post"],
+    "fresh_reset_per_action": true,
+    "matched_negative_control_required": true,
+    "target_evidence_sha256_required": true,
+    "bridge_evidence_sha256_required": true
+  },
+  "hard_gate": {
+    "positive_recall_nonzero": true,
+    "decoy_false_accept_zero": true,
+    "unknown_abstain_nonzero": true,
+    "cross_seed_recall_variance_bounded": true,
+    "all_strengths_must_pass": true,
+    "all_abstain_is_not_success": true
+  },
+  "observed_result": {
+    "positive_recall": 1.0,
+    "decoy_false_accept_count": 0,
+    "unknown_abstain_rate": 0.0,
+    "cross_seed_positive_recall_variance": 0.0,
+    "all_strengths_positive_recall": true,
+    "all_strengths_decoy_false_accept_zero": true,
+    "all_strengths_unknown_abstain": false
+  },
+  "diagnosis": "正例 metadata slot 可迁移，但 unseen transition-v4 shape spelling 使 blind 终态被判为 confirmed_negative；PG-119 四个 shape hash bucket 是可疑表面捷径。",
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "blocked_unknown_abstain_cross_implementation",
+    "reason": "失败证据必须保留；不能以正例召回或全拒答掩盖未知族弃权退化。"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "script_execution": false,
+    "database_write": false,
+    "destructive_payloads": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  }
+}

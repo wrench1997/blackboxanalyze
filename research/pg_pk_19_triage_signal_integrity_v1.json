@@ -1,0 +1,217 @@
+{
+  "schema_version": "sift-pg-pk-19-triage-signal-integrity-report-v1",
+  "protocol_id": "pg-pk-19-triage-signal-integrity-v1",
+  "status": "pass",
+  "case_count": 5,
+  "passed_case_count": 5,
+  "pre_fix_negative_controls": [
+    {
+      "path": "experiment",
+      "signal": "sql_cross_source_promotion_regression",
+      "observed_classification": "inconclusive",
+      "required_classification": "experiment_problem"
+    },
+    {
+      "path": "engineering",
+      "signal": "missing_joint_regression_artifact",
+      "observed_classification": "inconclusive",
+      "required_classification": "engineering_capability_problem"
+    }
+  ],
+  "post_fix_cases": [
+    {
+      "case_id": "domain_experiment_signal",
+      "inputs": {
+        "experiment_signals": [
+          "sql_cross_source_promotion_regression"
+        ],
+        "engineering_signals": []
+      },
+      "expected": {
+        "classification": "experiment_problem",
+        "model_change_authorized": false,
+        "infrastructure_scale_authorized": false
+      },
+      "observed": {
+        "schema_version": "sift-experiment-engineering-triage-v1",
+        "classification": "experiment_problem",
+        "experiment_path": {
+          "signals": [
+            "sql_cross_source_promotion_regression"
+          ],
+          "unregistered_signals": [
+            "sql_cross_source_promotion_regression"
+          ],
+          "gate_passed": false,
+          "action": "register_or_map_signal_before_scientific_repair"
+        },
+        "engineering_path": {
+          "signals": [],
+          "unregistered_signals": [],
+          "gate_passed": true,
+          "action": "no_engineering_failure_signal"
+        },
+        "evidence": {},
+        "model_change_authorized": false,
+        "infrastructure_scale_authorized": false
+      },
+      "passed": true
+    },
+    {
+      "case_id": "domain_engineering_signal",
+      "inputs": {
+        "experiment_signals": [],
+        "engineering_signals": [
+          "missing_joint_regression_artifact"
+        ]
+      },
+      "expected": {
+        "classification": "engineering_capability_problem",
+        "model_change_authorized": false,
+        "infrastructure_scale_authorized": false
+      },
+      "observed": {
+        "schema_version": "sift-experiment-engineering-triage-v1",
+        "classification": "engineering_capability_problem",
+        "experiment_path": {
+          "signals": [],
+          "unregistered_signals": [],
+          "gate_passed": true,
+          "action": "no_scientific_failure_signal"
+        },
+        "engineering_path": {
+          "signals": [
+            "missing_joint_regression_artifact"
+          ],
+          "unregistered_signals": [
+            "missing_joint_regression_artifact"
+          ],
+          "gate_passed": false,
+          "action": "register_or_map_signal_before_engineering_repair"
+        },
+        "evidence": {},
+        "model_change_authorized": false,
+        "infrastructure_scale_authorized": false
+      },
+      "passed": true
+    },
+    {
+      "case_id": "registered_experiment_signal",
+      "inputs": {
+        "experiment_signals": [
+          "family_holdout_regression"
+        ],
+        "engineering_signals": []
+      },
+      "expected": {
+        "classification": "experiment_problem",
+        "model_change_authorized": true,
+        "infrastructure_scale_authorized": false
+      },
+      "observed": {
+        "schema_version": "sift-experiment-engineering-triage-v1",
+        "classification": "experiment_problem",
+        "experiment_path": {
+          "signals": [
+            "family_holdout_regression"
+          ],
+          "unregistered_signals": [],
+          "gate_passed": false,
+          "action": "repair_data_oracle_objective_or_model_only"
+        },
+        "engineering_path": {
+          "signals": [],
+          "unregistered_signals": [],
+          "gate_passed": true,
+          "action": "no_engineering_failure_signal"
+        },
+        "evidence": {},
+        "model_change_authorized": true,
+        "infrastructure_scale_authorized": false
+      },
+      "passed": true
+    },
+    {
+      "case_id": "registered_engineering_signal",
+      "inputs": {
+        "experiment_signals": [],
+        "engineering_signals": [
+          "data_hash_or_lineage_mismatch"
+        ]
+      },
+      "expected": {
+        "classification": "engineering_capability_problem",
+        "model_change_authorized": false,
+        "infrastructure_scale_authorized": true
+      },
+      "observed": {
+        "schema_version": "sift-experiment-engineering-triage-v1",
+        "classification": "engineering_capability_problem",
+        "experiment_path": {
+          "signals": [],
+          "unregistered_signals": [],
+          "gate_passed": true,
+          "action": "no_scientific_failure_signal"
+        },
+        "engineering_path": {
+          "signals": [
+            "data_hash_or_lineage_mismatch"
+          ],
+          "unregistered_signals": [],
+          "gate_passed": false,
+          "action": "repair_lineage_runtime_resources_or_reliability"
+        },
+        "evidence": {},
+        "model_change_authorized": false,
+        "infrastructure_scale_authorized": true
+      },
+      "passed": true
+    },
+    {
+      "case_id": "clean_run",
+      "inputs": {
+        "experiment_signals": [],
+        "engineering_signals": []
+      },
+      "expected": {
+        "classification": "inconclusive",
+        "model_change_authorized": false,
+        "infrastructure_scale_authorized": false
+      },
+      "observed": {
+        "schema_version": "sift-experiment-engineering-triage-v1",
+        "classification": "inconclusive",
+        "experiment_path": {
+          "signals": [],
+          "unregistered_signals": [],
+          "gate_passed": true,
+          "action": "no_scientific_failure_signal"
+        },
+        "engineering_path": {
+          "signals": [],
+          "unregistered_signals": [],
+          "gate_passed": true,
+          "action": "no_engineering_failure_signal"
+        },
+        "evidence": {},
+        "model_change_authorized": false,
+        "infrastructure_scale_authorized": false
+      },
+      "passed": true
+    }
+  ],
+  "protected_invariants": {
+    "model_or_checkpoint_unchanged": true,
+    "payload_or_oracle_authority_unchanged": true,
+    "experiment_and_engineering_paths_remain_independent": true,
+    "unknown_signal_never_authorizes_model_or_scale_by_itself": true
+  },
+  "evidence_sha256": {
+    "protocol": "499c9381c955dd4d714ef06ae674e39cb6afdbf01c0ea3b86258f9a36b661c47",
+    "triage_implementation": "26e991297f5ff1eb4ebcfb5a7eaeef38975a1f0b0c7593612c3acf766f067ac9",
+    "triage_tests": "cd383faf2c9ef05e6ba65b09df637e790f49dbe0f68a614ccf99dd33a06e92b3"
+  },
+  "local_only": true,
+  "model_or_checkpoint_modified": false,
+  "payload_or_oracle_modified": false
+}

@@ -1,0 +1,107 @@
+{
+  "protocol_id": "pg-pk-53-cross-source-typed-replay-v1",
+  "schema_version": "pg-pk-53-cross-source-typed-replay-protocol-v1",
+  "objective": "在三个独立 loopback 实现、三种采样种子和 GET/POST 双通道上复现 typed-positive，并把模型分类、oracle 绑定、belief 更新和负对照分开计分。",
+  "authorized_scope": {
+    "target_host": "127.0.0.1",
+    "external_network": false,
+    "database_write": false,
+    "script_execution": false,
+    "command_execution": false,
+    "credential_access": false,
+    "persistent_state_mutation": false,
+    "raw_probe_persistence": false,
+    "raw_response_body_persistence": false
+  },
+  "independent_sources": [
+    {
+      "source_id": "pg34-standalone",
+      "implementation": "pg34",
+      "variant": "base",
+      "module": "app.pg34_independent_fixture",
+      "transport_layout": "generic-field-get-post"
+    },
+    {
+      "source_id": "pg35-alpha",
+      "implementation": "pg35",
+      "variant": "alpha",
+      "module": "app.pg35_independent_fixture",
+      "transport_layout": "form-get-post"
+    },
+    {
+      "source_id": "pg35-beta",
+      "implementation": "pg35",
+      "variant": "beta",
+      "module": "app.pg35_independent_fixture",
+      "transport_layout": "json-get-post"
+    },
+    {
+      "source_id": "pg36-north",
+      "implementation": "pg36",
+      "variant": "north",
+      "module": "app.pg36_independent_maze_fixture",
+      "transport_layout": "json-two-stage"
+    },
+    {
+      "source_id": "pg36-south",
+      "implementation": "pg36",
+      "variant": "south",
+      "module": "app.pg36_independent_maze_fixture",
+      "transport_layout": "form-two-stage"
+    }
+  ],
+  "sampling_seeds": [5301, 5307, 5311],
+  "methods": ["GET", "POST"],
+  "surface_ids": [
+    "surface-01",
+    "surface-02",
+    "surface-03",
+    "surface-04",
+    "surface-05",
+    "surface-06",
+    "surface-07",
+    "surface-08",
+    "surface-09"
+  ],
+  "families": [
+    "xss",
+    "injection",
+    "authentication",
+    "access_control",
+    "logic",
+    "url_redirect",
+    "input_validation",
+    "command_injection",
+    "ordinary_response"
+  ],
+  "oracle_contract": {
+    "contract_id": "pg53-independent-typed-effect-contract-v1",
+    "positive_requires": [
+      "fresh_target",
+      "matched_negative_control",
+      "bounded_effect_signal",
+      "safety_fields_all_false",
+      "evidence_hash"
+    ],
+    "screen_stage_is_not_positive": true,
+    "oracle_is_label_not_model_feature": true,
+    "rule_ir_is_non_executable": true
+  },
+  "active_controller": {
+    "belief_update": "MultiStepBelief over visible response shape only",
+    "probe_selection": "choose_active_probe",
+    "typed_oracle_available_after_probe": true,
+    "stop_is_not_training_label": true
+  },
+  "promotion_gate": {
+    "training_eligible_before_fresh_holdout": false,
+    "long_term_memory_write_before_capability_gate": false,
+    "formal_claim_requires": [
+      "independent implementation holdout",
+      "three independent seeds",
+      "typed positive and negative oracle metrics",
+      "family/source separation",
+      "fresh model candidate without oracle features"
+    ]
+  }
+}

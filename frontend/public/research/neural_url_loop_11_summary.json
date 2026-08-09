@@ -1,0 +1,32 @@
+{
+  "status": "confirmed_research_result",
+  "scope": "synthetic complete-family holdout; not a production vulnerability-detector claim",
+  "model": { "parameters": 908546, "learned_set_head_parameters": 128, "target_training_examples": 0 },
+  "final_confirmation": {
+    "fresh_seeds": [20261603, 20261621],
+    "candidate_neural_mean": 0.884167,
+    "candidate_neural_min": 0.88,
+    "frozen_neural_mean": 0.6325,
+    "minimum_gain_over_frozen": 0.25,
+    "minimum_same_checkpoint_set_head_gain": 0.288333,
+    "worst_old_family_regression": -0.008333,
+    "counterexample_top1_mean": 0.88,
+    "random_top1_mean": 0.375,
+    "all_preregistered_checks_passed": true
+  },
+  "per_seed": [
+    { "seed": 20261603, "dataset_sha256": "443864237401b8cee85c974ed9364a56179102dc0bb413057a0508668518e3ad", "candidate_neural": 0.888333, "same_checkpoint_without_set_head": 0.6, "frozen_neural": 0.638333, "c5_rule_system": 1.0, "counterexample_top1": 0.88, "worst_old_family_regression": -0.008333 },
+    { "seed": 20261621, "dataset_sha256": "a9d72a8ab0f09656c0979f5c74bd140002b4ec7c105d7e3afac78c3b0d2507f2", "candidate_neural": 0.88, "same_checkpoint_without_set_head": 0.588333, "frozen_neural": 0.626667, "c5_rule_system": 1.0, "counterexample_top1": 0.88, "worst_old_family_regression": 0.0 }
+  ],
+  "failed_branches": [
+    { "name": "Canonical-only pilot", "result": "54.33% / failed", "reason": "representation alone did not repair episode binding" },
+    { "name": "Global-meta set head", "result": "rejected", "reason": "truthiness regression -3.83pp" },
+    { "name": "Selective meta v1", "result": "rejected", "reason": "substring regression -5.67pp" },
+    { "name": "URL meta v2", "result": "confirmed", "reason": "two untouched holdout seeds passed" }
+  ],
+  "separation_of_claims": {
+    "neural": "88.42% unseen-family mean with same-checkpoint causal ablation",
+    "c5": "100% zero-parameter executable rule path; excluded from neural score",
+    "engineering": "not established; broader languages, parsers, noise and reliability tests remain"
+  }
+}

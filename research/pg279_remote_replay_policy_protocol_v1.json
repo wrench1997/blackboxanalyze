@@ -1,0 +1,90 @@
+{
+  "protocol_id": "pg279-remote-replay-policy-v1",
+  "schema_version": "pg279-remote-replay-policy-protocol-v1",
+  "comparators": [
+    "coarse_process_sft",
+    "final_only_sft",
+    "enriched_process_sft",
+    "conservative_offline_update",
+    "dpo_preference_update"
+  ],
+  "reward": {
+    "question_match": 1.0,
+    "action_match": 1.3,
+    "belief_match": 1.3,
+    "slot_match": 1.1,
+    "premature_non_ask": -3.0,
+    "unsupported_positive": -4.0
+  },
+  "constraints": {
+    "behavior_kl_anchor": true,
+    "supervised_anchor": true,
+    "external_requests": false,
+    "controlled_loopback_only": true
+  },
+  "split": {
+    "train_count": 384,
+    "holdout_count": 96,
+    "implementation_holdout": true,
+    "families": [
+      "dom_effect",
+      "logic_access",
+      "redirect_contract",
+      "sql_differential"
+    ],
+    "model_seeds": [
+      27911,
+      27912,
+      27913
+    ]
+  },
+  "checks": {
+    "dataset_audit_pass": true,
+    "coarse_collision_detected": true,
+    "enriched_collision_zero": true,
+    "post_observation_collision_zero": true,
+    "implementation_pre_transition_min": true,
+    "implementation_post_transition_min": true,
+    "implementation_slot_min": true,
+    "paired_counterfactual_min": true,
+    "missing_safe_min": true,
+    "family_holdout_question_min": false,
+    "conservative_no_regression": true,
+    "dpo_no_regression": true,
+    "promotion_blocked": true
+  },
+  "report_sha256": "c52578e59bc2271349629a4787f9ad1ae7e033daf70282dc2e9b041bf4a317b3",
+  "next_experiment": "PG-280 authorized real application/Pikachu replay when a remote Docker target is available; retain the same GET/POST failure-repair, replay-mix and frozen-canary gates",
+  "retention_matrix": {
+    "frozen_dataset": "research/pg278_multifamily_question_dataset_v1.json",
+    "frozen_report": "research/pg278_multifamily_question_policy_report_v1.json",
+    "before_min": {
+      "pre_transition_accuracy": 1.0,
+      "post_transition_accuracy": 1.0,
+      "missing_safe_rate": 1.0
+    },
+    "after_min": {
+      "pre_transition_accuracy": 1.0,
+      "post_transition_accuracy": 1.0,
+      "missing_safe_rate": 1.0
+    },
+    "delta": {
+      "pre_transition_accuracy": 0.0,
+      "post_transition_accuracy": 0.0,
+      "missing_safe_rate": 0.0
+    },
+    "checks": {
+      "pre_transition_accuracy": true,
+      "post_transition_accuracy": true,
+      "missing_safe_rate": true
+    },
+    "status": "passed"
+  },
+  "training_replay_mix": {
+    "dataset": "research/pg279_remote_replay_training_mix_v1.json",
+    "dataset_sha256": "e5674ce973cff9dc0424446661f9bab81883eb7723e1ea33e6dce371b81f8f3b",
+    "audit": "research/pg279_remote_replay_training_mix_audit_v1.json",
+    "replay_rows": 192
+  },
+  "protocol_sha256": "f31057c403ebdb2355fdc8211e8c6361596165cccc1664403125978a35a0d356"
+}

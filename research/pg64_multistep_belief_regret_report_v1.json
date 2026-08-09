@@ -1,0 +1,113 @@
+{
+  "protocol_id": "pg-pk-64-multistep-belief-regret-v1",
+  "schema_version": "pg64-multistep-belief-regret-report-v1",
+  "status": "diagnostic_only",
+  "dataset": {
+    "task_count": 288,
+    "split_counts": {
+      "train": 72,
+      "dev": 72,
+      "holdout": 144
+    },
+    "layouts": [
+      "fable",
+      "garnet",
+      "haze",
+      "ion"
+    ],
+    "hypothesis_count": 3,
+    "observation_classes": [
+      "query_signal",
+      "form_signal",
+      "neutral_signal",
+      "typed_exit",
+      "typed_no_exit"
+    ]
+  },
+  "controller": {
+    "class": "expected_information_gain_plus_exit_utility",
+    "typed_oracle_before_action": false,
+    "family_oracle_used_before_action": false,
+    "belief_updates_from_post_action_projection": true,
+    "duplicate_evidence_guard": true,
+    "raw_input_model": false,
+    "gradient_training": false
+  },
+  "active_belief": {
+    "episode_count": 288,
+    "positive_episode_count": 192,
+    "negative_control_count": 96,
+    "confirmed_positive_count": 192,
+    "target_recall": 1.0,
+    "known_target_recall": 1.0,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 40,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "mean_steps": 2.368056,
+    "median_steps": 2.0,
+    "mean_entropy_reduction": 1.098612,
+    "mean_counterfactual_regret": 0.0,
+    "max_counterfactual_regret": 0.0,
+    "multi_step_episode_rate": 0.701389,
+    "action_counts": {
+      "POST.confirm": 247,
+      "GET.confirm": 243,
+      "POST.screen": 96,
+      "GET.screen": 96
+    },
+    "fresh_reset_count": 682,
+    "evidence_hash_count": 682,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "fixed_order": {
+    "episode_count": 288,
+    "positive_episode_count": 192,
+    "negative_control_count": 96,
+    "confirmed_positive_count": 192,
+    "target_recall": 1.0,
+    "known_target_recall": 1.0,
+    "unknown_strict_abstain": true,
+    "unknown_abstain_count": 40,
+    "negative_false_accept_count": 0,
+    "negative_false_accept_rate": 0.0,
+    "mean_steps": 3.666667,
+    "median_steps": 4.0,
+    "mean_entropy_reduction": 1.098612,
+    "mean_counterfactual_regret": 0.170003,
+    "max_counterfactual_regret": 0.4325,
+    "multi_step_episode_rate": 1.0,
+    "action_counts": {
+      "GET.screen": 288,
+      "POST.screen": 288,
+      "GET.confirm": 288,
+      "POST.confirm": 192
+    },
+    "fresh_reset_count": 1056,
+    "evidence_hash_count": 1056,
+    "raw_probe_stored_count": 0,
+    "raw_response_stored_count": 0
+  },
+  "comparison": {
+    "target_recall_delta": 0.0,
+    "mean_step_delta": -1.298611,
+    "mean_regret_delta": -0.170003,
+    "entropy_reduction_delta": 0.0
+  },
+  "hard_gate": {
+    "schema_version": "pg64-multistep-belief-regret-hard-gate-v1",
+    "status": "passed",
+    "claim_allowed": false,
+    "reasons": [],
+    "training_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "promotion": {
+    "status": "quarantined_multistep_belief_diagnostic",
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "formal_capability_claim_allowed": false
+  },
+  "interpretation": "PG64 证明的是带噪抽象观察下的多步 belief/动作选择审计链；它不等价于真实漏洞发现或 payload 成功。"
+}

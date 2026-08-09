@@ -1,0 +1,60 @@
+{
+  "schema_version": "pg-pk-41-safe-unknown-router-protocol-v1",
+  "protocol_id": "PG-41",
+  "title": "effect-confirmed 后的 ontology 命名与 unknown 安全路由",
+  "objective": "当族无关 effect head 已确认可疑效果时，只对训练边界内的语义 ontology 命名；未见语义一律输出 unknown_surface 并 abstain，禁止用表面相似强行误命名。",
+  "inputs": {
+    "effect_checkpoint": "artifacts/pg39-coarse-delta/coarse_delta.pt",
+    "semantic_catalog": "research/pg40_semantic_router_catalog_v1.json",
+    "fresh_replay_provenance": true,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false
+  },
+  "known_ontology_boundary": {
+    "known_semantic_references": ["markup-context", "operator-context", "auth-boundary", "subject-boundary"],
+    "known_family_bindings": {
+      "markup-context": "xss",
+      "operator-context": "injection",
+      "auth-boundary": "authentication",
+      "subject-boundary": "access_control"
+    },
+    "unseen_semantic_references": ["state-invariant", "url-target", "scalar-boundary", "local-canary", "ordinary-surface"],
+    "unknown_route": "unknown_surface",
+    "unknown_requires_abstain": true,
+    "mapping_is_auditable_rule_ir_prior_not_typed_oracle": true
+  },
+  "model_input_contract": {
+    "effect_head_input": "bounded candidate-control coarse delta",
+    "router_input": "bounded semantic probe_ref",
+    "excluded": ["family", "positive", "positive_authority", "typed_effect_ready", "source_id", "target_instance_id", "evidence_sha256", "raw_probe", "raw_response_body"],
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "promotion_gate": {
+    "zero_unknown_misname": true,
+    "zero_negative_effect_false_accept": true,
+    "known_family_recall_required": true,
+    "unknown_surface_strict_abstain": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "passed_safe_routing_gate_diagnostic_only"
+  },
+  "run_result": {
+    "script": "scripts/run_pg41_safe_unknown_router.py",
+    "pair_count": 480,
+    "known_positive_count": 48,
+    "unknown_positive_count": 48,
+    "known_family_recall": 1.0,
+    "unknown_effect_recall": 1.0,
+    "negative_effect_false_accept_count": 0,
+    "unknown_misname_count": 0,
+    "unknown_not_abstain_count": 0,
+    "unknown_strict_abstain": true,
+    "get_post_covered": true,
+    "safe_routing_gate_status": "passed",
+    "capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "安全未知路由门禁通过；这不是族外漏洞命名或正式模型能力晋升证明。"
+  },
+  "status": "run_completed_safe_routing_gate_passed_no_promotion"
+}

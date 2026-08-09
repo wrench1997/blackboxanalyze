@@ -1,0 +1,59 @@
+{
+  "protocol_id": "pg-pk-103-auto-goal-label-active-probe-v1",
+  "schema_version": "pg103-auto-goal-label-active-probe-protocol-v1",
+  "purpose": "test automatic generic goal/label induction from bounded active probe observations",
+  "training_contract": {
+    "source": "pg101",
+    "role": "train",
+    "row_count": 32,
+    "typed_oracle_visible": false,
+    "family_visible": false
+  },
+  "frozen_evaluation_contract": {
+    "source": "pg101",
+    "pg42": "known plus template holdout",
+    "pg35": "third implementation",
+    "row_count": 522
+  },
+  "fresh_evaluation_contract": {
+    "source": "pg76",
+    "unknown_family": "workflow_invariant",
+    "variants": [
+      "copper",
+      "teal",
+      "indigo"
+    ],
+    "fresh_target_per_episode": true,
+    "row_count": 24
+  },
+  "proposal_contract": {
+    "labels_must_be_generic_effect_aliases": true,
+    "vulnerability_family_generation_forbidden": true,
+    "success_requires_get_post_repeat": true,
+    "unseen_slot_must_abstain": true
+  },
+  "oracle_contract": {
+    "typed_oracle_after_proposal": true,
+    "negative_controls_required": true,
+    "evidence_sha256_required": true
+  },
+  "safety_contract": {
+    "loopback_only": true,
+    "external_network": false,
+    "raw_probe_persistence_forbidden": true,
+    "raw_response_persistence_forbidden": true
+  },
+  "gate": {
+    "known_recall_min": 0.8,
+    "known_label_consistency_min": 0.95,
+    "false_accept_count": 0,
+    "unknown_family_strict_abstain": true,
+    "repeat_goal_completion_min": 0.8,
+    "repeat_label_consistency_min": 0.95,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "passed_generic_goal_label_diagnostic",
+    "blocking_reasons": []
+  }
+}

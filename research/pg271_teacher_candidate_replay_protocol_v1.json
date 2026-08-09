@@ -1,0 +1,36 @@
+{
+  "protocol_id": "pg271-teacher-candidate-fresh-seed-replay-v1",
+  "schema_version": "pg271-teacher-candidate-replay-protocol-v1",
+  "input_contract": {
+    "fresh_reset_required": true,
+    "independent_seed_required": true,
+    "oracle_target_off_context": true,
+    "raw_probe_off_context": true
+  },
+  "evaluation_contract": {
+    "family_holdout": true,
+    "unsupported_positive_zero": true,
+    "abstain_calibration_reported": true
+  },
+  "promotion_contract": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "run": {
+    "capability_gate": {
+      "status": "passed",
+      "checks": {
+        "source_fresh_replay_audit_pass": true,
+        "model_input_context_only": true,
+        "family_holdout_nonempty": true,
+        "family_unsupported_positive_zero": true,
+        "all_unsupported_positive_zero": true
+      },
+      "claim_allowed": false
+    },
+    "report_sha256": "bab8aa948d7695622b2f292e487e38ccd0cbeeb70bc1939857fdfa3164289c99"
+  },
+  "next_experiment": "PG-272 independent seed plus fresh implementation holdout, then constrained offline RL only if abstain and repair remain stable",
+  "protocol_sha256": "a9af955c1fe975849005e719ef34ce6d1d22b7944dd575fd1e295af9b12907e9"
+}

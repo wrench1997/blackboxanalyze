@@ -1,0 +1,317 @@
+{
+  "schema_version": "pg369-multitask-moe-plan-v1",
+  "status": "ready_static_candidate_design",
+  "execution": {
+    "plan_only": true,
+    "trainer_invoked": false,
+    "checkpoint_written": false,
+    "gpu_touched": false,
+    "docker_started": false,
+    "network_used": false,
+    "raw_material_loaded": false
+  },
+  "inputs": {
+    "sources": {
+      "pg362": {
+        "schema": "pg362-full-rule-ir-dataset-v1",
+        "rows": {
+          "records": 2600,
+          "train_rows": 1200,
+          "implementation_holdout_rows": 1400,
+          "raw_hits": 0,
+          "missing_vocabulary_tokens": 0,
+          "training_eligible_rows": 0
+        },
+        "file_sha256": "2f2e270a9143e9488a7e9206cace944abb3b0f37b31bd8b3059bf2bc3c3f4d35"
+      },
+      "pg367": {
+        "schema": "pg367-waf-staircase-dataset-v2",
+        "rows": {
+          "records": 352,
+          "train_rows": 275,
+          "implementation_holdout_rows": 77,
+          "raw_hits": 0,
+          "missing_vocabulary_tokens": 0,
+          "training_eligible_rows": 0
+        },
+        "file_sha256": "aef0788f65b8870bd5ee2a26419e876589d4d8ac4af39cc0ef5f5a97d1df4913"
+      }
+    },
+    "audits": {
+      "pg362": {
+        "source": "pg362",
+        "status": "passed_candidate_audit",
+        "failures": [],
+        "reported_status": "diagnostic_candidate_only",
+        "reported_counts": {
+          "records": 2600,
+          "train_rows": 1200,
+          "implementation_holdout_rows": 1400,
+          "raw_hits": 0,
+          "missing_vocabulary_tokens": 0,
+          "training_eligible_rows": 0,
+          "unique_target_sequences": 265
+        }
+      },
+      "pg367": {
+        "source": "pg367",
+        "status": "passed_candidate_audit",
+        "failures": [],
+        "reported_status": "passed_diagnostic_only",
+        "reported_counts": {
+          "records": 352,
+          "valid_rows": 352,
+          "train_rows": 275,
+          "implementation_holdout_rows": 77,
+          "get_rows": 176,
+          "post_rows": 176,
+          "baseline_rows": 192,
+          "failure_rows": 160,
+          "repair_rows": 160,
+          "repair_action_changed": 160,
+          "positive_effect_rows": 144,
+          "negative_rows": 88,
+          "negative_clean_rows": 88,
+          "raw_hits": 0,
+          "training_eligible_rows": 0
+        }
+      }
+    },
+    "row_audits": {
+      "pg362": {
+        "source": "pg362",
+        "status": "passed_candidate_input_audit",
+        "counts": {
+          "records": 2600,
+          "train_rows": 1200,
+          "implementation_holdout_rows": 1400,
+          "raw_hits": 0,
+          "missing_vocabulary_tokens": 0,
+          "training_eligible_rows": 0
+        },
+        "tasks": {
+          "question": {
+            "ask_failure": 520,
+            "none": 2080
+          },
+          "next_action": {
+            "abstain": 520,
+            "repair": 520,
+            "replay": 520,
+            "select_probe_variant": 1040
+          },
+          "repair_action": {
+            "method": 520,
+            "none": 1560,
+            "reset": 520
+          },
+          "safe_to_send": {
+            "0": 1040,
+            "1": 1560
+          },
+          "negative_control_presence_ref": {
+            "matched_triplet": 2600
+          }
+        },
+        "lengths": {
+          "max_context_target": 621,
+          "min_context_target": 392,
+          "full_context_preserved": true,
+          "silent_truncation": false
+        },
+        "failures": []
+      },
+      "pg367": {
+        "source": "pg367",
+        "status": "passed_candidate_input_audit",
+        "counts": {
+          "records": 352,
+          "train_rows": 275,
+          "implementation_holdout_rows": 77,
+          "raw_hits": 0,
+          "missing_vocabulary_tokens": 0,
+          "training_eligible_rows": 0
+        },
+        "tasks": {
+          "question": {
+            "ask_failure": 160,
+            "none": 192
+          },
+          "next_action": {
+            "abstain": 48,
+            "repair": 160,
+            "replay": 48,
+            "select_probe_variant": 96
+          },
+          "repair_action": {
+            "encoding": 64,
+            "none": 192,
+            "shape": 32,
+            "syntax": 64
+          },
+          "safe_to_send": {
+            "0": 208,
+            "1": 144
+          },
+          "negative_control_presence_ref": {
+            "matched_triplet": 352
+          }
+        },
+        "lengths": {
+          "max_context_target": 44,
+          "min_context_target": 44,
+          "full_context_preserved": true,
+          "silent_truncation": false
+        },
+        "failures": []
+      }
+    },
+    "combined": {
+      "train_rows": 1475,
+      "implementation_holdout_rows": 1477,
+      "vocabulary_union_size": 875,
+      "max_context_target_length": 621,
+      "required_context_window": 768,
+      "full_context_preserved": true,
+      "silent_truncation": false
+    }
+  },
+  "model": {
+    "family": "decoder_only_causal_transformer_moe",
+    "base_module": "app.pg295_causal_moe.py",
+    "base_source_sha256": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8",
+    "reused_symbols": [
+      "CausalMoEConfig",
+      "CausalMoELanguageModel",
+      "train_causal_moe"
+    ],
+    "config": {
+      "d_model": 256,
+      "n_heads": 4,
+      "n_layers": 4,
+      "experts": 4,
+      "expert_hidden": 512,
+      "max_length": 768
+    },
+    "context_policy": {
+      "all_abstract_context_kept": true,
+      "target_tokens_as_labels_only": true,
+      "raw_payload_or_response_in_context": false,
+      "sidecars_off_context": true
+    }
+  },
+  "multi_task_objective": {
+    "formula": "1.0*L_next_token + 1.0*L_slot_query + 1.5*L_ask + 1.5*L_repair + 2.0*L_negative",
+    "weights": {
+      "next_token": 1.0,
+      "slot_query": 1.0,
+      "ask": 1.5,
+      "repair": 1.5,
+      "negative": 2.0
+    },
+    "tasks": [
+      {
+        "name": "next_token",
+        "weight": 1.0,
+        "target": "full_ordered_rule_ir",
+        "coverage": "all_13_slots"
+      },
+      {
+        "name": "slot_query",
+        "weight": 1.0,
+        "target": "one_slot_value_given_full_context",
+        "coverage": "all_13_slots"
+      },
+      {
+        "name": "ask",
+        "weight": 1.5,
+        "target": "question_and_ask_reason",
+        "coverage": "missing_or_failure_rows"
+      },
+      {
+        "name": "repair",
+        "weight": 1.5,
+        "target": "next_action=repair_and_repair_action",
+        "coverage": "failure_rows"
+      },
+      {
+        "name": "negative",
+        "weight": 2.0,
+        "target": "safe_to_send=0_and_matched_negative_presence",
+        "coverage": "abstain_or_negative_rows"
+      }
+    ],
+    "label_values_are_abstract_only": true,
+    "evaluator_labels_not_used": true,
+    "label_builder": "derive_multitask_labels"
+  },
+  "task_coverage": {
+    "combined_all_rows": {
+      "question": {
+        "ask_failure": 680,
+        "none": 2272
+      },
+      "next_action": {
+        "abstain": 568,
+        "repair": 680,
+        "replay": 568,
+        "select_probe_variant": 1136
+      },
+      "repair_action": {
+        "encoding": 64,
+        "method": 520,
+        "none": 1752,
+        "reset": 520,
+        "shape": 32,
+        "syntax": 64
+      },
+      "safe_to_send": {
+        "0": 1248,
+        "1": 1704
+      },
+      "negative_control_presence_ref": {
+        "matched_triplet": 2952
+      }
+    },
+    "slot_count": 13
+  },
+  "expected_metrics": {
+    "status": "not_run_static_plan",
+    "reference": {
+      "status": "observed_reference_only",
+      "schema_version": "pg367-a800-process-candidate-v1",
+      "worst_holdout_sequence_exact": 0.662338,
+      "report_sha256": "70b571fc650a9fa876d95efcc327c74479c080d555ea63751b6404a2203d1a01",
+      "promotion": {
+        "training_allowed": false,
+        "memory_promotion_allowed": false,
+        "payload_catalog_promotion_allowed": false,
+        "vulnerability_claim_allowed": false
+      }
+    },
+    "acceptance_targets": {
+      "holdout_sequence_exact_min": 0.7,
+      "slot_query_accuracy_min": 0.9,
+      "ask_recall_min": 0.95,
+      "repair_recall_min": 0.9,
+      "negative_false_allow_max": 0,
+      "predictive_entropy_relative_drop_max": 0.25
+    },
+    "interpretation": "这些是下一轮候选的验收门，不是已获得的模型成绩。"
+  },
+  "failures": [],
+  "scientific_gate": {
+    "status": "blocked_candidate_only",
+    "input_audit_required": true,
+    "independent_implementation_required": true,
+    "typed_live_replay_required": true,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "plan_sha256": "7e8d8aaa4fc0eb7d3aac478a101be99b4f29b41ab277f065160a266020e51561"
+}

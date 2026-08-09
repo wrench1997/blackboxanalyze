@@ -1,0 +1,596 @@
+{
+  "protocol_id": "pg317-question-anchor-moe-v1",
+  "schema_version": "pg317-question-anchor-moe-training-report-v1",
+  "status": "completed_local_morning_pg317_question_anchor",
+  "source": {
+    "dataset": "research\\pg317_question_anchor_dataset_v1.json",
+    "dataset_sha256": "20393d6c8fa8ad5ded4ee0c2a13481482840a8cc550b01cf1f62880bb7d61cab",
+    "audit": "research\\pg317_question_anchor_dataset_audit_v1.json",
+    "audit_sha256": "c525640f7d7207e10fa94cc7429596cbc68894ed976f6e60685cdff21315f60f",
+    "pg305_report": "research\\pg305_live_loopback_replay_report_v1.json",
+    "pg305_report_sha256": "1e924347b03b9fb5b6eeb427a690591d805a849caf163e18288d4f42d5740324",
+    "raw_payload_in_context": false,
+    "raw_response_body_in_context": false,
+    "wire_emission": false
+  },
+  "training": {
+    "architecture": "causal_transformer_moe_next_token",
+    "target_representation": "multi_missing_question_anchor_plus_symbolic_slot_copy_plus_failure_repair",
+    "binder": "deterministic_pg313_probe_variant",
+    "config": {
+      "d_model": 64,
+      "n_heads": 4,
+      "n_layers": 2,
+      "experts": 2,
+      "expert_hidden": 128,
+      "top_k": 1,
+      "dropout": 0.0,
+      "max_length": 72
+    },
+    "device": "cpu",
+    "seeds": [
+      31701,
+      31702,
+      31703
+    ],
+    "seed_checkpoint_dir": "artifacts\\pg317-question-anchor\\seeds",
+    "question_pretrain_epochs": 200,
+    "assembly_epochs": 260,
+    "question_pretrain_rows": 1800,
+    "fit_count": 500,
+    "holdout_count": 251,
+    "hard_negative_count": 80,
+    "anchor_train_rows": 160,
+    "elapsed_seconds": 430.094,
+    "token_weights": {
+      "question=ask_typed_availability": 8.0,
+      "question=ask_replay_readiness": 8.0,
+      "question=ask_evidence_presence": 8.0,
+      "question=ask_feedback_state": 8.0,
+      "question=ask_negative_control": 8.0,
+      "question=ask_fresh_reset": 8.0,
+      "safe_to_send=0": 5.0,
+      "safe_to_send=1": 2.6,
+      "next_action=request_observation": 7.0,
+      "next_action=repair_abstract_plan": 6.0,
+      "next_action=assemble_abstract_plan": 2.0,
+      "repair_action=retry_bounded_variant": 6.0,
+      "stop_condition=repair_feedback_or_abstain": 5.0,
+      "probe_variant_ref=none": 5.0,
+      "probe_variant_ref=source_attested_candidate": 2.0,
+      "probe_variant_ref=reference_canary": 2.0,
+      "probe_variant_ref=negative_control": 2.0
+    }
+  },
+  "metrics": {
+    "holdout_anchor_question_exact": {
+      "mean": 0.996296,
+      "min": 0.988889,
+      "max": 1.0
+    },
+    "holdout_anchor_safe_allow_max": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "holdout_anchor_unnecessary_question": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "holdout_anchor_complete_exact": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "holdout_missing_question_recall": {
+      "mean": 0.996748,
+      "min": 0.990244,
+      "max": 1.0
+    },
+    "holdout_variant_exact": {
+      "mean": 0.997344,
+      "min": 0.992032,
+      "max": 1.0
+    },
+    "holdout_repair_exact": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "hard_bound_false_allow": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "hard_repair_exact": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "best_seed": 31701
+  },
+  "per_seed": [
+    {
+      "seed": 31701,
+      "train": {
+        "causal_symbolic": {
+          "count": 500,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": 0.201439,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 248
+        },
+        "bound_probe": {
+          "count": 500,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        },
+        "anchor": {
+          "ask_count": 150,
+          "ask_question_exact": 1.0,
+          "ask_safe_allow": 0,
+          "complete_count": 10,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 1.0,
+          "invalid_plan_count": 0
+        },
+        "repair": {
+          "count": 196,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 251,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": 0.189189,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 205
+        },
+        "bound_probe": {
+          "count": 251,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        },
+        "anchor": {
+          "ask_count": 180,
+          "ask_question_exact": 1.0,
+          "ask_safe_allow": 0,
+          "complete_count": 12,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 1.0,
+          "invalid_plan_count": 0
+        },
+        "repair": {
+          "count": 4,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 80,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 40
+        },
+        "bound_probe": {
+          "count": 80,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        },
+        "anchor": {
+          "ask_count": 0,
+          "ask_question_exact": 0.0,
+          "ask_safe_allow": 0,
+          "complete_count": 0,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 0.0,
+          "invalid_plan_count": 0
+        },
+        "repair": {
+          "count": 40,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "selection_score": 6.5,
+      "checkpoint": "artifacts\\pg317-question-anchor\\seeds\\pg317_question_anchor_moe_seed_31701.pt"
+    },
+    {
+      "seed": 31702,
+      "train": {
+        "causal_symbolic": {
+          "count": 500,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": 0.201439,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 248
+        },
+        "bound_probe": {
+          "count": 500,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        },
+        "anchor": {
+          "ask_count": 150,
+          "ask_question_exact": 1.0,
+          "ask_safe_allow": 0,
+          "complete_count": 10,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 1.0,
+          "invalid_plan_count": 0
+        },
+        "repair": {
+          "count": 196,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 251,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": 0.189189,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 205
+        },
+        "bound_probe": {
+          "count": 251,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        },
+        "anchor": {
+          "ask_count": 180,
+          "ask_question_exact": 1.0,
+          "ask_safe_allow": 0,
+          "complete_count": 12,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 1.0,
+          "invalid_plan_count": 0
+        },
+        "repair": {
+          "count": 4,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 80,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 40
+        },
+        "bound_probe": {
+          "count": 80,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        },
+        "anchor": {
+          "ask_count": 0,
+          "ask_question_exact": 0.0,
+          "ask_safe_allow": 0,
+          "complete_count": 0,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 0.0,
+          "invalid_plan_count": 0
+        },
+        "repair": {
+          "count": 40,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "selection_score": 6.5,
+      "checkpoint": "artifacts\\pg317-question-anchor\\seeds\\pg317_question_anchor_moe_seed_31702.pt"
+    },
+    {
+      "seed": 31703,
+      "train": {
+        "causal_symbolic": {
+          "count": 500,
+          "token_accuracy": 1.0,
+          "sequence_exact_accuracy": 1.0,
+          "positive_recall": 0.201439,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 248
+        },
+        "bound_probe": {
+          "count": 500,
+          "sequence_exact_accuracy": 1.0,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 1.0
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        },
+        "anchor": {
+          "ask_count": 150,
+          "ask_question_exact": 1.0,
+          "ask_safe_allow": 0,
+          "complete_count": 10,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 1.0,
+          "invalid_plan_count": 0
+        },
+        "repair": {
+          "count": 196,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "holdout": {
+        "causal_symbolic": {
+          "count": 251,
+          "token_accuracy": 0.997242,
+          "sequence_exact_accuracy": 0.98008,
+          "positive_recall": 0.189189,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 205
+        },
+        "bound_probe": {
+          "count": 251,
+          "sequence_exact_accuracy": 0.98008,
+          "slot_accuracy": {
+            "transport": 0.992032,
+            "field_role": 0.992032,
+            "encoding": 0.992032,
+            "oracle": 0.992032,
+            "stop_condition": 0.98008
+          },
+          "variant_accuracy": {
+            "probe_variant": 0.992032,
+            "encoding_chain": 0.992032
+          },
+          "variant_exact": 0.992032,
+          "missing_question_recall": 0.990244,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 2
+        },
+        "anchor": {
+          "ask_count": 180,
+          "ask_question_exact": 0.988889,
+          "ask_safe_allow": 0,
+          "complete_count": 12,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 1.0,
+          "invalid_plan_count": 2
+        },
+        "repair": {
+          "count": 4,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "hard_negative": {
+        "causal_symbolic": {
+          "count": 80,
+          "token_accuracy": 0.961538,
+          "sequence_exact_accuracy": 0.5,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 40
+        },
+        "bound_probe": {
+          "count": 80,
+          "sequence_exact_accuracy": 0.5,
+          "slot_accuracy": {
+            "transport": 1.0,
+            "field_role": 1.0,
+            "encoding": 1.0,
+            "oracle": 1.0,
+            "stop_condition": 0.5
+          },
+          "variant_accuracy": {
+            "probe_variant": 1.0,
+            "encoding_chain": 1.0
+          },
+          "variant_exact": 1.0,
+          "missing_question_recall": 1.0,
+          "unnecessary_question_rate": 0.0,
+          "hard_negative_false_allow": 0,
+          "invalid_predicted_plan_count": 0
+        },
+        "anchor": {
+          "ask_count": 0,
+          "ask_question_exact": 0.0,
+          "ask_safe_allow": 0,
+          "complete_count": 0,
+          "complete_unnecessary_question_rate": 0.0,
+          "complete_bound_exact": 0.0,
+          "invalid_plan_count": 0
+        },
+        "repair": {
+          "count": 40,
+          "repair_exact": 1.0,
+          "safe_allow": 0,
+          "variant_non_none": 0
+        }
+      },
+      "selection_score": 6.444065,
+      "checkpoint": "artifacts\\pg317-question-anchor\\seeds\\pg317_question_anchor_moe_seed_31703.pt"
+    }
+  ],
+  "hypothesis_gate": {
+    "status": "blocked",
+    "checks": {
+      "audit_pass": true,
+      "anchor_question_min": true,
+      "anchor_zero_safe_allow": true,
+      "anchor_unnecessary_question_max": true,
+      "original_question_min": true,
+      "variant_exact_min": true,
+      "repair_exact_min": true,
+      "hard_zero_false_allow": true,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "scientific_gate": {
+    "status": "blocked",
+    "reasons": [
+      "PG-317 is offline anchor training; independent fresh GET/POST replay is still required",
+      "the adapter emits abstract Rule-IR references rather than literal payloads",
+      "all-seed worst-case and family-out tests must remain green before any promotion",
+      "no training or memory promotion"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "checkpoint_role": "research_candidate_only"
+  },
+  "checkpoint": "artifacts\\pg317-question-anchor\\pg317_question_anchor_moe_local_morning.pt",
+  "report_sha256": "35d2a1d09363bacc49200ae57ad9ecbc1e775a7f17abdb852a0ce4447c4b6d39"
+}

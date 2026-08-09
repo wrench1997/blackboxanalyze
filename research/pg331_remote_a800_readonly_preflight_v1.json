@@ -1,0 +1,53 @@
+{
+  "protocol_id": "pg331-remote-a800-readonly-preflight-v1",
+  "schema_version": "pg331-remote-a800-readonly-preflight-v1",
+  "status": "gpu_ready_data_gate_blocked",
+  "checked_at": "2026-08-08T06:22:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "host": "112.111.7.91:60228",
+  "remote_queries": {
+    "transport": "ssh_batchmode_read_only",
+    "gpu_indices_queried": [0],
+    "gpu1_to_gpu7_queried": false,
+    "training_started": false,
+    "remote_files_modified": false,
+    "containers_started": false
+  },
+  "gpu0": {
+    "index": 0,
+    "name": "NVIDIA A800-SXM4-80GB",
+    "driver": "550.90.07",
+    "memory_total_mib": 81920,
+    "memory_used_mib": 1,
+    "utilization_percent": 0,
+    "compute_apps": 0,
+    "mode": "Default",
+    "persistence": "Enabled",
+    "power_state": "P0"
+  },
+  "training_entry_gates": {
+    "weekend_rule_allows_remote_lane": true,
+    "cuda_visible_devices_required": "0",
+    "parent_requires_exactly_one_visible_device": true,
+    "parent_requires_a800_name": true,
+    "data_code_audit_hash_lock": true,
+    "information_preservation_gate": false,
+    "fresh_pg331_source_rows_available": false,
+    "training_allowed_now": false
+  },
+  "script_hashes": {
+    "scripts/run_pg327_a800_replay_train.py": "7def304b574c8f37b7b8f436580c99bb051002a92f10d65ccdff7313fcd8887a",
+    "scripts/run_pg328_a800_entropy_replay_train.py": "be0a4aaf16c56f96a03605952c379e51d0ce09dec7630505c495732a38d266e9",
+    "scripts/run_pg329_a800_entropy_regularized_replay_train.py": "110500fc9d2dc9401ccac24749bb46e46677eae16a742e32fb3dbe66b2292fd7",
+    "scripts/run_pg330_a800_teacher_kl_replay_train.py": "8a40444f5aba964acb1986ea30505aef15fb111cf1b7f2c751f51881c8dd9771",
+    "scripts/run_pg322_cross_impl_decoy_moe.py": "88db79891b506770a77f5b6f28cb2ba4ab345470b5287986d882571d033fa08e"
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "远程 GPU0 空闲且资源规则满足，但 PG-331 信息保真与真实 source-row 数据门未通过；资源可用不等于允许训练。",
+  "report_sha256": "7c7acedef9775b853253ce13eb6ae20effb5bac2ec3e9769adfdad35556cbd88"
+}

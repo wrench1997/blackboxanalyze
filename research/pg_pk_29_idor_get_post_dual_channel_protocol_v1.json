@@ -1,0 +1,45 @@
+{
+  "schema_version": "pg-pk-29-idor-get-post-dual-channel-protocol-v1",
+  "purpose": "Exercise a read-only IDOR surface through both GET and POST after independent container recreation.",
+  "surface": {
+    "family": "logic_access",
+    "route_template": "vulnerableapp-idor-level1",
+    "fixed_id": "0",
+    "ignored_marker_field": "probe",
+    "read_only_contract": true
+  },
+  "channels": {
+    "required": ["GET", "POST"],
+    "GET": "query parameters id=0 plus inert marker",
+    "POST": "urlencoded form id=0 plus inert marker",
+    "credentials_or_tokens": false
+  },
+  "episode_contract": [
+    "recreate pinned loopback container before each episode",
+    "take an unmarked baseline before the marked request on each channel",
+    "never use cookies, tokens, credentials, SQL syntax, scripts, or state-changing fields",
+    "retain only bounded response projections and allow-listed marker evidence"
+  ],
+  "interpretation": {
+    "GET_200": "transport observation only",
+    "POST_400": "channel/adapter observation only",
+    "reflection_status_or_error": "candidate_or_abstain_only",
+    "typed_authorization_boundary": "required for positive authority"
+  },
+  "hard_gate": {
+    "required_methods": ["GET", "POST"],
+    "target_instances": 3,
+    "sampling_seeds": 3,
+    "positive_replays_per_case": 2,
+    "matched_negative_control": true,
+    "training_before_pass": false,
+    "memory_promotion_before_pass": false
+  },
+  "artifacts": {
+    "runner": "scripts/run_pg29_idor_get_post_dual_experiment.py",
+    "catalog": "research/pg_pk_29_idor_get_post_dual_catalog_v1.json",
+    "acceptance": "research/pg_pk_29_idor_get_post_dual_acceptance_v1.json",
+    "hardcore_gate": "research/pg_pk_29_idor_get_post_dual_hardcore_gate_v1.json"
+  },
+  "training_artifact_generated": false
+}

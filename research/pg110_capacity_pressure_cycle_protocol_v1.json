@@ -1,0 +1,25 @@
+{
+  "protocol_id": "pg-pk-110-capacity-pressure-cycle-v1",
+  "schema_version": "pg110-capacity-pressure-cycle-protocol-v1",
+  "purpose": "test typed BSP capacity growth, merge/ablation and fail-closed evidence collection",
+  "source_reports": [
+    "PG108",
+    "PG109"
+  ],
+  "growth_gate": {
+    "typed_bottleneck": true,
+    "fresh_holdout_gap": true,
+    "cross_dataset_seed_implementation": true
+  },
+  "ablation_gate": {
+    "known_recall_no_drop": true,
+    "false_accept_no_increase": true,
+    "unknown_abstain_no_drop": true,
+    "latency_or_memory_improvement": true,
+    "rollback_on_regression": true
+  },
+  "result": {
+    "status": "passed_capacity_pressure_diagnostic",
+    "blocking_reasons": []
+  }
+}

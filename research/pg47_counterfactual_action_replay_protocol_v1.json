@@ -1,0 +1,66 @@
+{
+  "schema_version": "pg-pk-47-counterfactual-action-replay-protocol-v1",
+  "protocol_id": "PG-47",
+  "title": "counterfactual action replay information-gain head",
+  "objective": "将同一目标上的 GET/POST、screen/confirm 动作作为反事实候选，训练 action-value head 预测下一步确认证据概率，再在独立 PG-42 实现上进行主动探测和 trace 验收。",
+  "training_contract": {
+    "catalog": "research/pg40_semantic_router_catalog_v1.json",
+    "implementation": "atlas",
+    "sampling_seeds": [361, 367],
+    "actions": ["GET.screen", "POST.screen", "GET.confirm", "POST.confirm"],
+    "model_input": ["bounded invariant candidate-control delta", "action one-hot", "bounded belief features"],
+    "excluded": ["typed_oracle", "positive", "positive_authority", "family", "evidence_sha256", "raw_probe", "raw_response_body"],
+    "oracle_is_target_only": true,
+    "pg42_used_for_training": false,
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "holdout_contract": {
+    "catalog": "research/pg42_independent_semantic_catalog_v1.json",
+    "implementations": ["cobalt", "quartz"],
+    "sampling_seeds": [401, 409, 419],
+    "fresh_reset_required": true,
+    "negative_control_required": true,
+    "get_post_exploration_required": true
+  },
+  "policy_contract": {
+    "initial_exploration": ["GET.screen", "POST.screen"],
+    "get_post_exploration_required": true,
+    "selection": "untried action with maximum predicted evidence value minus bounded query cost",
+    "stop": "predicted effect probability >= 0.60",
+    "unknown_route": "effect confirmed but semantic outside ontology -> unknown_surface + abstain"
+  },
+  "promotion_gate": {
+    "effect_success_required": true,
+    "known_family_recall_required": true,
+    "unknown_strict_abstain": true,
+    "zero_negative_effect_false_accept": true,
+    "trace_validation_required": true,
+    "query_reduction_is_diagnostic_not_sufficient": true,
+    "training_and_memory_blocked_on_failure": true,
+    "status": "passed_active_action_safety_gate_diagnostic_only"
+  },
+  "run_result": {
+    "trainer": "scripts/train_pg47_counterfactual_action_value.py",
+    "training_pair_count": 80,
+    "seed_holdout_effect_recall": 1.0,
+    "seed_holdout_false_positive_rate": 0.0,
+    "pg42_episode_count": 180,
+    "pg42_effect_success_rate": 1.0,
+    "pg42_known_family_recall": 1.0,
+    "pg42_unknown_safe_abstain_count": 72,
+    "pg42_unknown_strict_abstain": true,
+    "pg42_negative_false_accept_count": 0,
+    "pg42_mean_queries": 3.1,
+    "pg42_median_queries": 3.0,
+    "pg42_mean_query_reduction_rate": 0.225,
+    "get_post_covered": true,
+    "accepted_trace_episode_count": 180,
+    "safe_gate_status": "passed",
+    "formal_capability_claim_allowed": false,
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "interpretation": "counterfactual action-value head 复现并解释主动探测收益；正式能力 claim 仍需更多独立靶场和组合语义验证。"
+  },
+  "status": "run_completed_action_value_safety_gate_passed_no_promotion"
+}

@@ -1,0 +1,46 @@
+{
+  "protocol_id": "pg-pk-138-decoupled-loio-v1",
+  "schema_version": "pg138-decoupled-loio-protocol-v1",
+  "objective": "解耦 causal representation 与 typed-contract safety head，并用两个 leave-one-implementation-out folds 验证。",
+  "folds": {
+    "holdout_pg127": {
+      "train": [
+        "pg135",
+        "pg125"
+      ],
+      "holdout": [
+        "pg127",
+        "pg122"
+      ]
+    },
+    "holdout_pg125": {
+      "train": [
+        "pg135",
+        "pg127"
+      ],
+      "holdout": [
+        "pg125",
+        "pg122"
+      ]
+    }
+  },
+  "variants": [
+    "scratch_balanced",
+    "adapter_only",
+    "balanced_full",
+    "joint_balanced"
+  ],
+  "required_gates": {
+    "fresh_replay": true,
+    "two_loio_folds": true,
+    "loio_safety_floor": false,
+    "loio_unknown_abstain": true,
+    "loio_nontrivial_action_rate": true,
+    "raw_masked_calibrated_separate": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion_gates": {
+    "action_gain_in_both_loio_folds": false,
+    "cross_implementation_review_complete": false
+  }
+}

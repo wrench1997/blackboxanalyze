@@ -1,0 +1,311 @@
+{
+  "schema_version": "pg363-a800-pooled-rule-ir-candidate-v1",
+  "status": "pooled_structured_candidate_only",
+  "gate": {
+    "schema_version": "pg351-a800-ask-oracle-composition-candidate-v1",
+    "status": "ready_target_conditioned_candidate",
+    "checks": {
+      "weekend_remote_lane": true,
+      "explicit_training_flag": true,
+      "cuda_visible_devices_zero": true,
+      "single_visible_a800_gpu0": true,
+      "dataset_status_candidate_only": true,
+      "audit_status_candidate_only": true,
+      "target_coverage_train": true,
+      "target_coverage_holdout": true,
+      "vocabulary_locked": true,
+      "promotion_closed": true,
+      "data_code_vocab_rules_hashes_locked": true
+    },
+    "failures": [],
+    "training_allowed": true,
+    "split_counts": {
+      "train": 1600,
+      "implementation_holdout": 1000
+    },
+    "target_coverage": {
+      "train": {
+        "rows": 1600,
+        "questions": {
+          "ask_failure": 320,
+          "none": 1280
+        },
+        "next_actions": {
+          "abstain": 320,
+          "repair": 320,
+          "replay": 320,
+          "select_probe_variant": 640
+        },
+        "ask_present": true,
+        "repair_present": true,
+        "abstain_present": true,
+        "positive_present": true
+      },
+      "implementation_holdout": {
+        "rows": 1000,
+        "questions": {
+          "ask_failure": 200,
+          "none": 800
+        },
+        "next_actions": {
+          "abstain": 200,
+          "repair": 200,
+          "replay": 200,
+          "select_probe_variant": 400
+        },
+        "ask_present": true,
+        "repair_present": true,
+        "abstain_present": true,
+        "positive_present": true
+      }
+    },
+    "unknown_token_count": 0,
+    "candidate_only": true,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    }
+  },
+  "locks": {
+    "dataset": "9eb16a89e7ca813b42f1a473945ea44ff7ac9a39964c23e07e169aa0d58fd618",
+    "audit": "c1b7fa04a6d298202d5bd6cec11d71171147d82a4d4948654c761d2b7930c7f2",
+    "rules": "1324f236e35f36c9ffbb3963e25c58eba72075025e4ba7da17ce8e9789726ea4",
+    "script": "8f8a6113508b61ff712e6663875a2d4a38b0633671596680ffbd9cb0d756b36a",
+    "model": "4102126e56b5574e9e2092ff9ede257161e67efecae08c4fa5ac64df9b0b0ce8",
+    "decoder": "67b55ea637fcdca99b5e40847a536392f82c334c7b29608a5c0681420e1a39ba"
+  },
+  "training": {
+    "device": "cuda:0",
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "seeds": [
+      36301,
+      36302,
+      36303
+    ],
+    "epochs": 16,
+    "learning_rate": 0.0002,
+    "batch_size": 16,
+    "objective": {
+      "language_model_weight": 0.15,
+      "slot_weight": 1.0
+    },
+    "pooling": "learned_attention+mean+last_boundary",
+    "context_only_slot_inference": true,
+    "target_tokens_used_as_labels_only": true,
+    "required_max_length": 621,
+    "candidate_only": true
+  },
+  "target_slots": [
+    "question",
+    "ask_reason",
+    "next_action",
+    "repair_action",
+    "transport_ref",
+    "field_role_ref",
+    "encoding_ref",
+    "syntax_category_ref",
+    "probe_variant_ref",
+    "safe_to_send",
+    "payload_shape_ref",
+    "oracle_ref",
+    "negative_control_presence_ref"
+  ],
+  "candidates": [
+    {
+      "seed": 36301,
+      "train": {
+        "rows": 1600,
+        "sequence_exact_accuracy": 1.0,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 1.0,
+          "repair_action": 1.0,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "syntax_category_ref": 1.0,
+          "probe_variant_ref": 1.0,
+          "safe_to_send": 1.0,
+          "payload_shape_ref": 1.0,
+          "oracle_ref": 1.0,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 1.0,
+        "positive_action_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "implementation_holdout": {
+        "rows": 1000,
+        "sequence_exact_accuracy": 1.0,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 1.0,
+          "repair_action": 1.0,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "syntax_category_ref": 1.0,
+          "probe_variant_ref": 1.0,
+          "safe_to_send": 1.0,
+          "payload_shape_ref": 1.0,
+          "oracle_ref": 1.0,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 1.0,
+        "positive_action_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "baseline_holdout_predictive_entropy": 6.688618,
+      "post_holdout_predictive_entropy": 1.070948,
+      "relative_entropy_drop": 0.839885
+    },
+    {
+      "seed": 36302,
+      "train": {
+        "rows": 1600,
+        "sequence_exact_accuracy": 1.0,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 1.0,
+          "repair_action": 1.0,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "syntax_category_ref": 1.0,
+          "probe_variant_ref": 1.0,
+          "safe_to_send": 1.0,
+          "payload_shape_ref": 1.0,
+          "oracle_ref": 1.0,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 1.0,
+        "positive_action_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "implementation_holdout": {
+        "rows": 1000,
+        "sequence_exact_accuracy": 1.0,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 1.0,
+          "repair_action": 1.0,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "syntax_category_ref": 1.0,
+          "probe_variant_ref": 1.0,
+          "safe_to_send": 1.0,
+          "payload_shape_ref": 1.0,
+          "oracle_ref": 1.0,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 1.0,
+        "positive_action_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "baseline_holdout_predictive_entropy": 6.685599,
+      "post_holdout_predictive_entropy": 1.110167,
+      "relative_entropy_drop": 0.833947
+    },
+    {
+      "seed": 36303,
+      "train": {
+        "rows": 1600,
+        "sequence_exact_accuracy": 1.0,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 1.0,
+          "repair_action": 1.0,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "syntax_category_ref": 1.0,
+          "probe_variant_ref": 1.0,
+          "safe_to_send": 1.0,
+          "payload_shape_ref": 1.0,
+          "oracle_ref": 1.0,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 1.0,
+        "positive_action_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "implementation_holdout": {
+        "rows": 1000,
+        "sequence_exact_accuracy": 1.0,
+        "slot_accuracy": {
+          "question": 1.0,
+          "ask_reason": 1.0,
+          "next_action": 1.0,
+          "repair_action": 1.0,
+          "transport_ref": 1.0,
+          "field_role_ref": 1.0,
+          "encoding_ref": 1.0,
+          "syntax_category_ref": 1.0,
+          "probe_variant_ref": 1.0,
+          "safe_to_send": 1.0,
+          "payload_shape_ref": 1.0,
+          "oracle_ref": 1.0,
+          "negative_control_presence_ref": 1.0
+        },
+        "ask_recall": 1.0,
+        "repair_recall": 1.0,
+        "abstain_recall": 1.0,
+        "positive_action_recall": 1.0,
+        "positive_recall": 1.0,
+        "negative_false_allow": 0
+      },
+      "baseline_holdout_predictive_entropy": 6.687381,
+      "post_holdout_predictive_entropy": 1.024929,
+      "relative_entropy_drop": 0.846737
+    }
+  ],
+  "worst_seed": {
+    "max_relative_entropy_drop": 0.846737,
+    "entropy_gate_passed": false,
+    "negative_false_allow_max": 0,
+    "ask_recall_min": 1.0,
+    "repair_recall_min": 1.0,
+    "abstain_recall_min": 1.0,
+    "positive_action_recall_min": 1.0,
+    "positive_recall_min": 1.0,
+    "rule_ir_sequence_exact_min": 1.0
+  },
+  "scientific_gate": {
+    "status": "blocked_candidate_only",
+    "raw_payload_in_context": false,
+    "typed_live_replay_with_model_selected_wire": false,
+    "independent_implementation": false,
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "interpretation": "全上下文 pooling 只修表示读取位置，不把任何 raw wire/evaluator answer 送入模型；必须同时观察跨实现 ASK/repair/negative/entropy，不能用安全 guard 替代模型能力。",
+  "report_sha256": "6719009a1b28f1addf560a08b3001b2f81b8e6df8a3bd936836fe590e09e1f1e"
+}

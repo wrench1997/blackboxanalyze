@@ -1,0 +1,1323 @@
+{
+  "protocol_id": "pg295-causal-moe-training-v1",
+  "schema_version": "pg295-causal-moe-training-report-v1",
+  "status": "completed_local_morning_pg295_causal_moe",
+  "source": {
+    "dataset": "research/pg294_active_repair_dataset_v1.json",
+    "dataset_sha256": "bb60a6dc4d88e0e57af319b58e8e94c2178b14bce7accc81dc644b9d963000ee",
+    "audit": "research/pg294_active_repair_dataset_audit_v1.json",
+    "audit_sha256": "6ecb0d11b270122a10eaadfaf923b763f22245a2be62d85a437c84263e858f07",
+    "context_is_oracle_blind": true,
+    "literal_payload_in_context": false,
+    "wire_emission": false
+  },
+  "device": {
+    "execution_mode": "local_morning",
+    "timestamp": "2026-08-07T08:36:52.999078+08:00",
+    "cuda_visible_devices": "0",
+    "visible_device_count": 1,
+    "current_device": 0,
+    "device_name": "NVIDIA GeForce RTX 3060"
+  },
+  "split": {
+    "total": 632,
+    "train": 312,
+    "source_holdout": 240,
+    "seed_holdout": 72,
+    "missing": 104,
+    "source_missing": 40,
+    "seed_missing": 12,
+    "hard_negative_eval": 8,
+    "seeds": [
+      29501,
+      29502,
+      29503
+    ]
+  },
+  "objective": "causal next-token assembly of abstract action, repair, question and safe gate",
+  "variants": [
+    {
+      "config_name": "moe_small",
+      "config": {
+        "d_model": 64,
+        "n_heads": 4,
+        "n_layers": 2,
+        "experts": 2,
+        "expert_hidden": 128,
+        "top_k": 1,
+        "dropout": 0.05,
+        "max_length": 128
+      },
+      "vocabulary_size": 75,
+      "train": {
+        "count": {
+          "mean": 312.0,
+          "min": 312.0,
+          "max": 312.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 156.0,
+          "min": 156.0,
+          "max": 156.0
+        },
+        "missing_question_recall": {
+          "mean": 0.982906,
+          "min": 0.974359,
+          "max": 1.0
+        },
+        "positive_recall": {
+          "mean": 0.416667,
+          "min": 0.0,
+          "max": 0.75
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.963675,
+          "min": 0.923077,
+          "max": 0.987179
+        },
+        "token_accuracy": {
+          "mean": 0.988034,
+          "min": 0.971795,
+          "max": 0.996795
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "source_holdout": {
+        "count": {
+          "mean": 240.0,
+          "min": 240.0,
+          "max": 240.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 120.0,
+          "min": 120.0,
+          "max": 120.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "positive_recall": {
+          "mean": 0.416667,
+          "min": 0.0,
+          "max": 0.75
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.986111,
+          "min": 0.983333,
+          "max": 0.991667
+        },
+        "token_accuracy": {
+          "mean": 0.995555,
+          "min": 0.993333,
+          "max": 0.9975
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "seed_holdout": {
+        "count": {
+          "mean": 72.0,
+          "min": 72.0,
+          "max": 72.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 36.0,
+          "min": 36.0,
+          "max": 36.0
+        },
+        "missing_question_recall": {
+          "mean": 0.925926,
+          "min": 0.888889,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.888889,
+          "min": 0.722222,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 0.962963,
+          "min": 0.9,
+          "max": 1.0
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "missing": {
+        "count": {
+          "mean": 104.0,
+          "min": 104.0,
+          "max": 104.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 104.0,
+          "min": 104.0,
+          "max": 104.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "source_missing": {
+        "count": {
+          "mean": 40.0,
+          "min": 40.0,
+          "max": 40.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 40.0,
+          "min": 40.0,
+          "max": 40.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "seed_missing": {
+        "count": {
+          "mean": 12.0,
+          "min": 12.0,
+          "max": 12.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 12.0,
+          "min": 12.0,
+          "max": 12.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "hard_negative": {
+        "count": {
+          "mean": 8.0,
+          "min": 8.0,
+          "max": 8.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 3.333333,
+          "min": 0.0,
+          "max": 6.0
+        },
+        "missing_question_count": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "safe_reject_rate": {
+          "mean": 0.583333,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.5,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 0.866667,
+          "min": 0.75,
+          "max": 1.0
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "per_seed": [
+        {
+          "seed": 29501,
+          "train": {
+            "count": 312,
+            "token_accuracy": 0.971795,
+            "sequence_exact_accuracy": 0.923077,
+            "positive_recall": 0.0,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 0.974359,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 156
+          },
+          "source_holdout": {
+            "count": 240,
+            "token_accuracy": 0.993333,
+            "sequence_exact_accuracy": 0.983333,
+            "positive_recall": 0.0,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 120
+          },
+          "seed_holdout": {
+            "count": 72,
+            "token_accuracy": 0.9,
+            "sequence_exact_accuracy": 0.722222,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 0.888889,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 36
+          },
+          "missing": {
+            "count": 104,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 104
+          },
+          "source_missing": {
+            "count": 40,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 40
+          },
+          "seed_missing": {
+            "count": 12,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 12
+          },
+          "hard_negative": {
+            "count": 8,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          }
+        },
+        {
+          "seed": 29502,
+          "train": {
+            "count": 312,
+            "token_accuracy": 0.996795,
+            "sequence_exact_accuracy": 0.987179,
+            "positive_recall": 0.75,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 156
+          },
+          "source_holdout": {
+            "count": 240,
+            "token_accuracy": 0.995833,
+            "sequence_exact_accuracy": 0.983333,
+            "positive_recall": 0.75,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 120
+          },
+          "seed_holdout": {
+            "count": 72,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 36
+          },
+          "missing": {
+            "count": 104,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 104
+          },
+          "source_missing": {
+            "count": 40,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 40
+          },
+          "seed_missing": {
+            "count": 12,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 12
+          },
+          "hard_negative": {
+            "count": 8,
+            "token_accuracy": 0.85,
+            "sequence_exact_accuracy": 0.25,
+            "positive_recall": null,
+            "hard_negative_false_allow": 6,
+            "safe_reject_rate": 0.25,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          }
+        },
+        {
+          "seed": 29503,
+          "train": {
+            "count": 312,
+            "token_accuracy": 0.995513,
+            "sequence_exact_accuracy": 0.980769,
+            "positive_recall": 0.5,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 0.974359,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 156
+          },
+          "source_holdout": {
+            "count": 240,
+            "token_accuracy": 0.9975,
+            "sequence_exact_accuracy": 0.991667,
+            "positive_recall": 0.5,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 120
+          },
+          "seed_holdout": {
+            "count": 72,
+            "token_accuracy": 0.988889,
+            "sequence_exact_accuracy": 0.944444,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 0.888889,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 36
+          },
+          "missing": {
+            "count": 104,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 104
+          },
+          "source_missing": {
+            "count": 40,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 40
+          },
+          "seed_missing": {
+            "count": 12,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 12
+          },
+          "hard_negative": {
+            "count": 8,
+            "token_accuracy": 0.75,
+            "sequence_exact_accuracy": 0.25,
+            "positive_recall": null,
+            "hard_negative_false_allow": 4,
+            "safe_reject_rate": 0.5,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "config_name": "moe_wide",
+      "config": {
+        "d_model": 96,
+        "n_heads": 4,
+        "n_layers": 2,
+        "experts": 4,
+        "expert_hidden": 192,
+        "top_k": 2,
+        "dropout": 0.05,
+        "max_length": 128
+      },
+      "vocabulary_size": 75,
+      "train": {
+        "count": {
+          "mean": 312.0,
+          "min": 312.0,
+          "max": 312.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 1.333333,
+          "min": 0.0,
+          "max": 4.0
+        },
+        "missing_question_count": {
+          "mean": 156.0,
+          "min": 156.0,
+          "max": 156.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "positive_recall": {
+          "mean": 0.666667,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 0.995671,
+          "min": 0.987013,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.981837,
+          "min": 0.961538,
+          "max": 0.996795
+        },
+        "token_accuracy": {
+          "mean": 0.995513,
+          "min": 0.989744,
+          "max": 0.999359
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "source_holdout": {
+        "count": {
+          "mean": 240.0,
+          "min": 240.0,
+          "max": 240.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 1.333333,
+          "min": 0.0,
+          "max": 4.0
+        },
+        "missing_question_count": {
+          "mean": 120.0,
+          "min": 120.0,
+          "max": 120.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "positive_recall": {
+          "mean": 0.666667,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 0.99435,
+          "min": 0.983051,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.981944,
+          "min": 0.966667,
+          "max": 0.995833
+        },
+        "token_accuracy": {
+          "mean": 0.996389,
+          "min": 0.993333,
+          "max": 0.999167
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "seed_holdout": {
+        "count": {
+          "mean": 72.0,
+          "min": 72.0,
+          "max": 72.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 36.0,
+          "min": 36.0,
+          "max": 36.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.981481,
+          "min": 0.944444,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 0.992593,
+          "min": 0.977778,
+          "max": 1.0
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "missing": {
+        "count": {
+          "mean": 104.0,
+          "min": 104.0,
+          "max": 104.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 104.0,
+          "min": 104.0,
+          "max": 104.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "source_missing": {
+        "count": {
+          "mean": 40.0,
+          "min": 40.0,
+          "max": 40.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 40.0,
+          "min": 40.0,
+          "max": 40.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "seed_missing": {
+        "count": {
+          "mean": 12.0,
+          "min": 12.0,
+          "max": 12.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "missing_question_count": {
+          "mean": 12.0,
+          "min": 12.0,
+          "max": 12.0
+        },
+        "missing_question_recall": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "safe_reject_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "token_accuracy": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "hard_negative": {
+        "count": {
+          "mean": 8.0,
+          "min": 8.0,
+          "max": 8.0
+        },
+        "hard_negative_false_allow": {
+          "mean": 5.333333,
+          "min": 0.0,
+          "max": 8.0
+        },
+        "missing_question_count": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "safe_reject_rate": {
+          "mean": 0.333333,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "sequence_exact_accuracy": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "token_accuracy": {
+          "mean": 0.75,
+          "min": 0.65,
+          "max": 0.8
+        },
+        "unnecessary_question_rate": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "per_seed": [
+        {
+          "seed": 29501,
+          "train": {
+            "count": 312,
+            "token_accuracy": 0.997436,
+            "sequence_exact_accuracy": 0.987179,
+            "positive_recall": 0.0,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 156
+          },
+          "source_holdout": {
+            "count": 240,
+            "token_accuracy": 0.996667,
+            "sequence_exact_accuracy": 0.983333,
+            "positive_recall": 0.0,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 120
+          },
+          "seed_holdout": {
+            "count": 72,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 36
+          },
+          "missing": {
+            "count": 104,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 104
+          },
+          "source_missing": {
+            "count": 40,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 40
+          },
+          "seed_missing": {
+            "count": 12,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 12
+          },
+          "hard_negative": {
+            "count": 8,
+            "token_accuracy": 0.8,
+            "sequence_exact_accuracy": 0.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          }
+        },
+        {
+          "seed": 29502,
+          "train": {
+            "count": 312,
+            "token_accuracy": 0.999359,
+            "sequence_exact_accuracy": 0.996795,
+            "positive_recall": 1.0,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 156
+          },
+          "source_holdout": {
+            "count": 240,
+            "token_accuracy": 0.999167,
+            "sequence_exact_accuracy": 0.995833,
+            "positive_recall": 1.0,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 120
+          },
+          "seed_holdout": {
+            "count": 72,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 36
+          },
+          "missing": {
+            "count": 104,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 104
+          },
+          "source_missing": {
+            "count": 40,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 40
+          },
+          "seed_missing": {
+            "count": 12,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 12
+          },
+          "hard_negative": {
+            "count": 8,
+            "token_accuracy": 0.65,
+            "sequence_exact_accuracy": 0.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 8,
+            "safe_reject_rate": 0.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          }
+        },
+        {
+          "seed": 29503,
+          "train": {
+            "count": 312,
+            "token_accuracy": 0.989744,
+            "sequence_exact_accuracy": 0.961538,
+            "positive_recall": 1.0,
+            "hard_negative_false_allow": 4,
+            "safe_reject_rate": 0.987013,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 156
+          },
+          "source_holdout": {
+            "count": 240,
+            "token_accuracy": 0.993333,
+            "sequence_exact_accuracy": 0.966667,
+            "positive_recall": 1.0,
+            "hard_negative_false_allow": 4,
+            "safe_reject_rate": 0.983051,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 120
+          },
+          "seed_holdout": {
+            "count": 72,
+            "token_accuracy": 0.977778,
+            "sequence_exact_accuracy": 0.944444,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 36
+          },
+          "missing": {
+            "count": 104,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 104
+          },
+          "source_missing": {
+            "count": 40,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 40
+          },
+          "seed_missing": {
+            "count": 12,
+            "token_accuracy": 1.0,
+            "sequence_exact_accuracy": 1.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 0,
+            "safe_reject_rate": 1.0,
+            "missing_question_recall": 1.0,
+            "unnecessary_question_rate": null,
+            "missing_question_count": 12
+          },
+          "hard_negative": {
+            "count": 8,
+            "token_accuracy": 0.8,
+            "sequence_exact_accuracy": 0.0,
+            "positive_recall": null,
+            "hard_negative_false_allow": 8,
+            "safe_reject_rate": 0.0,
+            "missing_question_recall": null,
+            "unnecessary_question_rate": 0.0,
+            "missing_question_count": 0
+          }
+        }
+      ]
+    }
+  ],
+  "selection": {
+    "config_name": "moe_wide",
+    "hard_negative_false_allow_max": 8,
+    "seed_missing_question_recall_min": 1.0,
+    "seed_positive_recall_min": null
+  },
+  "answer_only_control": {
+    "normal_holdout": {
+      "count": {
+        "mean": 72.0,
+        "min": 72.0,
+        "max": 72.0
+      },
+      "hard_negative_false_allow": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "missing_question_count": {
+        "mean": 36.0,
+        "min": 36.0,
+        "max": 36.0
+      },
+      "missing_question_recall": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "safe_reject_rate": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "sequence_exact_accuracy": {
+        "mean": 0.5,
+        "min": 0.5,
+        "max": 0.5
+      },
+      "token_accuracy": {
+        "mean": 0.866667,
+        "min": 0.833333,
+        "max": 0.9
+      },
+      "unnecessary_question_rate": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "missing_holdout": {
+      "count": {
+        "mean": 12.0,
+        "min": 12.0,
+        "max": 12.0
+      },
+      "hard_negative_false_allow": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "missing_question_count": {
+        "mean": 12.0,
+        "min": 12.0,
+        "max": 12.0
+      },
+      "missing_question_recall": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "safe_reject_rate": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "sequence_exact_accuracy": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "token_accuracy": {
+        "mean": 0.6,
+        "min": 0.4,
+        "max": 0.8
+      }
+    },
+    "per_seed": [
+      {
+        "seed": 29501,
+        "normal_holdout": {
+          "count": 72,
+          "token_accuracy": 0.833333,
+          "sequence_exact_accuracy": 0.5,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 36
+        },
+        "missing_holdout": {
+          "count": 12,
+          "token_accuracy": 0.4,
+          "sequence_exact_accuracy": 0.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.0,
+          "unnecessary_question_rate": null,
+          "missing_question_count": 12
+        }
+      },
+      {
+        "seed": 29502,
+        "normal_holdout": {
+          "count": 72,
+          "token_accuracy": 0.9,
+          "sequence_exact_accuracy": 0.5,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 36
+        },
+        "missing_holdout": {
+          "count": 12,
+          "token_accuracy": 0.8,
+          "sequence_exact_accuracy": 0.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.0,
+          "unnecessary_question_rate": null,
+          "missing_question_count": 12
+        }
+      },
+      {
+        "seed": 29503,
+        "normal_holdout": {
+          "count": 72,
+          "token_accuracy": 0.866667,
+          "sequence_exact_accuracy": 0.5,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.0,
+          "unnecessary_question_rate": 0.0,
+          "missing_question_count": 36
+        },
+        "missing_holdout": {
+          "count": 12,
+          "token_accuracy": 0.6,
+          "sequence_exact_accuracy": 0.0,
+          "positive_recall": null,
+          "hard_negative_false_allow": 0,
+          "safe_reject_rate": 1.0,
+          "missing_question_recall": 0.0,
+          "unnecessary_question_rate": null,
+          "missing_question_count": 12
+        }
+      }
+    ],
+    "question_supervision": false
+  },
+  "engineering_gate": {
+    "status": "blocked",
+    "checks": {
+      "dataset_audit_pass": true,
+      "resource_contract": true,
+      "causal_next_token_only": true,
+      "moe_router_present": true,
+      "missing_question_split_present": true,
+      "hard_negative_zero_false_allow": false,
+      "control_has_no_question_supervision": true,
+      "promotion_blocked": true
+    },
+    "claim_allowed": false
+  },
+  "scientific_gate": {
+    "status": "blocked",
+    "checks": {
+      "fresh_real_evaluator": false,
+      "real_application_gold": false,
+      "literal_payload_success": false,
+      "question_identifiability_test": true
+    },
+    "reasons": [
+      "abstract PG-294 state cells only",
+      "no fresh typed replay",
+      "no real application gold"
+    ],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "payload_catalog_promotion_allowed": false
+  },
+  "formal_conclusion": "A causal MoE can be evaluated for missing-observation questions; answer-only accuracy is not evidence of active diagnosis, and the real payload claim remains unproven.",
+  "elapsed_seconds": 517.159,
+  "report_sha256": "43c32f472baa7192591c345b69d1e42c2c558a2e956cdab5c4e209800d7e76fc"
+}

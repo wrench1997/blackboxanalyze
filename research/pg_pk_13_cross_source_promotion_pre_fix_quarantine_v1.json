@@ -1,0 +1,32 @@
+{
+  "schema_version": "sift-pg-pk-13-failure-replay-v1",
+  "protocol_id": "pg-pk-13-cross-source-promotion-v1",
+  "status": "quarantine",
+  "preserved_failed_run": true,
+  "failure_class": "experiment_problem",
+  "root_cause": "shared-family training labeled the legacy plain_control surface as xss, so the diagnostic router emitted a candidate on a negative control",
+  "source_fixture_count": 3,
+  "oracle_revalidated_pair_count": 11,
+  "router_gated_pair_count": 2,
+  "fallback_oracle_pair_count": 9,
+  "false_positive_ledger_row_count": 2,
+  "promotion_reasons": [
+    "cross_app_positive_fixture_v1:false_positive_rate_exceeded"
+  ],
+  "source_hashes": {
+    "cross_app_positive_fixture_v1": "823eadf3f7a17e3c1097775d53fbf4de80ca69d7721f464f31b1d47eaa382912",
+    "heterogeneous_surface_fixture_v1": "55524eb4d2eb97cd00761423c473797d44cb01faa95981b5efe820b2edb74379",
+    "heterogeneous_surface_fixture_v2": "eb57a8951f4363f4d114b4abad9672d25393ccf5dfbc1b1594b6fd844cbf9015"
+  },
+  "remediation": {
+    "label_change": "plain_control -> control",
+    "retrain": "scripts/train_shared_family_router.py",
+    "required_replay": "PG-PK-09, PG-PK-12, PG-PK-13 and joint regression",
+    "positive_authority_changed": false
+  },
+  "safety": {
+    "local_only": true,
+    "raw_body_stored": false,
+    "external_network": false
+  }
+}

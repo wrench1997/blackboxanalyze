@@ -1,0 +1,941 @@
+{
+  "schema_version": "pg368-second-implementation-plan-v1",
+  "status": "planning_only",
+  "implementation": {
+    "implementation_id": "pg368_webgoat_docker_relay",
+    "family": "WebGoat",
+    "image": "webgoat/webgoat@sha256:3101bd9e7bcfe122d7ef91e690ef3720de36cc4e86b3d06763a1ddf2e2751a4b",
+    "image_digest": "3101bd9e7bcfe122d7ef91e690ef3720de36cc4e86b3d06763a1ddf2e2751a4b",
+    "runtime_module": "app/pg333_webgoat_docker_relay.py",
+    "independent_from": "pg367_inprocess_waf_staircase",
+    "independence_contract": {
+      "different_image_digest": true,
+      "different_runtime_module": true,
+      "different_process_boundary": true,
+      "shared_runtime_forbidden": true,
+      "shared_fixture_or_route_answer_forbidden": true
+    }
+  },
+  "source_attestation": {
+    "runtime_module_sha256": "c63356ef7a5264bc2ef8736c9ef2c6a2357bea8b910c5358180e076f4639f1a3",
+    "source_audit_sha256": "51bc46a91b8a6b68909282e15dcf766d3cd7cd90668eb9dfe11e1babcf4c980c",
+    "source_report_sha256": "77244d0387002b64ebe65a2af07b1f65db53ed9690d1b520aee3c85b91e50519",
+    "relay_image_digest_attested": true,
+    "relay_route_path_sha256": "5f93f1f18cb8f07a82767123d396232dac940a899a7dd55d5ebf4304c5b3b637",
+    "source_audit_status": "passed",
+    "source_report_status": "completed_typed_method_shape_diagnostic_only",
+    "source_report_hard_gate_status": "blocked_method_shape_canary_not_vulnerability",
+    "source_report_counts": {
+      "seed_count": 3,
+      "route_count": 2,
+      "negative_violation_count": 0
+    }
+  },
+  "execution": {
+    "docker_started": false,
+    "network_contacted": false,
+    "network_mode": "none",
+    "loopback_relay_required": true,
+    "published_ports_allowed": false,
+    "bind_or_volume_mounts_allowed": false,
+    "external_network": false,
+    "fresh_disposable_container_per_seed_route_role": true,
+    "execution_requires_explicit_operator_flag": "PG368_LOCAL_DOCKER_EVAL=1"
+  },
+  "seeds": [
+    36801,
+    36802,
+    36803
+  ],
+  "routes": [
+    {
+      "route_ref_sha256": "803d820e30c347db8f9eace1c2f7f67778565a109c9a532808c163a11d23bb8a",
+      "method": "GET",
+      "response_shape": "html_page",
+      "path_literal_stored": false
+    },
+    {
+      "route_ref_sha256": "9fa773fa5004cb376ec81f32f9133fa025dacab8ff47af5e96565fc4e3507e3d",
+      "method": "POST",
+      "response_shape": "loopback_redirect",
+      "path_literal_stored": false
+    }
+  ],
+  "episodes": [
+    {
+      "seed": 36801,
+      "route_ref_sha256": "803d820e30c347db8f9eace1c2f7f67778565a109c9a532808c163a11d23bb8a",
+      "method": "GET",
+      "response_shape": "html_page",
+      "roles": {
+        "candidate": {
+          "target_identity_sha256": "64168eb65785152bfac87280c997c844dde6448275d3761c8240c41f72c40fd4",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "reference": {
+          "target_identity_sha256": "9ce139bbbef866707e3a22d9250c6b1a1c1347a865c6b4df9841d9e4d1f7688c",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "negative": {
+          "target_identity_sha256": "9e30e7caf112f6c19bcc815efa05ab1b7b56fdf2a31dc72598e4ae85088a9777",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": true,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "replay": {
+          "target_identity_sha256": "483280eee145098b160fa4023e7f5cbea18b517ebaa11fca119ba53389cb8b5c",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": false,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": true,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": false,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        }
+      },
+      "typed_contract": {
+        "candidate_reference_negative_replay": true,
+        "fresh_reset_per_role": true,
+        "evidence_sha256": true,
+        "method_shape_only": true,
+        "vulnerability_oracle": false
+      }
+    },
+    {
+      "seed": 36801,
+      "route_ref_sha256": "9fa773fa5004cb376ec81f32f9133fa025dacab8ff47af5e96565fc4e3507e3d",
+      "method": "POST",
+      "response_shape": "loopback_redirect",
+      "roles": {
+        "candidate": {
+          "target_identity_sha256": "ec6c09cb2a0fd1c038fe2d28402fdab403c6e481218e5f0c83942232aa8fe98b",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "reference": {
+          "target_identity_sha256": "30609c21d0ad6a7511d521ea97e159e8bd6d243f89a27ff73c01bdbcf6fcfc28",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "negative": {
+          "target_identity_sha256": "65e8abb9bbca6958a687c076f27ded07fed7f72d322a736cf9124c4f017973a3",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": true,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "replay": {
+          "target_identity_sha256": "b218d979757fd26625f7282a13d86b0a150eb119bd4b445b1f3278a8a45db58c",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": false,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": true,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": false,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        }
+      },
+      "typed_contract": {
+        "candidate_reference_negative_replay": true,
+        "fresh_reset_per_role": true,
+        "evidence_sha256": true,
+        "method_shape_only": true,
+        "vulnerability_oracle": false
+      }
+    },
+    {
+      "seed": 36802,
+      "route_ref_sha256": "803d820e30c347db8f9eace1c2f7f67778565a109c9a532808c163a11d23bb8a",
+      "method": "GET",
+      "response_shape": "html_page",
+      "roles": {
+        "candidate": {
+          "target_identity_sha256": "d03daec1d1ad048c0a9bdd3dedbd4b3257a452eac1ca1ff2f3b7e1f7be15d786",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "reference": {
+          "target_identity_sha256": "bb27a06a437e6dfd49600c487795a2b58916c5db72469b8c8fc5b3b175eab3a1",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "negative": {
+          "target_identity_sha256": "06d02de35070f82d5f0fe7bdc8518ccb38e502077f680cb6fcae0ea915cb4257",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": true,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "replay": {
+          "target_identity_sha256": "f935e5146e798d80988d2108fc1d63a2b471ed7ad260fb4c4625630344101952",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": false,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": true,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": false,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        }
+      },
+      "typed_contract": {
+        "candidate_reference_negative_replay": true,
+        "fresh_reset_per_role": true,
+        "evidence_sha256": true,
+        "method_shape_only": true,
+        "vulnerability_oracle": false
+      }
+    },
+    {
+      "seed": 36802,
+      "route_ref_sha256": "9fa773fa5004cb376ec81f32f9133fa025dacab8ff47af5e96565fc4e3507e3d",
+      "method": "POST",
+      "response_shape": "loopback_redirect",
+      "roles": {
+        "candidate": {
+          "target_identity_sha256": "310afa7b2e7a487a6d64a3e97a4752e460587881403f5411d789f92abe5ce66b",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "reference": {
+          "target_identity_sha256": "837d767e39744f6bfaf54e7d251ea66276f3342495e9df27b9cdfea416ab5b89",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "negative": {
+          "target_identity_sha256": "0cbfd201a5153753385e9f02463cac20939adfc616056c5c326e909c571db86c",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": true,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "replay": {
+          "target_identity_sha256": "74b83bcceb920105aeeaea423f9f42dab8659161e18720a7674d8814c2518ad5",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": false,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": true,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": false,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        }
+      },
+      "typed_contract": {
+        "candidate_reference_negative_replay": true,
+        "fresh_reset_per_role": true,
+        "evidence_sha256": true,
+        "method_shape_only": true,
+        "vulnerability_oracle": false
+      }
+    },
+    {
+      "seed": 36803,
+      "route_ref_sha256": "803d820e30c347db8f9eace1c2f7f67778565a109c9a532808c163a11d23bb8a",
+      "method": "GET",
+      "response_shape": "html_page",
+      "roles": {
+        "candidate": {
+          "target_identity_sha256": "f2bbf8182be605cd8dac16e9d7145800132506866d3a6bbd3952d0964a1163aa",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "reference": {
+          "target_identity_sha256": "7add071500fcd6df4036f268c23815987e3c96427d388fe6106e5e231c3ba636",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "negative": {
+          "target_identity_sha256": "6f3d283a0c545eccf077a500daf8009e9d016c965578560e8ccbfc53f01942a1",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": true,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "replay": {
+          "target_identity_sha256": "d2464e6f0d2f4e81f1c6b77c2e2b03c086ad8c0669efc766de24237d1e8289cf",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "GET",
+            "candidate_reference_required": false,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": true,
+            "effect_class": "html_page"
+          },
+          "source_row_allowed": false,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "none",
+            "encoding_ref": "none",
+            "response_shape_ref": "html_page",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        }
+      },
+      "typed_contract": {
+        "candidate_reference_negative_replay": true,
+        "fresh_reset_per_role": true,
+        "evidence_sha256": true,
+        "method_shape_only": true,
+        "vulnerability_oracle": false
+      }
+    },
+    {
+      "seed": 36803,
+      "route_ref_sha256": "9fa773fa5004cb376ec81f32f9133fa025dacab8ff47af5e96565fc4e3507e3d",
+      "method": "POST",
+      "response_shape": "loopback_redirect",
+      "roles": {
+        "candidate": {
+          "target_identity_sha256": "d8fca579029d7c116c31431badd199a6f6f8246b6c9f8afce9f0b4463647f13f",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "reference": {
+          "target_identity_sha256": "55b99f8c58469a5b81a001a4c09efbb15cdfc94102abef26701f40460e55033f",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "negative": {
+          "target_identity_sha256": "1f90d7de682e8b48a6ba91b57ae112e1376b3f895da3f6563f4098f9b5b19e6a",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": true,
+            "negative_must_be_clean": true,
+            "replay_must_match_candidate_shape": false,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": true,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        },
+        "replay": {
+          "target_identity_sha256": "ee3560d8a239113de482bb24c68ae7f396ed74c920e0a0940fd1bbf50af9c78e",
+          "fresh_container_required": true,
+          "fresh_reset_before_required": true,
+          "fresh_reset_after_required": true,
+          "state_reset_before_required": false,
+          "state_reset_after_required": false,
+          "database_clean_attestation_required": true,
+          "teardown_required": true,
+          "candidate_reference_negative_replay_required": true,
+          "role_bound_evidence_sha256_required": true,
+          "typed_oracle": {
+            "status": "planned_unobserved",
+            "method": "POST",
+            "candidate_reference_required": false,
+            "negative_must_be_clean": false,
+            "replay_must_match_candidate_shape": true,
+            "effect_class": "loopback_redirect"
+          },
+          "source_row_allowed": false,
+          "model_projection": {
+            "question": "ask_typed",
+            "next_action": "ask_typed",
+            "repair_action": "observe",
+            "transport_ref": "request_method",
+            "parameter_role_ref": "credential_pair",
+            "encoding_ref": "form_urlencoded",
+            "response_shape_ref": "loopback_redirect",
+            "safe_to_send": false
+          },
+          "training_eligible": false
+        }
+      },
+      "typed_contract": {
+        "candidate_reference_negative_replay": true,
+        "fresh_reset_per_role": true,
+        "evidence_sha256": true,
+        "method_shape_only": true,
+        "vulnerability_oracle": false
+      }
+    }
+  ],
+  "model_context_policy": {
+    "abstract_tokens_only": true,
+    "raw_payload_or_probe": false,
+    "raw_request_or_response": false,
+    "url_or_route_literal": false,
+    "evaluator_answer_literal": false,
+    "missing_observation_action": "ASK"
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false,
+    "reason": "planning_only_until_live_typed_replay_and_cross_implementation_audit"
+  },
+  "interpretation": "WebGoat is a source-attested second implementation candidate, not a vulnerability result. Existing PG-333/PG-342 method-shape evidence is diagnostic only; this plan must remain ASK/incomplete until a fresh candidate/reference/negative/replay run supplies role-bound typed evidence.",
+  "plan_sha256": "27f4bfba5c3e83cf282a4935600c4f8ed5582e9019f1682eb5f42078121b8263"
+}

@@ -1,0 +1,37 @@
+{
+  "protocol_id": "pg-pk-09-sql-active-probe-v1",
+  "objective": "Use a calibrated SQL-channel decoder and multi-step belief state to choose safe pair refinements under a bounded request budget.",
+  "screening": {
+    "one_plain_probe_per_surface": true,
+    "refinement_requires_decoder_oracle_ambiguity": true,
+    "max_requests": 13,
+    "static_catalog_requests": 15
+  },
+  "belief": {
+    "implementation": "app/belief_state.py",
+    "likelihood_source": ["SQL channel decoder", "shared family router diagnostic prior", "bounded AST/response projection"],
+    "shared_router": {
+      "implementation": "app/shared_router_bridge.py",
+      "active_threshold": 0.6,
+      "strict_ood": true,
+      "positive_authority": false,
+      "abstain_is_uniform_prior": true
+    },
+    "evaluator_labels_visible_to_selector": false,
+    "evidence_hash_recorded": true
+  },
+  "acceptance": {
+    "active_order_does_not_emit_positive_alone": true,
+    "pair_revalidation_required": true,
+    "strict_ood_remains_abstain": true,
+    "unsafe_or_unknown_probe": "abstain"
+  },
+  "safety": {
+    "loopback_only": true,
+    "get_only": true,
+    "database_touched": false,
+    "real_sleep_performed": false,
+    "external_network": false,
+    "raw_body_stored": false
+  }
+}

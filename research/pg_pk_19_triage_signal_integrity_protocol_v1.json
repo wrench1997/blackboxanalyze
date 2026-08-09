@@ -1,0 +1,40 @@
+{
+  "schema_version": "sift-preregistered-experiment-v1",
+  "protocol_id": "pg-pk-19-triage-signal-integrity-v1",
+  "scope": "experiment-versus-engineering triage signal transport only",
+  "root_cause_hypothesis": "Callers already place failures on the experiment or engineering path, but triage_failure silently drops non-registry signal names, producing a false inconclusive classification.",
+  "pre_fix_negative_controls": [
+    {
+      "path": "experiment",
+      "signal": "sql_cross_source_promotion_regression",
+      "observed_classification": "inconclusive",
+      "required_classification": "experiment_problem"
+    },
+    {
+      "path": "engineering",
+      "signal": "missing_joint_regression_artifact",
+      "observed_classification": "inconclusive",
+      "required_classification": "engineering_capability_problem"
+    }
+  ],
+  "intervention": "Preserve every non-empty caller-supplied signal on its explicitly selected path, keep the registry as taxonomy metadata, and expose unregistered signal names instead of silently deleting them.",
+  "predictions": {
+    "domain_experiment_signal_classification": "experiment_problem",
+    "domain_engineering_signal_classification": "engineering_capability_problem",
+    "registered_signal_behavior_unchanged": true,
+    "clean_run_classification": "inconclusive",
+    "full_test_suite_must_pass": true
+  },
+  "protected_invariants": {
+    "model_or_checkpoint_unchanged": true,
+    "payload_or_oracle_authority_unchanged": true,
+    "experiment_and_engineering_paths_remain_independent": true,
+    "unknown_signal_never_authorizes_model_or_scale_by_itself": true
+  },
+  "failure_conditions": [
+    "either domain negative control remains inconclusive",
+    "registered signal classification changes",
+    "clean run stops being inconclusive",
+    "any existing test fails"
+  ]
+}

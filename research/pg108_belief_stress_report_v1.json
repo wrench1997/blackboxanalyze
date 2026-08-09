@@ -1,0 +1,96 @@
+{
+  "protocol_id": "pg-pk-108-belief-stress-v1",
+  "schema_version": "pg108-belief-stress-report-v1",
+  "status": "passed_belief_order_seed_stress",
+  "source": {
+    "training_source": "PG101 train",
+    "evaluation_source": "PG105/PG106 fresh traces",
+    "training_row_count": 32,
+    "evaluation_row_count": 578,
+    "episode_count": 289,
+    "source_hashes": {
+      "train": "6070cab5a7fc8ed869ebfbf4d752c1b527929751f12a9d41d3bb8f8987749efe",
+      "pg105_dataset": "dc1573b34ddcb2733933d1393fca28f073566f4cbd58be4ed30edb9e326e4ad3",
+      "pg105_trace": "053058554dd93f86ee17b0a6257b7a5bb44cbd1a8b3c6ca29de3138ab6e25db3",
+      "pg106_dataset": "205011724db70c65ee5911423123970400f2f18d2482b3b5956b046b80d28cea",
+      "pg106_trace": "1736d73e9371a1f44adc785769eb62953c828749621a43ddf9a60b178339ed5f",
+      "belief": "8a1b44e292cc50c48b76c71678eeb45df792bb969318a306546f24c8e30b201a",
+      "inducer": "c3eaf01cfcc392b6b2efc540c386b40769ab3f3738d14b509b26eaa41bd7811e",
+      "runner": "74477091296bdb8b292ba10d76a1e5e7fd78393e1bc05a0881f4571618637ae1"
+    }
+  },
+  "controller": {
+    "scenario_set": [
+      "canonical",
+      "reverse",
+      "seed_a",
+      "seed_b",
+      "budget_one",
+      "duplicate",
+      "conflicting"
+    ],
+    "posterior_family_free": true,
+    "typed_oracle_called": false,
+    "duplicate_evidence_guard": true,
+    "conflicting_duplicate_fail_closed": true,
+    "promotion_allowed": false
+  },
+  "metrics": {
+    "episode_count": 289,
+    "scenario_count": 7,
+    "order_invariant": true,
+    "seed_invariant": true,
+    "duplicate_step_count": 289,
+    "conflicting_duplicate_step_count": 289,
+    "duplicate_posterior_unchanged_rate": 1.0,
+    "conflicting_posterior_unchanged_rate": 1.0,
+    "budget_one_fail_closed_rate": 1.0,
+    "canonical_confirmed_positive_count": 0,
+    "canonical_typed_oracle_called_count": 0,
+    "posterior_states": [
+      "effect",
+      "input_only",
+      "no_effect",
+      "unknown"
+    ]
+  },
+  "capability_gate": {
+    "status": "passed_belief_order_seed_stress",
+    "checks": {
+      "training_row_count": true,
+      "evaluation_row_count": true,
+      "binding_valid": true,
+      "order_invariant": true,
+      "seed_invariant": true,
+      "duplicate_evidence_rejected": true,
+      "conflicting_duplicate_rejected": true,
+      "duplicate_posterior_unchanged": true,
+      "conflicting_posterior_unchanged": true,
+      "budget_one_fail_closed": true,
+      "unknown_and_decoy_never_confirm": true,
+      "no_typed_oracle_called": true,
+      "no_confirm_without_oracle": true,
+      "fresh_reset_and_negative_preserved": true,
+      "posterior_family_free": true,
+      "promotion_disabled": true
+    },
+    "blocking_reasons": [],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "belief_stress_evaluation_only",
+    "reason": "stress results do not add training memory without cross-dataset and human review"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "evaluator_labels_in_model_input": false,
+    "fresh_reset_replayed": true,
+    "negative_controls_preserved": true,
+    "long_term_memory_write": false
+  }
+}

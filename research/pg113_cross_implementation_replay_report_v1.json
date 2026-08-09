@@ -1,0 +1,117 @@
+{
+  "protocol_id": "pg-pk-113-cross-implementation-replay-v1",
+  "schema_version": "pg113-cross-implementation-replay-report-v1",
+  "status": "passed_pg113_cross_implementation_replay",
+  "scope": {
+    "execution_mode": "fresh_loopback_uvicorn_process",
+    "loopback_only": true,
+    "external_network": false,
+    "implementation_count": 2,
+    "cross_implementation_replay_claim_allowed": true,
+    "trained_model_claim_allowed": false,
+    "docker_claimed": false
+  },
+  "source": {
+    "reference_report": "research/pg112_python_bsp_local_replay_report_v1.json",
+    "source_hashes": {
+      "target": "aae205c3ca5d9a388a2631dbf51eb07a179e6c35582aeb65bbf5524361d59f70",
+      "bridge": "f9251fc6917cd1b217a329e2b4af2061acf4f53806da0e060b88b0558ce98e56",
+      "bsp_core": "7164a49481fa1ec19bfc09f90c2dde0c6566b1c4bf2d95eb6f79247bab745019",
+      "runner": "6b167b67003c2a2b20cb79130ef255ecd890d7d5fbcad5079833ba45cbef15ca",
+      "reference_app": "8c6ae8b4799174273b5341f4ec20a0b772438ab949b192b021c16838383b02c2"
+    }
+  },
+  "metrics": {
+    "target_instance_count": 3,
+    "surface_count": 4,
+    "episode_count": 12,
+    "step_count": 48,
+    "get_step_count": 24,
+    "post_step_count": 24,
+    "fresh_reset_count": 48,
+    "evidence_hash_valid_count": 48,
+    "typed_oracle_called_count": 36,
+    "oracle_withheld_step_count": 12,
+    "confirmed_positive_count": 9,
+    "confirmed_negative_count": 24,
+    "candidate_count": 12,
+    "abstain_count": 3,
+    "known_positive_pair_count": 9,
+    "unknown_oracle_abstain_rate": 1.0,
+    "bsp_parameter_unchanged_rate": 1.0
+  },
+  "cross_implementation": {
+    "reference_protocol": "pg-pk-112-python-bsp-local-replay-v1",
+    "independent_target_schema": "pg113-independent-target-v1",
+    "reference_known_positive_pairs": 9,
+    "independent_known_positive_pairs": 9,
+    "reference_withheld_abstain_rate": 1.0,
+    "independent_withheld_abstain_rate": 1.0,
+    "claim": "same abstract causal replay policy reproduced on an independent implementation; no trained-model capability claim"
+  },
+  "checks": {
+    "independent_target_process_identity": true,
+    "target_instance_count_three": true,
+    "surface_matrix_complete": true,
+    "get_post_balanced": true,
+    "fresh_reset_every_step": true,
+    "reset_epoch_unique_per_target": true,
+    "evidence_hashes_valid": true,
+    "matched_negative_controls": true,
+    "known_pairs_confirmed_after_get_post": true,
+    "withheld_oracle_abstains": true,
+    "target_oracle_hashes_bound": true,
+    "bsp_parameters_unchanged": true,
+    "bsp_mass_conserved": true,
+    "model_input_oracle_blind": true,
+    "model_input_family_free": true,
+    "no_raw_values_stored": true,
+    "no_training_or_memory_write": true,
+    "cross_implementation_aggregate_consistency": true,
+    "reference_and_target_are_distinct": true
+  },
+  "capability_gate": {
+    "status": "passed_pg113_cross_implementation_replay",
+    "checks": {
+      "independent_target_process_identity": true,
+      "target_instance_count_three": true,
+      "surface_matrix_complete": true,
+      "get_post_balanced": true,
+      "fresh_reset_every_step": true,
+      "reset_epoch_unique_per_target": true,
+      "evidence_hashes_valid": true,
+      "matched_negative_controls": true,
+      "known_pairs_confirmed_after_get_post": true,
+      "withheld_oracle_abstains": true,
+      "target_oracle_hashes_bound": true,
+      "bsp_parameters_unchanged": true,
+      "bsp_mass_conserved": true,
+      "model_input_oracle_blind": true,
+      "model_input_family_free": true,
+      "no_raw_values_stored": true,
+      "no_training_or_memory_write": true,
+      "cross_implementation_aggregate_consistency": true,
+      "reference_and_target_are_distinct": true
+    },
+    "blocking_reasons": [],
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "cross_implementation_evaluation_only",
+    "reason": "cross-implementation replay is evidence for the protocol, not a trained-model or vulnerability capability claim"
+  },
+  "safety": {
+    "loopback_only": true,
+    "external_network": false,
+    "raw_probe_strings_stored": false,
+    "raw_response_bodies_stored": false,
+    "family_labels_in_model_input": false,
+    "typed_oracle_labels_in_model_input": false,
+    "fresh_reset_per_action": true,
+    "matched_negative_controls": true,
+    "bsp_weights_updated": false,
+    "long_term_memory_write": false
+  }
+}

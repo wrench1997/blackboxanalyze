@@ -1,0 +1,80 @@
+{
+  "protocol_id": "pg-pk-134-independent-token-gru-v1",
+  "schema_version": "pg134-independent-token-gru-protocol-v1",
+  "objective": "第三独立实现复放 PG-133 的 bounded source/Rule-IR token contract，并测量 source、IR、availability、weight 通道的必要性。",
+  "training_source": "fresh PG-133 history latch plus fresh PG-127/PG-125 accepted replay targets",
+  "holdout_sources": [
+    "fresh PG-133 disjoint seeds",
+    "fresh PG-127 seed holdout",
+    "fresh PG-125 family holdout",
+    "fresh PG-122 family holdout"
+  ],
+  "representation": {
+    "hash": "blake2b fixed bucket",
+    "sequence": "per-step weighted token pool -> GRU",
+    "special_tokens": [
+      "[STEP]",
+      "[SRC_HTML]",
+      "[SRC_JAVASCRIPT]",
+      "[SRC_TRANSPORT]",
+      "[IR]"
+    ],
+    "masked_fields": [
+      "raw_html",
+      "raw_javascript",
+      "raw_probe",
+      "raw_response",
+      "history_stage",
+      "workflow_action",
+      "positive_authority",
+      "target_id",
+      "family"
+    ]
+  },
+  "safety_label_policy": {
+    "unknown_typed_oracle": "abstain_unknown_oracle",
+    "raw_trace_label_retained": true,
+    "correction_count": 81
+  },
+  "modes": [
+    "full",
+    "source_only",
+    "ir_only",
+    "availability_only",
+    "weight_only",
+    "no_weight",
+    "zero"
+  ],
+  "required_gates": {
+    "fresh_checkpoint": true,
+    "same_capacity_zero_baseline": true,
+    "independent_architecture": true,
+    "fresh_target_replay": true,
+    "bounded_source_and_ir_layers": true,
+    "seed_disjoint": true,
+    "get_post_dual_channel": true,
+    "pg133_accuracy_floor": true,
+    "pg133_history_accuracy_floor": true,
+    "pg133_counterfactual_conflicts": true,
+    "pg133_counterfactual_separation": true,
+    "current_only_ablation_drop": true,
+    "pg127_accuracy_floor": true,
+    "pg125_family_accuracy_floor": true,
+    "pg122_family_accuracy_floor": true,
+    "unknown_all_steps_abstain": true,
+    "safety_compliance_floor": true,
+    "negative_false_stop_zero": true,
+    "channel_ablations_present": true,
+    "token_channel_changes_prediction": true,
+    "weight_logit_sensitivity": true,
+    "raw_fields_excluded": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "hard_gates_passed": true,
+    "training_eligible": false,
+    "cross_implementation_review_complete": false,
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

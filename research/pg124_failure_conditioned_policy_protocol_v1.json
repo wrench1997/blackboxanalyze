@@ -1,0 +1,53 @@
+{
+  "protocol_id": "pg-pk-124-failure-conditioned-policy-v1",
+  "schema_version": "pg124-failure-conditioned-policy-protocol-v1",
+  "objective": "验证模型是否直接使用脱敏 failure token 选择下一安全动作。",
+  "model_input": {
+    "base": "PG-123 52 维投影",
+    "failure_slots": 17,
+    "masked_fields": [
+      "positive_authority",
+      "typed_available",
+      "evidence_hash",
+      "raw_probe",
+      "raw_response",
+      "target_id",
+      "family"
+    ]
+  },
+  "variants": [
+    "fresh failure-conditioned model",
+    "fresh no-failure-input same-capacity model",
+    "same full checkpoint with failure slots zeroed"
+  ],
+  "holdout": {
+    "source": "PG-122",
+    "target_instances": 9,
+    "episodes": 36,
+    "steps": 144,
+    "get": 72,
+    "post": 72
+  },
+  "gates": {
+    "fresh_full_checkpoint": true,
+    "fresh_no_failure_checkpoint": true,
+    "same_capacity": true,
+    "seed_disjoint": true,
+    "get_post_balanced_holdout": true,
+    "failure_signature_all_holdout": true,
+    "failure_authority_fields_masked": true,
+    "model_input_family_free": true,
+    "no_raw_probe_strings": true,
+    "no_raw_response_bodies": true,
+    "full_policy_accuracy_nonzero": true,
+    "full_policy_safety_compliance_nonzero": true,
+    "full_policy_non_abstain_nonzero": true,
+    "failure_slot_ablation_changes_behavior": true,
+    "no_failure_baseline_recorded": true,
+    "memory_promotion_forbidden": true
+  },
+  "promotion": {
+    "training_artifact_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "protocol_id": "pg-pk-181-manifest-decoder-replay-v1",
+  "schema_version": "pg181-manifest-decoder-replay-protocol-v1",
+  "input_trace": "research\\pg179b_pikachu_iterative_trace_v1.json",
+  "parameter_manifest": "research\\pg179_pikachu_browser_crawl_manifest_v1.json",
+  "variants": {
+    "small": {
+      "kind": "causal",
+      "d_model": 128,
+      "nhead": 4,
+      "layers": 2,
+      "max_len": 128
+    },
+    "medium": {
+      "kind": "causal",
+      "d_model": 256,
+      "nhead": 8,
+      "layers": 3,
+      "max_len": 128
+    },
+    "moe_large": {
+      "kind": "moe",
+      "d_model": 512,
+      "nhead": 8,
+      "layers": 3,
+      "n_experts": 4,
+      "expert_ff": 1024,
+      "max_len": 128
+    }
+  },
+  "seeds": [
+    18101,
+    18102
+  ],
+  "replay": {
+    "image": "tavenli/pikachu-labs@sha256:b32c7362bb102091bd4ef09c5c571db146bd57469d5598f0c8681ffeeb7907fe",
+    "loopback_port": 8781,
+    "fresh_container_per_replay": true,
+    "only_observed_parameter": "url",
+    "raw_value_persistence": false
+  },
+  "gates": {
+    "model_output_allowlist": [
+      "baseline",
+      "matched_control",
+      "safe_candidate",
+      "abstain"
+    ],
+    "manifest_validator_before_send": true,
+    "unobserved_field_forbidden": true,
+    "safe_canary_only": true,
+    "typed_positive_required_for_vulnerability_label": true,
+    "unknown_oracle_abstain": true,
+    "training_promotion_allowed": false,
+    "memory_promotion_allowed": false
+  },
+  "protocol_sha256": "410d28b90301157d63a3c1d82d6a19c364cffe1fe95ca16f34cb8955d8697231"
+}

@@ -1,0 +1,73 @@
+{
+  "protocol_id": "pg-pk-104-probe-binding-ablation-v1",
+  "schema_version": "pg104-probe-binding-ablation-protocol-v1",
+  "purpose": "audit whether automatic generic labels depend on an unverified probe-slot memory shortcut",
+  "training_contract": {
+    "source": "PG101 train",
+    "row_count": 32,
+    "oracle_visible": false,
+    "family_visible": false
+  },
+  "evaluation_contract": {
+    "frozen_sources": [
+      "PG42",
+      "PG35",
+      "PG76"
+    ],
+    "fresh_source": "PG69 amber/violet",
+    "row_count": 562
+  },
+  "binding_contract": {
+    "schema_version": "safe-active-probe-binding-v1",
+    "binding_sha256": "7dde557c5754de18da63356dafb88cd07aca8b487e27dd2c37280874f0279dd8",
+    "invalid_binding_action": "abstain",
+    "probe_values_persisted": false
+  },
+  "surface_ablation_contract": {
+    "mutation": "invert bounded geometry signs only",
+    "binding_remains_valid": true,
+    "label_should_remain_generic": true
+  },
+  "composition_contract": {
+    "required_atoms": [
+      "effect_present",
+      "probe_binding_valid",
+      "get_post_repeat",
+      "negative_control_clear"
+    ],
+    "assembly": "copy_paste_atoms_sorted_and_deduplicated",
+    "order_invariant": true,
+    "cross_sample_recombination_non_executable": true,
+    "missing_atom_action": "await_typed_oracle_or_abstain",
+    "family_names_in_model_output": false
+  },
+  "permutation_ablation_contract": {
+    "mutation": "reverse active pattern and binding order",
+    "binding_becomes_invalid": true,
+    "guarded_must_abstain": true,
+    "raw_failure_must_be_preserved": true
+  },
+  "safety_contract": {
+    "loopback_only": true,
+    "get_post_required": true,
+    "fresh_reset_required": true,
+    "matched_negative_required": true,
+    "evidence_sha256_required": true,
+    "raw_persistence_forbidden": true
+  },
+  "gate": {
+    "known_recall_min": 0.8,
+    "known_label_consistency_min": 0.95,
+    "false_accept_count": 0,
+    "unknown_family_strict_abstain": true,
+    "surface_ablation_agreement": 1.0,
+    "invalid_binding_abstain": 1.0,
+    "promotion_on_pass": false
+  },
+  "result": {
+    "status": "blocked",
+    "blocking_reasons": [
+      "unknown_pg69_strict_abstain"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "experiment": "delayed-rule-memory-ablation",
+  "episodes": 32,
+  "relevant_event_delay": 6,
+  "conditions": [
+    {
+      "condition": "no_memory",
+      "history_depth": 0,
+      "visible_memory_slots": 0,
+      "best_accuracy": 0.75,
+      "best_rule": "(input.action == \"cancel\")",
+      "candidate_count": 32,
+      "search_seconds": 0.0166
+    },
+    {
+      "condition": "raw_long_context",
+      "history_depth": 6,
+      "visible_memory_slots": 6,
+      "best_accuracy": 1.0,
+      "best_rule": "((input.action == \"commit\") AND (prev[6].input.action == \"verify\"))",
+      "candidate_count": 180,
+      "search_seconds": 0.644
+    },
+    {
+      "condition": "retrieved_episodic_memory",
+      "history_depth": 0,
+      "visible_memory_slots": 1,
+      "best_accuracy": 1.0,
+      "best_rule": "((input.action == \"commit\") AND (state.retrieved_verified == true))",
+      "candidate_count": 72,
+      "search_seconds": 0.0346
+    }
+  ],
+  "interpretation": {
+    "working_memory": "Raw context can recover the delayed dependency but its token cost grows with delay.",
+    "long_term_memory": "A retrieved structured memory preserves the relevant fact with constant context cost.",
+    "rl_role": "Train write/retrieve/forget actions using future rule accuracy, counterexample validity and token cost as reward terms."
+  }
+}

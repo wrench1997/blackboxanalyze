@@ -1,0 +1,245 @@
+{
+  "protocol_id": "pg-pk-70-trace-abstention-head-v1",
+  "schema_version": "sift-pg70-trace-abstention-head-report-v1",
+  "status": "candidate_training_completed",
+  "source": {
+    "pg69_trace": "research\\pg69_per_action_reset_unseen_family_trace_v1.json",
+    "pg69_report": "research\\pg69_per_action_reset_unseen_family_report_v1.json",
+    "model_retrained_on_unknown_family": false,
+    "family_in_features": false,
+    "oracle_in_features": false,
+    "device": "cuda"
+  },
+  "dataset": {
+    "accepted_trace_step_count": 12,
+    "known_train_example_count": 4,
+    "known_dev_holdout_example_count": 4,
+    "unknown_family_holdout_count": 8,
+    "classes": [
+      "confirm",
+      "reject"
+    ],
+    "split_rule": "first two known fresh Docker instances train; remaining known instances dev; workflow family never trains"
+  },
+  "metrics": {
+    "train": {
+      "count": 4,
+      "accuracy": 0.5,
+      "false_accept_count": 1,
+      "confirm_recall": 0.5,
+      "abstain_count": 0
+    },
+    "dev_holdout": {
+      "count": 4,
+      "accuracy": 0.5,
+      "false_accept_count": 0,
+      "confirm_recall": 0.0,
+      "abstain_count": 1
+    },
+    "unknown_family_holdout": {
+      "count": 8,
+      "misname_count": 0,
+      "strict_abstain": true,
+      "max_confidence": 0.519742,
+      "min_ood_distance": 2165.063477
+    }
+  },
+  "details": {
+    "train": [
+      {
+        "step_id": "pg69-step-00",
+        "role": "candidate",
+        "expected": "confirm",
+        "raw_prediction": "reject",
+        "decision": "reject",
+        "confidence": 0.732012,
+        "ood_distance": 0.0,
+        "unknown": false
+      },
+      {
+        "step_id": "pg69-step-00",
+        "role": "matched_control",
+        "expected": "reject",
+        "raw_prediction": "reject",
+        "decision": "reject",
+        "confidence": 0.732012,
+        "ood_distance": 0.0,
+        "unknown": false
+      },
+      {
+        "step_id": "pg69-step-01",
+        "role": "candidate",
+        "expected": "confirm",
+        "raw_prediction": "confirm",
+        "decision": "confirm",
+        "confidence": 0.776925,
+        "ood_distance": 0.0,
+        "unknown": false
+      },
+      {
+        "step_id": "pg69-step-01",
+        "role": "matched_control",
+        "expected": "reject",
+        "raw_prediction": "confirm",
+        "decision": "confirm",
+        "confidence": 0.776925,
+        "ood_distance": 0.0,
+        "unknown": false
+      }
+    ],
+    "dev_holdout": [
+      {
+        "step_id": "pg69-step-02",
+        "role": "candidate",
+        "expected": "confirm",
+        "raw_prediction": "reject",
+        "decision": "reject",
+        "confidence": 0.732012,
+        "ood_distance": 0.0,
+        "unknown": false
+      },
+      {
+        "step_id": "pg69-step-02",
+        "role": "matched_control",
+        "expected": "reject",
+        "raw_prediction": "reject",
+        "decision": "reject",
+        "confidence": 0.732012,
+        "ood_distance": 0.0,
+        "unknown": false
+      },
+      {
+        "step_id": "pg69-step-03",
+        "role": "candidate",
+        "expected": "confirm",
+        "raw_prediction": "confirm",
+        "decision": "abstain",
+        "confidence": 0.538783,
+        "ood_distance": 1767.766968,
+        "unknown": false
+      },
+      {
+        "step_id": "pg69-step-03",
+        "role": "matched_control",
+        "expected": "reject",
+        "raw_prediction": "reject",
+        "decision": "reject",
+        "confidence": 0.732012,
+        "ood_distance": 0.0,
+        "unknown": false
+      }
+    ],
+    "unknown_family_holdout": [
+      {
+        "step_id": "pg69-step-04",
+        "role": "candidate",
+        "expected": "abstain",
+        "raw_prediction": "reject",
+        "decision": "abstain",
+        "confidence": 0.519742,
+        "ood_distance": 2165.063477,
+        "unknown": true
+      },
+      {
+        "step_id": "pg69-step-05",
+        "role": "candidate",
+        "expected": "abstain",
+        "raw_prediction": "reject",
+        "decision": "abstain",
+        "confidence": 0.519272,
+        "ood_distance": 2165.063477,
+        "unknown": true
+      },
+      {
+        "step_id": "pg69-step-06",
+        "role": "candidate",
+        "expected": "abstain",
+        "raw_prediction": "reject",
+        "decision": "abstain",
+        "confidence": 0.519742,
+        "ood_distance": 2165.063477,
+        "unknown": true
+      },
+      {
+        "step_id": "pg69-step-07",
+        "role": "candidate",
+        "expected": "abstain",
+        "raw_prediction": "reject",
+        "decision": "abstain",
+        "confidence": 0.519272,
+        "ood_distance": 2165.063477,
+        "unknown": true
+      },
+      {
+        "step_id": "pg69-step-08",
+        "role": "candidate",
+        "expected": "abstain",
+        "raw_prediction": "reject",
+        "decision": "abstain",
+        "confidence": 0.519742,
+        "ood_distance": 2165.063477,
+        "unknown": true
+      },
+      {
+        "step_id": "pg69-step-09",
+        "role": "candidate",
+        "expected": "abstain",
+        "raw_prediction": "reject",
+        "decision": "abstain",
+        "confidence": 0.519272,
+        "ood_distance": 2165.063477,
+        "unknown": true
+      },
+      {
+        "step_id": "pg69-step-10",
+        "role": "candidate",
+        "expected": "abstain",
+        "raw_prediction": "reject",
+        "decision": "abstain",
+        "confidence": 0.519742,
+        "ood_distance": 2165.063477,
+        "unknown": true
+      },
+      {
+        "step_id": "pg69-step-11",
+        "role": "candidate",
+        "expected": "abstain",
+        "raw_prediction": "reject",
+        "decision": "abstain",
+        "confidence": 0.519272,
+        "ood_distance": 2165.063477,
+        "unknown": true
+      }
+    ]
+  },
+  "training": {
+    "checkpoint": "artifacts\\pg70-trace-abstention\\trace_decision_head.pt",
+    "epochs": 300,
+    "seed": 20700403,
+    "ood_distance_threshold": 12.0,
+    "confidence_threshold": 0.7,
+    "online_weight_update": false,
+    "long_term_memory_write": false
+  },
+  "capability_gate": {
+    "status": "blocked",
+    "checks": {
+      "dev_confirm_recall": false,
+      "dev_false_accept_zero": true,
+      "unknown_misname_zero": true,
+      "unknown_strict_abstain": true,
+      "raw_free": true
+    },
+    "claim_allowed": false
+  },
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "status": "candidate_checkpoint_evaluation_only",
+    "reason": "tiny single-run head; requires independent seeds, fresh Docker rerun and family-heldout replay"
+  },
+  "formal_claim": {
+    "allowed": false,
+    "reason": "PG-70 is a small post-training candidate, not a broad web vulnerability detector"
+  }
+}
