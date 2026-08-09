@@ -22,8 +22,18 @@ def _fake_request(_base: str, path: str, *, method: str = "GET", payload=None, t
         "identity_canonicalization",
         "password_reset_subject_binding",
         "two_factor_reset_binding",
+        "oauth_second_factor",
+        "activation_link_second_factor",
+        "csrf_disable_second_factor",
         "captcha_reuse",
+        "captcha_predictability",
+        "captcha_response_exposure",
+        "captcha_client_validation",
+        "captcha_delivery_abuse",
         "session_fixation_boundary",
+        "session_guessing",
+        "session_forgery",
+        "session_leakage",
         "query_object_scope",
         "vertical_role_scope",
         "query_identifier_entropy",
@@ -72,7 +82,7 @@ def test_live_lane_keeps_only_abstract_typed_projection(monkeypatch) -> None:
     monkeypatch.setenv("PG388_LOCAL_EVAL", "1")
     report = live.run(environ={"PG388_LOCAL_EVAL": "1"}, request=_fake_request)
     assert report["status"] == "passed_live_local_canary_only"
-    assert report["counts"] == {"fresh_resets": 18, "typed_observations": 90, "candidate_effects": 34, "negative_control_clean": 18, "unsafe_allow": 0}
+    assert report["counts"] == {"fresh_resets": 28, "typed_observations": 140, "candidate_effects": 54, "negative_control_clean": 28, "unsafe_allow": 0}
     assert all("evaluator_sidecar" not in row for row in report["rows"])
     assert all(row["safe_to_send"] is False for row in report["rows"])
     assert report["model_boundary"]["raw_response_stored"] is False

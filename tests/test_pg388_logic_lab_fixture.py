@@ -100,7 +100,7 @@ def test_local_canary_accepts_only_scenario_role_phase_enums() -> None:
 def test_local_canary_exposes_extended_logic_matrix_without_raw_values() -> None:
     document = manifest()
     canary = document["canary"]
-    assert len(canary["cases"]) == 18
+    assert len(canary["cases"]) == 28
     assert set(canary["concrete_effect_cases"]) >= {"install_reentry_gate", "two_factor_reset_binding", "query_object_scope"}
     _call("/api/reset", "POST")
     status, candidate = _call("/api/canary", "POST", {"case_ref": "install_reentry_gate", "role": "candidate", "phase": "candidate"})

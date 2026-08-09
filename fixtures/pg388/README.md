@@ -32,9 +32,10 @@ shows all 24 presentation cases while preserving `training_eligible=false`
 and all promotion flags false.
 
 The local canary endpoint `/api/canary` is a bounded evaluator demonstration
-for 18 abstract state machines covering installation, purchase boundaries,
+for 28 abstract state machines covering installation, purchase boundaries,
 including a transaction-concurrency/version-binding canary,
-identity/recovery, 2FA, CAPTCHA, sessions, authorization, identifier entropy,
+identity/recovery, 2FA (including OAuth/activation/CSRF order), CAPTCHA,
+sessions (including entropy/integrity/exposure), authorization, identifier entropy,
 execution order, and response projection. It accepts only `case_ref`, `role`,
 and `phase` enums and emits state buckets/deltas; it does not accept
 identifiers, prices, coupons, tokens, credentials, or arbitrary request values.
