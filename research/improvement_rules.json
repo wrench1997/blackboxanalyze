@@ -14255,9 +14255,9 @@
     },
     "token_model_candidate": {
       "runner": "scripts/run_pg388_logic_token_candidate.py",
-      "runner_sha256": "f0f77236bfb84362762cef66b8a00baaac6ac5bf771ba729501c22799ffa501c",
+      "runner_sha256": "7a48838f34ee730175243960b6d4a6ba781125c971551330bd657e4369d081df",
       "tests": "tests/test_pg388_logic_token_candidate.py",
-      "tests_sha256": "aec2215a0a6db6334a63d3648f87f46fbbbf380c8f7467f6a3c7f958c5f45c9c",
+      "tests_sha256": "052104fa6346ff779443b1662561aa016451eafa04cdcd141a5f2bfab0308aca",
       "cpu_smoke_report": "research/pg388_logic_token_cpu_smoke_v1.json",
       "cpu_smoke_report_sha256": "542c3ec0ea0b8828f8a460f8d3d2ec6e31f165ba30bedc343e6149de6175cc22",
       "heads": ["question", "ask_reason", "next_action", "repair_action", "logic_invariant_ref", "state_transition_ref", "precondition_ref", "counterfactual_ref", "probe_variant_ref", "oracle_ref", "safe_to_send"],
@@ -14286,6 +14286,28 @@
         "wire_created": false,
         "training_eligible": 0,
         "capability_training_allowed": false,
+        "promotion": {"training_allowed": false, "memory_promotion_allowed": false, "payload_catalog_promotion_allowed": false, "vulnerability_claim_allowed": false}
+      },
+      "pooling_diagnostics": {
+        "modes": ["boundary", "mean_boundary", "anchor_mean_boundary"],
+        "mean_boundary": {
+          "report": "research/pg388_logic_canary_token_cpu_smoke_28case_mean_boundary_v1.json",
+          "report_sha256": "c1819f50faf87ae6968227b8c0736c6f0712c9107455e7f800951527ae89eef0",
+          "worst_holdout_ask_recall": 0.0,
+          "worst_logic_invariant_accuracy": 0.042857,
+          "worst_state_transition_accuracy": 0.042857,
+          "negative_false_allow": 0,
+          "interpretation": "masked mean plus boundary did not recover invariant/state heads; diagnostic only"
+        },
+        "anchor_mean_boundary": {
+          "report": "research/pg388_logic_canary_token_cpu_smoke_28case_anchor_v1.json",
+          "report_sha256": "362385859ed32bcfeb22633d000a65160645418a07552a19e8c8a0c5487e5760",
+          "worst_holdout_ask_recall": 0.0,
+          "worst_logic_invariant_accuracy": 0.042857,
+          "worst_state_transition_accuracy": 0.078571,
+          "negative_false_allow": 0,
+          "interpretation": "explicit surface/invariant anchor features improve representation slightly but remain seed-unstable and far below a capability gate"
+        },
         "promotion": {"training_allowed": false, "memory_promotion_allowed": false, "payload_catalog_promotion_allowed": false, "vulnerability_claim_allowed": false}
       },
       "interpretation": "CPU wiring evidence over abstract logic rows only; not live target generalization or vulnerability capability",

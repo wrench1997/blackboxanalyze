@@ -103,16 +103,38 @@ def _gaps(train: Sequence[Mapping[str, Any]], holdout: Sequence[Mapping[str, Any
 
 
 class LogicDecisionModel(nn.Module):
-    def __init__(self, *, vocab_size: int, config: CausalMoEConfig, classes: Mapping[str, Mapping[str, int]]) -> None:
+    def __init__(self, *, vocab_size: int, config: CausalMoEConfig, classes: Mapping[str, Mapping[str, int]], pooling: str = "boundary") -> None:
         super().__init__()
+        if pooling not in {"boundary", "mean", "mean_boundary", "anchor_mean_boundary"}:
+            raise ValueError("pg388_pooling_invalid")
         self.backbone = CausalMoELanguageModel(vocab_size=vocab_size, config=config)
+        self.pooling = pooling
+        projection_width = config.d_model * 4 if pooling == "anchor_mean_boundary" else config.d_model * 2
+        self.pool_projection = nn.Linear(projection_width, config.d_model) if pooling in {"mean_boundary", "anchor_mean_boundary"} else None
         self.heads = nn.ModuleDict({key: nn.Linear(config.d_model, len(values)) for key, values in classes.items()})
 
     def forward(self, ids: torch.Tensor, mask: torch.Tensor) -> dict[str, torch.Tensor]:
         hidden, _ = self.backbone.forward_hidden(ids, valid_mask=mask)
         lengths = mask.long().sum(dim=1).clamp_min(1) - 1
         boundary = hidden[torch.arange(hidden.shape[0], device=hidden.device), lengths]
-        return {key: head(boundary) for key, head in self.heads.items()}
+        if self.pooling == "mean":
+            weights = mask.unsqueeze(-1).to(hidden.dtype)
+            features = (hidden * weights).sum(dim=1) / weights.sum(dim=1).clamp_min(1.0)
+        elif self.pooling == "mean_boundary":
+            weights = mask.unsqueeze(-1).to(hidden.dtype)
+            mean = (hidden * weights).sum(dim=1) / weights.sum(dim=1).clamp_min(1.0)
+            assert self.pool_projection is not None
+            features = F.gelu(self.pool_projection(torch.cat([mean, boundary], dim=-1)))
+        elif self.pooling == "anchor_mean_boundary":
+            weights = mask.unsqueeze(-1).to(hidden.dtype)
+            mean = (hidden * weights).sum(dim=1) / weights.sum(dim=1).clamp_min(1.0)
+            first = hidden[:, 0]
+            second = hidden[:, 1] if hidden.shape[1] > 1 else first
+            assert self.pool_projection is not None
+            features = F.gelu(self.pool_projection(torch.cat([first, second, mean, boundary], dim=-1)))
+        else:
+            features = boundary
+        return {key: head(features) for key, head in self.heads.items()}
 
 
 def _pad(rows: Sequence[Mapping[str, Any]], vocab: Mapping[str, int], device: torch.device, max_length: int) -> tuple[torch.Tensor, torch.Tensor]:
@@ -152,11 +174,11 @@ def _metrics(model: LogicDecisionModel, rows: Sequence[Mapping[str, Any]], vocab
     return {"rows": len(rows), "head_accuracy": {key: round(correct[key] / max(len(rows), 1), 6) for key in HEADS}, "ask_recall": round(correct["ask_correct"] / max(correct["ask_total"], 1), 6), "negative_false_allow": int(correct["negative_false_allow"]), "negative_total": int(correct["negative_total"])}
 
 
-def _train_seed(train: Sequence[Mapping[str, Any]], holdout: Sequence[Mapping[str, Any]], vocab: Mapping[str, int], classes: Mapping[str, Mapping[str, int]], *, seed: int, config: CausalMoEConfig, epochs: int, microbatch: int) -> dict[str, Any]:
+def _train_seed(train: Sequence[Mapping[str, Any]], holdout: Sequence[Mapping[str, Any]], vocab: Mapping[str, int], classes: Mapping[str, Mapping[str, int]], *, seed: int, config: CausalMoEConfig, epochs: int, microbatch: int, pooling: str) -> dict[str, Any]:
     torch.manual_seed(seed)
     random.seed(seed)
     device = torch.device("cpu")
-    model = LogicDecisionModel(vocab_size=len(vocab), config=config, classes=classes).to(device)
+    model = LogicDecisionModel(vocab_size=len(vocab), config=config, classes=classes, pooling=pooling).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=2e-4, weight_decay=0.01)
     order = list(range(len(train)))
     for epoch in range(max(1, epochs)):
@@ -175,7 +197,7 @@ def _train_seed(train: Sequence[Mapping[str, Any]], holdout: Sequence[Mapping[st
     return {"seed": seed, "train": _metrics(model, train, vocab, classes, device, config.max_length), "holdout": _metrics(model, holdout, vocab, classes, device, config.max_length)}
 
 
-def run_candidate(*, dataset_path: Path = DEFAULT_DATASET, cpu_smoke: bool = False, epochs: int = 1, row_limit: int | None = None, d_model: int = 64, n_layers: int = 2, experts: int = 2, expert_hidden: int = 128, max_length: int = 96, microbatch: int = 16, seeds: Sequence[int] = (38801, 38802, 38803)) -> dict[str, Any]:
+def run_candidate(*, dataset_path: Path = DEFAULT_DATASET, cpu_smoke: bool = False, epochs: int = 1, row_limit: int | None = None, d_model: int = 64, n_layers: int = 2, experts: int = 2, expert_hidden: int = 128, max_length: int = 96, microbatch: int = 16, pooling: str = "boundary", seeds: Sequence[int] = (38801, 38802, 38803)) -> dict[str, Any]:
     dataset = _load(dataset_path)
     train, holdout = _safe_rows(dataset)
     if row_limit is not None:
@@ -184,14 +206,14 @@ def run_candidate(*, dataset_path: Path = DEFAULT_DATASET, cpu_smoke: bool = Fal
     vocab = _vocab(train)
     classes = _classes(train)
     gaps = _gaps(train, holdout, vocab, classes)
-    report: dict[str, Any] = {"schema_version": SCHEMA_VERSION, "status": "cpu_smoke_candidate_only" if cpu_smoke else "plan_only", "dataset": str(dataset_path), "dataset_sha256": hashlib.sha256(dataset_path.read_bytes()).hexdigest(), "train_rows": len(train), "holdout_rows": len(holdout), "train_only_vocabulary": {"size": len(vocab), "scope": "train_context_only"}, "gaps": gaps, "heads": list(HEADS), "model": {"backbone": "decoder_only_causal_moe", "d_model": d_model, "n_layers": n_layers, "experts": experts, "expert_hidden": expert_hidden, "max_length": max_length}, "execution": {"optimizer_started": False, "device": "cpu", "gpu_touched": False, "docker_started": False, "network_contacted": False, "wire_created": False}, "training_eligible": 0, "capability_training_allowed": False, "logic_candidate_only": True, "promotion": dict(PROMOTION)}
+    report: dict[str, Any] = {"schema_version": SCHEMA_VERSION, "status": "cpu_smoke_candidate_only" if cpu_smoke else "plan_only", "dataset": str(dataset_path), "dataset_sha256": hashlib.sha256(dataset_path.read_bytes()).hexdigest(), "train_rows": len(train), "holdout_rows": len(holdout), "train_only_vocabulary": {"size": len(vocab), "scope": "train_context_only"}, "gaps": gaps, "heads": list(HEADS), "model": {"backbone": "decoder_only_causal_moe", "d_model": d_model, "n_layers": n_layers, "experts": experts, "expert_hidden": expert_hidden, "max_length": max_length, "pooling": pooling}, "execution": {"optimizer_started": False, "device": "cpu", "gpu_touched": False, "docker_started": False, "network_contacted": False, "wire_created": False}, "training_eligible": 0, "capability_training_allowed": False, "logic_candidate_only": True, "promotion": dict(PROMOTION)}
     if gaps["blocked"]:
         report["status"] = "blocked_train_only_vocab_gap"
         report["blocking_before_optimizer"] = True
     elif cpu_smoke:
         config = CausalMoEConfig(d_model=d_model, n_heads=max(1, min(4, d_model // 16)), n_layers=n_layers, experts=experts, expert_hidden=expert_hidden, top_k=min(2, experts), dropout=0.05, max_length=max_length)
         report["execution"]["optimizer_started"] = True
-        report["seeds"] = [_train_seed(train, holdout, vocab, classes, seed=int(seed), config=config, epochs=epochs, microbatch=microbatch) for seed in seeds]
+        report["seeds"] = [_train_seed(train, holdout, vocab, classes, seed=int(seed), config=config, epochs=epochs, microbatch=microbatch, pooling=pooling) for seed in seeds]
     else:
         report["planned_seeds"] = list(seeds)
     report["report_sha256"] = _sha({key: value for key, value in report.items() if key != "report_sha256"})
@@ -210,9 +232,10 @@ def main() -> None:
     parser.add_argument("--expert-hidden", type=int, default=128)
     parser.add_argument("--max-length", type=int, default=96)
     parser.add_argument("--microbatch", type=int, default=16)
+    parser.add_argument("--pooling", choices=("boundary", "mean", "mean_boundary", "anchor_mean_boundary"), default="boundary")
     parser.add_argument("--output", default="research/pg388_logic_token_candidate_v1.json")
     args = parser.parse_args()
-    report = run_candidate(dataset_path=Path(args.dataset), cpu_smoke=args.cpu_smoke, epochs=args.epochs, row_limit=args.row_limit, d_model=args.d_model, n_layers=args.layers, experts=args.experts, expert_hidden=args.expert_hidden, max_length=args.max_length, microbatch=args.microbatch)
+    report = run_candidate(dataset_path=Path(args.dataset), cpu_smoke=args.cpu_smoke, epochs=args.epochs, row_limit=args.row_limit, d_model=args.d_model, n_layers=args.layers, experts=args.experts, expert_hidden=args.expert_hidden, max_length=args.max_length, microbatch=args.microbatch, pooling=args.pooling)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

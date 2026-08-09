@@ -17,6 +17,8 @@ docker compose -f docker-compose.pg388.yml -p pg388demo up -d
 
 28-case token CPU smoke 也已登记为诊断资产：420/420 train/holdout、train-only vocab=75、unknown gap=0；但 worst ASK recall=`0.0`、logic invariant=`0.042857`、state transition=`0.064286`，因此不能宣传为模型已经学会逻辑漏洞或通用 payload 生成。
 
+另有 `mean_boundary` / `anchor_mean_boundary` pooling 对照，结果仍是 seed-unstable、逻辑不变量头接近随机；它们用于定位模型结构问题，不是能力或训练晋级证据。
+
 源码克隆可以立即用于前端演示；接收方应以 `git ls-remote --heads origin main` 返回的提交和资产清单 SHA 为准。截至本说明更新时，仓库还没有名为 `v0.1-demo` 的 GitHub Release；Release 下载命令只在该 Release 实际创建后使用。
 
 ## 大文件分层

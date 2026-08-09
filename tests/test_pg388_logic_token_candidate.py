@@ -23,3 +23,42 @@ def test_logic_token_candidate_cpu_smoke_keeps_wire_closed() -> None:
     assert report["execution"]["wire_created"] is False
     assert report["promotion"]["vulnerability_claim_allowed"] is False
     assert report["seeds"][0]["holdout"]["negative_false_allow"] == 0
+
+
+def test_logic_token_candidate_supports_mean_boundary_pooling() -> None:
+    report = run_candidate(
+        dataset_path=Path("research/pg388_logic_canary_trajectory_dataset_v1.json"),
+        cpu_smoke=True,
+        epochs=1,
+        row_limit=16,
+        d_model=32,
+        n_layers=1,
+        experts=2,
+        expert_hidden=64,
+        max_length=64,
+        microbatch=8,
+        pooling="mean_boundary",
+        seeds=(38801,),
+    )
+    assert report["model"]["pooling"] == "mean_boundary"
+    assert report["execution"]["optimizer_started"] is True
+    assert report["promotion"]["vulnerability_claim_allowed"] is False
+
+
+def test_logic_token_candidate_supports_anchor_pooling() -> None:
+    report = run_candidate(
+        dataset_path=Path("research/pg388_logic_canary_trajectory_dataset_v1.json"),
+        cpu_smoke=True,
+        epochs=1,
+        row_limit=8,
+        d_model=32,
+        n_layers=1,
+        experts=2,
+        expert_hidden=64,
+        max_length=64,
+        microbatch=4,
+        pooling="anchor_mean_boundary",
+        seeds=(38801,),
+    )
+    assert report["model"]["pooling"] == "anchor_mean_boundary"
+    assert report["execution"]["optimizer_started"] is True
