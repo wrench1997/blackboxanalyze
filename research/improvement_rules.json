@@ -14260,22 +14260,24 @@
     },
     "trajectory_dataset": {
       "builder": "scripts/build_pg388_logic_canary_trajectory_dataset.py",
-      "builder_sha256": "12f5ef77e5e1592a0b26e38268a1249c7d45bd9e9e9ae6d49622c0af5935e803",
+      "builder_sha256": "880bb4814a0513476abf8b6d89556862a34982c9193c0cedb5d7fe6e2b7d596f",
       "dataset": "research/pg388_logic_canary_trajectory_dataset_v1.json",
-      "dataset_sha256": "50b0e6933da17046de1302f9aa8da65b0b752a809dcef3703443c38156ad5192",
+      "dataset_sha256": "b600b849466d029319765953c43eafa0e15ee587bfa62f52a28aaf3d03198bbf",
       "audit": "scripts/audit_pg388_logic_canary_trajectory_dataset.py",
-      "audit_sha256": "744c6aae08d440e5228cd19008b992f1813fe67f3f48f4a72c98f2e603758eee",
+      "audit_sha256": "ba3fd64e338e5bc652ea165b831b914430819f401983ccba829c74aca51754a5",
       "audit_report": "research/pg388_logic_canary_trajectory_audit_v1.json",
-      "audit_report_sha256": "f06b49d26400b5af478d592cc03945c71e37f622c5c7ee55ecd1ceafeff7e4af",
+      "audit_report_sha256": "04cf1b52dfd9a700d5a414340214ebfa7236c8e392d45164c793e65a2dd9bffd",
       "counts": {"records": 90, "train": 45, "implementation_holdout": 45, "cases": 3, "phases": 5, "roles": 4},
       "context_target_boundary": "context is state/invariant/phase/role only; typed effect is target/sidecar only",
+      "cross_split_context_overlap": 0,
+      "cross_split_context_target_overlap": 0,
       "training_eligible": 0,
       "promotion": {"training_allowed": false, "memory_promotion_allowed": false, "payload_catalog_promotion_allowed": false, "vulnerability_claim_allowed": false},
       "cpu_smoke": {
         "runner": "scripts/run_pg388_logic_token_candidate.py",
         "runner_sha256": "316e1e6355f1ccf892a141aef599687b3f79dc737a735906c9406a6039a594e5",
         "report": "research/pg388_logic_canary_token_cpu_smoke_v1.json",
-        "report_sha256": "c18790df76cfb377c3b255803ad666658124f6d6fd819803cd381ea76329719a",
+        "report_sha256": "47a591235e24e15f6ab3dbe8b4d2d7d60bb7bbcfa14990fd3dfe5d539602e634",
         "rows_train": 45,
         "rows_holdout": 45,
         "device": "cpu",
@@ -14284,7 +14286,11 @@
         "gpu_touched": false,
         "docker_started": false,
         "network_contacted": false,
-        "interpretation": "wiring candidate only; not a live vulnerability or payload capability"
+        "interpretation": "wiring candidate only; not a live vulnerability or payload capability",
+        "contrast_report": "research/pg388_logic_canary_token_cpu_smoke_e8_v1.json",
+        "contrast_report_sha256": "90ef40560f5342842dc379c2f6b422a6e549d270d78aa879b18cf01ed16cd87d",
+        "contrast_epochs": 8,
+        "contrast_interpretation": "diagnostic only; improved fit on tiny repeated canary trajectories is not generalized implementation capability"
       }
     },
     "tests": {

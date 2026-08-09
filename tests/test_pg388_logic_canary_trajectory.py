@@ -20,6 +20,8 @@ def test_canary_trajectory_audit_passes_and_keeps_promotion_closed() -> None:
     assert report["status"] == "passed_candidate_trajectory_audit"
     assert report["invalid_rows"] == 0
     assert report["context_target_leaks"] == 0
+    assert report["cross_split_context_overlap"] == 0
+    assert report["cross_split_context_target_overlap"] == 0
     assert report["promotion"]["training_allowed"] is False
 
 

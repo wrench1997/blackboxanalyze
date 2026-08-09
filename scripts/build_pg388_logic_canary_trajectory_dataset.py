@@ -60,6 +60,7 @@ def build_dataset() -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     for implementation_index, implementation in enumerate(IMPLEMENTATIONS):
         split = "train" if implementation_index == 0 else "implementation_holdout"
+        history_tokens = ["history=precondition", "history=observe"] if implementation_index == 0 else ["history=observe", "history=precondition"]
         for case_ref, case in CASES.items():
             for seed in SEEDS:
                 for role, phase in (("candidate", "baseline"), ("candidate", "candidate"), ("reference", "reference"), ("negative", "negative"), ("replay", "replay")):
@@ -78,7 +79,7 @@ def build_dataset() -> dict[str, Any]:
                             f"phase={phase}",
                             f"role={role}",
                             f"state_before={_state_before(case_ref, phase)}",
-                            "history=bounded_local_sequence",
+                            *history_tokens,
                             "fresh_reset=required",
                             "oracle_mode=typed_shape_only",
                             "safe_to_send=false",
