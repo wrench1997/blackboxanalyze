@@ -15,6 +15,8 @@ docker compose -f docker-compose.pg388.yml -p pg388demo up -d
 打开 `http://localhost:3000/pg388`。展示所需的抽象报告和数据集列在
 `research/pg388_demo_asset_manifest_v1.json`，不会包含原始 payload、wire、响应正文、凭据或外部回调。
 
+当前已验证的 GitHub `main` 提交是 `ebaa94dbad4da1f65864712653f837c9dc04d0d5`；截至本说明更新时，仓库还没有名为 `v0.1-demo` 的 GitHub Release。源码克隆可以立即用于前端演示，Release 下载命令只在该 Release 实际创建后使用。
+
 ## 大文件分层
 
 | 层 | 放什么 | 接收方如何拿到 |
@@ -33,11 +35,19 @@ docker compose -f docker-compose.pg388.yml -p pg388demo up -d
 ```bash
 git clone https://github.com/wrench1997/blackboxanalyze.git
 cd blackboxanalyze
-gh release download v0.1-demo -R wrench1997/blackboxanalyze -D assets
 powershell -ExecutionPolicy Bypass -File scripts/verify_demo_assets.ps1 \
   -ManifestPath research/pg388_demo_asset_manifest_v1.json \
-  -Root .
+  -Root . \
+  -AllowMissingOptional
 ```
+
+这一步会校验 Git 中的源码/小型报告，并明确列出尚未下载的可选 checkpoint；它不会把缺失的权重伪装成已验证。若之后发布了 `v0.1-demo`，先运行：
+
+```bash
+gh release download v0.1-demo -R wrench1997/blackboxanalyze -D .
+```
+
+然后去掉 `-AllowMissingOptional` 重新校验，才可把 checkpoint 当作演示输入。
 
 没有 GitHub CLI 时，也可以从 Release 页面逐个下载，然后运行同一个校验脚本。校验失败时不要训练或启动演示。
 

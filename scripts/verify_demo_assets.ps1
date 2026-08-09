@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory = $true)]
     [string]$ManifestPath,
-    [string]$Root = (Get-Location).Path
+    [string]$Root = (Get-Location).Path,
+    [switch]$AllowMissingOptional
 )
 
 $ErrorActionPreference = 'Stop'
@@ -19,6 +20,7 @@ if ($null -eq $manifest.assets -or $manifest.assets.Count -eq 0) {
 }
 
 $failures = @()
+$missingOptional = @()
 foreach ($asset in $manifest.assets) {
     if ([string]::IsNullOrWhiteSpace($asset.path) -or
         [string]::IsNullOrWhiteSpace($asset.sha256) -or
@@ -31,7 +33,13 @@ foreach ($asset in $manifest.assets) {
     $resolved = $null
     try { $resolved = (Resolve-Path -LiteralPath $candidate).Path } catch { }
     if ($null -eq $resolved) {
-        $failures += "missing: $($asset.path)"
+        $optional = ([string]$asset.distribution -eq 'release_or_a800_cache') -and
+            (-not [bool]$asset.required_for_frontend_demo)
+        if ($AllowMissingOptional -and $optional) {
+            $missingOptional += [string]$asset.path
+        } else {
+            $failures += "missing: $($asset.path)"
+        }
         continue
     }
     $rootPrefix = $rootPath.TrimEnd('\') + '\'
@@ -57,8 +65,9 @@ if ($failures.Count -gt 0) {
 }
 
 [pscustomobject]@{
-    status = 'verified'
+    status = if ($missingOptional.Count -gt 0) { 'verified_source_with_optional_missing' } else { 'verified' }
     manifest = $manifestFullPath
     asset_count = $manifest.assets.Count
+    missing_optional = @($missingOptional)
     root = $rootPath
 } | ConvertTo-Json -Compress

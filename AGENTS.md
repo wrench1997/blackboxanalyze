@@ -1397,3 +1397,9 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 新增 `research/pg388_demo_asset_manifest_v1.json`，登记 PG-388 抽象数据、审计、可选候选 checkpoint 的路径/字节数/SHA-256；新增 `scripts/verify_demo_assets.ps1`，接收方下载后必须先做路径、大小和哈希校验。
 - 新增 `docs/GITHUB_DEMO_RELEASE.md`：GitHub main 放源代码与小型 manifest；Release 放明天演示所需的少量资产；A800 只作训练/推理缓存，canonical copy 必须留在本地归档或受控对象存储。大权重不因位于 A800 就自动获得训练、记忆或晋级资格。
 - 本轮未上传原始 payload、wire、响应正文、凭据或外部地址；GitHub 推送需在网络可用时显式执行 `git push origin main`，Release 资产另行发布并再次校验哈希。
+
+### 2026-08-10：GitHub main 同步与可选大文件校验修正
+
+- 用户已明确授权推送；`origin/main` 当前与本地提交 `ebaa94dbad4da1f65864712653f837c9dc04d0d5` 一致，工作区干净。该事实覆盖上方“等待授权/未执行 push”的历史预检记录。
+- GitHub API 当前没有 `v0.1-demo` Release；不能在接收流程中假定该 Release 已存在。源码克隆可直接启动 `/pg388`，Release 下载命令仅在实际创建后使用。
+- `scripts/verify_demo_assets.ps1` 新增 `-AllowMissingOptional`：源码克隆时校验 Git 内的小型资产，并把 `distribution=release_or_a800_cache` 且 `required_for_frontend_demo=false` 的缺失 checkpoint 明确列入 `missing_optional`；不允许把缺失权重当作已验证。所有资产齐备后必须去掉该开关再校验。
