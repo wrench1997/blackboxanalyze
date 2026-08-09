@@ -8,8 +8,8 @@ from scripts.build_pg388_logic_canary_trajectory_dataset import build_dataset
 
 def test_canary_trajectory_builder_has_disjoint_matrix_and_abstract_targets() -> None:
     artifact = build_dataset()
-    assert artifact["counts"] == {"records": 510, "train": 255, "implementation_holdout": 255, "cases": 17, "implementations": 2, "seeds": 3, "phases": 5, "roles": 4}
-    assert len(artifact["rows"]) == 510
+    assert artifact["counts"] == {"records": 540, "train": 270, "implementation_holdout": 270, "cases": 18, "implementations": 2, "seeds": 3, "phases": 5, "roles": 4}
+    assert len(artifact["rows"]) == 540
     assert all(row["training_eligible"] is False for row in artifact["rows"])
     assert all("vulnerable_effect" not in " ".join(row["context_tokens"]) for row in artifact["rows"])
     assert all("effect_shape=" in " ".join(row["target_tokens"]) for row in artifact["rows"])

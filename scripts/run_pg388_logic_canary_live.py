@@ -26,6 +26,7 @@ CASES = (
     "subject_resource_scope",
     "install_reentry_gate",
     "purchase_price_binding",
+    "purchase_concurrency_lock",
     "purchase_status_transition",
     "purchase_quantity_floor",
     "identity_canonicalization",

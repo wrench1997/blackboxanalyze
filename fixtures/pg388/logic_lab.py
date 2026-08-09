@@ -43,6 +43,7 @@ _CANARY_CASES = {
     "subject_resource_scope": "horizontal_authorization",
     "install_reentry_gate": "installation_gate",
     "purchase_price_binding": "transaction_price",
+    "purchase_concurrency_lock": "transaction_concurrency",
     "purchase_status_transition": "transaction_status",
     "purchase_quantity_floor": "transaction_quantity",
     "identity_canonicalization": "identity_canonicalization",
@@ -61,6 +62,7 @@ _CANARY_CASES = {
 _CANARY_RISK = {
     "install_reentry_gate": ("setup_reentered", "unexpected_reconfigure"),
     "purchase_price_binding": ("client_total_accepted", "total_mismatch"),
+    "purchase_concurrency_lock": ("duplicate_commit", "order_version_reused"),
     "purchase_status_transition": ("status_advanced", "payment_order_violation"),
     "purchase_quantity_floor": ("negative_quantity_accepted", "quantity_delta_nonzero"),
     "identity_canonicalization": ("duplicate_identity", "normalization_bypass"),

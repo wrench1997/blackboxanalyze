@@ -24,6 +24,7 @@ CASES = {
     "subject_resource_scope": {"surface": "horizontal_authorization", "invariant": "subject_matches_resource", "repair": "scope"},
     "install_reentry_gate": {"surface": "installation_gate", "invariant": "install_once_until_reset", "repair": "state"},
     "purchase_price_binding": {"surface": "transaction_price", "invariant": "price_bound_to_server_quote", "repair": "authority"},
+    "purchase_concurrency_lock": {"surface": "transaction_concurrency", "invariant": "single_commit_per_order", "repair": "replay"},
     "purchase_status_transition": {"surface": "transaction_status", "invariant": "status_transition_is_server_owned", "repair": "order"},
     "purchase_quantity_floor": {"surface": "transaction_quantity", "invariant": "quantity_is_positive", "repair": "boundary"},
     "identity_canonicalization": {"surface": "identity_canonicalization", "invariant": "canonical_identity_is_unique", "repair": "normalization"},
@@ -40,6 +41,7 @@ CASES = {
 RISK_OUTCOMES = {
     "install_reentry_gate": ("setup_reentered", "unexpected_reconfigure"),
     "purchase_price_binding": ("client_total_accepted", "total_mismatch"),
+    "purchase_concurrency_lock": ("duplicate_commit", "order_version_reused"),
     "purchase_status_transition": ("status_advanced", "payment_order_violation"),
     "purchase_quantity_floor": ("negative_quantity_accepted", "quantity_delta_nonzero"),
     "identity_canonicalization": ("duplicate_identity", "normalization_bypass"),
