@@ -407,6 +407,27 @@ const supplementalCases: LogicCase[] = [
 ];
 const allCases: LogicCase[] = [...cases, ...supplementalCases];
 
+const concreteCanaryCases = new Set([
+  "nonce_replay",
+  "coupon_reuse_boundary",
+  "subject_resource_scope",
+  "install_reentry_gate",
+  "purchase_price_binding",
+  "purchase_concurrency_lock",
+  "purchase_status_transition",
+  "purchase_quantity_floor",
+  "identity_canonicalization",
+  "password_reset_subject_binding",
+  "two_factor_reset_binding",
+  "captcha_reuse",
+  "session_fixation_boundary",
+  "query_object_scope",
+  "vertical_role_scope",
+  "query_identifier_entropy",
+  "execution_order",
+  "sensitive_projection",
+]);
+
 const flowLabels = [
   ["01", "abstract context", "状态、不变量和角色"],
   ["02", "ASK / Rule-IR", "缺字段先提问"],
@@ -508,7 +529,6 @@ export default function Pg388LogicLab() {
       const replay = await postAbstract("/api/episode", { case_ref: selected.backendCaseRef, role: "replay", feedback_state: "typed_effect" });
       if (runRef.current !== run) return;
       setBackendTrace((previous) => previous ? { ...previous, status: "complete", replay: replay.fresh_reset_required ? "fresh_required" : "review" } : previous);
-      const concreteCanaryCases = new Set(["nonce_replay", "coupon_reuse_boundary", "subject_resource_scope"]);
       if (concreteCanaryCases.has(selected.backendCaseRef)) {
         await postAbstract("/api/canary", { case_ref: selected.backendCaseRef, role: "candidate", phase: "baseline" });
         await postAbstract("/api/canary", { case_ref: selected.backendCaseRef, role: "candidate", phase: "candidate" });
