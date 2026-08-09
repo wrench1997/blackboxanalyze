@@ -19,6 +19,8 @@ docker compose -f docker-compose.pg388.yml -p pg388demo up -d
 
 另有 `mean_boundary` / `anchor_mean_boundary` pooling 对照，结果仍是 seed-unstable、逻辑不变量头接近随机；它们用于定位模型结构问题，不是能力或训练晋级证据。
 
+结构化 11-slot 组合 decoder 目前只登记了 plan（`research/pg388_logic_composed_candidate_plan_v1.json`），因 typed/fresh/operator-review 硬门未齐而保持 optimizer 未启动；其他 AI 不应把该 plan 当 checkpoint 或能力结果。
+
 源码克隆可以立即用于前端演示；接收方应以 `git ls-remote --heads origin main` 返回的提交和资产清单 SHA 为准。截至本说明更新时，仓库还没有名为 `v0.1-demo` 的 GitHub Release；Release 下载命令只在该 Release 实际创建后使用。
 
 ## 大文件分层

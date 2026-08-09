@@ -1,0 +1,67 @@
+{
+  "schema_version": "pg388-logic-composed-candidate-plan-v1",
+  "status": "blocked_capability_contract",
+  "dataset": "D:\\workspace\\blackboxanalyze\\research\\pg388_logic_canary_trajectory_dataset_v1.json",
+  "dataset_sha256": "83ee6bbc03df77c753293fac1d2076bddb78987302a359a8a7cb17161d7a6654",
+  "counts": {
+    "records": 840,
+    "train": 420,
+    "implementation_holdout": 420,
+    "slots": 11
+  },
+  "slot_order": [
+    "question",
+    "ask_reason",
+    "logic_invariant_ref",
+    "state_transition_ref",
+    "precondition_ref",
+    "counterfactual_ref",
+    "probe_variant_ref",
+    "next_action",
+    "repair_action",
+    "oracle_ref",
+    "safe_to_send"
+  ],
+  "train_only_vocabulary": {
+    "size": 73,
+    "unknown_holdout_context_count": 0
+  },
+  "unknown_holdout_slot_values": {},
+  "required_context_window": 10,
+  "model_design": {
+    "backbone": "decoder_only_causal_moe",
+    "d_model": 256,
+    "n_layers": 4,
+    "experts": 4,
+    "expert_hidden": 512,
+    "slot_decoder": "autoregressive_causal_previous_slot_conditioned",
+    "slot_decoder_layers": 2,
+    "auxiliary_heads": [
+      "ask",
+      "repair",
+      "negative_control"
+    ],
+    "target_mask": "target_only_next_token_plus_teacher_forced_slot_composition"
+  },
+  "gate": {
+    "failures": [
+      "fresh_role_reset_not_attested",
+      "operator_review_not_attested",
+      "typed_evaluator_not_attested"
+    ],
+    "optimizer_started": false,
+    "gpu_touched": false,
+    "docker_started": false,
+    "network_contacted": false,
+    "wire_created": false
+  },
+  "training_eligible": 0,
+  "capability_training_allowed": false,
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  },
+  "report_sha256": "66c9f1485388b89c8b12a9f1db79463d9996ff5b59fff8d34f5fe62ccfaa56fb"
+}

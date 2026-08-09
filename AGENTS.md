@@ -1487,3 +1487,12 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - `scripts/run_pg388_logic_token_candidate.py` 增加可选 `boundary`、`mean`、`mean_boundary`、`anchor_mean_boundary` pooling；测试 SHA=`052104fa6346ff779443b1662561aa016451eafa04cdcd141a5f2bfab0308aca`，runner SHA=`7a48838f34ee730175243960b6d4a6ba781125c971551330bd657e4369d081df`。
 - 同一 840 行、420/420 split、2 epochs、CPU-only 对照：`mean_boundary` 报告=`research/pg388_logic_canary_token_cpu_smoke_28case_mean_boundary_v1.json` SHA=`c1819f50faf87ae6968227b8c0736c6f0712c9107455e7f800951527ae89eef0`；`anchor_mean_boundary` 报告=`research/pg388_logic_canary_token_cpu_smoke_28case_anchor_v1.json` SHA=`362385859ed32bcfeb22633d000a65160645418a07552a19e8c8a0c5487e5760`。
 - anchor pooling 将 state-transition 最好 seed 提到 `0.085714`，但 worst ASK recall=`0.0`、logic invariant 最低约 `0.042857`，仍远低于能力门；这说明仅换 pooling 不能解决逻辑不变量组合学习，结果仅作模型结构诊断，训练、payload、memory、vulnerability promotion 全关闭。当前规则 SHA=`23f5192b2d2ae2525bdae06ed9484cf2f1d08a1d32fb0ca157740bcd8ce007fa`，asset manifest SHA=`ecae950c5b642f86fb75869dc6212ee1f5a6bfb82f16aa80df88caa4b7670a0a`。
+
+### 2026-08-10：PG-388 pooling smoke 时间窗隔离修订
+
+- 上述 pooling smoke 发生在 `05:50 Asia/Shanghai`，不满足本地 `08:00–18:00` 训练窗口；新增 `research/pg388_logic_pooling_time_window_quarantine_v1.json`（SHA=`316709b6aa7a710274d2ea7b4883b6b2eefd2a78753b9300715428c913d8fc72`），将两个报告标记为历史诊断、不得训练/晋级。后续只做代码/合同测试，合规时间再决定是否重跑。修订后规则 SHA=`fb9a8dc2781df7c7709188c361d4d860c962b0a89d21d172297b196f7907a02b`，asset manifest SHA=`bef0f86cf38c8a0b4849f5f14999837a48a5c00397174e3840b98139475d633f`。
+
+### 2026-08-10：PG-388 结构化逻辑槽组合计划
+
+- 新增纯标准库计划器 `scripts/plan_pg388_logic_composed_candidate.py`（SHA=`4a8800bbdabafa2287330d551f9aefb4341f4b02800018309b0c7ca87a38a936`）及 tests=`f1342e43db363d832e1a5a06a516124baf973b5d89f506928485e7fd9b67f400`。它定义 11 个有序 Rule-IR 槽和 `autoregressive_causal_previous_slot_conditioned` decoder 设计，目标是让 invariant→transition→action→repair 组合，而不是独立标签记忆。
+- 计划报告=`research/pg388_logic_composed_candidate_plan_v1.json` SHA=`2097845dcd68c696863c7f091a17df9a712401c0aa4e87f0aa7b4d26bc5b0595`，840 行（420/420），状态=`blocked_capability_contract`；typed evaluator、fresh role reset、operator review 均未具备，optimizer/GPU/Docker/network/wire 全部 false，training/promotion 全关闭。当前时间窗外只完成 plan/contract，不运行训练。当前规则 SHA=`d8ef65e4bd79dfa504ff4bc552a8c3cb8cc3178423a680248de13cc782dec08b`，asset manifest SHA=`4518393b26b08fd43bbc41d2556298e6652eb7e417c23e46252d46d961cff1c7`。
