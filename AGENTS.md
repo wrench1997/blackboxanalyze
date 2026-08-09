@@ -1501,3 +1501,9 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 
 - `/pg388` 新增 `MODEL READINESS / STRUCTURED RULE-IR` 面板，明确显示 11-slot previous-slot decoder 设计、840 条 `train/implementation_holdout=420/420` 抽象轨迹、当前 wiring 诊断和 optimizer 前硬门；component SHA=`4dd6185a9f770225111ae5b7da0f134a66b40149e16bf3996ec48323b73e3964`，本地 frontend image=`sha256:c92593c232745a2de1ff733650c0331b9966f81008c9487e4857b6ac7e3083e2`。
 - 页面与 `/pg388-api/api/manifest` 已复核 HTTP 200；manifest 资产数=`27`。面板明确 `optimizer=0`、typed evaluator/fresh role reset/operator review 未认证；训练、payload、memory、promotion 和 vulnerability claim 继续全部关闭。本次提交前校验：rules SHA=`1b5e379b14a3e157928d8f8dff6d1dbba65b92d8731e61eb2c31bb1a9d3a7d3f`，asset manifest SHA=`06de4d755de62f685a606c7f69aa90c4cd618f1b9f051421b849228dd2e616a4`。
+
+### 2026-08-10：PG-388 结构化 Rule-IR 组合数据绑定
+
+- 新增 `scripts/build_pg388_logic_rule_ir_composition_dataset.py` 与只读审计 `scripts/audit_pg388_logic_rule_ir_composition_dataset.py`；从 840 条 trajectory 生成 11 个有序 slot 的模型视图，`effect_shape/state_delta/invariant_result` 保持 evaluator-side summary，不进入 `target_tokens`。数据=`research/pg388_logic_rule_ir_composition_dataset_v1.json`，840 行（train/holdout=`420/420`），audit=`passed_candidate_rule_ir_audit`，unique row hashes=`840`，context firewall 通过。
+- 本地 live canary 只以 aggregate coverage 绑定（fresh reset=`28`、typed observation=`140`、negative clean=`28`、unsafe allow=`0`），没有 row-bound implementation/seed/evidence 绑定；因此 `training_eligible=0`、optimizer/GPU/Docker/network/wire 全部关闭，不能把该数据称为漏洞能力或 payload 数据。
+- 本次资产校验：builder SHA=`fad11aa4e3b9d95bc66f5498c758d9f73492df90c02f204a3b42046e524a9f1e`，dataset SHA=`ae9461fa84062ab2d9a96dbd3450ff83932e4f2f79d7baa7ae51703faeccef26`，audit report SHA=`45463e834e71394831fd60c37cc52edebd5057abb069408a2e14163e20d0867f`；规则 SHA=`783e8f012ce50f314691a7d16790a5ea5a62c31ef2e1e58d9d10df7769e9836b`，asset manifest SHA=`d22c1a1d7fbbd1e6659e5a38da4703c27a7fc961431ff724a1b2f768f529dc2b`。
