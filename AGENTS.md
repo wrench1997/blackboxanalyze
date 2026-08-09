@@ -1381,6 +1381,10 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 审计器 SHA=`66f744b69aba4e48469d7962e9bea02b8c9149d45a1c2213a1dab4adb41ebac5`，测试 SHA=`13c6d86d94fd29c28d127a74255d0ff1c46e60630e92329e29bc281fe5ba47a3`；专项测试=`2 passed`。
 - 同步后的 rules 外部 SHA=`a2109c55898cab9603c04c9e1e65cda317a0ddb44da762fb4c34ad94ee77c504`。
 
+### 2026-08-10：根 README 展示入口
+
+- 根 `README.md` 已加入 PG-388 Docker compose 启动和 `http://localhost:3000/pg388` 展示说明，明确 24 案例、抽象 enum-only 后端与 PG-385/386 fixture-bound 边界。README SHA=`ec3c37e603fb44719467e42807c63db50ebcfd51d73c4bba85995af5b89f8c4e`。
+
 ### 2026-08-10：GitHub 提交预检
 
 - 当前工作目录不是 Git 仓库，没有 `.git` 和 remote；未执行 `git init`、commit 或 push，等待用户提供 GitHub repository URL、可见性和推送授权。
