@@ -15,6 +15,9 @@ docker compose -f docker-compose.pg388.yml -p pg388demo up -d
 打开 `http://localhost:3000/pg388`。展示所需的抽象报告和数据集列在
 `research/pg388_demo_asset_manifest_v1.json`，不会包含原始 payload、wire、响应正文、凭据或外部回调。
 
+页面里的 “MODEL READINESS / STRUCTURED RULE-IR” 面板会直接展示 11-slot 组合计划、840 条
+train/holdout 轨迹和当前硬门；它明确标出 optimizer 未启动，不把 wiring smoke 冒充为漏洞能力。
+
 28-case token CPU smoke 也已登记为诊断资产：420/420 train/holdout、train-only vocab=75、unknown gap=0；但 worst ASK recall=`0.0`、logic invariant=`0.042857`、state transition=`0.064286`，因此不能宣传为模型已经学会逻辑漏洞或通用 payload 生成。
 
 另有 `mean_boundary` / `anchor_mean_boundary` pooling 对照，结果仍是 seed-unstable、逻辑不变量头接近随机；它们用于定位模型结构问题，不是能力或训练晋级证据。

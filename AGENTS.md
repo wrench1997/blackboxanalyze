@@ -1496,3 +1496,8 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 
 - 新增纯标准库计划器 `scripts/plan_pg388_logic_composed_candidate.py`（SHA=`4a8800bbdabafa2287330d551f9aefb4341f4b02800018309b0c7ca87a38a936`）及 tests=`f1342e43db363d832e1a5a06a516124baf973b5d89f506928485e7fd9b67f400`。它定义 11 个有序 Rule-IR 槽和 `autoregressive_causal_previous_slot_conditioned` decoder 设计，目标是让 invariant→transition→action→repair 组合，而不是独立标签记忆。
 - 计划报告=`research/pg388_logic_composed_candidate_plan_v1.json` SHA=`2097845dcd68c696863c7f091a17df9a712401c0aa4e87f0aa7b4d26bc5b0595`，840 行（420/420），状态=`blocked_capability_contract`；typed evaluator、fresh role reset、operator review 均未具备，optimizer/GPU/Docker/network/wire 全部 false，training/promotion 全关闭。当前时间窗外只完成 plan/contract，不运行训练。当前规则 SHA=`d8ef65e4bd79dfa504ff4bc552a8c3cb8cc3178423a680248de13cc782dec08b`，asset manifest SHA=`4518393b26b08fd43bbc41d2556298e6652eb7e417c23e46252d46d961cff1c7`。
+
+### 2026-08-10：PG-388 模型门演示面板
+
+- `/pg388` 新增 `MODEL READINESS / STRUCTURED RULE-IR` 面板，明确显示 11-slot previous-slot decoder 设计、840 条 `train/implementation_holdout=420/420` 抽象轨迹、当前 wiring 诊断和 optimizer 前硬门；component SHA=`4dd6185a9f770225111ae5b7da0f134a66b40149e16bf3996ec48323b73e3964`，本地 frontend image=`sha256:c92593c232745a2de1ff733650c0331b9966f81008c9487e4857b6ac7e3083e2`。
+- 页面与 `/pg388-api/api/manifest` 已复核 HTTP 200；manifest 资产数=`27`。面板明确 `optimizer=0`、typed evaluator/fresh role reset/operator review 未认证；训练、payload、memory、promotion 和 vulnerability claim 继续全部关闭。本次提交前校验：rules SHA=`1b5e379b14a3e157928d8f8dff6d1dbba65b92d8731e61eb2c31bb1a9d3a7d3f`，asset manifest SHA=`06de4d755de62f685a606c7f69aa90c4cd618f1b9f051421b849228dd2e616a4`。

@@ -581,6 +581,7 @@ export default function Pg388LogicLab() {
         <nav className={styles.nav} aria-label="研究台导航">
           <a href="/pg385">PG385 · XSS / JS</a>
           <a href="#cases">案例矩阵</a>
+          <a href="#model">模型门</a>
           <a href="#contract">边界合同</a>
           <span className={styles.live}><i /> LOCAL CANARY ONLY</span>
         </nav>
@@ -626,6 +627,16 @@ export default function Pg388LogicLab() {
         <div className={styles.flowGrid}>
           {flowLabels.map(([number, title, detail]) => <article key={number}><span>{number}</span><strong>{title}</strong><p>{detail}</p></article>)}
         </div>
+      </section>
+
+      <section id="model" className={styles.contractSection}>
+        <div className={styles.sectionHead}><div><p className={styles.kicker}>MODEL READINESS / STRUCTURED RULE‑IR</p><h2>模型先组合，<br />再谈能力。</h2></div><p>这块把当前训练证据和硬门直接摆出来：840 条抽象轨迹、11 个有序槽位，计划中的 decoder 会把 invariant → transition → action → repair 串起来。</p></div>
+        <div className={styles.contractGrid}>
+          <article className={styles.good}><span>DESIGN</span><h3>11-slot composition</h3><ul><li>autoregressive previous-slot conditioning</li><li>next-token + slot composition</li><li>ASK / repair / negative auxiliary heads</li></ul></article>
+          <article><span>DIAGNOSTIC</span><h3>当前仍不稳定</h3><ul><li>worst ASK recall：0.0</li><li>logic invariant：约 0.043</li><li>state transition：最高仅 0.086</li></ul></article>
+          <article className={styles.hold}><span>HARD HOLD</span><h3>blocked before optimizer</h3><ul><li>typed evaluator 未认证</li><li>fresh role reset 未认证</li><li>operator review 未认证</li></ul></article>
+        </div>
+        <div className={styles.noteBar}><strong>840 rows · train/holdout 420/420 · plan only · optimizer 0</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>
       </section>
 
       <section id="cases" className={styles.labSection}>
