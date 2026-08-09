@@ -333,3 +333,19 @@ pytest -q
 - domain 没写全，系统最多只能证明“当前测试域无分歧”。
 - 时间、随机数、并发、网络、数据库、模型版本等外部变量未记录时，仍会形成隐藏上下文。
 - 任意程序的完全等价判断一般不可判定；本项目做的是有限行为归纳、反例搜索和状态空间证据分析。
+
+## PG-388 逻辑漏洞本地展示
+
+PG-388 是一个仅供本机展示的前后端逻辑状态实验台：
+
+```powershell
+$env:PG388_PYTHON_IMAGE_DIGEST='sha256:<reviewed-python-digest>'
+$env:PG388_NODE_BASE_IMAGE='node:20.11.1-alpine3.19@sha256:<reviewed-node-digest>'
+docker compose -f docker-compose.pg388.yml -p pg388demo up -d
+```
+
+打开 `http://localhost:3000/pg388`。页面包含 24 个案例（核心业务逻辑 + 10 个补充分类），可运行 `fresh reset → ASK → failure repair → candidate/reference/negative → replay`。后端只接受抽象枚举，不接收账号、凭据、原始请求值、URL 或响应正文；所有训练、payload catalog 和漏洞晋级标记均关闭。
+
+PG-385/PG-386 页面展示的是另一个 fixture-bound 过滤反馈实验，不能把本地 canary 结果解释为任意网址的通用 WAF、XSS 或 SQL 能力。
+#   b l a c k b o x a n a l y z e  
+ 
