@@ -87,6 +87,7 @@ _JS_OVERLAY_KEYS = frozenset({
     "schema_version",
     "source_sha256",
     "source_text_stored",
+    "script_count",
     "local_fixture",
     "javascript_context",
     "js_semantic_tokens",
@@ -112,7 +113,11 @@ def _normalize_js_context_overlay(value: Mapping[str, Any] | None) -> dict[str, 
         if key not in value:
             continue
         item = value[key]
-        if key == "js_semantic_tokens":
+        if key == "script_count":
+            if isinstance(item, bool) or not isinstance(item, int) or item < 0 or item > 128:
+                raise ValueError("PG-377 javascript script count is invalid")
+            result[key] = item
+        elif key == "js_semantic_tokens":
             if not isinstance(item, (list, tuple)) or len(item) > 128:
                 raise ValueError("PG-377 javascript semantic token sequence invalid")
             tokens = [str(token) for token in item]

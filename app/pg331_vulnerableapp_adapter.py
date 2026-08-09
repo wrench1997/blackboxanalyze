@@ -119,7 +119,17 @@ def capture_vulnerableapp_projection(*, html: str | None, headers: Mapping[str, 
         # Seeing an <html> element without a lang attribute is an observed
         # absence, not an unobserved field.  Keep unknown only when no
         # document root was captured at all.
-        if parser.tag_counts.get("html") and parsed.get("document_structure", {}).get("html_lang") == "unknown":
+        if parser.tag_counts.get("html"):
+            if parsed.get("document_structure", {}).get("doctype") == "unknown":
+                parsed["document_structure"]["doctype"] = "absent"
+            if parsed.get("document_structure", {}).get("html_lang") == "unknown":
+                parsed["document_structure"]["html_lang"] = "absent"
+        # JSON/text API responses are observed pages with no document root,
+        # not missing captures. Preserve that distinction in the field
+        # manifest without inventing DOM or JavaScript facts.
+        content_class = str((response or {}).get("content_type_class", "unknown")).casefold()
+        if content_class in {"html", "json", "text", "plain_text"} and not parser.tag_counts.get("html"):
+            parsed["document_structure"]["doctype"] = "absent"
             parsed["document_structure"]["html_lang"] = "absent"
         for axis in ("document_structure", "navigation", "javascript_surface"):
             observation[axis] = parsed[axis]

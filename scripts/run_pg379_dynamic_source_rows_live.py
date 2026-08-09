@@ -1348,6 +1348,7 @@ def _materialize_row(
     lane: str,
     implementation_id: str,
     image_digest: str,
+    authorization_id: str,
     seed: int,
     role: str,
 ) -> dict[str, Any]:
@@ -1358,10 +1359,8 @@ def _materialize_row(
         source_meta = {
             "source_id": "pg379-dynamic-local",
             "implementation": implementation_id,
-            "family_id": "dynamic_whole_page_shape",
-            "surface_id": str(route.get("route_class", "abstract_surface")),
             "collector_id": SCHEMA_VERSION,
-            "authorization_id": str(sidecar.get("evaluator_id", "pg379-evaluator")),
+            "authorization_id": str(authorization_id),
             "image_digest": _bare_digest(image_digest),
             "source_digest": _json_digest(
                 {
@@ -1415,6 +1414,18 @@ def _materialize_row(
     row["adapter_validation"] = {
         "valid": bool(validation.get("valid")),
         "failures": list(validation.get("failures") or []),
+    }
+    # ``adapter_validation`` is collector bookkeeping, not part of the
+    # adapter's canonical projection.  If it is retained on the in-memory
+    # wrapper, refresh the wrapper hash after adding it; otherwise every
+    # otherwise-valid row fails its own record_sha256 check on the next
+    # validation pass.
+    if isinstance(row.get("record_sha256"), str):
+        row["record_sha256"] = sha256_json({key: value for key, value in row.items() if key != "record_sha256"})
+    validation_after = validate_pg377_webgoat_source_row(row)
+    row["adapter_validation"] = {
+        "valid": bool(validation_after.get("valid")),
+        "failures": list(validation_after.get("failures") or []),
     }
     row["training_eligible"] = False
     return row
@@ -1580,6 +1591,8 @@ def collect_pg379_dynamic_source_rows_live(
     failure_observed = 0
     failure_changed = 0
     fresh_reset_failures = 0
+    adapter_failure_counts: dict[str, int] = {}
+    materialization_failure_counts: dict[str, int] = {}
     for lane in ("train", "holdout"):
         implementation_id = str(requirements[lane]["implementation_id"])
         attestation = normalized_attestations[lane]
@@ -1653,11 +1666,20 @@ def collect_pg379_dynamic_source_rows_live(
                         lane=lane,
                         implementation_id=implementation_id,
                         image_digest=digest,
+                        authorization_id=str(normalized_attestations[lane].get("authorization_id", "")),
                         seed=int(seed),
                         role=role,
                     )
                     rows.append(row)
                     valid_source_rows += int(bool(row.get("adapter_validation", {}).get("valid")))
+                    adapter_validation = row.get("adapter_validation") if isinstance(row.get("adapter_validation"), Mapping) else {}
+                    for failure in adapter_validation.get("failures") or []:
+                        key = str(failure)
+                        adapter_failure_counts[key] = adapter_failure_counts.get(key, 0) + 1
+                    materialization_failure = row.get("capture_materialization_failure")
+                    if materialization_failure:
+                        key = str(materialization_failure)
+                        materialization_failure_counts[key] = materialization_failure_counts.get(key, 0) + 1
                 route_summaries.append(
                     {
                         "implementation_id": implementation_id,
@@ -1734,6 +1756,8 @@ def collect_pg379_dynamic_source_rows_live(
             "failure_action_changed_count": failure_changed,
             "fresh_reset_failure_count": fresh_reset_failures,
             "capture_failure_count": len(failures),
+            "adapter_failure_counts": dict(sorted(adapter_failure_counts.items())),
+            "materialization_failure_counts": dict(sorted(materialization_failure_counts.items())),
         },
         "hard_gate": {
             "image_attestation": bool(gate.get("ready")),

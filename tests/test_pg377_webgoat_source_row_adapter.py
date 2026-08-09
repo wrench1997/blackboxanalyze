@@ -154,6 +154,18 @@ def test_evaluator_sidecar_is_not_copied_into_model_context() -> None:
     assert row["context_firewall"] == {"forbidden_token_count": 0, "sidecars_off_context": True}
 
 
+def test_javascript_overlay_accepts_bounded_script_count() -> None:
+    row = capture_pg377_webgoat_source_row(
+        html="<script>ignored</script>",
+        javascript_context_projection={
+            "script_count": 1,
+            "source_text_stored": False,
+            "js_semantic_tokens": ["js_script_count=present"],
+        },
+    )
+    assert row["javascript_context_overlay"]["script_count"] == 1
+
+
 def test_role_and_method_allowlists_are_explicit() -> None:
     assert set(METHODS) == {"GET", "POST"}
     assert set(ROLES) == {"candidate", "reference", "negative", "replay"}

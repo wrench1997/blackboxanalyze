@@ -19,6 +19,28 @@ def test_get_html_projection_has_abstract_axes_and_no_raw_result() -> None:
     assert HTML not in str(result) and "127.0.0.1" not in str(result)
 
 
+def test_html_root_without_doctype_marks_doctype_absent() -> None:
+    result = capture_vulnerableapp_projection(
+        html="<html><body>bounded</body></html>",
+        headers={"Content-Type": "text/html"},
+        request_projection={"method": "GET"},
+        response_projection={"status": 200, "body_length": 31, "body_shape": "html"},
+    )
+    assert result["observation"]["document_structure"]["doctype"] == "absent"
+
+
+def test_html_fragment_marks_root_fields_absent() -> None:
+    result = capture_vulnerableapp_projection(
+        html="<div>bounded fragment</div>",
+        headers={"Content-Type": "text/html"},
+        request_projection={"method": "GET"},
+        response_projection={"status": 200, "body_length": 29, "body_shape": "html"},
+    )
+    document = result["observation"]["document_structure"]
+    assert document["doctype"] == "absent"
+    assert document["html_lang"] == "absent"
+
+
 def test_302_and_post_unsupported_stay_abstract_and_ask_safe() -> None:
     result = capture_vulnerableapp_projection(html="<html></html>", headers={"Location": "/done"}, request_projection={"method": "POST", "parameters": []}, response_projection={"status": 302, "body_length": 0}, post_supported=False)
     response = result["observation"]["response_transport"]
@@ -31,6 +53,19 @@ def test_missing_observations_are_explicit_not_observed() -> None:
     assert all(value is None for value in result["observation"].values())
     assert all(status == "not_observed" for axis in result["field_capture_manifest"].values() for status in axis.values())
     assert result["typed_projection"]["next_action"] == "ask_typed"
+
+
+def test_json_response_marks_document_root_absent_not_unobserved() -> None:
+    result = capture_vulnerableapp_projection(
+        html='{"response_shape":"json"}',
+        headers={"Content-Type": "application/json"},
+        request_projection={"method": "GET"},
+        response_projection={"status": 200, "body_length": 28, "body_shape": "json"},
+        post_supported=True,
+    )
+    document = result["observation"]["document_structure"]
+    assert document["doctype"] == "absent"
+    assert document["html_lang"] == "absent"
 
 
 @pytest.mark.parametrize("bad", [{"response_body": "x"}, {"url": "http://example.test"}, {"payload": "x"}])
