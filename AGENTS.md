@@ -1556,3 +1556,9 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - `/pg388` 的模型面板新增 `CANDIDATE MODEL / CPU SMOKE` 聚合区：只读取三份既有 CPU candidate 报告的 train/holdout 数量、train-only vocabulary scope、seed 数、最弱 Rule-IR head、ASK worst recall 和 negative false-allow；不复制 token 序列、原始 payload、wire、响应或 evaluator answer。
 - 当前三份报告均为 `cpu_smoke_candidate_only`、device=`cpu`、GPU/Docker/network/wire 全 false、`training_eligible=0`、promotion 全关闭。logic invariant smoke 的 worst ASK=`1.0`、negative false-allow=`0`、最弱 head=`ask_reason 0.75`；supplemental smoke worst next_action=`0.679688`；trajectory canary worst ASK=`0.0`、logic invariant=`0.042857`，后者明确显示模型 wiring/组合仍不稳定。
 - 投影脚本最新 SHA=`b28f469bbc4aae555c5bf6d4110298fd7f5011344ab47a25b925644515321857`，组件 SHA=`2305ef9f9cdaf8c2d681a9a824faa9d79c53c545d49b15a3bcf15a916b2e0950`，测试 SHA=`a7c767419870eb54460f8e9a37b85f94e47fa5519c5acb070fd36e0a078c9670`，摘要 SHA=`05fc5837df2c8ce84f1429239187c74364a80701f06ea57b5650f059fcacc6a7`；asset manifest 当前 SHA=`3c9224ba5ce5683438b424b76a11d176612785a982da3c964f6f309af3223911`，校验 `asset_count=60` 通过。Next build 和前端投影测试均通过，当前展示仍只说明逻辑推理诊断，不代表通用漏洞或 payload 能力。
+
+### 2026-08-10：PG-388 候选模型面板发布
+
+- 提交=`80290d56e47394edc098fb2675dfdcba8542b7e3`，已推送并核对 `origin/main`；工作区干净。
+- 发布内容包括三份 CPU candidate smoke 的只读聚合指标、PG388 模型面板、摘要/资产清单同步；回归 `12 passed`、`npm run build` 通过、资产校验 `asset_count=60` 通过、`/pg388` 与摘要接口 HTTP 200。
+- 本次提交仍没有启动 A800、Docker holdout 或外网；训练资格、payload catalog、长期记忆和漏洞声明全部关闭。下一步若要真实训练，仍必须先补 train split、operator review、image attestation 和信息/容量硬门。
