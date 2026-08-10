@@ -31,6 +31,10 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["candidate_model"]["runs"][3]["label"] == "11-slot composition"
     assert summary["candidate_model"]["runs"][3]["holdout_count"] == 128
     assert summary["candidate_model"]["training_allowed"] is False
+    assert summary["taxonomy_coverage"]["case_count"] == 66
+    assert summary["taxonomy_coverage"]["category_count"] == 10
+    assert summary["taxonomy_coverage"]["missing_anchor_count"] == 0
+    assert summary["taxonomy_coverage"]["candidate_only_count"] == 10
 
 
 def test_pg388_frontend_projection_contains_no_rows_or_raw_markers():

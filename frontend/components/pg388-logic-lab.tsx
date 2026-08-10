@@ -28,6 +28,18 @@ type LogicCase = {
   stages: string[];
 };
 
+type BackendCaseSummary = {
+  case_ref?: unknown;
+  counterfactual?: unknown;
+  failure?: unknown;
+  invariant?: unknown;
+  observation?: unknown;
+  precondition?: unknown;
+  state_model?: unknown;
+  surface?: unknown;
+  transition?: unknown;
+};
+
 type BackendStatus = "checking" | "online" | "offline";
 
 type BackendTrace = {
@@ -147,6 +159,17 @@ type RuleIrSummary = {
     failures: string[];
     report_file: string;
     report_sha256: string;
+  };
+  taxonomy_coverage: {
+    status: string;
+    case_count: number;
+    core_case_count: number;
+    supplemental_case_count: number;
+    category_count: number;
+    missing_anchor_count: number;
+    diagnostic_gap_count: number;
+    candidate_only_count: number;
+    categories: Array<{ name: string; covered: number; candidate_only: number; unresolved: number }>;
   };
   candidate_model: {
     status: string;
@@ -539,6 +562,59 @@ const supplementalCases: LogicCase[] = [
 ];
 const allCases: LogicCase[] = [...cases, ...supplementalCases];
 
+function backendCaseTitle(caseRef: string): string {
+  return caseRef
+    .split("_")
+    .map((part) => part ? part[0].toUpperCase() + part.slice(1) : part)
+    .join(" ");
+}
+
+function backendCaseGroup(caseRef: string, surface: string): string {
+  const value = `${caseRef} ${surface}`.toLowerCase();
+  if (value.includes("install") || value.includes("update")) return "安装 / 更新";
+  if (value.includes("purchase") || value.includes("order") || value.includes("coupon") || value.includes("payment")) return "交易 / 风控";
+  if (value.includes("password") || value.includes("registration") || value.includes("identity") || value.includes("login") || value.includes("account")) return "账户 / 认证";
+  if (value.includes("factor") || value.includes("oauth") || value.includes("captcha")) return "2FA / 验证码";
+  if (value.includes("session") || value.includes("random") || value.includes("crypto")) return "Session / 随机数";
+  if (value.includes("scope") || value.includes("role") || value.includes("resource") || value.includes("authorization")) return "越权 / 查询";
+  return "其他逻辑";
+}
+
+function makeBackendCase(raw: BackendCaseSummary): LogicCase | null {
+  const caseRef = typeof raw.case_ref === "string" ? raw.case_ref : "";
+  if (!caseRef) return null;
+  const surface = typeof raw.surface === "string" ? raw.surface : "abstract_surface";
+  const transition = typeof raw.transition === "string" ? raw.transition : "state_transition";
+  const stateModel = typeof raw.state_model === "string" ? raw.state_model : "abstract";
+  const invariant = typeof raw.invariant === "string" ? raw.invariant : "invariant_observed";
+  const precondition = typeof raw.precondition === "string" ? raw.precondition : "required_observation";
+  const failure = typeof raw.failure === "string" ? raw.failure : "invariant_mismatch";
+  const counterfactual = typeof raw.counterfactual === "string" ? raw.counterfactual : "counterfactual_not_observed";
+  const observation = typeof raw.observation === "string" ? raw.observation : "typed_shape";
+  const method: "GET" | "POST" = /read|query|list|lookup|static|view|fetch|inspect|install|activate|observe/i.test(`${transition} ${surface} ${caseRef}`) ? "GET" : "POST";
+  return {
+    id: `backend-${caseRef}`,
+    backendCaseRef: caseRef,
+    group: backendCaseGroup(caseRef, surface),
+    title: `抽象合同 · ${backendCaseTitle(caseRef)}`,
+    short: `后端不变量契约 · ${stateModel}`,
+    method,
+    surface,
+    invariant,
+    preconditions: [precondition, `state_model=${stateModel}`, "raw_value=opaque"],
+    counterfactual,
+    failure,
+    decision: "ASK",
+    action: `先补齐 ${observation} 观测，再只修复一个抽象槽位；缺证据时保持 ASK。`,
+    negative: "negative 只比较脱敏状态形状，不发送业务值。",
+    replay: "独立 fresh reset → baseline → candidate/reference/negative → replay",
+    oracle: `${observation} + bounded_state_delta`,
+    boundary: "本合同来自本地抽象后端；未绑定审阅 adapter 时不发送、不写入。",
+    tokens: [`transport=${method}`, `surface=${surface}`, `state_model=${stateModel}`, `failure=${failure}`, "action=ASK"],
+    stages: ["读取抽象状态", "识别不变量", "ASK 缺失观测", "单变量 repair", "negative 对照", "fresh replay"],
+  };
+}
+
 const concreteCanaryCases = new Set([
   "nonce_replay",
   "coupon_reuse_boundary",
@@ -590,6 +666,7 @@ export default function Pg388LogicLab() {
   const [backendStatus, setBackendStatus] = useState<BackendStatus>("checking");
   const [backendCaseCount, setBackendCaseCount] = useState<number | null>(null);
   const [supplementalCaseCount, setSupplementalCaseCount] = useState<number | null>(null);
+  const [backendCatalog, setBackendCatalog] = useState<LogicCase[]>([]);
   const [backendTrace, setBackendTrace] = useState<BackendTrace | null>(null);
   const [ruleIrSummary, setRuleIrSummary] = useState<RuleIrSummary | null>(null);
   const runRef = useRef(0);
@@ -609,11 +686,18 @@ export default function Pg388LogicLab() {
         const supplementalDocument = await supplementalResponse.json() as { cases?: unknown[] };
         if (!cancelled) {
           setBackendStatus("online");
-          setBackendCaseCount(Array.isArray(casesDocument.cases) ? casesDocument.cases.length : null);
-          setSupplementalCaseCount(Array.isArray(supplementalDocument.cases) ? supplementalDocument.cases.length : null);
+          const backendCases = Array.isArray(casesDocument.cases) ? casesDocument.cases : [];
+          const supplementalCasesFromBackend = Array.isArray(supplementalDocument.cases) ? supplementalDocument.cases : [];
+          const catalog = [...backendCases, ...supplementalCasesFromBackend]
+            .filter((item): item is BackendCaseSummary => Boolean(item && typeof item === "object"))
+            .map(makeBackendCase)
+            .filter((item): item is LogicCase => item !== null);
+          setBackendCaseCount(backendCases.length);
+          setSupplementalCaseCount(supplementalCasesFromBackend.length);
+          setBackendCatalog(catalog);
         }
       })
-      .catch(() => { if (!cancelled) { setBackendStatus("offline"); setBackendCaseCount(null); setSupplementalCaseCount(null); } });
+      .catch(() => { if (!cancelled) { setBackendStatus("offline"); setBackendCaseCount(null); setSupplementalCaseCount(null); setBackendCatalog([]); } });
     return () => { cancelled = true; };
   }, []);
 
@@ -629,7 +713,14 @@ export default function Pg388LogicLab() {
     return () => { cancelled = true; };
   }, []);
 
-  const selected = useMemo(() => allCases.find((item) => item.id === caseId) || allCases[0], [caseId]);
+  const caseCatalog = useMemo(() => {
+    const merged = new Map<string, LogicCase>();
+    allCases.forEach((item) => merged.set(item.backendCaseRef, item));
+    backendCatalog.forEach((item) => { if (!merged.has(item.backendCaseRef)) merged.set(item.backendCaseRef, item); });
+    return Array.from(merged.values());
+  }, [backendCatalog]);
+
+  const selected = useMemo(() => caseCatalog.find((item) => item.id === caseId) || caseCatalog[0] || allCases[0], [caseCatalog, caseId]);
 
   function chooseCase(nextId: string) {
     if (running) return;
@@ -741,7 +832,7 @@ export default function Pg388LogicLab() {
             模型只看脱敏 token，缺关键观测就 ASK；受控 adapter 只连接本地 disposable canary。
           </p>
           <div className={styles.chips}>
-            <span className={styles.accent}>{allCases.length} abstract cases</span>
+            <span className={styles.accent}>{caseCatalog.length} abstract cases</span>
             <span>{backendCaseCount === null ? "56 backend invariant contracts" : `${backendCaseCount} backend contracts · live`}</span>
             <span>{supplementalCaseCount === null ? "10 taxonomy-gap contracts" : `${supplementalCaseCount} supplemental gaps · candidate-only`}</span>
             <span>GET + POST</span>
@@ -754,7 +845,7 @@ export default function Pg388LogicLab() {
           <strong className={styles.metric}>0</strong>
           <span className={styles.metricLabel}>业务状态写入 / 外部目标</span>
           <div className={styles.metricGrid}>
-            <div><b>{allCases.length}</b><span>抽象案例</span></div>
+            <div><b>{caseCatalog.length}</b><span>抽象案例</span></div>
             <div><b>6</b><span>闭环阶段</span></div>
             <div><b>0</b><span>负对照误放</span></div>
             <div><b>ASK</b><span>缺观测策略</span></div>
@@ -819,6 +910,17 @@ export default function Pg388LogicLab() {
             </div>
             <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>optimizer smoke ≠ 漏洞能力</strong><small>词表 scope=train_context_only · negative false-allow 必须为 0 · capability / promotion 仍关闭；浏览器只读取上述聚合指标。</small></div>
           </div>
+          <div className={styles.ruleIrHoldout} aria-label="Logic taxonomy coverage projection">
+            <div className={styles.ruleIrHeader}><div><span className={styles.miniLabel}>LOGIC TAXONOMY COVERAGE</span><strong>{ruleIrSummary.taxonomy_coverage.status}</strong></div><b className={ruleIrSummary.taxonomy_coverage.missing_anchor_count === 0 ? styles.gatePass : styles.gateHold}>{ruleIrSummary.taxonomy_coverage.missing_anchor_count === 0 ? "ANCHORS COMPLETE" : "GAPS"}</b></div>
+            <div className={styles.ruleIrMetrics}>
+              <div><span>CASES</span><strong>{ruleIrSummary.taxonomy_coverage.case_count}</strong><small>{ruleIrSummary.taxonomy_coverage.core_case_count} core · {ruleIrSummary.taxonomy_coverage.supplemental_case_count} supplemental</small></div>
+              <div><span>CATEGORIES</span><strong>{ruleIrSummary.taxonomy_coverage.category_count}</strong><small>04.13 logic inventory</small></div>
+              <div><span>CANDIDATE ONLY</span><strong className={ruleIrSummary.taxonomy_coverage.candidate_only_count === 0 ? styles.gatePass : styles.gateHold}>{ruleIrSummary.taxonomy_coverage.candidate_only_count}</strong><small>needs typed fresh evidence</small></div>
+              <div><span>UNRESOLVED</span><strong className={ruleIrSummary.taxonomy_coverage.diagnostic_gap_count === 0 ? styles.gatePass : styles.gateHold}>{ruleIrSummary.taxonomy_coverage.diagnostic_gap_count}</strong><small>not silently promoted</small></div>
+            </div>
+            <div className={styles.ruleIrSlots}><span className={styles.miniLabel}>CATEGORY COUNTS · ABSTRACT ONLY</span><div>{ruleIrSummary.taxonomy_coverage.categories.map((category) => <code key={category.name}>{category.name} · {category.covered}{category.candidate_only ? ` +${category.candidate_only} candidate` : ""}{category.unresolved ? ` · ${category.unresolved} gap` : ""}</code>)}</div></div>
+            <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>覆盖审计不是漏洞确认</strong><small>分类只用于检查实验是否覆盖安装、交易、账户、认证、验证码、Session、越权和信息查询；case/route/原始值仍不进入浏览器投影。</small></div>
+          </div>
         </div>}
         <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>
       </section>
@@ -831,8 +933,8 @@ export default function Pg388LogicLab() {
 
         <div className={styles.labGrid}>
           <aside className={styles.caseList}>
-            <div className={styles.panelLabel}><span>CASE CATALOG</span><b>{allCases.length} CASES</b></div>
-            {allCases.map((item, index) => (
+            <div className={styles.panelLabel}><span>CASE CATALOG</span><b>{caseCatalog.length} CASES</b></div>
+            {caseCatalog.map((item, index) => (
               <button key={item.id} type="button" className={`${styles.caseButton} ${item.id === selected.id ? styles.caseActive : ""}`} onClick={() => chooseCase(item.id)}>
                 <span>{String(index + 1).padStart(2, "0")}</span><div><strong>{item.title}</strong><small>{item.group} · {item.method} · {item.surface}</small></div>
               </button>

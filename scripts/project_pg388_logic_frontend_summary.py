@@ -27,6 +27,7 @@ DEFAULT_HOLDOUT_B_REPORT = ROOT / "research" / "pg388_logic_holdout_b_source_row
 DEFAULT_HOLDOUT_B_AUDIT = ROOT / "research" / "pg388_logic_holdout_b_source_rows_audit_v1.json"
 DEFAULT_HOLDOUT_B_DOCKER_SMOKE = ROOT / "research" / "pg388_logic_holdout_b_docker_smoke_v1.json"
 DEFAULT_CROSS_IMPLEMENTATION_AUDIT = ROOT / "research" / "pg388_logic_cross_implementation_audit_v1.json"
+DEFAULT_TAXONOMY_AUDIT = ROOT / "research" / "pg388_logic_taxonomy_audit_v1.json"
 DEFAULT_CANDIDATE_REPORTS = (
     ("logic invariant", ROOT / "research" / "pg388_logic_token_cpu_smoke_v1.json"),
     ("supplemental logic", ROOT / "research" / "pg388_logic_supplement_token_cpu_smoke_v1.json"),
@@ -169,6 +170,53 @@ def _candidate_model_projection() -> dict[str, Any]:
     }
 
 
+def _taxonomy_coverage_projection(path: Path) -> dict[str, Any]:
+    """Expose only bounded category counts for the frontend coverage panel."""
+    if not path.exists():
+        return {
+            "status": "missing",
+            "file": path.name,
+            "sha256": "",
+            "case_count": 0,
+            "core_case_count": 0,
+            "supplemental_case_count": 0,
+            "category_count": 0,
+            "missing_anchor_count": 0,
+            "diagnostic_gap_count": 0,
+            "candidate_only_count": 0,
+            "categories": [],
+        }
+    report = _load(path)
+    raw_categories = report.get("categories") if isinstance(report.get("categories"), dict) else {}
+    categories: list[dict[str, Any]] = []
+    for name, raw in raw_categories.items():
+        spec = raw if isinstance(raw, dict) else {}
+        candidate = spec.get("candidate_only_case_refs")
+        unresolved = spec.get("unresolved_next_cases")
+        categories.append(
+            {
+                "name": str(name),
+                "covered": int(spec.get("covered_count", 0) or 0),
+                "candidate_only": len(candidate) if isinstance(candidate, list) else 0,
+                "unresolved": len(unresolved) if isinstance(unresolved, list) else 0,
+            }
+        )
+    categories.sort(key=lambda item: item["name"])
+    return {
+        "status": str(report.get("status", "unknown")),
+        "file": path.name,
+        "sha256": _sha256(path),
+        "case_count": int(report.get("case_count", 0) or 0),
+        "core_case_count": int(report.get("core_case_count", 0) or 0),
+        "supplemental_case_count": int(report.get("supplemental_case_count", 0) or 0),
+        "category_count": len(categories),
+        "missing_anchor_count": int(report.get("missing_anchor_count", 0) or 0),
+        "diagnostic_gap_count": int(report.get("diagnostic_gap_count", 0) or 0),
+        "candidate_only_count": int(report.get("candidate_only_count", 0) or 0),
+        "categories": categories,
+    }
+
+
 def build_summary(
     *,
     dataset_path: Path = DEFAULT_DATASET,
@@ -181,6 +229,7 @@ def build_summary(
     holdout_b_audit_path: Path = DEFAULT_HOLDOUT_B_AUDIT,
     holdout_b_docker_smoke_path: Path = DEFAULT_HOLDOUT_B_DOCKER_SMOKE,
     cross_implementation_audit_path: Path = DEFAULT_CROSS_IMPLEMENTATION_AUDIT,
+    taxonomy_audit_path: Path = DEFAULT_TAXONOMY_AUDIT,
 ) -> dict[str, Any]:
     dataset = _load(dataset_path)
     audit = _load(audit_path)
@@ -192,6 +241,7 @@ def build_summary(
     holdout_b_audit = _load(holdout_b_audit_path) if holdout_b_audit_path.exists() else None
     holdout_b_docker = _load(holdout_b_docker_smoke_path) if holdout_b_docker_smoke_path.exists() else None
     cross_implementation = _load(cross_implementation_audit_path) if cross_implementation_audit_path.exists() else None
+    taxonomy_coverage = _taxonomy_coverage_projection(taxonomy_audit_path)
     rows = dataset.get("rows")
     if not isinstance(rows, list):
         raise ValueError("PG-388 dataset rows must be a list")
@@ -349,6 +399,7 @@ def build_summary(
         "live_evidence": live_projection,
         "independent_holdout": independent_holdout,
         "cross_implementation_audit": cross_implementation_projection,
+        "taxonomy_coverage": taxonomy_coverage,
         "candidate_model": _candidate_model_projection(),
         "plan": {
             "file": plan_path.name,
