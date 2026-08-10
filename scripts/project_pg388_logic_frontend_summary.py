@@ -26,6 +26,7 @@ DEFAULT_ROW_BOUND_AUDIT = ROOT / "research" / "pg388_logic_rule_ir_source_rows_l
 DEFAULT_HOLDOUT_B_REPORT = ROOT / "research" / "pg388_logic_holdout_b_source_rows_v1.json"
 DEFAULT_HOLDOUT_B_AUDIT = ROOT / "research" / "pg388_logic_holdout_b_source_rows_audit_v1.json"
 DEFAULT_HOLDOUT_B_DOCKER_SMOKE = ROOT / "research" / "pg388_logic_holdout_b_docker_smoke_v1.json"
+DEFAULT_CROSS_IMPLEMENTATION_AUDIT = ROOT / "research" / "pg388_logic_cross_implementation_audit_v1.json"
 DEFAULT_OUTPUT = ROOT / "frontend" / "public" / "research" / "pg388_logic_rule_ir_frontend_summary_v1.json"
 
 SCHEMA_VERSION = "pg388-logic-rule-ir-frontend-summary-v1"
@@ -93,6 +94,7 @@ def build_summary(
     holdout_b_report_path: Path = DEFAULT_HOLDOUT_B_REPORT,
     holdout_b_audit_path: Path = DEFAULT_HOLDOUT_B_AUDIT,
     holdout_b_docker_smoke_path: Path = DEFAULT_HOLDOUT_B_DOCKER_SMOKE,
+    cross_implementation_audit_path: Path = DEFAULT_CROSS_IMPLEMENTATION_AUDIT,
 ) -> dict[str, Any]:
     dataset = _load(dataset_path)
     audit = _load(audit_path)
@@ -103,6 +105,7 @@ def build_summary(
     holdout_b = _load(holdout_b_report_path) if holdout_b_report_path.exists() else None
     holdout_b_audit = _load(holdout_b_audit_path) if holdout_b_audit_path.exists() else None
     holdout_b_docker = _load(holdout_b_docker_smoke_path) if holdout_b_docker_smoke_path.exists() else None
+    cross_implementation = _load(cross_implementation_audit_path) if cross_implementation_audit_path.exists() else None
     rows = dataset.get("rows")
     if not isinstance(rows, list):
         raise ValueError("PG-388 dataset rows must be a list")
@@ -207,6 +210,26 @@ def build_summary(
             "docker_smoke_observed": docker_execution.get("docker_started") is True and int(docker_observed.get("health_http_status", 0)) == 200,
         },
     }
+    cross_sources = cross_implementation.get("sources") if isinstance(cross_implementation, dict) and isinstance(cross_implementation.get("sources"), dict) else {}
+    cross_coverage = cross_implementation.get("coverage") if isinstance(cross_implementation, dict) and isinstance(cross_implementation.get("coverage"), dict) else {}
+    cross_gate = cross_implementation.get("hard_gate") if isinstance(cross_implementation, dict) and isinstance(cross_implementation.get("hard_gate"), dict) else {}
+    cross_implementation_projection = {
+        "status": str((cross_implementation or {}).get("status", "missing")),
+        "implementation_count": int(cross_sources.get("implementation_count", 0)),
+        "source_row_count": int(cross_coverage.get("source_row_count", 0)),
+        "split_counts": cross_sources.get("split_counts", {}) if isinstance(cross_sources.get("split_counts", {}), dict) else {},
+        "strict_valid": int(cross_coverage.get("strict_valid", 0)),
+        "typed_evidence": int(cross_coverage.get("typed_evidence", 0)),
+        "fresh_resets": int(cross_coverage.get("fresh_resets", 0)),
+        "negative_violations": int(cross_coverage.get("negative_violations", 0)),
+        "context_signature_overlap": int(cross_sources.get("cross_implementation_context_signature_overlap", 0)),
+        "target_signature_overlap": int(cross_sources.get("cross_implementation_target_signature_overlap", 0)),
+        "train_split_present": cross_gate.get("train_split_present") is True,
+        "training_eligible": int(cross_gate.get("training_eligible", 0) or 0),
+        "failures": [str(item) for item in ((cross_implementation or {}).get("failures", []) if isinstance((cross_implementation or {}).get("failures", []), list) else [])],
+        "report_file": cross_implementation_audit_path.name,
+        "report_sha256": _sha256(cross_implementation_audit_path) if cross_implementation_audit_path.exists() else "",
+    }
     output = {
         "schema_version": SCHEMA_VERSION,
         "status": "diagnostic_rule_ir_candidate",
@@ -239,6 +262,7 @@ def build_summary(
         },
         "live_evidence": live_projection,
         "independent_holdout": independent_holdout,
+        "cross_implementation_audit": cross_implementation_projection,
         "plan": {
             "file": plan_path.name,
             "sha256": _sha256(plan_path),
@@ -257,6 +281,7 @@ def build_summary(
             "operator_reviewed": (row_bound_contract.get("operator_reviewed") if row_bound is not None else source_contract.get("operator_reviewed")) is True,
             "candidate_reference_negative_replay": (row_bound_contract.get("candidate_reference_negative_replay") if row_bound is not None else source_contract.get("candidate_reference_negative_replay")) is True,
             "independent_holdout_docker_smoke": independent_holdout["gates"]["docker_smoke_observed"],
+            "cross_implementation_audit": cross_implementation_projection["status"] == "passed_candidate_cross_implementation_logic_audit",
             "capability_training_allowed": False,
             "training_eligible": False,
             "promotion": _safe_promotion(dataset.get("promotion")),

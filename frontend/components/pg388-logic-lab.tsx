@@ -112,6 +112,23 @@ type RuleIrSummary = {
       docker_smoke_observed: boolean;
     };
   };
+  cross_implementation_audit: {
+    status: string;
+    implementation_count: number;
+    source_row_count: number;
+    split_counts: Record<string, number>;
+    strict_valid: number;
+    typed_evidence: number;
+    fresh_resets: number;
+    negative_violations: number;
+    context_signature_overlap: number;
+    target_signature_overlap: number;
+    train_split_present: boolean;
+    training_eligible: number;
+    failures: string[];
+    report_file: string;
+    report_sha256: string;
+  };
   plan: {
     status: string;
     required_context_window: number;
@@ -760,6 +777,7 @@ export default function Pg388LogicLab() {
             <div className={styles.ruleIrGates}>
               {[["source-row contract", ruleIrSummary.independent_holdout.gates.source_row_contract], ["fresh reset", ruleIrSummary.independent_holdout.gates.fresh_role_reset], ["C/R/N/replay", ruleIrSummary.independent_holdout.gates.candidate_reference_negative_replay], ["image attested", ruleIrSummary.independent_holdout.gates.image_attested], ["operator review", ruleIrSummary.independent_holdout.gates.operator_reviewed]].map(([label, passed]) => <span key={String(label)} className={passed ? styles.gatePass : styles.gateHold}><i />{String(label)} · {passed ? "PASS" : "HOLD"}</span>)}
             </div>
+            <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>CROSS-IMPLEMENTATION AUDIT</span><strong>{ruleIrSummary.cross_implementation_audit.implementation_count} implementations · {ruleIrSummary.cross_implementation_audit.source_row_count} holdout rows · {ruleIrSummary.cross_implementation_audit.status}</strong><small>train split {ruleIrSummary.cross_implementation_audit.train_split_present ? "present" : "missing"} · context overlap {ruleIrSummary.cross_implementation_audit.context_signature_overlap} · target overlap {ruleIrSummary.cross_implementation_audit.target_signature_overlap} · training {ruleIrSummary.cross_implementation_audit.training_eligible}</small></div>
           </div>
         </div>}
         <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>

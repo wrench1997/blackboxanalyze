@@ -1,0 +1,78 @@
+{
+  "schema_version": "pg388-logic-cross-implementation-audit-v1",
+  "status": "passed_candidate_cross_implementation_logic_audit",
+  "purpose": "bounded metadata audit for two PG-388 logic implementations",
+  "sources": {
+    "implementation_count": 2,
+    "implementation_counts": {
+      "pg388-logic-lab-backend-a": 140,
+      "pg388-logic-lab-backend-b": 140
+    },
+    "split_counts": {
+      "implementation_holdout": 280
+    },
+    "source_digest_groups": 2,
+    "duplicate_record_ref_count": 0,
+    "cross_implementation_context_signature_overlap": 0,
+    "cross_implementation_target_signature_overlap": 5
+  },
+  "coverage": {
+    "source_row_count": 280,
+    "strict_valid": 280,
+    "typed_evidence": 280,
+    "fresh_resets": 280,
+    "negative_clean": 280,
+    "negative_violations": 0,
+    "target_slot_lengths": {
+      "13": 280
+    },
+    "context_firewall_failures": 0,
+    "raw_context_flag_failures": 0
+  },
+  "implementation_contracts": {
+    "pg388-logic-lab-backend-a": {
+      "source_id_present": true,
+      "authorization_present": true,
+      "row_bound_typed_evidence": true,
+      "fresh_role_reset": true,
+      "operator_reviewed": false,
+      "training_eligible": false
+    },
+    "pg388-logic-lab-backend-b": {
+      "source_id_present": true,
+      "authorization_present": true,
+      "row_bound_typed_evidence": true,
+      "fresh_role_reset": true,
+      "operator_reviewed": false,
+      "training_eligible": false
+    }
+  },
+  "docker_smoke": {
+    "status": "completed_local_disposable_docker_smoke_candidate_only",
+    "health_http_status": 200,
+    "docker_started": true,
+    "target_contacted": true,
+    "external_network": false,
+    "persistent_storage": false,
+    "negative_control_clean": true
+  },
+  "hard_gate": {
+    "train_split_present": false,
+    "implementation_holdout_present": true,
+    "operator_reviewed": false,
+    "image_attested": false,
+    "training_eligible": 0,
+    "capability_training_allowed": false
+  },
+  "failures": [
+    "train_split_missing",
+    "operator_review_missing",
+    "image_attestation_missing"
+  ],
+  "promotion": {
+    "training_allowed": false,
+    "memory_promotion_allowed": false,
+    "payload_catalog_promotion_allowed": false,
+    "vulnerability_claim_allowed": false
+  }
+}
