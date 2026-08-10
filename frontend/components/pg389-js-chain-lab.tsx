@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./pg389-js-chain-lab.module.css";
 
 type Action = "REPAIR" | "ASK" | "ABSTAIN" | "SELECT";
@@ -20,6 +20,26 @@ type ChainCase = {
   repair: string;
   oracle: string;
   boundary: string;
+};
+
+type CandidateSummary = {
+  candidate_status: string;
+  report_sha256: string;
+  train_count: number;
+  holdout_count: number;
+  seed_count: number;
+  vocabulary_size: number;
+  holdout: {
+    composition_exact: number;
+    slot_accuracy: number;
+    ask_recall: number;
+    repair_recall: number;
+    negative_false_allow: number;
+    composition_entropy: number;
+  };
+  contract: { status: string; failure_count: number; unknown_context_count: number; context_overlap: number };
+  execution: { optimizer_started: boolean; device: string; gpu_touched: boolean; docker_started: boolean; network_contacted: boolean };
+  training_allowed: boolean;
 };
 
 const cases: ChainCase[] = [
@@ -227,7 +247,14 @@ const actionCopy: Record<Action, string> = {
 export default function Pg389JsChainLab() {
   const [selected, setSelected] = useState(0);
   const [showProjection, setShowProjection] = useState(true);
+  const [candidate, setCandidate] = useState<CandidateSummary | null>(null);
   const item = cases[selected];
+  useEffect(() => {
+    fetch("/research/pg389_js_chain_frontend_summary_v1.json")
+      .then((response) => response.ok ? response.json() : null)
+      .then((value) => setCandidate(value))
+      .catch(() => setCandidate(null));
+  }, []);
   const stats = useMemo(() => ({
     get: cases.filter((entry) => entry.transport === "GET").length,
     post: cases.filter((entry) => entry.transport === "POST").length,
@@ -253,6 +280,20 @@ export default function Pg389JsChainLab() {
         <div><strong>{stats.guarded}</strong><span>guard 变体</span></div>
         <div><strong>9/9</strong><span>fixture typed roles</span></div>
         <div><strong>0</strong><span>原始 wire 进入模型</span></div>
+      </section>
+
+      <section className={styles.chainCard} aria-label="JS 链候选模型">
+        <div className={styles.cardTitle}><span>MODEL CANDIDATE · ABSTRACT JS CHAIN</span><small>{candidate?.candidate_status ?? "loading"}</small></div>
+        {candidate ? <>
+          <div className={styles.chainMeta}>
+            <div><small>COMPOSITION EXACT</small><strong>{(candidate.holdout.composition_exact * 100).toFixed(1)}%</strong></div>
+            <div><small>SLOT ACCURACY</small><strong>{(candidate.holdout.slot_accuracy * 100).toFixed(1)}%</strong></div>
+            <div><small>ASK / REPAIR</small><strong>{(candidate.holdout.ask_recall * 100).toFixed(1)}% / {(candidate.holdout.repair_recall * 100).toFixed(1)}%</strong></div>
+          </div>
+          <div className={styles.replayNote}>
+            {candidate.train_count}/{candidate.holdout_count} train/holdout · {candidate.seed_count} seeds · vocab {candidate.vocabulary_size} · {candidate.execution.device} · negative false-allow {candidate.holdout.negative_false_allow} · contract {candidate.contract.status} · promotion false
+          </div>
+        </> : <div className={styles.boundary}>候选摘要尚未加载；页面仍可查看抽象链路。</div>}
       </section>
 
       <section className={styles.workspace}>
