@@ -30,6 +30,8 @@ DEFAULT_CROSS_IMPLEMENTATION_AUDIT = ROOT / "research" / "pg388_logic_cross_impl
 DEFAULT_TAXONOMY_AUDIT = ROOT / "research" / "pg388_logic_taxonomy_audit_v1.json"
 DEFAULT_SUPPLEMENT_CANARY = ROOT / "research" / "pg388_logic_supplement_canary_local_v1.json"
 DEFAULT_SUPPLEMENT_CANARY_AUDIT = ROOT / "research" / "pg388_logic_supplement_canary_local_audit_v1.json"
+DEFAULT_TYPED_SUPPLEMENT = ROOT / "research" / "pg388_logic_supplement_typed_rule_ir_projection_v1.json"
+DEFAULT_TYPED_SUPPLEMENT_AUDIT = ROOT / "research" / "pg388_logic_supplement_typed_rule_ir_projection_audit_v1.json"
 DEFAULT_CANDIDATE_REPORTS = (
     ("logic invariant", ROOT / "research" / "pg388_logic_token_cpu_smoke_v1.json"),
     ("supplemental logic", ROOT / "research" / "pg388_logic_supplement_token_cpu_smoke_v1.json"),
@@ -291,6 +293,47 @@ def _supplement_canary_projection(report_path: Path, audit_path: Path) -> dict[s
     }
 
 
+def _typed_supplement_projection(report_path: Path, audit_path: Path) -> dict[str, Any]:
+    """Project typed Rule-IR counts while keeping diagnostic rows off-context."""
+
+    if not report_path.exists():
+        return {
+            "status": "missing",
+            "report_file": report_path.name,
+            "report_sha256": "",
+            "audit_status": "missing",
+            "audit_file": audit_path.name,
+            "audit_sha256": "",
+            "counts": {"records": 0, "train": 0, "implementation_holdout": 0, "evaluator_diagnostic": 0, "typed_evaluator_observed": 0, "fresh_reset": 0, "role_bound_evidence": 0},
+            "training_eligible": 0,
+            "context_firewall_passed": False,
+            "scope": "diagnostic_only",
+        }
+    report = _load(report_path)
+    audit = _load(audit_path) if audit_path.exists() else {}
+    raw_counts = report.get("counts") if isinstance(report.get("counts"), dict) else {}
+    return {
+        "status": str(report.get("status", "unknown")),
+        "report_file": report_path.name,
+        "report_sha256": _sha256(report_path),
+        "audit_status": str(audit.get("status", "missing")),
+        "audit_file": audit_path.name,
+        "audit_sha256": _sha256(audit_path) if audit_path.exists() else "",
+        "counts": {
+            "records": int(raw_counts.get("records", 0) or 0),
+            "train": int(raw_counts.get("train", 0) or 0),
+            "implementation_holdout": int(raw_counts.get("implementation_holdout", 0) or 0),
+            "evaluator_diagnostic": int(raw_counts.get("evaluator_diagnostic", 0) or 0),
+            "typed_evaluator_observed": int(raw_counts.get("typed_evaluator_observed", 0) or 0),
+            "fresh_reset": int(raw_counts.get("fresh_reset", 0) or 0),
+            "role_bound_evidence": int(raw_counts.get("role_bound_evidence", 0) or 0),
+        },
+        "training_eligible": int(report.get("training_eligible", 0) or 0),
+        "context_firewall_passed": audit.get("context_firewall_passed") is True,
+        "scope": "typed_abstract_rule_ir_diagnostic_no_train_split",
+    }
+
+
 def build_summary(
     *,
     dataset_path: Path = DEFAULT_DATASET,
@@ -306,6 +349,8 @@ def build_summary(
     taxonomy_audit_path: Path = DEFAULT_TAXONOMY_AUDIT,
     supplement_canary_path: Path = DEFAULT_SUPPLEMENT_CANARY,
     supplement_canary_audit_path: Path = DEFAULT_SUPPLEMENT_CANARY_AUDIT,
+    typed_supplement_path: Path = DEFAULT_TYPED_SUPPLEMENT,
+    typed_supplement_audit_path: Path = DEFAULT_TYPED_SUPPLEMENT_AUDIT,
 ) -> dict[str, Any]:
     dataset = _load(dataset_path)
     audit = _load(audit_path)
@@ -319,6 +364,7 @@ def build_summary(
     cross_implementation = _load(cross_implementation_audit_path) if cross_implementation_audit_path.exists() else None
     taxonomy_coverage = _taxonomy_coverage_projection(taxonomy_audit_path)
     supplemental_canary = _supplement_canary_projection(supplement_canary_path, supplement_canary_audit_path)
+    typed_supplement = _typed_supplement_projection(typed_supplement_path, typed_supplement_audit_path)
     rows = dataset.get("rows")
     if not isinstance(rows, list):
         raise ValueError("PG-388 dataset rows must be a list")
@@ -478,6 +524,7 @@ def build_summary(
         "cross_implementation_audit": cross_implementation_projection,
         "taxonomy_coverage": taxonomy_coverage,
         "supplemental_canary": supplemental_canary,
+        "typed_supplement": typed_supplement,
         "candidate_model": _candidate_model_projection(),
         "plan": {
             "file": plan_path.name,
@@ -499,6 +546,7 @@ def build_summary(
             "independent_holdout_docker_smoke": independent_holdout["gates"]["docker_smoke_observed"],
             "cross_implementation_audit": cross_implementation_projection["status"] == "passed_candidate_cross_implementation_logic_audit",
             "supplemental_canary_audit": supplemental_canary["audit_status"] == "passed_candidate_only",
+            "typed_supplement_audit": typed_supplement["audit_status"] == "passed_diagnostic_only",
             "capability_training_allowed": False,
             "training_eligible": False,
             "promotion": _safe_promotion(dataset.get("promotion")),

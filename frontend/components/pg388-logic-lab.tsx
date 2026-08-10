@@ -208,6 +208,26 @@ type RuleIrSummary = {
     promotion: Record<string, boolean>;
     scope: string;
   };
+  typed_supplement: {
+    status: string;
+    report_file: string;
+    report_sha256: string;
+    audit_status: string;
+    audit_file: string;
+    audit_sha256: string;
+    counts: {
+      records: number;
+      train: number;
+      implementation_holdout: number;
+      evaluator_diagnostic: number;
+      typed_evaluator_observed: number;
+      fresh_reset: number;
+      role_bound_evidence: number;
+    };
+    training_eligible: number;
+    context_firewall_passed: boolean;
+    scope: string;
+  };
   candidate_model: {
     status: string;
     runs: CandidateModelRun[];
@@ -229,6 +249,7 @@ type RuleIrSummary = {
     fresh_role_reset_attested: boolean;
     operator_reviewed: boolean;
     supplemental_canary_audit: boolean;
+    typed_supplement_audit: boolean;
     capability_training_allowed: boolean;
     training_eligible: boolean;
     promotion: Record<string, boolean>;
@@ -971,6 +992,16 @@ export default function Pg388LogicLab() {
               {[['in-process only', ruleIrSummary.supplemental_canary.execution.in_process_only], ['Docker', !ruleIrSummary.supplemental_canary.execution.docker_started], ['external network', !ruleIrSummary.supplemental_canary.execution.external_network], ['wire', !ruleIrSummary.supplemental_canary.execution.wire_created]].map(([label, passed]) => <span key={String(label)} className={passed ? styles.gatePass : styles.gateHold}><i />{String(label)} · {passed ? 'CLOSED' : 'OPEN'}</span>)}
             </div>
             <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>状态差分 ≠ 通用漏洞确认</strong><small>每个 role 前后 fresh reset；replay 只在 evaluator 内建立抽象状态。没有 Docker、外网、wire、原始值或训练晋级。</small></div>
+          </div>
+          <div className={styles.ruleIrHoldout} aria-label="Typed Rule-IR diagnostic projection">
+            <div className={styles.ruleIrHeader}><div><span className={styles.miniLabel}>TYPED RULE-IR PROJECTION</span><strong>{ruleIrSummary.typed_supplement.audit_status}</strong></div><b className={ruleIrSummary.gates.typed_supplement_audit ? styles.gatePass : styles.gateHold}>{ruleIrSummary.gates.typed_supplement_audit ? "DIAGNOSTIC" : "HOLD"}</b></div>
+            <div className={styles.ruleIrMetrics}>
+              <div><span>ABSTRACT ROWS</span><strong>{ruleIrSummary.typed_supplement.counts.records}</strong><small>evaluator diagnostic {ruleIrSummary.typed_supplement.counts.evaluator_diagnostic}</small></div>
+              <div><span>TRAIN SPLIT</span><strong className={ruleIrSummary.typed_supplement.counts.train === 0 ? styles.gatePass : styles.gateHold}>{ruleIrSummary.typed_supplement.counts.train}</strong><small>implementation holdout {ruleIrSummary.typed_supplement.counts.implementation_holdout}</small></div>
+              <div><span>TYPED / RESET</span><strong>{ruleIrSummary.typed_supplement.counts.typed_evaluator_observed}/{ruleIrSummary.typed_supplement.counts.fresh_reset}</strong><small>role-bound evidence {ruleIrSummary.typed_supplement.counts.role_bound_evidence}</small></div>
+              <div><span>MODEL INPUT</span><strong className={styles.gateHold}>OFF</strong><small>context firewall {ruleIrSummary.typed_supplement.context_firewall_passed ? "pass" : "hold"}</small></div>
+            </div>
+            <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>typed observation ≠ train permission</strong><small>该投影只把抽象上下文和 Rule-IR 目标留作诊断；没有 train split、原始效果、evaluator 答案或 payload。</small></div>
           </div>
         </div>}
         <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>

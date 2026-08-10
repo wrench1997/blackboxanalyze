@@ -58,6 +58,12 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["supplemental_canary"]["execution"]["in_process_only"] is True
     assert summary["supplemental_canary"]["execution"]["docker_started"] is False
     assert summary["gates"]["supplemental_canary_audit"] is True
+    assert summary["typed_supplement"]["audit_status"] == "passed_diagnostic_only"
+    assert summary["typed_supplement"]["counts"]["records"] == 120
+    assert summary["typed_supplement"]["counts"]["train"] == 0
+    assert summary["typed_supplement"]["counts"]["typed_evaluator_observed"] == 120
+    assert summary["typed_supplement"]["context_firewall_passed"] is True
+    assert summary["gates"]["typed_supplement_audit"] is True
 
 
 def test_pg388_frontend_projection_contains_no_rows_or_raw_markers():
