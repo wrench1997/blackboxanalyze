@@ -56,6 +56,51 @@
     "audit_status": "passed_candidate_logic_rule_ir_source_row_audit",
     "audit_sha256": "b287bf46d6ea44adb4ef25e65e80e0d76f6dfcba3d56625ec55dc650d06cc75c"
   },
+  "independent_holdout": {
+    "implementation": "pg388-logic-lab-backend-b",
+    "source_rows": {
+      "status": "completed_logic_rule_ir_source_rows_candidate_only",
+      "source_rows": 140,
+      "strict_valid": 140,
+      "typed": 140,
+      "fresh_resets": 140,
+      "failure_repair": 56,
+      "negative_violations": 0,
+      "audit_status": "passed_candidate_logic_rule_ir_source_row_audit",
+      "report_file": "pg388_logic_holdout_b_source_rows_v1.json",
+      "report_sha256": "103784e82feef9d6d770c9c8d27655a443ecf15e868f45295e1a1ac47d5013e6",
+      "audit_file": "pg388_logic_holdout_b_source_rows_audit_v1.json",
+      "audit_sha256": "2baec352e100c0ce05e9a622674a367ee7689e5085c4f81946fa2401d055c3cc"
+    },
+    "docker_smoke": {
+      "status": "completed_local_disposable_docker_smoke_candidate_only",
+      "health_http_status": 200,
+      "case_count": 56,
+      "role_count": 4,
+      "fresh_before": 4,
+      "fresh_after": 4,
+      "candidate_state_delta": "bounded_transition",
+      "reference_state_delta": "zero",
+      "negative_state_delta": "zero",
+      "negative_control_clean": true,
+      "docker_started": true,
+      "target_contacted": true,
+      "external_network": false,
+      "persistent_storage": false,
+      "safe_to_send": false,
+      "report_file": "pg388_logic_holdout_b_docker_smoke_v1.json",
+      "report_sha256": "9a846e90d6a209322746088b78168aae31727c1907c1ff5b1d1dee3e86d50cc8"
+    },
+    "gates": {
+      "source_row_contract": true,
+      "fresh_role_reset": true,
+      "candidate_reference_negative_replay": true,
+      "image_attested": false,
+      "operator_reviewed": false,
+      "training_eligible": false,
+      "docker_smoke_observed": true
+    }
+  },
   "plan": {
     "file": "pg388_logic_composed_candidate_plan_v1.json",
     "sha256": "2097845dcd68c696863c7f091a17df9a712401c0aa4e87f0aa7b4d26bc5b0595",
@@ -77,6 +122,7 @@
     "fresh_role_reset_attested": true,
     "operator_reviewed": false,
     "candidate_reference_negative_replay": true,
+    "independent_holdout_docker_smoke": true,
     "capability_training_allowed": false,
     "training_eligible": false,
     "promotion": {
@@ -91,6 +137,7 @@
     "context_contains_wire": false,
     "context_contains_raw_markup": false,
     "answers_out_of_context": true,
-    "claim": "abstract Rule-IR candidate only; not a generic vulnerability or payload capability result"
+    "claim": "abstract Rule-IR candidate only; not a generic vulnerability or payload capability result",
+    "independent_holdout_context": "bounded counts and status only; implementation-B source rows and Docker evaluator details remain out of browser context"
   }
 }

@@ -23,6 +23,9 @@ DEFAULT_PLAN = ROOT / "research" / "pg388_logic_composed_candidate_plan_v1.json"
 DEFAULT_LIVE = ROOT / "research" / "pg388_logic_canary_live_v1.json"
 DEFAULT_ROW_BOUND_REPORT = ROOT / "research" / "pg388_logic_rule_ir_source_rows_live_v1.json"
 DEFAULT_ROW_BOUND_AUDIT = ROOT / "research" / "pg388_logic_rule_ir_source_rows_live_audit_v1.json"
+DEFAULT_HOLDOUT_B_REPORT = ROOT / "research" / "pg388_logic_holdout_b_source_rows_v1.json"
+DEFAULT_HOLDOUT_B_AUDIT = ROOT / "research" / "pg388_logic_holdout_b_source_rows_audit_v1.json"
+DEFAULT_HOLDOUT_B_DOCKER_SMOKE = ROOT / "research" / "pg388_logic_holdout_b_docker_smoke_v1.json"
 DEFAULT_OUTPUT = ROOT / "frontend" / "public" / "research" / "pg388_logic_rule_ir_frontend_summary_v1.json"
 
 SCHEMA_VERSION = "pg388-logic-rule-ir-frontend-summary-v1"
@@ -87,6 +90,9 @@ def build_summary(
     live_path: Path = DEFAULT_LIVE,
     row_bound_report_path: Path = DEFAULT_ROW_BOUND_REPORT,
     row_bound_audit_path: Path = DEFAULT_ROW_BOUND_AUDIT,
+    holdout_b_report_path: Path = DEFAULT_HOLDOUT_B_REPORT,
+    holdout_b_audit_path: Path = DEFAULT_HOLDOUT_B_AUDIT,
+    holdout_b_docker_smoke_path: Path = DEFAULT_HOLDOUT_B_DOCKER_SMOKE,
 ) -> dict[str, Any]:
     dataset = _load(dataset_path)
     audit = _load(audit_path)
@@ -94,6 +100,9 @@ def build_summary(
     live = _load(live_path)
     row_bound = _load(row_bound_report_path) if row_bound_report_path.exists() else None
     row_bound_audit = _load(row_bound_audit_path) if row_bound_audit_path.exists() else None
+    holdout_b = _load(holdout_b_report_path) if holdout_b_report_path.exists() else None
+    holdout_b_audit = _load(holdout_b_audit_path) if holdout_b_audit_path.exists() else None
+    holdout_b_docker = _load(holdout_b_docker_smoke_path) if holdout_b_docker_smoke_path.exists() else None
     rows = dataset.get("rows")
     if not isinstance(rows, list):
         raise ValueError("PG-388 dataset rows must be a list")
@@ -148,6 +157,56 @@ def build_summary(
             "audit_status": "aggregate_only",
             "audit_sha256": "",
         }
+    holdout_b_counts = holdout_b.get("counts") if isinstance(holdout_b, dict) and isinstance(holdout_b.get("counts"), dict) else {}
+    holdout_b_contract = holdout_b.get("source_contract") if isinstance(holdout_b, dict) and isinstance(holdout_b.get("source_contract"), dict) else {}
+    holdout_b_execution = holdout_b.get("execution") if isinstance(holdout_b, dict) and isinstance(holdout_b.get("execution"), dict) else {}
+    docker_observed = holdout_b_docker.get("observed") if isinstance(holdout_b_docker, dict) and isinstance(holdout_b_docker.get("observed"), dict) else {}
+    docker_execution = holdout_b_docker.get("execution") if isinstance(holdout_b_docker, dict) and isinstance(holdout_b_docker.get("execution"), dict) else {}
+    independent_holdout = {
+        "implementation": "pg388-logic-lab-backend-b",
+        "source_rows": {
+            "status": str((holdout_b or {}).get("status", "missing")),
+            "source_rows": int(holdout_b_counts.get("source_rows", 0)),
+            "strict_valid": int(holdout_b_counts.get("strict_valid", 0)),
+            "typed": int(holdout_b_counts.get("typed", 0)),
+            "fresh_resets": int(holdout_b_counts.get("fresh_resets", 0)),
+            "failure_repair": int(holdout_b_counts.get("failure_repair", 0)),
+            "negative_violations": int(holdout_b_counts.get("negative_violations", 0)),
+            "audit_status": str((holdout_b_audit or {}).get("status", "missing")),
+            "report_file": holdout_b_report_path.name,
+            "report_sha256": _sha256(holdout_b_report_path) if holdout_b_report_path.exists() else "",
+            "audit_file": holdout_b_audit_path.name,
+            "audit_sha256": _sha256(holdout_b_audit_path) if holdout_b_audit_path.exists() else "",
+        },
+        "docker_smoke": {
+            "status": str((holdout_b_docker or {}).get("status", "missing")),
+            "health_http_status": int(docker_observed.get("health_http_status", 0)),
+            "case_count": int(docker_observed.get("case_count", 0)),
+            "role_count": len(docker_observed.get("roles", [])) if isinstance(docker_observed.get("roles"), list) else 0,
+            "fresh_before": int(docker_observed.get("fresh_reset_before_count", 0)),
+            "fresh_after": int(docker_observed.get("fresh_reset_after_count", 0)),
+            "candidate_state_delta": str(docker_observed.get("candidate_state_delta", "missing")),
+            "reference_state_delta": str(docker_observed.get("reference_state_delta", "missing")),
+            "negative_state_delta": str(docker_observed.get("negative_state_delta", "missing")),
+            "negative_control_clean": docker_observed.get("negative_control_clean") is True,
+            "docker_started": docker_execution.get("docker_started") is True,
+            "target_contacted": docker_execution.get("target_contacted") is True,
+            "external_network": docker_execution.get("network_contacted") is True,
+            "persistent_storage": docker_observed.get("persistent_storage") is True,
+            "safe_to_send": docker_observed.get("safe_to_send") is True,
+            "report_file": holdout_b_docker_smoke_path.name,
+            "report_sha256": _sha256(holdout_b_docker_smoke_path) if holdout_b_docker_smoke_path.exists() else "",
+        },
+        "gates": {
+            "source_row_contract": holdout_b_contract.get("row_bound_typed_evidence") is True,
+            "fresh_role_reset": holdout_b_contract.get("fresh_role_reset_attested") is True,
+            "candidate_reference_negative_replay": holdout_b_contract.get("candidate_reference_negative_replay") is True,
+            "image_attested": holdout_b_contract.get("image_attested") is True,
+            "operator_reviewed": holdout_b_contract.get("operator_reviewed") is True,
+            "training_eligible": int((holdout_b or {}).get("training_eligible", 0) or 0) > 0,
+            "docker_smoke_observed": docker_execution.get("docker_started") is True and int(docker_observed.get("health_http_status", 0)) == 200,
+        },
+    }
     output = {
         "schema_version": SCHEMA_VERSION,
         "status": "diagnostic_rule_ir_candidate",
@@ -179,6 +238,7 @@ def build_summary(
             "failure_count": len(audit.get("failures", [])) if isinstance(audit.get("failures"), list) else 0,
         },
         "live_evidence": live_projection,
+        "independent_holdout": independent_holdout,
         "plan": {
             "file": plan_path.name,
             "sha256": _sha256(plan_path),
@@ -196,6 +256,7 @@ def build_summary(
             "fresh_role_reset_attested": (row_bound_contract.get("fresh_role_reset_attested") if row_bound is not None else source_contract.get("fresh_role_reset_attested")) is True,
             "operator_reviewed": (row_bound_contract.get("operator_reviewed") if row_bound is not None else source_contract.get("operator_reviewed")) is True,
             "candidate_reference_negative_replay": (row_bound_contract.get("candidate_reference_negative_replay") if row_bound is not None else source_contract.get("candidate_reference_negative_replay")) is True,
+            "independent_holdout_docker_smoke": independent_holdout["gates"]["docker_smoke_observed"],
             "capability_training_allowed": False,
             "training_eligible": False,
             "promotion": _safe_promotion(dataset.get("promotion")),
@@ -206,6 +267,7 @@ def build_summary(
             "context_contains_raw_markup": False,
             "answers_out_of_context": True,
             "claim": "abstract Rule-IR candidate only; not a generic vulnerability or payload capability result",
+            "independent_holdout_context": "bounded counts and status only; implementation-B source rows and Docker evaluator details remain out of browser context",
         },
     }
     _assert_safe_projection(output)

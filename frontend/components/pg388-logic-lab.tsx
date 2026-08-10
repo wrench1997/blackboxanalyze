@@ -67,6 +67,51 @@ type RuleIrSummary = {
     unsafe_allow: number;
     row_bound: boolean;
   };
+  independent_holdout: {
+    implementation: string;
+    source_rows: {
+      status: string;
+      source_rows: number;
+      strict_valid: number;
+      typed: number;
+      fresh_resets: number;
+      failure_repair: number;
+      negative_violations: number;
+      audit_status: string;
+      report_file: string;
+      report_sha256: string;
+      audit_file: string;
+      audit_sha256: string;
+    };
+    docker_smoke: {
+      status: string;
+      health_http_status: number;
+      case_count: number;
+      role_count: number;
+      fresh_before: number;
+      fresh_after: number;
+      candidate_state_delta: string;
+      reference_state_delta: string;
+      negative_state_delta: string;
+      negative_control_clean: boolean;
+      docker_started: boolean;
+      target_contacted: boolean;
+      external_network: boolean;
+      persistent_storage: boolean;
+      safe_to_send: boolean;
+      report_file: string;
+      report_sha256: string;
+    };
+    gates: {
+      source_row_contract: boolean;
+      fresh_role_reset: boolean;
+      candidate_reference_negative_replay: boolean;
+      image_attested: boolean;
+      operator_reviewed: boolean;
+      training_eligible: boolean;
+      docker_smoke_observed: boolean;
+    };
+  };
   plan: {
     status: string;
     required_context_window: number;
@@ -703,6 +748,18 @@ export default function Pg388LogicLab() {
           <div className={styles.ruleIrSlots}><span className={styles.miniLabel}>ORDERED COMPOSITION SLOTS</span><div>{ruleIrSummary.dataset.slot_order.map((slot, index) => <code key={slot}>{String(index + 1).padStart(2, "0")} · {slot}</code>)}</div></div>
           <div className={styles.ruleIrGates}>
             {[["abstract audit", ruleIrSummary.gates.abstract_rule_ir_audit], ["context firewall", ruleIrSummary.gates.context_firewall], ["typed row binding", ruleIrSummary.gates.source_row_bound_typed_evidence], ["fresh role reset", ruleIrSummary.gates.fresh_role_reset_attested], ["operator review", ruleIrSummary.gates.operator_reviewed]].map(([label, passed]) => <span key={String(label)} className={passed ? styles.gatePass : styles.gateHold}><i />{String(label)} · {passed ? "PASS" : "HOLD"}</span>)}
+          </div>
+          <div className={styles.ruleIrHoldout} aria-label="Independent implementation holdout projection">
+            <div className={styles.ruleIrHeader}><div><span className={styles.miniLabel}>INDEPENDENT IMPLEMENTATION HOLDOUT</span><strong>{ruleIrSummary.independent_holdout.implementation}</strong></div><b>{ruleIrSummary.independent_holdout.docker_smoke.status}</b></div>
+            <div className={styles.ruleIrMetrics}>
+              <div><span>B SOURCE ROWS</span><strong>{ruleIrSummary.independent_holdout.source_rows.strict_valid}/{ruleIrSummary.independent_holdout.source_rows.source_rows}</strong><small>strict valid · typed {ruleIrSummary.independent_holdout.source_rows.typed} · audit {ruleIrSummary.independent_holdout.source_rows.audit_status}</small></div>
+              <div><span>DOCKER SMOKE</span><strong className={ruleIrSummary.independent_holdout.gates.docker_smoke_observed ? styles.gatePass : styles.gateHold}>{ruleIrSummary.independent_holdout.gates.docker_smoke_observed ? "OBSERVED" : "HOLD"}</strong><small>health {ruleIrSummary.independent_holdout.docker_smoke.health_http_status} · {ruleIrSummary.independent_holdout.docker_smoke.case_count} cases</small></div>
+              <div><span>ROLE RESET</span><strong>{ruleIrSummary.independent_holdout.docker_smoke.fresh_before + ruleIrSummary.independent_holdout.docker_smoke.fresh_after}</strong><small>before/after · negative {ruleIrSummary.independent_holdout.docker_smoke.negative_control_clean ? "clean" : "review"}</small></div>
+              <div><span>B TRAINING</span><strong className={styles.gateHold}>HOLD</strong><small>image/operator review remain closed</small></div>
+            </div>
+            <div className={styles.ruleIrGates}>
+              {[["source-row contract", ruleIrSummary.independent_holdout.gates.source_row_contract], ["fresh reset", ruleIrSummary.independent_holdout.gates.fresh_role_reset], ["C/R/N/replay", ruleIrSummary.independent_holdout.gates.candidate_reference_negative_replay], ["image attested", ruleIrSummary.independent_holdout.gates.image_attested], ["operator review", ruleIrSummary.independent_holdout.gates.operator_reviewed]].map(([label, passed]) => <span key={String(label)} className={passed ? styles.gatePass : styles.gateHold}><i />{String(label)} · {passed ? "PASS" : "HOLD"}</span>)}
+            </div>
           </div>
         </div>}
         <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>
