@@ -131,7 +131,7 @@ def _result(request: Mapping[str, str]) -> dict[str, Any]:
         state_delta, action_shape, effect = "zero", "baseline_observe", "observe_shape"
     return {
         "schema_version": SCHEMA_VERSION,
-        "status": "typed_local_holdout_result",
+        "status": "typed_local_canary_result",
         "implementation_id": IMPLEMENTATION_ID,
         "case_ref": case_ref,
         "role": role,
