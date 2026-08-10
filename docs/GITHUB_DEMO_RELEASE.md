@@ -83,3 +83,9 @@ SHA256SUMS
 - 原始攻击字符串、原始响应、网络 wire、凭据、外连地址和 evaluator 答案不进入仓库或模型上下文。
 - PG-385/PG-386 的过滤反馈只能解释为本地 canary 证据，不能宣传为任意网址 WAF 绕过或通用 payload 能力。
 - 任意 release asset 进入训练前，仍需通过对应 dataset/audit/rules hash gate。
+
+## 2026-08-10 交接冻结
+
+当前 `origin/main` 是公开 GitHub 仓库。可直接随仓库分发的是源码、Docker 演示配置、抽象数据、审计报告和 `research/pg388_demo_asset_manifest_v1.json`；新增的 PG-388 多表面候选计划明确为 `blocked_surface_source_contract`，不会启动 optimizer。
+
+本地 `artifacts/` 中约 51.3 GiB 的历史/候选权重保持被 `.gitignore` 排除。GitHub 普通 Git 不接受这些大文件，且公开仓库不应发布可能编码原始攻击字符串的过滤/解码权重。公司环境如需权重，应从受控 A800/对象存储复制后按报告中的 SHA-256 校验；不要把 A800 当作唯一事实来源，也不要把缺失权重误判成已验证。
