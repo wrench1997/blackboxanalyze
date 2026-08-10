@@ -72,6 +72,11 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["information_preservation"]["composition_dataset"]["context_unique_ratio"]["train"] == 0.333333
     assert summary["information_preservation"]["composition_dataset"]["cross_split_target_overlap"] == 140
     assert summary["information_preservation"]["composition_dataset"]["contract_passed"] is False
+    assert summary["information_preservation"]["surface_dataset"]["split_counts"] == {"implementation_holdout": 72, "train": 72}
+    assert summary["information_preservation"]["surface_dataset"]["context_unique_ratio"]["train"] == 0.166667
+    assert summary["information_preservation"]["surface_dataset"]["cross_split_context_overlap"] == 0
+    assert summary["information_preservation"]["surface_dataset"]["axis_observed_count"] == 7
+    assert summary["information_preservation"]["surface_dataset"]["contract_passed"] is False
 
 
 def test_pg388_frontend_projection_contains_no_rows_or_raw_markers():

@@ -257,6 +257,21 @@ type RuleIrSummary = {
       source_contract: { row_bound_typed_evidence: boolean; fresh_role_reset_attested: boolean; operator_reviewed: boolean; training_eligible: number };
       contract_passed: boolean;
     };
+    surface_dataset: {
+      status: string;
+      row_count: number;
+      split_counts: Record<string, number>;
+      implementation_count: number;
+      context_unique_ratio: Record<string, number>;
+      target_unique_ratio: Record<string, number>;
+      cross_split_context_overlap: number;
+      cross_split_target_overlap: number;
+      axis_observed_count: number;
+      axis_zero_entropy_count: number;
+      axis_count: number;
+      source_contract: { in_process_fixture_only: boolean; row_bound_typed_evidence: boolean; fresh_role_reset_attested: boolean; operator_reviewed: boolean; training_eligible: number };
+      contract_passed: boolean;
+    };
     training_eligible: number;
     promotion: Record<string, boolean>;
     scope: string;
@@ -1045,8 +1060,9 @@ export default function Pg388LogicLab() {
               <div><span>AXIS ENTROPY</span><strong className={ruleIrSummary.information_preservation.axis_presence.zero_entropy_axis_count === 0 ? styles.gatePass : styles.gateHold}>{ruleIrSummary.information_preservation.axis_presence.zero_entropy_axis_count}/{ruleIrSummary.information_preservation.axis_presence.axis_count} ZERO</strong><small>{ruleIrSummary.information_preservation.axis_presence.axes_observed_count} axes observed · holdout train split required</small></div>
               <div><span>CAPACITY WINDOW</span><strong>{ruleIrSummary.information_preservation.capacity.required_window_estimate}</strong><small>context max {ruleIrSummary.information_preservation.capacity.context_length_max} · information gate {ruleIrSummary.information_preservation.information_gate.passed ? "pass" : "hold"}</small></div>
               <div><span>COMPOSITION SET</span><strong className={ruleIrSummary.information_preservation.composition_dataset.contract_passed ? styles.gatePass : styles.gateHold}>{ruleIrSummary.information_preservation.composition_dataset.split_counts.train ?? 0}/{ruleIrSummary.information_preservation.composition_dataset.split_counts.implementation_holdout ?? 0}</strong><small>train/holdout · context {(ruleIrSummary.information_preservation.composition_dataset.context_unique_ratio.train * 100).toFixed(1)}% unique · contract {ruleIrSummary.information_preservation.composition_dataset.contract_passed ? "pass" : "hold"}</small></div>
+              <div><span>SURFACE ROWS</span><strong className={ruleIrSummary.information_preservation.surface_dataset.contract_passed ? styles.gatePass : styles.gateHold}>{ruleIrSummary.information_preservation.surface_dataset.split_counts.train ?? 0}/{ruleIrSummary.information_preservation.surface_dataset.split_counts.implementation_holdout ?? 0}</strong><small>2 implementations · context {(ruleIrSummary.information_preservation.surface_dataset.context_unique_ratio.train * 100).toFixed(1)}% unique · axes {ruleIrSummary.information_preservation.surface_dataset.axis_observed_count}/{ruleIrSummary.information_preservation.surface_dataset.axis_count}</small></div>
             </div>
-            <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>信息保真审计 ≠ 训练许可</strong><small>严格 source-row 缺 train split；composition dataset 虽有 train/holdout，但 typed/reset/operator 与完整七轴合同未通过，且 target 跨 split 有重叠。此卡只展示聚合诊断，不把行、token、payload 或 evaluator 答案送进浏览器。</small></div>
+             <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>信息保真审计 ≠ 训练许可</strong><small>严格 source-row 缺 train split；composition 与多表面 source rows 虽有 split，但 operator/训练合同仍未通过。此卡只展示聚合诊断，不把行、token、JS 源码、payload 或 evaluator 答案送进浏览器。</small></div>
           </div>
         </div>}
         <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>

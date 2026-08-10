@@ -352,6 +352,21 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
         "source_contract": {"row_bound_typed_evidence": False, "fresh_role_reset_attested": False, "operator_reviewed": False, "training_eligible": 0},
         "contract_passed": False,
     }
+    surface_empty = {
+        "status": "missing",
+        "row_count": 0,
+        "split_counts": {},
+        "implementation_count": 0,
+        "context_unique_ratio": {},
+        "target_unique_ratio": {},
+        "cross_split_context_overlap": 0,
+        "cross_split_target_overlap": 0,
+        "axis_observed_count": 0,
+        "axis_zero_entropy_count": 0,
+        "axis_count": 7,
+        "source_contract": {"in_process_fixture_only": False, "row_bound_typed_evidence": False, "fresh_role_reset_attested": False, "operator_reviewed": False, "training_eligible": 0},
+        "contract_passed": False,
+    }
 
     empty = {
         "status": "missing",
@@ -374,6 +389,7 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
         },
         "integrity": {"row_count": 0, "raw_context_marker_hits": 0, "row_hash_failures": 0},
         "composition_dataset": composition_empty,
+        "surface_dataset": surface_empty,
         "training_eligible": 0,
         "promotion": _safe_promotion(None),
         "scope": "bounded_information_diagnostic_no_rows_or_tokens",
@@ -388,6 +404,7 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
     gate = report.get("information_gate") if isinstance(report.get("information_gate"), dict) else {}
     integrity = report.get("integrity") if isinstance(report.get("integrity"), dict) else {}
     composition = report.get("composition_dataset") if isinstance(report.get("composition_dataset"), dict) else {}
+    surface = report.get("surface_dataset") if isinstance(report.get("surface_dataset"), dict) else {}
     composition_sequence = composition.get("sequence_diversity") if isinstance(composition.get("sequence_diversity"), dict) else {}
     composition_by_split = composition_sequence.get("by_split") if isinstance(composition_sequence.get("by_split"), dict) else {}
     composition_context_ratios: dict[str, float] = {}
@@ -426,6 +443,40 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
             and int(composition_sequence.get("cross_split_context_overlap", 0) or 0) == 0
             and int(composition_sequence.get("cross_split_target_overlap", 0) or 0) == 0
         ),
+    }
+    surface_sequence = surface.get("sequence_diversity") if isinstance(surface.get("sequence_diversity"), dict) else {}
+    surface_by_split = surface_sequence.get("by_split") if isinstance(surface_sequence.get("by_split"), dict) else {}
+    surface_context_ratios: dict[str, float] = {}
+    surface_target_ratios: dict[str, float] = {}
+    for split, item in surface_by_split.items():
+        if not isinstance(item, dict):
+            continue
+        context = item.get("context") if isinstance(item.get("context"), dict) else {}
+        target = item.get("target") if isinstance(item.get("target"), dict) else {}
+        surface_context_ratios[str(split)] = round(float(context.get("unique_ratio", 0.0) or 0.0), 6)
+        surface_target_ratios[str(split)] = round(float(target.get("unique_ratio", 0.0) or 0.0), 6)
+    surface_axes = surface.get("axis_presence") if isinstance(surface.get("axis_presence"), dict) else {}
+    surface_contract = surface.get("source_contract") if isinstance(surface.get("source_contract"), dict) else {}
+    surface_projection = {
+        "status": str(surface.get("status", "missing")),
+        "row_count": int(surface.get("row_count", 0) or 0),
+        "split_counts": {str(key): int(value or 0) for key, value in (surface.get("split_counts", {}) or {}).items()} if isinstance(surface.get("split_counts"), dict) else {},
+        "implementation_count": int(surface.get("implementation_count", 0) or 0),
+        "context_unique_ratio": surface_context_ratios,
+        "target_unique_ratio": surface_target_ratios,
+        "cross_split_context_overlap": int(surface_sequence.get("cross_split_context_overlap", 0) or 0),
+        "cross_split_target_overlap": int(surface_sequence.get("cross_split_target_overlap", 0) or 0),
+        "axis_observed_count": sum(1 for value in surface_axes.values() if isinstance(value, dict) and int(value.get("observed_count", 0) or 0) > 0),
+        "axis_zero_entropy_count": sum(1 for value in surface_axes.values() if isinstance(value, dict) and float(value.get("presence_entropy_bits", 0.0) or 0.0) == 0.0),
+        "axis_count": len(surface_axes) or 7,
+        "source_contract": {
+            "in_process_fixture_only": surface_contract.get("in_process_fixture_only") is True,
+            "row_bound_typed_evidence": surface_contract.get("row_bound_typed_evidence") is True,
+            "fresh_role_reset_attested": surface_contract.get("fresh_role_reset_attested") is True,
+            "operator_reviewed": surface_contract.get("operator_reviewed") is True,
+            "training_eligible": int(surface_contract.get("training_eligible", 0) or 0),
+        },
+        "contract_passed": surface.get("contract_passed") is True,
     }
 
     def _sequence(name: str) -> dict[str, Any]:
@@ -487,6 +538,7 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
             "row_hash_failures": int(integrity.get("row_hash_failures", 0) or 0),
         },
         "composition_dataset": composition_projection,
+        "surface_dataset": surface_projection,
         "training_eligible": int(report.get("training_eligible", 0) or 0),
         "promotion": _safe_promotion(report.get("promotion")),
         "scope": "bounded_information_diagnostic_no_rows_or_tokens",

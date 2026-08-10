@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_A_ROWS = ROOT / "research" / "pg388_logic_rule_ir_source_rows_live_rows_v1.json"
 DEFAULT_B_ROWS = ROOT / "research" / "pg388_logic_holdout_b_source_rows_rows_v1.json"
 DEFAULT_COMPOSITION_DATASET = ROOT / "research" / "pg388_logic_rule_ir_composition_dataset_v1.json"
+DEFAULT_SURFACE_ROWS = ROOT / "research" / "pg388_logic_surface_source_rows_v1.json"
 DEFAULT_OUTPUT = ROOT / "research" / "pg388_logic_information_preservation_audit_v1.json"
 
 SCHEMA_VERSION = "pg388-logic-information-preservation-audit-v1"
@@ -228,6 +229,147 @@ def _composition_projection(path: Path) -> dict[str, Any]:
     }
 
 
+def _surface_rows(path: Path) -> list[Mapping[str, Any]]:
+    """Load only source-row objects from the bounded surface report."""
+    document = _load(path)
+    values = document.get("rows")
+    if not isinstance(values, list):
+        raise ValueError(f"surface source-row list missing: {path}")
+    result: list[Mapping[str, Any]] = []
+    for wrapper in values:
+        if not isinstance(wrapper, Mapping) or not isinstance(wrapper.get("source_row"), Mapping):
+            raise ValueError("surface source-row wrapper missing source_row")
+        result.append(wrapper["source_row"])
+    return result
+
+
+def _surface_projection(path: Path | None) -> dict[str, Any]:
+    """Summarize varied full-page rows without returning their contents."""
+    empty = {
+        "status": "missing",
+        "file": path.name if path is not None else "",
+        "sha256": "",
+        "row_count": 0,
+        "split_counts": {},
+        "implementation_count": 0,
+        "sequence_diversity": {
+            "by_split": {},
+            "cross_split_context_overlap": 0,
+            "cross_split_target_overlap": 0,
+        },
+        "axis_presence": {},
+        "raw_context_marker_hits": 0,
+        "source_contract": {
+            "in_process_fixture_only": False,
+            "row_bound_typed_evidence": False,
+            "fresh_role_reset_attested": False,
+            "operator_reviewed": False,
+            "training_eligible": 0,
+        },
+        "contract_passed": False,
+        "promotion": dict(PROMOTION),
+    }
+    if path is None or not path.exists():
+        return empty
+    document = _load(path)
+    rows = _surface_rows(path)
+    split_rows: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    implementations: set[str] = set()
+    for row in rows:
+        split_rows[str(row.get("split", "unknown"))].append(row)
+        meta = row.get("source_meta") if isinstance(row.get("source_meta"), Mapping) else {}
+        if meta.get("implementation"):
+            implementations.add(str(meta["implementation"]))
+    contexts = {
+        split: [list(row.get("context_tokens", [])) for row in group if isinstance(row.get("context_tokens"), list)]
+        for split, group in split_rows.items()
+    }
+    targets = {
+        split: [list(row.get("target_tokens", [])) for row in group if isinstance(row.get("target_tokens"), list)]
+        for split, group in split_rows.items()
+    }
+    context_sets = {split: {_digest(sequence) for sequence in values} for split, values in contexts.items()}
+    target_sets = {split: {_digest(sequence) for sequence in values} for split, values in targets.items()}
+    axes = (
+        "document_presence",
+        "navigation_presence",
+        "request_transport_presence",
+        "response_transport_presence",
+        "javascript_presence",
+        "failure_feedback_presence",
+        "belief_replay_presence",
+    )
+    axis_presence: dict[str, dict[str, Any]] = {}
+    for axis in axes:
+        states = []
+        for row in rows:
+            values = row.get("axis_presence") if isinstance(row.get("axis_presence"), Mapping) else {}
+            states.append(str(values.get(axis, "unknown")))
+        counts = Counter(states)
+        axis_presence[axis] = {
+            "row_count": len(states),
+            "observed_count": int(counts.get("observed", 0)),
+            "absent_count": int(counts.get("absent", 0)),
+            "not_observed_count": int(counts.get("not_observed", 0)),
+            "unknown_count": int(counts.get("unknown", 0)),
+            "presence_entropy_bits": _entropy(states),
+            "unique_presence_states": len(counts),
+        }
+    raw_marker_hits = 0
+    for row in rows:
+        tokens = row.get("context_tokens") if isinstance(row.get("context_tokens"), list) else []
+        raw_marker_hits += sum(
+            1
+            for token in tokens
+            if isinstance(token, str)
+            and any(marker in token.casefold() for marker in ("http://", "https://", "payload=", "wire=", "response_body=", "raw_"))
+        )
+    contract = document.get("source_contract") if isinstance(document.get("source_contract"), Mapping) else {}
+    source_contract = {
+        "in_process_fixture_only": contract.get("in_process_fixture_only") is True,
+        "row_bound_typed_evidence": contract.get("row_bound_typed_evidence") is True,
+        "fresh_role_reset_attested": contract.get("fresh_role_reset_attested") is True,
+        "operator_reviewed": contract.get("operator_reviewed") is True,
+        "training_eligible": int(contract.get("training_eligible", document.get("training_eligible", 0)) or 0),
+    }
+    split_summary = {
+        split: {
+            "row_count": len(split_rows[split]),
+            "context": _sequence_summary(contexts.get(split, [])),
+            "target": _sequence_summary(targets.get(split, [])),
+            "implementation_count": len({str((row.get("source_meta") or {}).get("implementation", "unknown")) for row in split_rows[split]}),
+        }
+        for split in sorted(split_rows)
+    }
+    contract_passed = bool(
+        source_contract["row_bound_typed_evidence"]
+        and source_contract["fresh_role_reset_attested"]
+        and source_contract["operator_reviewed"]
+        and source_contract["training_eligible"] > 0
+        and raw_marker_hits == 0
+        and int(len(context_sets.get("train", set()) & context_sets.get("implementation_holdout", set()))) == 0
+        and int(len(target_sets.get("train", set()) & target_sets.get("implementation_holdout", set()))) == 0
+    )
+    return {
+        "status": str(document.get("status", "unknown")),
+        "file": path.name,
+        "sha256": _file_sha256(path),
+        "row_count": len(rows),
+        "split_counts": {split: len(group) for split, group in sorted(split_rows.items())},
+        "implementation_count": len(implementations),
+        "sequence_diversity": {
+            "by_split": split_summary,
+            "cross_split_context_overlap": len(context_sets.get("train", set()) & context_sets.get("implementation_holdout", set())),
+            "cross_split_target_overlap": len(target_sets.get("train", set()) & target_sets.get("implementation_holdout", set())),
+        },
+        "axis_presence": axis_presence,
+        "raw_context_marker_hits": raw_marker_hits,
+        "source_contract": source_contract,
+        "contract_passed": contract_passed,
+        "promotion": dict(PROMOTION),
+    }
+
+
 def _assert_safe(value: Any) -> None:
     if isinstance(value, Mapping):
         for key, item in value.items():
@@ -239,7 +381,13 @@ def _assert_safe(value: Any) -> None:
             _assert_safe(item)
 
 
-def audit(*, a_rows_path: Path = DEFAULT_A_ROWS, b_rows_path: Path = DEFAULT_B_ROWS, composition_dataset_path: Path = DEFAULT_COMPOSITION_DATASET) -> dict[str, Any]:
+def audit(
+    *,
+    a_rows_path: Path = DEFAULT_A_ROWS,
+    b_rows_path: Path = DEFAULT_B_ROWS,
+    composition_dataset_path: Path = DEFAULT_COMPOSITION_DATASET,
+    surface_rows_path: Path | None = DEFAULT_SURFACE_ROWS,
+) -> dict[str, Any]:
     source_specs = (("backend_a", a_rows_path), ("backend_b", b_rows_path))
     source_rows: dict[str, list[Mapping[str, Any]]] = {name: _rows(path) for name, path in source_specs}
     all_rows = [row for rows in source_rows.values() for row in rows]
@@ -254,6 +402,7 @@ def audit(*, a_rows_path: Path = DEFAULT_A_ROWS, b_rows_path: Path = DEFAULT_B_R
     target_sets = {name: {_digest(sequence) for sequence in sequences} for name, sequences in target_by_source.items()}
     axes = ("document_presence", "navigation_presence", "request_transport_presence", "response_transport_presence", "javascript_presence", "failure_feedback_presence", "belief_replay_presence")
     composition = _composition_projection(composition_dataset_path)
+    surface = _surface_projection(surface_rows_path)
     raw_marker_hits = 0
     row_hash_failures = 0
     for row in all_rows:
@@ -286,6 +435,10 @@ def audit(*, a_rows_path: Path = DEFAULT_A_ROWS, b_rows_path: Path = DEFAULT_B_R
     composition_overlap = composition.get("sequence_diversity", {}) if isinstance(composition, Mapping) else {}
     if composition_overlap.get("cross_split_context_overlap", 0) or composition_overlap.get("cross_split_target_overlap", 0):
         failures.append("composition_cross_split_overlap")
+    if surface.get("status") == "missing":
+        failures.append("surface_dataset_missing")
+    elif surface.get("contract_passed") is not True:
+        failures.append("surface_source_contract_incomplete")
     status = "blocked_information_gate" if failures or split_counts.get("train", 0) == 0 else "diagnostic_information_candidate_only"
     output: dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
@@ -303,6 +456,7 @@ def audit(*, a_rows_path: Path = DEFAULT_A_ROWS, b_rows_path: Path = DEFAULT_B_R
             "role_observation_count": sum(roles.values()),
         },
         "composition_dataset": composition,
+        "surface_dataset": surface,
         "sequence_diversity": {
             "context": _sequence_summary(context_sequences),
             "target": _sequence_summary(target_sequences),
@@ -345,9 +499,10 @@ def main() -> int:
     parser.add_argument("--a-rows", type=Path, default=DEFAULT_A_ROWS)
     parser.add_argument("--b-rows", type=Path, default=DEFAULT_B_ROWS)
     parser.add_argument("--composition-dataset", type=Path, default=DEFAULT_COMPOSITION_DATASET)
+    parser.add_argument("--surface-rows", type=Path, default=DEFAULT_SURFACE_ROWS)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
-    report = audit(a_rows_path=args.a_rows, b_rows_path=args.b_rows, composition_dataset_path=args.composition_dataset)
+    report = audit(a_rows_path=args.a_rows, b_rows_path=args.b_rows, composition_dataset_path=args.composition_dataset, surface_rows_path=args.surface_rows)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": report["status"], "row_count": report["sources"]["role_observation_count"], "output": str(args.output)}, ensure_ascii=False))
