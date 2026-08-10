@@ -65,6 +65,10 @@ type CandidateModelRun = {
   vocabulary_scope: string;
   vocabulary_size: number;
   weakest_head: { name: string; accuracy: number };
+  holdout_composition_exact: number;
+  holdout_slot_accuracy: number;
+  holdout_repair_recall: number;
+  holdout_composition_entropy: number;
   holdout_ask_recall: number;
   holdout_negative_false_allow: number;
   execution: { optimizer_started: boolean; device: string; gpu_touched: boolean };
@@ -904,7 +908,7 @@ export default function Pg388LogicLab() {
                 <div key={run.label}>
                   <span>{run.label}</span>
                   <strong className={run.holdout_ask_recall >= 0.95 && run.holdout_negative_false_allow === 0 ? styles.gatePass : styles.gateHold}>{(run.holdout_ask_recall * 100).toFixed(0)}% ASK</strong>
-                  <small>weakest {run.weakest_head.name} {(run.weakest_head.accuracy * 100).toFixed(1)}% · holdout {run.holdout_count} · {run.execution.device}</small>
+                  <small>composition {(run.holdout_composition_exact * 100).toFixed(1)}% · slots {(run.holdout_slot_accuracy * 100).toFixed(1)}% · repair {(run.holdout_repair_recall * 100).toFixed(1)}% · weakest {run.weakest_head.name} {(run.weakest_head.accuracy * 100).toFixed(1)}% · holdout {run.holdout_count} · {run.execution.device}</small>
                 </div>
               ))}
             </div>

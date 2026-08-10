@@ -106,6 +106,10 @@ def _candidate_run_projection(label: str, path: Path) -> dict[str, Any]:
             "vocabulary_scope": "missing",
             "vocabulary_size": 0,
             "weakest_head": {"name": "missing", "accuracy": 0.0},
+            "holdout_composition_exact": 0.0,
+            "holdout_slot_accuracy": 0.0,
+            "holdout_repair_recall": 0.0,
+            "holdout_composition_entropy": 0.0,
             "holdout_ask_recall": 0.0,
             "holdout_negative_false_allow": 0,
             "execution": {"optimizer_started": False, "device": "unknown", "gpu_touched": False},
@@ -133,6 +137,10 @@ def _candidate_run_projection(label: str, path: Path) -> dict[str, Any]:
     if worst_heads:
         weakest_name, weakest_accuracy = min(worst_heads.items(), key=lambda item: (item[1], item[0]))
     ask_values = [float(item.get("ask_recall", 0.0)) for item in holdouts if isinstance(item.get("ask_recall"), (int, float))]
+    composition_values = [float(item.get("composition_exact", 0.0)) for item in holdouts if isinstance(item.get("composition_exact"), (int, float))]
+    slot_values = [float(item.get("slot_accuracy", 0.0)) for item in holdouts if isinstance(item.get("slot_accuracy"), (int, float))]
+    repair_values = [float(item.get("repair_recall", 0.0)) for item in holdouts if isinstance(item.get("repair_recall"), (int, float))]
+    entropy_values = [float(item.get("composition_entropy", 0.0)) for item in holdouts if isinstance(item.get("composition_entropy"), (int, float))]
     false_allow_values = [int(item.get("negative_false_allow", 0) or 0) for item in holdouts]
     vocabulary = report.get("train_only_vocabulary") if isinstance(report.get("train_only_vocabulary"), dict) else report.get("train_context_vocabulary") if isinstance(report.get("train_context_vocabulary"), dict) else {}
     execution = report.get("execution") if isinstance(report.get("execution"), dict) else {}
@@ -147,6 +155,10 @@ def _candidate_run_projection(label: str, path: Path) -> dict[str, Any]:
         "vocabulary_scope": str(vocabulary.get("scope", "unknown")),
         "vocabulary_size": int(vocabulary.get("size", 0) or 0),
         "weakest_head": {"name": weakest_name, "accuracy": round(float(weakest_accuracy), 6)},
+        "holdout_composition_exact": round(min(composition_values), 6) if composition_values else 0.0,
+        "holdout_slot_accuracy": round(min(slot_values), 6) if slot_values else 0.0,
+        "holdout_repair_recall": round(min(repair_values), 6) if repair_values else 0.0,
+        "holdout_composition_entropy": round(max(entropy_values), 6) if entropy_values else 0.0,
         "holdout_ask_recall": round(min(ask_values), 6) if ask_values else 0.0,
         "holdout_negative_false_allow": max(false_allow_values) if false_allow_values else 0,
         "execution": {

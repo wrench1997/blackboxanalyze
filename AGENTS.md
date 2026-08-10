@@ -1570,10 +1570,10 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 组合 smoke 的 worst holdout composition exact=`0.023438`、slot accuracy=`0.628551`、ASK=`0.705882`，显示“把不变量、动作和修复按顺序组合”仍是模型瓶颈；该报告只作结构诊断，不是逻辑漏洞利用结果。前端 candidate model projection 已纳入该第四组 run，摘要 SHA=`e92ddb32ef427160074588a98cdcc57deb08688e50128ddcc11efd939e332256`，投影脚本 SHA=`7b045e65f7e5a34ed20d57142bc6b89b7a6b9c505933f382aebbedd9e59f251b`。
 - 追加完整 420/420 train/implementation-holdout 的 3-seed CPU run：report SHA=`bf8a3cd1d9ff45c762d62fc8381fc9ab4f3e20c63acea3540de8970ab541a31c`；worst composition exact=`0.007143`、slot accuracy=`0.800649`、ASK=`1.0`、repair=`1.0`、negative false-allow=`0`。完整数据没有解决组合精确率瓶颈，仍是 candidate-only。
 - 追加同一全量数据的 8-epoch CPU 对照：report SHA=`7e929aa1a95bc4154aa08b81fd6690cfbf8bb34b78a2b3d04372e72f7467327e`；worst composition exact=`0.964286`、slot accuracy=`0.994156`、ASK=`1.0`、repair=`1.0`、negative false-allow=`0`。这说明早期低分主要是训练不足，但仍只证明抽象 Rule-IR 组合，不证明真实漏洞能力。
-- demo asset manifest 当前 SHA=`abb5cba0b0d95616c3209efdb7a01bddbf9bb365381bc73e2569649fdb7be285`、`asset_count=65`；相关 PG388/前端/组合测试 `12 passed`（Transformer nested-tensor 仅为警告）。
+- demo asset manifest 当前 SHA=`dbb7a9386c263f80124e308d64bb13d3cd196609f951654bf1b29059eba294c7`、`asset_count=65`；相关 PG388/前端/组合测试 `12 passed`（Transformer nested-tensor 仅为警告）。
 - 前端已用最新 `.next/standalone` 做无外网 refresh image，当前 image=`sha256:9265f723d0f547af32d01ee00e88d17cfa4c19a17af9e372768dd50f992c7377`；`/pg388` 和摘要接口复核 HTTP 200，摘要 latest candidate=`11-slot composition (full CPU e8)`、taxonomy case_count=66，B holdout 未启动。
 - 前端摘要新增 taxonomy coverage projection：66 个抽象案例、10 个 04.13 类别、0 个缺失锚点、10 个 candidate-only 细项；只显示有界计数，原始行/业务值不进入浏览器。
-- 前端运行时将后端 56 个核心合同与 10 个 supplemental contracts 合并进 case catalog，静态详解优先，其余只使用 ASK/抽象模板；taxonomy 面板对应最新摘要 SHA=`c51a09d6aa0084db98da8305258a06e4bff10b1ce605eea1be9f0c8f0eb3eb2b`、投影脚本 SHA=`f002b338831c22831844686c7acd281d0222856fa959a99617aa2fe40606efa8`、组件 SHA=`843a4daba37110828c5cbfa4dda116ca6d6dde4b202b0bb9162a49084b84b48a`；Next build 通过，资产校验为 `asset_count=65`。
+- 前端运行时将后端 56 个核心合同与 10 个 supplemental contracts 合并进 case catalog，静态详解优先，其余只使用 ASK/抽象模板；taxonomy 面板与模型指标投影对应最新摘要 SHA=`a81cb120d4620f58e643442a6fb7cf4b1fa9f3ba726d9c52c08d3cddeb4373cd`、投影脚本 SHA=`705590f5fb210443b85663e9c75686f6e0098ef31e169e0023265c90a309cd8f`、组件 SHA=`28575d2399b00babb46308234b45873966be1cfec4f26f1d9b6fb9ad1c7bbd73`；Next build 通过，资产校验为 `asset_count=65`。
 
 ### 2026-08-10：PG-388 明日演示运行手册
 

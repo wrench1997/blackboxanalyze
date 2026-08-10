@@ -36,6 +36,9 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["candidate_model"]["runs"][5]["holdout_count"] == 420
     assert summary["candidate_model"]["runs"][5]["weakest_head"]["accuracy"] >= 0.96
     assert summary["candidate_model"]["runs"][5]["holdout_ask_recall"] == 1.0
+    assert summary["candidate_model"]["runs"][5]["holdout_composition_exact"] == 0.964286
+    assert summary["candidate_model"]["runs"][5]["holdout_slot_accuracy"] == 0.994156
+    assert summary["candidate_model"]["runs"][5]["holdout_repair_recall"] == 1.0
     assert summary["candidate_model"]["training_allowed"] is False
     assert summary["taxonomy_coverage"]["case_count"] == 66
     assert summary["taxonomy_coverage"]["category_count"] == 10
