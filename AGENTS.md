@@ -1562,3 +1562,8 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 提交=`80290d56e47394edc098fb2675dfdcba8542b7e3`，已推送并核对 `origin/main`；工作区干净。
 - 发布内容包括三份 CPU candidate smoke 的只读聚合指标、PG388 模型面板、摘要/资产清单同步；回归 `12 passed`、`npm run build` 通过、资产校验 `asset_count=60` 通过、`/pg388` 与摘要接口 HTTP 200。
 - 本次提交仍没有启动 A800、Docker holdout 或外网；训练资格、payload catalog、长期记忆和漏洞声明全部关闭。下一步若要真实训练，仍必须先补 train split、operator review、image attestation 和信息/容量硬门。
+
+### 2026-08-10：PG-388 明日演示运行手册
+
+- 新增 `docs/PG388_DEMO_RUNBOOK.md`，记录克隆/资产校验、immutable base digest、compose 启动、HTTP 健康检查、推荐讲解顺序、模型指标解读和安全清理命令。
+- 手册明确 PG388 是本地 disposable 抽象逻辑状态靶场；不会把 CPU smoke、typed state-shape 或 holdout 误述为通用漏洞、XSS/SQL/WAF 绕过或 payload 能力。
