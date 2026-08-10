@@ -28,6 +28,8 @@ DEFAULT_HOLDOUT_B_AUDIT = ROOT / "research" / "pg388_logic_holdout_b_source_rows
 DEFAULT_HOLDOUT_B_DOCKER_SMOKE = ROOT / "research" / "pg388_logic_holdout_b_docker_smoke_v1.json"
 DEFAULT_CROSS_IMPLEMENTATION_AUDIT = ROOT / "research" / "pg388_logic_cross_implementation_audit_v1.json"
 DEFAULT_TAXONOMY_AUDIT = ROOT / "research" / "pg388_logic_taxonomy_audit_v1.json"
+DEFAULT_SUPPLEMENT_CANARY = ROOT / "research" / "pg388_logic_supplement_canary_local_v1.json"
+DEFAULT_SUPPLEMENT_CANARY_AUDIT = ROOT / "research" / "pg388_logic_supplement_canary_local_audit_v1.json"
 DEFAULT_CANDIDATE_REPORTS = (
     ("logic invariant", ROOT / "research" / "pg388_logic_token_cpu_smoke_v1.json"),
     ("supplemental logic", ROOT / "research" / "pg388_logic_supplement_token_cpu_smoke_v1.json"),
@@ -232,6 +234,63 @@ def _taxonomy_coverage_projection(path: Path) -> dict[str, Any]:
     }
 
 
+def _supplement_canary_projection(report_path: Path, audit_path: Path) -> dict[str, Any]:
+    """Expose only bounded local-canary counts; never pass rows to the UI."""
+
+    if not report_path.exists():
+        return {
+            "status": "missing",
+            "report_file": report_path.name,
+            "report_sha256": "",
+            "audit_status": "missing",
+            "audit_file": audit_path.name,
+            "audit_sha256": "",
+            "counts": {},
+            "execution": {"in_process_only": True, "docker_started": False, "target_contacted": False, "external_network": False},
+            "training_eligible": 0,
+            "promotion": _safe_promotion(None),
+        }
+    report = _load(report_path)
+    audit = _load(audit_path) if audit_path.exists() else {}
+    raw_counts = report.get("counts") if isinstance(report.get("counts"), dict) else {}
+    keys = (
+        "cases",
+        "seeds",
+        "roles",
+        "role_rows",
+        "fresh_resets_before",
+        "fresh_resets_after",
+        "setup_observations",
+        "typed_observations",
+        "candidate_effects",
+        "replay_effects",
+        "negative_control_clean",
+        "negative_violation",
+        "unsafe_allow",
+    )
+    counts = {key: int(raw_counts.get(key, 0) or 0) for key in keys}
+    execution = report.get("execution") if isinstance(report.get("execution"), dict) else {}
+    return {
+        "status": str(report.get("status", "unknown")),
+        "report_file": report_path.name,
+        "report_sha256": _sha256(report_path),
+        "audit_status": str(audit.get("status", "missing")),
+        "audit_file": audit_path.name,
+        "audit_sha256": _sha256(audit_path) if audit_path.exists() else "",
+        "counts": counts,
+        "execution": {
+            "in_process_only": execution.get("in_process_only") is True,
+            "docker_started": execution.get("docker_started") is True,
+            "target_contacted": execution.get("target_contacted") is True,
+            "external_network": execution.get("external_network") is True,
+            "wire_created": execution.get("wire_created") is True,
+        },
+        "training_eligible": int(report.get("training_eligible", 0) or 0),
+        "promotion": _safe_promotion(report.get("promotion")),
+        "scope": "local_in_process_evaluator_only;abstract_state_shape_not_a_general_vulnerability_claim",
+    }
+
+
 def build_summary(
     *,
     dataset_path: Path = DEFAULT_DATASET,
@@ -245,6 +304,8 @@ def build_summary(
     holdout_b_docker_smoke_path: Path = DEFAULT_HOLDOUT_B_DOCKER_SMOKE,
     cross_implementation_audit_path: Path = DEFAULT_CROSS_IMPLEMENTATION_AUDIT,
     taxonomy_audit_path: Path = DEFAULT_TAXONOMY_AUDIT,
+    supplement_canary_path: Path = DEFAULT_SUPPLEMENT_CANARY,
+    supplement_canary_audit_path: Path = DEFAULT_SUPPLEMENT_CANARY_AUDIT,
 ) -> dict[str, Any]:
     dataset = _load(dataset_path)
     audit = _load(audit_path)
@@ -257,6 +318,7 @@ def build_summary(
     holdout_b_docker = _load(holdout_b_docker_smoke_path) if holdout_b_docker_smoke_path.exists() else None
     cross_implementation = _load(cross_implementation_audit_path) if cross_implementation_audit_path.exists() else None
     taxonomy_coverage = _taxonomy_coverage_projection(taxonomy_audit_path)
+    supplemental_canary = _supplement_canary_projection(supplement_canary_path, supplement_canary_audit_path)
     rows = dataset.get("rows")
     if not isinstance(rows, list):
         raise ValueError("PG-388 dataset rows must be a list")
@@ -415,6 +477,7 @@ def build_summary(
         "independent_holdout": independent_holdout,
         "cross_implementation_audit": cross_implementation_projection,
         "taxonomy_coverage": taxonomy_coverage,
+        "supplemental_canary": supplemental_canary,
         "candidate_model": _candidate_model_projection(),
         "plan": {
             "file": plan_path.name,
@@ -435,6 +498,7 @@ def build_summary(
             "candidate_reference_negative_replay": (row_bound_contract.get("candidate_reference_negative_replay") if row_bound is not None else source_contract.get("candidate_reference_negative_replay")) is True,
             "independent_holdout_docker_smoke": independent_holdout["gates"]["docker_smoke_observed"],
             "cross_implementation_audit": cross_implementation_projection["status"] == "passed_candidate_cross_implementation_logic_audit",
+            "supplemental_canary_audit": supplemental_canary["audit_status"] == "passed_candidate_only",
             "capability_training_allowed": False,
             "training_eligible": False,
             "promotion": _safe_promotion(dataset.get("promotion")),

@@ -175,6 +175,39 @@ type RuleIrSummary = {
     candidate_only_count: number;
     categories: Array<{ name: string; covered: number; candidate_only: number; unresolved: number }>;
   };
+  supplemental_canary: {
+    status: string;
+    report_file: string;
+    report_sha256: string;
+    audit_status: string;
+    audit_file: string;
+    audit_sha256: string;
+    counts: {
+      cases: number;
+      seeds: number;
+      roles: number;
+      role_rows: number;
+      fresh_resets_before: number;
+      fresh_resets_after: number;
+      setup_observations: number;
+      typed_observations: number;
+      candidate_effects: number;
+      replay_effects: number;
+      negative_control_clean: number;
+      negative_violation: number;
+      unsafe_allow: number;
+    };
+    execution: {
+      in_process_only: boolean;
+      docker_started: boolean;
+      target_contacted: boolean;
+      external_network: boolean;
+      wire_created: boolean;
+    };
+    training_eligible: number;
+    promotion: Record<string, boolean>;
+    scope: string;
+  };
   candidate_model: {
     status: string;
     runs: CandidateModelRun[];
@@ -195,6 +228,7 @@ type RuleIrSummary = {
     source_row_bound_typed_evidence: boolean;
     fresh_role_reset_attested: boolean;
     operator_reviewed: boolean;
+    supplemental_canary_audit: boolean;
     capability_training_allowed: boolean;
     training_eligible: boolean;
     promotion: Record<string, boolean>;
@@ -924,6 +958,19 @@ export default function Pg388LogicLab() {
             </div>
             <div className={styles.ruleIrSlots}><span className={styles.miniLabel}>CATEGORY COUNTS · ABSTRACT ONLY</span><div>{ruleIrSummary.taxonomy_coverage.categories.map((category) => <code key={category.name}>{category.name} · {category.covered}{category.candidate_only ? ` +${category.candidate_only} candidate` : ""}{category.unresolved ? ` · ${category.unresolved} gap` : ""}</code>)}</div></div>
             <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>覆盖审计不是漏洞确认</strong><small>分类只用于检查实验是否覆盖安装、交易、账户、认证、验证码、Session、越权和信息查询；case/route/原始值仍不进入浏览器投影。</small></div>
+          </div>
+          <div className={styles.ruleIrHoldout} aria-label="Supplemental fresh local canary projection">
+            <div className={styles.ruleIrHeader}><div><span className={styles.miniLabel}>SUPPLEMENTAL FRESH CANARY</span><strong>{ruleIrSummary.supplemental_canary.audit_status}</strong></div><b className={ruleIrSummary.gates.supplemental_canary_audit ? styles.gatePass : styles.gateHold}>{ruleIrSummary.gates.supplemental_canary_audit ? "AUDITED" : "HOLD"}</b></div>
+            <div className={styles.ruleIrMetrics}>
+              <div><span>ROLE ROWS</span><strong>{ruleIrSummary.supplemental_canary.counts.role_rows}</strong><small>{ruleIrSummary.supplemental_canary.counts.cases} cases · {ruleIrSummary.supplemental_canary.counts.seeds} seeds · {ruleIrSummary.supplemental_canary.counts.roles} roles</small></div>
+              <div><span>FRESH RESET</span><strong>{ruleIrSummary.supplemental_canary.counts.fresh_resets_before}/{ruleIrSummary.supplemental_canary.counts.fresh_resets_after}</strong><small>before / after · role-bound</small></div>
+              <div><span>CANDIDATE / REPLAY</span><strong>{ruleIrSummary.supplemental_canary.counts.candidate_effects}/{ruleIrSummary.supplemental_canary.counts.replay_effects}</strong><small>bounded state effects · typed {ruleIrSummary.supplemental_canary.counts.typed_observations}</small></div>
+              <div><span>NEGATIVE</span><strong className={ruleIrSummary.supplemental_canary.counts.negative_violation === 0 ? styles.gatePass : styles.gateHold}>{ruleIrSummary.supplemental_canary.counts.negative_violation}</strong><small>violations · clean {ruleIrSummary.supplemental_canary.counts.negative_control_clean}</small></div>
+            </div>
+            <div className={styles.ruleIrGates}>
+              {[['in-process only', ruleIrSummary.supplemental_canary.execution.in_process_only], ['Docker', !ruleIrSummary.supplemental_canary.execution.docker_started], ['external network', !ruleIrSummary.supplemental_canary.execution.external_network], ['wire', !ruleIrSummary.supplemental_canary.execution.wire_created]].map(([label, passed]) => <span key={String(label)} className={passed ? styles.gatePass : styles.gateHold}><i />{String(label)} · {passed ? 'CLOSED' : 'OPEN'}</span>)}
+            </div>
+            <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>状态差分 ≠ 通用漏洞确认</strong><small>每个 role 前后 fresh reset；replay 只在 evaluator 内建立抽象状态。没有 Docker、外网、wire、原始值或训练晋级。</small></div>
           </div>
         </div>}
         <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>

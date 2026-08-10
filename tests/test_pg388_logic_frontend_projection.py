@@ -50,6 +50,14 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["taxonomy_coverage"]["category_count"] == 10
     assert summary["taxonomy_coverage"]["missing_anchor_count"] == 0
     assert summary["taxonomy_coverage"]["candidate_only_count"] == 10
+    assert summary["supplemental_canary"]["audit_status"] == "passed_candidate_only"
+    assert summary["supplemental_canary"]["counts"]["role_rows"] == 120
+    assert summary["supplemental_canary"]["counts"]["fresh_resets_before"] == 120
+    assert summary["supplemental_canary"]["counts"]["fresh_resets_after"] == 120
+    assert summary["supplemental_canary"]["counts"]["negative_violation"] == 0
+    assert summary["supplemental_canary"]["execution"]["in_process_only"] is True
+    assert summary["supplemental_canary"]["execution"]["docker_started"] is False
+    assert summary["gates"]["supplemental_canary_audit"] is True
 
 
 def test_pg388_frontend_projection_contains_no_rows_or_raw_markers():
