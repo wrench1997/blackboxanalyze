@@ -228,6 +228,25 @@ type RuleIrSummary = {
     context_firewall_passed: boolean;
     scope: string;
   };
+  information_preservation: {
+    status: string;
+    report_file: string;
+    report_sha256: string;
+    sources: { implementation_count: number; row_count: number; split_counts: Record<string, number> };
+    sequence_diversity: {
+      context: { count: number; unique: number; unique_ratio: number; length_max: number };
+      target: { count: number; unique: number; unique_ratio: number; length_max: number };
+      cross_implementation_context_overlap: number;
+      cross_implementation_target_overlap: number;
+    };
+    axis_presence: { axis_count: number; axes_observed_count: number; zero_entropy_axis_count: number };
+    capacity: { required_window_estimate: number; context_length_max: number };
+    information_gate: { passed: boolean; failures: string[]; predictive_entropy_holdout: string; field_ablation: string };
+    integrity: { row_count: number; raw_context_marker_hits: number; row_hash_failures: number };
+    training_eligible: number;
+    promotion: Record<string, boolean>;
+    scope: string;
+  };
   candidate_model: {
     status: string;
     runs: CandidateModelRun[];
@@ -250,6 +269,7 @@ type RuleIrSummary = {
     operator_reviewed: boolean;
     supplemental_canary_audit: boolean;
     typed_supplement_audit: boolean;
+    information_preservation_audit: boolean;
     capability_training_allowed: boolean;
     training_eligible: boolean;
     promotion: Record<string, boolean>;
@@ -1002,6 +1022,16 @@ export default function Pg388LogicLab() {
               <div><span>MODEL INPUT</span><strong className={styles.gateHold}>OFF</strong><small>context firewall {ruleIrSummary.typed_supplement.context_firewall_passed ? "pass" : "hold"}</small></div>
             </div>
             <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>typed observation ≠ train permission</strong><small>该投影只把抽象上下文和 Rule-IR 目标留作诊断；没有 train split、原始效果、evaluator 答案或 payload。</small></div>
+          </div>
+          <div className={styles.ruleIrHoldout} aria-label="Information preservation audit projection">
+            <div className={styles.ruleIrHeader}><div><span className={styles.miniLabel}>INFORMATION PRESERVATION</span><strong>{ruleIrSummary.information_preservation.status}</strong></div><b className={ruleIrSummary.gates.information_preservation_audit ? styles.gatePass : styles.gateHold}>{ruleIrSummary.gates.information_preservation_audit ? "PASS" : "HOLD"}</b></div>
+            <div className={styles.ruleIrMetrics}>
+              <div><span>CONTEXT DIVERSITY</span><strong>{(ruleIrSummary.information_preservation.sequence_diversity.context.unique_ratio * 100).toFixed(2)}%</strong><small>{ruleIrSummary.information_preservation.sequence_diversity.context.unique}/{ruleIrSummary.information_preservation.sequence_diversity.context.count} unique · max {ruleIrSummary.information_preservation.sequence_diversity.context.length_max}</small></div>
+              <div><span>TARGET DIVERSITY</span><strong>{(ruleIrSummary.information_preservation.sequence_diversity.target.unique_ratio * 100).toFixed(2)}%</strong><small>{ruleIrSummary.information_preservation.sequence_diversity.target.unique}/{ruleIrSummary.information_preservation.sequence_diversity.target.count} unique · max {ruleIrSummary.information_preservation.sequence_diversity.target.length_max}</small></div>
+              <div><span>AXIS ENTROPY</span><strong className={ruleIrSummary.information_preservation.axis_presence.zero_entropy_axis_count === 0 ? styles.gatePass : styles.gateHold}>{ruleIrSummary.information_preservation.axis_presence.zero_entropy_axis_count}/{ruleIrSummary.information_preservation.axis_presence.axis_count} ZERO</strong><small>{ruleIrSummary.information_preservation.axis_presence.axes_observed_count} axes observed · holdout train split required</small></div>
+              <div><span>CAPACITY WINDOW</span><strong>{ruleIrSummary.information_preservation.capacity.required_window_estimate}</strong><small>context max {ruleIrSummary.information_preservation.capacity.context_length_max} · information gate {ruleIrSummary.information_preservation.information_gate.passed ? "pass" : "hold"}</small></div>
+            </div>
+            <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>信息保真审计 ≠ 训练许可</strong><small>当前 7 个 presence 轴熵为 0，context 序列高度重复且缺 train split；此卡只展示聚合诊断，不把行、token、payload 或 evaluator 答案送进浏览器。</small></div>
           </div>
         </div>}
         <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>

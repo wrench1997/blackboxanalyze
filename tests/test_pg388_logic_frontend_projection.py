@@ -64,6 +64,10 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["typed_supplement"]["counts"]["typed_evaluator_observed"] == 120
     assert summary["typed_supplement"]["context_firewall_passed"] is True
     assert summary["gates"]["typed_supplement_audit"] is True
+    assert summary["information_preservation"]["status"] == "blocked_information_gate"
+    assert summary["information_preservation"]["sequence_diversity"]["context"]["unique_ratio"] == 0.007143
+    assert summary["information_preservation"]["axis_presence"]["zero_entropy_axis_count"] == 7
+    assert summary["gates"]["information_preservation_audit"] is False
 
 
 def test_pg388_frontend_projection_contains_no_rows_or_raw_markers():

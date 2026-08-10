@@ -256,6 +256,64 @@
     "context_firewall_passed": true,
     "scope": "typed_abstract_rule_ir_diagnostic_no_train_split"
   },
+  "information_preservation": {
+    "status": "blocked_information_gate",
+    "report_file": "pg388_logic_information_preservation_audit_v1.json",
+    "report_sha256": "45be804aace61f29d80a620a2f6c7e37a6bbceddb46530e197efaf0289f276b4",
+    "sources": {
+      "implementation_count": 2,
+      "row_count": 280,
+      "split_counts": {
+        "implementation_holdout": 280
+      }
+    },
+    "sequence_diversity": {
+      "context": {
+        "count": 280,
+        "unique": 2,
+        "unique_ratio": 0.007143,
+        "length_max": 2261
+      },
+      "target": {
+        "count": 280,
+        "unique": 7,
+        "unique_ratio": 0.025,
+        "length_max": 13
+      },
+      "cross_implementation_context_overlap": 0,
+      "cross_implementation_target_overlap": 5
+    },
+    "axis_presence": {
+      "axis_count": 7,
+      "axes_observed_count": 7,
+      "zero_entropy_axis_count": 7
+    },
+    "capacity": {
+      "required_window_estimate": 2261,
+      "context_length_max": 2261
+    },
+    "information_gate": {
+      "passed": false,
+      "failures": [
+        "train_split_missing"
+      ],
+      "predictive_entropy_holdout": "not_run",
+      "field_ablation": "not_run"
+    },
+    "integrity": {
+      "row_count": 280,
+      "raw_context_marker_hits": 0,
+      "row_hash_failures": 0
+    },
+    "training_eligible": 0,
+    "promotion": {
+      "training_allowed": false,
+      "memory_promotion_allowed": false,
+      "payload_catalog_promotion_allowed": false,
+      "vulnerability_claim_allowed": false
+    },
+    "scope": "bounded_information_diagnostic_no_rows_or_tokens"
+  },
   "candidate_model": {
     "status": "candidate_only_projection",
     "runs": [
@@ -524,6 +582,7 @@
     "cross_implementation_audit": true,
     "supplemental_canary_audit": true,
     "typed_supplement_audit": true,
+    "information_preservation_audit": false,
     "capability_training_allowed": false,
     "training_eligible": false,
     "promotion": {

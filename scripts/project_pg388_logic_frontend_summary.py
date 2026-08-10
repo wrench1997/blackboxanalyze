@@ -32,6 +32,7 @@ DEFAULT_SUPPLEMENT_CANARY = ROOT / "research" / "pg388_logic_supplement_canary_l
 DEFAULT_SUPPLEMENT_CANARY_AUDIT = ROOT / "research" / "pg388_logic_supplement_canary_local_audit_v1.json"
 DEFAULT_TYPED_SUPPLEMENT = ROOT / "research" / "pg388_logic_supplement_typed_rule_ir_projection_v1.json"
 DEFAULT_TYPED_SUPPLEMENT_AUDIT = ROOT / "research" / "pg388_logic_supplement_typed_rule_ir_projection_audit_v1.json"
+DEFAULT_INFORMATION_AUDIT = ROOT / "research" / "pg388_logic_information_preservation_audit_v1.json"
 DEFAULT_CANDIDATE_REPORTS = (
     ("logic invariant", ROOT / "research" / "pg388_logic_token_cpu_smoke_v1.json"),
     ("supplemental logic", ROOT / "research" / "pg388_logic_supplement_token_cpu_smoke_v1.json"),
@@ -334,6 +335,107 @@ def _typed_supplement_projection(report_path: Path, audit_path: Path) -> dict[st
     }
 
 
+def _information_preservation_projection(path: Path) -> dict[str, Any]:
+    """Project bounded diversity/capacity diagnostics without token values."""
+
+    empty = {
+        "status": "missing",
+        "report_file": path.name,
+        "report_sha256": "",
+        "sources": {"implementation_count": 0, "row_count": 0, "split_counts": {}},
+        "sequence_diversity": {
+            "context": {"count": 0, "unique": 0, "unique_ratio": 0.0, "length_max": 0},
+            "target": {"count": 0, "unique": 0, "unique_ratio": 0.0, "length_max": 0},
+            "cross_implementation_context_overlap": 0,
+            "cross_implementation_target_overlap": 0,
+        },
+        "axis_presence": {"axis_count": 0, "axes_observed_count": 0, "zero_entropy_axis_count": 0},
+        "capacity": {"required_window_estimate": 0, "context_length_max": 0},
+        "information_gate": {
+            "passed": False,
+            "failures": ["missing"],
+            "predictive_entropy_holdout": "not_run",
+            "field_ablation": "not_run",
+        },
+        "integrity": {"row_count": 0, "raw_context_marker_hits": 0, "row_hash_failures": 0},
+        "training_eligible": 0,
+        "promotion": _safe_promotion(None),
+        "scope": "bounded_information_diagnostic_no_rows_or_tokens",
+    }
+    if not path.exists():
+        return empty
+    report = _load(path)
+    sources = report.get("sources") if isinstance(report.get("sources"), dict) else {}
+    sequence = report.get("sequence_diversity") if isinstance(report.get("sequence_diversity"), dict) else {}
+    axis = report.get("axis_presence") if isinstance(report.get("axis_presence"), dict) else {}
+    capacity = report.get("capacity") if isinstance(report.get("capacity"), dict) else {}
+    gate = report.get("information_gate") if isinstance(report.get("information_gate"), dict) else {}
+    integrity = report.get("integrity") if isinstance(report.get("integrity"), dict) else {}
+
+    def _sequence(name: str) -> dict[str, Any]:
+        raw = sequence.get(name) if isinstance(sequence.get(name), dict) else {}
+        return {
+            "count": int(raw.get("count", 0) or 0),
+            "unique": int(raw.get("unique", 0) or 0),
+            "unique_ratio": round(float(raw.get("unique_ratio", 0.0) or 0.0), 6),
+            "length_max": int(raw.get("length_max", 0) or 0),
+        }
+
+    axis_states = []
+    for name, raw in axis.items():
+        if not isinstance(raw, dict):
+            continue
+        axis_states.append(
+            {
+                "name": str(name),
+                "observed_count": int(raw.get("observed_count", 0) or 0),
+                "unique_presence_states": int(raw.get("unique_presence_states", 0) or 0),
+                "entropy_bits": round(float(raw.get("entropy_bits", 0.0) or 0.0), 6),
+            }
+        )
+    zero_entropy = sum(1 for item in axis_states if item["entropy_bits"] == 0.0)
+    observed = sum(1 for item in axis_states if item["observed_count"] > 0)
+    return {
+        "status": str(report.get("status", "unknown")),
+        "report_file": path.name,
+        "report_sha256": _sha256(path),
+        "sources": {
+            "implementation_count": int(sources.get("implementation_count", 0) or 0),
+            "row_count": sum(int(value or 0) for value in (sources.get("implementation_row_counts", {}) or {}).values()) if isinstance(sources.get("implementation_row_counts"), dict) else 0,
+            "split_counts": {str(key): int(value or 0) for key, value in (sources.get("split_counts", {}) or {}).items()} if isinstance(sources.get("split_counts"), dict) else {},
+        },
+        "sequence_diversity": {
+            "context": _sequence("context"),
+            "target": _sequence("target"),
+            "cross_implementation_context_overlap": int(sequence.get("cross_implementation_context_overlap", 0) or 0),
+            "cross_implementation_target_overlap": int(sequence.get("cross_implementation_target_overlap", 0) or 0),
+        },
+        "axis_presence": {
+            "axis_count": len(axis_states),
+            "axes_observed_count": observed,
+            "zero_entropy_axis_count": zero_entropy,
+        },
+        "capacity": {
+            "required_window_estimate": int(capacity.get("required_window_estimate", 0) or 0),
+            "context_length_max": int(capacity.get("context_length_max", 0) or 0),
+        },
+        "information_gate": {
+            "passed": gate.get("passed") is True,
+            "failures": [str(item) for item in gate.get("failures", []) if isinstance(item, str)] if isinstance(gate.get("failures", []), list) else [],
+            "predictive_entropy_holdout": str(gate.get("predictive_entropy_holdout", "not_run")),
+            "field_ablation": str(gate.get("field_ablation", "not_run")),
+        },
+        "integrity": {
+            "row_count": int(integrity.get("row_count", 0) or 0),
+            "raw_context_marker_hits": int(integrity.get("raw_context_marker_hits", 0) or 0),
+            "row_hash_failures": int(integrity.get("row_hash_failures", 0) or 0),
+        },
+        "training_eligible": int(report.get("training_eligible", 0) or 0),
+        "promotion": _safe_promotion(report.get("promotion")),
+        "scope": "bounded_information_diagnostic_no_rows_or_tokens",
+    }
+
+
 def build_summary(
     *,
     dataset_path: Path = DEFAULT_DATASET,
@@ -351,6 +453,7 @@ def build_summary(
     supplement_canary_audit_path: Path = DEFAULT_SUPPLEMENT_CANARY_AUDIT,
     typed_supplement_path: Path = DEFAULT_TYPED_SUPPLEMENT,
     typed_supplement_audit_path: Path = DEFAULT_TYPED_SUPPLEMENT_AUDIT,
+    information_audit_path: Path = DEFAULT_INFORMATION_AUDIT,
 ) -> dict[str, Any]:
     dataset = _load(dataset_path)
     audit = _load(audit_path)
@@ -365,6 +468,7 @@ def build_summary(
     taxonomy_coverage = _taxonomy_coverage_projection(taxonomy_audit_path)
     supplemental_canary = _supplement_canary_projection(supplement_canary_path, supplement_canary_audit_path)
     typed_supplement = _typed_supplement_projection(typed_supplement_path, typed_supplement_audit_path)
+    information_preservation = _information_preservation_projection(information_audit_path)
     rows = dataset.get("rows")
     if not isinstance(rows, list):
         raise ValueError("PG-388 dataset rows must be a list")
@@ -525,6 +629,7 @@ def build_summary(
         "taxonomy_coverage": taxonomy_coverage,
         "supplemental_canary": supplemental_canary,
         "typed_supplement": typed_supplement,
+        "information_preservation": information_preservation,
         "candidate_model": _candidate_model_projection(),
         "plan": {
             "file": plan_path.name,
@@ -547,6 +652,7 @@ def build_summary(
             "cross_implementation_audit": cross_implementation_projection["status"] == "passed_candidate_cross_implementation_logic_audit",
             "supplemental_canary_audit": supplemental_canary["audit_status"] == "passed_candidate_only",
             "typed_supplement_audit": typed_supplement["audit_status"] == "passed_diagnostic_only",
+            "information_preservation_audit": information_preservation["information_gate"]["passed"] and not information_preservation["status"].startswith("blocked"),
             "capability_training_allowed": False,
             "training_eligible": False,
             "promotion": _safe_promotion(dataset.get("promotion")),
