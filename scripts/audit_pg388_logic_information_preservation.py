@@ -258,6 +258,7 @@ def _surface_projection(path: Path | None) -> dict[str, Any]:
             "cross_split_target_overlap": 0,
         },
         "axis_presence": {},
+        "prefix_diversity": {},
         "raw_context_marker_hits": 0,
         "source_contract": {
             "in_process_fixture_only": False,
@@ -363,6 +364,7 @@ def _surface_projection(path: Path | None) -> dict[str, Any]:
             "cross_split_target_overlap": len(target_sets.get("train", set()) & target_sets.get("implementation_holdout", set())),
         },
         "axis_presence": axis_presence,
+        "prefix_diversity": _prefix_counts(rows),
         "raw_context_marker_hits": raw_marker_hits,
         "source_contract": source_contract,
         "contract_passed": contract_passed,

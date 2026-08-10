@@ -215,6 +215,12 @@ def _sidecar(implementation: str, seed: int, case_ref: str, role: str) -> dict[s
 def _row(implementation: str, seed: int, case: tuple[str, str, str, str], role: str, split: str, source_digest: str) -> dict[str, Any]:
     case_ref, parameter_role, value_type, _family = case
     method = "GET" if implementation.endswith("c") else "POST"
+    # A bounded API-shaped variant deliberately omits an HTML document for a
+    # small, deterministic subset.  This produces honest document/navigation/
+    # JavaScript ``not_observed`` states instead of a zero-entropy all-page
+    # fixture, while response/request/failure/belief projections remain
+    # abstract and fully auditable.
+    api_surface = implementation.endswith("d") and seed == 38802 and case_ref in {"coupon_state", "resource_scope"}
     target_digest = _digest(f"pg388-surface-instance|{implementation}|{seed}|{case_ref}|{role}")
     reset = {
         "fresh_reset": True,
@@ -248,7 +254,7 @@ def _row(implementation: str, seed: int, case: tuple[str, str, str, str], role: 
     response = {
         "status": 200 if method == "GET" else 303,
         "body_length": 512 + (seed % 3) * 64,
-        "body_shape": "html",
+        "body_shape": "json" if api_surface else "html",
         "connection_outcome": "complete",
         "failure_class": "none",
         "failure_stage": "none",
@@ -258,11 +264,11 @@ def _row(implementation: str, seed: int, case: tuple[str, str, str, str], role: 
     }
     # Keep headers abstract.  A concrete Location/path is evaluator-side and
     # is intentionally represented by redirect shape below, not serialized.
-    headers = {"Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store"}
+    headers = {"Content-Type": "application/json" if api_surface else "text/html; charset=utf-8", "Cache-Control": "no-store"}
     sidecar = _sidecar(implementation, seed, case_ref, role)
     record_id = f"pg388_surface_{implementation[-1]}_{seed}_{case_ref}_{role}"
     projection = capture_pg377_webgoat_source_row(
-        html=_html(implementation, case_ref, method, role),
+        html=None if api_surface else _html(implementation, case_ref, method, role),
         headers=headers,
         request_projection=request,
         response_projection=response,
@@ -270,7 +276,7 @@ def _row(implementation: str, seed: int, case: tuple[str, str, str, str], role: 
         reset=reset,
         evaluator_sidecar=sidecar,
         belief_projection=_belief(implementation, method, role),
-        javascript_context_projection=_javascript_overlay(implementation, case_ref, source_digest),
+        javascript_context_projection=None if api_surface else _javascript_overlay(implementation, case_ref, source_digest),
         post_supported=True,
         source_meta=meta,
         record_id=record_id,
@@ -326,6 +332,7 @@ def build(output_path: Path = DEFAULT_OUTPUT) -> dict[str, Any]:
         "counts": {
             "source_rows": len(wrappers),
             "strict_valid": strict_valid,
+            "incomplete_rows": len(wrappers) - strict_valid,
             "typed": typed,
             "fresh_resets": fresh,
             "train": sum(1 for row in rows if row.get("split") == "train"),

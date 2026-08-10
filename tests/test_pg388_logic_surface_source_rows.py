@@ -15,7 +15,8 @@ def test_build_is_bounded_strict_and_diagnostic_only(tmp_path: Path) -> None:
     assert report["status"] == "completed_inprocess_diagnostic_only"
     assert report["counts"] == {
         "source_rows": 144,
-        "strict_valid": 144,
+        "strict_valid": 136,
+        "incomplete_rows": 8,
         "typed": 144,
         "fresh_resets": 144,
         "train": 72,
@@ -30,8 +31,9 @@ def test_build_is_bounded_strict_and_diagnostic_only(tmp_path: Path) -> None:
     assert output.read_bytes() == first_bytes
 
     rows = report["rows"]
-    assert all(item["strict_valid"] for item in rows)
-    assert all(validate_pg331_source_row(item["source_row"])["valid"] for item in rows)
+    assert sum(item["strict_valid"] for item in rows) == 136
+    assert sum(not item["strict_valid"] for item in rows) == 8
+    assert sum(validate_pg331_source_row(item["source_row"])["valid"] for item in rows) == 136
     assert {item["source_row"]["split"] for item in rows} == {"train", "implementation_holdout"}
     assert {item["source_row"]["source_meta"]["implementation"] for item in rows} == {
         "pg388_logic_surface_c",
@@ -50,10 +52,15 @@ def test_js_is_semantic_projection_and_axes_are_not_collapsed(tmp_path: Path) ->
 
     for item in rows:
         row = item["source_row"]
-        overlay = row["javascript_context_overlay"]
-        assert overlay["source_text_stored"] is False
-        assert overlay["javascript_context"]["persistent_state"] is False
-        assert overlay["javascript_context"]["dynamic_code"] is False
+        overlay = row.get("javascript_context_overlay")
+        if item["strict_valid"]:
+            assert overlay["source_text_stored"] is False
+            assert overlay["javascript_context"]["persistent_state"] is False
+            assert overlay["javascript_context"]["dynamic_code"] is False
+        else:
+            assert overlay is None
+            assert row["target_projection"]["question"] == "ask_typed"
+            assert row["axis_presence"]["document_presence"] == "not_observed"
         assert row["context_firewall"] == {"forbidden_token_count": 0, "sidecars_off_context": True}
         assert row["training_eligible"] is False
         for key in ("training_eligible", "memory_promotion_allowed", "payload_catalog_promotion_allowed", "vulnerability_claim_allowed"):
@@ -75,5 +82,8 @@ def test_field_manifest_keeps_observed_and_absent_distinct(tmp_path: Path) -> No
         statuses = {status for section in manifest.values() for status in section.values()}
         assert "observed" in statuses
         assert "absent" in statuses
-        assert "unknown" not in statuses
-        assert "not_observed" not in statuses
+        if item["strict_valid"]:
+            assert "unknown" not in statuses
+            assert "not_observed" not in statuses
+        else:
+            assert "not_observed" in statuses

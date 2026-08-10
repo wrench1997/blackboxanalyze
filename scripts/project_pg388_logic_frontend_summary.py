@@ -364,6 +364,9 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
         "axis_observed_count": 0,
         "axis_zero_entropy_count": 0,
         "axis_count": 7,
+        "value_diversity_prefix_count": 0,
+        "value_diversity_nonconstant_prefix_count": 0,
+        "value_diversity_max_entropy_bits": 0.0,
         "source_contract": {"in_process_fixture_only": False, "row_bound_typed_evidence": False, "fresh_role_reset_attested": False, "operator_reviewed": False, "training_eligible": 0},
         "contract_passed": False,
     }
@@ -456,6 +459,7 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
         surface_context_ratios[str(split)] = round(float(context.get("unique_ratio", 0.0) or 0.0), 6)
         surface_target_ratios[str(split)] = round(float(target.get("unique_ratio", 0.0) or 0.0), 6)
     surface_axes = surface.get("axis_presence") if isinstance(surface.get("axis_presence"), dict) else {}
+    surface_prefixes = surface.get("prefix_diversity") if isinstance(surface.get("prefix_diversity"), dict) else {}
     surface_contract = surface.get("source_contract") if isinstance(surface.get("source_contract"), dict) else {}
     surface_projection = {
         "status": str(surface.get("status", "missing")),
@@ -469,6 +473,9 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
         "axis_observed_count": sum(1 for value in surface_axes.values() if isinstance(value, dict) and int(value.get("observed_count", 0) or 0) > 0),
         "axis_zero_entropy_count": sum(1 for value in surface_axes.values() if isinstance(value, dict) and float(value.get("presence_entropy_bits", 0.0) or 0.0) == 0.0),
         "axis_count": len(surface_axes) or 7,
+        "value_diversity_prefix_count": len(surface_prefixes),
+        "value_diversity_nonconstant_prefix_count": sum(1 for value in surface_prefixes.values() if isinstance(value, dict) and int(value.get("unique_values", 0) or 0) > 1),
+        "value_diversity_max_entropy_bits": round(max((float(value.get("entropy_bits", 0.0) or 0.0) for value in surface_prefixes.values() if isinstance(value, dict)), default=0.0), 6),
         "source_contract": {
             "in_process_fixture_only": surface_contract.get("in_process_fixture_only") is True,
             "row_bound_typed_evidence": surface_contract.get("row_bound_typed_evidence") is True,

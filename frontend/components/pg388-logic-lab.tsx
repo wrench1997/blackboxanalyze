@@ -269,6 +269,9 @@ type RuleIrSummary = {
       axis_observed_count: number;
       axis_zero_entropy_count: number;
       axis_count: number;
+      value_diversity_prefix_count: number;
+      value_diversity_nonconstant_prefix_count: number;
+      value_diversity_max_entropy_bits: number;
       source_contract: { in_process_fixture_only: boolean; row_bound_typed_evidence: boolean; fresh_role_reset_attested: boolean; operator_reviewed: boolean; training_eligible: number };
       contract_passed: boolean;
     };
@@ -1061,6 +1064,7 @@ export default function Pg388LogicLab() {
               <div><span>CAPACITY WINDOW</span><strong>{ruleIrSummary.information_preservation.capacity.required_window_estimate}</strong><small>context max {ruleIrSummary.information_preservation.capacity.context_length_max} · information gate {ruleIrSummary.information_preservation.information_gate.passed ? "pass" : "hold"}</small></div>
               <div><span>COMPOSITION SET</span><strong className={ruleIrSummary.information_preservation.composition_dataset.contract_passed ? styles.gatePass : styles.gateHold}>{ruleIrSummary.information_preservation.composition_dataset.split_counts.train ?? 0}/{ruleIrSummary.information_preservation.composition_dataset.split_counts.implementation_holdout ?? 0}</strong><small>train/holdout · context {(ruleIrSummary.information_preservation.composition_dataset.context_unique_ratio.train * 100).toFixed(1)}% unique · contract {ruleIrSummary.information_preservation.composition_dataset.contract_passed ? "pass" : "hold"}</small></div>
               <div><span>SURFACE ROWS</span><strong className={ruleIrSummary.information_preservation.surface_dataset.contract_passed ? styles.gatePass : styles.gateHold}>{ruleIrSummary.information_preservation.surface_dataset.split_counts.train ?? 0}/{ruleIrSummary.information_preservation.surface_dataset.split_counts.implementation_holdout ?? 0}</strong><small>2 implementations · context {(ruleIrSummary.information_preservation.surface_dataset.context_unique_ratio.train * 100).toFixed(1)}% unique · axes {ruleIrSummary.information_preservation.surface_dataset.axis_observed_count}/{ruleIrSummary.information_preservation.surface_dataset.axis_count}</small></div>
+              <div><span>VALUE SHAPES</span><strong>{ruleIrSummary.information_preservation.surface_dataset.value_diversity_nonconstant_prefix_count}/{ruleIrSummary.information_preservation.surface_dataset.value_diversity_prefix_count}</strong><small>non-constant abstract prefixes · max entropy {ruleIrSummary.information_preservation.surface_dataset.value_diversity_max_entropy_bits.toFixed(2)} bits</small></div>
             </div>
              <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>信息保真审计 ≠ 训练许可</strong><small>严格 source-row 缺 train split；composition 与多表面 source rows 虽有 split，但 operator/训练合同仍未通过。此卡只展示聚合诊断，不把行、token、JS 源码、payload 或 evaluator 答案送进浏览器。</small></div>
           </div>
