@@ -1,9 +1,11 @@
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 from scripts.run_pg388_logic_composed_candidate import (
     DEFAULT_AUDIT,
     DEFAULT_DATASET,
+    _local_cuda_gate,
     SLOT_ORDER,
     load_rows,
     run_candidate,
@@ -52,3 +54,19 @@ def test_pg388_full_e8_artifact_remains_candidate_only_and_abstract():
     serialized = json.dumps(report, ensure_ascii=False).casefold()
     for marker in ("raw_payload=", "response_body=", "wire=", "http://", "https://", "oracle_answer="):
         assert marker not in serialized
+
+
+def test_pg388_local_cuda_gate_requires_explicit_weekday_window_and_gpu_zero():
+    passed = _local_cuda_gate(
+        now=datetime(2026, 8, 10, 10, 0, tzinfo=timezone.utc),
+        environ={"BLACKBOX_LOCAL_MORNING_TRAIN": "1", "CUDA_VISIBLE_DEVICES": "0"},
+    )
+    assert passed["status"] == "passed"
+    blocked = _local_cuda_gate(
+        now=datetime(2026, 8, 9, 20, 0, tzinfo=timezone.utc),
+        environ={"CUDA_VISIBLE_DEVICES": "1"},
+    )
+    assert blocked["status"] == "blocked"
+    assert "missing_BLACKBOX_LOCAL_MORNING_TRAIN" in blocked["failures"]
+    assert "outside_weekday_lane" in blocked["failures"]
+    assert "CUDA_VISIBLE_DEVICES_must_equal_0" in blocked["failures"]

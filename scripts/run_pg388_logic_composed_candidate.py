@@ -13,8 +13,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import random
 import sys
+from datetime import datetime
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -69,6 +71,38 @@ PROMOTION_KEYS = (
     "payload_catalog_promotion_allowed",
     "vulnerability_claim_allowed",
 )
+
+
+def _local_cuda_gate(*, now: datetime | None = None, environ: Mapping[str, str] | None = None) -> dict[str, Any]:
+    """Return a fail-closed gate for the explicitly authorized local weekday lane.
+
+    This lane is a candidate diagnostic only.  The formal source-row/capability
+    contract remains independent and is never bypassed by a CUDA run.
+    """
+    env = dict(environ or {}) if environ is not None else dict(os.environ)
+    current = now or datetime.now().astimezone()
+    explicit = env.get("BLACKBOX_LOCAL_MORNING_TRAIN") == "1"
+    weekday = current.weekday() < 5
+    in_window = 8 <= current.hour < 18
+    visible = env.get("CUDA_VISIBLE_DEVICES", "")
+    failures: list[str] = []
+    if not explicit:
+        failures.append("missing_BLACKBOX_LOCAL_MORNING_TRAIN")
+    if not weekday:
+        failures.append("outside_weekday_lane")
+    if not in_window:
+        failures.append("outside_local_morning_window")
+    if visible != "0":
+        failures.append("CUDA_VISIBLE_DEVICES_must_equal_0")
+    return {
+        "status": "passed" if not failures else "blocked",
+        "explicit_flag": explicit,
+        "weekday": weekday,
+        "in_window": in_window,
+        "timezone": str(current.tzinfo or "local"),
+        "cuda_visible_devices": visible,
+        "failures": failures,
+    }
 
 
 def _sha_file(path: Path) -> str:
@@ -372,7 +406,9 @@ def _train_seed(train: Sequence[Mapping[str, Any]], holdout: Sequence[Mapping[st
     return {"seed": seed, "train": _evaluate(model, train, vocabulary, classes, device), "holdout": _evaluate(model, holdout, vocabulary, classes, device)}
 
 
-def run_candidate(*, dataset_path: Path = DEFAULT_DATASET, audit_path: Path = DEFAULT_AUDIT, cpu_smoke: bool = False, row_limit: int | None = 128, epochs: int = 1, d_model: int = 64, layers: int = 2, experts: int = 2, expert_hidden: int = 128, microbatch: int = 16) -> dict[str, Any]:
+def run_candidate(*, dataset_path: Path = DEFAULT_DATASET, audit_path: Path = DEFAULT_AUDIT, cpu_smoke: bool = False, local_cuda: bool = False, row_limit: int | None = 128, epochs: int = 1, d_model: int = 64, layers: int = 2, experts: int = 2, expert_hidden: int = 128, microbatch: int = 16) -> dict[str, Any]:
+    if cpu_smoke and local_cuda:
+        raise ValueError("cpu_smoke_and_local_cuda_are_mutually_exclusive")
     train, holdout, info = load_rows(dataset_path, audit_path)
     vocabulary = build_context_vocabulary(train)
     classes = build_slot_classes(train)
@@ -382,9 +418,17 @@ def run_candidate(*, dataset_path: Path = DEFAULT_DATASET, audit_path: Path = DE
         train = train[:limit]
         holdout = holdout[:limit]
     config = CausalMoEConfig(d_model=int(d_model), n_heads=4 if int(d_model) % 4 == 0 else 2, n_layers=int(layers), experts=int(experts), expert_hidden=int(expert_hidden), max_length=128)
+    local_gate = _local_cuda_gate() if local_cuda else {"status": "not_requested", "failures": []}
+    cuda_available = bool(torch.cuda.is_available()) if local_cuda and local_gate["status"] == "passed" else False
+    if local_cuda and local_gate["status"] == "passed" and not cuda_available:
+        local_gate = {**local_gate, "status": "blocked", "failures": ["cuda_unavailable"]}
+    if local_cuda and local_gate["status"] == "passed" and torch.cuda.device_count() != 1:
+        local_gate = {**local_gate, "status": "blocked", "failures": ["visible_device_count_must_equal_1"]}
+    device = torch.device("cuda:0" if local_cuda and local_gate["status"] == "passed" else "cpu")
+    local_device_name = torch.cuda.get_device_name(0) if local_cuda and local_gate["status"] == "passed" else None
     report: dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
-        "status": "cpu_composed_candidate_only" if cpu_smoke else "plan_only_blocked",
+        "status": ("local_cuda_composed_candidate_only" if local_cuda and local_gate["status"] == "passed" else "blocked_local_cuda_gate" if local_cuda else "cpu_composed_candidate_only" if cpu_smoke else "plan_only_blocked"),
         "dataset_file": dataset_path.name,
         "audit_file": audit_path.name,
         "dataset_sha256": info["dataset_sha256"],
@@ -395,15 +439,18 @@ def run_candidate(*, dataset_path: Path = DEFAULT_DATASET, audit_path: Path = DE
         "holdout_count": len(holdout),
         "train_context_vocabulary": {"size": len(vocabulary), "scope": "train_context_only"},
         "model": {"backbone": "decoder_only_causal_moe", "composition_decoder": "causal_previous_slot_conditioned", "d_model": int(d_model), "layers": int(layers), "experts": int(experts)},
-        "execution": {"optimizer_started": False, "device": "cpu", "gpu_touched": False, "docker_started": False, "network_contacted": False, "wire_created": False},
+        "execution": {"optimizer_started": False, "device": "cuda:0" if local_cuda and local_gate["status"] == "passed" else "cpu", "gpu_touched": False, "local_cuda_candidate": bool(local_cuda), "docker_started": False, "network_contacted": False, "wire_created": False},
+        "local_training_gate": local_gate,
+        "local_device_name": local_device_name,
         "training_eligible": 0,
         "capability_training_allowed": False,
         "logic_composition_candidate_only": True,
         "promotion": _safe_promotion(),
     }
-    if cpu_smoke:
+    if cpu_smoke or (local_cuda and local_gate["status"] == "passed"):
         report["execution"]["optimizer_started"] = True
-        report["seeds"] = [_train_seed(train, holdout, vocabulary, classes, seed=seed, config=config, epochs=epochs, microbatch=microbatch, device=torch.device("cpu")) for seed in SEEDS]
+        report["execution"]["gpu_touched"] = bool(local_cuda)
+        report["seeds"] = [_train_seed(train, holdout, vocabulary, classes, seed=seed, config=config, epochs=epochs, microbatch=microbatch, device=device) for seed in SEEDS]
     else:
         report["seeds"] = []
     return report
@@ -414,6 +461,7 @@ def main() -> int:
     parser.add_argument("--dataset", type=Path, default=DEFAULT_DATASET)
     parser.add_argument("--audit", type=Path, default=DEFAULT_AUDIT)
     parser.add_argument("--cpu-smoke", action="store_true")
+    parser.add_argument("--local-cuda", action="store_true", help="run an explicitly gated local CUDA candidate; never grants promotion")
     parser.add_argument("--row-limit", type=int, default=128)
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--d-model", type=int, default=64)
@@ -423,7 +471,7 @@ def main() -> int:
     parser.add_argument("--microbatch", type=int, default=16)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
-    report = run_candidate(dataset_path=args.dataset, audit_path=args.audit, cpu_smoke=args.cpu_smoke, row_limit=args.row_limit, epochs=args.epochs, d_model=args.d_model, layers=args.layers, experts=args.experts, expert_hidden=args.expert_hidden, microbatch=args.microbatch)
+    report = run_candidate(dataset_path=args.dataset, audit_path=args.audit, cpu_smoke=args.cpu_smoke, local_cuda=args.local_cuda, row_limit=args.row_limit, epochs=args.epochs, d_model=args.d_model, layers=args.layers, experts=args.experts, expert_hidden=args.expert_hidden, microbatch=args.microbatch)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"output": str(args.output), "status": report["status"], "train_count": report["train_count"], "holdout_count": report["holdout_count"], "optimizer_started": report["execution"]["optimizer_started"]}, ensure_ascii=False))

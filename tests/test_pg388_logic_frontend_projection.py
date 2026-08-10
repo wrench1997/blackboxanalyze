@@ -25,7 +25,7 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["independent_holdout"]["gates"]["docker_smoke_observed"] is True
     assert summary["independent_holdout"]["gates"]["training_eligible"] is False
     assert summary["candidate_model"]["status"] == "candidate_only_projection"
-    assert len(summary["candidate_model"]["runs"]) == 6
+    assert len(summary["candidate_model"]["runs"]) == 7
     assert summary["candidate_model"]["runs"][0]["vocabulary_scope"] == "train_context_only"
     assert summary["candidate_model"]["runs"][0]["execution"]["device"] == "cpu"
     assert summary["candidate_model"]["runs"][3]["label"] == "11-slot composition"
@@ -39,6 +39,12 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["candidate_model"]["runs"][5]["holdout_composition_exact"] == 0.964286
     assert summary["candidate_model"]["runs"][5]["holdout_slot_accuracy"] == 0.994156
     assert summary["candidate_model"]["runs"][5]["holdout_repair_recall"] == 1.0
+    assert summary["candidate_model"]["runs"][6]["label"] == "11-slot composition (local CUDA e8)"
+    assert summary["candidate_model"]["runs"][6]["holdout_composition_exact"] == 0.992857
+    assert summary["candidate_model"]["runs"][6]["holdout_slot_accuracy"] == 0.998701
+    assert summary["candidate_model"]["runs"][6]["execution"]["device"] == "cuda:0"
+    assert summary["candidate_model"]["runs"][6]["execution"]["gpu_touched"] is True
+    assert summary["candidate_model"]["latest_label"] == "11-slot composition (local CUDA e8)"
     assert summary["candidate_model"]["training_allowed"] is False
     assert summary["taxonomy_coverage"]["case_count"] == 66
     assert summary["taxonomy_coverage"]["category_count"] == 10
