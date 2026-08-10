@@ -34,6 +34,7 @@ DEFAULT_CANDIDATE_REPORTS = (
     ("trajectory canary", ROOT / "research" / "pg388_logic_canary_token_cpu_smoke_28case_v2.json"),
     ("11-slot composition", ROOT / "research" / "pg388_logic_composed_candidate_cpu_smoke_v1.json"),
     ("11-slot composition (full CPU)", ROOT / "research" / "pg388_logic_composed_candidate_cpu_full_v1.json"),
+    ("11-slot composition (full CPU e8)", ROOT / "research" / "pg388_logic_composed_candidate_cpu_full_e8_v1.json"),
 )
 DEFAULT_OUTPUT = ROOT / "frontend" / "public" / "research" / "pg388_logic_rule_ir_frontend_summary_v1.json"
 

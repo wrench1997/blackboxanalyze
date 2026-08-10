@@ -38,3 +38,17 @@ def test_pg388_composed_report_projection_has_no_raw_markers(tmp_path: Path):
     serialized = json.dumps(report, ensure_ascii=False).casefold()
     for marker in ("raw_payload=", "response_body=", "wire=", "http://", "https://", "oracle_answer="):
         assert marker not in serialized
+
+
+def test_pg388_full_e8_artifact_remains_candidate_only_and_abstract():
+    path = Path("research/pg388_logic_composed_candidate_cpu_full_e8_v1.json")
+    report = json.loads(path.read_text(encoding="utf-8"))
+    assert report["status"] == "cpu_composed_candidate_only"
+    assert report["train_count"] == 420
+    assert report["holdout_count"] == 420
+    assert report["execution"]["device"] == "cpu"
+    assert report["execution"]["gpu_touched"] is False
+    assert report["training_eligible"] == 0
+    serialized = json.dumps(report, ensure_ascii=False).casefold()
+    for marker in ("raw_payload=", "response_body=", "wire=", "http://", "https://", "oracle_answer="):
+        assert marker not in serialized

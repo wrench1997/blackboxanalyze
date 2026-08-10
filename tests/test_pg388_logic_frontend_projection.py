@@ -25,13 +25,17 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["independent_holdout"]["gates"]["docker_smoke_observed"] is True
     assert summary["independent_holdout"]["gates"]["training_eligible"] is False
     assert summary["candidate_model"]["status"] == "candidate_only_projection"
-    assert len(summary["candidate_model"]["runs"]) == 5
+    assert len(summary["candidate_model"]["runs"]) == 6
     assert summary["candidate_model"]["runs"][0]["vocabulary_scope"] == "train_context_only"
     assert summary["candidate_model"]["runs"][0]["execution"]["device"] == "cpu"
     assert summary["candidate_model"]["runs"][3]["label"] == "11-slot composition"
     assert summary["candidate_model"]["runs"][3]["holdout_count"] == 128
     assert summary["candidate_model"]["runs"][4]["label"] == "11-slot composition (full CPU)"
     assert summary["candidate_model"]["runs"][4]["holdout_count"] == 420
+    assert summary["candidate_model"]["runs"][5]["label"] == "11-slot composition (full CPU e8)"
+    assert summary["candidate_model"]["runs"][5]["holdout_count"] == 420
+    assert summary["candidate_model"]["runs"][5]["weakest_head"]["accuracy"] >= 0.96
+    assert summary["candidate_model"]["runs"][5]["holdout_ask_recall"] == 1.0
     assert summary["candidate_model"]["training_allowed"] is False
     assert summary["taxonomy_coverage"]["case_count"] == 66
     assert summary["taxonomy_coverage"]["category_count"] == 10
