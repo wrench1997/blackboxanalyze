@@ -21,6 +21,8 @@ DEFAULT_DATASET = ROOT / "research" / "pg388_logic_rule_ir_composition_dataset_v
 DEFAULT_AUDIT = ROOT / "research" / "pg388_logic_rule_ir_composition_audit_v1.json"
 DEFAULT_PLAN = ROOT / "research" / "pg388_logic_composed_candidate_plan_v1.json"
 DEFAULT_LIVE = ROOT / "research" / "pg388_logic_canary_live_v1.json"
+DEFAULT_ROW_BOUND_REPORT = ROOT / "research" / "pg388_logic_rule_ir_source_rows_live_v1.json"
+DEFAULT_ROW_BOUND_AUDIT = ROOT / "research" / "pg388_logic_rule_ir_source_rows_live_audit_v1.json"
 DEFAULT_OUTPUT = ROOT / "frontend" / "public" / "research" / "pg388_logic_rule_ir_frontend_summary_v1.json"
 
 SCHEMA_VERSION = "pg388-logic-rule-ir-frontend-summary-v1"
@@ -83,11 +85,15 @@ def build_summary(
     audit_path: Path = DEFAULT_AUDIT,
     plan_path: Path = DEFAULT_PLAN,
     live_path: Path = DEFAULT_LIVE,
+    row_bound_report_path: Path = DEFAULT_ROW_BOUND_REPORT,
+    row_bound_audit_path: Path = DEFAULT_ROW_BOUND_AUDIT,
 ) -> dict[str, Any]:
     dataset = _load(dataset_path)
     audit = _load(audit_path)
     plan = _load(plan_path)
     live = _load(live_path)
+    row_bound = _load(row_bound_report_path) if row_bound_report_path.exists() else None
+    row_bound_audit = _load(row_bound_audit_path) if row_bound_audit_path.exists() else None
     rows = dataset.get("rows")
     if not isinstance(rows, list):
         raise ValueError("PG-388 dataset rows must be a list")
@@ -112,6 +118,36 @@ def build_summary(
         unknown_holdout_count = int(unknown_holdout)
     else:
         unknown_holdout_count = 0
+    row_bound_counts = row_bound.get("counts") if isinstance(row_bound, dict) and isinstance(row_bound.get("counts"), dict) else {}
+    row_bound_contract = row_bound.get("source_contract") if isinstance(row_bound, dict) and isinstance(row_bound.get("source_contract"), dict) else {}
+    if row_bound is not None:
+        live_projection = {
+            "status": str(row_bound.get("status", "unknown")),
+            "fresh_resets": int(row_bound_counts.get("fresh_resets", 0)),
+            "typed_observations": int(row_bound_counts.get("typed", 0)),
+            "candidate_effects": int(row_bound_counts.get("failure_repair", 0)),
+            "negative_control_clean": max(0, int(row_bound_counts.get("typed", 0)) - int(row_bound_counts.get("negative_violations", 0))),
+            "unsafe_allow": 0,
+            "row_bound": row_bound_contract.get("row_bound_typed_evidence") is True,
+            "report_file": row_bound_report_path.name,
+            "report_sha256": _sha256(row_bound_report_path),
+            "audit_status": str((row_bound_audit or {}).get("status", "pending")),
+            "audit_sha256": _sha256(row_bound_audit_path) if row_bound_audit_path.exists() else "",
+        }
+    else:
+        live_projection = {
+            "status": str(live_coverage.get("status", "unknown")),
+            "fresh_resets": int(live_coverage.get("fresh_resets", 0)),
+            "typed_observations": int(live_coverage.get("typed_observations", 0)),
+            "candidate_effects": int(live_coverage.get("candidate_effects", 0)),
+            "negative_control_clean": int(live_coverage.get("negative_control_clean", 0)),
+            "unsafe_allow": int(live_coverage.get("unsafe_allow", 0)),
+            "row_bound": live_coverage.get("row_bound") is True,
+            "report_file": live_path.name,
+            "report_sha256": _sha256(live_path),
+            "audit_status": "aggregate_only",
+            "audit_sha256": "",
+        }
     output = {
         "schema_version": SCHEMA_VERSION,
         "status": "diagnostic_rule_ir_candidate",
@@ -142,17 +178,7 @@ def build_summary(
             "training_eligible": int(audit.get("training_eligible", 0)),
             "failure_count": len(audit.get("failures", [])) if isinstance(audit.get("failures"), list) else 0,
         },
-        "live_evidence": {
-            "status": str(live_coverage.get("status", "unknown")),
-            "fresh_resets": int(live_coverage.get("fresh_resets", 0)),
-            "typed_observations": int(live_coverage.get("typed_observations", 0)),
-            "candidate_effects": int(live_coverage.get("candidate_effects", 0)),
-            "negative_control_clean": int(live_coverage.get("negative_control_clean", 0)),
-            "unsafe_allow": int(live_coverage.get("unsafe_allow", 0)),
-            "row_bound": live_coverage.get("row_bound") is True,
-            "report_file": "pg388_logic_canary_live_v1.json",
-            "report_sha256": _sha256(live_path),
-        },
+        "live_evidence": live_projection,
         "plan": {
             "file": plan_path.name,
             "sha256": _sha256(plan_path),
@@ -166,10 +192,10 @@ def build_summary(
         "gates": {
             "abstract_rule_ir_audit": audit.get("status") == "passed_candidate_rule_ir_audit",
             "context_firewall": audit.get("context_firewall_passed") is True,
-            "source_row_bound_typed_evidence": source_contract.get("row_bound_typed_evidence") is True,
-            "fresh_role_reset_attested": source_contract.get("fresh_role_reset_attested") is True,
-            "operator_reviewed": source_contract.get("operator_reviewed") is True,
-            "candidate_reference_negative_replay": source_contract.get("candidate_reference_negative_replay") is True,
+            "source_row_bound_typed_evidence": (row_bound_contract.get("row_bound_typed_evidence") if row_bound is not None else source_contract.get("row_bound_typed_evidence")) is True,
+            "fresh_role_reset_attested": (row_bound_contract.get("fresh_role_reset_attested") if row_bound is not None else source_contract.get("fresh_role_reset_attested")) is True,
+            "operator_reviewed": (row_bound_contract.get("operator_reviewed") if row_bound is not None else source_contract.get("operator_reviewed")) is True,
+            "candidate_reference_negative_replay": (row_bound_contract.get("candidate_reference_negative_replay") if row_bound is not None else source_contract.get("candidate_reference_negative_replay")) is True,
             "capability_training_allowed": False,
             "training_eligible": False,
             "promotion": _safe_promotion(dataset.get("promotion")),

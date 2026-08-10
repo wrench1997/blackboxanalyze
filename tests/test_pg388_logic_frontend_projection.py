@@ -14,7 +14,10 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["audit"]["context_firewall_passed"] is True
     assert summary["gates"]["capability_training_allowed"] is False
     assert summary["gates"]["training_eligible"] is False
-    assert summary["live_evidence"]["row_bound"] is False
+    assert summary["live_evidence"]["row_bound"] is True
+    assert summary["live_evidence"]["audit_status"] == "passed_candidate_logic_rule_ir_source_row_audit"
+    assert summary["gates"]["fresh_role_reset_attested"] is True
+    assert summary["gates"]["operator_reviewed"] is False
     assert summary["plan"]["optimizer_started"] is False
 
 
