@@ -21,6 +21,32 @@ services:
       - pg388_internal
     restart: "no"
 
+  # Optional implementation holdout.  It is intentionally not part of the
+  # default display profile; enable only after reviewing a separate image
+  # digest and fresh-reset contract.
+  pg388-backend-b:
+    profiles: ["holdout"]
+    image: pg388-logic-backend-b:local
+    build:
+      context: .
+      dockerfile: fixtures/pg388/Dockerfile.b
+      args:
+        PYTHON_IMAGE_DIGEST_B: ${PG388_PYTHON_IMAGE_DIGEST_B:?set reviewed Python base digest for holdout}
+    environment:
+      PG388_BIND: 0.0.0.0
+      PG388_PORT: 8089
+      PG388_NETWORK_MODE: internal_private_holdout
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    security_opt:
+      - no-new-privileges:true
+    expose:
+      - "8089"
+    networks:
+      - pg388_internal
+    restart: "no"
+
   pg388-frontend:
     image: pg388-frontend:local
     build:

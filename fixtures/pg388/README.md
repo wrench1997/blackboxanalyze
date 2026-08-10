@@ -23,6 +23,14 @@ compose network is Docker `internal: true` and publishes only the frontend to
 `127.0.0.1:3000`; it is a display deployment, not a replacement for the
 network-none evaluator contract.
 
+Implementation B is an optional source/implementation holdout. It uses a
+separate transition table and `fixtures/pg388/Dockerfile.b`; enable it only
+with `docker compose --profile holdout -f docker-compose.pg388.yml up` after
+reviewing `PG388_PYTHON_IMAGE_DIGEST_B`. It exposes only the private `8089`
+container port, has no persistent storage, and must remain candidate-only
+until its own fresh reset, typed candidate/reference/negative/replay evidence
+and source-row audit are complete.
+
 The frozen core catalog contains 56 abstract contracts.  The separate
 `/api/supplemental-cases` endpoint exposes 10 candidate-only taxonomy-gap
 contracts (OAuth/activation/CSRF second-factor, CAPTCHA detail cases, and

@@ -28,6 +28,10 @@ def test_pg388_two_container_display_is_loopback_published_and_internal() -> Non
     assert "pg388-frontend:local" in compose
     assert "pg388_display" in compose
     assert "pg388_internal" in compose
+    assert "pg388-backend-b" in compose
+    assert "Dockerfile.b" in compose
+    assert "PG388_PYTHON_IMAGE_DIGEST_B" in compose
+    assert 'profiles: ["holdout"]' in compose
     assert "NODE_BASE_IMAGE" in frontend_dockerfile
     assert "standalone" in frontend_dockerfile
     assert 'output: "standalone"' in next_config
