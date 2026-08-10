@@ -18,7 +18,11 @@ docker compose -f docker-compose.pg388.yml -p pg388demo up -d
 页面里的 “MODEL READINESS / STRUCTURED RULE-IR” 面板会直接展示 11-slot 组合计划、840 条
 train/holdout 轨迹和当前硬门；它明确标出 optimizer 未启动，不把 wiring smoke 冒充为漏洞能力。
 
-28-case token CPU smoke 也已登记为诊断资产：420/420 train/holdout、train-only vocab=75、unknown gap=0；但 worst ASK recall=`0.0`、logic invariant=`0.042857`、state transition=`0.064286`，因此不能宣传为模型已经学会逻辑漏洞或通用 payload 生成。
+当前 `/pg388` 还展示 66 个 4.13 逻辑案例（56 core + 10 supplemental）、两实现 holdout 和
+120 条 fresh-role typed Rule-IR 诊断投影；typed observation 仍不是 train permission，投影明确为
+`evaluator_diagnostic`，没有 train/implementation-holdout split。
+
+历史 28-case token CPU smoke 仍登记为诊断资产：420/420 train/holdout、train-only vocab=75、unknown gap=0；但 worst ASK recall=`0.0`、logic invariant=`0.042857`、state transition=`0.064286`，因此不能宣传为模型已经学会逻辑漏洞或通用 payload 生成。
 
 另有 `mean_boundary` / `anchor_mean_boundary` pooling 对照，结果仍是 seed-unstable、逻辑不变量头接近随机；它们用于定位模型结构问题，不是能力或训练晋级证据。
 
