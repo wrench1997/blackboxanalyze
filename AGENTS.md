@@ -1563,6 +1563,14 @@ PG-305 的共享 `context_tokens()` 构造器也加入同一层早期拒绝：�
 - 发布内容包括三份 CPU candidate smoke 的只读聚合指标、PG388 模型面板、摘要/资产清单同步；回归 `12 passed`、`npm run build` 通过、资产校验 `asset_count=60` 通过、`/pg388` 与摘要接口 HTTP 200。
 - 本次提交仍没有启动 A800、Docker holdout 或外网；训练资格、payload catalog、长期记忆和漏洞声明全部关闭。下一步若要真实训练，仍必须先补 train split、operator review、image attestation 和信息/容量硬门。
 
+### 2026-08-10：PG-388 11-slot 组合 decoder candidate smoke
+
+- 新增 `scripts/run_pg388_logic_composed_candidate.py`（SHA=`5ff9ead14060c04dce4d2e7c8b81b2568f9847d38485e148de4bc67d21b45901`）和测试（SHA=`cbbdaee49a039030307c00ba01f3b5ced83f9ca787b27489dbd544af23ada817`）。它只读取 PG388 abstract context/11-slot target，使用 shared causal MoE + previous-slot-conditioned composition decoder；evaluator summary、source metadata、wire、响应和 payload 不进入 batch。
+- plan=`research/pg388_logic_composed_candidate_plan_v1.json` SHA=`8679194a9a080f0d633d3596b5feaa2926bc3453cb46e4f1f3efadd5c8d85566`，source contract 仍因 row-bound typed evidence、fresh reset attestation、operator review 缺失而 blocked。CPU smoke=`research/pg388_logic_composed_candidate_cpu_smoke_v1.json` SHA=`bfc5eea536784979e045496a0323877a272c1ff41e362534dfb6582da0ab182b`，128/128 bounded rows、3 seeds、optimizer 仅 CPU、GPU/Docker/network/wire 全 false、training/promotion 全关。
+- 组合 smoke 的 worst holdout composition exact=`0.023438`、slot accuracy=`0.628551`、ASK=`0.705882`，显示“把不变量、动作和修复按顺序组合”仍是模型瓶颈；该报告只作结构诊断，不是逻辑漏洞利用结果。前端 candidate model projection 已纳入该第四组 run，摘要 SHA=`e92ddb32ef427160074588a98cdcc57deb08688e50128ddcc11efd939e332256`，投影脚本 SHA=`7b045e65f7e5a34ed20d57142bc6b89b7a6b9c505933f382aebbedd9e59f251b`。
+- demo asset manifest 当前 SHA=`fe93d5852df2e491b925027282529a7e9bdd352d94bea01ad4b6f787745a5626`、`asset_count=63`；相关 PG388/前端/组合测试 `11 passed`（Transformer nested-tensor 仅为警告）。
+- 前端已用最新 `.next/standalone` 做无外网 refresh image，当前 image=`sha256:a3792ed6f7cbcca1964f87c5f4c99dfa9835aad43ee49ec6ffa49f9fd514e2f8`；`/pg388` 和摘要接口复核 HTTP 200，B holdout 未启动。
+
 ### 2026-08-10：PG-388 明日演示运行手册
 
 - 新增 `docs/PG388_DEMO_RUNBOOK.md`，记录克隆/资产校验、immutable base digest、compose 启动、HTTP 健康检查、推荐讲解顺序、模型指标解读和安全清理命令。

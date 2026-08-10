@@ -31,6 +31,7 @@ DEFAULT_CANDIDATE_REPORTS = (
     ("logic invariant", ROOT / "research" / "pg388_logic_token_cpu_smoke_v1.json"),
     ("supplemental logic", ROOT / "research" / "pg388_logic_supplement_token_cpu_smoke_v1.json"),
     ("trajectory canary", ROOT / "research" / "pg388_logic_canary_token_cpu_smoke_28case_v2.json"),
+    ("11-slot composition", ROOT / "research" / "pg388_logic_composed_candidate_cpu_smoke_v1.json"),
 )
 DEFAULT_OUTPUT = ROOT / "frontend" / "public" / "research" / "pg388_logic_rule_ir_frontend_summary_v1.json"
 
@@ -115,6 +116,12 @@ def _candidate_run_projection(label: str, path: Path) -> dict[str, Any]:
     head_values: dict[str, list[float]] = {}
     for holdout in holdouts:
         head_accuracy = holdout.get("head_accuracy") if isinstance(holdout.get("head_accuracy"), dict) else {}
+        if not head_accuracy and isinstance(holdout.get("per_slot"), dict):
+            head_accuracy = {
+                str(name): value.get("accuracy")
+                for name, value in holdout["per_slot"].items()
+                if isinstance(value, dict) and isinstance(value.get("accuracy"), (int, float))
+            }
         for name, value in head_accuracy.items():
             if isinstance(value, (int, float)) and not isinstance(value, bool):
                 head_values.setdefault(str(name), []).append(float(value))
@@ -124,15 +131,15 @@ def _candidate_run_projection(label: str, path: Path) -> dict[str, Any]:
         weakest_name, weakest_accuracy = min(worst_heads.items(), key=lambda item: (item[1], item[0]))
     ask_values = [float(item.get("ask_recall", 0.0)) for item in holdouts if isinstance(item.get("ask_recall"), (int, float))]
     false_allow_values = [int(item.get("negative_false_allow", 0) or 0) for item in holdouts]
-    vocabulary = report.get("train_only_vocabulary") if isinstance(report.get("train_only_vocabulary"), dict) else {}
+    vocabulary = report.get("train_only_vocabulary") if isinstance(report.get("train_only_vocabulary"), dict) else report.get("train_context_vocabulary") if isinstance(report.get("train_context_vocabulary"), dict) else {}
     execution = report.get("execution") if isinstance(report.get("execution"), dict) else {}
     return {
         "label": label,
         "status": str(report.get("status", "unknown")),
         "report_file": path.name,
         "report_sha256": _sha256(path),
-        "train_count": int(report.get("train_rows", 0) or 0),
-        "holdout_count": int(report.get("holdout_rows", 0) or 0),
+        "train_count": int(report.get("train_rows", report.get("train_count", 0)) or 0),
+        "holdout_count": int(report.get("holdout_rows", report.get("holdout_count", 0)) or 0),
         "seed_count": len(holdouts),
         "vocabulary_scope": str(vocabulary.get("scope", "unknown")),
         "vocabulary_size": int(vocabulary.get("size", 0) or 0),

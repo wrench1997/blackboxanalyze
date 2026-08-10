@@ -40,7 +40,7 @@ Invoke-WebRequest -UseBasicParsing http://127.0.0.1:3000/pg388-api/health | Sele
 1. 在 `CASE MATRIX` 选择“价格 / 金额”“优惠券重放”“找回绑定”“2FA 顺序”“水平越权”或“订单并发提交”。
 2. 先讲 `invariant`、`preconditions` 和 `counterfactual`，再点击本地 loopback replay。
 3. 展示 `reset → observe/ASK → repair → candidate → reference → negative → replay` 轨迹；重点看 negative 是否保持 clean，以及 failure 后 action 是否改变。
-4. 展开 `MODEL READINESS / STRUCTURED RULE-IR`：先看 typed/fresh/source-row 合同，再看 `CANDIDATE MODEL / CPU SMOKE` 的 ASK、最弱 head、holdout 和 false-allow。
+4. 展开 `MODEL READINESS / STRUCTURED RULE-IR`：先看 typed/fresh/source-row 合同，再看 `CANDIDATE MODEL / CPU SMOKE` 的 ASK、最弱 head、holdout 和 false-allow；第四组 `11-slot composition` 用来说明顺序组合目前仍是瓶颈。
 5. 最后说明 `HOLD` 的原因：A/B 都是 implementation holdout，尚无正式 train split、operator review 和 image attestation；CPU smoke 是 wiring/结构诊断，不是“模型已经会找漏洞”。
 
 ## 4. 演示时的准确表述

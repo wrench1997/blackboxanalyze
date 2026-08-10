@@ -1,14 +1,10 @@
 {
-  "schema_version": "pg388-logic-composed-candidate-plan-v1",
-  "status": "blocked_capability_contract",
-  "dataset": "D:\\workspace\\blackboxanalyze\\research\\pg388_logic_canary_trajectory_dataset_v1.json",
-  "dataset_sha256": "83ee6bbc03df77c753293fac1d2076bddb78987302a359a8a7cb17161d7a6654",
-  "counts": {
-    "records": 840,
-    "train": 420,
-    "implementation_holdout": 420,
-    "slots": 11
-  },
+  "schema_version": "pg388-logic-composed-candidate-v1",
+  "status": "plan_only_blocked",
+  "dataset_file": "pg388_logic_rule_ir_composition_dataset_v1.json",
+  "audit_file": "pg388_logic_rule_ir_composition_audit_v1.json",
+  "dataset_sha256": "ae9461fa84062ab2d9a96dbd3450ff83932e4f2f79d7baa7ae51703faeccef26",
+  "audit_sha256": "45463e834e71394831fd60c37cc52edebd5057abb069408a2e14163e20d0867f",
   "slot_order": [
     "question",
     "ask_reason",
@@ -22,34 +18,37 @@
     "oracle_ref",
     "safe_to_send"
   ],
-  "train_only_vocabulary": {
-    "size": 73,
-    "unknown_holdout_context_count": 0
-  },
-  "unknown_holdout_slot_values": {},
-  "required_context_window": 10,
-  "model_design": {
-    "backbone": "decoder_only_causal_moe",
-    "d_model": 256,
-    "n_layers": 4,
-    "experts": 4,
-    "expert_hidden": 512,
-    "slot_decoder": "autoregressive_causal_previous_slot_conditioned",
-    "slot_decoder_layers": 2,
-    "auxiliary_heads": [
-      "ask",
-      "repair",
-      "negative_control"
-    ],
-    "target_mask": "target_only_next_token_plus_teacher_forced_slot_composition"
-  },
-  "gate": {
+  "contract": {
+    "status": "blocked_candidate_contract",
     "failures": [
-      "fresh_role_reset_not_attested",
-      "operator_review_not_attested",
-      "typed_evaluator_not_attested"
+      "row_bound_typed_evidence_missing",
+      "fresh_role_reset_attestation_missing",
+      "operator_review_missing"
     ],
+    "train_count": 420,
+    "holdout_count": 420,
+    "unknown_context_count": 0,
+    "unknown_slot_value_count": 0,
+    "unknown_slot_values": {},
+    "context_overlap": 0,
+    "source_contract_complete": false
+  },
+  "train_count": 128,
+  "holdout_count": 128,
+  "train_context_vocabulary": {
+    "size": 75,
+    "scope": "train_context_only"
+  },
+  "model": {
+    "backbone": "decoder_only_causal_moe",
+    "composition_decoder": "causal_previous_slot_conditioned",
+    "d_model": 64,
+    "layers": 2,
+    "experts": 2
+  },
+  "execution": {
     "optimizer_started": false,
+    "device": "cpu",
     "gpu_touched": false,
     "docker_started": false,
     "network_contacted": false,
@@ -57,11 +56,12 @@
   },
   "training_eligible": 0,
   "capability_training_allowed": false,
+  "logic_composition_candidate_only": true,
   "promotion": {
     "training_allowed": false,
     "memory_promotion_allowed": false,
     "payload_catalog_promotion_allowed": false,
     "vulnerability_claim_allowed": false
   },
-  "report_sha256": "66c9f1485388b89c8b12a9f1db79463d9996ff5b59fff8d34f5fe62ccfaa56fb"
+  "seeds": []
 }
