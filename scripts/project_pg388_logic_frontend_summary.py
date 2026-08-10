@@ -338,6 +338,21 @@ def _typed_supplement_projection(report_path: Path, audit_path: Path) -> dict[st
 def _information_preservation_projection(path: Path) -> dict[str, Any]:
     """Project bounded diversity/capacity diagnostics without token values."""
 
+    composition_empty = {
+        "status": "missing",
+        "row_count": 0,
+        "split_counts": {},
+        "implementation_count": 0,
+        "context_unique_ratio": {"train": 0.0, "implementation_holdout": 0.0},
+        "target_unique_ratio": {"train": 0.0, "implementation_holdout": 0.0},
+        "cross_split_context_overlap": 0,
+        "cross_split_target_overlap": 0,
+        "axis_observed_count": 0,
+        "axis_count": 7,
+        "source_contract": {"row_bound_typed_evidence": False, "fresh_role_reset_attested": False, "operator_reviewed": False, "training_eligible": 0},
+        "contract_passed": False,
+    }
+
     empty = {
         "status": "missing",
         "report_file": path.name,
@@ -358,6 +373,7 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
             "field_ablation": "not_run",
         },
         "integrity": {"row_count": 0, "raw_context_marker_hits": 0, "row_hash_failures": 0},
+        "composition_dataset": composition_empty,
         "training_eligible": 0,
         "promotion": _safe_promotion(None),
         "scope": "bounded_information_diagnostic_no_rows_or_tokens",
@@ -371,6 +387,46 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
     capacity = report.get("capacity") if isinstance(report.get("capacity"), dict) else {}
     gate = report.get("information_gate") if isinstance(report.get("information_gate"), dict) else {}
     integrity = report.get("integrity") if isinstance(report.get("integrity"), dict) else {}
+    composition = report.get("composition_dataset") if isinstance(report.get("composition_dataset"), dict) else {}
+    composition_sequence = composition.get("sequence_diversity") if isinstance(composition.get("sequence_diversity"), dict) else {}
+    composition_by_split = composition_sequence.get("by_split") if isinstance(composition_sequence.get("by_split"), dict) else {}
+    composition_context_ratios: dict[str, float] = {}
+    composition_target_ratios: dict[str, float] = {}
+    for split, item in composition_by_split.items():
+        if not isinstance(item, dict):
+            continue
+        context = item.get("context") if isinstance(item.get("context"), dict) else {}
+        target = item.get("target") if isinstance(item.get("target"), dict) else {}
+        composition_context_ratios[str(split)] = round(float(context.get("unique_ratio", 0.0) or 0.0), 6)
+        composition_target_ratios[str(split)] = round(float(target.get("unique_ratio", 0.0) or 0.0), 6)
+    composition_contract = composition.get("source_contract") if isinstance(composition.get("source_contract"), dict) else {}
+    composition_axis = composition.get("axis_token_coverage") if isinstance(composition.get("axis_token_coverage"), dict) else {}
+    composition_projection = {
+        "status": str(composition.get("status", "missing")),
+        "row_count": int(composition.get("row_count", 0) or 0),
+        "split_counts": {str(key): int(value or 0) for key, value in (composition.get("split_counts", {}) or {}).items()} if isinstance(composition.get("split_counts"), dict) else {},
+        "implementation_count": int(composition.get("implementation_count", 0) or 0),
+        "context_unique_ratio": composition_context_ratios,
+        "target_unique_ratio": composition_target_ratios,
+        "cross_split_context_overlap": int(composition_sequence.get("cross_split_context_overlap", 0) or 0),
+        "cross_split_target_overlap": int(composition_sequence.get("cross_split_target_overlap", 0) or 0),
+        "axis_observed_count": sum(1 for value in composition_axis.values() if isinstance(value, (int, float)) and value > 0),
+        "axis_count": len(composition_axis) or 7,
+        "source_contract": {
+            "row_bound_typed_evidence": composition_contract.get("row_bound_typed_evidence") is True,
+            "fresh_role_reset_attested": composition_contract.get("fresh_role_reset_attested") is True,
+            "operator_reviewed": composition_contract.get("operator_reviewed") is True,
+            "training_eligible": int(composition_contract.get("training_eligible", 0) or 0),
+        },
+        "contract_passed": (
+            composition_contract.get("row_bound_typed_evidence") is True
+            and composition_contract.get("fresh_role_reset_attested") is True
+            and composition_contract.get("operator_reviewed") is True
+            and all(isinstance(value, (int, float)) and value > 0 for value in composition_axis.values())
+            and int(composition_sequence.get("cross_split_context_overlap", 0) or 0) == 0
+            and int(composition_sequence.get("cross_split_target_overlap", 0) or 0) == 0
+        ),
+    }
 
     def _sequence(name: str) -> dict[str, Any]:
         raw = sequence.get(name) if isinstance(sequence.get(name), dict) else {}
@@ -430,6 +486,7 @@ def _information_preservation_projection(path: Path) -> dict[str, Any]:
             "raw_context_marker_hits": int(integrity.get("raw_context_marker_hits", 0) or 0),
             "row_hash_failures": int(integrity.get("row_hash_failures", 0) or 0),
         },
+        "composition_dataset": composition_projection,
         "training_eligible": int(report.get("training_eligible", 0) or 0),
         "promotion": _safe_promotion(report.get("promotion")),
         "scope": "bounded_information_diagnostic_no_rows_or_tokens",

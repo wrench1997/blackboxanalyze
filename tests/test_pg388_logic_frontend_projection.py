@@ -68,6 +68,10 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["information_preservation"]["sequence_diversity"]["context"]["unique_ratio"] == 0.007143
     assert summary["information_preservation"]["axis_presence"]["zero_entropy_axis_count"] == 7
     assert summary["gates"]["information_preservation_audit"] is False
+    assert summary["information_preservation"]["composition_dataset"]["split_counts"] == {"implementation_holdout": 420, "train": 420}
+    assert summary["information_preservation"]["composition_dataset"]["context_unique_ratio"]["train"] == 0.333333
+    assert summary["information_preservation"]["composition_dataset"]["cross_split_target_overlap"] == 140
+    assert summary["information_preservation"]["composition_dataset"]["contract_passed"] is False
 
 
 def test_pg388_frontend_projection_contains_no_rows_or_raw_markers():
