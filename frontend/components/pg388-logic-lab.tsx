@@ -42,6 +42,25 @@ type BackendTrace = {
   canary: string;
 };
 
+type CandidateModelRun = {
+  label: string;
+  status: string;
+  report_file: string;
+  report_sha256: string;
+  train_count: number;
+  holdout_count: number;
+  seed_count: number;
+  vocabulary_scope: string;
+  vocabulary_size: number;
+  weakest_head: { name: string; accuracy: number };
+  holdout_ask_recall: number;
+  holdout_negative_false_allow: number;
+  execution: { optimizer_started: boolean; device: string; gpu_touched: boolean };
+  training_eligible: boolean;
+  capability_training_allowed: boolean;
+  promotion: Record<string, boolean>;
+};
+
 type RuleIrSummary = {
   status: string;
   dataset: {
@@ -128,6 +147,14 @@ type RuleIrSummary = {
     failures: string[];
     report_file: string;
     report_sha256: string;
+  };
+  candidate_model: {
+    status: string;
+    runs: CandidateModelRun[];
+    latest_label: string;
+    training_allowed: boolean;
+    capability_claim_allowed: boolean;
+    note: string;
   };
   plan: {
     status: string;
@@ -778,6 +805,19 @@ export default function Pg388LogicLab() {
               {[["source-row contract", ruleIrSummary.independent_holdout.gates.source_row_contract], ["fresh reset", ruleIrSummary.independent_holdout.gates.fresh_role_reset], ["C/R/N/replay", ruleIrSummary.independent_holdout.gates.candidate_reference_negative_replay], ["image attested", ruleIrSummary.independent_holdout.gates.image_attested], ["operator review", ruleIrSummary.independent_holdout.gates.operator_reviewed]].map(([label, passed]) => <span key={String(label)} className={passed ? styles.gatePass : styles.gateHold}><i />{String(label)} · {passed ? "PASS" : "HOLD"}</span>)}
             </div>
             <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>CROSS-IMPLEMENTATION AUDIT</span><strong>{ruleIrSummary.cross_implementation_audit.implementation_count} implementations · {ruleIrSummary.cross_implementation_audit.source_row_count} holdout rows · {ruleIrSummary.cross_implementation_audit.status}</strong><small>train split {ruleIrSummary.cross_implementation_audit.train_split_present ? "present" : "missing"} · context overlap {ruleIrSummary.cross_implementation_audit.context_signature_overlap} · target overlap {ruleIrSummary.cross_implementation_audit.target_signature_overlap} · training {ruleIrSummary.cross_implementation_audit.training_eligible}</small></div>
+          </div>
+          <div className={styles.ruleIrHoldout} aria-label="Candidate model CPU smoke projection">
+            <div className={styles.ruleIrHeader}><div><span className={styles.miniLabel}>CANDIDATE MODEL / CPU SMOKE</span><strong>{ruleIrSummary.candidate_model.status}</strong></div><b className={styles.gateHold}>CANDIDATE ONLY</b></div>
+            <div className={styles.ruleIrMetrics}>
+              {ruleIrSummary.candidate_model.runs.map((run) => (
+                <div key={run.label}>
+                  <span>{run.label}</span>
+                  <strong className={run.holdout_ask_recall >= 0.95 && run.holdout_negative_false_allow === 0 ? styles.gatePass : styles.gateHold}>{(run.holdout_ask_recall * 100).toFixed(0)}% ASK</strong>
+                  <small>weakest {run.weakest_head.name} {(run.weakest_head.accuracy * 100).toFixed(1)}% · holdout {run.holdout_count} · {run.execution.device}</small>
+                </div>
+              ))}
+            </div>
+            <div className={styles.ruleIrHoldoutNote}><span className={styles.miniLabel}>INTERPRETATION</span><strong>optimizer smoke ≠ 漏洞能力</strong><small>词表 scope=train_context_only · negative false-allow 必须为 0 · capability / promotion 仍关闭；浏览器只读取上述聚合指标。</small></div>
           </div>
         </div>}
         <div className={styles.noteBar}><strong>{ruleIrSummary ? `${ruleIrSummary.dataset.records} rows · train/holdout ${ruleIrSummary.dataset.split_counts.train ?? 0}/${ruleIrSummary.dataset.split_counts.implementation_holdout ?? 0} · ${ruleIrSummary.plan.status} · optimizer ${ruleIrSummary.plan.optimizer_started ? "started" : "0"}` : "840 rows · train/holdout 420/420 · plan only · optimizer 0"}</strong><span>不要把 wiring smoke 当作逻辑漏洞或 payload 能力</span></div>

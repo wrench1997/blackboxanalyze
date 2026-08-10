@@ -24,6 +24,11 @@ def test_pg388_frontend_projection_is_bounded_and_fail_closed():
     assert summary["independent_holdout"]["docker_smoke"]["negative_control_clean"] is True
     assert summary["independent_holdout"]["gates"]["docker_smoke_observed"] is True
     assert summary["independent_holdout"]["gates"]["training_eligible"] is False
+    assert summary["candidate_model"]["status"] == "candidate_only_projection"
+    assert len(summary["candidate_model"]["runs"]) == 3
+    assert summary["candidate_model"]["runs"][0]["vocabulary_scope"] == "train_context_only"
+    assert summary["candidate_model"]["runs"][0]["execution"]["device"] == "cpu"
+    assert summary["candidate_model"]["training_allowed"] is False
 
 
 def test_pg388_frontend_projection_contains_no_rows_or_raw_markers():
@@ -43,5 +48,6 @@ def test_pg388_frontend_projection_contains_no_rows_or_raw_markers():
         "https://",
         "container_id",
         "image_id",
+        '"context_tokens"',
     ):
         assert marker not in serialized

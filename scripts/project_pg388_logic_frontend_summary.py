@@ -27,6 +27,11 @@ DEFAULT_HOLDOUT_B_REPORT = ROOT / "research" / "pg388_logic_holdout_b_source_row
 DEFAULT_HOLDOUT_B_AUDIT = ROOT / "research" / "pg388_logic_holdout_b_source_rows_audit_v1.json"
 DEFAULT_HOLDOUT_B_DOCKER_SMOKE = ROOT / "research" / "pg388_logic_holdout_b_docker_smoke_v1.json"
 DEFAULT_CROSS_IMPLEMENTATION_AUDIT = ROOT / "research" / "pg388_logic_cross_implementation_audit_v1.json"
+DEFAULT_CANDIDATE_REPORTS = (
+    ("logic invariant", ROOT / "research" / "pg388_logic_token_cpu_smoke_v1.json"),
+    ("supplemental logic", ROOT / "research" / "pg388_logic_supplement_token_cpu_smoke_v1.json"),
+    ("trajectory canary", ROOT / "research" / "pg388_logic_canary_token_cpu_smoke_28case_v2.json"),
+)
 DEFAULT_OUTPUT = ROOT / "frontend" / "public" / "research" / "pg388_logic_rule_ir_frontend_summary_v1.json"
 
 SCHEMA_VERSION = "pg388-logic-rule-ir-frontend-summary-v1"
@@ -80,6 +85,80 @@ def _safe_promotion(value: Any) -> dict[str, bool]:
             "payload_catalog_promotion_allowed",
             "vulnerability_claim_allowed",
         )
+    }
+
+
+def _candidate_run_projection(label: str, path: Path) -> dict[str, Any]:
+    """Project CPU candidate metrics without exposing sequences or evaluator data."""
+    if not path.exists():
+        return {
+            "label": label,
+            "status": "missing",
+            "report_file": path.name,
+            "report_sha256": "",
+            "train_count": 0,
+            "holdout_count": 0,
+            "seed_count": 0,
+            "vocabulary_scope": "missing",
+            "vocabulary_size": 0,
+            "weakest_head": {"name": "missing", "accuracy": 0.0},
+            "holdout_ask_recall": 0.0,
+            "holdout_negative_false_allow": 0,
+            "execution": {"optimizer_started": False, "device": "unknown", "gpu_touched": False},
+            "training_eligible": False,
+            "capability_training_allowed": False,
+            "promotion": _safe_promotion(None),
+        }
+    report = _load(path)
+    seeds = report.get("seeds") if isinstance(report.get("seeds"), list) else []
+    holdouts = [seed.get("holdout", {}) for seed in seeds if isinstance(seed, dict) and isinstance(seed.get("holdout"), dict)]
+    head_values: dict[str, list[float]] = {}
+    for holdout in holdouts:
+        head_accuracy = holdout.get("head_accuracy") if isinstance(holdout.get("head_accuracy"), dict) else {}
+        for name, value in head_accuracy.items():
+            if isinstance(value, (int, float)) and not isinstance(value, bool):
+                head_values.setdefault(str(name), []).append(float(value))
+    worst_heads = {name: min(values) for name, values in head_values.items() if values}
+    weakest_name, weakest_accuracy = ("missing", 0.0)
+    if worst_heads:
+        weakest_name, weakest_accuracy = min(worst_heads.items(), key=lambda item: (item[1], item[0]))
+    ask_values = [float(item.get("ask_recall", 0.0)) for item in holdouts if isinstance(item.get("ask_recall"), (int, float))]
+    false_allow_values = [int(item.get("negative_false_allow", 0) or 0) for item in holdouts]
+    vocabulary = report.get("train_only_vocabulary") if isinstance(report.get("train_only_vocabulary"), dict) else {}
+    execution = report.get("execution") if isinstance(report.get("execution"), dict) else {}
+    return {
+        "label": label,
+        "status": str(report.get("status", "unknown")),
+        "report_file": path.name,
+        "report_sha256": _sha256(path),
+        "train_count": int(report.get("train_rows", 0) or 0),
+        "holdout_count": int(report.get("holdout_rows", 0) or 0),
+        "seed_count": len(holdouts),
+        "vocabulary_scope": str(vocabulary.get("scope", "unknown")),
+        "vocabulary_size": int(vocabulary.get("size", 0) or 0),
+        "weakest_head": {"name": weakest_name, "accuracy": round(float(weakest_accuracy), 6)},
+        "holdout_ask_recall": round(min(ask_values), 6) if ask_values else 0.0,
+        "holdout_negative_false_allow": max(false_allow_values) if false_allow_values else 0,
+        "execution": {
+            "optimizer_started": execution.get("optimizer_started") is True,
+            "device": str(execution.get("device", "unknown")),
+            "gpu_touched": execution.get("gpu_touched") is True,
+        },
+        "training_eligible": int(report.get("training_eligible", 0) or 0) > 0,
+        "capability_training_allowed": report.get("capability_training_allowed") is True,
+        "promotion": _safe_promotion(report.get("promotion")),
+    }
+
+
+def _candidate_model_projection() -> dict[str, Any]:
+    runs = [_candidate_run_projection(label, path) for label, path in DEFAULT_CANDIDATE_REPORTS]
+    return {
+        "status": "candidate_only_projection",
+        "runs": runs,
+        "latest_label": runs[-1]["label"] if runs else "missing",
+        "training_allowed": False,
+        "capability_claim_allowed": False,
+        "note": "CPU optimizer smoke is wiring evidence only; it is not a vulnerability or payload result.",
     }
 
 
@@ -263,6 +342,7 @@ def build_summary(
         "live_evidence": live_projection,
         "independent_holdout": independent_holdout,
         "cross_implementation_audit": cross_implementation_projection,
+        "candidate_model": _candidate_model_projection(),
         "plan": {
             "file": plan_path.name,
             "sha256": _sha256(plan_path),

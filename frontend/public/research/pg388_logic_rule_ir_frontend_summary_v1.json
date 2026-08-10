@@ -124,6 +124,105 @@
     "report_file": "pg388_logic_cross_implementation_audit_v1.json",
     "report_sha256": "bc3dd567f7028bd1efc1ce752fef9bdc447a499a994f7c76fbace8952eab3aa0"
   },
+  "candidate_model": {
+    "status": "candidate_only_projection",
+    "runs": [
+      {
+        "label": "logic invariant",
+        "status": "cpu_smoke_candidate_only",
+        "report_file": "pg388_logic_token_cpu_smoke_v1.json",
+        "report_sha256": "542c3ec0ea0b8828f8a460f8d3d2ec6e31f165ba30bedc343e6149de6175cc22",
+        "train_count": 128,
+        "holdout_count": 128,
+        "seed_count": 3,
+        "vocabulary_scope": "train_context_only",
+        "vocabulary_size": 35,
+        "weakest_head": {
+          "name": "ask_reason",
+          "accuracy": 0.75
+        },
+        "holdout_ask_recall": 1.0,
+        "holdout_negative_false_allow": 0,
+        "execution": {
+          "optimizer_started": true,
+          "device": "cpu",
+          "gpu_touched": false
+        },
+        "training_eligible": false,
+        "capability_training_allowed": false,
+        "promotion": {
+          "training_allowed": false,
+          "memory_promotion_allowed": false,
+          "payload_catalog_promotion_allowed": false,
+          "vulnerability_claim_allowed": false
+        }
+      },
+      {
+        "label": "supplemental logic",
+        "status": "cpu_smoke_candidate_only",
+        "report_file": "pg388_logic_supplement_token_cpu_smoke_v1.json",
+        "report_sha256": "f52f9baaab6318e3b96a0bac0ef9cfa5a4dc1d68ea52770eab5188ba469f65de",
+        "train_count": 128,
+        "holdout_count": 128,
+        "seed_count": 3,
+        "vocabulary_scope": "train_context_only",
+        "vocabulary_size": 34,
+        "weakest_head": {
+          "name": "next_action",
+          "accuracy": 0.679688
+        },
+        "holdout_ask_recall": 1.0,
+        "holdout_negative_false_allow": 0,
+        "execution": {
+          "optimizer_started": true,
+          "device": "cpu",
+          "gpu_touched": false
+        },
+        "training_eligible": false,
+        "capability_training_allowed": false,
+        "promotion": {
+          "training_allowed": false,
+          "memory_promotion_allowed": false,
+          "payload_catalog_promotion_allowed": false,
+          "vulnerability_claim_allowed": false
+        }
+      },
+      {
+        "label": "trajectory canary",
+        "status": "cpu_smoke_candidate_only",
+        "report_file": "pg388_logic_canary_token_cpu_smoke_28case_v2.json",
+        "report_sha256": "b235eea07df8081abd5ed482b326d1764b05290808e3e01b785d1bcdc56cc298",
+        "train_count": 420,
+        "holdout_count": 420,
+        "seed_count": 3,
+        "vocabulary_scope": "train_context_only",
+        "vocabulary_size": 75,
+        "weakest_head": {
+          "name": "logic_invariant_ref",
+          "accuracy": 0.042857
+        },
+        "holdout_ask_recall": 0.0,
+        "holdout_negative_false_allow": 0,
+        "execution": {
+          "optimizer_started": true,
+          "device": "cpu",
+          "gpu_touched": false
+        },
+        "training_eligible": false,
+        "capability_training_allowed": false,
+        "promotion": {
+          "training_allowed": false,
+          "memory_promotion_allowed": false,
+          "payload_catalog_promotion_allowed": false,
+          "vulnerability_claim_allowed": false
+        }
+      }
+    ],
+    "latest_label": "trajectory canary",
+    "training_allowed": false,
+    "capability_claim_allowed": false,
+    "note": "CPU optimizer smoke is wiring evidence only; it is not a vulnerability or payload result."
+  },
   "plan": {
     "file": "pg388_logic_composed_candidate_plan_v1.json",
     "sha256": "2097845dcd68c696863c7f091a17df9a712401c0aa4e87f0aa7b4d26bc5b0595",
