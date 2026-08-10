@@ -47,7 +47,9 @@ train/holdout 轨迹和当前硬门；它明确标出 optimizer 未启动，不�
 
 ```bash
 git clone https://github.com/wrench1997/blackboxanalyze.git
-cd blackboxanalyze
+cd .\blackboxanalyze
+git lfs install
+git lfs pull
 powershell -ExecutionPolicy Bypass -File scripts/verify_demo_assets.ps1 \
   -ManifestPath research/pg388_demo_asset_manifest_v1.json \
   -Root . \
@@ -88,7 +90,14 @@ SHA256SUMS
 
 当前 `origin/main` 是公开 GitHub 仓库。可直接随仓库分发的是源码、Docker 演示配置、抽象数据、审计报告和 `research/pg388_demo_asset_manifest_v1.json`；新增的 PG-388 多表面候选计划明确为 `blocked_surface_source_contract`，不会启动 optimizer。
 
-本地 `artifacts/` 中约 51.3 GiB 的历史/候选权重保持被 `.gitignore` 排除。GitHub 普通 Git 不接受这些大文件，且公开仓库不应发布可能编码原始攻击字符串的过滤/解码权重。公司环境如需权重，应从受控 A800/对象存储复制后按报告中的 SHA-256 校验；不要把 A800 当作唯一事实来源，也不要把缺失权重误判成已验证。
+本地 `artifacts/` 中约 51.3 GiB 的历史/候选权重仍保持被 `.gitignore` 排除。按你的展示授权，本次额外公开三份最新候选权重（PG-384 抽象组合、PG-385 过滤修复、PG-386 fixture decoder head），均通过 Git LFS；其余历史权重仍不上传，避免超出仓库配额。它们都是 candidate-only，本地 canary 研究结果，不代表通用 WAF 绕过或任意 payload 能力。
 
 本次仅例外发布一份 PG-384 抽象 Rule-IR composition checkpoint：
 `artifacts/pg384-binding-composition-a800/pg375_seed_38101.pt`，通过 Git LFS，SHA-256=`8fa769c3dbc91c1a803733ac56e038847e29f5477655c7e6d5077cb7ab879b4d`。它是可选的 candidate-only 权重，前端不依赖它，不能用于宣称通用漏洞或 payload 能力。公司拉取后先执行 `git lfs install`、`git lfs pull`，再运行资产校验；未安装 LFS 时请使用 `-AllowMissingOptional`。
+
+同时公开：
+
+- PG-385 filter SFT：`artifacts/pg385-filter-sft/pg370_seed_38003.pt`，SHA-256=`f6265ecd19acb1d53c8debba5cb9ca8002bd9b2edc3e0c183dee75b8fddec98f`。
+- PG-386 fixture decoder head：`artifacts/pg386-fixture-payload-decoder/pg386_payload_head_seed_38603.pt`，SHA-256=`ea57370656898b03b3988ddbe2fa94c69f126baf7dacd3e7451612e977d13827`。
+
+如果你停留在 `D:\workspace`，`git lfs pull` 会报 `Not in a Git repository`；请使用 `git -C .\blackboxanalyze lfs pull`，或先进入克隆目录。
